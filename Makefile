@@ -2,7 +2,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = cbt-llm-temp
+PROJECT_NAME = cbt-llm
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 

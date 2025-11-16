@@ -1,4 +1,4 @@
-# cbt-llm-temp documentation!
+# cbt-llm documentation!
 
 ## Description
 
