@@ -84,3 +84,7 @@ export PRINT_HELP_PYSCRIPT
 
 help:
 	@$(PYTHON_INTERPRETER) -c "${PRINT_HELP_PYSCRIPT}" < $(MAKEFILE_LIST)
+
+install:
+	pip install -e .
+	pip install external_libs/PyMedTermino-0.3.2
