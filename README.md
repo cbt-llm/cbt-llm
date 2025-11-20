@@ -33,8 +33,8 @@ Accordingly, add the relative path to your ```.env```
 It should look like:
 
 ```
-SNOMEDCT_DIR = "data/external/snomed/SNOMEDCT_CORE_SUBSET_201611"
-SNOMEDCT_CORE_FILE = "data/external/snomed/SnomedCT_RF2Release_INT_20160731/SNOMEDCT_CORE_SUBSET_201611.txt"
+SNOMEDCT_DIR = "data/external/snomed/SnomedCT_RF2Release_INT_20160731"
+SNOMEDCT_CORE_FILE = "data/external/snomed/SNOMEDCT_CORE_SUBSET_201611/SNOMEDCT_CORE_SUBSET_201611.txt"
 ```
 
 These paths point to the directory and core file that PyMedTermino will use. Then continue as follows:
