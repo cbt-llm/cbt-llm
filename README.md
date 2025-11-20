@@ -49,6 +49,8 @@ pip install external_libs/PyMedTermino-0.3.2
 
 ## Graph Setup
 
+Create a Neo4j Instance and add the uri, username, password to your ```.env```
+
 ### Load From PymedTermino
 ```python -m cbt_llm.pymed_loader```
 
