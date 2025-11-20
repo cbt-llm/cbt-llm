@@ -9,6 +9,19 @@ cd cbt-llm
 cp .env.example .env
 ```
 
+### Add PyMedTermino-0.3.2
+ 
+1. Under ```external_libs``` add the PyMedTermino-0.3.2 folder
+
+2. Update ```external_libs/PyMedTermino-0.3.2/setup.py``` with the following:
+```
+import os
+SNOMEDCT_DIR = os.getenv("SNOMEDCT_DIR")
+SNOMEDCT_CORE_FILE = os.getenv("SNOMEDCT_CORE_FILE")
+```
+
+
+
 ### Add SNOMED CT Data
 
 PyMedTermino requires access to the official SNOMED CT distribution, which is protected by a copyright license.
