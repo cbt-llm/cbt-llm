@@ -24,10 +24,9 @@ SNOMEDCT_CORE_FILE = os.getenv("SNOMEDCT_CORE_FILE")
 
 ### Add SNOMED CT Data
 
-PyMedTermino requires access to the official SNOMED CT distribution, which is protected by a copyright license.
-You can obtain the license and then upload the release files into 
-
-```data/external/snomed```
+PyMedTermino requires access to the official SNOMED CT distribution, which is protected by a copyright license. 
+So we will not be committing it to the repo. You can obtain the license and then upload the release files locally 
+into the project's ```data/external/snomed``` directory.
 
 Accordingly, add the relative path to your ```.env```
 
