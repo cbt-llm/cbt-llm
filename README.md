@@ -42,6 +42,11 @@ These paths point to the directory and core file that PyMedTermino will use. The
 ```
 python3 -m venv .venv
 source .venv/bin/activate
+make install
+```
+
+If make install fails:
+```
 pip install -e .
 pip install external_libs/PyMedTermino-0.3.2
 ```
