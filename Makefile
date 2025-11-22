@@ -88,3 +88,6 @@ help:
 install:
 	pip install -e .
 	pip install external_libs/PyMedTermino-0.3.2
+
+streamlit:
+	streamlit run app/streamlit_app.py
