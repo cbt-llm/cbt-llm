@@ -61,3 +61,22 @@ Create a Neo4j Instance and add the uri, username, password to your ```.env```
 ### Load SNOMED Concepts/Relationships to neo4j Graph
 ```python -m cbt_llm.pymed_graph```
 
+### Create node embeddings and store in the graph
+```python3 embed_snomed.py```
+
+To check if the embeddings have been created in the neo4j
+Run this below command in neo4j desktop/browser
+
+```MATCH (n:Concept) WHERE n.embedding RETURN n.code AS code, size(n.embedding) AS embedding_size LIMIT 5```
+
+### Install the Graph Data Science Plugin on the Neo4j Desktop 
+This is used for semantic search. 
+
+### Retrieve the tok_k embeddings
+```python3 main.py```
+
+
+
+
+
+
