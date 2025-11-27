@@ -61,6 +61,8 @@ Create a Neo4j Instance and add the uri, username, password to your ```.env```
 ### Load SNOMED Concepts/Relationships to neo4j Graph
 ```python -m cbt_llm.pymed_graph```
 
+## Graph Retrieval
+
 ### Create node embeddings and store in the graph
 ```python3 embed_snomed.py```
 
