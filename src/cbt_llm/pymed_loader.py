@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import pandas as pd
 
 from cbt_llm.config import SNOMEDCT_DIR, SNOMEDCT_CORE_FILE
 
@@ -58,5 +59,13 @@ if __name__ == "__main__":
     # starting root at Mental disorders and mapping all its children/relationships
     nodes, rels = extract_snomed_relationships(74732009)
 
+    df_nod = pd.DataFrame(nodes)
+    df_rel = pd.DataFrame(rels)
+
+    df_nod.to_csv("output-CBT-Nodes.csv")
+    df_rel.to_csv("output-CBT-Rel.csv")
+
     print("Concepts:", len(nodes))
     print("Relations:", len(rels))
+
+    
