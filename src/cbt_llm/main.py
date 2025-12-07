@@ -17,7 +17,9 @@ def main():
     # query_text = "I am happy, this converstation really helped me."
     # query_text = "	From a teen in the U.S.: I’m 16 and this year was the worst for me. My parents got divorced, but I knew there was no bad blood between each other and me and them. Yet, it still sucked knowing theyre divorced now. I understand why it happened and I know it’s a necessary evil. However, it affected my school work so bad."
 
-    query_text = " "
+    # query_text = "I am not able to sleep at night, I am worried about my exams"
+    query_text = "I have a great boyfriend of 2 years yet I fear something is wrong with me…I developed a crush on someone at work and think about this person a lot. I would probably be intimate with them if given the chance. I wish I could forget about my crush and be happy with the amazing man I already have. The truth is, my crush is mostly lust and excitement and wouldn’t be a long term match. I feel like I have commitment issues…most of my friends would love to marry my man but I am hesitant and don’t know why. Right now we aren’t officially together because he caught me chatting online with my crush…and the truth is, I fear if we get back together, i might get bored again and start another crush or move further with this crush. My boyfriend is great, he is there for me and is a real man. I guess I can’t figure out why I can’t just be satisfied like a normal person. What is it that I am seeking? Will I ever be able to settle down? I don’t want to lose what I have with him but I would love the freedom and good time to explore someone new. Please help. Thank you!"
+    
 
     results = retrieve_snomed_matches(driver, query_text, k=5)
 
