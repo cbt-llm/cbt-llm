@@ -66,6 +66,7 @@ Create a Neo4j Instance and add the uri, username, password to your ```.env```
 ### Create node embeddings and store in the graph
 ```python3 embed_snomed.py```
 
+
 To check if the embeddings have been created in the neo4j
 Run this below command in neo4j desktop/browser
 
