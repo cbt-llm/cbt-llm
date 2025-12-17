@@ -6,7 +6,7 @@ seeds=(
   "I get a tight chest before meetings and I avoid speaking, then I regret it all day."
   "I messed up one small thing yesterday and now I can't stop replaying it like it proves I'm not good enough."
   "My sleep is messed up because my brain won't shut off at night, and I wake up tired and irritated."
-  
+
 )
 
 for i in "${!seeds[@]}"; do
@@ -35,4 +35,8 @@ for i in "${!seeds[@]}"; do
     --transcript_json "output/rag_transcript_${run}.json" \
     --retrieval_json "output/rag_retrieval_${run}.json" \
     --prompt_trace_json "output/rag_prompt_trace_${run}.json"
+
+
+python src/cbt_llm/new_vadar.py output --out output/vader_outputs
+
 done
