@@ -1,4 +1,3 @@
-# src/cbt_llm/new_vadar.py
 import os, json, glob, argparse
 from pathlib import Path
 
@@ -6,10 +5,9 @@ import numpy as np
 import pandas as pd
 
 import matplotlib
-matplotlib.use("Agg")  # safe for headless runs
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-# Prefer vaderSentiment (what you used before); fallback to nltk if needed
 try:
     from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
     _VADER_BACKEND = "vaderSentiment"
@@ -18,9 +16,6 @@ except Exception:
     _VADER_BACKEND = "missing"
 
 
-# ---- role mapping ----
-# Your transcript JSON uses roles: "patient", "therapist"
-# (We still keep some extra aliases in case you have older files mixed in.)
 ROLE_MAP = {
     "patient": "human",
     "client": "human",
@@ -49,7 +44,6 @@ def get_text(m):
     if isinstance(m.get("text"), str):
         return m["text"]
 
-    # OpenAI-style content parts
     c = m.get("content")
     if isinstance(c, list):
         parts = []
@@ -91,7 +85,6 @@ def to_messages(obj):
         for key in ("transcript", "messages", "turns", "dialogue", "conversation", "chat", "utterances"):
             if isinstance(obj.get(key), list):
                 return obj[key]
-    # fallback: wrap as single message
     return [obj]
 
 def ensure_analyzer():
@@ -99,7 +92,6 @@ def ensure_analyzer():
     if SentimentIntensityAnalyzer is not None:
         return SentimentIntensityAnalyzer()
 
-    # Fallback to nltk if vaderSentiment isn't installed
     try:
         import nltk
         from nltk.sentiment import SentimentIntensityAnalyzer as NLTK_SIA
@@ -128,7 +120,7 @@ def build_dataframe(input_dir: Path, pattern: str):
 
     for fp in files:
         fp_path = Path(fp)
-        session_id = fp_path.stem  # e.g., rag_transcript_1
+        session_id = fp_path.stem
         try:
             raw = read_any_json(fp_path)
             msgs = to_messages(raw)
@@ -166,16 +158,28 @@ def build_dataframe(input_dir: Path, pattern: str):
     return pd.DataFrame(all_rows)
 
 def per_session_progress(hum: pd.DataFrame):
-    # progress = last 20% mean − first 20% mean
-    def head_tail_delta(s, frac=0.2):
-        n = max(1, int(len(s) * frac))
-        return pd.Series({
-            "mean_early": float(s.iloc[:n].mean()),
-            "mean_late":  float(s.iloc[-n:].mean()),
-            "delta":      float(s.iloc[-n:].mean() - s.iloc[:n].mean()),
-            "n_turns":    int(len(s)),
+    rows = []
+
+    for session_id, g in hum.groupby("session_id"):
+        s = g["compound"].dropna()
+        if len(s) < 2:
+            continue
+
+        n = max(1, int(len(s) * 0.2))
+        mean_early = float(s.iloc[:n].mean())
+        mean_late = float(s.iloc[-n:].mean())
+
+        rows.append({
+            "session_id": session_id,
+            "mean_early": mean_early,
+            "mean_late": mean_late,
+            "delta": mean_late - mean_early,
+            "n_turns": int(len(s)),
         })
-    return hum.groupby("session_id")["compound"].apply(head_tail_delta).reset_index()
+
+    return pd.DataFrame(rows)
+
+
 
 def aggregate_trajectory(hum: pd.DataFrame, bins=20):
     """Normalize each session to 0..1 progress and average across sessions."""
@@ -195,7 +199,7 @@ def plot_per_session_patient(hum: pd.DataFrame, out_dir: Path):
         plt.figure(figsize=(10, 4))
         plt.plot(np.arange(1, len(g) + 1), g["compound"].values, linewidth=2)
         plt.axhline(0, linestyle="--", alpha=0.6)
-        plt.title(f"Patient Sentiment (VADER compound) — {session_id}")
+        plt.title(f"Patient Sentiment (VADER compound) - {session_id}")
         plt.xlabel("Patient turn #")
         plt.ylabel("VADER compound")
         plt.tight_layout()
@@ -232,10 +236,9 @@ def main():
     progress = per_session_progress(hum)
     progress.to_csv(out_dir / "session_progress_summary.csv", index=False)
 
-    # ---- Plot: per-session patient curve ----
     plot_per_session_patient(hum, out_dir)
 
-    # ---- Plot 1: Progress across sessions (Δ) ----
+    # Plot 1: Progress across sessions (Δ)
     prog_plot = progress.dropna(subset=["delta"]).sort_values("delta")
     if not prog_plot.empty:
         plt.figure(figsize=(10, 5))
@@ -247,7 +250,7 @@ def main():
         plt.savefig(out_dir / "progress_across_sessions.png", dpi=150)
         plt.close()
 
-    # ---- Plot 2: Average normalized trajectory ----
+    # Plot 2: Average normalized trajectory
     traj = aggregate_trajectory(hum, bins=20)
     if not traj.empty:
         plt.figure(figsize=(10, 4))

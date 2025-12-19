@@ -1,32 +1,21 @@
-# src/cbt_llm/multiturn_convo.py
-
 import os
 import re
 import json
 import argparse
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional
 
 import requests
+from openai import OpenAI
 from neo4j import GraphDatabase
 
 from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, ROOT
 from cbt_llm.retrieve_snomed import retrieve_snomed_matches
 
-# -----------------------------
-# Optional schema extraction (OpenAI)
-# -----------------------------
-_USER_SCHEMA_IMPORT_ERROR: Optional[str] = None
-try:
-    from cbt_llm.user_schema import extract_user_schema  # type: ignore
-except Exception as e:
-    extract_user_schema = None  # type: ignore
-    _USER_SCHEMA_IMPORT_ERROR = repr(e)
 
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# -----------------------------
-# Ollama client
-# -----------------------------
+OPENAI_PATIENT_MODEL = "gpt-4o-mini"
 class OllamaChat:
     def __init__(self, model: str, base_url: str = "http://localhost:11434"):
         self.model = model
@@ -35,12 +24,11 @@ class OllamaChat:
     def chat(
         self,
         messages: List[Dict[str, str]],
-        temperature: float = 0.7,
-        num_predict: int = 256,
+        temperature: float,
+        num_predict: int,
         top_p: float = 0.9,
-        stop: Optional[List[str]] = None,
     ) -> str:
-        payload: Dict[str, Any] = {
+        payload = {
             "model": self.model,
             "messages": messages,
             "options": {
@@ -50,438 +38,388 @@ class OllamaChat:
             },
             "stream": False,
         }
-        if stop:
-            payload["options"]["stop"] = stop
-
         r = requests.post(f"{self.base_url}/api/chat", json=payload, timeout=300)
         r.raise_for_status()
-        return (r.json().get("message", {}) or {}).get("content", "").strip()
+        return (r.json().get("message") or {}).get("content", "").strip()
 
-
-# -----------------------------
-# CBT protocol playbook loader
-# -----------------------------
 def load_cbt_protocols_text() -> str:
     path = ROOT / "references" / "cbt-protocols.json"
     if not path.exists():
         return ""
-    data = json.loads(path.read_text(encoding="utf-8"))
-    protocols = data.get("cbt_protocols", []) or []
 
-    lines = ["[CBT Protocol Playbook — internal guidance]"]
-    for p in protocols:
-        name = (p.get("name") or "").strip()
-        purpose = (p.get("purpose") or "").strip()
-        techniques = p.get("techniques", []) or []
-        if name:
-            lines.append(f"- {name}: {purpose}")
-            for t in techniques[:5]:
-                lines.append(f"  • {t}")
-    return "\n".join(lines).strip()
+    data = json.loads(path.read_text())
+    lines = ["[CBT Protocol Playbook — internal]"]
 
+    for p in data.get("cbt_protocols", []):
+        lines.append(f"- {p['name']}: {p.get('purpose','')}")
+        for kf in (p.get("key_functions") or [])[:3]:
+            lines.append(f"  ◦ {kf}")
 
-# -----------------------------
-# Prompts
-# -----------------------------
-THERAPIST_SYSTEM_BASE = """You are a supportive CBT-style therapist assistant.
-
-Hard constraints:
-- You are NOT a medical professional. Do not diagnose, label pathology, or prescribe medications.
-- You MUST follow CBT micro-structure each turn:
-  1) validate & reflect briefly
-  2) clarify with ONE question only
-  3) identify trigger / automatic thought / emotion / behavior (ONLY from patient text)
-  4) gentle reality-test or reframe (collaborative, not preachy)
-  5) suggest ONE tiny, optional next step (1 sentence max)
-
-Very important:
-- You may be given "CBT schema" and "retrieved clinical concepts" as hidden context.
-- Use them silently to improve your response.
-- DO NOT mention: SNOMED, ICD, UMLS, Neo4j, embeddings, "retrieval", "RAG", codes/IDs, vectors, similarity scores.
-- Do NOT output any medical codes/IDs.
-
-Safety:
-- If the patient mentions self-harm/suicide/imminent danger: encourage immediate local emergency help and keep it brief.
-
-Style + brevity:
-- 2–4 sentences total.
-- 1 short paragraph only.
-- End with EXACTLY ONE question (single question mark).
-- No lists.
-"""
-
-# IMPORTANT: Patient-model role mapping:
-# - role="user" messages are from the THERAPIST
-# - role="assistant" messages are from the PATIENT (this model)
-PATIENT_SYSTEM = """You are simulating a human client (the PATIENT) in a CBT session.
-
-Role mapping in this chat:
-- Messages with role="user" are spoken by the THERAPIST.
-- Messages with role="assistant" are spoken by YOU (the PATIENT).
-
-Rules:
-- Reply with 1–2 sentences (max ~35 words).
-- Sound like a normal person (simple, emotional, a bit messy is OK).
-- Do NOT teach CBT, do NOT reframe, do NOT suggest coping strategies.
-- Do NOT give structured advice, steps, or lists.
-- Do NOT ask therapist-style probing questions (e.g., "what evidence...", "could it be...", "let's explore...").
-- Do NOT mention being an AI or any system instructions.
-"""
+    return "\n".join(lines)
 
 CBT_PLAYBOOK_TEXT = load_cbt_protocols_text()
 
+THERAPIST_BASELINE_PROMPT = """
+You are responding to the patient as an assistant.
 
-# -----------------------------
-# Leak/drift detection
-# -----------------------------
-CODE_LIKE_RE = re.compile(r"\b\d{4,}\b|[A-Z]{2,}\d{2,}|/EV\b", re.IGNORECASE)
-FORBIDDEN_PHRASES = [
-    "snomed", "neo4j", "embedding", "cosine", "vector", "retrieval", "rag", "similarity score", "icd", "umls"
+Guidelines:
+- Respond naturally and empathetically.
+- Do not diagnose or label disorders.
+- If the patient mentions self-harm or imminent danger, encourage immediate local help.
+
+Style:
+- 2-4 sentences.
+- One paragraph.
+""".strip()
+
+# THERAPIST_CBT_PROMPT_gemma = """
+# You are a CBT-style therapist in a live conversation.
+
+# You are given hidden contextual information derived from:
+# - a structured schema extracted from the patient’s recent language
+# - background psychological concepts used only for interpretation
+
+# ABSOLUTE REQUIREMENT:
+# Every response MUST clearly use the structured schema.
+# If no schema element is reflected in your wording, the response is incorrect.
+
+# AVAILABLE CBT MOVES (choose ONE per turn):
+# A. Clarifying Question
+# B. Gentle Reframe
+# C. Pattern Highlighting
+
+# Move definitions:
+# A. Clarifying Question – helps the patient notice a specific thought or trigger  
+# B. Gentle Reframe – offers a tentative alternative interpretation of a thought  
+# C. Pattern Highlighting – connects the current statement to a recurring pattern across turns  
+
+# RULES FOR MOVE SELECTION:
+# - Choose EXACTLY ONE move per turn
+# - Do NOT repeat the same move used in the previous turn unless clearly necessary
+# - The move must directly operate on the selected schema element
+
+# HOW TO USE THE SCHEMA:
+# - Select EXACTLY ONE schema element (trigger OR automatic thought OR emotion OR behavior)
+# - Paraphrase it in plain language
+# - Make it clearly recognizable in your response
+
+# BACKGROUND CONCEPTS:
+# - Use only for silent interpretation
+# - Translate into everyday experiences
+# - Never mention diagnoses or clinical terms
+
+# STRICT FORMAT RULES:
+# - One paragraph
+# - 2–3 sentences
+# - End with exactly ONE open-ended question
+# - No advice, coping strategies, reassurance, or explanations
+
+# If the response could apply to another patient, it is incorrect.
+# If the CBT move is unclear, it is incorrect.
+
+# """.strip()
+
+THERAPIST_CBT_PROMPT = """
+You are a CBT-style therapist in a live conversation. 
+Your goal is to help the patient gain insight into their thoughts and feelings and improve their understanding.
+
+You are given hidden contextual information derived from:
+- a structured schema extracted from the patient's recent language
+- background psychological concepts used only for interpretation
+
+ABSOLUTE REQUIREMENT:
+Every response MUST clearly use the structured schema.
+If no schema element is reflected in your wording, the response is incorrect.
+
+HOW TO USE THE SCHEMA:
+- Select EXACTLY ONE schema element from ONE bucket:
+  (trigger OR automatic thought OR emotion OR behavior)
+- Paraphrase it in plain, everyday language
+- Make it clearly recognizable in your response
+
+BACKGROUND CONCEPTS (if present):
+- Use them ONLY as silent support for interpretation
+- Translate them into everyday experiences (e.g., “mental fog”, “feeling stuck”)
+- NEVER mention diagnoses or clinical terms
+
+STRICT FORMAT RULES (must follow):
+- Exactly 2 or 3 sentences
+- Ask EXACTLY ONE open-ended question
+- NO lists, NO advice, NO coping strategies
+- NO psychoeducation
+- NO therapy explanations or instructions
+
+CONTENT REQUIREMENTS (in order):
+1. Reflect ONE specific schema element (by paraphrase) or
+2. Reflect ONE specific patient thought or pattern
+3. Offer ONE alternative interpretation or discrepancy
+4. End with ONE open-ended question about that thought
+
+If your response could apply to another patient, it is incorrect.
+If the schema is not clearly visible in the wording, it is incorrect.
+
+""".strip()
+
+PATIENT_SYSTEM = """
+You are simulating a human patient.
+
+Rules (must follow):
+- 1–2 sentences only.
+- Speak only about your own feelings, thoughts, or experiences.
+- Engage with the therapist's prompts naturally and address your issues.
+- Do NOT give advice, reassurance, validation, or guidance.
+- Do NOT ask questions.
+- Informal, emotional, sometimes messy language.
+- Never sound like a therapist.
+- Do not mention being an AI.
+""".strip()
+
+
+CODE_LIKE_RE = re.compile(r"\b\d{4,}\b|[A-Z]{2,}\d{2,}")
+FORBIDDEN_PHRASES = ["snomed", "neo4j", "embedding", "rag", "vector"]
+
+PATIENT_DRIFT = [
+    "you’re right", "that makes sense", "you should", "try to",
+    "it might help", "remember that"
 ]
-
-# Stronger patient drift cues (patient starts sounding like therapist / advice-giver)
-PATIENT_DRIFT_PHRASES = [
-    "it sounds like",
-    "what evidence",
-    "could it be",
-    "let's explore",
-    "have you considered",
-    "automatic thoughts",
-    "cognitive distortion",
-    "behavioral experiment",
-    "it might be helpful",
-    "here are",
-    "strategies",
-    "steps you can take",
-    "try to challenge",
-    "reframe",
-    "practice, practice",
-    "to build confidence",
-    "you should",
-]
-
-PATIENT_LIST_RE = re.compile(r"\n\s*(\d+\.)|\n\s*[-*]\s+")
-
-_DISORDER_SUFFIX_RE = re.compile(r"\s*\(disorder\)\s*$", re.IGNORECASE)
-
-
-def looks_like_therapist_leak(text: str) -> bool:
-    t = (text or "").lower()
-    if CODE_LIKE_RE.search(text or ""):
-        return True
-    return any(p in t for p in FORBIDDEN_PHRASES)
-
 
 def looks_like_patient_drift(text: str) -> bool:
-    t = (text or "").lower()
-    if any(p in t for p in PATIENT_DRIFT_PHRASES):
-        return True
-    if PATIENT_LIST_RE.search(text or ""):
-        return True
-    return False
+    t = text.lower()
+    return any(p in t for p in PATIENT_DRIFT)
+
+def looks_like_therapist_leak(text: str) -> bool:
+    return any(x in text.lower() for x in ["snomed", "rag", "embedding"])
 
 
-# -----------------------------
-# Schema extraction with debug
-# -----------------------------
-def safe_extract_schema(text: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
-    if extract_user_schema is None:
-        if _USER_SCHEMA_IMPORT_ERROR:
-            return None, f"user_schema import failed: {_USER_SCHEMA_IMPORT_ERROR}"
-        return None, "user_schema import failed (unknown)"
-    if not os.getenv("OPENAI_API_KEY"):
-        return None, "OPENAI_API_KEY not set in environment"
+try:
+    from cbt_llm.user_schema import extract_user_schema
+except Exception:
+    extract_user_schema = None
+
+def safe_extract_schema(text: str) -> Optional[Dict[str, Any]]:
+    if not extract_user_schema:
+        return None
     try:
-        return extract_user_schema(text), None
-    except Exception as e:
-        return None, f"user_schema call failed: {repr(e)}"
+        return extract_user_schema(text)
+    except Exception:
+        return None
 
-
-# -----------------------------
-# RAG sanitization
-# -----------------------------
-def _clean_term(s: Optional[str]) -> Optional[str]:
-    if not s:
-        return s
-    return _DISORDER_SUFFIX_RE.sub("", s).strip()
-
-
-def sanitize_rag_for_prompt(rag_results: List[Dict[str, Any]]) -> Dict[str, Any]:
-    # Keep terms + relation type + target_term only (no codes/scores)
+def sanitize_rag(raw):
     concepts = []
-    for item in rag_results or []:
-        term = _clean_term(item.get("term"))
-        rels_out = []
-        for rel in (item.get("relations") or []):
-            rels_out.append({
-                "type": rel.get("type"),
-                "target_term": _clean_term(rel.get("target_term")),
-            })
-        if term:
-            concepts.append({"term": term, "relations": rels_out[:5]})
-    return {"concepts": concepts[:10]}
+    for r in raw or []:
+        if r.get("term"):
+            concepts.append({"term": r["term"]})
+    return {"concepts": concepts[:5]}
 
-
-def build_therapist_hidden_context(
-    schema_obj: Optional[Dict[str, Any]],
-    rag_safe: Optional[Dict[str, Any]],
-) -> str:
+def build_hidden_context(schema, rag, use_protocol):
     blocks = []
-    if CBT_PLAYBOOK_TEXT:
+    if use_protocol and CBT_PLAYBOOK_TEXT:
         blocks.append(CBT_PLAYBOOK_TEXT)
-    if schema_obj:
-        blocks.append("[CBT schema — extracted from patient text]\n" + json.dumps(schema_obj, ensure_ascii=False))
-    if rag_safe and rag_safe.get("concepts"):
-        blocks.append("[Retrieved clinical concepts — internal, non-diagnostic]\n" + json.dumps(rag_safe, ensure_ascii=False))
-    return "\n\n".join(blocks).strip()
+    if schema:
+        blocks.append("[SCHEMA]\n" + json.dumps(schema))
+    if rag:
+        blocks.append("[RAG]\n" + json.dumps(rag))
+    return "\n\n".join(blocks)
+
+def audit_grounding(reply, schema, rag):
+    t = reply.lower()
+    return {
+        "schema_used": bool(schema and any(x.lower() in t for v in schema.values() for x in v if isinstance(x,str))),
+        "rag_used": bool(rag and any(c["term"].split()[0].lower() in t for c in rag.get("concepts", [])))
+    }
 
 
-# -----------------------------
-# Debug printing
-# -----------------------------
-def _print_block(title: str, text: str) -> None:
-    print("\n" + "=" * 90)
-    print(title)
-    print("-" * 90)
-    print(text.rstrip())
-    print("=" * 90 + "\n")
-
-
-def _print_messages(title: str, messages: List[Dict[str, str]], max_chars: int = 6000) -> None:
-    lines = []
-    for m in messages:
-        role = m.get("role", "?")
-        content = (m.get("content", "") or "")
-        if len(content) > max_chars:
-            content = content[:max_chars] + f"\n...[truncated, {len(m.get('content',''))} chars total]"
-        lines.append(f"[{role}]\n{content}\n")
-    _print_block(title, "\n".join(lines))
-
-
-# -----------------------------
-# Core runner
-# -----------------------------
 def run_session(
     therapist_model: str,
     patient_model: str,
+    therapist_mode: str,
     turns: int,
     use_rag: bool,
     use_schema: bool,
+    use_protocol: bool,
     k: int,
     seed: str,
     transcript_json: str,
-    retrieval_json: Optional[str] = None,
-    prompt_trace_json: Optional[str] = None,
-    temperature_therapist: float = 0.5,
-    temperature_patient: float = 0.7,
-    therapist_max_tokens: int = 220,
-    patient_max_tokens: int = 90,
-    print_live: bool = True,
-    print_prompts: bool = False,
-) -> None:
-    driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
-    therapist = OllamaChat(therapist_model)
-    patient = OllamaChat(patient_model)
+    print_prompts: bool,
+):
+    therapist_llm = OllamaChat(therapist_model)
 
-    # Chat histories for the two models (OpenAI-style roles)
-    therapist_chat: List[Dict[str, str]] = [{"role": "system", "content": THERAPIST_SYSTEM_BASE}]
-    patient_chat: List[Dict[str, str]] = [{"role": "system", "content": PATIENT_SYSTEM}]
+    from openai import OpenAI
+    openai_client = OpenAI()
 
-    # Transcript we save (human-readable roles)
-    transcript_out: List[Dict[str, str]] = [{"role": "patient", "content": seed.strip()}]
+    driver = GraphDatabase.driver(
+        NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)
+    )
 
-    retrieval_log: List[Dict[str, Any]] = []
-    prompt_trace: List[Dict[str, Any]] = []
+    base_therapist_prompt = (
+        THERAPIST_BASELINE_PROMPT
+        if therapist_mode == "baseline"
+        else THERAPIST_CBT_PROMPT
+    )
 
-    # Seed goes into therapist history as USER (patient speaking to therapist model)
-    therapist_chat.append({"role": "user", "content": seed.strip()})
+    therapist_chat: List[Dict[str, str]] = []
+    patient_chat: List[Dict[str, str]] = [
+        {"role": "system", "content": PATIENT_SYSTEM}
+    ]
 
-    # Seed goes into patient history as ASSISTANT (patient speaking in patient-model chat)
-    patient_chat.append({"role": "assistant", "content": seed.strip()})
+    transcript = [{"role": "patient", "content": seed}]
+    cbt_context_log = []
 
-    last_patient_text = seed.strip()
-
-    if print_live:
-        _print_block("SEED (Patient starts)", seed.strip())
+    patient_chat.append({"role": "assistant", "content": seed})
+    last_patient = seed
 
     for t in range(1, turns + 1):
-        # This is the text used for retrieval/schema this turn
-        retrieval_query_text = last_patient_text
+        schema = safe_extract_schema(last_patient) if use_schema else None
 
-        # --- RAG + schema for THIS patient turn (used only by therapist)
-        schema_obj = None
-        schema_err = None
-        if use_schema:
-            schema_obj, schema_err = safe_extract_schema(retrieval_query_text)
-
-        rag_raw: List[Dict[str, Any]] = []
-        rag_safe: Dict[str, Any] = {"concepts": []}
+        rag_safe = None
         if use_rag:
-            rag_raw = retrieve_snomed_matches(driver, retrieval_query_text, k=k) or []
-            rag_safe = sanitize_rag_for_prompt(rag_raw)
+            rag_raw = retrieve_snomed_matches(driver, last_patient, k=k) or []
+            rag_safe = sanitize_rag(rag_raw)
 
-        hidden_context = build_therapist_hidden_context(schema_obj, rag_safe)
-        therapist_input = therapist_chat + ([{"role": "system", "content": hidden_context}] if hidden_context else [])
+        hidden_context = build_hidden_context(schema, rag_safe, use_protocol)
+
+        therapist_system_prompt = base_therapist_prompt
+        if hidden_context:
+            therapist_system_prompt += (
+                "\n\nIMPORTANT CONTEXT (MUST BE USED):\n"
+                + hidden_context
+            )
+
+        therapist_chat = [
+            {"role": "system", "content": therapist_system_prompt},
+            {"role": "user", "content": last_patient},
+        ]
 
         if print_prompts:
-            _print_messages(f"TURN {t} — THERAPIST INPUT MESSAGES", therapist_input)
+            print("\n" + "=" * 80)
+            print(f"TURN {t} — THERAPIST INPUT")
+            for m in therapist_chat:
+                print(f"[{m['role']}]\n{m['content']}\n")
 
-        # --- Therapist turn (with leak repair)
-        therapist_reply = therapist.chat(
-            therapist_input,
-            temperature=temperature_therapist,
-            num_predict=therapist_max_tokens,
+        # -------- Therapist generation --------
+        therapist_reply = therapist_llm.chat(
+            therapist_chat,
+            temperature=0.15,
+            num_predict=140,
+            top_p=0.7,
         )
-        repaired_therapist = False
+
+        # Retry if therapist violates constraints
         if looks_like_therapist_leak(therapist_reply):
-            repaired_therapist = True
-            therapist_reply = therapist.chat(
-                therapist_input + [{
+            therapist_reply = therapist_llm.chat(
+                therapist_chat + [{
                     "role": "system",
-                    "content": "Rewrite your last message. Remove any codes/IDs/technical terms. Keep it CBT-style, 2–4 sentences, end with exactly one question."
+                    "content": (
+                        "Rewrite strictly following the rules. "
+                        "No lists. No advice. One question only."
+                    )
                 }],
-                temperature=0.2,
-                num_predict=therapist_max_tokens,
+                temperature=0.1,
+                num_predict=120,
             )
 
-        transcript_out.append({"role": "therapist", "content": therapist_reply})
-        therapist_chat.append({"role": "assistant", "content": therapist_reply})
+        transcript.append({"role": "therapist", "content": therapist_reply})
 
-        if print_live:
-            _print_block(f"TURN {t} — Therapist", therapist_reply)
+        # -------- Grounding audit --------
+        if therapist_mode == "cbt":
+            cbt_context_log.append({
+                "turn": t,
+                "patient_text": last_patient,
+                "schema": schema,
+                "rag": rag_safe,
+                "grounding_audit": audit_grounding(
+                    therapist_reply, schema, rag_safe
+                ),
+            })
 
-        # --- Patient turn (CORRECT ROLE MAPPING)
-        # Therapist speaks as role="user" to the patient model
-        patient_input = patient_chat + [{"role": "user", "content": therapist_reply}]
+        patient_messages = patient_chat + [
+            {"role": "user", "content": therapist_reply}
+        ]
 
-        if print_prompts:
-            _print_messages(f"TURN {t} — PATIENT INPUT MESSAGES", patient_input)
-
-        patient_reply = patient.chat(
-            patient_input,
-            temperature=temperature_patient,
-            num_predict=patient_max_tokens,
+        patient_resp = openai_client.chat.completions.create(
+            model=patient_model,
+            messages=patient_messages,
+            temperature=0.9,
+            max_tokens=80,
         )
 
-        repaired_patient = False
+        patient_reply = patient_resp.choices[0].message.content.strip()
+
+        # Retry if patient drifts into therapist mode
         if looks_like_patient_drift(patient_reply):
-            repaired_patient = True
-            patient_reply = patient.chat(
-                patient_input + [{
+            patient_resp = openai_client.chat.completions.create(
+                model=patient_model,
+                messages=patient_messages + [{
                     "role": "system",
-                    "content": "Rewrite your last reply as the patient: 1–2 sentences, emotional/colloquial, no CBT talk, no advice/solutions, no lists, no therapist-style questions."
+                    "content": (
+                        "Rewrite as the patient. "
+                        "Feelings only. No advice. "
+                        "No validation. 1–2 sentences."
+                    )
                 }],
-                temperature=0.3,
-                num_predict=patient_max_tokens,
+                temperature=0.9,
+                max_tokens=80,
             )
+            patient_reply = patient_resp.choices[0].message.content.strip()
 
-        transcript_out.append({"role": "patient", "content": patient_reply})
+        transcript.append({"role": "patient", "content": patient_reply})
 
-        # Update patient history correctly:
-        # - store therapist message as user
-        # - store patient response as assistant
-        patient_chat.append({"role": "user", "content": therapist_reply})
         patient_chat.append({"role": "assistant", "content": patient_reply})
-
-        # Therapist model sees patient reply as next user message
-        therapist_chat.append({"role": "user", "content": patient_reply})
-
-        if print_live:
-            _print_block(f"TURN {t} — Patient", patient_reply)
-
-        # Update last patient text for next turn
-        last_patient_text = patient_reply
-
-        # Log retrieval artifacts for this turn (NOW correctly aligned)
-        retrieval_log.append({
-            "turn": t,
-            "patient_text_used_for_retrieval": retrieval_query_text,
-            "schema": schema_obj,
-            "schema_error": schema_err,
-            "rag_safe": rag_safe,
-            "rag_raw": rag_raw,
-        })
-
-        if prompt_trace_json:
-            prompt_trace.append({
-                "turn": t,
-                "therapist_input_messages": therapist_input,
-                "therapist_reply": therapist_reply,
-                "therapist_repaired": repaired_therapist,
-                "patient_input_messages": patient_input,
-                "patient_reply": patient_reply,
-                "patient_repaired": repaired_patient,
-                "schema_error": schema_err,
-            })
+        last_patient = patient_reply
 
     driver.close()
 
-    # Save transcript
+    output = {
+        "therapist_model": therapist_model,
+        "patient_model": patient_model,
+        "therapist_mode": therapist_mode,
+        "turns": turns,
+        "seed": seed,
+        "transcript": transcript,
+    }
+
+    if therapist_mode == "cbt":
+        output["cbt_context"] = cbt_context_log
+
     Path(transcript_json).parent.mkdir(parents=True, exist_ok=True)
-    with open(transcript_json, "w", encoding="utf-8") as f:
-        json.dump({
-            "therapist_model": therapist_model,
-            "patient_model": patient_model,
-            "turns": turns,
-            "use_rag": use_rag,
-            "use_schema": use_schema,
-            "k": k,
-            "seed": seed,
-            "transcript": transcript_out,
-        }, f, ensure_ascii=False, indent=2)
-
-    # Save retrieval log
-    if retrieval_json:
-        Path(retrieval_json).parent.mkdir(parents=True, exist_ok=True)
-        with open(retrieval_json, "w", encoding="utf-8") as f:
-            json.dump({
-                "use_rag": use_rag,
-                "use_schema": use_schema,
-                "k": k,
-                "retrieval_log": retrieval_log,
-            }, f, ensure_ascii=False, indent=2)
-
-    # Save prompt trace
-    if prompt_trace_json:
-        Path(prompt_trace_json).parent.mkdir(parents=True, exist_ok=True)
-        with open(prompt_trace_json, "w", encoding="utf-8") as f:
-            json.dump(prompt_trace, f, ensure_ascii=False, indent=2)
+    Path(transcript_json).write_text(
+        json.dumps(output, indent=2, ensure_ascii=False)
+    )
 
 
 def main():
     ap = argparse.ArgumentParser()
+
+    # ap.add_argument("--therapist_model", default="mistral:7b-instruct")
     ap.add_argument("--therapist_model", default="gemma2:9b")
-    ap.add_argument("--patient_model", default="mistral:7b-instruct")
-    ap.add_argument("--turns", type=int, default=6)
+
+    ap.add_argument("--patient_model", default="gpt-4o-mini")
+
+    ap.add_argument("--therapist_mode", choices=["baseline", "cbt"], required=True)
+    ap.add_argument("--turns", type=int, default=10)
     ap.add_argument("--k", type=int, default=5)
-    ap.add_argument("--seed", default="I’ve been anxious lately and I keep thinking I’m going to mess up at work.")
+    ap.add_argument("--seed", default="I keep overthinking everything at work.")
+    ap.add_argument("--transcript_json", default="output/debug_transcript.json")
     ap.add_argument("--use_rag", action="store_true")
     ap.add_argument("--use_schema", action="store_true")
-    ap.add_argument("--transcript_json", default="output/transcript.json")
-    ap.add_argument("--retrieval_json", default=None)
-    ap.add_argument("--prompt_trace_json", default=None)
-
-    # Printing controls
-    ap.add_argument("--no_print_live", action="store_true", help="Disable live turn-by-turn printing")
-    ap.add_argument("--print_prompts", action="store_true", help="Print full message lists sent to each model")
+    ap.add_argument("--use_protocol", action="store_true")
+    ap.add_argument("--print_prompts", action="store_true")
 
     args = ap.parse_args()
 
     run_session(
         therapist_model=args.therapist_model,
         patient_model=args.patient_model,
+        therapist_mode=args.therapist_mode,
         turns=args.turns,
         use_rag=args.use_rag,
         use_schema=args.use_schema,
+        use_protocol=args.use_protocol,
         k=args.k,
         seed=args.seed,
         transcript_json=args.transcript_json,
-        retrieval_json=args.retrieval_json,
-        prompt_trace_json=args.prompt_trace_json,
-        print_live=(not args.no_print_live),
         print_prompts=args.print_prompts,
     )
-
 
 if __name__ == "__main__":
     main()
