@@ -1,3 +1,9 @@
+"""
+Generating conversations between therapist and patient LLMs.
+
+Run:
+./run_experiment.sh [baseline|cbt] [gemma|mistral|qwen|deepseek|gpt]
+"""
 import os
 import re
 import json
@@ -21,13 +27,7 @@ class OllamaChat:
         self.model = model
         self.base_url = base_url.rstrip("/")
 
-    def chat(
-        self,
-        messages: List[Dict[str, str]],
-        temperature: float,
-        num_predict: int,
-        top_p: float = 0.9,
-    ) -> str:
+    def chat(self, messages, temperature, num_predict, top_p=0.9) -> str:
         payload = {
             "model": self.model,
             "messages": messages,
@@ -40,7 +40,24 @@ class OllamaChat:
         }
         r = requests.post(f"{self.base_url}/api/chat", json=payload, timeout=300)
         r.raise_for_status()
-        return (r.json().get("message") or {}).get("content", "").strip()
+        return r.json()["message"]["content"].strip()
+
+
+class OpenAIChat:
+    def __init__(self, model: str):
+        self.model = model
+        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+    def chat(self, messages, temperature, num_predict, top_p=0.9) -> str:
+        r = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            temperature=temperature,
+            max_tokens=num_predict,
+            top_p=top_p,
+        )
+        return r.choices[0].message.content.strip()
+
 
 def load_cbt_protocols_text() -> str:
     path = ROOT / "references" / "cbt-protocols.json"
@@ -59,8 +76,41 @@ def load_cbt_protocols_text() -> str:
 
 CBT_PLAYBOOK_TEXT = load_cbt_protocols_text()
 
+PATIENT_SYSTEM = """
+You are simulating a human patient in an ongoing cognitive behavioral therapy (CBT) session.
+
+Respond as the patient would in a real therapy session.
+
+Your responses should be internally guided by:
+- your personal history
+- your core and intermediate beliefs
+- your automatic thoughts, emotions, and behaviors
+
+These structures influence how you speak,
+but you MUST NOT name or reference them explicitly.
+
+- Speak in natural, everyday language
+- Responses may include hesitation, uncertainty, or emotional shifts
+- Gradually reveal deeper concerns over time
+- Allow inconsistencies, ambivalence, and partial insight
+
+- 1–5 sentences per response
+- Do NOT give advice
+- Do NOT explain therapy concepts
+- Do NOT sound analytical or instructional
+- Do NOT ask questions unless it feels emotionally natural
+- Never mention schemas, beliefs, CBT, or diagrams
+
+- React to the therapist’s response, not just the surface question
+- If the therapist offers an interpretation, consider it emotionally before intellectually
+
+You are now the patient.
+Respond naturally to the therapist’s next message.
+
+""".strip()
+
 THERAPIST_BASELINE_PROMPT = """
-You are responding to the patient as an assistant.
+You are responding to the patient as a therapist.
 
 Guidelines:
 - Respond naturally and empathetically.
@@ -69,188 +119,111 @@ Guidelines:
 
 Style:
 - 2-4 sentences.
-- One paragraph.
+- One paragraph maximum.
 """.strip()
-
-# THERAPIST_CBT_PROMPT_gemma = """
-# You are a CBT-style therapist in a live conversation.
-
-# You are given hidden contextual information derived from:
-# - a structured schema extracted from the patient’s recent language
-# - background psychological concepts used only for interpretation
-
-# ABSOLUTE REQUIREMENT:
-# Every response MUST clearly use the structured schema.
-# If no schema element is reflected in your wording, the response is incorrect.
-
-# AVAILABLE CBT MOVES (choose ONE per turn):
-# A. Clarifying Question
-# B. Gentle Reframe
-# C. Pattern Highlighting
-
-# Move definitions:
-# A. Clarifying Question – helps the patient notice a specific thought or trigger  
-# B. Gentle Reframe – offers a tentative alternative interpretation of a thought  
-# C. Pattern Highlighting – connects the current statement to a recurring pattern across turns  
-
-# RULES FOR MOVE SELECTION:
-# - Choose EXACTLY ONE move per turn
-# - Do NOT repeat the same move used in the previous turn unless clearly necessary
-# - The move must directly operate on the selected schema element
-
-# HOW TO USE THE SCHEMA:
-# - Select EXACTLY ONE schema element (trigger OR automatic thought OR emotion OR behavior)
-# - Paraphrase it in plain language
-# - Make it clearly recognizable in your response
-
-# BACKGROUND CONCEPTS:
-# - Use only for silent interpretation
-# - Translate into everyday experiences
-# - Never mention diagnoses or clinical terms
-
-# STRICT FORMAT RULES:
-# - One paragraph
-# - 2–3 sentences
-# - End with exactly ONE open-ended question
-# - No advice, coping strategies, reassurance, or explanations
-
-# If the response could apply to another patient, it is incorrect.
-# If the CBT move is unclear, it is incorrect.
-
-# """.strip()
-
-
-
-# THERAPIST_CBT_PROMPT = """
-# You are a CBT-style therapist in a live conversation. 
-# Your goal is to help the patient gain insight into their thoughts and feelings and improve their understanding.
-
-# You are given hidden contextual information derived from:
-# - a structured schema extracted from the patient's recent language
-# - background psychological concepts used only for interpretation
-
-# ABSOLUTE REQUIREMENT:
-# Every response MUST clearly use the structured schema.
-# If no schema element is reflected in your wording, the response is incorrect.
-
-# HOW TO USE THE SCHEMA:
-# - Select EXACTLY ONE schema element from ONE bucket:
-#   (trigger OR automatic thought OR emotion OR behavior)
-# - Paraphrase it in plain, everyday language
-# - Make it clearly recognizable in your response
-
-# BACKGROUND CONCEPTS (if present):
-# - Use them ONLY as silent support for interpretation
-# - Translate them into everyday experiences (e.g., “mental fog”, “feeling stuck”)
-# - NEVER mention diagnoses or clinical terms
-
-# STRICT FORMAT RULES (must follow):
-# - Exactly 2 or 3 sentences
-# - Ask EXACTLY ONE open-ended question
-# - NO lists, NO advice, NO coping strategies
-# - NO psychoeducation
-# - NO therapy explanations or instructions
-
-# CONTENT REQUIREMENTS (in order):
-# 1. Reflect ONE specific schema element (by paraphrase) or
-# 2. Reflect ONE specific patient thought or pattern
-# 3. Offer ONE alternative interpretation or discrepancy
-# 4. End with ONE open-ended question about that thought
-
-# If your response could apply to another patient, it is incorrect.
-# If the schema is not clearly visible in the wording, it is incorrect.
-
-# """.strip()
 
 THERAPIST_CBT_PROMPT = """
-You are a CBT-oriented therapist responding in an ongoing conversation.
+You are a Cognitive Behavior Therapist in a live Cognitive Behavior Therapy (CBT) conversation.
 
-You are given hidden CONTEXT that includes:
-- A structured schema extracted from the patient’s recent language
-- Clinically relevant background concepts expressed in technical terms
+You are given HIDDEN CONTEXT that includes:
+- a CBT protocol playbook describing validated intervention strategies
+- a structured user schema (triggers, automatic thoughts, emotions, behaviors)
+- retrieved clinical concepts relevant to the user’s language
 
-You MUST use this context to shape every response.
-If you do not ground your reply in the schema, the response is incorrect.
+You MUST use this context on EVERY turn.
 
---------------------
-HOW TO USE THE CONTEXT
---------------------
+━━━━━━━━━━━━━━━━━━━
+NON-NEGOTIABLE RULE
+━━━━━━━━━━━━━━━━━━━
 
-Schema usage (REQUIRED every turn):
-- Explicitly reflect at least ONE item from the schema:
-  • a trigger
-  • OR an automatic thought
-  • OR an emotion
-  • OR a behavior
-Use the patient’s own wording or a close paraphrase.
+You MUST NOT mirror, paraphrase, or summarize the patient’s message.
 
-Clinical concepts (if present):
-- Treat them as *patterns*, not diagnoses.
-- Translate them into plain language experiences (e.g., “getting stuck in loops,”
-  “mental shutdown,” “pressure to perform,” “mental overload”).
-- NEVER name disorders or clinical terms.
+If your response could be mistaken for a reflection of what the patient just said,
+the response is INVALID.
 
---------------------
-CBT MOVE SELECTION
---------------------
+Your task is to INTERPRET meaning and advance insight,
+not to echo content.
 
-Each response must apply EXACTLY ONE of the following moves:
+━━━━━━━━━━━━━━━━━━━
+OPENING STYLE CONSTRAINT
+━━━━━━━━━━━━━━━━━━━
 
-1. Clarification:
-   Gently narrow or specify a vague thought or feeling.
-2. Reframing:
-   Offer a realistic alternative interpretation.
-3. Discrepancy highlighting:
-   Point out a mismatch between fear and evidence.
-4. Pattern identification:
-   Name a recurring mental or emotional pattern.
-5. Decatastrophizing:
-   Soften an all-or-nothing or worst-case assumption.
 
-IMPORTANT:
-- Do NOT repeat the same move used in the previous turn.
-- If the conversation feels stuck, choose a DIFFERENT move.
+You may start with ONE of these forward-moving openings:
+- a tentative hypothesis about an assumption
+- a pattern label
+- a discrepancy
+- a reframed meaning
+- a precision check that does NOT restate 
 
---------------------
-RESPONSE CONSTRAINTS (STRICT)
---------------------
+Or reflective starters such as:
+- "It sounds like..."
+- "It seems like..."
+- "I hear you..."
+- "What I'm hearing is..."
+- "You're feeling..."
+- "You are feeling..."
 
-- ONE paragraph only
+
+━━━━━━━━━━━━━━━━━━━
+INTERNAL CLINICAL REASONING (SILENT)
+━━━━━━━━━━━━━━━━━━━
+
+Before writing your response, do ALL of the following internally:
+
+1. Select the MOST RELEVANT schema element
+   (trigger OR automatic thought OR emotion OR behavior)
+
+2. Identify the implicit assumption or cognitive distortion beneath it
+   (e.g., rules, expectations, self-judgments, meanings, conditional beliefs)
+
+3. Select the SINGLE most appropriate CBT protocol:
+   - validate_and_reflect → when emotional safety or alignment is primary
+   - socratic_questioning → when assumptions need to be examined
+   - cognitive_reframing → when interpretations are rigid or limiting
+
+4. Use the most relevant retrieved concepts ONLY to sharpen interpretation
+   (they are support signals; do NOT name or quote them)
+
+━━━━━━━━━━━━━━━━━━━
+HOW TO USE CONTEXT
+━━━━━━━━━━━━━━━━━━━
+
+- Refer to schema elements INDIRECTLY, never verbatim
+- Treat retrieved concepts as patterns, never diagnoses
+- Translate technical ideas into lived experience
+- Focus on what the experience IMPLIES, not what it IS
+- Never name CBT techniques, schemas, diagnoses, or distortions
+
+━━━━━━━━━━━━━━━━━━━
+RESPONSE CONSTRAINTS
+━━━━━━━━━━━━━━━━━━━
+
+- ONE paragraph
 - 2–4 sentences total
-- NO lists, NO bullet points
-- NO advice, coping tips, or strategies
-- NO reassurance or encouragement
+- NO advice
 - NO psychoeducation
-- NO diagnosis or medical language
-- Ask EXACTLY ONE open-ended question at the end
 
---------------------
+━━━━━━━━━━━━━━━━━━━
 CONTENT REQUIREMENTS
---------------------
+━━━━━━━━━━━━━━━━━━━
 
 Your response MUST:
-1. Name or paraphrase ONE specific feeling from the schema
-2. Reflect ONE specific thought or pattern from the schema
-3. Apply ONE CBT move (from the list above)
-4. End with ONE open-ended question
+1. Indirectly reference ONE schema element
+2. Make an implicit assumption or distortion visible
+3. Apply the selected CBT protocol clearly
+4. Introduce a NEW interpretation, pattern, or perspective
 
-Ground everything in the patient’s actual words.
-If the response could apply to anyone, it is incorrect.
+Question use:
+- Ask EXACTLY ONE open-ended question ONLY if the chosen protocol requires exploration
+  (e.g., socratic_questioning).
+- If using validate_and_reflect or cognitive_reframing, a question is OPTIONAL.
+
+If the response restates the patient’s experience, it is wrong.
+If the response could apply to many people, it is wrong.
+If the CBT protocol is not clearly applied, it is wrong.
 """.strip()
 
-PATIENT_SYSTEM = """
-You are simulating a human patient.
-
-Rules (must follow):
-- 1–2 sentences only.
-- Speak only about your own feelings, thoughts, or experiences.
-- Engage with the therapist's prompts naturally and address your issues.
-- Do NOT give advice, reassurance, validation, or guidance.
-- Do NOT ask questions.
-- Informal, emotional, sometimes messy language.
-- Never sound like a therapist.
-- Do not mention being an AI.
-""".strip()
 
 
 CODE_LIKE_RE = re.compile(r"\b\d{4,}\b|[A-Z]{2,}\d{2,}")
@@ -294,7 +267,7 @@ def build_hidden_context(schema, rag, use_protocol):
     if use_protocol and CBT_PLAYBOOK_TEXT:
         blocks.append(CBT_PLAYBOOK_TEXT)
     if schema:
-        blocks.append("[SCHEMA]\n" + json.dumps(schema))
+        blocks.append("[USER SCHEMA]\n" + json.dumps(schema))
     if rag:
         blocks.append("[RAG]\n" + json.dumps(rag))
     return "\n\n".join(blocks)
@@ -308,115 +281,131 @@ def audit_grounding(reply, schema, rag):
 
 
 def run_session(
-    therapist_model: str,
-    patient_model: str,
-    therapist_mode: str,
-    turns: int,
-    use_rag: bool,
-    use_schema: bool,
-    use_protocol: bool,
-    k: int,
-    seed: str,
-    transcript_json: str,
-    print_prompts: bool,
+    therapist_model,
+    patient_model,
+    therapist_mode,
+    turns,
+    use_rag,
+    use_schema,
+    use_protocol,
+    k,
+    seed,
+    transcript_json,
 ):
-    therapist_llm = OllamaChat(therapist_model)
 
-    from openai import OpenAI
-    openai_client = OpenAI()
+    if therapist_mode == "baseline":
+        if use_rag or use_schema or use_protocol:
+            raise ValueError(
+                "Baseline mode must NOT use user schema, RAG, or CBT protocols."
+            )
+        use_rag = use_schema = use_protocol = False
+
+    if therapist_mode == "cbt":
+        if not (use_rag and use_schema and use_protocol):
+            raise ValueError(
+                "CBT mode MUST use user schema, RAG, and CBT protocols."
+            )
+        
+    therapist_llm = (
+        OpenAIChat(therapist_model)
+        if therapist_model.startswith("gpt")
+        else OllamaChat(therapist_model)
+    )
+
+    patient_llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     driver = GraphDatabase.driver(
         NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)
     )
 
-    base_therapist_prompt = (
+    base_prompt = (
         THERAPIST_BASELINE_PROMPT
         if therapist_mode == "baseline"
         else THERAPIST_CBT_PROMPT
     )
 
-    therapist_chat: List[Dict[str, str]] = []
-    patient_chat: List[Dict[str, str]] = [
-        {"role": "system", "content": PATIENT_SYSTEM}
-    ]
-
     transcript = [{"role": "patient", "content": seed}]
-    cbt_context_log = []
-
-    patient_chat.append({"role": "assistant", "content": seed})
+    patient_chat = [{"role": "system", "content": PATIENT_SYSTEM}]
     last_patient = seed
 
-    for t in range(1, turns + 1):
+    schema_trace = []  # store schema per turn for CBT transcripts
+
+    for turn_idx in range(turns):
+
         schema = safe_extract_schema(last_patient) if use_schema else None
+        rag = (
+            sanitize_rag(retrieve_snomed_matches(driver, last_patient, k=k))
+            if use_rag else None
+        )
 
-        rag_safe = None
-        if use_rag:
-            rag_raw = retrieve_snomed_matches(driver, last_patient, k=k) or []
-            rag_safe = sanitize_rag(rag_raw)
+        if therapist_mode == "cbt":
+            schema_trace.append({
+                "turn": turn_idx,
+                "patient_text": last_patient,
+                "schema": schema,
+                "retrieval": rag,
+            })
 
-        hidden_context = build_hidden_context(schema, rag_safe, use_protocol)
+        hidden_context = build_hidden_context(schema, rag, use_protocol)
 
-        therapist_system_prompt = base_therapist_prompt
-        if hidden_context:
-            therapist_system_prompt += (
-                "\n\nIMPORTANT CONTEXT (MUST BE USED):\n"
-                + hidden_context
-            )
-
-        therapist_chat = [
-            {"role": "system", "content": therapist_system_prompt},
-            {"role": "user", "content": last_patient},
+        therapist_messages = [
+            {"role": "system", "content": base_prompt}
         ]
 
-        if print_prompts:
-            print("\n" + "=" * 80)
-            print(f"TURN {t} — THERAPIST INPUT")
-            for m in therapist_chat:
-                print(f"[{m['role']}]\n{m['content']}\n")
+        if hidden_context:
+            therapist_messages.append({
+                "role": "system",
+                "content": "IMPORTANT CONTEXT (DO NOT REVEAL):\n" + hidden_context
+            })
 
-        # -------- Therapist generation --------
+        therapist_messages.append({
+            "role": "user",
+            "content": last_patient
+        })
+
         therapist_reply = therapist_llm.chat(
-            therapist_chat,
+            therapist_messages,
             temperature=0.15,
             num_predict=140,
             top_p=0.7,
-        )
+        ).strip()
 
-        # Retry if therapist violates constraints
         if looks_like_therapist_leak(therapist_reply):
-            therapist_reply = therapist_llm.chat(
-                therapist_chat + [{
+            rewritten = therapist_llm.chat(
+                therapist_messages + [{
                     "role": "system",
                     "content": (
-                        "Rewrite strictly following the rules. "
-                        "No lists. No advice. One question only."
+                        "Rewrite the response strictly following the rules. "
+                        "Do NOT paraphrase. "
+                        "Do NOT begin with phrases like 'it sounds like' or 'it seems like'. "
+                        "Interpret meaning and advance insight."
                     )
                 }],
                 temperature=0.1,
-                num_predict=120,
+                num_predict=140,
+                top_p=0.7,
+            ).strip()
+
+            if rewritten:
+                therapist_reply = rewritten
+
+        if not therapist_reply:
+            raise RuntimeError(
+                f"Empty therapist response at turn {turn_idx} "
+                f"from model {therapist_model}. Aborting run."
             )
 
-        transcript.append({"role": "therapist", "content": therapist_reply})
+        transcript.append({
+            "role": "therapist",
+            "content": therapist_reply
+        })
 
-        # -------- Grounding audit --------
-        if therapist_mode == "cbt":
-            cbt_context_log.append({
-                "turn": t,
-                "patient_text": last_patient,
-                "schema": schema,
-                "rag": rag_safe,
-                "grounding_audit": audit_grounding(
-                    therapist_reply, schema, rag_safe
-                ),
-            })
-
-        patient_messages = patient_chat + [
-            {"role": "user", "content": therapist_reply}
-        ]
-
-        patient_resp = openai_client.chat.completions.create(
+        patient_resp = patient_llm.chat.completions.create(
             model=patient_model,
-            messages=patient_messages,
+            messages=patient_chat + [{
+                "role": "user",
+                "content": therapist_reply
+            }],
             temperature=0.9,
             max_tokens=80,
         )
@@ -425,24 +414,30 @@ def run_session(
 
         # Retry if patient drifts into therapist mode
         if looks_like_patient_drift(patient_reply):
-            patient_resp = openai_client.chat.completions.create(
+            patient_reply = patient_llm.chat.completions.create(
                 model=patient_model,
-                messages=patient_messages + [{
+                messages=patient_chat + [{
                     "role": "system",
                     "content": (
-                        "Rewrite as the patient. "
-                        "Feelings only. No advice. "
-                        "No validation. 1–2 sentences."
+                        "Rewrite strictly as the patient. "
+                        "No advice. No validation. "
+                        "Speak only from personal feelings and experience."
                     )
                 }],
                 temperature=0.9,
                 max_tokens=80,
-            )
-            patient_reply = patient_resp.choices[0].message.content.strip()
+            ).choices[0].message.content.strip()
 
-        transcript.append({"role": "patient", "content": patient_reply})
+        transcript.append({
+            "role": "patient",
+            "content": patient_reply
+        })
 
-        patient_chat.append({"role": "assistant", "content": patient_reply})
+        patient_chat.append({
+            "role": "assistant",
+            "content": patient_reply
+        })
+
         last_patient = patient_reply
 
     driver.close()
@@ -451,13 +446,18 @@ def run_session(
         "therapist_model": therapist_model,
         "patient_model": patient_model,
         "therapist_mode": therapist_mode,
+        "intervention_flags": {
+            "use_schema": use_schema,
+            "use_rag": use_rag,
+            "use_protocol": use_protocol,
+        },
         "turns": turns,
         "seed": seed,
         "transcript": transcript,
     }
 
     if therapist_mode == "cbt":
-        output["cbt_context"] = cbt_context_log
+        output["user_schema_trace"] = schema_trace
 
     Path(transcript_json).parent.mkdir(parents=True, exist_ok=True)
     Path(transcript_json).write_text(
@@ -468,36 +468,22 @@ def run_session(
 def main():
     ap = argparse.ArgumentParser()
 
-    # ap.add_argument("--therapist_model", default="mistral:7b-instruct")
-    ap.add_argument("--therapist_model", default="gemma2:9b")
-
+    ap.add_argument("--therapist_model", required=True)
     ap.add_argument("--patient_model", default="gpt-4o-mini")
-
     ap.add_argument("--therapist_mode", choices=["baseline", "cbt"], required=True)
     ap.add_argument("--turns", type=int, default=10)
     ap.add_argument("--k", type=int, default=5)
-    ap.add_argument("--seed", default="I keep overthinking everything at work.")
-    ap.add_argument("--transcript_json", default="output/debug_transcript.json")
+    ap.add_argument("--seed", required=True)
+    ap.add_argument("--transcript_json", required=True)
+
     ap.add_argument("--use_rag", action="store_true")
     ap.add_argument("--use_schema", action="store_true")
     ap.add_argument("--use_protocol", action="store_true")
-    ap.add_argument("--print_prompts", action="store_true")
 
     args = ap.parse_args()
 
-    run_session(
-        therapist_model=args.therapist_model,
-        patient_model=args.patient_model,
-        therapist_mode=args.therapist_mode,
-        turns=args.turns,
-        use_rag=args.use_rag,
-        use_schema=args.use_schema,
-        use_protocol=args.use_protocol,
-        k=args.k,
-        seed=args.seed,
-        transcript_json=args.transcript_json,
-        print_prompts=args.print_prompts,
-    )
+    run_session(**vars(args))
+
 
 if __name__ == "__main__":
     main()

@@ -1,16 +1,38 @@
 #!/usr/bin/env bash
 set -e
 
-mkdir -p output
+# Usage: ./run_experiments.sh [baseline|cbt] [gemma|mistral|qwen|deepseek|gpt]
+# Example: ./run_experiments.sh cbt mistral
 
-MODE="$1"   # baseline | cbt
+MODE="$1"
+MODEL_KEY="$2"
 
-if [[ "$MODE" != "baseline" && "$MODE" != "cbt" ]]; then
-  echo "Usage: ./run_experiments.sh [baseline|cbt]"
+if [[ -z "$MODE" || -z "$MODEL_KEY" ]]; then
+  echo "Usage: ./run_experiments.sh [baseline|cbt] [gemma|mistral|qwen|deepseek|gpt]"
   exit 1
 fi
 
-# MODEL="gemma2:9b"
+if [[ "$MODE" != "baseline" && "$MODE" != "cbt" ]]; then
+  echo "Invalid mode: $MODE"
+  exit 1
+fi
+
+# Model map
+case "$MODEL_KEY" in
+  gemma)    MODEL="gemma2:9b" ;;
+  mistral)  MODEL="mistral:7b-instruct" ;;
+  qwen)     MODEL="qwen3:4b" ;;
+  deepseek) MODEL="deepseek-r1:8b" ;;
+  gpt)      MODEL="gpt-4o" ;;
+  *)
+    echo "Unknown model key: $MODEL_KEY"
+    exit 1
+    ;;
+esac
+
+OUTDIR="output/${MODEL_KEY}"
+mkdir -p "$OUTDIR"
+
 TURNS=10
 K=5
 
@@ -26,18 +48,16 @@ for i in "${!seeds[@]}"; do
   run=$((i+1))
   seed="${seeds[$i]}"
 
-  echo "======================================"
-  echo "Running $MODE — seed $run"
-  echo "======================================"
+  echo "Seed $run"
 
   CMD=(
     python -m cbt_llm.multiturn_convo
-    # --model "$MODEL"
+    --therapist_model "$MODEL"
     --therapist_mode "$MODE"
-    --turns $TURNS
-    --k $K
+    --turns "$TURNS"
+    --k "$K"
     --seed "$seed"
-    --transcript_json "output/${MODE}_transcript_${run}.json"
+    --transcript_json "${OUTDIR}/${MODE}_transcript_${run}.json"
   )
 
   if [[ "$MODE" == "cbt" ]]; then
@@ -46,3 +66,6 @@ for i in "${!seeds[@]}"; do
 
   "${CMD[@]}"
 done
+
+
+echo "Outputs saved to ./output/${MODEL_KEY}"
