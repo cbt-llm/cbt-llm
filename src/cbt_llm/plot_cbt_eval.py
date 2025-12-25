@@ -1,159 +1,205 @@
 """
-Generate CBT evaluation plots from evaluating_benchmark outputs.
+plot_cbt_eval.py
 
-Plots (per model):
-1. CBT Coverage (Bar Chart)
-2. CBT Bench (Radar Chart)
-3. CBT Depth Over Turns (Line Plot)
+Generate therapist-side CBT evaluation plots from evaluation/{model}/summary.csv
 
+Plots per model (Appendix):
+1. CBT Protocol Adherence (Radar)
+2. CBT Quality (Baseline vs CBT-guided)
+
+These plots align with the paper’s therapist-side evaluation:
+- Model-level aggregation first
+- Cross-model aggregation handled separately for main figures
+
+Usage:
+python src/cbt_llm/plot_cbt_eval.py --models gpt gemma mistral
 """
 
 from pathlib import Path
-import pandas as pd
+import argparse
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
-
-
-ROOT = Path(__file__).resolve().parents[2] 
-RESULTS_ROOT = ROOT / "output" / "results"
-PLOTS_OUT = ROOT / "output" / "reports" / "figures"
+EVAL_ROOT = Path("evaluation")
+PLOTS_OUT = EVAL_ROOT / "plots_cbt"
 PLOTS_OUT.mkdir(parents=True, exist_ok=True)
 
-MODELS = {"gemma": "gemma-2-9b", "mistral": "mistral-7b-instruct"}
-
-PROTOCOL_COLS = [
-    "validation_execution",
-    "socratic_execution",
-    "reframing_execution",
-]
-
-LABEL_MAP = {
-    "validation_execution": "Validation",
-    "socratic_execution": "Socratic Questioning",
-    "reframing_execution": "Reframing Unhelpful Thoughts",
+MODEL_DISPLAY = {
+    "gpt": "GPT-4o-mini",
+    "gemma": "Gemma-2-9B",
+    "mistral": "Mistral-7B-Instruct",
+    "qwen": "Qwen-3-4B",
+    "deepseek": "DeepSeek-R1-8B",
 }
 
+PROTOCOL_COLS = {
+    "Validation & Reflection": "judge_avg_validate_and_reflect_quality",
+    "Socratic Questioning": "judge_avg_socratic_questioning_quality",
+    "Cognitive Reframing": "judge_avg_cognitive_reframing_quality",
+}
+
+def model_title(model: str) -> str:
+    return MODEL_DISPLAY.get(model, model.upper())
+
+def normalize_filename(path: str) -> str:
+    return Path(path).name.lower()
+
+def is_cbt_file(path: str) -> bool:
+    """
+    Strictly identify CBT-guided conversations.
+    Matches experimental naming: cbt_*.json
+    """
+    return normalize_filename(path).startswith("cbt_")
+
 def load_summary(model: str) -> pd.DataFrame:
-    path = RESULTS_ROOT / model / "summary.csv"
+    path = EVAL_ROOT / model / "summary.csv"
     if not path.exists():
-        raise FileNotFoundError(f"Missing summary.csv for {model}: {path}")
+        raise FileNotFoundError(f"Missing summary.csv for model: {model}")
     return pd.read_csv(path)
 
-def load_turns(model: str, stem: str) -> pd.DataFrame:
-    path = RESULTS_ROOT / model / f"{stem}.turns.csv"
-    if not path.exists():
-        raise FileNotFoundError(f"Missing turns file: {path}")
-    return pd.read_csv(path)
 
-def is_cbt(stem: str) -> bool:
-    return stem.startswith("cbt_")
+def plot_protocol_radar(model: str, df: pd.DataFrame):
+    baseline = df[~df["file"].apply(is_cbt_file)]
+    cbt = df[df["file"].apply(is_cbt_file)]
 
+    labels = list(PROTOCOL_COLS.keys())
 
-def plot_cbt_coverage(model: str, summary: pd.DataFrame):
-    coverage = {"Baseline": [], "CBT": []}
+    baseline_vals = [baseline[col].mean() for col in PROTOCOL_COLS.values()]
+    cbt_vals = [cbt[col].mean() for col in PROTOCOL_COLS.values()]
 
-    for _, row in summary.iterrows():
-        active = sum(
-            row[f"{p}_avg"] > 0
-            for p in [
-                "validation_execution",
-                "socratic_execution",
-                "reframing_execution",
-            ]
-        )
-        score = active / 3.0
-        group = "CBT" if is_cbt(row["stem"]) else "Baseline"
-        coverage[group].append(score)
+    baseline_vals += baseline_vals[:1]
+    cbt_vals += cbt_vals[:1]
 
-    means = {k: np.mean(v) for k, v in coverage.items()}
-
-    plt.figure(figsize=(4, 4))
-    plt.bar(means.keys(), means.values())
-    plt.ylim(0, 1.0)
-    plt.ylabel("CBT Coverage")
-    plt.title(f"{MODELS[model].upper()}: CBT Coverage")
-    plt.tight_layout()
-    plt.savefig(PLOTS_OUT / f"{model}_cbt_coverage.png", dpi=200)
-    plt.close()
-
-
-def plot_radar(model: str, summary: pd.DataFrame):
-    categories = ["Validation", "Socratic Questioning", "Reframing", "Continuity"]
-    angles = np.linspace(0, 2 * np.pi, len(categories), endpoint=False).tolist()
+    angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
     angles += angles[:1]
 
-    def aggregate(group: str):
-        rows = summary[
-            summary["stem"].apply(lambda s: is_cbt(s) if group == "CBT" else not is_cbt(s))
-        ]
-        vals = [
-            rows["validation_execution_avg"].mean(),
-            rows["socratic_execution_avg"].mean(),
-            rows["reframing_execution_avg"].mean(),
-            1.0 - rows["refusal_rate"].mean(),   # continuity proxy
-        ]
-        return vals + vals[:1]
+    fig, ax = plt.subplots(
+        figsize=(7.5, 6.5),
+        subplot_kw=dict(polar=True)
+    )
 
-    baseline_vals = aggregate("Baseline")
-    cbt_vals = aggregate("CBT")
+    line_b, = ax.plot(angles, baseline_vals, linewidth=2, label="Baseline")
+    ax.fill(angles, baseline_vals, alpha=0.15)
 
-    fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(polar=True))
+    line_c, = ax.plot(angles, cbt_vals, linewidth=2, label="CBT-guided")
+    ax.fill(angles, cbt_vals, alpha=0.15)
 
-    ax.plot(angles, baseline_vals, label="Baseline")
-    ax.fill(angles, baseline_vals, alpha=0.1)
+    ax.set_thetagrids(
+        np.degrees(angles[:-1]),
+        labels,
+        fontsize=11
+    )
+    ax.tick_params(pad=14)
+    ax.set_ylim(0, 5)
 
-    ax.plot(angles, cbt_vals, label="CBT")
-    ax.fill(angles, cbt_vals, alpha=0.1)
+    ax.set_title(
+        f"{model_title(model)}: CBT Protocol Adherence",
+        fontsize=14,
+        pad=32,
+    )
 
-    ax.set_thetagrids(np.degrees(angles[:-1]), categories)
-    ax.set_ylim(0, 1)
-    ax.set_title(f"{model.upper()}: CBT Bench ")
-    ax.legend(loc="upper right")
+    fig.legend(
+        handles=[line_b, line_c],
+        labels=["Baseline", "CBT-guided"],
+        loc="center right",
+        bbox_to_anchor=(0.98, 0.55),
+        frameon=True,
+        fontsize=11,
+    )
 
-    plt.tight_layout()
-    plt.savefig(PLOTS_OUT / f"{model}_cbt_radar.png", dpi=200)
-    plt.close()
+    fig.subplots_adjust(left=0.08, right=0.78, top=0.85, bottom=0.08)
 
-def plot_depth_over_turns(model: str, summary: pd.DataFrame):
-    depth = {"Baseline": {}, "CBT": {}}
-
-    for _, row in summary.iterrows():
-        stem = row["stem"]
-        group = "CBT" if is_cbt(stem) else "Baseline"
-        df = load_turns(model, stem)
-
-        df["cbt_depth"] = df[PROTOCOL_COLS].mean(axis=1)
-
-        for idx, val in enumerate(df["cbt_depth"]):
-            depth[group].setdefault(idx, []).append(val)
-
-    plt.figure(figsize=(6, 4))
-
-    for group in ["Baseline", "CBT"]:
-        xs = sorted(depth[group].keys())
-        ys = [np.mean(depth[group][x]) for x in xs]
-        plt.plot(xs, ys, marker="o", label=group)
-
-    plt.xlabel("Therapist Turn Index")
-    plt.ylabel("CBT Depth")
-    plt.ylim(0, 1)
-    plt.title(f"{MODELS[model].upper()}: CBT Depth Over Turns")
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(PLOTS_OUT / f"{model}_cbt_depth_over_turns.png", dpi=200)
+    plt.savefig(PLOTS_OUT / f"{model}_cbt_protocol_adherence.png", dpi=200)
     plt.close()
 
 
-def main():
-    for model in MODELS:
-        summary = load_summary(model)
+def plot_overall_quality(model: str, df: pd.DataFrame):
+    baseline = df[~df["file"].apply(is_cbt_file)]["judge_avg_avg_score"]
+    cbt = df[df["file"].apply(is_cbt_file)]["judge_avg_avg_score"]
 
-        plot_cbt_coverage(model, summary)
-        plot_radar(model, summary)
-        plot_depth_over_turns(model, summary)
+    plt.figure(figsize=(5.5, 4.5))
+    plt.bar(
+        ["Baseline", "CBT-guided"],
+        [baseline.mean(), cbt.mean()],
+    )
 
-        print(f"[OK] Plots generated for {model}")
+    plt.ylabel("Average CBT Quality Score")
+    plt.ylim(0, 5)
+    plt.title(f"{model_title(model)}: CBT Quality")
+
+    plt.tight_layout()
+    plt.savefig(PLOTS_OUT / f"{model}_overall_cbt_quality.png", dpi=200)
+    plt.close()
+
+
+def plot_delta_cbt_quality_across_models(models):
+    """
+    Plot Δ-CBT Quality = mean(CBT-guided) - mean(Baseline) per model.
+    This is the main paper figure.
+    """
+    model_names = []
+    deltas = []
+
+    for model in models:
+        df = load_summary(model)
+
+        baseline = df[~df["file"].apply(is_cbt_file)]["judge_avg_avg_score"]
+        cbt = df[df["file"].apply(is_cbt_file)]["judge_avg_avg_score"]
+
+        if baseline.empty or cbt.empty:
+            continue
+
+        delta = cbt.mean() - baseline.mean()
+
+        model_names.append(model_title(model))
+        deltas.append(delta)
+
+    x = np.arange(len(model_names))
+
+    plt.figure(figsize=(7.0, 4.5))
+    plt.bar(x, deltas)
+
+    plt.axhline(0, linestyle="--", linewidth=1)
+    plt.xticks(x, model_names)
+    plt.ylabel("Difference in CBT Quality (CBT-guided - Baseline)")
+
+
+    plt.title("Effect of CBT-Guided Prompting on Therapist Quality")
+
+    plt.tight_layout()
+    plt.savefig(
+        PLOTS_OUT / "difference_cbt_quality_across_models.png",
+        dpi=200
+    )
+    plt.close()
+
+
+
+def main(models):
+    for model in models:
+        df = load_summary(model)
+
+        required = {"file", "judge_avg_avg_score"} | set(PROTOCOL_COLS.values())
+        missing = required - set(df.columns)
+        if missing:
+            raise ValueError(f"{model} summary.csv missing columns: {missing}")
+
+        plot_protocol_radar(model, df)
+        plot_overall_quality(model, df)
+    
+    plot_delta_cbt_quality_across_models(models)
+
+    print("Evaluation plots generated.")
+
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser()
+    ap.add_argument(
+        "--models",
+        nargs="+",
+        required=True,
+    )
+    args = ap.parse_args()
+
+    main(args.models)
