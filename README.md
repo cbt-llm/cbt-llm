@@ -1,5 +1,5 @@
 # cbt-llm
-CMSC691: Reward Based - Action Oriented CBT LLMs
+CMSC691: CBT Oriented LLMs
 
 ## Project Setup
 
