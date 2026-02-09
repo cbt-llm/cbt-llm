@@ -1,4 +1,8 @@
-mkdir -p output
+#!/usr/bin/env bash
+timestamp=$(date +"%m%d%Y_%H%M")
+RUN_DIR="outputs/output_${timestamp}"
+
+mkdir -p "$RUN_DIR"
 
 seeds=(
   "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
@@ -37,6 +41,10 @@ for i in "${!seeds[@]}"; do
     --prompt_trace_json "output/rag_prompt_trace_${run}.json"
 
 
-python src/cbt_llm/new_vadar.py output --out output/vader_outputs
+
 
 done
+
+mkdir -p "${RUN_DIR}/vader_outputs"
+
+python src/cbt_llm/new_vadar.py "$RUN_DIR" --out "${RUN_DIR}/vader_outputs"
