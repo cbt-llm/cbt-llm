@@ -16,7 +16,7 @@ seeds=(
 for i in "${!seeds[@]}"; do
   run=$((i+1))
 
-  ---- BASELINE (no RAG, no schema) ----
+  #---- BASELINE (no RAG, no schema) ----
   python -m cbt_llm.multiturn_convo \
     --therapist_model "gemma2:9b" \
     --patient_model "mistral:7b-instruct" \
