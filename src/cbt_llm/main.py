@@ -1,5 +1,8 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 from pipelines.neo4j_pipeline import run_neo4j_pipeline
@@ -28,8 +31,11 @@ def main():
     else:
         print("Invalid choice.")
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
     print("\n\nResults saved to snomed_turn_results.csv\n")
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
