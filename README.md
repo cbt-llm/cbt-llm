@@ -1,5 +1,5 @@
 # cbt-llm
-CMSC691: Reward Based - Action Oriented CBT LLMs
+CMSC691: CBT Oriented LLMs
 
 ## Project Setup
 
@@ -61,6 +61,8 @@ Create a Neo4j Instance and add the uri, username, password to your ```.env```
 ### Load SNOMED Concepts/Relationships to neo4j Graph
 ```python -m cbt_llm.pymed_graph```
 
+## Graph Retrieval
+
 ### Create node embeddings and store in the graph
 ```python3 embed_snomed.py```
 
@@ -76,8 +78,81 @@ This is used for semantic search.
 ### Retrieve the tok_k embeddings
 ```python3 main.py```
 
+## Start User Interface
 
+From the root directory, run: ```streamlit run app.py```
 
+![Chat Interface](images/ui.png)
+![Conversation](images/chat.png)
 
+## Run RAG Experiments
+
+We evaluate CBT-aligned retrieval-augmented generation using a 2 × 3 factorial design, varying:
+
+- Prompting mode: baseline vs. CBT-guided
+- Language model: three open and closed LLMs
+
+2 × 5 factorial design
+
+Models mapping to experiment with:
+- gemma-2-2b (arg: gemma)
+- mistral-7b-instruct (arg: mistral)
+- gpt-4o (arg: gpt)
+
+Each model is run under baseline and CBT-guided system prompts.
+Outputs are written to output/{model}/.
+
+Commands to run:
+
+```sh
+export PYTHONPATH=src
+export OPENAI_API_KEY=
+```
+
+```./run_experiments.sh [baseline|cbt] ${MODEL}```
+
+## Generate Evaluation Plots
+
+#### Therapist-Side Evaluation
+
+We evaluate therapist responses using an LLM-as-a-judge framework that scores:
+
+- Validation & reflection
+- Socratic questioning
+- Cognitive reframing
+- Overall CBT quality
+
+Outputs are saved to:
+
+```
+evaluation/{model}/summary.csv
+evaluation/{model}/*.judge.jsonl
+```
+
+Commands:
+
+```python src/cbt_llm/plot_cbt_eval.py --models gpt gemma mistral```
+
+#### Patient-Side Sentiment Evaluation
+
+Patient responses are analyzed using VADER compound sentiment scores as a proxy for emotional trajectory.
+
+Generate Patient Evaluation Plots
+
+This script produces:
+
+Patient sentiment trajectories (baseline vs. CBT-guided)
+
+Protocol-specific patient sentiment effects
+
+Cross-model aggregated patient effect
+
+```python src/cbt_llm/plot_patient_eval.py --models gpt gemma mistral```
+
+Outputs are saved to:
+
+```
+evaluation/patient_plots/
+```
 
 
