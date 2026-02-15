@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 from pipelines.neo4j_pipeline import run_neo4j_pipeline
 from pipelines.llm_pipeline import run_all_models
 from patient_queries import PATIENT_TURNS
@@ -24,8 +27,11 @@ def main():
 
     else:
         print("Invalid choice.")
+<<<<<<< Updated upstream
 
     print("\n\nResults saved to snomed_turn_results.csv\n")
+=======
+>>>>>>> Stashed changes
 
 
 if __name__ == "__main__":
