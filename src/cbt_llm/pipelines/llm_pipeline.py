@@ -5,7 +5,7 @@ import re
 import json
 from datetime import datetime
 from config import OUTPUT_LLM_DIR
-import os
+from pathlib import Path
 
 
 MODELS = [
@@ -86,7 +86,7 @@ def run_all_models(user_text: str):
     # Create timestamped filename
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_filename = f"llm_results_{timestamp}.json"
-    output_path = os.path.join(OUTPUT_LLM_DIR, output_filename)
+    output_path = Path(OUTPUT_LLM_DIR) / output_filename
 
     # Prepare structured output
     final_output = {

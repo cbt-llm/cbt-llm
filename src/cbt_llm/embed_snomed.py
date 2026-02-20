@@ -1,176 +1,95 @@
 from neo4j import GraphDatabase
 from sentence_transformers import SentenceTransformer
-from config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
 from transformers import AutoTokenizer, AutoModel
-import torch
+from config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
 from tqdm.auto import tqdm
-import numpy as np
-from huggingface_hub import login
-
-
-
+import torch
+import re
 
 driver = GraphDatabase.driver(
     NEO4J_URI,
-    auth=(NEO4J_USER, NEO4J_PASSWORD)
+    auth=(NEO4J_USER, NEO4J_PASSWORD),
 )
 
+mpnet = SentenceTransformer("all-mpnet-base-v2")
 
-# mpnet_model= SentenceTransformer("all-mpnet-base-v2")
+def load_hf_model(model_name: str):
+    tok = AutoTokenizer.from_pretrained(model_name)
+    mdl = AutoModel.from_pretrained(model_name)
+    mdl.eval()
+    return tok, mdl
 
-# sapbert_tokenizer = AutoTokenizer.from_pretrained(
-#     "cambridgeltl/SapBERT-from-PubMedBERT-fulltext"
-# )
-# sapbert_model = AutoModel.from_pretrained(
-#     "cambridgeltl/SapBERT-from-PubMedBERT-fulltext"
-# )
-# sapbert_model.eval()
-
-
-bioreddit_tokenizer = AutoTokenizer.from_pretrained(
-    "cambridgeltl/BioRedditBERT-uncased"
-)
-bioreddit_model = AutoModel.from_pretrained(
-    "cambridgeltl/BioRedditBERT-uncased"
-)
-bioreddit_model.eval()
-
-mentalbert_tokenizer = AutoTokenizer.from_pretrained(
-    "mental/mental-bert-base-uncased"
-)
-mentalbert_model = AutoModel.from_pretrained(
-    "mental/mental-bert-base-uncased"
-)
-mentalbert_model.eval()
-
+sapbert_tok, sapbert_mdl = load_hf_model("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
+bioreddit_tok, bioreddit_mdl = load_hf_model("cambridgeltl/BioRedditBERT-uncased")
+mentalbert_tok, mentalbert_mdl = load_hf_model("mental/mental-bert-base-uncased")
 
 def fetch_nodes(tx):
-    query = """
+    q = """
     MATCH (n:Concept)
     RETURN n.code AS code, n.term AS term, n.synonyms AS synonyms
     """
-    return list(tx.run(query))
+    return list(tx.run(q))
 
+def join_text(term, synonyms):
+    term = term or ""
+    synonyms = synonyms or []
+    parts = [term] + [s for s in synonyms if s]
+    text = " ".join(parts)
+    return re.sub(r"\s+", " ", text).strip()
 
-# def store_embeddings(tx, code, vec_mpnet, vec_sapbert):
-#     query = """
-#     MATCH (n:Concept {code: $code})
-#     SET n.embedding_mpnet = $mpnet,
-#         n.embedding_sapbert = $sapbert
-#     """
-#     tx.run(query, code=code, mpnet=vec_mpnet, sapbert=vec_sapbert)
-
-
-def store_embeddings(tx, code, bioreddit_vec, mentalbert_vec):
-    query = """
-    MATCH (n:Concept {code: $code})
-    SET n.embedding_bioreddit = $bio,
-        n.embedding_mentalbert = $mental
-    """
-    tx.run(
-        query,
-        code=code,
-        bio=bioreddit_vec,
-        mental=mentalbert_vec
-    )
-
-
-# def sapbert_embed(texts, max_length=25):
-#     """ Returns CLS embeddings of a list of strings """
-
-#     encoded = sapbert_tokenizer.batch_encode_plus(
-#         texts,
-#         padding="max_length",
-#         truncation=True,
-#         max_length=max_length,
-#         return_tensors="pt"
-#     )
-
-    
-
-#     with torch.no_grad():
-#         output = sapbert_model(**encoded)[0][:, 0, :]   # CLS token
-
-#     return output.numpy()
-
-
-# def main():
-#     print("Fetching nodes...")
-#     with driver.session() as session:
-#         nodes = session.execute_read(fetch_nodes)
-
-#     print("Generating & storing embeddings (MPNet + SapBERT)...")
-#     for row in nodes:
-#         term = row["term"] or ""
-#         synonyms = row["synonyms"] or []
-#         combined_text = " ".join([term] + synonyms)
-
-#         # MPNet embedding
-#         mpnet_vec = mpnet_model.encode(combined_text).tolist()
-
-#         # SapBERT embedding
-#         sap_vec = sapbert_embed([combined_text])[0].tolist()
-
-#         with driver.session() as session:
-#             session.execute_write(
-#                 store_embeddings,
-#                 row["code"],
-#                 mpnet_vec,
-#                 sap_vec
-#             )
-
-#     print("Done! Both embeddings stored.")
-
-
-
-# if __name__ == "__main__":
-#     main()
-
-def cls_embed(texts, tokenizer, model, max_length=32):
-    encoded = tokenizer.batch_encode_plus(
-        texts,
+def cls_embed(text: str, tok, mdl, max_length=32):
+    enc = tok(
+        [text],
         padding="max_length",
         truncation=True,
         max_length=max_length,
-        return_tensors="pt"
+        return_tensors="pt",
     )
-
     with torch.no_grad():
-        output = model(**encoded).last_hidden_state[:, 0, :]
+        vec = mdl(**enc).last_hidden_state[:, 0, :]  # CLS
+    return vec.detach().cpu().numpy()[0].tolist()
 
-    return output.numpy()
+def store_embeddings(tx, code: str, embeddings: dict):
+    """
+    embeddings keys must match Neo4j property names:
+      embedding_mpnet, embedding_sapbert, embedding_bioreddit, embedding_mentalbert
+    """
+    q = """
+    MATCH (n:Concept {code: $code})
+    SET n.embedding_mpnet = $embedding_mpnet,
+        n.embedding_sapbert = $embedding_sapbert,
+        n.embedding_bioreddit = $embedding_bioreddit,
+        n.embedding_mentalbert = $embedding_mentalbert
+    """
+    tx.run(q, code=code, **embeddings)
 
-
-# -------- Main -------- #
+HF_EMBEDDERS = {
+    "embedding_sapbert": (sapbert_tok, sapbert_mdl),
+    "embedding_bioreddit": (bioreddit_tok, bioreddit_mdl),
+    "embedding_mentalbert": (mentalbert_tok, mentalbert_mdl),
+}
 
 def main():
     print("Fetching SNOMED nodes...")
-    with driver.session() as session:
-        nodes = session.execute_read(fetch_nodes)
+    with driver.session() as s:
+        nodes = s.execute_read(fetch_nodes)
 
-    print("Generating BioRedditBERT + MentalBERT embeddings...")
+    print("Generating embeddings (MPNet + 3 HF CLS models)...")
     for row in tqdm(nodes):
-        term = row["term"] or ""
-        synonyms = row["synonyms"] or []
-        text = " ".join([term] + synonyms)
-        
-        bio_vec = cls_embed(
-            [text], bioreddit_tokenizer, bioreddit_model
-        )[0].tolist()
+        code = row["code"]
+        text = join_text(row.get("term"), row.get("synonyms"))
 
-        mental_vec = cls_embed(
-            [text], mentalbert_tokenizer, mentalbert_model
-        )[0].tolist()
+        embeddings = {
+            "embedding_mpnet": mpnet.encode(text).tolist()
+        }
 
-        with driver.session() as session:
-            session.execute_write(
-                store_embeddings,
-                row["code"],
-                bio_vec,
-                mental_vec
-            )
+        for prop, (tok, mdl) in HF_EMBEDDERS.items():
+            embeddings[prop] = cls_embed(text, tok, mdl)
 
-    print("Done! New embeddings stored safely.")
+        with driver.session() as s:
+            s.execute_write(store_embeddings, code, embeddings)
+
+    print("Done! All embeddings stored.")
 
 
 if __name__ == "__main__":

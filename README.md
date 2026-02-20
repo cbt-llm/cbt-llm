@@ -184,6 +184,32 @@ ollama serve
 
 ### Run experiments
 
+1. Compute Retrieval Recall Scores:
+Evaluate SNOMED CT concept retrieval performance across the following embedding models:
+
+- MPNet (all-mpnet-base-v2)
+- SapBERT (SapBERT-from-PubMedBERT-fulltext)
+- BioRedditBERT
+- MentalBERT
+
+```sh
+python3 src/evaluation/recall_eval.py
+```
+
+Files generated:
+
+- `recall_summary.csv`: Recall@1, @3, @5 per embedding model
+- `qualitative_examples.csv`: Per-query retrieved concepts with correctness labels
+
+2. Run Concept generation pipelines:
+
+- llm_pipeline
+- neo4j_pipeline
+
+3. Generate Transcripts
+
+Run 
+
 ```sh
 ./run_experiments.sh [baseline|cbt] ${MODEL}
 ```
