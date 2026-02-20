@@ -4,7 +4,7 @@ import subprocess
 import re
 import json
 from datetime import datetime
-from config import OUTPUT_LLM_DIR
+from cbt_llm.config import OUTPUT_LLM_DIR
 from pathlib import Path
 
 
