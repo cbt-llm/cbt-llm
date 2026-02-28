@@ -1,16 +1,9 @@
-import os
-from pathlib import Path
-from dotenv import load_dotenv
 import pandas as pd
-
-from cbt_llm.config import SNOMEDCT_DIR, SNOMEDCT_CORE_FILE
-
-import sys
-pymed_path = Path(SNOMEDCT_DIR) / "build" / "lib"
-sys.path.insert(0, str(pymed_path))
-
 from pymedtermino.snomedct import SNOMEDCT
 
+# Root for all Mental state, behavior and/or psychosocial function finding (finding)
+# Reference: https://docs.snomed.org/snomed-ct-specifications/snomed-ct-editorial-guide/readme/authoring/domain-specific-modeling/clinical-finding-and-disorder 
+MENTAL_ROOT = 384821006 
 
 def extract_snomed_relationships(root_id):
     root = SNOMEDCT[root_id]
@@ -19,8 +12,8 @@ def extract_snomed_relationships(root_id):
     relationships = []
 
     for concept in root.descendants_no_double():
-
-        nodes[str(concept.code)] = concept.term
+        text = concept.term if concept.term else concept.fsn
+        nodes[str(concept.code)] = text
 
         for parent in concept.parents:
             relationships.append({
@@ -29,43 +22,32 @@ def extract_snomed_relationships(root_id):
                 "target": str(parent.code)
             })
 
-        for rel_type in concept.relations:
-            try:
-                targets = getattr(concept, rel_type)
-            except AttributeError:
-                continue
+        try:
+            interpreted_targets = concept.interprets
+        except AttributeError:
+            interpreted_targets = []
 
-            if not targets:
-                continue
+        for target in interpreted_targets:
+            relationships.append({
+                "source": str(concept.code),
+                "relation": "INTERPRETS",
+                "target": str(target.code)
+            })
+            target_text = target.term if target.term else target.fsn
+            nodes[str(target.code)] = target_text
 
-            for target in targets:
-                relationships.append({
-                    "source": str(concept.code),
-                    "relation": rel_type,
-                    "target": str(target.code)
-                })
-
-    node_rows = [
-        {"code": code, "term": term}
-        for code, term in nodes.items()
-    ]
-
+    node_rows = [{"code": code, "term": term} for code, term in nodes.items()]
     return node_rows, relationships
 
 
 if __name__ == "__main__":
-    print("Filtering for SNOMED mental health data")
+    nodes, rels = extract_snomed_relationships(MENTAL_ROOT)
 
-    # starting root at Mental disorders and mapping all its children/relationships
-    nodes, rels = extract_snomed_relationships(74732009)
+    df_nodes = pd.DataFrame(nodes)
+    df_rels = pd.DataFrame(rels)
 
-    df_nod = pd.DataFrame(nodes)
-    df_rel = pd.DataFrame(rels)
-
-    df_nod.to_csv("output-CBT-Nodes.csv")
-    df_rel.to_csv("output-CBT-Rel.csv")
+    df_nodes.to_csv("mental_findings_nodes.csv", index=False)
+    df_rels.to_csv("mental_findings_rels.csv", index=False)
 
     print("Concepts:", len(nodes))
-    print("Relations:", len(rels))
-
-    
+    print("Relationships:", len(rels))
