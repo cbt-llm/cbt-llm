@@ -1,5 +1,3 @@
-# model_runner.py
-
 import subprocess
 import re
 import json
