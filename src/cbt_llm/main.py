@@ -1,29 +1,40 @@
-from pipelines.neo4j_pipeline import run_neo4j_pipeline
-from pipelines.llm_pipeline import run_all_models
-from patient_queries import PATIENT_TURNS
+# main.py
+
+from cbt_llm.pipelines.neo4j_pipeline import run_neo4j_pipeline
+from cbt_llm.pipelines.llm_pipeline import run_all_models
+from cbt_llm.pipelines.claude_pipeline import run_claude_model
+from cbt_llm.user_data import load_all_patient_turns
+import glob
+import os
+
+
+# Path to all CSV files in the folder
+_data_dir = os.path.join(os.path.dirname(__file__), "cbt_user_data")
+csv_files = glob.glob(os.path.join(_data_dir, "*.csv"))
+
+# Load and clean the patient turns
+PATIENT_TURNS = load_all_patient_turns(csv_files, column_name="client_statement")
+print(PATIENT_TURNS[:5])
+
 
 def main():
     print("Choose pipeline:")
     print("1 → Neo4j SNOMED retrieval")
     print("2 → LLM semantic extraction")
+    print("3 → Claude semantic extraction")
 
     choice = input("Enter choice: ")
 
     if choice == "1":
-        # Neo4j: call pipeline one turn at a time
-        for i, turn in enumerate(PATIENT_TURNS, start=1):
-            print(f"\n========== Neo4j Turn {i} ==========\n")
-            run_neo4j_pipeline([turn])  # still passes a list with one turn
+        run_neo4j_pipeline(PATIENT_TURNS)
 
     elif choice == "2":
-        # LLM: call pipeline one turn at a time
-        for i, turn in enumerate(PATIENT_TURNS, start=1):
-            print(f"\n========== LLM Turn {i} ==========\n")
-            run_all_models(turn)  # expects a single string
+        run_all_models(PATIENT_TURNS)
+    elif choice == "3":
+        run_claude_model(PATIENT_TURNS)
 
     else:
         print("Invalid choice.")
-
 
     print("\n\nResults saved to snomed_turn_results.csv\n")
 

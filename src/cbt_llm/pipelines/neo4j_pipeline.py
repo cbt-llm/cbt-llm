@@ -6,12 +6,16 @@ from pathlib import Path
 
 EMBEDDING_MODES = ["mpnet", "sapbert", "bioreddit", "mentalbert"]
 
+
 def fetch_term(driver, code):
-    """Fetch SNOMED term given a code."""
-    q = "MATCH (c:Concept {code: $code}) RETURN c.term AS term"
+    if code is None:
+        return None
     with driver.session() as session:
-        r = session.run(q, code=code).single()
-        return r["term"] if r else None
+        result = session.run(
+            "MATCH (n:Concept {code: $code}) RETURN n.term AS term LIMIT 1",
+            code=code
+        ).single()
+    return result["term"] if result else None
 
 
 def run_neo4j_pipeline(patient_turns, output_file="snomed_turn_results.csv"):
@@ -20,8 +24,6 @@ def run_neo4j_pipeline(patient_turns, output_file="snomed_turn_results.csv"):
         NEO4J_URI,
         auth=(NEO4J_USER, NEO4J_PASSWORD)
     )
-
-    print("\n============= TURN-BY-TURN SNOMED EXTRACTION =============\n")
 
     with open(output_path, "w", newline="", encoding="utf-8") as csv_file:
         writer = csv.writer(csv_file)
@@ -39,9 +41,6 @@ def run_neo4j_pipeline(patient_turns, output_file="snomed_turn_results.csv"):
         ])
 
         for i, turn in enumerate(patient_turns, start=1):
-
-            print(f"\n==================== TURN {i} ====================\n")
-            print(f"User said:\n{turn}\n")
 
             for mode in EMBEDDING_MODES:
                 results = retrieve_snomed_matches(driver, turn, mode=mode, k=5)
