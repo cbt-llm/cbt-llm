@@ -166,7 +166,7 @@ def plot_protocol_effect(model: str, files):
     weighted = {
         "Validation": [],
         "Socratic": [],
-        "Reframing": [],
+        "Restructuring": [],
     }
 
     for fp in files:
@@ -218,18 +218,18 @@ def plot_protocol_effect(model: str, files):
 
             v = jr.get("validate_and_reflect_quality")
             s = jr.get("socratic_questioning_quality")
-            r = jr.get("cognitive_reframing_quality")
+            r = jr.get("cognitive_restructuring_quality")
 
             if isinstance(v, (int, float)):
                 weighted["Validation"].append((float(v), float(change)))
             if isinstance(s, (int, float)):
                 weighted["Socratic"].append((float(s), float(change)))
             if isinstance(r, (int, float)):
-                weighted["Reframing"].append((float(r), float(change)))
+                weighted["Restructuring"].append((float(r), float(change)))
 
     labels, means = [], []
 
-    for label in ["Validation", "Socratic", "Reframing"]:
+    for label in ["Validation", "Socratic", "Restructuring"]:
         vals = weighted[label]
         if not vals:
             continue
@@ -274,7 +274,7 @@ def plot_protocol_effect_across_models(models):
         weighted = {
             "Validation": [],
             "Socratic": [],
-            "Reframing": [],
+            "Restructuring": [],
         }
 
         for fp in files:
@@ -324,18 +324,18 @@ def plot_protocol_effect_across_models(models):
 
                     v = jr.get("validate_and_reflect_quality")
                     s = jr.get("socratic_questioning_quality")
-                    r = jr.get("cognitive_reframing_quality")
+                    r = jr.get("cognitive_restructuring_quality")
 
                     if isinstance(v, (int, float)):
                         weighted["Validation"].append((float(v), change))
                     if isinstance(s, (int, float)):
                         weighted["Socratic"].append((float(s), change))
                     if isinstance(r, (int, float)):
-                        weighted["Reframing"].append((float(r), change))
+                        weighted["Restructuring"].append((float(r), change))
 
         protocol_means = []
 
-        for label in ["Validation", "Socratic", "Reframing"]:
+        for label in ["Validation", "Socratic", "Restructuring"]:
             vals = weighted[label]
             if not vals:
                 continue
