@@ -110,7 +110,7 @@ Before writing your response, do ALL of the following internally:
 3. Select the SINGLE most appropriate CBT protocol:
    - validate_and_reflect → when emotional safety or alignment is primary
    - socratic_questioning → when assumptions need to be examined
-   - cognitive_reframing → when interpretations are rigid or limiting
+   - cognitive_restructuring → when interpretations are rigid or limiting
 
 4. Use the most relevant retrieved concepts ONLY to sharpen interpretation
    (they are support signals; do NOT name or quote them)
@@ -147,7 +147,7 @@ Your response MUST:
 Question use:
 - Ask EXACTLY ONE open-ended question ONLY if the chosen protocol requires exploration
   (e.g., socratic_questioning).
-- If using validate_and_reflect or cognitive_reframing, a question is OPTIONAL.
+- If using validate_and_reflect or cognitive_restructuring, a question is OPTIONAL.
 
 If the response restates the patient’s experience, it is wrong.
 If the response could apply to many people, it is wrong.

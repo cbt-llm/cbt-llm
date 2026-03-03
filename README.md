@@ -304,7 +304,7 @@ We evaluate therapist responses using an LLM-as-a-judge framework that scores:
 
 - Validation & reflection
 - Socratic questioning
-- Cognitive reframing
+- Cognitive restructuring
 - Overall CBT quality
 
 Outputs are saved to:

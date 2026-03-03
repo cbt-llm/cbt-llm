@@ -135,5 +135,5 @@ def run_nli_reranker(
     print(f"  Total findings : {len(findings)}")
     print(f"  Kept           : {kept}")
     print(f"  Dropped        : {len(findings) - kept}")
-    print(f"  CSV saved      : {output_path}")
+    # print(f"  CSV saved      : {output_path}")
     print(f"  JSON saved     : {json_path}\n")

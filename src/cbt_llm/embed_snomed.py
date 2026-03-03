@@ -10,6 +10,7 @@ driver = GraphDatabase.driver(
 )
 
 mpnet = SentenceTransformer("all-mpnet-base-v2")
+
 def load_hf_model(model_name: str):
     tok = AutoTokenizer.from_pretrained(model_name)
     mdl = AutoModel.from_pretrained(model_name)
@@ -46,7 +47,8 @@ def store_embeddings(tx, code: str, embeddings: dict):
     """
     q = """
     MATCH (n:Concept {code: $code})
-    SET n.embedding_sapbert = $embedding_sapbert,
+    SET n.embedding_mpnet = $embedding_mpnet,
+        n.embedding_sapbert = $embedding_sapbert,
         n.embedding_bioreddit = $embedding_bioreddit,
         n.embedding_mentalbert = $embedding_mentalbert
     """
@@ -71,7 +73,6 @@ def main():
         embeddings = {
             "embedding_mpnet": mpnet.encode(text).tolist()
         }
-        embeddings = {}
 
         for prop, (tok, mdl) in HF_EMBEDDERS.items():
             embeddings[prop] = cls_embed(text, tok, mdl)

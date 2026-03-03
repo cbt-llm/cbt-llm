@@ -36,7 +36,7 @@ MODEL_DISPLAY = {
 PROTOCOL_COLS = {
     "Validation & Reflection": "judge_avg_validate_and_reflect_quality",
     "Socratic Questioning": "judge_avg_socratic_questioning_quality",
-    "Cognitive Reframing": "judge_avg_cognitive_reframing_quality",
+    "Cognitive Restructuring": "judge_avg_cognitive_restructuring_quality",
 }
 
 def model_title(model: str) -> str:

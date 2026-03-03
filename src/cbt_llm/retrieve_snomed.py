@@ -1,6 +1,8 @@
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModel
 import torch
+from neo4j import GraphDatabase
+
 
 mpnet_model = SentenceTransformer("all-mpnet-base-v2")
 
@@ -155,4 +157,40 @@ def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0):
 
 
 
+if __name__ == "__main__":
 
+    from neo4j import GraphDatabase
+    from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
+
+    driver = GraphDatabase.driver(
+        NEO4J_URI,
+        auth=(NEO4J_USER, NEO4J_PASSWORD)
+    )
+
+    query = "I keep overthinking everything at work and I'm scared I might get fired."
+
+    print("\nQuery:")
+    print(query)
+    print("\nTop SNOMED Matches:\n")
+
+    results = retrieve_snomed_matches(
+        driver,
+        query,
+        mode="mpnet",
+        k=5,
+        threshold=0
+    )
+
+    for r in results:
+        print(f"TERM  : {r['term']}")
+        print(f"CODE  : {r['code']}")
+        print(f"SCORE : {r['score']}")
+
+        if r["relations"]:
+            print("RELATIONS:")
+            for rel in r["relations"]:
+                print("  ", rel)
+
+        print("-" * 40)
+
+    driver.close()
