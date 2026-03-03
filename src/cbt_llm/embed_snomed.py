@@ -1,11 +1,9 @@
 from neo4j import GraphDatabase
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModel
-from config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
+from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
 from tqdm.auto import tqdm
 import torch
-import re
-
 driver = GraphDatabase.driver(
     NEO4J_URI,
     auth=(NEO4J_USER, NEO4J_PASSWORD),
@@ -26,16 +24,9 @@ mentalbert_tok, mentalbert_mdl = load_hf_model("mental/mental-bert-base-uncased"
 def fetch_nodes(tx):
     q = """
     MATCH (n:Concept)
-    RETURN n.code AS code, n.term AS term, n.synonyms AS synonyms
+    RETURN n.code AS code, n.term AS term
     """
     return list(tx.run(q))
-
-def join_text(term, synonyms):
-    term = term or ""
-    synonyms = synonyms or []
-    parts = [term] + [s for s in synonyms if s]
-    text = " ".join(parts)
-    return re.sub(r"\s+", " ", text).strip()
 
 def cls_embed(text: str, tok, mdl, max_length=32):
     enc = tok(
@@ -56,8 +47,7 @@ def store_embeddings(tx, code: str, embeddings: dict):
     """
     q = """
     MATCH (n:Concept {code: $code})
-    SET n.embedding_mpnet = $embedding_mpnet,
-        n.embedding_sapbert = $embedding_sapbert,
+    SET n.embedding_sapbert = $embedding_sapbert,
         n.embedding_bioreddit = $embedding_bioreddit,
         n.embedding_mentalbert = $embedding_mentalbert
     """
@@ -74,14 +64,15 @@ def main():
     with driver.session() as s:
         nodes = s.execute_read(fetch_nodes)
 
-    print("Generating embeddings (MPNet + 3 HF CLS models)...")
+    print("Generating embeddings (3 HF CLS models)...")
     for row in tqdm(nodes):
         code = row["code"]
-        text = join_text(row.get("term"), row.get("synonyms"))
+        text = row.get("term") or ""
 
         embeddings = {
             "embedding_mpnet": mpnet.encode(text).tolist()
         }
+        embeddings = {}
 
         for prop, (tok, mdl) in HF_EMBEDDERS.items():
             embeddings[prop] = cls_embed(text, tok, mdl)

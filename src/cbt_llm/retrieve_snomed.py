@@ -98,7 +98,7 @@ def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0):
     RETURN 
         n.code AS code,
         n.term AS term,
-        [(n)-[r]->(m) | {{type: coalesce(r.type, type(r)), target: m.code}}] AS relations,
+        [(n)-[r]->(m) | {{type: type(r), target: m.code}}] AS relations,
         score
     ORDER BY score DESC
     LIMIT $k
@@ -136,7 +136,7 @@ EMBEDDING_MODES = {
 }
 
 
-def retrieve_snomed_matches(driver, text, mode="bioreddit", k=5, threshold=0):
+def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0):
     if mode not in EMBEDDING_MODES:
         raise ValueError(f"Unsupported embedding mode: {mode}")
 

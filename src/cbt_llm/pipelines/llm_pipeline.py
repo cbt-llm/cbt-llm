@@ -1,59 +1,36 @@
-import subprocess
 import re
 import json
+import requests
 from datetime import datetime
 from cbt_llm.config import OUTPUT_LLM_DIR
-from pathlib import Path
+from .prompt_templates.prompt import PROMPT_SNOMED
+import pandas as pd
+import os
 
 
 MODELS = [
     "gemma3:12b",
-    "llama2:13b",
-    "vicuna:13b"
+    "llama3:latest",
+    "mistral:7b-instruct"
 ]
 
-PROMPT_TEMPLATE = """
-You are assisting with exploratory research using SNOMED CT as the
-reference clinical ontology.
+OLLAMA_URL = "http://localhost:11434/api/generate"
 
-Your task:
-1. Understand the user text semantically.
-2. Perform a conceptual (semantic) search over SNOMED CT
-   mental and behavioral health concepts.
-3. Select up to 5 relevant SNOMED CT concept names only (no codes).
-4. When applicable, prefer higher-level parent concepts
-   connected via IS-A relationships.
-
-Rules:
-- Do NOT invent or guess medical codes.
-- Do NOT diagnose or label the user.
-- Only suggest high-level SNOMED CT mental or behavioral health concepts.
-- If nothing is relevant, say: "No clear mental health concepts."
-
-User text:
-"{user_text}"
-
-Output format (JSON only):
-{{
-  "concepts": [
-    {{
-      "term": "SNOMED concept name"
-    }}
-  ]
-}}
-"""
 
 def run_model(user_text: str, model_name: str):
-    prompt = PROMPT_TEMPLATE.format(user_text=user_text)
+    prompt = PROMPT_SNOMED.format(user_text=user_text)
 
-    result = subprocess.run(
-        ["ollama", "run", model_name],
-        input=prompt,
-        text=True,
-        capture_output=True
-    )
-
-    raw_output = result.stdout.strip()
+    try:
+        response = requests.post(OLLAMA_URL, json={
+            "model": model_name,
+            "prompt": prompt,
+            "stream": False,
+            "format": "json"
+        }, timeout=120)
+        response.raise_for_status()
+        raw_output = response.json().get("response", "").strip()
+    except requests.RequestException as e:
+        return {"error": f"Ollama API error for model {model_name}: {e}"}
 
     match = re.search(r"\{.*\}", raw_output, re.DOTALL)
     if not match:
@@ -70,35 +47,42 @@ def run_model(user_text: str, model_name: str):
             "raw_output": raw_output
         }
 
-def run_all_models(user_text: str):
 
-    results = {}
-
-    print("\n========== Running All Models ==========\n")
+def run_all_models(user_text_list: list):
+    """
+    user_text_list: list of queries to run
+    """
 
     for model in MODELS:
-        print(f"  - Running model: {model}")
-        model_result = run_model(user_text, model)
-        results[model] = model_result
+        print(f"\n========== Running Model: {model} ==========\n")
+        all_rows = []
 
-    # Create timestamped filename
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_filename = f"llm_results_{timestamp}.json"
-    output_path = Path(OUTPUT_LLM_DIR) / output_filename
+        for user_text in user_text_list:
+            model_result = run_model(user_text, model)
 
-    # Prepare structured output
-    final_output = {
-        "timestamp": timestamp,
-        "user_text": user_text,
-        "models_run": MODELS,
-        "results": results
-    }
+            row = {"User Query": user_text}
 
-    # Save to file
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(final_output, f, indent=2)
+            if "error" in model_result:
+                for i in range(1, 6):
+                    row[f"Concept {i}"] = model_result.get("error")
+            else:
+                findings = model_result.get("findings", [])
+                for i in range(5):
+                    if i < len(findings):
+                        row[f"Concept {i+1}"] = findings[i].get("term", "")
+                    else:
+                        row[f"Concept {i+1}"] = ""
 
-    print(f"\nResults saved to:\n{output_path}\n")
+            all_rows.append(row)
 
-    return final_output
+        # Create DataFrame
+        df = pd.DataFrame(all_rows)
 
+        # Create timestamped filename per model
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{model.replace(':','_')}_results_{timestamp}.csv"
+        filepath = os.path.join(OUTPUT_LLM_DIR, filename)
+
+        # Save to CSV
+        df.to_csv(filepath, index=False)
+        print(f"Results for model {model} saved to: {filepath}")
