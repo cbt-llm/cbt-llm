@@ -10,7 +10,6 @@ driver = GraphDatabase.driver(
 )
 
 mpnet = SentenceTransformer("all-mpnet-base-v2")
-
 def load_hf_model(model_name: str):
     tok = AutoTokenizer.from_pretrained(model_name)
     mdl = AutoModel.from_pretrained(model_name)

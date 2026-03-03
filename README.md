@@ -65,7 +65,7 @@ Create a Neo4j Instance and add the uri, username, password to your ```.env```
 ## Graph Retrieval
 
 ### Create node embeddings and store in the graph
-```python3 embed_snomed.py```
+```python -m cbt_llm.main```
 
 
 To check if the embeddings have been created in the neo4j
@@ -76,9 +76,79 @@ Run this below command in neo4j desktop/browser
 ### Install the Graph Data Science Plugin on the Neo4j Desktop 
 This is used for semantic search. 
 
-### Retrieve the tok_k embeddings
-```python3 main.py```
+### Retrieve the top_k embeddings
 
+```sh
+python -m cbt_llm.main
+```
+
+Select option `1` (Neo4j SNOMED retrieval).
+
+Output written to:
+```
+src/output_files/neo4j_retrival_output/snomed_turn_results.csv
+```
+
+Columns: `Embedding, Turn, User Text, SNOMED Term, Code, Score, Relation Type, Relation Target Code, Relation Target Term`
+
+---
+
+## NLI Re-ranking
+
+After SNOMED retrieval, a Natural Language Inference (NLI) re-ranking layer filters noisy top-K findings using `cross-encoder/nli-deberta-v3-small`.
+
+### How it works
+
+For each retrieved SNOMED finding, a hypothesis is constructed from the finding term and its `INTERPRETS` relations:
+
+```
+"This person has anxiety about resuming sexual relations (finding),
+ which involves psychological function, emotion, cognitive functions."
+```
+
+The NLI model scores `(user_text, hypothesis)` pairs and assigns a decision:
+
+| NLI Label     | Condition                         | Decision |
+| ------------- | --------------------------------- | -------- |
+| ENTAILMENT    | highest score                     | KEEP     |
+| NEUTRAL       | highest score AND score ≥ 0.5     | KEEP     |
+| CONTRADICTION | highest score                     | DROP     |
+
+### Run
+
+```sh
+python -m cbt_llm.main
+```
+
+Select option `4` (NLI re-ranking).
+
+Or run directly without loading the embedding models:
+
+```sh
+python -c "from cbt_llm.pipelines.nli_reranker import run_nli_reranker; run_nli_reranker()"
+```
+
+### Outputs
+
+Both files are written to `src/output_files/neo4j_retrival_output/`.
+
+**`nli_reranked_results.csv`** — full results with NLI scores and decision per finding:
+
+```
+Turn, User Text, SNOMED Term, Code, Retrieval Score, Hypothesis,
+NLI Label, Entailment Score, Neutral Score, Contradiction Score, Decision
+```
+
+**`nli_findings.json`** — kept SNOMED concept names per turn, for use in prompt integration:
+
+```json
+{
+  "1": ["Breakup of romance (finding)", "Anxiety about resuming sexual relations (finding)"],
+  "2": ["Anger (finding)", "Loss of control of anger (finding)"]
+}
+```
+
+---
 
 ## Set Up LLMs
 
@@ -203,10 +273,14 @@ Files generated:
 
 2. Run Concept generation pipelines:
 
-- llm_pipeline
-- neo4j_pipeline
+- `llm_pipeline` — LLM-based semantic extraction (option `2`)
+- `neo4j_pipeline` — SNOMED CT graph retrieval via MPNet embeddings (option `1`)
 
-3. Generate Transcripts
+3. Run NLI Re-ranking:
+
+Filter retrieved SNOMED findings using NLI (option `4`). Produces `nli_reranked_results.csv` and `nli_findings.json`.
+
+4. Generate Transcripts
 
 Run 
 
