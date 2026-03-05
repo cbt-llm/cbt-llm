@@ -30,7 +30,7 @@ load_dotenv()
 PROTOCOL_DIMENSIONS = [
     "validate_and_reflect_quality",
     "socratic_questioning_quality",
-    "cognitive_reframing_quality",
+    "cognitive_restructuring_quality",
 ]
 
 CBT_DIMENSIONS = [
@@ -75,7 +75,7 @@ Score each dimension from 1 (poor) to 5 (excellent).
 CBT PROTOCOL EXECUTION:
 1. validate_and_reflect_quality
 2. socratic_questioning_quality
-3. cognitive_reframing_quality
+3. cognitive_restructuring_quality
 
 CBT PRACTICE:
 4. cbt_adherence

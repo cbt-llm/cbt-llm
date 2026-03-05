@@ -9,12 +9,8 @@ from openai import OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 USER_SCHEMA_PROMPT = """
-You are a clinical-reasoning assistant trained to extract structured CBT components 
+You are a clinical-reasoning assistant trained to extract structured CBT cognitive model 
 from user text without diagnosing, labeling pathology, or adding interpretation.
-
-Extract ONLY the information present in the text.
-
-Return a JSON object with the following fields:
 
 Field definitions:
 - Triggers: external situations or contexts that precede distress (not thoughts or beliefs).
@@ -22,6 +18,14 @@ Field definitions:
 - Emotions: momentary affective states (single emotion words).
 - Behaviors: observable actions or avoidance responses.
 
+The cognitive model describes how people’s thoughts and perceptions influence their lives.
+Often, distress can distort people’s perceptions, and that, in turn, can lead to unhealthy
+emotions and behaviors. This helps to identify and evaluate user's “automatic
+thoughts” and shift their thinking to be healthier. 
+
+Extract ONLY the information present in the text.
+
+Return a JSON object with the following fields:
 
 {{
   "triggers": [list of short phrases],
