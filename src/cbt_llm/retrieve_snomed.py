@@ -2,31 +2,40 @@ from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModel
 import torch
 
-mpnet_model = SentenceTransformer("all-mpnet-base-v2")
+_models = {}
 
-sapbert_tokenizer = AutoTokenizer.from_pretrained(
-    "cambridgeltl/SapBERT-from-PubMedBERT-fulltext"
-)
-sapbert_model = AutoModel.from_pretrained(
-    "cambridgeltl/SapBERT-from-PubMedBERT-fulltext"
-)
-sapbert_model.eval()
 
-bioreddit_tokenizer = AutoTokenizer.from_pretrained(
-    "cambridgeltl/BioRedditBERT-uncased"
-)
-bioreddit_model = AutoModel.from_pretrained(
-    "cambridgeltl/BioRedditBERT-uncased"
-)
-bioreddit_model.eval()
+def _get_mpnet():
+    if "mpnet" not in _models:
+        _models["mpnet"] = SentenceTransformer("all-mpnet-base-v2")
+    return _models["mpnet"]
 
-mentalbert_tokenizer = AutoTokenizer.from_pretrained(
-    "mental/mental-bert-base-uncased"
-)
-mentalbert_model = AutoModel.from_pretrained(
-    "mental/mental-bert-base-uncased"
-)
-mentalbert_model.eval()
+
+def _get_sapbert():
+    if "sapbert" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
+        model = AutoModel.from_pretrained("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
+        model.eval()
+        _models["sapbert"] = (tokenizer, model)
+    return _models["sapbert"]
+
+
+def _get_bioreddit():
+    if "bioreddit" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("cambridgeltl/BioRedditBERT-uncased")
+        model = AutoModel.from_pretrained("cambridgeltl/BioRedditBERT-uncased")
+        model.eval()
+        _models["bioreddit"] = (tokenizer, model)
+    return _models["bioreddit"]
+
+
+def _get_mentalbert():
+    if "mentalbert" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("mental/mental-bert-base-uncased")
+        model = AutoModel.from_pretrained("mental/mental-bert-base-uncased")
+        model.eval()
+        _models["mentalbert"] = (tokenizer, model)
+    return _models["mentalbert"]
 
 
 def mean_pooling(model_output, attention_mask):
@@ -36,84 +45,31 @@ def mean_pooling(model_output, attention_mask):
 
 
 def embed_query_mpnet(text):
-    return mpnet_model.encode(text).tolist()
+    return _get_mpnet().encode(text).tolist()
+
 
 def embed_query_sapbert(text, max_length=256):
-    encoded = sapbert_tokenizer(
-        text,
-        padding=True,
-        truncation=True,
-        max_length=max_length,
-        return_tensors="pt"
-    )
-
+    tokenizer, model = _get_sapbert()
+    encoded = tokenizer(text, padding=True, truncation=True, max_length=max_length, return_tensors="pt")
     with torch.no_grad():
-        output = sapbert_model(**encoded)
-
-    vec = mean_pooling(output, encoded["attention_mask"])
-    return vec[0].numpy().tolist()
+        output = model(**encoded)
+    return mean_pooling(output, encoded["attention_mask"])[0].numpy().tolist()
 
 
 def embed_query_bioreddit(text, max_length=256):
-    encoded = bioreddit_tokenizer(
-        text,
-        padding=True,
-        truncation=True,
-        max_length=max_length,
-        return_tensors="pt"
-    )
-
+    tokenizer, model = _get_bioreddit()
+    encoded = tokenizer(text, padding=True, truncation=True, max_length=max_length, return_tensors="pt")
     with torch.no_grad():
-        output = bioreddit_model(**encoded)
-
-    vec = mean_pooling(output, encoded["attention_mask"])
-    return vec[0].numpy().tolist()
+        output = model(**encoded)
+    return mean_pooling(output, encoded["attention_mask"])[0].numpy().tolist()
 
 
 def embed_query_mentalbert(text, max_length=256):
-    encoded = mentalbert_tokenizer(
-        text,
-        padding=True,
-        truncation=True,
-        max_length=max_length,
-        return_tensors="pt"
-    )
-
+    tokenizer, model = _get_mentalbert()
+    encoded = tokenizer(text, padding=True, truncation=True, max_length=max_length, return_tensors="pt")
     with torch.no_grad():
-        output = mentalbert_model(**encoded)
-
-    vec = mean_pooling(output, encoded["attention_mask"])
-    return vec[0].numpy().tolist()
-
-
-
-
-
-def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0):
-    cypher = f"""
-    WITH $query AS queryVec
-    MATCH (n:Concept)
-    WHERE n.{embedding_field} IS NOT NULL
-    WITH n, gds.similarity.cosine(n.{embedding_field}, queryVec) AS score
-    RETURN 
-        n.code AS code,
-        n.term AS term,
-        [(n)-[r]->(m) | {{type: type(r), target: m.code}}] AS relations,
-        score
-    ORDER BY score DESC
-    LIMIT $k
-    """
-
-    params = {"query": query_embedding, "k": k}
-
-    with driver.session() as session:
-        results = session.run(cypher, params).data()
-
-    if not results or results[0]["score"] < threshold:
-        return [{"code": None, "term": "No matches found", "relations": [], "score": None}]
-
-    return results
-
+        output = model(**encoded)
+    return mean_pooling(output, encoded["attention_mask"])[0].numpy().tolist()
 
 
 EMBEDDING_MODES = {
@@ -136,7 +92,34 @@ EMBEDDING_MODES = {
 }
 
 
-def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0):
+def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0.35):
+    cypher = f"""
+    WITH $query AS queryVec
+    MATCH (n:Concept)
+    WHERE n.{embedding_field} IS NOT NULL
+    WITH n, gds.similarity.cosine(n.{embedding_field}, queryVec) AS score
+    WHERE score >= $threshold
+    RETURN
+        n.code AS code,
+        n.term AS term,
+        [(n)-[r]->(m) | {{type: type(r), target: m.code}}] AS relations,
+        score
+    ORDER BY score DESC
+    LIMIT $k
+    """
+
+    params = {"query": query_embedding, "k": k, "threshold": threshold}
+
+    with driver.session() as session:
+        results = session.run(cypher, params).data()
+
+    if not results:
+        return [{"code": None, "term": "No matches found", "relations": [], "score": None}]
+
+    return results
+
+
+def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0.35):
     if mode not in EMBEDDING_MODES:
         raise ValueError(f"Unsupported embedding mode: {mode}")
 
@@ -152,7 +135,3 @@ def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0):
         k=k,
         threshold=threshold
     )
-
-
-
-

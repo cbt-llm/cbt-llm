@@ -75,7 +75,7 @@ def run_nli_reranker(
     probs = exp_scores / exp_scores.sum(axis=1, keepdims=True)
 
     kept = 0
-    findings_by_turn = defaultdict(list)
+    findings_by_turn = defaultdict(lambda: {"entailment": [], "neutral": [], "contradiction": []})
 
     with open(output_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -111,7 +111,7 @@ def run_nli_reranker(
 
             if decision == "KEEP":
                 kept += 1
-                findings_by_turn[int(row["Turn"])].append(row["SNOMED Term"])
+            findings_by_turn[int(row["Turn"])][label.lower()].append(row["SNOMED Term"])
 
             writer.writerow([
                 row["Turn"],
@@ -127,7 +127,7 @@ def run_nli_reranker(
                 decision,
             ])
 
-    json_output = {str(turn): terms for turn, terms in sorted(findings_by_turn.items())}
+    json_output = {str(turn): labels for turn, labels in sorted(findings_by_turn.items())}
     with open(json_path, "w", encoding="utf-8") as jf:
         json.dump(json_output, jf, indent=2)
 

@@ -4,7 +4,7 @@ from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, OUTPUT_NEO4J_D
 import csv
 from pathlib import Path
 
-EMBEDDING_MODES = ["mpnet", "sapbert", "bioreddit", "mentalbert"]
+EMBEDDING_MODES = ["mpnet"]
 
 
 def fetch_term(driver, code):
