@@ -49,15 +49,15 @@ def nli_filter(user_text, findings, neutral_threshold=0.5):
         neutral = probs[i][LABEL_NEUTRAL]
         contra = probs[i][LABEL_CONTRADICTION]
 
-        if entail >= neutral and entail >= contra:
-            keep = True
-        elif neutral >= contra:
-            keep = neutral >= neutral_threshold
-        else:
-            keep = False
+        # if entail >= neutral and entail >= contra:
+        #     keep = True
+        # elif neutral >= contra:
+        #     keep = neutral >= neutral_threshold
+        # else:
+        #     keep = False
 
-        if keep:
-            concepts.add(f["term"])
+        # if keep:
+        concepts.add(f["term"])
 
     return {"concepts": [{"term": t} for t in concepts]}
 
@@ -73,15 +73,19 @@ if __name__ == "__main__":
         auth=(NEO4J_USER, NEO4J_PASSWORD)
     )
 
-    query = "I keep overthinking everything at work and I'm scared I might get fired."
+    query = "I’m calm most of the times but sometimes I end up blowing up."
 
     print("\nUser Query:", query)
 
     findings = retrieve_snomed_matches(driver, query, mode="mpnet", k=5)
 
-    filtered = nli_filter(query, findings)
+    print(findings)
 
-    for c in filtered["concepts"]:
-        print(c["term"])
+    filtered = nli_filter(query, findings)
+    print("------NLI Retrivals-------")
+    print(filtered)
+
+    # for c in filtered["concepts"]:
+    #     print(c["term"])
 
     driver.close()

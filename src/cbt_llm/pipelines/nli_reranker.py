@@ -17,15 +17,6 @@ LABEL_ENTAILMENT = 1
 LABEL_NEUTRAL = 2
 
 
-def _build_hypothesis(finding_term, interprets_targets):
-    """Build hypothesis from finding term and its INTERPRETS relation targets."""
-    base = f"This person has {finding_term.lower()}"
-    if interprets_targets:
-        joined = ", ".join(t.lower() for t in interprets_targets)
-        return f"{base}, which involves {joined}."
-    return f"{base}."
-
-
 def run_nli_reranker(
     input_file="snomed_turn_results.csv",
     output_file="nli_reranked_results.csv",
@@ -41,13 +32,6 @@ def run_nli_reranker(
     df = df[df["Embedding"] == embedding_filter].copy()
     df = df[df["SNOMED Term"].notna()].copy()
 
-    # Collect INTERPRETS targets per finding key
-    interprets_by_finding = defaultdict(list)
-    for _, row in df.iterrows():
-        if row.get("Relation Type") == "INTERPRETS" and pd.notna(row.get("Relation Target Term")):
-            key = (int(row["Turn"]), row["User Text"], row["SNOMED Term"], row["Code"], row["Score"])
-            interprets_by_finding[key].append(row["Relation Target Term"])
-
     # Deduplicate to one row per finding
     findings = (
         df[["Turn", "User Text", "SNOMED Term", "Code", "Score"]]
@@ -57,12 +41,10 @@ def run_nli_reranker(
     )
 
     # Build (premise, hypothesis) pairs
-    pairs = []
-    for _, row in findings.iterrows():
-        key = (int(row["Turn"]), row["User Text"], row["SNOMED Term"], row["Code"], row["Score"])
-        targets = interprets_by_finding.get(key, [])
-        hypothesis = _build_hypothesis(row["SNOMED Term"], targets)
-        pairs.append((row["User Text"], hypothesis))
+    pairs = [
+        (row["User Text"], f"This person has {row['SNOMED Term'].lower()}.")
+        for _, row in findings.iterrows()
+    ]
 
     print(f"Loading NLI model: {NLI_MODEL_NAME}")
     nli_model = CrossEncoder(NLI_MODEL_NAME)
@@ -135,5 +117,5 @@ def run_nli_reranker(
     print(f"  Total findings : {len(findings)}")
     print(f"  Kept           : {kept}")
     print(f"  Dropped        : {len(findings) - kept}")
-    # print(f"  CSV saved      : {output_path}")
+    print(f"  CSV saved      : {output_path}")
     print(f"  JSON saved     : {json_path}\n")

@@ -37,9 +37,44 @@ def _get_mentalbert():
         _models["mentalbert"] = (tokenizer, model)
     return _models["mentalbert"]
 
+_models = {}
+
+
+def _get_mpnet():
+    if "mpnet" not in _models:
+        _models["mpnet"] = SentenceTransformer("all-mpnet-base-v2")
+    return _models["mpnet"]
+
+
+def _get_sapbert():
+    if "sapbert" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
+        model = AutoModel.from_pretrained("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
+        model.eval()
+        _models["sapbert"] = (tokenizer, model)
+    return _models["sapbert"]
+
+
+def _get_bioreddit():
+    if "bioreddit" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("cambridgeltl/BioRedditBERT-uncased")
+        model = AutoModel.from_pretrained("cambridgeltl/BioRedditBERT-uncased")
+        model.eval()
+        _models["bioreddit"] = (tokenizer, model)
+    return _models["bioreddit"]
+
+
+def _get_mentalbert():
+    if "mentalbert" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("mental/mental-bert-base-uncased")
+        model = AutoModel.from_pretrained("mental/mental-bert-base-uncased")
+        model.eval()
+        _models["mentalbert"] = (tokenizer, model)
+    return _models["mentalbert"]
+
 
 def mean_pooling(model_output, attention_mask):
-    token_embeddings = model_output.last_hidden_state  # [B, T, H]
+    token_embeddings = model_output.last_hidden_state
     input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size())
     return (token_embeddings * input_mask_expanded).sum(1) / input_mask_expanded.sum(1)
 
@@ -92,13 +127,12 @@ EMBEDDING_MODES = {
 }
 
 
-def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0.35):
+def top_k_snomed(driver, query_embedding, embedding_field, k=5):
     cypher = f"""
     WITH $query AS queryVec
     MATCH (n:Concept)
     WHERE n.{embedding_field} IS NOT NULL
     WITH n, gds.similarity.cosine(n.{embedding_field}, queryVec) AS score
-    WHERE score >= $threshold
     RETURN
         n.code AS code,
         n.term AS term,
@@ -108,10 +142,8 @@ def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0.35):
     LIMIT $k
     """
 
-    params = {"query": query_embedding, "k": k, "threshold": threshold}
-
     with driver.session() as session:
-        results = session.run(cypher, params).data()
+        results = session.run(cypher, {"query": query_embedding, "k": k}).data()
 
     if not results:
         return [{"code": None, "term": "No matches found", "relations": [], "score": None}]
@@ -119,7 +151,7 @@ def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0.35):
     return results
 
 
-def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0.35):
+def retrieve_snomed_matches(driver, text, mode="mpnet", k=5):
     if mode not in EMBEDDING_MODES:
         raise ValueError(f"Unsupported embedding mode: {mode}")
 
@@ -128,10 +160,4 @@ def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0.35):
 
     query_vec = embed_fn(text)
 
-    return top_k_snomed(
-        driver,
-        query_vec,
-        embedding_field,
-        k=k,
-        threshold=threshold
-    )
+    return top_k_snomed(driver, query_vec, embedding_field, k=k)

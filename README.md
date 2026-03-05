@@ -91,29 +91,6 @@ src/output_files/neo4j_retrival_output/snomed_turn_results.csv
 
 Columns: `Embedding, Turn, User Text, SNOMED Term, Code, Score, Relation Type, Relation Target Code, Relation Target Term`
 
-### Retrieval Threshold
-
-Findings with a cosine similarity score below **0.35** are dropped before NLI re-ranking. This threshold is applied inside the Neo4j Cypher query so low-confidence matches never leave the graph.
-
-The threshold was chosen empirically from the score distribution across 27 CBT conversations (141 patient turns, 698 unique findings):
-
-| Metric   | Value  |
-| -------- | ------ |
-| Mean     | 0.370  |
-| Median   | 0.356  |
-| Std Dev  | 0.091  |
-
-0.35 coincides with the natural inflection point where the score histogram peaks (0.30–0.35 bin, n=168) and then declines. It retains **376 of 698 findings (53.9%)** — the upper half of the distribution — while discarding the accumulation of semantically weak matches below the median.
-
-To reproduce the full distribution analysis and plots:
-
-```sh
-python src/evaluation/threshold_analysis.py
-```
-
-Output: `src/output_files/neo4j_retrival_output/threshold_analysis.png`
-
----
 
 ## NLI Re-ranking
 
@@ -121,20 +98,19 @@ After SNOMED retrieval, a Natural Language Inference (NLI) re-ranking layer filt
 
 ### How it works
 
-For each retrieved SNOMED finding, a hypothesis is constructed from the finding term and its `INTERPRETS` relations:
+For each retrieved SNOMED finding, a hypothesis is constructed from the finding term:
 
 ```
-"This person has anxiety about resuming sexual relations (finding),
- which involves psychological function, emotion, cognitive functions."
+"This person has loss of control of anger (finding)."
 ```
 
 The NLI model scores `(user_text, hypothesis)` pairs and assigns a decision:
 
-| NLI Label     | Condition                         | Decision |
-| ------------- | --------------------------------- | -------- |
-| ENTAILMENT    | highest score                     | KEEP     |
-| NEUTRAL       | highest score AND score ≥ 0.5     | KEEP     |
-| CONTRADICTION | highest score                     | DROP     |
+| NLI Label     | Condition                         
+| ------------- | --------------------------------- 
+| ENTAILMENT    | highest score                     
+| NEUTRAL       | highest score AND score ≥ 0.5     
+| CONTRADICTION | highest score                     
 
 ### Run
 
@@ -177,6 +153,34 @@ NLI Label, Entailment Score, Neutral Score, Contradiction Score, Decision
   }
 }
 ```
+
+---
+
+## Live LLM Prompt Integration
+
+For real-time use during inference (i.e., when the LLM processes a patient turn), use `FindingsPipeline` instead of the batch CSV pipeline. It combines SNOMED retrieval and NLI re-ranking in a single in-memory call — no CSV files involved.
+
+### Usage
+
+```python
+from neo4j import GraphDatabase
+from cbt_llm.pipelines.findings_pipeline import FindingsPipeline
+
+driver = GraphDatabase.driver(uri, auth=(user, password))
+pipeline = FindingsPipeline(driver, k=5, neutral_threshold=0.5)
+
+findings = pipeline.get_findings("I don't know why I keep blowing up at people.")
+# {
+#   "entailment":    ["Unable to control anger (finding)", ...],
+#   "neutral":       ["Tends to allow anger to build up (finding)"],
+#   "contradiction": ["Able to control anger (finding)"]
+# }
+```
+
+- `k`: number of SNOMED concepts retrieved per query (default: 5)
+- `neutral_threshold`: minimum probability for a NEUTRAL finding to be kept (default: 0.5)
+
+The NLI model is loaded once on `FindingsPipeline()` construction and reused for all subsequent calls.
 
 ---
 

@@ -5,6 +5,7 @@ from cbt_llm.pipelines.neo4j_pipeline import run_neo4j_pipeline
 # from cbt_llm.pipelines.claude_pipeline import run_claude_model
 from cbt_llm.pipelines.nli_reranker import run_nli_reranker
 from cbt_llm.user_data import load_all_patient_turns
+from cbt_llm.patient_queries import PATIENT_TURNS
 import glob
 import os
 
@@ -15,7 +16,7 @@ csv_files = glob.glob(os.path.join(_data_dir, "*.csv"))
 
 #Load and clean the patient turns
 PATIENT_TURNS = load_all_patient_turns(csv_files, column_name="client_statement")
-print(PATIENT_TURNS[:5])
+# print(PATIENT_TURNS[:5])
 
 
 def main():
