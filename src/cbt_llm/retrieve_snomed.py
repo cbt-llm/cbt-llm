@@ -1,38 +1,45 @@
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModel
 import torch
-from neo4j import GraphDatabase
+
+_models = {}
 
 
-mpnet_model = SentenceTransformer("all-mpnet-base-v2")
+def _get_mpnet():
+    if "mpnet" not in _models:
+        _models["mpnet"] = SentenceTransformer("all-mpnet-base-v2")
+    return _models["mpnet"]
 
-sapbert_tokenizer = AutoTokenizer.from_pretrained(
-    "cambridgeltl/SapBERT-from-PubMedBERT-fulltext"
-)
-sapbert_model = AutoModel.from_pretrained(
-    "cambridgeltl/SapBERT-from-PubMedBERT-fulltext"
-)
-sapbert_model.eval()
 
-bioreddit_tokenizer = AutoTokenizer.from_pretrained(
-    "cambridgeltl/BioRedditBERT-uncased"
-)
-bioreddit_model = AutoModel.from_pretrained(
-    "cambridgeltl/BioRedditBERT-uncased"
-)
-bioreddit_model.eval()
+def _get_sapbert():
+    if "sapbert" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
+        model = AutoModel.from_pretrained("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
+        model.eval()
+        _models["sapbert"] = (tokenizer, model)
+    return _models["sapbert"]
 
-mentalbert_tokenizer = AutoTokenizer.from_pretrained(
-    "mental/mental-bert-base-uncased"
-)
-mentalbert_model = AutoModel.from_pretrained(
-    "mental/mental-bert-base-uncased"
-)
-mentalbert_model.eval()
+
+def _get_bioreddit():
+    if "bioreddit" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("cambridgeltl/BioRedditBERT-uncased")
+        model = AutoModel.from_pretrained("cambridgeltl/BioRedditBERT-uncased")
+        model.eval()
+        _models["bioreddit"] = (tokenizer, model)
+    return _models["bioreddit"]
+
+
+def _get_mentalbert():
+    if "mentalbert" not in _models:
+        tokenizer = AutoTokenizer.from_pretrained("mental/mental-bert-base-uncased")
+        model = AutoModel.from_pretrained("mental/mental-bert-base-uncased")
+        model.eval()
+        _models["mentalbert"] = (tokenizer, model)
+    return _models["mentalbert"]
 
 
 def mean_pooling(model_output, attention_mask):
-    token_embeddings = model_output.last_hidden_state  # [B, T, H]
+    token_embeddings = model_output.last_hidden_state
     input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size())
     return (token_embeddings * input_mask_expanded).sum(1) / input_mask_expanded.sum(1)
 
@@ -85,13 +92,12 @@ EMBEDDING_MODES = {
 }
 
 
-def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0.35):
+def top_k_snomed(driver, query_embedding, embedding_field, k=5):
     cypher = f"""
     WITH $query AS queryVec
     MATCH (n:Concept)
     WHERE n.{embedding_field} IS NOT NULL
     WITH n, gds.similarity.cosine(n.{embedding_field}, queryVec) AS score
-    WHERE score >= $threshold
     RETURN
         n.code AS code,
         n.term AS term,
@@ -101,10 +107,8 @@ def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0.35):
     LIMIT $k
     """
 
-    params = {"query": query_embedding, "k": k, "threshold": threshold}
-
     with driver.session() as session:
-        results = session.run(cypher, params).data()
+        results = session.run(cypher, {"query": query_embedding, "k": k}).data()
 
     if not results:
         return [{"code": None, "term": "No matches found", "relations": [], "score": None}]
@@ -112,7 +116,7 @@ def top_k_snomed(driver, query_embedding, embedding_field, k=5, threshold=0.35):
     return results
 
 
-def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0.35):
+def retrieve_snomed_matches(driver, text, mode="mpnet", k=5):
     if mode not in EMBEDDING_MODES:
         raise ValueError(f"Unsupported embedding mode: {mode}")
 
@@ -121,50 +125,4 @@ def retrieve_snomed_matches(driver, text, mode="mpnet", k=5, threshold=0.35):
 
     query_vec = embed_fn(text)
 
-    return top_k_snomed(
-        driver,
-        query_vec,
-        embedding_field,
-        k=k,
-        threshold=threshold
-    )
-
-
-
-if __name__ == "__main__":
-
-    from neo4j import GraphDatabase
-    from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
-
-    driver = GraphDatabase.driver(
-        NEO4J_URI,
-        auth=(NEO4J_USER, NEO4J_PASSWORD)
-    )
-
-    query = "I keep overthinking everything at work and I'm scared I might get fired."
-
-    print("\nQuery:")
-    print(query)
-    print("\nTop SNOMED Matches:\n")
-
-    results = retrieve_snomed_matches(
-        driver,
-        query,
-        mode="mpnet",
-        k=5,
-        threshold=0
-    )
-
-    for r in results:
-        print(f"TERM  : {r['term']}")
-        print(f"CODE  : {r['code']}")
-        print(f"SCORE : {r['score']}")
-
-        if r["relations"]:
-            print("RELATIONS:")
-            for rel in r["relations"]:
-                print("  ", rel)
-
-        print("-" * 40)
-
-    driver.close()
+    return top_k_snomed(driver, query_vec, embedding_field, k=k)
