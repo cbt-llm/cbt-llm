@@ -91,6 +91,28 @@ src/output_files/neo4j_retrival_output/snomed_turn_results.csv
 
 Columns: `Embedding, Turn, User Text, SNOMED Term, Code, Score, Relation Type, Relation Target Code, Relation Target Term`
 
+### Retrieval Threshold
+
+Findings with a cosine similarity score below **0.35** are dropped before NLI re-ranking. This threshold is applied inside the Neo4j Cypher query so low-confidence matches never leave the graph.
+
+The threshold was chosen empirically from the score distribution across 27 CBT conversations (141 patient turns, 698 unique findings):
+
+| Metric   | Value  |
+| -------- | ------ |
+| Mean     | 0.370  |
+| Median   | 0.356  |
+| Std Dev  | 0.091  |
+
+0.35 coincides with the natural inflection point where the score histogram peaks (0.30–0.35 bin, n=168) and then declines. It retains **376 of 698 findings (53.9%)** — the upper half of the distribution — while discarding the accumulation of semantically weak matches below the median.
+
+To reproduce the full distribution analysis and plots:
+
+```sh
+python src/evaluation/threshold_analysis.py
+```
+
+Output: `src/output_files/neo4j_retrival_output/threshold_analysis.png`
+
 ---
 
 ## NLI Re-ranking
@@ -139,12 +161,20 @@ Turn, User Text, SNOMED Term, Code, Retrieval Score, Hypothesis,
 NLI Label, Entailment Score, Neutral Score, Contradiction Score, Decision
 ```
 
-**`nli_findings.json`** — kept SNOMED concept names per turn, for use in prompt integration:
+**`nli_findings.json`** — all SNOMED findings per turn grouped by NLI label, for use in prompt integration:
 
 ```json
 {
-  "1": ["Breakup of romance (finding)", "Anxiety about resuming sexual relations (finding)"],
-  "2": ["Anger (finding)", "Loss of control of anger (finding)"]
+  "1": {
+    "entailment": ["Breakup of romance (finding)", "Anticipatory anxiety (finding)"],
+    "neutral": ["Anxiety about resuming sexual relations (finding)"],
+    "contradiction": ["Able to remember today's date (finding)"]
+  },
+  "2": {
+    "entailment": ["Anger (finding)"],
+    "neutral": ["Loss of control of anger (finding)"],
+    "contradiction": []
+  }
 }
 ```
 
