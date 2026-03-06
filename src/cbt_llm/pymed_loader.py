@@ -3,51 +3,76 @@ from pymedtermino.snomedct import SNOMEDCT
 
 # Root for all Mental state, behavior and/or psychosocial function finding (finding)
 # Reference: https://docs.snomed.org/snomed-ct-specifications/snomed-ct-editorial-guide/readme/authoring/domain-specific-modeling/clinical-finding-and-disorder 
-MENTAL_ROOT = 384821006 
+ROOTS = [
+    384821006,  # Mental state, behavior and/or psychosocial function finding
+]
 
-def extract_snomed_relationships(root_id):
-    root = SNOMEDCT[root_id]
+
+def extract_snomed_relationships(roots):
 
     nodes = {}
     relationships = []
 
-    for concept in root.descendants_no_double():
-        text = concept.term if concept.term else concept.fsn
-        nodes[str(concept.code)] = text
+    for root_id in roots:
+
+        root = SNOMEDCT[root_id]
+
+        for concept in root.descendants_no_double():
+
+            term = concept.term.lower()
+
+            # remove disorders
+            if "(disorder)" in term:
+                continue
+
+            # keep only findings
+            if "(finding)" not in term:
+                continue
+
+            code = str(concept.code)
+            nodes[code] = concept.term
+
+    # second pass to create relationships
+    for code in nodes:
+
+        concept = SNOMEDCT[int(code)]
 
         for parent in concept.parents:
-            relationships.append({
-                "source": str(concept.code),
-                "relation": "IS_A",
-                "target": str(parent.code)
-            })
+
+            parent_code = str(parent.code)
+
+            if parent_code in nodes:
+                relationships.append({
+                    "source": code,
+                    "relation": "IS_A",
+                    "target": parent_code
+                })
 
         try:
-            interpreted_targets = concept.interprets
+            for target in concept.interprets:
+
+                target_code = str(target.code)
+
+                relationships.append({
+                    "source": code,
+                    "relation": "INTERPRETS",
+                    "target": target_code
+                })
+
         except AttributeError:
-            interpreted_targets = []
+            pass
 
-        for target in interpreted_targets:
-            relationships.append({
-                "source": str(concept.code),
-                "relation": "INTERPRETS",
-                "target": str(target.code)
-            })
-            target_text = target.term if target.term else target.fsn
-            nodes[str(target.code)] = target_text
+    node_rows = [{"code": c, "term": t} for c, t in nodes.items()]
 
-    node_rows = [{"code": code, "term": term} for code, term in nodes.items()]
     return node_rows, relationships
 
 
 if __name__ == "__main__":
-    nodes, rels = extract_snomed_relationships(MENTAL_ROOT)
 
-    df_nodes = pd.DataFrame(nodes)
-    df_rels = pd.DataFrame(rels)
+    nodes, rels = extract_snomed_relationships(ROOTS)
 
-    df_nodes.to_csv("mental_findings_nodes.csv", index=False)
-    df_rels.to_csv("mental_findings_rels.csv", index=False)
+    pd.DataFrame(nodes).to_csv("mental_nodes.csv", index=False)
+    pd.DataFrame(rels).to_csv("mental_relationships.csv", index=False)
 
     print("Concepts:", len(nodes))
     print("Relationships:", len(rels))

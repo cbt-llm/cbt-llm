@@ -1,6 +1,8 @@
 
 PATIENT_TURNS = [
-    "I’m calm most of the times but sometimes I end up blowing up."
+    # "I’m calm most of the times but sometimes I end up blowing up.",
+    "I want to feel more in control of my time and my emotions, but everything feels reactive, like I'm constantly putting out fires.",
+    # "I guess I'm here because I don't want to keep carrying all of this alone, and I need help figuring out how to move forward without feeling so crushed all the time."
     
 ]
 # "I feel like my coursework is piling up faster than I can keep track of it, and every time I sit down to work, my mind jumps to everything else that could go wrong.",

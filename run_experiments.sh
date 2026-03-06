@@ -19,11 +19,11 @@ fi
 
 # Model map
 case "$MODEL_KEY" in
-  gemma)    MODEL="gemma2:9b" ;;
-  mistral)  MODEL="mistral:7b-instruct" ;;
-  qwen)     MODEL="qwen3:4b" ;;
+  gemma)    MODEL="gemma3:4b" ;;
+  mistral)  MODEL="mistral:7b" ;;
   deepseek) MODEL="deepseek-r1:8b" ;;
-  gpt)      MODEL="gpt-4o" ;;
+  qwen) MODEL="qwen3:8b" ;;
+  gpt)      MODEL="gpt-oss:20b" ;;
   *)
     echo "Unknown model key: $MODEL_KEY"
     exit 1
@@ -37,11 +37,10 @@ TURNS=10
 K=5
 
 seeds=(
-  "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
-  "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way."
-  "I get a tight chest before meetings and I avoid speaking, then I regret it all day."
-  "I messed up one small thing yesterday and now I can't stop replaying it like it proves I'm not good enough."
-  "My sleep is messed up because my brain won't shut off at night, and I wake up tired and irritated."
+  "I’m calm most of the times but sometimes I end up blowing up."
+  # "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
+  # "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way."
+  # "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile."
 )
 
 for i in "${!seeds[@]}"; do

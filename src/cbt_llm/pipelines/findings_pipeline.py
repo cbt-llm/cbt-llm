@@ -76,3 +76,10 @@ class FindingsPipeline:
                 output["contradiction"].append(r["term"])
 
         return output
+
+def main():
+    results = FindingsPipeline.get_findings("I keep blowing up.")
+    print(results)
+
+if __name__ == "__main__":
+    main()

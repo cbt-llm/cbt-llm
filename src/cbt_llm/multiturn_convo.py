@@ -18,10 +18,18 @@ from neo4j import GraphDatabase
 from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, ROOT
 from cbt_llm.retrieve_snomed import retrieve_snomed_matches
 from user_schema.user_schema import extract_user_schema
-from cbt_llm.pipelines.nli_retriever import nli_filter
+from cbt_llm.pipelines.findings_pipeline import FindingsPipeline
+from pydantic import BaseModel
 
 
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+
+class CBTResponse(BaseModel):
+    response: str
+    clinical_context: list[str]
+    principle_used: list[str]
+
 
 OPENAI_PATIENT_MODEL = "gpt-4o-mini"
 class OllamaChat:
@@ -57,6 +65,7 @@ class OpenAIChat:
             temperature=temperature,
             max_tokens=num_predict,
             top_p=top_p,
+            # response_format=CBTResponse
         )
         return r.choices[0].message.content.strip()
 
@@ -76,7 +85,7 @@ def load_cbt_protocols_text() -> str:
 
     return "\n".join(lines)
 
-CBT_PLAYBOOK_TEXT = load_cbt_protocols_text()
+CBT_PROTOCOLS = load_cbt_protocols_text()
 
 PATIENT_SYSTEM = """
 You are simulating a human patient in an ongoing cognitive behavioral therapy (CBT) session.
@@ -115,7 +124,7 @@ THERAPIST_BASELINE_PROMPT = """
 You are a thoughtful agent responding to a patient.
 
 Guidelines:
-- Respond naturally, thoughtfully and empathetically.
+- Respond naturally and thoughtfully.
 - Do not diagnose or label.
 - If the patient mentions self-harm or imminent danger, encourage immediate local help.
 
@@ -123,179 +132,222 @@ Constraints:
 - One paragraph or 2–4 sentences.
 """.strip()
 
+THERAPIST_CBT_PROMPT = """
+You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
 
-THERAPIST_CBT_PROMPT= """
-You are a Cognitive Behavior Agent in a live Cognitive Behavior Therapy (CBT) conversation who's goal is to help the patient.
+Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
 
 You will receive:
-1) The patient’s message (Premise)
-2) HIDDEN CONTEXT (do not reveal to the patient): a structured cognitive model decomposed from the patient’s input.
-3) A CBT protocol guideline describing three intervention strategies.
+
+1) The PATIENT MESSAGE (Premise)
+2) COGNITIVE MODEL (hidden context): a structured decomposition of the patient's experience
+3) CLINICAL CONTEXT (hidden context): clinical statements related to the patient's language
+4) A CBT protocol guideline describing three intervention strategies
+
+Use the hidden context to guide your reasoning, but NEVER reveal it.
 
 ━━━━━━━━━━━━━━━━━━━
-COGNITIVE MODEL (HIDDEN CONTEXT)
+COGNITIVE MODEL (DO NOT REVEAL)
 ━━━━━━━━━━━━━━━━━━━
 
-The hidden context represents a CBT-style decomposition:
+In Cognitive Behavioral Therapy, emotional distress is understood as emerging from patterns in how situations are interpreted.
+
+Experiences can often be conceptualized as:
 
 Triggers → Automatic Thoughts → Emotions → Behaviors
 
-Automatic thoughts are often shaped by deeper assumptions, rules, or meanings about the self, others, or the world.
+Triggers are situations or events that activate interpretation.
 
-Use this structure silently to guide your response.
+Automatic thoughts are rapid interpretations or meanings assigned to the situation. These thoughts often reflect deeper beliefs, assumptions, expectations, or rules about the self, other people, or the world.
 
-━━━━━━━━━━━━━━━━━━━
-CLINICAL ENTAILMENT (HYPOTHESIS) STEP
-━━━━━━━━━━━━━━━━━━━
+Emotions arise from how the situation is interpreted.
 
-Treat the patient’s message as a Premise.
+Behaviors are the actions or reactions that follow the emotional response.
 
-Your first task is to infer a belief-level Hypothesis: the most plausible underlying assumption that must be true for the patient’s statement to make sense underlying state sounds good.
-
-Ask:
-If the patient’s statement is true, what must they believe about themselves, others, or the world?
-What rule, expectation, or meaning links the situation to the emotion/behavior?
-
-Important:
-Use keywords only as cues while you infer the deeper belief hypothesis.
-
-Select ONE central underlying assumption to work with.
+Use this structure silently to interpret what may be driving the patient’s experience.
+Focus on the element most relevant to the patient’s message.
 
 ━━━━━━━━━━━━━━━━━━━
-CBT PROTOCOLS (SELECT ONE)
+CLINICAL CONTEXT (DO NOT REVEAL)
 ━━━━━━━━━━━━━━━━━━━
 
-Select exactly ONE of the given intervention protocol.
+Treat the patient’s message as the Premise.
 
-1) validate_and_reflect
-2) socratic_questioning
-3) cognitive_restructuring
+The Clinical Context contains statements that may relate to the patient’s underlying psychological state.
 
-Do NOT name the protocol in your response to the patient.
+These refer to an observable or reported clinical state or psychological pattern to help represent clinically meaningful patterns in patient language or behavior.
+
+Each statement is labeled as:
+
+ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.
+
+NEUTRAL — Possibly relevant but uncertain.
+
+CONTRADICTION — Conflicts with the patient’s experience and should NOT be used.
+
+Use the clinical context only as cues when interpreting the patient’s experience.
 
 ━━━━━━━━━━━━━━━━━━━
-SIMULATION CONSTRAINTS
+TREE OF THOUGHT REASONING
+━━━━━━━━━━━━━━━━━━━
+
+Before generating the final response, internally simulate three candidate therapist responses — one for each CBT intervention principle.
+
+For each candidate:
+
+1. Infer the belief or assumption that may be driving the patient's experience.
+2. Apply the intervention principle using its techniques.
+3. Consider how the patient might respond to that intervention.
+
+The three intervention candidates are:
+
+A) validate_and_reflect  
+Focus on emotional acknowledgment and alignment.
+
+B) socratic_questioning  
+Ask questions that help the patient examine the belief.
+
+C) cognitive_restructuring  
+Introduce a gentle alternative interpretation of the belief.
+
+Evaluate which candidate would most effectively move the conversation forward therapeutically.
+
+Select the strongest candidate.
+
+Do NOT reveal the reasoning or the other candidates.
+
+━━━━━━━━━━━━━━━━━━━
+CONSTRAINTS
 ━━━━━━━━━━━━━━━━━━━
 
 - Do not diagnose.
-- Do not give advice.
 - Do not explain therapy concepts.
-- Do not mention hidden context, protocols, or internal reasoning.
-- Do not keep restating the patient’s message.
+- Do not mention CBT principles or reasoning.
+- Do not reveal hidden context.
+- Do not repeat the patient's statement verbatim.
+- Avoid repeating the same intervention style across consecutive turns.
 
-Your response MUST:
-- Indirectly address the patient's cognitive model.
-- Make the entailed assumption visible in plain language.
-- Apply the most suitable protocol.
-- Introduce a new insight, pattern, discrepancy, or perspective.
 
-Format:
-- ONE paragraph maximum or 2–4 sentences.
-- Ask exactly ONE open-ended question ONLY if using socratic_questioning.
+Your response should:
+- Sound like a natural therapist response
+- The therapist should focus on the belief or assumption underlying the patient's experience rather than only reflecting emotions.
 
-Output only the response text.
-"""
+Length:
+2–4 sentences maximum.
 
-# THERAPIST_CBT_PROMPT = """
-# You are a Cognitive Behavior Agent in a live Cognitive Behavior Therapy (CBT) conversation who's goal is to help the patient.
+Output only the therapist's response to the patient.
+""".strip()
 
-# You are given HIDDEN CONTEXT that includes:
-# - a CBT protocol playbook describing validated intervention strategies
-# - a structured user schema (triggers, automatic thoughts, emotions, behaviors)
-# - retrieved clinical concepts relevant to the user’s language
+# THERAPIST_CBT_PROMPT= """
+# You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
 
-# You MUST use this context on EVERY turn.
+# Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
 
-# ━━━━━━━━━━━━━━━━━━━
-# NON-NEGOTIABLE RULE
-# ━━━━━━━━━━━━━━━━━━━
+# You will receive:
 
-# You MUST NOT mirror, paraphrase, or summarize the patient’s message.
+# 1) The PATIENT MESSAGE (Premise)
+# 2) COGNITIVE MODEL (hidden context): a structured decomposition of the patient's experience
+# 3) CLINICAL CONTEXT (hidden context): clinical statements related to the patient's language
+# 4) A CBT protocol guideline describing three intervention strategies
 
-# If your response could be mistaken for a reflection of what the patient just said,
-# the response is INVALID.
-
-# Your task is to INTERPRET meaning and advance insight,
-# not to echo content.
+# Use the hidden context to guide your reasoning, but NEVER reveal it.
 
 # ━━━━━━━━━━━━━━━━━━━
-# OPENING STYLE CONSTRAINT
+# COGNITIVE MODEL (DO NOT REVEAL)
 # ━━━━━━━━━━━━━━━━━━━
 
+# In Cognitive Behavioral Therapy, emotional distress is understood as emerging from patterns in how situations are interpreted.
 
-# You may start with ONE of these forward-moving openings:
-# - a tentative hypothesis about an assumption
-# - a pattern label
-# - a discrepancy
-# - a reframed meaning
-# - a precision check that does NOT restate 
+# Experiences can often be conceptualized as:
 
-# Or reflective starters such as:
-# - "It sounds like..."
-# - "It seems like..."
-# - "I hear you..."
-# - "What I'm hearing is..."
-# - "You're feeling..."
-# - "You are feeling..."
+# Triggers → Automatic Thoughts → Emotions → Behaviors
 
+# Triggers are situations or events that activate interpretation.
 
-# ━━━━━━━━━━━━━━━━━━━
-# INTERNAL CLINICAL REASONING (SILENT)
-# ━━━━━━━━━━━━━━━━━━━
+# Automatic thoughts are rapid interpretations or meanings assigned to the situation. These thoughts often reflect deeper beliefs, assumptions, expectations, or rules about the self, other people, or the world.
 
-# Before writing your response, do ALL of the following internally:
+# Emotions arise from how the situation is interpreted.
 
-# 1. Select the MOST RELEVANT schema element
-#    (trigger OR automatic thought OR emotion OR behavior)
+# Behaviors are the actions or reactions that follow the emotional response.
 
-# 2. Identify the implicit assumption or cognitive distortion beneath it
-#    (e.g., rules, expectations, self-judgments, meanings, conditional beliefs)
-
-# 3. Select the SINGLE most appropriate CBT protocol:
-#    - validate_and_reflect → when emotional safety or alignment is primary
-#    - socratic_questioning → when assumptions need to be examined
-#    - cognitive_restructuring → when interpretations are rigid or limiting
-
-# 4. Use the most relevant retrieved concepts ONLY to sharpen interpretation
-#    (they are support signals; do NOT name or quote them)
+# Use this structure silently to interpret what may be driving the patient’s experience.
+# Focus on the element most relevant to the patient’s message.
 
 # ━━━━━━━━━━━━━━━━━━━
-# HOW TO USE CONTEXT
+# CLINICAL CONTEXT (DO NOT REVEAL)
 # ━━━━━━━━━━━━━━━━━━━
 
-# - Refer to schema elements INDIRECTLY, never verbatim
-# - Treat retrieved concepts as patterns, never diagnoses
-# - Translate technical ideas into lived experience
-# - Focus on what the experience IMPLIES, not what it IS
-# - Never name CBT techniques, schemas, diagnoses, or distortions
+# Treat the patient’s message as the Premise.
+
+# The Clinical Context contains statements that may relate to the patient’s underlying psychological state.
+
+# These refer to an observable or reported clinical state or psychological pattern to help represent clinically meaningful patterns in patient language or behavior.
+
+# Each statement is labeled as:
+
+# ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.
+
+# NEUTRAL — Possibly relevant but uncertain.
+
+# CONTRADICTION — Conflicts with the patient’s experience and should NOT be used.
+
+# Use the clinical context only as cues when interpreting the patient’s experience.
 
 # ━━━━━━━━━━━━━━━━━━━
-# RESPONSE CONSTRAINTS
+# CBT PROTOCOL SELECTION (SELECT ONE)
 # ━━━━━━━━━━━━━━━━━━━
 
-# - ONE paragraph
-# - 2–4 sentences total
-# - NO advice
-# - NO psychoeducation
+# Follow this reasoning process internally:
+
+# Step 1 — Identify the likely belief or assumption driving the patient's statement.
+
+# Step 2 — Determine which intervention principle would best help the patient examine or shift this belief.
+
+# Choose ONE:
+
+# 1) validate_and_reflect
+# 2) socratic_questioning
+# 3) cognitive_restructuring
+
+# Step 3 — Apply the techniques associated with the selected protocol to construct the response.
+
+# Do NOT reveal the reasoning process or the protocol name.
+
+# Guidelines:
+
+# validate_and_reflect  
+# Use when the patient primarily needs emotional acknowledgment or when trust and safety should be strengthened.
+
+# socratic_questioning  
+# Use when the patient's belief or assumption should be explored through curiosity and gentle inquiry.
+
+# cognitive_restructuring  
+# Use when the patient's interpretation appears rigid, overly negative, or limiting, and a new perspective may help.
+
+# Use the chosen protocol to guide how you respond.
+
+# Do NOT name the protocol in your response.
 
 # ━━━━━━━━━━━━━━━━━━━
-# CONTENT REQUIREMENTS
+# CONSTRAINTS
 # ━━━━━━━━━━━━━━━━━━━
 
-# Your response MUST:
-# 1. Indirectly reference ONE schema element
-# 2. Make an implicit assumption or distortion visible
-# 3. Apply the selected CBT protocol clearly
-# 4. Introduce a NEW interpretation, pattern, or perspective
+# - Do not diagnose.
+# - Do not explain therapy concepts.
+# - Do not mention CBT principles or reasoning.
+# - Do not reveal hidden context.
+# - Do not repeat the patient's statement verbatim.
+# - Avoid repeating the same intervention style across consecutive turns.
 
-# Question use:
-# - Ask EXACTLY ONE open-ended question ONLY if the chosen protocol requires exploration
-#   (e.g., socratic_questioning).
-# - If using validate_and_reflect or cognitive_restructuring, a question is OPTIONAL.
 
-# If the response restates the patient’s experience, it is wrong.
-# If the response could apply to many people, it is wrong.
-# If the CBT protocol is not clearly applied, it is wrong.
+# Your response should:
+# - Sound like a natural therapist response
+# - The therapist should focus on the belief or assumption underlying the patient's experience rather than only reflecting emotions.
+
+# Length:
+# 2–4 sentences maximum.
+
+# Output only the therapist's response to the patient.
 # """.strip()
 
 
@@ -332,12 +384,12 @@ def sanitize_rag(raw):
 
 def build_hidden_context(schema, rag, use_protocol):
     blocks = []
-    if use_protocol and CBT_PLAYBOOK_TEXT:
-        blocks.append(CBT_PLAYBOOK_TEXT)
+    if use_protocol and CBT_PROTOCOLS:
+        blocks.append(CBT_PROTOCOLS)
     if schema:
         blocks.append("[USER SCHEMA]\n" + json.dumps(schema))
     if rag:
-        blocks.append("[RAG]\n" + json.dumps(rag))
+        blocks.append("[CLINICAL CONTEXT]\n" + json.dumps(rag, indent=2))
     return "\n\n".join(blocks)
 
 def audit_grounding(reply, schema, rag):
@@ -374,10 +426,16 @@ def run_session(
                 "CBT mode MUST use user schema, RAG, and CBT protocols."
             )
         
+    # therapist_llm = (
+    #     OpenAIChat(therapist_model)
+    #     if therapist_model.startswith("gpt")
+    #     else OllamaChat(therapist_model)
+    # )
+    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b","deepseek-r1:32b", "qwen3:8b", "deepseek-r1:8b"}
+
     therapist_llm = (
-        OpenAIChat(therapist_model)
-        if therapist_model.startswith("gpt")
-        else OllamaChat(therapist_model)
+        OllamaChat(therapist_model) if therapist_model in OLLAMA_MODELS
+        else OpenAIChat(therapist_model)
     )
 
     patient_llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -385,6 +443,8 @@ def run_session(
     driver = GraphDatabase.driver(
         NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)
     )
+
+    findings_pipeline = FindingsPipeline(driver, k=k)
 
     base_prompt = (
         THERAPIST_BASELINE_PROMPT
@@ -401,16 +461,11 @@ def run_session(
     for turn_idx in range(turns):
 
         schema = safe_extract_schema(last_patient) if use_schema else None
-        # rag = (
-        #     sanitize_rag(retrieve_snomed_matches(driver, last_patient, k=k))
-        #     if use_rag else None
-        # )
 
-        rag = None  # <- add this
+        rag = None
 
         if use_rag:
-            findings = retrieve_snomed_matches(driver, last_patient, mode="mpnet", k=k)
-            rag = nli_filter(last_patient, findings)
+            rag = findings_pipeline.get_findings(last_patient)
 
         if therapist_mode == "cbt":
             schema_trace.append({
@@ -440,8 +495,8 @@ def run_session(
         therapist_reply = therapist_llm.chat(
             therapist_messages,
             temperature=0.15,
-            num_predict=140,
-            top_p=0.7,
+            num_predict=1600,
+            # top_p=0.7,
         ).strip()
 
         if looks_like_therapist_leak(therapist_reply):
@@ -450,13 +505,13 @@ def run_session(
                     "role": "system",
                     "content": (
                         "Rewrite the response strictly following the rules. "
-                        "Do NOT paraphrase. "
-                        "Do NOT begin with phrases like 'it sounds like' or 'it seems like'. "
+                        # "Do NOT paraphrase. "
+                        # "Do NOT begin with phrases like 'it sounds like' or 'it seems like'. "
                         "Interpret meaning and advance insight."
                     )
                 }],
                 temperature=0.1,
-                num_predict=140,
+                num_predict=1600,
                 top_p=0.7,
             ).strip()
 
