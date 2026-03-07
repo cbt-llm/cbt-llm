@@ -19,7 +19,7 @@ class EvalConfig:
     output_root: Path = Path("evals")     # /evals/{model}/...
 
     # Judge model settings
-    judge_model: str = "deepseek-chat"
+    judge_model: str = "deepseek-r1:32b"
     max_output_tokens: int = 600
 
     # Context window for pointwise judging (how many prior turns to include)
@@ -260,12 +260,23 @@ class DeepSeekJudgeClient:
                 messages=messages,
                 response_format={"type": "json_object"},
                 max_tokens=self.cfg.max_output_tokens,
+                temperature =0,
             )
 
             content = resp.choices[0].message.content
 
             if not content or not content.strip():
                 raise ValueError("DeepSeek returned empty content.")
+            
+           
+
+            content = content.strip()
+            if content.startswith("```json"):
+                content = content[7:]
+            if content.startswith("```"):
+                content = content[3:]
+            if content.endswith("```"):
+                content = content[:-3]
 
             parsed_json = json.loads(content)
             return JudgeOutput(**parsed_json)
@@ -350,8 +361,8 @@ async def evaluate_single_file(
 
 async def run_for_model(model_name: str, cfg: EvalConfig) -> None:
     client = AsyncOpenAI(
-        api_key=os.environ["DEEPSEEK_API_KEY"],
-        base_url="https://api.deepseek.com",
+        api_key="ollama",
+        base_url="http://localhost:11434/v1",
     )
     judge = DeepSeekJudgeClient(client, cfg)
 
