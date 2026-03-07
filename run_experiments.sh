@@ -22,7 +22,7 @@ case "$MODEL_KEY" in
   gemma)    MODEL="gemma2:9b" ;;
   mistral)  MODEL="mistral:7b-instruct" ;;
   qwen)     MODEL="qwen3:4b" ;;
-  deepseek) MODEL="deepseek-r1:8b" ;;
+  deepseek) MODEL="deepseek-r1:14b" ;;
   gpt)      MODEL="gpt-4o" ;;
   *)
     echo "Unknown model key: $MODEL_KEY"

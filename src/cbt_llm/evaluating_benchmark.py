@@ -9,7 +9,13 @@ Key features:
 - Schema + retrieval attribution
 - Automatic output routing to: evaluation/{model}
 - LLM-as-a-judge (OpenAI)
+
+"run (from cbt_llm) : python -m cbt_llm.evaluating_benchmark ../../output/gemma1"
+
+verified prompts working fine
 """
+
+
 
 from __future__ import annotations
 
@@ -163,6 +169,7 @@ def run_openai_judge(
     model: str,
     out_jsonl: Path,
     max_turns: Optional[int] = None,
+    dump_prompts: bool = False,
 ) -> Dict[str, Any]:
     client = OpenAI()
 
@@ -177,6 +184,11 @@ def run_openai_judge(
             patient_text=t.patient,
             therapist_text=t.therapist,
         )
+
+        if dump_prompts:
+            print("\n" + "="*80)
+            print(prompt)
+            print("="*80 + "\n")
 
         resp = client.chat.completions.create(
             model=model,
@@ -222,6 +234,7 @@ def main() -> None:
     ap.add_argument("--context_window", type=int, default=2)
     ap.add_argument("--judge_model", default="gpt-4o-mini")
     ap.add_argument("--max_judge_turns", type=int)
+    ap.add_argument("--dump_prompts", action="store_true", help="Print the judge prompt for debugging")
     args = ap.parse_args()
 
     input_dir = Path(args.input).resolve()
@@ -258,6 +271,7 @@ def main() -> None:
             model=args.judge_model,
             out_jsonl=judge_jsonl,
             max_turns=args.max_judge_turns,
+            dump_prompts=args.dump_prompts,
         )
 
         metrics_json.write_text(json.dumps(metrics, indent=2))

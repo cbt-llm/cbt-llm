@@ -1,9 +1,49 @@
 """
+Module: multiturn_convo.py
+This module implements multi-turn conversational simulations between a CBT (Cognitive Behavioral Therapy) 
+therapist agent and a patient LLM. It supports two modes: baseline empathetic responses and protocol-guided 
+CBT interventions.
+Key Components:
+
+1. Chat Interfaces:
+    - OllamaChat: Interface for local Ollama models via HTTP API
+    - OpenAIChat: Interface for OpenAI models (GPT-4, GPT-4o-mini, etc.)
+
+2. System Prompts:
+    - PATIENT_SYSTEM: Guides the patient LLM to roleplay authentically as a therapy client
+    - THERAPIST_BASELINE_PROMPT: Generic empathetic therapist prompt
+    - THERAPIST_CBT_PROMPT: Advanced prompt incorporating cognitive models, clinical entailment, and CBT protocols
+
+3. Core Functions:
+    - safe_extract_schema(): Extracts structured cognitive models (triggers, thoughts, emotions, behaviors) from patient input
+    - build_hidden_context(): Constructs context blocks combining CBT playbooks, user schemas, and RAG results
+    - run_session(): Main orchestrator that simulates multi-turn therapy conversations
+    - looks_like_patient_drift() / looks_like_therapist_leak(): Content validation filters
+
+4. Workflow:
+    - Initializes therapist and patient LLMs based on mode (baseline vs. CBT)
+    - For each turn:
+      * Extracts user schema and retrieves clinical concepts via RAG (if enabled)
+      * Constructs therapist prompt with hidden context
+      * Generates therapist response
+      * Validates response for leaks or content violations
+      * Generates patient response with drift detection
+      * Appends turn to transcript
+    - Outputs JSON transcript with optional schema trace for CBT mode
+
+5. Validation:
+    - Prevents baseline mode from using schema, RAG, or protocols
+    - Enforces CBT mode to use all three features
+    - Detects and rejects responses containing implementation details (Neo4j, embeddings, etc.)
+    - Filters patient responses to prevent therapist-like advice-giving
+Timeout: OllamaChat.chat() includes a 300-second timeout for HTTP requests to the Ollama API.
+
 Generating multi-turn conversations between CBT agent and patient LLMs.
 
 Run:
 ./run_experiment.sh [baseline|cbt] [gemma|mistral|qwen|deepseek|gpt]
 """
+
 import os
 import re
 import json
