@@ -1,4 +1,71 @@
 from neo4j import GraphDatabase
+from pymedtermino.snomedct import SNOMEDCT
+
+
+ROOTS = [
+    384821006  # Mental state, behavior and/or psychosocial function finding
+]
+
+
+def extract_snomed_relationships(roots):
+
+    nodes = {}
+    relationships = []
+
+    for root_id in roots:
+
+        root = SNOMEDCT[root_id]
+
+        for concept in root.descendants_no_double():
+
+            term = concept.term.lower()
+
+            if "(disorder)" in term:
+                continue
+
+            if "(finding)" not in term:
+                continue
+
+            code = str(concept.code)
+            nodes[code] = concept.term
+
+    for code in list(nodes.keys()):
+
+        concept = SNOMEDCT[int(code)]
+
+        for parent in concept.parents:
+
+            parent_code = str(parent.code)
+
+            if parent_code not in nodes:
+                nodes[parent_code] = parent.term
+
+            relationships.append({
+                "source": code,
+                "relation": "IS_A",
+                "target": parent_code
+            })
+
+        try:
+            for target in concept.interprets:
+
+                target_code = str(target.code)
+
+                if target_code not in nodes:
+                    nodes[target_code] = target.term
+
+                relationships.append({
+                    "source": code,
+                    "relation": "INTERPRETS",
+                    "target": target_code
+                })
+
+        except AttributeError:
+            pass
+
+    node_rows = [{"code": c, "term": t} for c, t in nodes.items()]
+
+    return node_rows, relationships
 
 
 class LoadSnomedGraph:
@@ -46,11 +113,12 @@ class LoadSnomedGraph:
 
 
 if __name__ == "__main__":
-
-    from cbt_llm.pymed_loader import extract_snomed_relationships
     from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
 
-    nodes, rels = extract_snomed_relationships([384821006])
+    nodes, rels = extract_snomed_relationships(ROOTS)
+
+    print("Concepts:", len(nodes))
+    print("Relationships:", len(rels))
 
     loader = LoadSnomedGraph(NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD)
     loader.load(nodes, rels)
