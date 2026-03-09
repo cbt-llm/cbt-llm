@@ -501,7 +501,7 @@ def run_session(
             therapist_reply = therapist_llm.chat(
                 therapist_messages,
                 temperature=0.15,
-                num_predict=1600,
+                num_predict=2600,
             ).strip()
 
         else:
@@ -509,7 +509,7 @@ def run_session(
             therapist_reply = therapist_llm.chat(
                 therapist_messages,
                 temperature=0.15,
-                num_predict=1600,
+                num_predict=2600,
             ).strip()
 
         if looks_like_therapist_leak(therapist_reply):
@@ -524,7 +524,7 @@ def run_session(
                     )
                 }],
                 temperature=0.1,
-                num_predict=1600,
+                num_predict=2500,
                 top_p=0.7,
             ).strip()
 

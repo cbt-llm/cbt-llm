@@ -22,7 +22,6 @@ case "$MODEL_KEY" in
   gemma)    MODEL="gemma3:12b" ;;
   mistral)  MODEL="mistral:7b" ;;
   deepseek) MODEL="deepseek-r1:8b" ;;
-  qwen) MODEL="qwen3:8b" ;;
   gpt)      MODEL="gpt-oss:20b" ;;
   *)
     echo "Unknown model key: $MODEL_KEY"
@@ -37,10 +36,10 @@ TURNS=10
 K=5
 
 seeds=(
-  # "I’m calm most of the times but sometimes I end up blowing up."
-  "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
+  # "I feel calm most of the time, but sometimes when small things pile up it feels like nothing is going the way it should, and I end up blowing up."
+  # "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
   # "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way."
-  # "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile."
+  "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile."
 )
 
 for i in "${!seeds[@]}"; do
