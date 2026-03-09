@@ -462,7 +462,7 @@ def run_session(
         if use_rag:
             rag = findings_pipeline.get_findings(last_patient)
 
-        if therapist_mode == "cbt":
+        if therapist_mode in {"cbt", "cbt_tot"}:
             schema_trace.append({
                 "turn": turn_idx,
                 "patient_text": last_patient,
@@ -604,7 +604,7 @@ def run_session(
         "transcript": transcript,
     }
 
-    if therapist_mode == "cbt":
+    if therapist_mode in {"cbt", "cbt_tot"}:
         output["user_schema_trace"] = schema_trace
 
     Path(transcript_json).parent.mkdir(parents=True, exist_ok=True)
