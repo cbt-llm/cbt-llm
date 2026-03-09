@@ -131,7 +131,7 @@ Constraints:
 - One paragraph or 2–4 sentences.
 """.strip()
 
-THERAPIST_CBT_TOT_PROMPT = """
+THERAPIST_CBT_PROMPT = """
 You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
 
 Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
@@ -426,7 +426,7 @@ def run_session(
                 "CBT mode MUST use user schema, RAG, and CBT protocols."
             )
         
-    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma2:9b", "deepseek-r1:8b"}
+    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma3:12b", "deepseek-r1:8b"}
 
     therapist_llm = (
         OllamaChat(therapist_model) if therapist_model in OLLAMA_MODELS

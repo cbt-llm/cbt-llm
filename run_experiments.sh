@@ -19,7 +19,7 @@ fi
 
 # Model map
 case "$MODEL_KEY" in
-  gemma)    MODEL="gemma2:9b" ;;
+  gemma)    MODEL="gemma3:12b" ;;
   mistral)  MODEL="mistral:7b" ;;
   deepseek) MODEL="deepseek-r1:8b" ;;
   qwen) MODEL="qwen3:8b" ;;
@@ -37,8 +37,8 @@ TURNS=10
 K=5
 
 seeds=(
-  "I’m calm most of the times but sometimes I end up blowing up."
-  # "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
+  # "I’m calm most of the times but sometimes I end up blowing up."
+  "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
   # "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way."
   # "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile."
 )
