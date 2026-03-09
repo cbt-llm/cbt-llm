@@ -10,6 +10,8 @@ import json
 import argparse
 from pathlib import Path
 from typing import List, Dict, Any, Optional
+from cbt_llm.cbt_tot import tot_therapist_reply, CBT_PROTOCOLS
+
 
 import requests
 from openai import OpenAI
@@ -70,22 +72,19 @@ class OpenAIChat:
         return r.choices[0].message.content.strip()
 
 
-def load_cbt_protocols_text() -> str:
+def load_cbt_protocols():
     path = ROOT / "references" / "cbt-protocols.json"
+
     if not path.exists():
-        return ""
+        raise FileNotFoundError(f"Missing CBT protocol file: {path}")
 
     data = json.loads(path.read_text())
-    lines = ["[CBT Protocol Playbook — internal]"]
 
-    for p in data.get("cbt_protocols", []):
-        lines.append(f"- {p['name']}: {p.get('purpose','')}")
-        for kf in (p.get("key_functions") or [])[:3]:
-            lines.append(f"  ◦ {kf}")
+    return {
+        p["name"]: p
+        for p in data.get("cbt_protocols", [])
+    }
 
-    return "\n".join(lines)
-
-CBT_PROTOCOLS = load_cbt_protocols_text()
 
 PATIENT_SYSTEM = """
 You are simulating a human patient in an ongoing cognitive behavioral therapy (CBT) session.
@@ -132,7 +131,7 @@ Constraints:
 - One paragraph or 2–4 sentences.
 """.strip()
 
-THERAPIST_CBT_PROMPT = """
+THERAPIST_CBT_TOT_PROMPT = """
 You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
 
 Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
@@ -385,7 +384,7 @@ def sanitize_rag(raw):
 def build_hidden_context(schema, rag, use_protocol):
     blocks = []
     if use_protocol and CBT_PROTOCOLS:
-        blocks.append(CBT_PROTOCOLS)
+        blocks.append("[CBT_PROTOCOLS]\n" + json.dumps(CBT_PROTOCOLS, indent=2))
     if schema:
         blocks.append("[USER SCHEMA]\n" + json.dumps(schema))
     if rag:
@@ -420,18 +419,14 @@ def run_session(
             )
         use_rag = use_schema = use_protocol = False
 
-    if therapist_mode == "cbt":
+
+    if therapist_mode in {"cbt", "cbt_tot"}:
         if not (use_rag and use_schema and use_protocol):
             raise ValueError(
                 "CBT mode MUST use user schema, RAG, and CBT protocols."
             )
         
-    # therapist_llm = (
-    #     OpenAIChat(therapist_model)
-    #     if therapist_model.startswith("gpt")
-    #     else OllamaChat(therapist_model)
-    # )
-    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b","deepseek-r1:32b", "qwen3:8b", "deepseek-r1:8b"}
+    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma2:9b", "deepseek-r1:8b"}
 
     therapist_llm = (
         OllamaChat(therapist_model) if therapist_model in OLLAMA_MODELS
@@ -492,12 +487,30 @@ def run_session(
             "content": last_patient
         })
 
-        therapist_reply = therapist_llm.chat(
-            therapist_messages,
-            temperature=0.15,
-            num_predict=1600,
-            # top_p=0.7,
-        ).strip()
+        if therapist_mode == "cbt_tot":
+
+            therapist_reply, protocol_used, candidates = tot_therapist_reply(
+                therapist_llm,
+                base_prompt,
+                hidden_context,
+                last_patient
+            )
+
+        elif therapist_mode == "cbt":
+
+            therapist_reply = therapist_llm.chat(
+                therapist_messages,
+                temperature=0.15,
+                num_predict=1600,
+            ).strip()
+
+        else:
+
+            therapist_reply = therapist_llm.chat(
+                therapist_messages,
+                temperature=0.15,
+                num_predict=1600,
+            ).strip()
 
         if looks_like_therapist_leak(therapist_reply):
             rewritten = therapist_llm.chat(
@@ -524,10 +537,16 @@ def run_session(
                 f"from model {therapist_model}. Aborting run."
             )
 
-        transcript.append({
+        entry = {
             "role": "therapist",
             "content": therapist_reply
-        })
+        }
+
+        if therapist_mode == "cbt_tot":
+            entry["protocol_used"] = protocol_used
+            entry["tot_candidates"] = candidates
+
+        transcript.append(entry)
 
         patient_resp = patient_llm.chat.completions.create(
             model=patient_model,
@@ -599,7 +618,7 @@ def main():
 
     ap.add_argument("--therapist_model", required=True)
     ap.add_argument("--patient_model", default="gpt-4o-mini")
-    ap.add_argument("--therapist_mode", choices=["baseline", "cbt"], required=True)
+    ap.add_argument("--therapist_mode", choices=["baseline", "cbt", "cbt_tot"], required=True)
     ap.add_argument("--turns", type=int, default=10)
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--seed", required=True)
