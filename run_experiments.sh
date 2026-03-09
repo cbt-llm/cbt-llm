@@ -12,14 +12,14 @@ if [[ -z "$MODE" || -z "$MODEL_KEY" ]]; then
   exit 1
 fi
 
-if [[ "$MODE" != "baseline" && "$MODE" != "cbt" ]]; then
+if [[ "$MODE" != "baseline" && "$MODE" != "cbt" && "$MODE" != "cbt_tot" ]]; then
   echo "Invalid mode: $MODE"
   exit 1
 fi
 
 # Model map
 case "$MODEL_KEY" in
-  gemma)    MODEL="gemma3:4b" ;;
+  gemma)    MODEL="gemma2:9b" ;;
   mistral)  MODEL="mistral:7b" ;;
   deepseek) MODEL="deepseek-r1:8b" ;;
   qwen) MODEL="qwen3:8b" ;;
@@ -59,7 +59,7 @@ for i in "${!seeds[@]}"; do
     --transcript_json "${OUTDIR}/${MODE}_transcript_${run}.json"
   )
 
-  if [[ "$MODE" == "cbt" ]]; then
+  if [[ "$MODE" == "cbt" || "$MODE" == "cbt_tot" ]]; then
     CMD+=(--use_rag --use_schema --use_protocol)
   fi
 
