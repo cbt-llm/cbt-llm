@@ -32,14 +32,14 @@ esac
 OUTDIR="output/${MODEL_KEY}"
 mkdir -p "$OUTDIR"
 
-TURNS=2
+TURNS=10
 K=5
 
 seeds=(
   # "I feel calm most of the time, but sometimes when small things pile up it feels like nothing is going the way it should, and I end up blowing up."
-  # "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
-  # "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way."
-  # "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile."
+  "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
+  "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way."
+  "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile."
   "Sometimes I can’t help but feel this void despite being with people who are close friends and family. I don't know if I am being ungrateful, but I don't feel like I have anyone to talk to when things get hard. I don't belong anywhere. I just don't want to wake up ever again."
 )
 
