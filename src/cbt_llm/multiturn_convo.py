@@ -644,7 +644,7 @@ def run_session(
                 "retrieval": rag,
             },
 
-            "therapist": therapist_block
+            "llm_response": therapist_block
         }
 
         transcript.append(turn_record)
@@ -655,7 +655,7 @@ def run_session(
 
     output = {
         "metadata": {
-            "therapist_model": therapist_model,
+            "llm_response": therapist_model,
             "patient_model": patient_model,
             "mode": therapist_mode,
             "turns": turns,
@@ -681,7 +681,7 @@ def main():
     ap.add_argument("--therapist_model", required=True)
     ap.add_argument("--patient_model", default="gpt-4o-mini")
     ap.add_argument("--therapist_mode", choices=["baseline", "cbt", "cbt_mcot"], required=True)
-    ap.add_argument("--turns", type=int, default=10)
+    ap.add_argument("--turns", type=int, default=2)
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--seed", required=True)
     ap.add_argument("--transcript_json", required=True)

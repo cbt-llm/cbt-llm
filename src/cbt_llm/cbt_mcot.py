@@ -1,7 +1,14 @@
+"""
+Runs CBT Multiple Chain-of-Thought reasoning.
+
+Steps:
+1) generate candidate response per CBT protocol
+2) evaluate candidates
+3) select best response
+"""
 import json
 from pathlib import Path
 from cbt_llm.config import ROOT
-
 
 def load_cbt_protocols():
     path = ROOT / "references" / "cbt-protocols.json"
@@ -118,21 +125,15 @@ def mcot_therapist_reply(
     hidden_context,
     patient_text
 ):
-    """
-    Runs CBT Tree-of-Thought reasoning.
 
-    Steps:
-    1) generate candidate response per CBT protocol
-    2) evaluate candidates
-    3) select best response
-    """
+    candidate_list = []
+    candidate_map = {}
 
-    candidates = []
     protocols = list(CBT_PROTOCOLS.values())
 
     for protocol in protocols:
 
-        candidate = generate_candidate(
+        response = generate_candidate(
             llm,
             base_prompt,
             hidden_context,
@@ -140,15 +141,16 @@ def mcot_therapist_reply(
             protocol
         )
 
-        candidates.append(candidate)
+        candidate_list.append(response)
+        candidate_map[protocol["name"]] = response
 
     best_idx = evaluate_candidates(
         llm,
         patient_text,
-        candidates
+        candidate_list
     )
 
-    best_response = candidates[best_idx]
+    best_response = candidate_list[best_idx]
     best_protocol = protocols[best_idx]["name"]
 
-    return best_response, best_protocol, candidates
+    return best_response, best_protocol, candidate_map
