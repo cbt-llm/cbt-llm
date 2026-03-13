@@ -112,7 +112,7 @@ def evaluate_candidates(llm, patient_text, candidates):
         return 0
 
 
-def tot_therapist_reply(
+def mcot_therapist_reply(
     llm,
     base_prompt,
     hidden_context,
