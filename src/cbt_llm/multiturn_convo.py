@@ -543,7 +543,7 @@ def run_session(
             raw_reply = therapist_llm.chat(
                 therapist_messages,
                 temperature=0.15,
-                num_predict=2600,
+                num_predict=4000,
             ).strip()
 
             therapist_reply = raw_reply
@@ -561,7 +561,7 @@ def run_session(
             therapist_reply = therapist_llm.chat(
                 therapist_messages,
                 temperature=0.15,
-                num_predict=2600,
+                num_predict=4000,
             ).strip()
 
         if looks_like_therapist_leak(therapist_reply):
@@ -574,7 +574,7 @@ def run_session(
                     )
                 }],
                 temperature=0.1,
-                num_predict=2500,
+                num_predict=4000,
                 top_p=0.7,
             ).strip()
 
@@ -625,9 +625,8 @@ def run_session(
             "response": therapist_reply
         }
 
-        if reasoning:
-            reasoning = classify_reasoning_concepts(reasoning, rag)
-            therapist_block["reasoning"] = reasoning
+        reasoning = classify_reasoning_concepts(reasoning, rag)
+        therapist_block["reasoning"] = reasoning
 
         if therapist_mode == "cbt_mcot":
             therapist_block["protocol_used"] = protocol_used
@@ -681,7 +680,7 @@ def main():
     ap.add_argument("--therapist_model", required=True)
     ap.add_argument("--patient_model", default="gpt-4o-mini")
     ap.add_argument("--therapist_mode", choices=["baseline", "cbt", "cbt_mcot"], required=True)
-    ap.add_argument("--turns", type=int, default=2)
+    ap.add_argument("--turns", type=int, default=10)
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--seed", required=True)
     ap.add_argument("--transcript_json", required=True)

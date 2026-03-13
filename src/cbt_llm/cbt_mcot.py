@@ -75,7 +75,7 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
     return llm.chat(
         messages,
         temperature=0.4,
-        num_predict=400,
+        num_predict=2600,
     ).strip()
 
 def evaluate_candidates(llm, patient_text, candidates):
