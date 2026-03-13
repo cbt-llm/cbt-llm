@@ -32,7 +32,7 @@ esac
 OUTDIR="output/${MODEL_KEY}"
 mkdir -p "$OUTDIR"
 
-TURNS=10
+TURNS=2
 K=5
 
 seeds=(
