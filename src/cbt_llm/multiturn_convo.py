@@ -2,7 +2,7 @@
 Generating multi-turn conversations between CBT agent and patient LLMs.
 
 Run:
-./run_experiment.sh [baseline|cbt] [gemma|mistral|qwen|deepseek|gpt]
+./run_experiment.sh [baseline|cbt] [gemma|mistral|deepseek|gpt]
 """
 import os
 import re
@@ -10,7 +10,7 @@ import json
 import argparse
 from pathlib import Path
 from typing import List, Dict, Any, Optional
-from cbt_llm.cbt_tot import tot_therapist_reply, CBT_PROTOCOLS
+from cbt_llm.cbt_mcot import mcot_therapist_reply, CBT_PROTOCOLS
 
 
 import requests
@@ -21,16 +21,8 @@ from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, ROOT
 from cbt_llm.retrieve_snomed import retrieve_snomed_matches
 from user_schema.user_schema import extract_user_schema
 from cbt_llm.pipelines.findings_pipeline import FindingsPipeline
-from pydantic import BaseModel
-
 
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-
-class CBTResponse(BaseModel):
-    response: str
-    clinical_context: list[str]
-    principle_used: list[str]
 
 
 OPENAI_PATIENT_MODEL = "gpt-4o-mini"
@@ -67,7 +59,6 @@ class OpenAIChat:
             temperature=temperature,
             max_tokens=num_predict,
             top_p=top_p,
-            # response_format=CBTResponse
         )
         return r.choices[0].message.content.strip()
 
@@ -131,111 +122,111 @@ Constraints:
 - One paragraph or 2–4 sentences.
 """.strip()
 
-# THERAPIST_CBT_TOT_PROMPT = """
-# You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
+THERAPIST_CBT_MCOT_PROMPT = """
+You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
 
-# Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
+Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
 
-# You will receive:
+You will receive:
 
-# 1) The PATIENT MESSAGE (Premise)
-# 2) COGNITIVE MODEL (hidden context): a structured decomposition of the patient's experience
-# 3) CLINICAL CONTEXT (hidden context): clinical statements related to the patient's language
-# 4) A CBT protocol guideline describing three intervention strategies
+1) The PATIENT MESSAGE (Premise)
+2) COGNITIVE MODEL (hidden context): a structured decomposition of the patient's experience
+3) CLINICAL CONTEXT (hidden context): clinical statements related to the patient's language
+4) A CBT protocol guideline describing three intervention strategies
 
-# Use the hidden context to guide your reasoning, but NEVER reveal it.
+Use the hidden context to guide your reasoning, but NEVER reveal it.
 
-# ━━━━━━━━━━━━━━━━━━━
-# COGNITIVE MODEL (DO NOT REVEAL)
-# ━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━
+COGNITIVE MODEL (DO NOT REVEAL)
+━━━━━━━━━━━━━━━━━━━
 
-# In Cognitive Behavioral Therapy, emotional distress is understood as emerging from patterns in how situations are interpreted.
+In Cognitive Behavioral Therapy, emotional distress is understood as emerging from patterns in how situations are interpreted.
 
-# Experiences can often be conceptualized as:
+Experiences can often be conceptualized as:
 
-# Triggers → Automatic Thoughts → Emotions → Behaviors
+Triggers → Automatic Thoughts → Emotions → Behaviors
 
-# Triggers are situations or events that activate interpretation.
+Triggers are situations or events that activate interpretation.
 
-# Automatic thoughts are rapid interpretations or meanings assigned to the situation. These thoughts often reflect deeper beliefs, assumptions, expectations, or rules about the self, other people, or the world.
+Automatic thoughts are rapid interpretations or meanings assigned to the situation. These thoughts often reflect deeper beliefs, assumptions, expectations, or rules about the self, other people, or the world.
 
-# Emotions arise from how the situation is interpreted.
+Emotions arise from how the situation is interpreted.
 
-# Behaviors are the actions or reactions that follow the emotional response.
+Behaviors are the actions or reactions that follow the emotional response.
 
-# Use this structure silently to interpret what may be driving the patient’s experience.
-# Focus on the element most relevant to the patient’s message.
+Use this structure silently to interpret what may be driving the patient’s experience.
+Focus on the element most relevant to the patient’s message.
 
-# ━━━━━━━━━━━━━━━━━━━
-# CLINICAL CONTEXT (DO NOT REVEAL)
-# ━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━
+CLINICAL CONTEXT (DO NOT REVEAL)
+━━━━━━━━━━━━━━━━━━━
 
-# Treat the patient’s message as the Premise.
+Treat the patient’s message as the Premise.
 
-# The Clinical Context contains statements that may relate to the patient’s underlying psychological state.
+The Clinical Context contains statements that may relate to the patient’s underlying psychological state.
 
-# These refer to an observable or reported clinical state or psychological pattern to help represent clinically meaningful patterns in patient language or behavior.
+These refer to an observable or reported clinical state or psychological pattern to help represent clinically meaningful patterns in patient language or behavior.
 
-# Each statement is labeled as:
+Each statement is labeled as:
 
-# ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.
+ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.
 
-# NEUTRAL — Possibly relevant but uncertain.
+NEUTRAL — Possibly relevant but uncertain.
 
-# CONTRADICTION — Conflicts with the patient’s experience and should NOT be used.
+CONTRADICTION — Conflicts with the patient’s experience and should NOT be used.
 
-# Use the clinical context only as cues when interpreting the patient’s experience.
+Use the clinical context only as cues when interpreting the patient’s experience.
 
-# ━━━━━━━━━━━━━━━━━━━
-# TREE OF THOUGHT REASONING
-# ━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━
+TREE OF THOUGHT REASONING
+━━━━━━━━━━━━━━━━━━━
 
-# Before generating the final response, internally simulate three candidate therapist responses — one for each CBT intervention principle.
+Before generating the final response, internally simulate three candidate therapist responses — one for each CBT intervention principle.
 
-# For each candidate:
+For each candidate:
 
-# 1. Infer the belief or assumption that may be driving the patient's experience.
-# 2. Apply the intervention principle using its techniques.
-# 3. Consider how the patient might respond to that intervention.
+1. Infer the belief or assumption that may be driving the patient's experience.
+2. Apply the intervention principle using its techniques.
+3. Consider how the patient might respond to that intervention.
 
-# The three intervention candidates are:
+The three intervention candidates are:
 
-# A) validate_and_reflect  
-# Focus on emotional acknowledgment and alignment.
+A) validate_and_reflect  
+Focus on emotional acknowledgment and alignment.
 
-# B) socratic_questioning  
-# Ask questions that help the patient examine the belief.
+B) socratic_questioning  
+Ask questions that help the patient examine the belief.
 
-# C) cognitive_restructuring  
-# Introduce a gentle alternative interpretation of the belief.
+C) cognitive_restructuring  
+Introduce a gentle alternative interpretation of the belief.
 
-# Evaluate which candidate would most effectively move the conversation forward therapeutically.
+Evaluate which candidate would most effectively move the conversation forward therapeutically.
 
-# Select the strongest candidate.
+Select the strongest candidate.
 
-# Do NOT reveal the reasoning or the other candidates.
+Do NOT reveal the reasoning or the other candidates.
 
-# ━━━━━━━━━━━━━━━━━━━
-# CONSTRAINTS
-# ━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━
+CONSTRAINTS
+━━━━━━━━━━━━━━━━━━━
 
-# - Do not diagnose.
-# - Do not explain therapy concepts.
-# - Do not mention CBT principles or reasoning.
-# - Do not reveal hidden context.
-# - Do not repeat the patient's statement verbatim.
-# - Avoid repeating the same intervention style across consecutive turns.
+- Do not diagnose.
+- Do not explain therapy concepts.
+- Do not mention CBT principles or reasoning.
+- Do not reveal hidden context.
+- Do not repeat the patient's statement verbatim.
+- Avoid repeating the same intervention style across consecutive turns.
 
 
-# Your response should:
-# - Sound like a natural therapist response
-# - The therapist should focus on the belief or assumption underlying the patient's experience rather than only reflecting emotions.
+Your response should:
+- Sound like a natural therapist response
+- The therapist should focus on the belief or assumption underlying the patient's experience rather than only reflecting emotions.
 
-# Length:
-# 2–4 sentences maximum.
+Length:
+2–4 sentences maximum.
 
-# Output only the therapist's response to the patient.
-# """.strip()
+Output only the therapist's response to the patient.
+""".strip()
 
 THERAPIST_CBT_PROMPT= """
 You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
@@ -346,7 +337,19 @@ Your response should:
 Length:
 2–4 sentences maximum.
 
-Output only the therapist's response to the patient.
+Before producing the final therapist message, briefly reason about the patient's belief and which retrieved clinical concepts may be relevant.
+
+Format your output exactly as:
+
+REASONING:
+{
+  "retrieved_concepts_used": ["...", "..."],
+}
+
+FINAL RESPONSE:
+<therapist message>
+
+Do not mention reasoning in the final response.
 """.strip()
 
 
@@ -398,6 +401,39 @@ def audit_grounding(reply, schema, rag):
         "rag_used": bool(rag and any(c["term"].split()[0].lower() in t for c in rag.get("concepts", [])))
     }
 
+def classify_reasoning_concepts(reasoning, rag):
+    """
+    Tag each concept used in reasoning with its NLI label
+    (entailment / neutral / contradiction).
+    """
+    if not reasoning or not rag:
+        return reasoning
+
+    labels = {
+        "entailment": rag.get("entailment", []),
+        "neutral": rag.get("neutral", []),
+        "contradiction": rag.get("contradiction", [])
+    }
+
+    tagged = []
+
+    for concept in reasoning.get("retrieved_concepts_used", []):
+        tag = "unknown"
+
+        for k, concepts in labels.items():
+            if any(concept.lower() in c.lower() for c in concepts):
+                tag = k
+                break
+
+        tagged.append({
+            "concept": concept,
+            "label": tag
+        })
+
+    reasoning["retrieved_concepts_used"] = tagged
+
+    return reasoning
+
 
 def run_session(
     therapist_model,
@@ -420,7 +456,7 @@ def run_session(
         use_rag = use_schema = use_protocol = False
 
 
-    if therapist_mode in {"cbt", "cbt_tot"}:
+    if therapist_mode in {"cbt", "cbt_mcot"}:
         if not (use_rag and use_schema and use_protocol):
             raise ValueError(
                 "CBT mode MUST use user schema, RAG, and CBT protocols."
@@ -441,13 +477,16 @@ def run_session(
 
     findings_pipeline = FindingsPipeline(driver, k=k)
 
-    base_prompt = (
-        THERAPIST_BASELINE_PROMPT
-        if therapist_mode == "baseline"
-        else THERAPIST_CBT_PROMPT
-    )
+    if therapist_mode == "baseline":
+        base_prompt = THERAPIST_BASELINE_PROMPT
+    elif therapist_mode == "cbt":
+        base_prompt = THERAPIST_CBT_PROMPT
+    elif therapist_mode == "cbt_mcot":
+        base_prompt = THERAPIST_CBT_MCOT_PROMPT
+    else:
+        raise ValueError(f"Unknown therapist_mode: {therapist_mode}")
 
-    transcript = [{"role": "patient", "content": seed}]
+    transcript = []
     patient_chat = [{"role": "system", "content": PATIENT_SYSTEM}]
     last_patient = seed
 
@@ -462,7 +501,7 @@ def run_session(
         if use_rag:
             rag = findings_pipeline.get_findings(last_patient)
 
-        if therapist_mode in {"cbt", "cbt_tot"}:
+        if therapist_mode in {"cbt", "cbt_mcot"}:
             schema_trace.append({
                 "turn": turn_idx,
                 "patient_text": last_patient,
@@ -486,23 +525,36 @@ def run_session(
             "role": "user",
             "content": last_patient
         })
+        
 
-        if therapist_mode == "cbt_tot":
+        reasoning = None
 
-            therapist_reply, protocol_used, candidates = tot_therapist_reply(
+        if therapist_mode == "cbt_mcot":
+            therapist_reply, protocol_used, candidates = mcot_therapist_reply(
                 therapist_llm,
                 base_prompt,
                 hidden_context,
                 last_patient
             )
+            
 
         elif therapist_mode == "cbt":
 
-            therapist_reply = therapist_llm.chat(
+            raw_reply = therapist_llm.chat(
                 therapist_messages,
                 temperature=0.15,
                 num_predict=2600,
             ).strip()
+
+            therapist_reply = raw_reply
+
+            if "REASONING:" in raw_reply and "FINAL RESPONSE:" in raw_reply:
+                try:
+                    reasoning_text = raw_reply.split("REASONING:")[1].split("FINAL RESPONSE:")[0].strip()
+                    therapist_reply = raw_reply.split("FINAL RESPONSE:")[1].strip()
+                    reasoning = json.loads(reasoning_text)
+                except Exception:
+                    reasoning = None
 
         else:
 
@@ -518,8 +570,6 @@ def run_session(
                     "role": "system",
                     "content": (
                         "Rewrite the response strictly following the rules. "
-                        # "Do NOT paraphrase. "
-                        # "Do NOT begin with phrases like 'it sounds like' or 'it seems like'. "
                         "Interpret meaning and advance insight."
                     )
                 }],
@@ -536,17 +586,6 @@ def run_session(
                 f"Empty therapist response at turn {turn_idx} "
                 f"from model {therapist_model}. Aborting run."
             )
-
-        entry = {
-            "role": "therapist",
-            "content": therapist_reply
-        }
-
-        if therapist_mode == "cbt_tot":
-            entry["protocol_used"] = protocol_used
-            entry["tot_candidates"] = candidates
-
-        transcript.append(entry)
 
         patient_resp = patient_llm.chat.completions.create(
             model=patient_model,
@@ -576,36 +615,59 @@ def run_session(
                 max_tokens=80,
             ).choices[0].message.content.strip()
 
-        transcript.append({
-            "role": "patient",
-            "content": patient_reply
-        })
-
         patient_chat.append({
             "role": "assistant",
             "content": patient_reply
         })
+
+        therapist_block = {
+            "role": "cbt_agent" if therapist_mode != "baseline" else "agent",
+            "response": therapist_reply
+        }
+
+        if reasoning:
+            reasoning = classify_reasoning_concepts(reasoning, rag)
+            therapist_block["reasoning"] = reasoning
+
+        if therapist_mode == "cbt_mcot":
+            therapist_block["protocol_used"] = protocol_used
+            therapist_block["mcot_candidates"] = candidates
+
+
+        turn_record = {
+            "turn": turn_idx,
+
+            "patient": {
+                "role": "patient",
+                "query": last_patient,
+                "schema": schema,
+                "retrieval": rag,
+            },
+
+            "therapist": therapist_block
+        }
+
+        transcript.append(turn_record)
 
         last_patient = patient_reply
 
     driver.close()
 
     output = {
-        "therapist_model": therapist_model,
-        "patient_model": patient_model,
-        "therapist_mode": therapist_mode,
-        "intervention_flags": {
-            "use_schema": use_schema,
-            "use_rag": use_rag,
-            "use_protocol": use_protocol,
+        "metadata": {
+            "therapist_model": therapist_model,
+            "patient_model": patient_model,
+            "mode": therapist_mode,
+            "turns": turns,
+            "seed": seed,
+            "intervention_flags": {
+                "use_schema": use_schema,
+                "use_rag": use_rag,
+                "use_protocol": use_protocol
+            }
         },
-        "turns": turns,
-        "seed": seed,
-        "transcript": transcript,
+        "transcript": transcript
     }
-
-    if therapist_mode in {"cbt", "cbt_tot"}:
-        output["user_schema_trace"] = schema_trace
 
     Path(transcript_json).parent.mkdir(parents=True, exist_ok=True)
     Path(transcript_json).write_text(
@@ -618,7 +680,7 @@ def main():
 
     ap.add_argument("--therapist_model", required=True)
     ap.add_argument("--patient_model", default="gpt-4o-mini")
-    ap.add_argument("--therapist_mode", choices=["baseline", "cbt", "cbt_tot"], required=True)
+    ap.add_argument("--therapist_mode", choices=["baseline", "cbt", "cbt_mcot"], required=True)
     ap.add_argument("--turns", type=int, default=10)
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--seed", required=True)
