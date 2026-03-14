@@ -401,38 +401,80 @@ def audit_grounding(reply, schema, rag):
         "rag_used": bool(rag and any(c["term"].split()[0].lower() in t for c in rag.get("concepts", [])))
     }
 
-def classify_reasoning_concepts(reasoning, rag):
-    """
-    Tag each concept used in reasoning with its NLI label
-    (entailment / neutral / contradiction).
-    """
-    if not reasoning or not rag:
-        return reasoning
+import re
 
-    labels = {
-        "entailment": rag.get("entailment", []),
-        "neutral": rag.get("neutral", []),
-        "contradiction": rag.get("contradiction", [])
-    }
+def classify_reasoning_concepts(reasoning, rag, schema):
+    concepts = reasoning.get("retrieved_concepts_used", [])
+    labeled = []
 
-    tagged = []
+    for concept in concepts:
 
-    for concept in reasoning.get("retrieved_concepts_used", []):
-        tag = "unknown"
+        # handle both string and dict formats
+        if isinstance(concept, dict):
+            concept_text = concept.get("concept", "")
+        else:
+            concept_text = concept
 
-        for k, concepts in labels.items():
-            if any(concept.lower() in c.lower() for c in concepts):
-                tag = k
+        concept_clean = re.sub(r"\(.*?\)", "", concept_text).strip().lower()
+
+        label = "unknown"
+
+        # check rag
+        for k in ["entailment", "neutral", "contradiction"]:
+            for r in rag.get(k, []):
+                r_clean = re.sub(r"\(.*?\)", "", r).strip().lower()
+                if concept_clean in r_clean or r_clean in concept_clean:
+                    label = k
+                    break
+            if label != "unknown":
                 break
 
-        tagged.append({
-            "concept": concept,
-            "label": tag
+        # check schema
+        if label == "unknown":
+            for k in ["triggers", "automatic_thoughts", "emotions"]:
+                for s in schema.get(k, []):
+                    s_clean = s.strip().lower()
+                    if concept_clean in s_clean or s_clean in concept_clean:
+                        label = k
+                        break
+                if label != "unknown":
+                    break
+
+        labeled.append({
+            "concept": concept_text,
+            "label": label
         })
 
-    reasoning["retrieved_concepts_used"] = tagged
-
+    reasoning["retrieved_concepts_used"] = labeled
     return reasoning
+
+def classify_transcript(transcript):
+
+    for turn in transcript:
+
+        patient = turn.get("patient")
+        llm_response = turn.get("llm_response")
+
+        if not patient or not llm_response:
+            continue
+
+        rag = patient.get("retrieval")
+        schema = patient.get("schema")
+
+        # classify main reasoning
+        reasoning = llm_response.get("reasoning")
+        if reasoning:
+            classify_reasoning_concepts(reasoning, rag, schema)
+
+        # classify MCOT candidate reasoning
+        candidates = llm_response.get("mcot_candidates", {})
+        for _, data in candidates.items():
+            r = data.get("reasoning")
+            if r:
+                classify_reasoning_concepts(r, rag, schema)
+
+    return transcript
+
 
 
 def run_session(
@@ -511,6 +553,10 @@ def run_session(
 
         hidden_context = build_hidden_context(schema, rag, use_protocol)
 
+        print("\n================ HIDDEN CONTEXT ================")
+        print(hidden_context)
+        print("================================================\n")
+
         therapist_messages = [
             {"role": "system", "content": base_prompt}
         ]
@@ -526,15 +572,16 @@ def run_session(
             "content": last_patient
         })
         
-
-        reasoning = None
+        # reasoning = None
 
         if therapist_mode == "cbt_mcot":
-            therapist_reply, protocol_used, candidates = mcot_therapist_reply(
+            therapist_reply, protocol_used, candidates, reasoning = mcot_therapist_reply(
                 therapist_llm,
                 base_prompt,
                 hidden_context,
-                last_patient
+                last_patient,
+                rag,
+                schema
             )
             
 
@@ -543,7 +590,7 @@ def run_session(
             raw_reply = therapist_llm.chat(
                 therapist_messages,
                 temperature=0.15,
-                num_predict=4000,
+                num_predict=5000,
             ).strip()
 
             therapist_reply = raw_reply
@@ -561,7 +608,7 @@ def run_session(
             therapist_reply = therapist_llm.chat(
                 therapist_messages,
                 temperature=0.15,
-                num_predict=4000,
+                num_predict=5000,
             ).strip()
 
         if looks_like_therapist_leak(therapist_reply):
@@ -574,7 +621,7 @@ def run_session(
                     )
                 }],
                 temperature=0.1,
-                num_predict=4000,
+                num_predict=5000,
                 top_p=0.7,
             ).strip()
 
@@ -625,12 +672,13 @@ def run_session(
             "response": therapist_reply
         }
 
-        reasoning = classify_reasoning_concepts(reasoning, rag)
-        therapist_block["reasoning"] = reasoning
+        if therapist_mode == "cbt":
+            therapist_block["reasoning"] = reasoning
 
         if therapist_mode == "cbt_mcot":
             therapist_block["protocol_used"] = protocol_used
             therapist_block["mcot_candidates"] = candidates
+            therapist_block["reasoning"] = reasoning
 
 
         turn_record = {
@@ -669,9 +717,16 @@ def run_session(
     }
 
     Path(transcript_json).parent.mkdir(parents=True, exist_ok=True)
+
+    output["transcript"] = classify_transcript(output["transcript"])
+
     Path(transcript_json).write_text(
         json.dumps(output, indent=2, ensure_ascii=False)
     )
+
+    # Path(transcript_json).write_text(
+    #     json.dumps(output, indent=2, ensure_ascii=False)
+    # )
 
 
 def main():

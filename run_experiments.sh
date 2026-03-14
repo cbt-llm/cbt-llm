@@ -36,7 +36,7 @@ TURNS=10
 K=5
 
 seeds=(
-  # "I feel calm most of the time, but sometimes when small things pile up it feels like nothing is going the way it should, and I end up blowing up."
+  "I feel calm most of the time, but sometimes when small things pile up it feels like nothing is going the way it should, and I end up blowing up."
   "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything."
   "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way."
   "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile."

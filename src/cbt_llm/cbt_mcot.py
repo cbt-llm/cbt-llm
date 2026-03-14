@@ -6,9 +6,12 @@ Steps:
 2) evaluate candidates
 3) select best response
 """
+
 import json
+import re
 from pathlib import Path
 from cbt_llm.config import ROOT
+
 
 def load_cbt_protocols():
     path = ROOT / "references" / "cbt-protocols.json"
@@ -22,7 +25,6 @@ def load_cbt_protocols():
         p["name"]: p
         for p in data.get("cbt_protocols", [])
     }
-
 
 CBT_PROTOCOLS = load_cbt_protocols()
 
@@ -44,6 +46,19 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
     {chr(10).join("- " + t for t in protocol.get("techniques", []))}
 
     Generate ONE therapist response following this protocol.
+
+    Before producing the final response, briefly reason about
+    which retrieved clinical concepts may be relevant.
+
+    Format EXACTLY as:
+
+    REASONING:
+    {{
+    "retrieved_concepts_used": ["...", "..."]
+    }}
+
+    FINAL RESPONSE:
+    <therapist message>
 
     Rules:
     - natural therapist tone
@@ -72,58 +87,129 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
         "content": patient_text
     })
 
-    return llm.chat(
+    raw = llm.chat(
         messages,
-        temperature=0.4,
-        num_predict=2600,
+        temperature=0.25,
+        num_predict=5000,
     ).strip()
 
-def evaluate_candidates(llm, patient_text, candidates):
+    reasoning = None
+    response = raw
+
+    if "REASONING:" in raw:
+
+        try:
+            after_reasoning = raw.split("REASONING:", 1)[1]
+
+            if "FINAL RESPONSE:" in after_reasoning:
+                reasoning_text = after_reasoning.split("FINAL RESPONSE:", 1)[0].strip()
+                response = after_reasoning.split("FINAL RESPONSE:", 1)[1].strip()
+
+            else:
+                match = re.search(r"\{[\s\S]*\}", after_reasoning)
+
+                if match:
+                    reasoning_text = match.group(0)
+                    response = raw.replace("REASONING:" + after_reasoning, "").strip()
+                else:
+                    reasoning_text = None
+
+            if reasoning_text:
+                reasoning = json.loads(reasoning_text)
+
+        except Exception:
+            reasoning = None
+            response = raw
+
+
+    return {
+        "response": response,
+        "reasoning": reasoning
+    }
+
+def evaluate_candidates(llm, patient_text, candidates, protocols):
 
     judge_prompt = """
-    You are evaluating therapist responses.
+    You are evaluating therapist responses in a Cognitive Behavioral Therapy (CBT) conversation.
 
-    Select the response that best advances therapy.
+    Each response was generated using a different CBT intervention protocol.
 
-    Criteria:
-    - empathy
-    - exploration of beliefs
+    Select the response that BEST applies its protocol and would most effectively
+    move the therapy conversation forward.
+
+    Evaluation criteria:
+    - correct application of the CBT intervention
+    - empathy and emotional attunement
+    - exploration or reframing of beliefs
     - therapeutic usefulness
-    - conversational flow
+    - natural conversational flow
 
     Return ONLY the number of the best response.
-    """
+    """.strip()
 
-    numbered = "\n\n".join(
-        f"{i+1}. {c}" for i, c in enumerate(candidates)
-    )
+    candidate_blocks = []
+
+    for i, (response, protocol) in enumerate(zip(candidates, protocols), start=1):
+
+        block = f"""
+        {i}. Protocol: {protocol["name"]}
+
+        Purpose:
+        {protocol["purpose"]}
+
+        Response:
+        {response}
+        """.strip()
+
+        candidate_blocks.append(block)
+
+    numbered_candidates = "\n\n".join(candidate_blocks)
 
     messages = [
         {"role": "system", "content": judge_prompt},
         {
             "role": "user",
-            "content": f"Patient message:\n{patient_text}\n\nResponses:\n{numbered}"
+            "content": (
+                f"Patient message:\n{patient_text}\n\n"
+                f"Candidate responses:\n\n{numbered_candidates}"
+            )
         },
     ]
 
     result = llm.chat(
         messages,
         temperature=0.0,
+        top_p=0.9,
         num_predict=20,
-    )
+    ).strip()
 
     try:
-        idx = int(result.strip()) - 1
+        idx = int(result) - 1
         return max(0, min(idx, len(candidates) - 1))
-    except:
+    except Exception:
         return 0
+
+
+# def classify_reasoning_concepts(reasoning, rag, schema):
+
+#     concepts = reasoning.get("retrieved_concepts_used", [])
+
+#     print("\n[DEBUG] Retrieved concepts from reasoning:")
+#     for c in concepts:
+#         print(" -", c)
+#     print()
+
+#     return reasoning
+
 
 
 def mcot_therapist_reply(
     llm,
     base_prompt,
     hidden_context,
-    patient_text
+    patient_text,
+    rag,
+    schema
 ):
 
     candidate_list = []
@@ -133,7 +219,7 @@ def mcot_therapist_reply(
 
     for protocol in protocols:
 
-        response = generate_candidate(
+        candidate = generate_candidate(
             llm,
             base_prompt,
             hidden_context,
@@ -141,16 +227,23 @@ def mcot_therapist_reply(
             protocol
         )
 
-        candidate_list.append(response)
-        candidate_map[protocol["name"]] = response
+        candidate_list.append(candidate["response"])
+
+        candidate_map[protocol["name"]] = {
+            "response": candidate["response"],
+            "reasoning": candidate["reasoning"]
+        }
 
     best_idx = evaluate_candidates(
         llm,
         patient_text,
-        candidate_list
+        candidate_list,
+        protocols
     )
 
-    best_response = candidate_list[best_idx]
     best_protocol = protocols[best_idx]["name"]
 
-    return best_response, best_protocol, candidate_map
+    best_response = candidate_map[best_protocol]["response"]
+    best_reasoning = candidate_map[best_protocol]["reasoning"]
+
+    return best_response, best_protocol, candidate_map, best_reasoning
