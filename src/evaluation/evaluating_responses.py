@@ -33,6 +33,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -45,21 +46,20 @@ import ollama
 
 load_dotenv()
 
+
 @dataclass
 class EvalConfig:
-
     input_root: Path = Path("output")
     output_root: Path = Path("evals")
-
     protocol_file: Path = Path("references/cbt-protocols.json")
 
     judge_backend: str = "openai"
-
     judge_model: str = "gpt-5.1"
 
     max_tokens: int = 3000
     max_concurrent: int = 6
     retries: int = 3
+
 
 class Score(BaseModel):
     score: float = Field(..., ge=0, le=5)
@@ -78,7 +78,6 @@ class ProtocolEffectiveness(BaseModel):
 
 
 class CBTBestPractices(BaseModel):
-
     therapeutic_relationship: float = Field(..., ge=0, le=5)
     collaboration: float = Field(..., ge=0, le=5)
     goal_oriented: float = Field(..., ge=0, le=5)
@@ -88,12 +87,18 @@ class CBTBestPractices(BaseModel):
 
 
 class JudgeOutput(BaseModel):
-
     rationale: str
-
     protocol_scores: ProtocolScores
     protocol_effectiveness: ProtocolEffectiveness
     cbt_best_practices: CBTBestPractices
+
+
+def clamp(x):
+    try:
+        x = float(x)
+        return max(0, min(5, x))
+    except:
+        return 0
 
 
 def load_protocol_definitions(path):
@@ -104,7 +109,6 @@ def load_protocol_definitions(path):
     lines = []
 
     for p in data["cbt_protocols"]:
-
         lines.append(f"PROTOCOL: {p['name']}")
         lines.append(f"PURPOSE: {p['purpose']}")
 
@@ -122,144 +126,82 @@ def load_protocol_definitions(path):
 
 
 def load_cbt_best_practices():
-
     return """
-    CBT BEST PRACTICES
+CBT BEST PRACTICES
 
-    therapeutic_relationship
-    The therapist conveys empathy, understanding, and validation.
-    The patient should feel psychologically safe and understood.
+therapeutic_relationship
+The therapist conveys empathy and validation.
 
-    collaboration
-    Therapist and patient explore the problem together.
-    Language often includes collaborative framing such as
-    "let's explore", "what do you think", or "together".
+collaboration
+Therapist and patient explore the problem together.
 
-    goal_oriented
-    The therapist moves the discussion toward constructive
-    problem solving or cognitive change rather than only
-    emotional reassurance.
+goal_oriented
+Moves toward constructive cognitive change.
 
-    present_focused
-    The therapist focuses on the patient's current thoughts,
-    emotions, or behaviors rather than abstract advice.
+present_focused
+Focus on current thoughts and behaviors.
 
-    educative
-    The therapist helps the patient understand thinking
-    patterns, cognitive distortions, or coping strategies.
+educative
+Helps the patient understand thinking patterns.
 
-    guided_discovery
-    The therapist asks questions that encourage the patient
-    to examine beliefs and discover insights themselves.
-    """
+guided_discovery
+Encourages the patient to examine beliefs themselves.
+"""
+
 
 def build_prompt(prev_query, query, response, protocol_defs, best_practices):
 
     prev_section = prev_query if prev_query else "None"
 
     return f"""
-    You are evaluating a CBT therapist response.
+You are evaluating a CBT therapist response.
 
-    STEP 1 — ANALYSIS
+CBT PROTOCOL DEFINITIONS
+{protocol_defs}
 
-    Explain:
+CBT BEST PRACTICES
+{best_practices}
 
-    • what psychological problem the user describes
-    • what the therapist is trying to do
-    • which CBT techniques appear
-    • whether the therapist encourages reflection or insight
+PREVIOUS USER QUERY
+{prev_section}
 
+CURRENT USER QUERY
+{query}
 
-    CBT PROTOCOL DEFINITIONS
-    -----------------------
-    {protocol_defs}
+THERAPIST RESPONSE
+{response}
 
-    CBT BEST PRACTICES
-    ------------------
-    {best_practices}
+Use a 0–5 scale.
 
-    CONTEXT
-    -------
+Return STRICT JSON:
 
-    PREVIOUS USER QUERY
-    {prev_section}
+{{
+"rationale": "string",
 
-    CURRENT USER QUERY
-    {query}
+"protocol_scores": {{
+"validate_and_reflect": {{"score": number, "rationale": "string"}},
+"socratic_questioning": {{"score": number, "rationale": "string"}},
+"cognitive_restructuring": {{"score": number, "rationale": "string"}}
+}},
 
-    THERAPIST RESPONSE
-    {response}
+"protocol_effectiveness": {{
+"effectiveness": number,
+"rationale": "string"
+}},
 
+"cbt_best_practices": {{
+"therapeutic_relationship": number,
+"collaboration": number,
+"goal_oriented": number,
+"present_focused": number,
+"educative": number,
+"guided_discovery": number
+}}
+}}
 
-    STEP 2 — SCORING
+Return ONLY JSON.
+"""
 
-    Use a 0–5 scale.
-
-    0 = absent
-    1 = very weak
-    2 = weak
-    3 = moderate
-    4 = strong
-    5 = excellent
-
-
-    Score:
-
-    PROTOCOL EXECUTION
-    • validate_and_reflect
-    • socratic_questioning
-    • cognitive_restructuring
-
-    PROTOCOL EFFECTIVENESS
-    How appropriate the CBT strategy is for the user's problem.
-
-    CBT BEST PRACTICES
-    • therapeutic_relationship
-    • collaboration
-    • goal_oriented
-    • present_focused
-    • educative
-    • guided_discovery
-
-    Return STRICT JSON matching this schema:
-
-    {{
-    "rationale": "string",
-
-    "protocol_scores": {{
-        "validate_and_reflect": {{
-        "score": number,
-        "rationale": "string"
-        }},
-        "socratic_questioning": {{
-        "score": number,
-        "rationale": "string"
-        }},
-        "cognitive_restructuring": {{
-        "score": number,
-        "rationale": "string"
-        }}
-    }},
-
-    "protocol_effectiveness": {{
-        "effectiveness": number,
-        "rationale": "string"
-    }},
-
-    "cbt_best_practices": {{
-        "therapeutic_relationship": number,
-        "collaboration": number,
-        "goal_oriented": number,
-        "present_focused": number,
-        "educative": number,
-        "guided_discovery": number
-    }}
-    }}
-
-    Do not include any explanation outside the JSON.
-    
-
-    """
 
 def read_json(path):
     with open(path) as f:
@@ -273,6 +215,7 @@ def write_json(path, obj):
     with open(path, "w") as f:
         json.dump(obj, f, indent=2)
 
+
 def normalize(v):
     return v / 5
 
@@ -284,7 +227,6 @@ class Judge:
         self.cfg = cfg
         self.protocol_defs = protocol_defs
         self.best_practices = best_practices
-
         self.sem = asyncio.Semaphore(cfg.max_concurrent)
 
         if cfg.judge_backend == "openai":
@@ -295,11 +237,6 @@ class Judge:
                 raise RuntimeError("OPENAI_API_KEY missing")
 
             self.client = AsyncOpenAI(api_key=api_key)
-
-        elif cfg.judge_backend == "ollama":
-
-            # nothing to initialize for ollama
-            pass
 
 
     async def judge(self, prev_query, query, response):
@@ -312,6 +249,8 @@ class Judge:
             self.best_practices
         )
 
+        print(f"[DEBUG] Judge request: {query[:60]}")
+
         if self.cfg.judge_backend == "openai":
 
             resp = await self.client.responses.parse(
@@ -323,32 +262,57 @@ class Judge:
 
             return resp.output_parsed
 
-
         elif self.cfg.judge_backend == "ollama":
 
-            result = ollama.chat(
-                model=self.cfg.judge_model,
-                messages=[{"role": "user", "content": prompt}],
-                format="json",
-                options={
-                    "temperature": 0.0,
-                    "num_ctx": 4096
-                }
-            )
+            async with self.sem:
 
-            text = result["message"]["content"]
+                print("[DEBUG] Sending request to Ollama")
 
-            try:
+                loop = asyncio.get_running_loop()
+                start = time.time()
+
+                result = await loop.run_in_executor(
+                    None,
+                    lambda: ollama.chat(
+                        model=self.cfg.judge_model,
+                        messages=[{"role": "user", "content": prompt}],
+                        format="json",
+                        options={
+                            "temperature": 0.0,
+                            "num_ctx": 2048
+                        }
+                    )
+                )
+
+                elapsed = time.time() - start
+                print(f"[DEBUG] Ollama response received ({elapsed:.2f}s)")
+
+                text = result["message"]["content"]
+
+                print("[DEBUG] Raw output preview:")
+                print(text[:300])
+
                 parsed = json.loads(text)
+
+                if "json" in parsed:
+                    parsed = parsed["json"]
+
+                # normalize scores
+                for k in parsed["protocol_scores"]:
+                    parsed["protocol_scores"][k]["score"] = clamp(
+                        parsed["protocol_scores"][k]["score"]
+                    )
+
+                parsed["protocol_effectiveness"]["effectiveness"] = clamp(
+                    parsed["protocol_effectiveness"]["effectiveness"]
+                )
+
+                for k in parsed["cbt_best_practices"]:
+                    parsed["cbt_best_practices"][k] = clamp(
+                        parsed["cbt_best_practices"][k]
+                    )
+
                 return JudgeOutput(**parsed)
-
-            except Exception:
-
-                print("\n--- RAW MODEL OUTPUT ---\n")
-                print(text)
-                print("\n------------------------\n")
-
-                raise
 
 
 async def evaluate_file(judge, input_file, output_file):
@@ -359,10 +323,12 @@ async def evaluate_file(judge, input_file, output_file):
     tasks = []
     prev_query = None
 
-    for turn in transcript:
+    for turn_idx, turn in enumerate(transcript):
 
         query = turn["patient"]["query"]
         response = turn["llm_response"]["response"]
+
+        print(f"[DEBUG] Scheduling turn {turn_idx}")
 
         tasks.append(
             asyncio.create_task(
@@ -372,7 +338,11 @@ async def evaluate_file(judge, input_file, output_file):
 
         prev_query = query
 
+    print("[DEBUG] Waiting for judge results...")
+
     results = await asyncio.gather(*tasks)
+
+    print("[DEBUG] All judge results returned.")
 
     turns = []
 
@@ -387,6 +357,7 @@ async def evaluate_file(judge, input_file, output_file):
         "generated": datetime.utcnow().isoformat(),
         "turn_evals": turns
     })
+
 
 def summarize_modes(eval_dir):
 
@@ -481,11 +452,14 @@ async def run_model(model, cfg):
 
     for f in files:
 
+        print(f"\n[DEBUG] Starting evaluation for file: {f}")
+
         out = cfg.output_root / model / f"{f.stem}_eval.json"
 
         await evaluate_file(judge, f, out)
 
         print(f"[OK] {f}")
+
 
 def main():
 
@@ -502,7 +476,7 @@ def main():
     cfg = EvalConfig(
         judge_backend=args.judge_backend,
         judge_model=args.judge_model
-    )   
+    )
 
     asyncio.run(run_model(args.model, cfg))
 
