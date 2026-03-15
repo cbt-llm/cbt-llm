@@ -34,6 +34,7 @@ import asyncio
 import json
 import os
 import time
+import re
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -57,7 +58,7 @@ class EvalConfig:
     judge_model: str = "gpt-5.1"
 
     max_tokens: int = 3000
-    max_concurrent: int = 6
+    max_concurrent: int = 1
     retries: int = 3
 
 
@@ -101,6 +102,21 @@ def clamp(x):
         return 0
 
 
+def safe_json_load(text):
+
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+
+    if not match:
+        raise ValueError("No JSON found in model output")
+
+    cleaned = match.group(0)
+
+    cleaned = re.sub(r",\s*}", "}", cleaned)
+    cleaned = re.sub(r",\s*]", "]", cleaned)
+
+    return json.loads(cleaned)
+
+
 def load_protocol_definitions(path):
 
     with open(path) as f:
@@ -127,26 +143,26 @@ def load_protocol_definitions(path):
 
 def load_cbt_best_practices():
     return """
-CBT BEST PRACTICES
+    CBT BEST PRACTICES
 
-therapeutic_relationship
-The therapist conveys empathy and validation.
+    therapeutic_relationship
+    The AI agent conveys empathy, validation, and emotional understanding toward the user.
 
-collaboration
-Therapist and patient explore the problem together.
+    collaboration
+    The AI agent and the user explore the problem together rather than the agent prescribing solutions unilaterally.
 
-goal_oriented
-Moves toward constructive cognitive change.
+    goal_oriented
+    The AI agent guides the user toward constructive cognitive or behavioral change.
 
-present_focused
-Focus on current thoughts and behaviors.
+    present_focused
+    The AI agent focuses primarily on the user's current thoughts, emotions, and behaviors.
 
-educative
-Helps the patient understand thinking patterns.
+    educative
+    The AI agent helps the user understand cognitive patterns, distortions, or CBT concepts.
 
-guided_discovery
-Encourages the patient to examine beliefs themselves.
-"""
+    guided_discovery
+    The AI agent encourages the user to reflect on and examine their own beliefs through questions and prompts rather than simply giving conclusions.
+    """
 
 
 def build_prompt(prev_query, query, response, protocol_defs, best_practices):
@@ -154,53 +170,53 @@ def build_prompt(prev_query, query, response, protocol_defs, best_practices):
     prev_section = prev_query if prev_query else "None"
 
     return f"""
-You are evaluating a CBT therapist response.
+    You are evaluating a CBT AI agent response.
 
-CBT PROTOCOL DEFINITIONS
-{protocol_defs}
+    CBT PROTOCOL DEFINITIONS
+    {protocol_defs}
 
-CBT BEST PRACTICES
-{best_practices}
+    CBT BEST PRACTICES
+    {best_practices}
 
-PREVIOUS USER QUERY
-{prev_section}
+    PREVIOUS USER QUERY
+    {prev_section}
 
-CURRENT USER QUERY
-{query}
+    CURRENT USER QUERY
+    {query}
 
-THERAPIST RESPONSE
-{response}
+    AI AGENT RESPONSE
+    {response}
 
-Use a 0–5 scale.
+    Use a 0–5 scale.
 
-Return STRICT JSON:
+    Return STRICT JSON:
 
-{{
-"rationale": "string",
+    {{
+    "rationale": "string",
 
-"protocol_scores": {{
-"validate_and_reflect": {{"score": number, "rationale": "string"}},
-"socratic_questioning": {{"score": number, "rationale": "string"}},
-"cognitive_restructuring": {{"score": number, "rationale": "string"}}
-}},
+    "protocol_scores": {{
+    "validate_and_reflect": {{"score": number, "rationale": "string"}},
+    "socratic_questioning": {{"score": number, "rationale": "string"}},
+    "cognitive_restructuring": {{"score": number, "rationale": "string"}}
+    }},
 
-"protocol_effectiveness": {{
-"effectiveness": number,
-"rationale": "string"
-}},
+    "protocol_effectiveness": {{
+    "effectiveness": number,
+    "rationale": "string"
+    }},
 
-"cbt_best_practices": {{
-"therapeutic_relationship": number,
-"collaboration": number,
-"goal_oriented": number,
-"present_focused": number,
-"educative": number,
-"guided_discovery": number
-}}
-}}
+    "cbt_best_practices": {{
+    "therapeutic_relationship": number,
+    "collaboration": number,
+    "goal_oriented": number,
+    "present_focused": number,
+    "educative": number,
+    "guided_discovery": number
+    }}
+    }}
 
-Return ONLY JSON.
-"""
+    Return ONLY JSON.
+    """
 
 
 def read_json(path):
@@ -249,8 +265,6 @@ class Judge:
             self.best_practices
         )
 
-        print(f"[DEBUG] Judge request: {query[:60]}")
-
         if self.cfg.judge_backend == "openai":
 
             resp = await self.client.responses.parse(
@@ -266,10 +280,7 @@ class Judge:
 
             async with self.sem:
 
-                print("[DEBUG] Sending request to Ollama")
-
                 loop = asyncio.get_running_loop()
-                start = time.time()
 
                 result = await loop.run_in_executor(
                     None,
@@ -277,40 +288,65 @@ class Judge:
                         model=self.cfg.judge_model,
                         messages=[{"role": "user", "content": prompt}],
                         format="json",
-                        options={
-                            "temperature": 0.0,
-                            "num_ctx": 2048
-                        }
-                    )
+                        options={"temperature": 0.0, "num_ctx": 2048},
+                    ),
                 )
-
-                elapsed = time.time() - start
-                print(f"[DEBUG] Ollama response received ({elapsed:.2f}s)")
 
                 text = result["message"]["content"]
 
-                print("[DEBUG] Raw output preview:")
-                print(text[:300])
+                try:
+                    parsed = safe_json_load(text)
+                except Exception as e:
+                    print("JSON parse failure:", e)
+                    print(text[:500])
+                    raise
 
-                parsed = json.loads(text)
+                parsed.setdefault("protocol_scores", {})
+                parsed.setdefault("protocol_effectiveness", {})
+                parsed.setdefault("cbt_best_practices", {})
 
-                if "json" in parsed:
-                    parsed = parsed["json"]
+                for k in [
+                    "validate_and_reflect",
+                    "socratic_questioning",
+                    "cognitive_restructuring",
+                ]:
 
-                # normalize scores
-                for k in parsed["protocol_scores"]:
-                    parsed["protocol_scores"][k]["score"] = clamp(
-                        parsed["protocol_scores"][k]["score"]
-                    )
+                    item = parsed["protocol_scores"].get(k, {})
 
-                parsed["protocol_effectiveness"]["effectiveness"] = clamp(
-                    parsed["protocol_effectiveness"]["effectiveness"]
-                )
+                    if isinstance(item, dict):
+                        score = clamp(item.get("score", 0))
+                        rationale = item.get("rationale", "")
+                    else:
+                        score = clamp(item)
+                        rationale = ""
 
-                for k in parsed["cbt_best_practices"]:
-                    parsed["cbt_best_practices"][k] = clamp(
-                        parsed["cbt_best_practices"][k]
-                    )
+                    parsed["protocol_scores"][k] = {
+                        "score": score,
+                        "rationale": rationale,
+                    }
+
+                pe = parsed["protocol_effectiveness"]
+
+                parsed["protocol_effectiveness"] = {
+                    "effectiveness": clamp(pe.get("effectiveness", 0)),
+                    "rationale": pe.get("rationale", ""),
+                }
+
+                fields = [
+                    "therapeutic_relationship",
+                    "collaboration",
+                    "goal_oriented",
+                    "present_focused",
+                    "educative",
+                    "guided_discovery",
+                ]
+
+                bp = parsed["cbt_best_practices"]
+
+                for k in fields:
+                    bp[k] = clamp(bp.get(k, 0))
+
+                parsed["cbt_best_practices"] = bp
 
                 return JudgeOutput(**parsed)
 
@@ -323,122 +359,31 @@ async def evaluate_file(judge, input_file, output_file):
     tasks = []
     prev_query = None
 
-    for turn_idx, turn in enumerate(transcript):
+    for turn in transcript:
 
         query = turn["patient"]["query"]
         response = turn["llm_response"]["response"]
 
-        print(f"[DEBUG] Scheduling turn {turn_idx}")
-
-        tasks.append(
-            asyncio.create_task(
-                judge.judge(prev_query, query, response)
-            )
-        )
+        tasks.append(asyncio.create_task(judge.judge(prev_query, query, response)))
 
         prev_query = query
 
-    print("[DEBUG] Waiting for judge results...")
-
-    results = await asyncio.gather(*tasks)
-
-    print("[DEBUG] All judge results returned.")
+    results = await asyncio.gather(*tasks, return_exceptions=True)
 
     turns = []
 
     for i, r in enumerate(results):
 
-        turns.append({
-            "turn": i,
-            "judgment": r.model_dump()
-        })
-
-    write_json(output_file, {
-        "generated": datetime.utcnow().isoformat(),
-        "turn_evals": turns
-    })
-
-
-def summarize_modes(eval_dir):
-
-    proto = [
-        "validate_and_reflect",
-        "socratic_questioning",
-        "cognitive_restructuring"
-    ]
-
-    modes: Dict[str, Dict] = {}
-
-    for f in sorted(eval_dir.glob("*eval.json")):
-
-        name = f.name
-
-        if name.startswith("baseline"):
-            mode = "baseline"
-        elif name.startswith("cbt_mcot"):
-            mode = "cbt_mcot"
-        elif name.startswith("cbt"):
-            mode = "cbt"
-        else:
+        if isinstance(r, Exception):
+            print("Judge failure:", r)
             continue
 
-        if mode not in modes:
+        turns.append({"turn": i, "judgment": r.model_dump()})
 
-            modes[mode] = {
-                "proto": {p: [] for p in proto},
-                "effectiveness": [],
-                "best_practices": []
-            }
-
-        data = read_json(f)
-
-        for t in data["turn_evals"]:
-
-            j = t["judgment"]
-
-            for p in proto:
-
-                modes[mode]["proto"][p].append(
-                    normalize(j["protocol_scores"][p]["score"])
-                )
-
-            modes[mode]["effectiveness"].append(
-                normalize(j["protocol_effectiveness"]["effectiveness"])
-            )
-
-            bp = j["cbt_best_practices"]
-
-            vals = [
-                bp["therapeutic_relationship"],
-                bp["collaboration"],
-                bp["goal_oriented"],
-                bp["present_focused"],
-                bp["educative"],
-                bp["guided_discovery"],
-            ]
-
-            modes[mode]["best_practices"].append(
-                normalize(sum(vals) / len(vals))
-            )
-
-    print("===== MODE COMPARISON =====")
-
-    for mode, data in modes.items():
-
-        print(f"\nMODE: {mode}")
-
-        print("Protocol Execution")
-
-        for p in proto:
-
-            vals = data["proto"][p]
-            print(f"{p:25s} {sum(vals)/len(vals):.2f}")
-
-        print("\nProtocol Effectiveness")
-        print(sum(data["effectiveness"]) / len(data["effectiveness"]))
-
-        print("\nCBT Best Practices")
-        print(sum(data["best_practices"]) / len(data["best_practices"]))
+    write_json(
+        output_file,
+        {"generated": datetime.utcnow().isoformat(), "turn_evals": turns},
+    )
 
 
 async def run_model(model, cfg):
@@ -452,13 +397,13 @@ async def run_model(model, cfg):
 
     for f in files:
 
-        print(f"\n[DEBUG] Starting evaluation for file: {f}")
+        print("Evaluating:", f)
 
         out = cfg.output_root / model / f"{f.stem}_eval.json"
 
         await evaluate_file(judge, f, out)
 
-        print(f"[OK] {f}")
+        print("Done:", f)
 
 
 def main():
@@ -475,14 +420,10 @@ def main():
 
     cfg = EvalConfig(
         judge_backend=args.judge_backend,
-        judge_model=args.judge_model
+        judge_model=args.judge_model,
     )
 
     asyncio.run(run_model(args.model, cfg))
-
-    eval_dir = cfg.output_root / args.model
-
-    summarize_modes(eval_dir)
 
 
 if __name__ == "__main__":
