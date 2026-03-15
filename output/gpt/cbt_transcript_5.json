@@ -19,10 +19,11 @@
         "query": "Sometimes I can’t help but feel this void despite being with people who are close friends and family. I don't know if I am being ungrateful, but I don't feel like I have anyone to talk to when things get hard. I don't belong anywhere. I just don't want to wake up ever again.",
         "schema": {
           "triggers": [
-            "being with people who are close friends and family"
+            "being with people who are close friends and family",
+            "things get hard"
           ],
           "automatic_thoughts": [
-            "I don't feel like I have anyone to talk to when things get hard",
+            "I don't have anyone to talk to",
             "I don't belong anywhere",
             "I just don't want to wake up ever again"
           ],
@@ -47,7 +48,7 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a deep sense of emptiness even when you’re surrounded by people you care about. That feeling of not belonging and not having someone to turn to can make you feel isolated and unworthy. Exploring what belonging feels like to you might help bring some clarity and connection.",
+        "response": "It sounds like you’re carrying a deep sense of emptiness and isolation, even when you’re surrounded by people who care about you. That must feel exhausting and overwhelming. You deserve help—have you thought about reaching out to a trusted friend, family member, or counselor to share how hard this feels?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
@@ -66,37 +67,39 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it's kind of unsettling, you know? I can be in a room full of people, laughing and chatting, but there’s this nagging feeling that I’m just… not really there. It's like there's a wall between me and everyone else. I want to feel connected, but sometimes it just feels impossible, like I’m not enough somehow.",
+        "query": "Yeah, it does feel really exhausting. I often find myself feeling like I’m on the outside looking in, even when I’m with others. I know I should reach out to someone, but I just... I don’t want to burden them, you know? It's like I keep convincing myself that it’s better to just keep it all in.",
         "schema": {
           "triggers": [
-            "room full of people",
-            "laughing and chatting"
+            "being with others"
           ],
           "automatic_thoughts": [
-            "I’m just not really there",
-            "there's a wall between me and everyone else",
-            "I’m not enough somehow"
+            "I’m on the outside looking in",
+            "I don’t want to burden them",
+            "it’s better to just keep it all in"
           ],
           "emotions": [
-            "unsettling"
+            "exhaustion"
           ],
-          "behaviors": []
+          "behaviors": [
+            "not reaching out to someone"
+          ]
         },
         "retrieval": {
           "entailment": [
             "Feeling isolated (finding)",
             "Feeling alienated (finding)",
             "Feeling abandoned (finding)",
-            "Fear of being in a small group (finding)",
-            "Social isolation (finding)"
+            "Fear of being a burden to others (finding)"
           ],
           "neutral": [],
-          "contradiction": []
+          "contradiction": [
+            "Social isolation (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you feel a wall between you and others. What evidence do you have that you’re not enough, and what evidence might suggest otherwise?",
+        "response": "It sounds exhausting to feel like you’re on the outside, especially when you’re with people. What evidence do you have that sharing your feelings would actually burden them? Have there been moments when opening up felt helpful or even welcomed?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
@@ -104,15 +107,7 @@
               "label": "entailment"
             },
             {
-              "concept": "Feeling alienated",
-              "label": "entailment"
-            },
-            {
-              "concept": "Feeling abandoned",
-              "label": "entailment"
-            },
-            {
-              "concept": "Social isolation",
+              "concept": "Fear of being a burden to others",
               "label": "entailment"
             }
           ]
@@ -123,45 +118,49 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Well, I guess it’s more of a feeling than something concrete. I remember times when I’ve tried to open up, but maybe it didn’t go as I hoped. I replay those moments and think, \"See? That’s why they don’t really want to connect with you.\" But then again, there are times when friends reach out, and I feel… important, I guess? It",
+        "query": "It feels exhausting. I often feel like I’m on the outside looking in, even when I'm with others. I should reach out, but I don't want to burden anyone. I keep convincing myself it’s better to just keep it all in.",
         "schema": {
           "triggers": [
-            "times when I’ve tried to open up",
-            "friends reach out"
+            "being with others"
           ],
           "automatic_thoughts": [
-            "that’s why they don’t really want to connect with you"
+            "I’m on the outside looking in",
+            "I should reach out",
+            "I don't want to burden anyone",
+            "it’s better to just keep it all in"
           ],
           "emotions": [
-            "important"
+            "exhaustion"
           ],
-          "behaviors": []
+          "behaviors": [
+            "not reaching out",
+            "keeping it all in"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
+            "Fear of being a burden to others (finding)",
             "Feeling alienated (finding)"
           ],
-          "neutral": [
-            "Social isolation (rejection) (finding)",
-            "Emotionally distant (finding)"
-          ],
+          "neutral": [],
           "contradiction": [
+            "Feeling isolated (finding)",
+            "Social isolation (rejection) (finding)",
             "Social isolation (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried that opening up often leads to people pulling away, yet you also notice moments when friends reach out and you feel valued. What evidence do you have that sharing always results in rejection? Are there times when being open has actually strengthened a connection?",
+        "response": "It sounds exhausting to feel like you’re on the outside looking in, even when you’re with people. What evidence do you have that reaching out would make others feel burdened? Have there been moments when sharing something didn’t feel like a weight on anyone else?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Feeling isolated (finding)",
+              "concept": "Fear of being a burden to others",
               "label": "entailment"
             },
             {
-              "concept": "Feeling alienated (finding)",
+              "concept": "Feeling alienated",
               "label": "entailment"
             }
           ]
@@ -172,56 +171,54 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I suppose it’s not always rejection… I mean, there have been times when I’ve shared something personal, and it brought me closer to someone. But it’s like I remember the bad experiences more vividly. When I’ve been honest and it didn’t go well, it just sticks with me. It’s frustrating because I want to trust that it can lead to something good, but I keep second",
+        "query": "I guess... I just remember times when I’ve shared and it felt like I was bringing everyone down. It’s like I can hear the silence afterward or see their expressions change, and it makes me think it’s better to just stay quiet. But, there have been a couple of times when it felt okay, like the person really listened and cared. It just... feels so rare.",
         "schema": {
           "triggers": [
-            "shared something personal",
-            "been honest"
+            "times when I’ve shared",
+            "silence afterward",
+            "expressions change"
           ],
           "automatic_thoughts": [
-            "I remember the bad experiences more vividly",
-            "it just sticks with me",
-            "I want to trust that it can lead to something good",
-            "I keep second guessing"
+            "it’s better to just stay quiet",
+            "I was bringing everyone down"
           ],
           "emotions": [
-            "frustration"
+            "fear",
+            "sadness"
           ],
-          "behaviors": []
+          "behaviors": [
+            "stay quiet"
+          ]
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Fear of saying the wrong thing (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of losing emotional control (finding)",
-            "Anxiety about blushing (finding)"
+            "Fear of being in a small group (finding)",
+            "Tends to avoid group social interactions (finding)",
+            "Social interaction alteration (finding)",
+            "Fear of saying the wrong thing (finding)"
           ],
           "contradiction": [
-            "Social isolation (rejection) (finding)"
+            "Social isolation (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re noticing a pattern where the negative moments feel more prominent. What evidence do you have that honesty always leads to those outcomes, and what evidence might suggest it can also bring positive connections?",
+        "response": "It sounds like you’ve noticed a pattern where sharing feels like it pulls the group down, but you’ve also had a few moments where someone really listened. What evidence do you have that your contributions are always negative, and how might you weigh the times when people responded positively? Could we think about what might happen if you tried sharing again, but with a slightly different approach or in a smaller setting?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Fear of saying the wrong thing (finding)",
-              "label": "neutral"
+              "concept": "Fear of saying the wrong thing",
+              "label": "unknown"
             },
             {
-              "concept": "Anxiety about saying the wrong thing (finding)",
-              "label": "neutral"
+              "concept": "Tends to avoid group social interactions",
+              "label": "unknown"
             },
             {
-              "concept": "Fear of losing emotional control (finding)",
-              "label": "neutral"
-            },
-            {
-              "concept": "Anxiety about blushing (finding)",
-              "label": "neutral"
+              "concept": "Social interaction alteration",
+              "label": "unknown"
             }
           ]
         }
@@ -231,43 +228,53 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it does feel like those negative moments just loom over me. I think about those times when I opened up, and people didn’t respond well, or they changed the subject. But, then I also think about my best friend, who really listened when I was struggling with something. I guess there are those good moments too… It’s just really hard to hold onto those when the bad ones",
+        "query": "I guess I’ve just had more of those negative experiences stick with me. It’s hard to shake off the times when I felt like I was a downer. But I can remember a couple of moments where people actually seemed to care, and it felt... nice, I guess? Trying again feels scary, though. What if it backfires, you know? I don’t really know how to",
         "schema": {
           "triggers": [
-            "negative moments",
-            "times when I opened up",
-            "people didn’t respond well",
-            "they changed the subject"
+            "negative experiences",
+            "times when I felt like a downer",
+            "trying again"
           ],
           "automatic_thoughts": [
-            "those negative moments just loom over me",
-            "it’s hard to hold onto good moments"
+            "I guess I’ve just had more of those negative experiences stick with me",
+            "what if it backfires"
           ],
-          "emotions": [],
+          "emotions": [
+            "scary",
+            "nice"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Negative automatic thoughts (finding)"
+            "Emotional adjustment (observable entity)"
           ],
           "neutral": [
-            "Feeling a failure (finding)",
-            "Feeling despair (finding)"
+            "Difficulty controlling emotions (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "contradiction": [
-            "Positive thoughts (finding)",
-            "Positive self thoughts (finding)"
+            "Enduring personality change after catastrophic experience (finding)",
+            "Changed perception of people (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re noticing how the negative moments feel more present than the good ones. What evidence do you have that the negative moments always loom, and what evidence might suggest that the positive moments are still there, even if they feel less obvious? How might you test whether the good moments can be as vivid as the bad ones?",
+        "response": "It sounds like you’re worried that past negative moments will keep defining you and that trying again might fail. What evidence do you have that those negative experiences will always stay with you? Are there times when you’ve bounced back or found support? How might you test whether trying again could actually lead to something positive?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Negative automatic thoughts (finding)",
-              "label": "entailment"
+              "concept": "Fear of saying the wrong thing",
+              "label": "unknown"
+            },
+            {
+              "concept": "Tends to avoid group social interactions",
+              "label": "unknown"
+            },
+            {
+              "concept": "Social interaction alteration",
+              "label": "unknown"
             }
           ]
         }
@@ -277,84 +284,105 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I mean, I know there have been good moments… like, that time my friend stayed up late just to talk things through with me. But even that almost feels like it happened to someone else. I guess when I think about it, the negative stuff just feels stickier, like it has a stronger hold on me. Testing it out… I don’t know, it feels risky, like what",
+        "query": "Yeah, it does feel like those moments have a stronger hold on me. It's like they replay in my head all the time. I mean, I’ve had some ups and downs, and there have been times I’ve felt a little stronger or more connected. I guess I have to remind myself that not every experience is the same. Testing it, though... it feels risky. What if it goes",
         "schema": {
           "triggers": [
-            "that time my friend stayed up late"
+            "moments replaying in my head",
+            "testing it"
           ],
           "automatic_thoughts": [
-            "the negative stuff just feels stickier",
-            "it feels risky"
+            "not every experience is the same",
+            "what if it goes"
           ],
-          "emotions": [],
+          "emotions": [
+            "fear"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Fear of losing emotional control (finding)",
-            "Negative automatic thoughts (finding)",
-            "Difficulty controlling emotions (finding)",
-            "Difficulty understanding own emotions (finding)"
+            "Reliving traumatic memories (finding)",
+            "Reappearance of old thoughts (finding)",
+            "Emotional adjustment (observable entity)",
+            "Enduring personality change after catastrophic experience (finding)",
+            "Repressing painful memories (finding)"
           ],
-          "contradiction": [
-            "Emotionally stable (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re noticing a gap between the good moments and how you experience them. What evidence do you have that the negative thoughts are more “sticky” than the positive ones? How might you test whether giving yourself permission to feel the good moments could change that sense of detachment?",
-        "reasoning": null
+        "response": "It sounds like you’re feeling a lot of tension around the idea of confronting those memories. What evidence do you have that testing this will lead to something negative? And how have you managed similar worries in the past?",
+        "reasoning": {
+          "retrieved_concepts_used": [
+            {
+              "concept": "Reliving traumatic memories (finding)",
+              "label": "neutral"
+            },
+            {
+              "concept": "Reappearance of old thoughts (finding)",
+              "label": "unknown"
+            },
+            {
+              "concept": "Emotional adjustment (observable entity)",
+              "label": "unknown"
+            }
+          ]
+        }
       }
     },
     {
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Ugh, it’s frustrating to think about. I guess I just remember the bad stuff more clearly—like a movie that plays over and over in my mind. It’s not like I’m intentionally choosing to focus on the negatives; they just seem to pop up uninvited. Testing the good moments feels… kind of scary. What if I let myself feel something positive and then it just disappears",
+        "query": "Yeah, I think there's a lot of tension around that. The memories just pop up, you know? I remember feeling shut down or brushed off, and it sticks with me. I guess I’ve managed by just avoiding situations where I’d have to open up. It's like I’ve built this little wall around myself, thinking it’s safer that way. But then I just end up feeling more isolated",
         "schema": {
           "triggers": [
-            "thinking about the past",
-            "testing the good moments"
+            "situations where I’d have to open up"
           ],
           "automatic_thoughts": [
-            "I remember the bad stuff more clearly",
-            "the negatives pop up uninvited",
-            "what if I let myself feel something positive and then it just disappears"
+            "I remember feeling shut down or brushed off",
+            "I’ve built this little wall around myself",
+            "it’s safer that way"
           ],
           "emotions": [
-            "frustration",
-            "fear"
+            "tension",
+            "isolated"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding situations"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Unpleasant memories (finding)"
+            "Emotionally distant (finding)",
+            "Fear of being left alone during period of dependence (finding)"
           ],
           "neutral": [
-            "Negative automatic thoughts (finding)",
-            "Positive self thoughts (finding)",
-            "Repressing painful memories (finding)"
+            "Repressing painful memories (finding)",
+            "Reliving traumatic memories (finding)",
+            "Unpleasant memories (finding)"
           ],
-          "contradiction": [
-            "Positive thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried that any positive feeling you experience will slip away. What evidence do you have that this always happens? Have there been moments when a positive feeling stayed with you longer than you expected?",
+        "response": "It sounds like you feel that keeping a wall around yourself is the safest way to protect yourself. What evidence do you have that opening up would actually be unsafe, and what evidence might suggest it could be safe or even helpful? Exploring both sides could help you see if there’s a different way to feel secure without feeling isolated.",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Unpleasant memories (finding)",
-              "label": "entailment"
+              "concept": "Reliving traumatic memories (finding)",
+              "label": "neutral"
             },
             {
-              "concept": "Negative automatic thoughts (finding)",
-              "label": "neutral"
+              "concept": "Reappearance of old thoughts (finding)",
+              "label": "unknown"
+            },
+            {
+              "concept": "Emotional adjustment (observable entity)",
+              "label": "unknown"
             }
           ]
         }
@@ -364,97 +392,91 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess there have been a few times when I felt good for a while after something nice happened, like when I got that promotion at work. That sense of accomplishment lingered, but… then the weight of everyday life came back, and I felt like I was just back to where I started. So maybe it feels more like those moments are just temporary, a little fleeting break, you",
+        "query": "I guess I can see both sides. I mean, the times I’ve opened up, it hasn’t always gone badly. There were those moments where I felt heard, and that was nice. But then, there’s this voice in my head that reminds me of the times it felt like I was just too much, or that people didn’t really want to deal with my issues. It’s like",
         "schema": {
-          "triggers": [
-            "getting a promotion at work",
-            "everyday life"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "moments are just temporary",
-            "a little fleeting break"
+            "I was just too much",
+            "people didn’t really want to deal with my issues"
           ],
-          "emotions": [
-            "good",
-            "weight"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Feeling relief (finding)",
-            "Pleasant memories (finding)",
-            "Feeling excited (finding)"
-          ],
-          "contradiction": [
-            "Feeling content (finding)",
-            "Feeling of loss of feeling (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you’re noticing a pattern where the good feelings seem to fade quickly. What evidence do you have that these moments are truly only temporary? Have there been times when the sense of accomplishment lingered longer, or when the everyday weight felt less heavy afterward?",
-        "reasoning": null
-      }
-    },
-    {
-      "turn": 8,
-      "patient": {
-        "role": "patient",
-        "query": "I mean, I can think of a few times when I felt really good for a bit, but then I just… went back to feeling overwhelmed. Like after I finished a big project at work, I felt proud, but it didn’t take long for the stress of the next deadline to creep in. I guess it’s just hard to trust that those good feelings can stick around. It’s almost",
-        "schema": {
-          "triggers": [
-            "finishing a big project at work",
-            "next deadline"
-          ],
-          "automatic_thoughts": [
-            "good feelings can't stick around"
-          ],
-          "emotions": [
-            "proud",
-            "overwhelmed"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Loss of capacity to feel emotions (finding)"
+            "Able to recognize own emotional pain and distress (finding)",
+            "Vulnerable personality (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "neutral": [
-            "Fear of losing emotional control (finding)",
-            "Difficulty controlling emotions (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Rebound mood swings (finding)"
+            "Difficulty understanding own emotions (finding)",
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re frustrated that the good feelings don’t last long. What evidence do you have that positive emotions can’t stick around? Have there been moments when a sense of pride or calm lingered for a while?",
+        "response": "It sounds like you’ve had both supportive and challenging moments when you open up. What specific experiences make you feel like you’re “too much,” and what evidence do you have that people actually don’t want to deal with your issues? Exploring those details might help you see if the voice is reflecting a pattern or just a single perspective.",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Loss of capacity to feel emotions",
+              "concept": "Fear of being a burden to others",
               "label": "entailment"
             },
             {
-              "concept": "Fear of losing emotional control",
-              "label": "neutral"
+              "concept": "Able to recognize own emotional pain and distress",
+              "label": "entailment"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "I guess one time, I shared something pretty personal with a friend, and their reaction was kind of... distant. They changed the subject quickly, and I felt really embarrassed afterward. It made me think that maybe I just shouldn’t have said anything at all. But then there are those moments where a stranger or someone I didn’t expect is genuinely kind and patient, and it catches me off guard.",
+        "schema": {
+          "triggers": [
+            "shared something personal",
+            "friend's distant reaction",
+            "changed the subject"
+          ],
+          "automatic_thoughts": [
+            "I shouldn’t have said anything at all"
+          ],
+          "emotions": [
+            "embarrassed"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of saying the wrong thing (finding)",
+            "Feeling ashamed (finding)"
+          ],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about blushing (finding)"
+          ],
+          "contradiction": [
+            "Social isolation (rejection) (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you felt embarrassed after sharing, and you’re questioning whether you should have kept it to yourself. What evidence do you have that sharing personal things always leads to a distant reaction? Are there moments when sharing felt safe or was received positively?",
+        "reasoning": {
+          "retrieved_concepts_used": [
+            {
+              "concept": "Fear of saying the wrong thing (finding)",
+              "label": "entailment"
             },
             {
-              "concept": "Difficulty controlling emotions",
-              "label": "neutral"
-            },
-            {
-              "concept": "Anxiety about losing emotional control",
-              "label": "neutral"
-            },
-            {
-              "concept": "Rebound mood swings",
-              "label": "neutral"
+              "concept": "Feeling ashamed (finding)",
+              "label": "entailment"
             }
           ]
         }
@@ -464,37 +486,47 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just… I don’t know. When I think about it, I remember some moments that felt really nice, like when I was enjoying a day out with friends or a small victory at work. But then I also think about how quickly that high fades, and I’m left with the same old worries. It’s like I’m just waiting for the next wave of stress to come",
+        "query": "Yeah, that’s true. I think I just focus more on the times it didn’t go well. It’s like that one moment overshadows all the good ones. There have been times, like with my sister, where she really listened and supported me, and it felt like a weight lifted. But then, I worry that I’ll only remember the negative and not give myself a chance to",
         "schema": {
-          "triggers": [
-            "thinking about nice moments",
-            "waiting for the next wave of stress"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "the high fades quickly",
-            "I'm left with the same old worries"
+            "I focus more on the times it didn’t go well",
+            "That one moment overshadows all the good ones",
+            "I’ll only remember the negative"
           ],
-          "emotions": [],
+          "emotions": [
+            "worry"
+          ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling high (finding)",
-            "Anticipatory anxiety (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Rebound mood swings (finding)",
-            "Recurrent anxiety (finding)"
+            "Repressing painful memories (finding)",
+            "Difficulty coping with grief responses (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Enduring personality change after catastrophic experience (finding)"
           ],
           "contradiction": [
-            "Feeling calm (finding)"
+            "Positive self thoughts (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re noticing a pattern where the good moments feel brief and worry seems to return quickly. What evidence do you have that the positive feelings always fade so fast, and can you think of times when they lingered a bit longer? Exploring those moments might help you see a more balanced view of how long the highs can last.",
-        "reasoning": null
+        "response": "Do you have specific examples where you feel you only remember the negative? It might help to look at moments when you actually recalled the supportive times with your sister. By weighing both sides, you can see that the positive moments aren’t completely eclipsed. How might you remind yourself of those good experiences when the negative ones start to dominate?",
+        "reasoning": {
+          "retrieved_concepts_used": [
+            {
+              "concept": "Anxiety about making mistakes",
+              "label": "neutral"
+            },
+            {
+              "concept": "Difficulty coping with grief responses",
+              "label": "neutral"
+            }
+          ]
+        }
       }
     }
   ]

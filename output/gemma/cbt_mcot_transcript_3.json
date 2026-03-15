@@ -19,15 +19,14 @@
         "query": "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way.",
         "schema": {
           "triggers": [
-            "being around people"
+            "around people"
           ],
           "automatic_thoughts": [
-            "I feel lonely",
             "I get annoyed at myself for feeling that way"
           ],
           "emotions": [
-            "loneliness",
-            "annoyance"
+            "lonely",
+            "annoyed"
           ],
           "behaviors": []
         },
@@ -46,13 +45,54 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're experiencing a really difficult conflict – wanting to connect with others, but feeling lonely even when you are, and then adding frustration on top of that. That must be a disheartening experience. Can you tell me a little more about what's going through your mind when you notice yourself feeling lonely in those situations?",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you're experiencing a really difficult conflict – wanting connection while feeling isolated, and then criticizing yourself for that feeling. What do you think might be contributing to that sense of disconnect even when you're with others? Perhaps exploring that a little further could help us understand what's happening.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're experiencing a really difficult conflict – wanting to connect with others, but feeling lonely even when you are, and then adding frustration on top of that. That must be a disheartening experience. Can you tell me a little more about what's going through your mind when you notice yourself feeling lonely in those situations?",
-          "socratic_questioning": "That sounds like a really difficult and frustrating experience. What do you think it means when you feel lonely even when you're with others? Perhaps exploring that a bit further could help shed some light on what's going on.",
-          "cognitive_restructuring": "It sounds like you're experiencing a really difficult conflict – wanting to feel connected, but feeling lonely even when you're with others, and then adding frustration on top of that. What makes you think you *shouldn't* be feeling lonely in those situations?"
+          "validate_and_reflect": {
+            "response": "It sounds like you're experiencing a really difficult conflict – wanting connection while feeling isolated, and then feeling frustrated with yourself for feeling that way. That must be a painful place to be. Let's explore what might be contributing to this sense of loneliness even when you're with others.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're experiencing a really difficult conflict – wanting connection while feeling isolated, and then criticizing yourself for that feeling. What do you think might be contributing to that sense of disconnect even when you're with others? Perhaps exploring that a little further could help us understand what's happening.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're experiencing a really difficult conflict – wanting connection while feeling isolated, and then criticizing yourself for that feeling. It’s understandable that you’d be annoyed when you don’t feel the connection you desire, even when surrounded by others. Let’s explore what might be contributing to that sense of disconnect.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -60,46 +100,85 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s really frustrating. I mean, I’m around people, but it often feels like I’m just... there, you know? I start to think maybe I'm not interesting enough or that I don't belong. It’s like I can see everyone connecting, and I just feel invisible. It’s hard not to spiral into feeling worthless or like I’ll always be alone.",
+        "query": "Yeah, I guess it does feel like a conflict sometimes. It’s like, even when I’m around people, I still feel... sort of like an outsider. I think there are times when I feel like I’m not really being myself, and then I end up feeling this pressure to fit in or to be someone I'm not. It just makes me feel more alone.",
         "schema": {
           "triggers": [
             "being around people"
           ],
           "automatic_thoughts": [
-            "I'm not interesting enough",
-            "I don't belong",
-            "I feel invisible"
+            "I feel like an outsider",
+            "I'm not really being myself",
+            "I have to fit in",
+            "I have to be someone I'm not"
           ],
           "emotions": [
-            "frustration",
-            "worthlessness",
-            "loneliness"
+            "alone"
           ],
-          "behaviors": [
-            "spiraling into negative thoughts"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
             "Feeling isolated (finding)",
             "Feeling alienated (finding)",
-            "Feeling abandoned (finding)",
-            "Feeling lonely (finding)",
-            "Feeling unwanted (finding)"
+            "Feeling unwanted (finding)",
+            "Disorientation as to self (finding)"
           ],
-          "neutral": [],
+          "neutral": [
+            "Fear of being in a small group (finding)"
+          ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're experiencing a real sense of disconnection, and it's understandable that you'd feel frustrated when you're surrounded by others but still feel unseen. What makes you believe you're not interesting enough to connect with the people around you?",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you're experiencing a real struggle between wanting to connect with others and feeling like you have to change who you are to do so. What makes you feel like you’re not being yourself when you’re with people? Perhaps exploring that a little further could help clarify what’s happening.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds incredibly disheartening to be in a room full of people and still feel so disconnected. It takes courage to acknowledge those feelings of invisibility and the worry that you might not belong – it’s understandable that you’d feel frustrated and lonely. Let's explore what's contributing to these thoughts a little more.",
-          "socratic_questioning": "It sounds incredibly disheartening to feel disconnected even when you're surrounded by others. What makes you think you're not interesting enough to connect with the people around you? Can you think of times when you *did* feel seen or connected?",
-          "cognitive_restructuring": "It sounds incredibly painful to feel disconnected even when you're surrounded by others. What makes you believe that you aren't interesting enough to connect with the people around you? Let’s explore that thought a bit more closely."
+          "validate_and_reflect": {
+            "response": "It sounds incredibly difficult to feel disconnected even when you're surrounded by others. It takes courage to recognize that pressure to conform and acknowledge the sense of not being your true self – that’s a lot to carry. Let’s explore what it means to you to \"fit in\" and what that looks like in those situations.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Disorientation as to self (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're experiencing a real struggle between wanting to connect with others and feeling like you have to change who you are to do so. What makes you feel like you’re not being yourself when you’re with people? Perhaps exploring that a little further could help clarify what’s happening.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Disorientation as to self (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're caught between wanting to connect with others and feeling like you have to change who you are to do so. What makes you believe that you *have* to be someone else to fit in? Perhaps we can explore whether that’s always true, or if there's another way to approach these situations.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Disorientation as to self (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -107,345 +186,23 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I guess I just think I have nothing special to offer. I see how engaging others can be, and I just... don’t feel like I have that spark. Sometimes I worry that if I open up, people will just tune out or maybe even pity me. It’s easier to stay quiet than to risk that disappointment.",
+        "query": "Yeah, I guess that’s true. Sometimes I just feel this need to say what I think people want to hear, or I worry about how they’ll react to me. Like, if I share something personal, I fear they’ll judge me or think I’m weird. So instead, I just put on a smile and go along with whatever. But inside, it feels... heavy, you know",
         "schema": {
           "triggers": [
-            "engaging with others",
-            "opening up"
+            "worry about how they’ll react",
+            "sharing something personal"
           ],
           "automatic_thoughts": [
-            "I have nothing special to offer",
-            "people will tune out or pity me",
-            "it's easier to stay quiet"
-          ],
-          "emotions": [
-            "worry",
-            "disappointment"
-          ],
-          "behaviors": [
-            "stay quiet"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Minimal outside social stimulation (finding)"
-          ],
-          "neutral": [
-            "Feeling isolated (finding)",
-            "Introvert (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Feeling alienated (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're noticing a pattern of holding back, and you've identified a core concern about what others might think. What makes you believe that you have nothing special to offer in these interactions? Can you think of a time when you felt you did contribute something valuable, even in a small way?",
-        "reasoning": null,
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're experiencing a real sense of disappointment and vulnerability when you consider connecting with others. It takes courage to acknowledge those fears about how you might be perceived, and it’s understandable that you’d want to protect yourself from potential hurt. Perhaps we can explore what makes you feel that way.",
-          "socratic_questioning": "It sounds like you're noticing a pattern of holding back, and you've identified a core concern about what others might think. What makes you believe that you have nothing special to offer in these interactions? Can you think of a time when you felt you did contribute something valuable, even in a small way?",
-          "cognitive_restructuring": "It sounds like you're concerned that sharing yourself might lead to negative reactions from others. What makes you believe that you have nothing special to offer—is there a specific experience or pattern that leads you to that conclusion? Perhaps we could explore that a bit further."
-        }
-      }
-    },
-    {
-      "turn": 3,
-      "patient": {
-        "role": "patient",
-        "query": "I don’t know… it’s just always been that way for me. I remember once sharing a story with a couple of friends, and they laughed, but I freaked out afterward, thinking maybe it wasn’t that funny, or they were just being nice. So, it’s hard to trust that I could bring anything valuable to the table. I keep telling myself it was just luck or that",
-        "schema": {
-          "triggers": [
-            "sharing a story with friends",
-            "friends laughed"
-          ],
-          "automatic_thoughts": [
-            "maybe it wasn’t that funny",
-            "they were just being nice",
-            "I could bring anything valuable to the table",
-            "it was just luck"
-          ],
-          "emotions": [
-            "anxiety"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of being laughed at (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of saying the wrong thing (finding)"
-          ],
-          "neutral": [
-            "Fear of public speaking (finding)",
-            "Fear of writing in public (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you've carried this worry for a while, and that experience with your friends really reinforced those doubts. It makes sense that you'd question whether your contributions are genuinely valued when you've had moments like that. Let's explore what's behind this feeling a little more.",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you've carried this worry for a while, and that experience with your friends really reinforced those doubts. It makes sense that you'd question whether your contributions are genuinely valued when you've had moments like that. Let's explore what's behind this feeling a little more.",
-          "socratic_questioning": "It sounds like that experience really shook your confidence. What makes you think your friends might have been just being nice, rather than genuinely enjoying your story? Perhaps exploring that thought a bit further could help you understand what's behind it.",
-          "cognitive_restructuring": "It sounds like you’re really questioning whether your contributions are genuinely valued, and that can be a tough feeling to shake. What makes you think that their laughter necessarily meant you weren’t funny, or that you had to worry about whether they were just being polite? Perhaps there's another explanation for their reaction."
-        }
-      }
-    },
-    {
-      "turn": 4,
-      "patient": {
-        "role": "patient",
-        "query": "I don’t know… it’s just always been that way for me. I remember once sharing a story with a couple of friends, and they laughed, but I freaked out afterward, thinking maybe it wasn’t that funny or they were just being nice. I keep telling myself it was just luck or that I got lucky that one time. I don’t really believe I could do it again.",
-        "schema": {
-          "triggers": [
-            "sharing a story with friends",
-            "friends laughed"
-          ],
-          "automatic_thoughts": [
-            "maybe it wasn’t that funny",
-            "they were just being nice",
-            "it was just luck",
-            "I got lucky that one time",
-            "I don’t really believe I could do it again"
-          ],
-          "emotions": [
-            "anxiety"
-          ],
-          "behaviors": [
-            "freaked out"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of being laughed at (finding)"
-          ],
-          "neutral": [
-            "Humor - mental defense mechanism (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Hears voices laughing at self (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're really struggling with a pattern of self-doubt after these experiences. What makes you think that their laughter meant you weren't genuinely funny, or that it was just a fluke? Can you think of any times when their laughter might have indicated they genuinely enjoyed what you said?",
-        "reasoning": null,
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're carrying a lot of worry about how others perceive you, and that this has been a pattern for a while. It makes sense that you'd feel anxious when you're unsure if people genuinely connect with what you're sharing. Perhaps we can explore where this worry comes from and how it impacts you.",
-          "socratic_questioning": "It sounds like you're really struggling with a pattern of self-doubt after these experiences. What makes you think that their laughter meant you weren't genuinely funny, or that it was just a fluke? Can you think of any times when their laughter might have indicated they genuinely enjoyed what you said?",
-          "cognitive_restructuring": "It sounds like you're really questioning whether your experiences are genuine or just a matter of chance. What makes you think it was just luck, and what would it mean if it wasn't? Perhaps we can explore what evidence you have to support those beliefs."
-        }
-      }
-    },
-    {
-      "turn": 5,
-      "patient": {
-        "role": "patient",
-        "query": "I guess... I don't know, maybe I think it’s easier to believe it was just a fluke. It protects me from feeling like I might fail again. It's like if I don’t let myself hope, then I won’t get hurt. But yeah, there have been moments when I saw them genuinely smiling. I just can't shake the feeling that it’s all just a mask, you know",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "it’s easier to believe it was just a fluke",
-            "I might fail again",
-            "if I don’t let myself hope, then I won’t get hurt",
-            "it’s all just a mask"
-          ],
-          "emotions": [],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Smiling (finding)",
-            "Idealization - mental defense mechanism (finding)",
-            "Feeling mixed emotions (finding)"
-          ],
-          "neutral": [
-            "Anxiety about appearing ridiculous (finding)",
-            "Fear of being laughed at (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're trying to navigate a really difficult balance between protecting yourself and acknowledging what you're experiencing. What makes you think it’s easier to dismiss the positive moments as a fluke? And what would it mean for you if you allowed yourself to consider that maybe, just maybe, those smiles were real?",
-        "reasoning": null,
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're trying to manage a difficult feeling of vulnerability by downplaying positive experiences and bracing yourself for potential disappointment. It takes courage to acknowledge that protecting yourself can sometimes feel like a heavy burden. Perhaps we can explore what it would take to allow yourself to experience those moments of genuine connection without the fear of future hurt?",
-          "socratic_questioning": "It sounds like you're trying to navigate a really difficult balance between protecting yourself and acknowledging what you're experiencing. What makes you think it’s easier to dismiss the positive moments as a fluke? And what would it mean for you if you allowed yourself to consider that maybe, just maybe, those smiles were real?",
-          "cognitive_restructuring": "It sounds like you're trying to manage a lot of vulnerability right now. What makes you think that believing it was a fluke is actually protective? Perhaps we could explore what would be different if you allowed yourself to consider the possibility that it wasn't just a fluke."
-        }
-      }
-    },
-    {
-      "turn": 6,
-      "patient": {
-        "role": "patient",
-        "query": "I guess... I don’t know, maybe I think it’s easier to believe it was just a fluke. If I don’t let myself hope, then I won’t get hurt. But there have been moments when they were genuinely smiling, and I can’t shake the feeling it’s all just a mask. It’s hard to believe it’s real.",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "maybe I think it’s easier to believe it was just a fluke",
-            "if I don’t let myself hope, then I won’t get hurt",
-            "I can’t shake the feeling it’s all just a mask",
-            "it’s hard to believe it’s real"
-          ],
-          "emotions": [],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Delusion concerning appearance (finding)",
-            "Smiling (finding)",
-            "Tends to exaggerate emotional expression inappropriately (finding)",
-            "Delusion of own appearance (finding)"
-          ],
-          "neutral": [
-            "Fear of appearing ridiculous (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're caught between wanting to believe something positive and a deep fear of disappointment. It makes sense that you'd try to protect yourself by dismissing it as a fluke, but you're also noticing moments that suggest something more might be happening. What do you think is driving that need to protect yourself?",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're caught between wanting to believe something positive and a deep fear of disappointment. It makes sense that you'd try to protect yourself by dismissing it as a fluke, but you're also noticing moments that suggest something more might be happening. What do you think is driving that need to protect yourself?",
-          "socratic_questioning": "It sounds like you're caught between wanting to believe something positive and a deep worry about being disappointed. What makes you think it might be a fluke, and what would need to be true for you to feel more confident in what you're experiencing?",
-          "cognitive_restructuring": "It sounds like you're caught between wanting to believe something positive and a worry that it might not be genuine. What makes you think it might be a fluke, and what evidence do you have that contradicts that thought? Perhaps exploring those different perspectives could help you feel more grounded."
-        }
-      }
-    },
-    {
-      "turn": 7,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it’s like… I’ve been let down before, you know? Feeling like I’m not enough for people or that they’re just humoring me. It’s just safer to keep my distance and not really engage. I guess I don’t want to risk being vulnerable and getting hurt again. It’s tough to break out of that cycle.",
-        "schema": {
-          "triggers": [
-            "being let down",
-            "feeling not enough",
-            "humoring me",
-            "risking vulnerability",
-            "getting hurt"
-          ],
-          "automatic_thoughts": [
-            "it's safer to keep my distance",
-            "I don't want to risk being vulnerable"
+            "they’ll judge me",
+            "they'll think I’m weird"
           ],
           "emotions": [
             "fear",
-            "hurt",
-            "tough"
+            "heavy"
           ],
           "behaviors": [
-            "keep my distance",
-            "not engage"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Emotionally distant (finding)",
-            "Feeling emotionally hurt (finding)"
-          ],
-          "neutral": [
-            "Social isolation (rejection) (finding)",
-            "Fear of losing emotional control (finding)",
-            "Fear of abandonment (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you've developed a strategy to protect yourself, and that makes sense given those past experiences. What makes you believe that keeping your distance is truly keeping you safe, and what might you be missing out on by doing so? Perhaps we can explore what it would take to feel a little more secure in letting someone closer.",
-        "reasoning": null,
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you've built up a strong sense of protecting yourself, and that makes perfect sense given those past experiences. It takes a lot of courage to acknowledge that cycle, and it's understandable that you'd want to avoid getting hurt again. What do you think contributes to that feeling of not being enough?",
-          "socratic_questioning": "It sounds like you've developed a strategy to protect yourself, and that makes sense given those past experiences. What makes you believe that keeping your distance is truly keeping you safe, and what might you be missing out on by doing so? Perhaps we can explore what it would take to feel a little more secure in letting someone closer.",
-          "cognitive_restructuring": "It sounds like past experiences have led you to believe that protecting yourself means keeping others at a distance. What makes you so sure that people are humoring you or letting you down, and is there any evidence that contradicts that thought? Perhaps exploring those instances more closely could offer a different perspective."
-        }
-      }
-    },
-    {
-      "turn": 8,
-      "patient": {
-        "role": "patient",
-        "query": "I mean, I get that it’s supposed to be protective, but sometimes I wonder if I’m just missing out on real connections. I guess I convince myself that it’s easier to keep things shallow rather than risk the pain of someone really knowing me. But, you know, it does feel lonely. Sometimes I see others really bonding, and a part of me aches for that, but it’s",
-        "schema": {
-          "triggers": [
-            "seeing others bonding"
-          ],
-          "automatic_thoughts": [
-            "I'm missing out on real connections",
-            "it's easier to keep things shallow",
-            "risk the pain of someone really knowing me"
-          ],
-          "emotions": [
-            "loneliness",
-            "ache"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)"
-          ],
-          "neutral": [
-            "Social isolation (rejection) (finding)"
-          ],
-          "contradiction": [
-            "Social isolation (finding)",
-            "Limited social contact (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you’re recognizing a pattern of protecting yourself, and also noticing the cost of that protection – the loneliness. What makes you believe that letting someone truly know you would inevitably lead to pain? Perhaps exploring that assumption a bit further could help clarify whether it’s always true.",
-        "reasoning": null,
-        "protocol_used": "cognitive_restructuring",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you’ve noticed a pattern of keeping things at a distance, and you're questioning whether that's truly protecting you or keeping you from something you desire. It takes courage to acknowledge that longing for deeper connection, even when you’ve built walls to avoid potential hurt. What do you think it would take to explore that ache a little further?",
-          "socratic_questioning": "It sounds like you're noticing a pattern of protecting yourself, and also questioning whether that protection might be keeping you from something you want. What makes you believe it’s easier to keep things shallow?",
-          "cognitive_restructuring": "It sounds like you’re recognizing a pattern of protecting yourself, and also noticing the cost of that protection – the loneliness. What makes you believe that letting someone truly know you would inevitably lead to pain? Perhaps exploring that assumption a bit further could help clarify whether it’s always true."
-        }
-      }
-    },
-    {
-      "turn": 9,
-      "patient": {
-        "role": "patient",
-        "query": "I guess... I’ve just had experiences where opening up led to rejection or judgment. It makes me think that if I let people in, they’ll see all my flaws and decide I’m not worth it. It’s easier to keep it light than to risk that kind of hurt. But I do wonder if maybe there's a chance that someone could accept me, flaws and all. It just feels so",
-        "schema": {
-          "triggers": [
-            "experiences of opening up",
-            "rejection",
-            "judgment"
-          ],
-          "automatic_thoughts": [
-            "if I let people in, they’ll see all my flaws",
-            "I’m not worth it"
-          ],
-          "emotions": [
-            "hurt"
-          ],
-          "behaviors": [
-            "keep it light"
+            "put on a smile",
+            "go along with whatever"
           ]
         },
         "retrieval": {
@@ -453,23 +210,659 @@
             "Fear of being a burden to others (finding)"
           ],
           "neutral": [
-            "Fear of writing in public (finding)",
-            "Vulnerable personality (finding)",
             "Fear of saying the wrong thing (finding)",
-            "Social isolation (rejection) (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of writing in public (finding)",
+            "Fear of public speaking (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you've developed a way to protect yourself from potential pain, and that makes perfect sense given what you've been through. What makes you believe that people will inevitably react with rejection or judgment when you show them your vulnerabilities?",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you're carrying a lot by trying to manage how others perceive you. What makes you think they’ll judge you or think you’re weird if you were to share something personal? Perhaps exploring that assumption a bit further could help you understand where that fear comes from.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you've built up a protective way of interacting with people, and it makes sense that you'd want to avoid feeling hurt again. It takes a lot of courage to even consider letting your guard down, especially when past experiences have taught you that vulnerability can lead to painful outcomes. What do you think it would take for you to feel a little more comfortable exploring that possibility of acceptance?",
-          "socratic_questioning": "It sounds like you've developed a strategy to protect yourself from potential pain, and that makes a lot of sense given what you've experienced. What makes it feel so difficult to consider the possibility of someone accepting you as you are?",
-          "cognitive_restructuring": "It sounds like you’ve developed a way to protect yourself from potential pain, and that’s understandable given those past experiences. What makes you think that people who have rejected you in the past would represent what everyone thinks of you? Perhaps there’s a possibility that some people might be able to see beyond those flaws and appreciate you for who you are."
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot by trying to manage how others perceive you. That need to ensure everyone is happy can be exhausting, and it's understandable that you'd feel weighed down by it. It takes courage to acknowledge that disconnect between what you present and what you're truly experiencing.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're carrying a lot by trying to manage how others perceive you. What makes you think they’ll judge you or think you’re weird if you were to share something personal? Perhaps exploring that assumption a bit further could help you understand where that fear comes from.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a significant burden trying to manage how others perceive you. What makes you believe that sharing your true thoughts and feelings would lead to judgment or being seen as \"weird\"? Perhaps we could explore some instances where you’ve felt this way and examine the evidence for and against those assumptions.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "I guess it goes back to when I was younger. I was always worried about what people thought of me, and I had a couple of experiences where I felt like I was really vulnerable, and it didn't go well. I don't know… maybe it’s just stuck with me. It’s like I keep replaying those moments in my head, and it makes it hard to trust that people will really",
+        "schema": {
+          "triggers": [
+            "when I was younger",
+            "experiences where I felt vulnerable"
+          ],
+          "automatic_thoughts": [
+            "worried about what people thought of me",
+            "keep replaying those moments in my head",
+            "hard to trust that people will really"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of being a burden to others (finding)",
+            "Fear of being watched (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of saying the wrong thing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like those earlier experiences had a significant impact, and it's understandable that they’re still affecting you. What do you think those moments taught you about how people behave, and how has that shaped your expectations of others today? Perhaps exploring those lessons could offer some clarity.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like those earlier experiences left a lasting impact, and it's understandable that you'd still be carrying that worry with you. Replaying those moments can certainly make it difficult to feel secure in relationships. It takes courage to revisit those vulnerable times, and I appreciate you sharing that with me.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being watched (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those earlier experiences had a significant impact, and it's understandable that they’re still affecting you. What do you think those moments taught you about how people behave, and how has that shaped your expectations of others today? Perhaps exploring those lessons could offer some clarity.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being watched (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like those earlier experiences have left a lasting impact on how you view interactions with others. What makes you think that people won't really, and what evidence do you have that supports that belief now? Perhaps we can explore whether those past experiences still accurately reflect how people behave today.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being watched (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I think those moments taught me that being open can lead to hurt, you know? I learned to be cautious, to hold back my true thoughts and feelings. I guess it makes me expect that people will reject me if I show them too much of who I really am. So, I end up just playing it safe, but then it feels like I'm losing a part of myself. It",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "being open can lead to hurt",
+            "people will reject me if I show them too much of who I really am"
+          ],
+          "emotions": [
+            "hurt"
+          ],
+          "behaviors": [
+            "be cautious",
+            "hold back my true thoughts and feelings",
+            "play it safe"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of saying the wrong thing (finding)",
+            "Character trait finding of ability to learn from adverse experience (finding)"
+          ],
+          "neutral": [
+            "Feeling ashamed (finding)",
+            "Vulnerable personality (finding)",
+            "Enduring personality change after catastrophic experience (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’ve developed a strong sense of how to protect yourself, and that’s understandable given those experiences. What makes you believe that being open will inevitably lead to hurt, and has there ever been a time when sharing yourself didn't result in that outcome? Perhaps exploring those instances could offer a different perspective.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’ve developed a strong sense of protecting yourself, and that’s understandable given those experiences. It takes courage to recognize how those past moments have shaped your approach to relationships and how it impacts you now. Perhaps we can explore what it would take to feel a little more comfortable sharing yourself, even with the risk of vulnerability.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Character trait finding of ability to learn from adverse experience (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’ve developed a strong sense of how to protect yourself, and that’s understandable given those experiences. What makes you believe that being open will inevitably lead to hurt, and has there ever been a time when sharing yourself didn't result in that outcome? Perhaps exploring those instances could offer a different perspective.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Character trait finding of ability to learn from adverse experience",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’ve developed a strong belief about the consequences of vulnerability, and that’s understandable given those experiences. What makes you so certain that showing people who you really are will inevitably lead to rejection? Perhaps there have been times when being open has actually brought you closer to others?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Character trait finding of ability to learn from adverse experience (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "I mean, I know there have been times when I’ve shared stuff and it didn’t go badly… but those moments feel so rare. Most of the time, I just remember the awkwardness or the rejection. It’s like I latch onto the negative experiences because they feel safer somehow. It's easier to expect the worst, right? Even if it’s not fair, it just feels more comfortable to",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "those moments feel so rare",
+            "I latch onto the negative experiences",
+            "it's easier to expect the worst",
+            "it just feels more comfortable"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Social isolation (rejection) (finding)",
+            "Social fear (finding)",
+            "Fear of social group activities (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're noticing a pattern of focusing on negative experiences after sharing something, and that it provides a sense of safety. What do you think makes those negative experiences feel safer than the possibility of a positive interaction? Perhaps exploring that a little further could help us understand this pattern better.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're caught in a cycle where the few times things don't go as planned really stand out, and they overshadow the more positive interactions. It makes sense that you'd gravitate toward expecting the worst if that feels like a way to protect yourself from further discomfort. Let’s explore what makes those negative experiences feel so significant.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Social isolation (rejection) (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Social fear (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're noticing a pattern of focusing on negative experiences after sharing something, and that it provides a sense of safety. What do you think makes those negative experiences feel safer than the possibility of a positive interaction? Perhaps exploring that a little further could help us understand this pattern better.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Social isolation (rejection) (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Social fear (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're noticing a pattern where you focus on negative social experiences, and that it provides a sense of predictability, even if it's not entirely accurate. What makes those negative experiences feel \"safer\" than considering the possibility of positive interactions? Perhaps exploring that a little further could help us understand what’s driving this tendency.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Social isolation (rejection) (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Social fear (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "I guess it feels safer because it’s familiar. I've been through that disappointment before, so I kind of know how to handle it. It’s like, if I expect the worst and it happens, I don’t have to feel as hurt because I was prepared for it. But when something good does happen, it feels like a risk—I mean, what if it doesn’t last? That uncertainty really",
+        "schema": {
+          "triggers": [
+            "disappointment",
+            "something good happens",
+            "uncertainty"
+          ],
+          "automatic_thoughts": [
+            "if I expect the worst and it happens, I don’t have to feel as hurt",
+            "what if it doesn’t last"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Fear of losing emotional control (finding)",
+            "Sense of impending doom (finding)",
+            "Fearful mood (finding)",
+            "Fear of injury (finding)"
+          ],
+          "contradiction": [
+            "Feeling safe (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’ve developed a strategy to protect yourself from pain, and that makes a lot of sense given your past experiences. I'm curious, what does it cost you to maintain that expectation of the worst? And what would happen, realistically, if that good thing *did* change or disappear?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’ve developed a way to cope with disappointment, and that familiarity provides a sense of safety. However, it also seems like this approach might be making it difficult to truly enjoy positive experiences, as you’re constantly bracing yourself for them to disappear. Perhaps we can explore what’s driving that need to prepare for the worst?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’ve developed a strategy to protect yourself from pain, and that makes a lot of sense given your past experiences. I'm curious, what does it cost you to maintain that expectation of the worst? And what would happen, realistically, if that good thing *did* change or disappear?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’ve developed a strategy to protect yourself from pain, and that makes sense given your past experiences. However, it also seems like that strategy might be limiting your ability to fully enjoy the good things that come along. Let’s explore whether there might be another way to approach these situations that allows you to feel both prepared and open to positive experiences.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I can see how it makes sense to protect myself, but it does cost me—like, I miss out on connections. Sometimes I look around and feel like everyone else is enjoying life, but I’m stuck in this bubble. If something good happens and then it goes away, I guess it just feels like more proof that I shouldn't have hoped in the first place. I don't really know",
+        "schema": {
+          "triggers": [
+            "missing out on connections",
+            "seeing others enjoying life",
+            "good things going away"
+          ],
+          "automatic_thoughts": [
+            "I shouldn't have hoped in the first place"
+          ],
+          "emotions": [
+            "sadness"
+          ],
+          "behaviors": [
+            "staying in a bubble"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Isolation - mental defense mechanism (finding)",
+            "Turning against the self - mental defense mechanism (finding)",
+            "Overprotected (finding)",
+            "Social isolation (rejection) (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're recognizing a pattern of protecting yourself, and also noticing the impact that has on your life. What makes you believe that hoping in the first place is the problem when something good changes or disappears? Perhaps there's another way to understand what happens.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're recognizing a pattern where protecting yourself feels necessary, yet it also leads to feelings of disconnection and sadness. It takes courage to acknowledge that even though this approach might feel safe, it's also preventing you from experiencing the things you desire. Let’s explore what’s driving that feeling that you shouldn't have hoped in the first place.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Isolation - mental defense mechanism (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Turning against the self - mental defense mechanism (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're recognizing a pattern of protecting yourself, and also noticing the impact that has on your life. What makes you believe that hoping in the first place is the problem when something good changes or disappears? Perhaps there's another way to understand what happens.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Isolation - mental defense mechanism (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Turning against the self - mental defense mechanism (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’re noticing a pattern where protecting yourself feels necessary, but also creates a sense of disconnection and sadness. Perhaps we could explore whether that initial protection is always truly necessary, or if there might be other ways to approach situations that allow you to experience joy without feeling quite so vulnerable when things change. What makes you feel like hoping is something to be avoided?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Isolation - mental defense mechanism (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Turning against the self - mental defense mechanism (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "I guess I just think, if I didn't get my hopes up, I wouldn’t have to feel that disappointment when things don't work out. It’s like, it feels safer to just keep everything on the surface. I want to believe that there could be something good, but then when it slips away, it just makes me feel more alone than before. I’m scared that if I hope too much",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "if I didn't get my hopes up, I wouldn’t have to feel that disappointment",
+            "it feels safer to just keep everything on the surface",
+            "I want to believe that there could be something good",
+            "when it slips away, it just makes me feel more alone than before",
+            "I'm scared that if I hope too much"
+          ],
+          "emotions": [
+            "disappointment",
+            "alone",
+            "scared"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Loss of hope for the future (finding)",
+            "Optimistic thoughts (finding)",
+            "Level of hope (observable entity)",
+            "Feeling hopeless (finding)"
+          ],
+          "neutral": [],
+          "contradiction": [
+            "Hopeful for the future (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’ve developed a strategy to manage disappointment by lowering your expectations. What do you think might be the potential downsides of consistently keeping things on the surface, even when you desire to believe in something positive? Perhaps exploring that a little further could help clarify what’s most important to you in these situations.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’ve developed a strategy to protect yourself from pain by managing your expectations, and that’s understandable. It also seems like that strategy comes with its own set of challenges, like feeling more isolated when things don't go as planned. Perhaps we can explore what’s keeping you from allowing yourself to hope, and what the potential benefits of doing so might be.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of hope for the future (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Optimistic thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling hopeless (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’ve developed a strategy to manage disappointment by lowering your expectations. What do you think might be the potential downsides of consistently keeping things on the surface, even when you desire to believe in something positive? Perhaps exploring that a little further could help clarify what’s most important to you in these situations.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of hope for the future (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Optimistic thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling hopeless (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you've developed a strategy to manage disappointment by lowering your expectations, and that makes sense given how painful those experiences have been. But I wonder, is there a cost to keeping things on the surface, and does it truly protect you from feeling alone? Perhaps we could explore whether there might be a different way to approach hope and disappointment.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of hope for the future (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Optimistic thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling hopeless (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "I mean, I get what you’re saying. It’s like... I know I’m missing out on a lot of real connections, and that’s lonely. But then I worry that if I really let people in, I’ll just get hurt again. It’s confusing because part of me really wants to be close to people and share those moments, but the other part is terrified of being let down",
+        "schema": {
+          "triggers": [
+            "missing out on real connections",
+            "letting people in"
+          ],
+          "automatic_thoughts": [
+            "I'll just get hurt again",
+            "I'm terrified of being let down"
+          ],
+          "emotions": [
+            "lonely",
+            "confused",
+            "terrified"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)"
+          ],
+          "neutral": [
+            "Social isolation (rejection) (finding)",
+            "Social isolation (finding)",
+            "Limited social contact (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're caught between a genuine desire for connection and a deep-seated fear of vulnerability. What makes you believe that letting people in will inevitably lead to being let down? Can you think of times when that hasn't been the case, or situations where you might have misinterpreted someone’s actions?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're caught between a genuine desire for connection and a deep-seated fear of vulnerability. That pull between wanting closeness and protecting yourself from potential hurt can be incredibly confusing and painful. It takes courage to acknowledge both of those feelings, and it’s understandable that you’re feeling torn.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're caught between a genuine desire for connection and a deep-seated fear of vulnerability. What makes you believe that letting people in will inevitably lead to being let down? Can you think of times when that hasn't been the case, or situations where you might have misinterpreted someone’s actions?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're caught between a genuine desire for connection and a deep-seated fear of vulnerability. What makes you believe that letting people in will inevitably lead to being let down? Perhaps we could explore some instances where you’ve felt hurt in the past and see if there are any patterns or alternative ways to view those experiences.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
         }
       }
     }

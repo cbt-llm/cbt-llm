@@ -26,6 +26,7 @@
           "emotions": [],
           "behaviors": [
             "never share anything",
+            "pretend I’m fine",
             "smile"
           ]
         },
@@ -44,13 +45,54 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot, and you're trying to protect the people around you. It takes strength to manage those feelings and put on a brave face, but it also seems exhausting to always be doing that. Perhaps we can explore what makes you feel like sharing might be a burden?",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you're really concerned about how your needs impact those around you. What makes you believe that sharing something would place a burden on others? Let’s explore that a little further.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're carrying a lot, and you're trying to protect the people around you. It takes strength to manage those feelings and put on a brave face, but it also seems exhausting to always be doing that. Perhaps we can explore what makes you feel like sharing might be a burden?",
-          "socratic_questioning": "It sounds like you're really concerned about not wanting to inconvenience others. What makes you believe that sharing something might be a burden? Let's explore that a bit more.",
-          "cognitive_restructuring": "It sounds like you're really concerned about how others perceive you, and that worry is driving you to keep things bottled up. What makes you believe that sharing something would automatically make you a burden? Perhaps there are times when people have been supportive and understanding when you've opened up in the past."
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot, and you're really concerned about how your needs might affect those around you. It takes strength to manage those feelings and put on a brave face, but it also seems exhausting to constantly pretend everything is okay. Perhaps we can explore where that worry about being a burden comes from?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Caring towards others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're really concerned about how your needs impact those around you. What makes you believe that sharing something would place a burden on others? Let’s explore that a little further.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Caring towards others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're really concerned about how your needs impact those around you. Is it possible that sometimes, reaching out for support doesn't automatically mean you're creating a burden? Perhaps there are situations where people genuinely want to help, and it might not be as negative as you imagine.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Caring towards others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -58,47 +100,87 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it does feel heavy sometimes. I guess I just worry that if I open up, it’ll add more weight for everyone else, you know? Like, I don’t want to drag anyone down, and I’m scared they might not know how to handle it. It just feels easier to keep it all locked away.",
+        "query": "I guess I just feel like everyone has their own stuff to deal with, you know? Sometimes it feels like if I bring up my issues, I'm just adding to their stress. It’s like I don’t want to be a hassle or make them feel obligated to help me.",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "bringing up my issues"
+          ],
           "automatic_thoughts": [
-            "if I open up, it’ll add more weight for everyone else",
-            "I don’t want to drag anyone down",
-            "they might not know how to handle it",
-            "it feels easier to keep it all locked away"
+            "everyone has their own stuff to deal with",
+            "I'm just adding to their stress",
+            "I don’t want to be a hassle",
+            "I don’t want to make them feel obligated to help me"
           ],
           "emotions": [
-            "worry",
-            "scared",
-            "heavy"
+            "guilt"
           ],
           "behaviors": [
-            "keep it all locked away"
+            "avoiding sharing my issues"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Pressured by others (finding)",
-            "Fear of losing emotional control (finding)",
-            "Fear of collapsing (finding)"
+            "Fear of being a burden to others (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Preoccupied with emotional problems (finding)"
           ],
           "contradiction": [
-            "Anxiety about collapsing (finding)"
+            "Pressured by others (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot, and it's understandable why you'd feel that way. What makes you think sharing your burdens would necessarily add to others' weight, and is that always the case? Perhaps there's another way to look at it—maybe your openness could even offer them a chance to support you, and strengthen your connection.",
-        "reasoning": null,
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like you're really considerate of the people around you and their own challenges. What makes you believe that bringing up your issues would necessarily add to their stress, and is there a way to know for sure? Perhaps exploring that a little further could help you understand the situation more clearly.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're carrying a lot, and it's understandable why you'd feel that way. It takes real strength to consider being vulnerable, especially when you're concerned about the impact it might have on those around you. What makes you think that sharing your experiences would necessarily add to their burdens?",
-          "socratic_questioning": "It sounds like you're carrying a lot, and it's understandable that you'd want to protect those around you. What makes you think that sharing your experiences would necessarily add to their burden? Can you imagine a scenario where opening up might not have that effect?",
-          "cognitive_restructuring": "It sounds like you're carrying a lot, and it's understandable why you'd feel that way. What makes you think sharing your burdens would necessarily add to others' weight, and is that always the case? Perhaps there's another way to look at it—maybe your openness could even offer them a chance to support you, and strengthen your connection."
+          "validate_and_reflect": {
+            "response": "It sounds like you're really considerate of the people in your life and want to avoid adding to their burdens. It takes a lot of self-awareness to recognize that you don’t want to be a hassle or create obligations for others. It seems like you're carrying a worry about how your sharing might impact them.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're really considerate of the people around you and their own challenges. What makes you believe that bringing up your issues would necessarily add to their stress, and is there a way to know for sure? Perhaps exploring that a little further could help you understand the situation more clearly.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're really concerned about the impact you have on others, and that's a thoughtful consideration. What makes you believe that bringing up your issues would necessarily add to their stress, and is there a way to explore whether that's always the case? Perhaps there are times when sharing could actually be helpful or even welcomed.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -106,13 +188,266 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I guess I’ve always thought that if I let people in, it’d just be… too much for them. I don't want to be a bother or seem weak. But, you know, sometimes I wonder if I’m pushing people away by trying to handle everything myself. It’s just… it feels confusing.",
+        "query": "I guess I just have this feeling that my problems are… well, not as important as what others are going through. I remember times when I’ve shared something, and it felt like I was just burdening them. It's like I should be strong enough to handle it on my own.",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "if I let people in, it’d just be too much for them",
-            "I don't want to be a bother or seem weak",
-            "I’m pushing people away by trying to handle everything myself"
+            "my problems are not as important as what others are going through",
+            "I am just burdening them",
+            "I should be strong enough to handle it on my own"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Able to recognize own emotional pain and distress (finding)",
+            "Feeling isolated (finding)"
+          ],
+          "neutral": [
+            "Fear of being a burden to others (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're carrying a lot of responsibility, feeling like you need to manage your own struggles while also considering what others are experiencing. What makes you believe your problems aren't as important as others'? And when you've felt like a burden, what specifically happened that led you to that conclusion?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot, and it’s tough when you worry about adding to the burdens of others. It takes courage to acknowledge these feelings, and it’s understandable that you’d want to be strong and handle things independently. Perhaps we can explore where this belief about needing to be strong comes from.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're carrying a lot of responsibility, feeling like you need to manage your own struggles while also considering what others are experiencing. What makes you believe your problems aren't as important as others'? And when you've felt like a burden, what specifically happened that led you to that conclusion?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a lot of responsibility, feeling like you need to minimize your own struggles to avoid adding to others' burdens. What makes you believe that your problems aren't as important as others'? Let’s explore that a bit more.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "I don’t know… maybe it’s just how I grew up? I learned to keep things to myself and not to put my worries on anyone else. There were times when I tried to talk about how I was feeling, and it just felt like people didn’t really get it, or they seemed overwhelmed. I guess it taught me to just keep quiet about it and deal with it alone.",
+        "schema": {
+          "triggers": [
+            "how I grew up",
+            "times when I tried to talk about how I was feeling"
+          ],
+          "automatic_thoughts": [
+            "people didn’t really get it",
+            "they seemed overwhelmed",
+            "I should keep quiet about it",
+            "I need to deal with it alone"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "keep things to myself",
+            "deal with it alone"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of being a burden to others (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Feeling isolated (finding)"
+          ],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Difficulty controlling emotions (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you developed some strategies for managing difficult feelings based on those experiences. What do you think it meant for you to learn to carry those worries alone, and what impact has that had on you over time? Perhaps we can explore what you gained and what you might have missed out on.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you developed a way to cope with difficult feelings based on experiences where it didn't feel safe to share. It takes a lot of strength to carry things on your own, and it’s understandable why you’d feel that way given those past interactions. Perhaps we can explore what it means for you to carry those burdens alone?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you developed some strategies for managing difficult feelings based on those experiences. What do you think it meant for you to learn to carry those worries alone, and what impact has that had on you over time? Perhaps we can explore what you gained and what you might have missed out on.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you developed a system for protecting yourself, and it makes sense that you’d do that given those experiences. What do you think might be the impact of consistently carrying those worries and feelings on your own, even when you’d like to share them? Perhaps there's a cost to that approach, even if it felt necessary at the time.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I guess I thought it meant I was being strong or independent. Like, if I could carry it all myself, then maybe I’d prove I was okay. But… sometimes it feels really heavy, you know? I feel like I've missed out on connecti ng with others, and there’s this loneliness that creeps in. It’s hard because I want to reach out, but I",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "if I could carry it all myself, then maybe I’d prove I was okay",
+            "I’ve missed out on connecting with others"
+          ],
+          "emotions": [
+            "loneliness"
+          ],
+          "behaviors": [
+            "want to reach out"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)"
+          ],
+          "neutral": [
+            "Fear of being a burden to others (finding)",
+            "Moderate ego strength (finding)",
+            "Low ego strength (finding)",
+            "Fear of being left alone during period of dependence (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re questioning whether being strong and independent is truly what you want, and wondering if there’s a cost to striving for that. What makes you believe that carrying everything yourself would prove you’re okay? Perhaps we could explore what \"okay\" means to you in this situation.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you were trying to demonstrate strength and independence, and that’s understandable. However, recognizing that it’s become overwhelming suggests there’s a deeper need for connection and support. It takes courage to acknowledge when carrying everything feels too heavy, and it’s okay to want to reach out.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re questioning whether being strong and independent is truly what you want, and wondering if there’s a cost to striving for that. What makes you believe that carrying everything yourself would prove you’re okay? Perhaps we could explore what \"okay\" means to you in this situation.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Moderate ego strength (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’ve been using carrying everything yourself as a way to demonstrate your strength, and that’s understandable. But it also seems like that approach might be contributing to feelings of loneliness and being overwhelmed. Let’s explore whether there's another way to feel okay that doesn't involve shouldering so much on your own.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Moderate ego strength (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "I don’t know… I guess I’ve always thought that being okay meant not showing weakness or needing help. It’s like I have this idea that if I can keep it all together, then I’m doing fine. But then I’m just stuck with this weight, and it feels like I’m convincing myself I can handle it when I really can’t. It’s just confusing, I suppose.",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "being okay meant not showing weakness or needing help",
+            "if I can keep it all together, then I’m doing fine",
+            "I can handle it when I really can’t"
           ],
           "emotions": [
             "confusion"
@@ -121,155 +456,55 @@
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Feeling alienated (finding)",
-            "Feeling isolated (finding)"
+            "Preoccupation with body weight (finding)"
           ],
           "neutral": [
-            "Pressured by others (finding)",
-            "Fear of being in a small group (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're caught between a desire to protect others and a worry that you might be unintentionally isolating yourself. What makes you believe that letting people in would be \"too much\" for them? Perhaps exploring that thought a little further could help clarify whether it's truly based on their limitations or your own concerns.",
-        "reasoning": null,
-        "protocol_used": "cognitive_restructuring",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're caught between wanting to connect with others and a worry that it might create a burden. It takes courage to acknowledge that you might be unintentionally creating distance, and it's understandable that this leaves you feeling confused. Perhaps we can explore what makes you feel that letting people in would be \"too much\" for them?",
-          "socratic_questioning": "It sounds like you're caught between wanting connection and a worry about the impact you might have on others. What makes you think letting people in would be \"too much\" for them? Perhaps exploring that thought a little further could help clarify what's behind it.",
-          "cognitive_restructuring": "It sounds like you're caught between a desire to protect others and a worry that you might be unintentionally isolating yourself. What makes you believe that letting people in would be \"too much\" for them? Perhaps exploring that thought a little further could help clarify whether it's truly based on their limitations or your own concerns."
-        }
-      }
-    },
-    {
-      "turn": 3,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, that’s kind of true. I just have this nagging feeling that my problems are… I don’t know, not normal? Like everyone else has it together, and I’m the one who can’t seem to figure things out. I guess I just don’t want to be the person everyone feels sorry for. But then again, I feel so alone sometimes. It’s a bit of",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "my problems are not normal",
-            "everyone else has it together",
-            "I'm the one who can't seem to figure things out",
-            "I don't want to be the person everyone feels sorry for"
-          ],
-          "emotions": [
-            "alone"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)",
-            "Fear of being a burden to others (finding)"
-          ],
-          "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Anxiety about going crazy (finding)",
-            "Depressive delusion of catastrophe (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're grappling with a lot of difficult feelings. What makes you believe your problems aren't normal compared to others? And when you imagine everyone else \"having it together,\" what specifically do you think they're doing differently?",
-        "reasoning": null,
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're carrying a heavy burden of feeling different and worrying about how others perceive you. It takes courage to acknowledge those feelings of isolation and the desire to not be a source of pity for others. Let's explore what makes you feel these things are so different from everyone else’s experience.",
-          "socratic_questioning": "It sounds like you're grappling with a lot of difficult feelings. What makes you believe your problems aren't normal compared to others? And when you imagine everyone else \"having it together,\" what specifically do you think they're doing differently?",
-          "cognitive_restructuring": "It sounds like you're caught between feeling like your struggles set you apart and the pain of feeling isolated. What makes you believe your problems aren't normal, and is there a possibility that others experience similar challenges even if they don’t show it? Perhaps exploring that a little more could offer some perspective."
-        }
-      }
-    },
-    {
-      "turn": 4,
-      "patient": {
-        "role": "patient",
-        "query": "I guess it’s just this feeling that I’m always on the outside looking in. When I see people laughing or talking about their lives, I think they must have it all sorted out, while I’m just… stuck. I might hear about their struggles, but they don’t seem as heavy, you know? It’s like there’s this invisible line, and I don’t know how to cross",
-        "schema": {
-          "triggers": [
-            "seeing people laughing",
-            "hearing about their struggles"
-          ],
-          "automatic_thoughts": [
-            "they must have it all sorted out",
-            "I'm just stuck",
-            "their struggles don’t seem as heavy",
-            "there’s this invisible line"
-          ],
-          "emotions": [],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Feeling isolated (finding)",
-            "Social isolation (rejection) (finding)",
-            "Introvert (finding)",
-            "Fear of being a burden to others (finding)"
-          ],
-          "contradiction": [
-            "Social isolation (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're noticing a real disconnect between your experience and what you perceive in others. What makes you believe that those laughing or sharing their lives have it all figured out? Perhaps exploring that assumption a bit further might offer some clarity.",
-        "reasoning": null,
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds incredibly disheartening to feel like you're observing life from a distance, and that others have a grasp on things that you don't. That sense of being \"stuck\" and separated by an invisible line can be a really isolating experience. It takes courage to share that feeling, and I appreciate you describing it so openly.",
-          "socratic_questioning": "It sounds like you're noticing a real disconnect between your experience and what you perceive in others. What makes you believe that those laughing or sharing their lives have it all figured out? Perhaps exploring that assumption a bit further might offer some clarity.",
-          "cognitive_restructuring": "It sounds like you're noticing a real disconnect between your experience and what you perceive in others. Could it be that everyone presents a certain image, and perhaps their struggles are more complex than they appear on the surface? Let’s explore what evidence you have to support the idea that they truly have everything \"sorted out.\""
-        }
-      }
-    },
-    {
-      "turn": 5,
-      "patient": {
-        "role": "patient",
-        "query": "I don’t know, maybe it’s just how confident they seem. Like, they’re comfortable in their skin, and it feels effortless. I guess I just assume they don’t have the same doubts or fears I do. But then, when I think about it, I’ve heard some of their struggles too. It’s just hard to reconcile that with how I see myself. It makes me feel",
-        "schema": {
-          "triggers": [
-            "how confident they seem",
-            "comfortable in their skin"
-          ],
-          "automatic_thoughts": [
-            "they don’t have the same doubts or fears I do",
-            "hard to reconcile that with how I see myself"
-          ],
-          "emotions": [],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
+            "Anxiety about becoming fat (finding)",
+            "Impaired attitude to nutritional status (finding)",
             "Anxiety about altered body image (finding)",
-            "Tends to be self-conscious (finding)",
-            "Phobic avoidance - mental defense mechanism (finding)",
-            "Social fear (finding)"
+            "Fear of becoming fat (finding)"
           ],
-          "contradiction": [
-            "Tends not to be self-conscious (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're noticing a contrast between how others appear and your own internal experience, and that’s creating some conflict for you. It's understandable that you'd find it difficult to reconcile someone's outward confidence with the knowledge that they, like everyone, have their own challenges. Perhaps we can explore what assumptions you're making about yourself in comparison to others?",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you’ve developed a strong belief about how you *should* be, and that it’s creating a lot of pressure. What makes you think that needing help or showing vulnerability is a sign of weakness? Perhaps we could explore where that belief comes from and whether it’s truly serving you well.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're noticing a contrast between how others appear and your own internal experience, and that’s creating some conflict for you. It's understandable that you'd find it difficult to reconcile someone's outward confidence with the knowledge that they, like everyone, have their own challenges. Perhaps we can explore what assumptions you're making about yourself in comparison to others?",
-          "socratic_questioning": "It sounds like you're noticing a discrepancy between how you perceive someone's confidence and the reality of their struggles. What makes you believe that they are comfortable in their skin? And what assumptions do you hold about yourself when you compare your experiences to theirs?",
-          "cognitive_restructuring": "It sounds like you're noticing a discrepancy between how you perceive others and how you perceive yourself, and that's creating some internal conflict. Perhaps it’s worth exploring whether everyone projects an image of confidence, and what assumptions you might be making about their internal experience. What makes you think they don't have doubts or fears?"
+          "validate_and_reflect": {
+            "response": "It sounds like you’ve developed a strong belief that needing support is a sign of weakness, and that’s created a lot of pressure to appear “okay.” It makes sense that you're feeling confused when that expectation doesn't quite match up with how you're experiencing things. Perhaps we can explore where that belief came from and how it's impacting you now.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’ve developed a strong belief about how you *should* be, and that it’s creating a lot of pressure. What makes you think that needing help or showing vulnerability is a sign of weakness? Perhaps we could explore where that belief comes from and whether it’s truly serving you well.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’ve developed a strong belief that needing help is a sign of weakness, and that’s created a lot of pressure to appear “okay.” What makes you think that needing help is inherently a sign of weakness? Perhaps there's a different way to view those moments when you feel like you can’t handle it all.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -277,14 +512,16 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, that does make sense. I guess I just often feel like I’m not measuring up. Like, if they’re all breezing through life, then I must be doing something wrong. I think I assume that I’m supposed to be stronger or more put together. It’s like there’s this voice in my head telling me I should just… get over it. I don’t know if",
+        "query": "Yeah, it definitely feels like I have to keep up this facade of being strong. I think it comes from, um, my family? I remember them always valuing resilience and not wanting to be a burden. I guess I just adopted that mindset. But at the same time, I see others being open and it seems to help them connect better, and it makes me wonder if I’m just",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "family values",
+            "seeing others being open"
+          ],
           "automatic_thoughts": [
-            "I’m not measuring up",
-            "I must be doing something wrong",
-            "I’m supposed to be stronger or more put together",
-            "I should just get over it"
+            "I have to keep up this facade of being strong",
+            "I’m just a burden",
+            "I adopted that mindset"
           ],
           "emotions": [],
           "behaviors": []
@@ -293,23 +530,61 @@
           "entailment": [],
           "neutral": [
             "Fear of being a burden to others (finding)",
-            "Fear of being in a small group (finding)",
-            "Low ego strength (finding)",
-            "Lack of pride (finding)",
-            "Feeling isolated (finding)"
+            "Fear of losing emotional control (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Vulnerable personality (finding)",
+            "Enduring personality change after catastrophic experience (finding)",
+            "Feeling isolated (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're holding yourself to a pretty high standard, comparing your experience to what you perceive in others. What makes you think that everyone else is \"breezing through life,\" and how do you know what you \"should\" be feeling or how you \"should\" be?",
-        "reasoning": null,
+        "response": "It sounds like you're noticing a conflict between what you learned about strength and resilience from your family, and what you observe in others who are more open. What do you think might be the cost of maintaining this \"facade of being strong,\" and what might you gain by exploring a different approach?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're holding yourself to a really high standard, and it's tough when you feel like you're falling short of it. That inner voice telling you to \"just get over it\" can be particularly harsh. Let’s explore where that expectation of being stronger or more put together comes from.",
-          "socratic_questioning": "It sounds like you're holding yourself to a pretty high standard, comparing your experience to what you perceive in others. What makes you think that everyone else is \"breezing through life,\" and how do you know what you \"should\" be feeling or how you \"should\" be?",
-          "cognitive_restructuring": "It sounds like you're holding yourself to a really high standard, comparing your experience to others and assuming you *should* be handling things differently. What makes you think that everyone else is \"breezing through life,\" and is that really the whole story? Perhaps exploring that assumption a bit further could be helpful."
+          "validate_and_reflect": {
+            "response": "It sounds like you’re caught between wanting to be genuine and honoring the values you learned from your family. It makes sense that you’d feel conflicted when you see others expressing themselves more openly. Perhaps we can explore where this need to appear strong comes from and whether it’s truly serving you now.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Vulnerable personality (finding)",
+                  "label": "contradiction"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're noticing a conflict between what you learned about strength and resilience from your family, and what you observe in others who are more open. What do you think might be the cost of maintaining this \"facade of being strong,\" and what might you gain by exploring a different approach?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Vulnerable personality (finding)",
+                  "label": "contradiction"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're noticing a conflict between the way you were raised to cope and what you observe in others. Perhaps we could explore whether maintaining this \"strong\" facade is truly serving you, or if it might be preventing you from experiencing deeper connections? What evidence do you have that being open would be detrimental, versus helpful, in your relationships?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -317,44 +592,89 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s just what I see on the surface. People smiling, laughing, and sharing their accomplishments—it all feels so effortless. And I tend to think that if they can do it, I should be able to as well. But deep down, I know that things aren’t always what they seem. It’s just hard to shake that feeling of not measuring up. It makes me question if",
+        "query": "Yeah, I feel like keeping up this façade means I miss out on really connecting with people. I guess I sometimes feel isolated, and it can be so lonely. But then, the idea of being open… it scares me a bit. What if people don’t understand or, worse, they judge me? I know there’s a part of me that wants to try, but I just don’t",
         "schema": {
           "triggers": [
-            "people smiling",
-            "people laughing",
-            "people sharing accomplishments"
+            "keeping up this façade",
+            "being open"
           ],
           "automatic_thoughts": [
-            "if they can do it, I should be able to as well",
-            "things aren’t always what they seem",
-            "feeling of not measuring up"
+            "I miss out on really connecting with people",
+            "what if people don’t understand",
+            "what if they judge me"
           ],
           "emotions": [
-            "anxiety"
+            "isolated",
+            "lonely",
+            "scared"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoid being open"
+          ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Tends not to be sociable (finding)"
+          ],
           "neutral": [
-            "Lack of pride (finding)",
-            "Incongruent personal expectations (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Delusion of grandiose ability (finding)",
-            "Feels own body is unreal (finding)"
+            "Social isolation (rejection) (finding)",
+            "Introvert (finding)",
+            "Social isolation (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're noticing a disconnect between what you see others doing and your own experience, and that creates a sense of falling short. What makes you believe you *should* be able to do those things just as easily?",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you're caught between a genuine desire for connection and a fear of vulnerability. What makes you think people might judge you if you were to be more open? Let’s explore that a little further.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're noticing a contrast between how others present themselves and your own experience, and that comparison brings up a sense of falling short. It takes courage to acknowledge that things aren't always as they appear, and it's understandable that you'd feel uneasy when you're questioning your own abilities. Let's explore what's behind this feeling of not measuring up a bit more.",
-          "socratic_questioning": "It sounds like you're noticing a disconnect between what you see others doing and your own experience. What makes you believe that if they can do something, you should be able to as well? Perhaps exploring that assumption a little further might help clarify things.",
-          "cognitive_restructuring": "It sounds like you're noticing a discrepancy between how things appear and what you suspect might be the reality behind them. What makes you believe that you *should* be able to do what you see others doing? Perhaps exploring that assumption a bit further could help you understand the situation more fully."
+          "validate_and_reflect": {
+            "response": "It sounds like you're caught between a genuine desire for connection and a very real fear of vulnerability. That sense of loneliness must be difficult to navigate, especially when you feel like you’re putting on a show to avoid it. It takes courage to even acknowledge these conflicting feelings, and I appreciate you sharing them.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're caught between a genuine desire for connection and a fear of vulnerability. What makes you think people might judge you if you were to be more open? Let’s explore that a little further.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're caught between a genuine desire for connection and a fear of vulnerability. What makes you believe that being open would necessarily lead to judgment or misunderstanding? Perhaps we could explore some instances where you’ve taken small risks and see what actually happened.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -362,41 +682,86 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I guess I grew up with this idea that strength means pushing through, you know? Like, if you’re not smiling or achieving something, then you’re failing somehow. It’s like I’ve internalized this pressure to be “perfect” or at least to appear fine. But then I wonder, maybe that’s not how it’s supposed to be? It feels exhausting trying to live up to that",
+        "query": "Yeah, I think that’s it. I mean, I’ve seen how people react when someone shares something really personal, and sometimes it feels like they just don’t know what to say or they change the subject. It makes me worry that they’ll think I'm weak or that my feelings are silly. I guess there’s this fear that if I show my true self, it’ll push people away instead",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "people react when someone shares something personal",
+            "they change the subject"
+          ],
           "automatic_thoughts": [
-            "strength means pushing through",
-            "if you’re not smiling or achieving something, then you’re failing",
-            "I’ve internalized this pressure to be perfect",
-            "I need to appear fine"
+            "they’ll think I'm weak",
+            "my feelings are silly",
+            "if I show my true self, it’ll push people away"
           ],
           "emotions": [
-            "exhaustion"
+            "worry",
+            "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of being a burden to others (finding)",
+            "Fear of public speaking (finding)"
+          ],
           "neutral": [
-            "Feeling a failure (finding)",
-            "Ego strength finding (finding)",
-            "Moderate ego strength (finding)",
-            "Low ego strength (finding)",
-            "Fear of being a burden to others (finding)"
+            "Fear of writing in public (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're recognizing a pattern that's been a significant part of your life, and questioning whether it's truly serving you. What makes you think that maybe pushing through and always appearing fine isn't the right approach? Perhaps exploring that thought further could offer some clarity.",
-        "reasoning": null,
+        "response": "It sounds like you've noticed a pattern in how people respond when you open up, and that’s understandably leading to some worry. What makes you think that changing the subject or not knowing what to say means they think you’re weak or that your feelings are silly? Could there be other explanations for their reactions?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you've carried a heavy expectation to always appear strong and successful, and it's taking a toll on you. It's understandable that you'd feel exhausted when trying to meet such a demanding standard. Perhaps we could explore where that idea of strength came from and whether it still serves you well today.",
-          "socratic_questioning": "It sounds like you're recognizing a pattern that's been a significant part of your life, and questioning whether it's truly serving you. What makes you think that maybe pushing through and always appearing fine isn't the right approach? Perhaps exploring that thought further could offer some clarity.",
-          "cognitive_restructuring": "It sounds like you're recognizing a difficult standard you hold yourself to, and it’s understandable that it’s leading to exhaustion. What makes you think that maybe pushing through and always appearing fine isn't the only way to demonstrate strength? Perhaps exploring that thought further could help you find a more sustainable way to approach things."
+          "validate_and_reflect": {
+            "response": "It sounds like you've noticed a pattern in how people respond when you open up, and that’s understandably led to some worry about what they might think. It takes courage to be vulnerable, and it's natural to be concerned about how others will react and whether that might affect your relationships. It seems like you're trying to protect yourself from potential rejection.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you've noticed a pattern in how people respond when you open up, and that’s understandably leading to some worry. What makes you think that changing the subject or not knowing what to say means they think you’re weak or that your feelings are silly? Could there be other explanations for their reactions?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're noticing a pattern in how people respond when you open up, and that's understandably leading to some worry. What makes you think that their reaction – changing the subject or seeming unsure – means they perceive you as weak or that your feelings are silly? Perhaps there's another explanation for their behavior.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -404,43 +769,98 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Hmm. I guess part of me knows that it's okay to not be okay sometimes, but I just... struggle to believe it. I keep thinking that if I admit I’m struggling, I’ll be letting everyone down. But then I feel so drained trying to keep up this facade. It's like I’m just tired of pretending everything’s fine when it’s not. There’s this part of me that",
+        "query": "I guess it just feels so personal when they don’t know how to respond. It’s like, if I opened up and they kind of freeze or divert the conversation, my mind immediately goes to the worst-case scenario. I wonder if they think I'm just being dramatic or if they’re uncomfortable with my feelings. It’s hard to see it any other way, but maybe I’m just overthinking it",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "they don’t know how to respond",
+            "they freeze or divert the conversation"
+          ],
           "automatic_thoughts": [
-            "if I admit I’m struggling, I’ll be letting everyone down",
-            "I’m just tired of pretending everything’s fine when it’s not"
+            "my mind immediately goes to the worst-case scenario",
+            "they think I'm just being dramatic",
+            "they’re uncomfortable with my feelings",
+            "maybe I’m just overthinking it"
           ],
           "emotions": [
-            "drained",
-            "tired"
+            "frustration",
+            "anxiety"
           ],
-          "behaviors": [
-            "keeping up this facade"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Able to recognize own emotional pain and distress (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Preoccupied with emotional problems (finding)",
-            "Complaining of feeling depressed (finding)",
-            "Emotionally stable (finding)",
-            "Anxiety about collapsing (finding)"
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of speaking to people in authority (finding)",
+            "Difficulty coping with grief responses (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're caught between recognizing a truth and feeling conflicted about it. What makes you believe that admitting you're struggling would lead to letting others down? Let's explore that a bit more.",
-        "reasoning": null,
+        "response": "It sounds incredibly disheartening when you share something vulnerable and the response isn't what you hoped for. What specifically makes you believe that their reaction indicates they think you’re being dramatic, and is there any other possible explanation for their behavior? Exploring those possibilities might offer a different perspective.",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're caught between understanding that it's acceptable to have difficult times, and a worry that showing that vulnerability will disappoint those around you. That’s a really difficult place to be, feeling drained from trying to maintain a certain image. It makes sense that you’d feel tired when you’re putting so much effort into pretending.",
-          "socratic_questioning": "It sounds like you're caught between recognizing a truth and feeling conflicted about it. What makes you believe that admitting you're struggling would lead to letting others down? Let's explore that a bit more.",
-          "cognitive_restructuring": "It sounds like you're caught between understanding that vulnerability is acceptable and a deep worry about the impact it might have on others. What makes it so difficult to believe that it’s okay to not be okay, and what specifically do you imagine would happen if you were to show that you’re struggling?"
+          "validate_and_reflect": {
+            "response": "It sounds incredibly disheartening when you share something vulnerable and the response isn't what you hoped for. It makes sense that you'd jump to those conclusions when someone seems to shut down or change the subject – it’s natural to wonder what that means. Let’s explore what’s going on for you when that happens.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly disheartening when you share something vulnerable and the response isn't what you hoped for. What specifically makes you believe that their reaction indicates they think you’re being dramatic, and is there any other possible explanation for their behavior? Exploring those possibilities might offer a different perspective.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds incredibly disheartening when you share something vulnerable and the response isn't what you hoped for. What makes you think the worst-case scenario is the most likely explanation when they react that way? Perhaps there are other possibilities at play, and we could explore those a bit further.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
         }
       }
     }

@@ -44,13 +44,21 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that you might feel that way—when you're worried about being a burden, it can be really hard to share what's really going on. But pretending to be fine while hiding your true feelings can actually make things more difficult for you in the long run. It's completely understandable that you're trying to protect others, but it might be worth thinking about how this affects you too.",
-        "reasoning": null,
+        "response": "It sounds like you're worried that sharing your true feelings might make others feel burdened. Can you tell me more about what happens when you don't share?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It makes sense that you might feel that way—when you're worried about being a burden, it can be really hard to share what's really going on. But pretending to be fine while hiding your true feelings can actually make things more difficult for you in the long run. It's completely understandable that you're trying to protect others, but it might be worth thinking about how this affects you too.",
-          "socratic_questioning": "It sounds like staying silent is really hard for you. How does hiding your feelings affect your relationships and your sense of peace?",
-          "cognitive_restructuring": "It makes sense that you might feel this way, but let's explore it further. When you say you never share anything, is there a specific moment or situation that made you feel like a burden to someone else?"
+          "validate_and_reflect": {
+            "response": "It takes a lot of courage to share that. I can see how much you care about others and don’t want to let them down. But I wonder, is this need to protect others sometimes making it harder for you to be yourself?",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "How does hiding your true feelings affect your relationships with others?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that you might feel that way, but let's think about how often that feeling actually holds true. When has this belief been helpful or unhelpful in the past?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -58,42 +66,67 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I do find myself putting on that brave face a lot. I don’t want to drag anyone down with my problems. But, honestly, it feels like I’m just bottling everything up, and then it gets overwhelming sometimes. It’s like I’m caught in this loop of feeling like I have to hide what’s really going on.",
+        "query": "Yeah, it’s like I just keep everything bottled up inside. I feel this weight, and sometimes it feels like I’m just going through the motions, you know? I worry that if I open up, it might change how people see me or make them uncomfortable. So, I end up not saying anything and just feeling... alone, I guess.",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I have to hide what's really going on",
-            "I don't want to drag anyone down with my problems",
-            "I'm bottling everything up",
-            "It gets overwhelming sometimes"
+          "triggers": [
+            "worry about opening up",
+            "fear of changing how people see me",
+            "fear of making others uncomfortable"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "I keep everything bottled up",
+            "I’m just going through the motions",
+            "I might change how people see me",
+            "I might make them uncomfortable"
+          ],
+          "emotions": [
+            "alone"
+          ],
           "behaviors": [
-            "putting on a brave face"
+            "not saying anything"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Fear of appearing ridiculous (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Feeling isolated (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "neutral": [
-            "Anxiety about appearing ridiculous (finding)",
-            "Anxiety about saying the wrong thing (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about collapsing (finding)",
+            "Feeling ashamed (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that hiding your problems would feel like a trap, especially when you're already feeling overwhelmed. The brave face might offer some short-term relief, but it can also make things feel bigger and more difficult to manage over time.",
-        "reasoning": null,
+        "response": "It sounds like you're carrying a heavy burden, and it makes sense that you'd feel stuck or hesitant to share. The worry about how others might perceive you or react can feel overwhelming, and it's completely understandable how that might lead to keeping things inside.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "I hear you saying that putting on a brave face helps you keep others from being burdened, but it also feels like it's taking a toll on you. It takes courage to carry that weight alone, but it's completely understandable that it can feel overwhelming at times.",
-          "socratic_questioning": "It makes sense that you'd feel caught in that cycle. When you put on the brave face, how does that work for you in the long run?",
-          "cognitive_restructuring": "It makes sense that you feel the need to keep things to yourself, but I wonder what happens when you do let something out?"
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a heavy burden, and it makes sense that you'd feel stuck or hesitant to share. The worry about how others might perceive you or react can feel overwhelming, and it's completely understandable how that might lead to keeping things inside.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult. When you say you worry about changing how people see you or making them uncomfortable, what do you think might happen if you didn't worry about that and just let things out?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "FEELING ISOLATED",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "FEAR OF BEING A BURDEN",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a lot of pressure inside, and the thought of opening up feels overwhelming. Can you tell me more about what it would mean if you did share some of that? Maybe there's a way to express yourself without completely changing how others see you.",
+            "reasoning": null
+          }
         }
       }
     },
@@ -101,42 +134,66 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, that sounds right. It’s like I’m afraid if I let my guard down, everything will just spill out, and then I won’t know how to handle it. I feel like I’m expected to keep it together, you know? But inside, it’s just... a lot. Sometimes I wonder if anyone would even understand if I opened up.",
+        "query": "Yeah, it really does feel heavy. Sometimes I just wish I could express what I’m feeling without worrying about the fallout. I think about it a lot, and then I just freeze up. I guess I’m scared of how people might react or if they'd even care.",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "if I let my guard down, everything will just spill out",
-            "I won’t know how to handle it",
-            "I’m expected to keep it together",
-            "I wonder if anyone would even understand if I opened up"
+            "I wish I could express what I’m feeling without worrying about the fallout",
+            "I’m scared of how people might react",
+            "I wonder if they'd even care"
           ],
           "emotions": [
             "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "freeze up"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of saying the wrong thing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of being a burden to others (finding)",
             "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Vulnerable personality (finding)",
-            "Anxiety about going crazy (finding)"
+            "Difficulty coping with grief responses (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that you'd feel that way—there's a lot of pressure to stay strong, isn't there? It sounds like you're carrying a heavy weight, and it's completely understandable to wonder if others could truly grasp what you're going through.",
-        "reasoning": null,
+        "response": "It makes sense that you'd feel that way—when you're worried about how others might respond, it can definitely feel overwhelming. And it's completely understandable to feel hesitant when you're afraid of being judged or dismissed.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It makes sense that you'd feel that way—there's a lot of pressure to stay strong, isn't there? It sounds like you're carrying a heavy weight, and it's completely understandable to wonder if others could truly grasp what you're going through.",
-          "socratic_questioning": "I hear that you're feeling overwhelmed by the pressure to stay composed, and it sounds like you're worried about what might happen if you let your guard down. Can you tell me more about how you think not keeping things together might affect the situation? And what do you imagine others might think or feel if you were to open up?",
-          "cognitive_restructuring": "It makes sense that you'd feel anxious about opening up, but let's consider—what evidence do you have that everything would completely spiral out of control if you did?"
+          "validate_and_reflect": {
+            "response": "It makes sense that you'd feel that way—when you're worried about how others might respond, it can definitely feel overwhelming. And it's completely understandable to feel hesitant when you're afraid of being judged or dismissed.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult—when you say you freeze up, what might happen if you tried to express yourself anyway?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that you'd feel frozen when thinking about expressing yourself, especially with the worry of how others might respond. Have you ever seen a situation where someone else handled a difficult conversation in a way that didn't turn out badly?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -144,48 +201,51 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, the pressure can be really heavy. I think sometimes it feels easier to just manage things on my own rather than risk being seen as weak or needy. But then I end up feeling so isolated, and I don’t always know how to break that cycle. It’s like I’m stuck between wanting to reach out and being terrified of it.",
+        "query": "Thanks for saying that. It just feels like I have this constant battle in my head. I want to reach out and show what I’m really feeling, but then that fear takes over. It makes me wonder if it’s even worth the risk of being vulnerable.",
         "schema": {
-          "triggers": [
-            "pressure",
-            "risk of being seen as weak or needy"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "manage things on my own",
-            "I end up feeling isolated",
-            "stuck between wanting to reach out and being terrified"
+            "I have this constant battle in my head",
+            "Is it even worth the risk of being vulnerable?"
           ],
           "emotions": [
-            "fear",
-            "isolation"
+            "fear"
           ],
           "behaviors": [
-            "manage things on my own",
-            "avoid reaching out"
+            "want to reach out and show what I’m really feeling"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Pressured by others (finding)",
-            "Fear of being a burden to others (finding)",
-            "Feeling alienated (finding)"
+            "Fear of losing emotional control (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)"
+            "Anxiety about going crazy (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Emotionally distant (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the pressure you're facing is really weighing on you, and I hear the struggle between wanting to ask for help and worrying about how others might see you. That tension between reaching out and staying isolated can feel incredibly heavy, doesn't it?",
-        "reasoning": null,
+        "response": "It makes sense that you'd feel caught between wanting to connect and worrying about the outcome. That internal conflict can feel overwhelming, and it's completely understandable why you might hesitate.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like the pressure you're facing is really weighing on you, and I hear the struggle between wanting to ask for help and worrying about how others might see you. That tension between reaching out and staying isolated can feel incredibly heavy, doesn't it?",
-          "socratic_questioning": "It makes sense that you’d feel that way—managing things alone can seem like the only option to avoid feeling vulnerable. But when you’re stuck in that cycle, what impact do you think it’s having on how you actually feel day to day?",
-          "cognitive_restructuring": "It makes sense that you'd feel that pressure to manage things alone, but I wonder if you've ever considered that reaching out might actually help lighten the load? Sometimes, sharing what you're going through can reduce the weight you're carrying."
+          "validate_and_reflect": {
+            "response": "It makes sense that you'd feel caught between wanting to connect and worrying about the outcome. That internal conflict can feel overwhelming, and it's completely understandable why you might hesitate.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like there's a lot going on inside, and that tension between wanting to connect and feeling overwhelmed by fear can be exhausting. Can you tell me more about what makes that fear feel so strong?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "That sounds really challenging. What evidence suggests it's a constant battle?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -193,45 +253,55 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does. It's like this tug-of-war inside me all the time. I want to connect with people, but there’s this voice that tells me to just keep it to myself. Sometimes I feel so tired of fighting it. I wish it didn’t feel so daunting to be open.",
+        "query": "Yeah, it really is overwhelming. Like, part of me craves that connection and wants to be seen, but then there's this other part that just wants to hide. I sometimes think maybe it’s easier to just keep my distance than to put myself out there and risk feeling rejected or judged.",
         "schema": {
           "triggers": [
-            "want to connect with people",
-            "voice telling to keep it to myself"
+            "wanting connection",
+            "risk of rejection",
+            "risk of judgment"
           ],
           "automatic_thoughts": [
-            "tug-of-war inside me",
-            "feel tired of fighting it",
-            "wish it didn’t feel so daunting to be open"
+            "easier to keep my distance",
+            "risk feeling rejected",
+            "risk feeling judged"
           ],
           "emotions": [
-            "tired",
-            "daunting"
+            "overwhelmed"
           ],
-          "behaviors": []
+          "behaviors": [
+            "wanting to hide"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Introvert (finding)",
-            "Feeling alienated (finding)"
+            "Feeling alienated (finding)",
+            "Feeling isolated (finding)"
           ],
           "neutral": [
             "Social isolation (rejection) (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Limited social contact (finding)",
+            "Social isolation (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying this constant internal battle, and the exhaustion you feel makes complete sense. The weight of holding those thoughts and emotions alone can be draining, even if you're not always saying them out loud. It's completely understandable why opening up might feel so overwhelming at times.",
-        "reasoning": null,
+        "response": "It makes sense that you'd feel caught between wanting to connect and needing to protect yourself from potential hurt. That internal conflict can definitely feel overwhelming, especially when you're weighing the risks of rejection or judgment.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're carrying this constant internal battle, and the exhaustion you feel makes complete sense. The weight of holding those thoughts and emotions alone can be draining, even if you're not always saying them out loud. It's completely understandable why opening up might feel so overwhelming at times.",
-          "socratic_questioning": "It sounds like there's a lot of inner conflict for you right now. Can you tell me more about what makes being open feel so exhausting? And what does that feeling of being open actually remind you of?",
-          "cognitive_restructuring": "It sounds like there's a lot of internal conflict for you right now. The tension between wanting to connect and feeling overwhelmed by it must be exhausting. What do you think might be making this struggle feel so heavy?"
+          "validate_and_reflect": {
+            "response": "It makes sense that you'd feel caught between wanting to connect and needing to protect yourself from potential hurt. That internal conflict can definitely feel overwhelming, especially when you're weighing the risks of rejection or judgment.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It makes sense that you'd feel caught between wanting to connect and wanting to protect yourself. Can you tell me a bit more about what happens when you keep your distance?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that you'd feel caught between wanting to connect and wanting to protect yourself. When you're worried about being judged or rejected, it can feel safer to keep your distance. Have you ever considered that maybe stepping out just a little could change how you see the outcome?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -239,47 +309,64 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is exhausting. I guess I worry that if I share too much, people might not know how to respond or might judge me. It's like I’m stuck in this cycle of wanting to be genuine but feeling like I can't show that side of myself. I just don’t want to burden anyone or make them feel uncomfortable.",
+        "query": "Exactly. It's like my mind is constantly going back and forth. I want to believe people will understand me, but there's always that little voice that tells me it's safer to stay quiet. Some days, I just feel so tired of that back and forth, you know? It makes it hard to even know what I really want.",
         "schema": {
-          "triggers": [
-            "sharing too much",
-            "people might judge me",
-            "wanting to be genuine"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "people might not know how to respond",
-            "I can't show that side of myself",
-            "I don’t want to burden anyone",
-            "make them feel uncomfortable"
+            "people will understand me",
+            "it's safer to stay quiet"
           ],
           "emotions": [
-            "exhaustion",
-            "worry"
+            "tired"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of saying the wrong thing (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Fear of being a burden to others (finding)"
+            "Repressing thoughts (finding)"
           ],
           "neutral": [
-            "Fear of writing in public (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about going crazy (finding)",
+            "Difficulty controlling emotions (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Loud thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that sharing feels exhausting when you're worried about how others might respond. It sounds like you're caught between wanting to be genuine and feeling like that might put others in an uncomfortable position. It takes a lot of energy to try to balance those competing needs.",
-        "reasoning": null,
+        "response": "It sounds like you're carrying a lot of internal conflict, juggling the desire to be understood with the fear of saying the wrong thing. That exhaustion you mentioned seems to come from being caught in that mental tug-of-war, which can make it really draining to figure out what you truly need.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It makes sense that sharing feels exhausting when you're worried about how others might respond. It sounds like you're caught between wanting to be genuine and feeling like that might put others in an uncomfortable position. It takes a lot of energy to try to balance those competing needs.",
-          "socratic_questioning": "It makes sense that sharing might feel exhausting when you're worried about how others will respond. Could you tell me more about what happens when you don’t share?",
-          "cognitive_restructuring": "It sounds like you're worried that sharing more might lead to awkwardness or misunderstanding. Maybe it's worth considering that others might respond differently than you expect, or that some discomfort could actually invite deeper connection."
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot of internal conflict, juggling the desire to be understood with the fear of saying the wrong thing. That exhaustion you mentioned seems to come from being caught in that mental tug-of-war, which can make it really draining to figure out what you truly need.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It makes sense that this internal conflict feels exhausting. When you mentioned staying quiet, what happens when you do that?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Repressing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Emotions",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "I hear that internal conflict can be exhausting. Can you think of a time when staying quiet actually helped you feel more at ease?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -287,46 +374,49 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does take a toll. I guess that’s why I often choose to just stay quiet. I’d rather keep the peace than risk causing any awkwardness or concern. But then I end up feeling more alone, like I’m in this bubble that no one can penetrate. It’s a tough spot to be in.",
+        "query": "Yeah, that really hits home. It’s exhausting to feel torn like that all the time. I think a part of me just wants to be accepted as I am, but then I doubt if I’m even worth that. I keep thinking maybe I should just settle for what’s comfortable instead of risking that struggle.",
         "schema": {
-          "triggers": [
-            "causing awkwardness",
-            "causing concern"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I’d rather keep the peace",
-            "I end up feeling more alone",
-            "I’m in this bubble that no one can penetrate"
+            "I doubt if I’m even worth acceptance",
+            "Maybe I should just settle for what’s comfortable"
           ],
           "emotions": [
-            "alone"
+            "exhaustion"
           ],
-          "behaviors": [
-            "choose to just stay quiet"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Social isolation (finding)",
-            "Feeling alienated (finding)"
+            "Feeling unwanted (finding)",
+            "Feeling trapped (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)",
-            "Fear of being in a small group (finding)"
+            "Difficulty understanding own emotions (finding)",
+            "Anxiety about altered body image (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Unable to understand own emotions (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like staying quiet can feel like it's creating more distance between you and others, even though you're trying to keep things peaceful. That must be really draining, and it makes sense you'd feel caught in a cycle where silence ends up making you feel more alone. It's understandable how that could become a difficult pattern to break.",
-        "reasoning": null,
+        "response": "It makes sense that this would feel overwhelming. When you're caught between wanting acceptance and doubting your own worth, it can create a lot of internal tension. It's completely understandable how that might drain your energy.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like staying quiet can feel like it's creating more distance between you and others, even though you're trying to keep things peaceful. That must be really draining, and it makes sense you'd feel caught in a cycle where silence ends up making you feel more alone. It's understandable how that could become a difficult pattern to break.",
-          "socratic_questioning": "It makes sense that avoiding conflict might feel safer, but how does staying quiet actually affect the peace you're trying to keep?",
-          "cognitive_restructuring": "It sounds like staying quiet helps you avoid conflict, but it also makes you feel more isolated. Have you ever wondered what happens when you do speak up?"
+          "validate_and_reflect": {
+            "response": "It makes sense that this would feel overwhelming. When you're caught between wanting acceptance and doubting your own worth, it can create a lot of internal tension. It's completely understandable how that might drain your energy.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It makes sense that this feeling would be draining. When you mention wanting to settle for comfort, what makes you think that might be the only option?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a heavy burden, and it's completely understandable why that would feel draining. When you mentioned doubting your own worth, I wonder if there's a part of you that believes acceptance can only come if you're perfect or meet certain expectations?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -334,43 +424,61 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel that way. I mean, I just want to feel connected, but then I push people away without even realizing it. It’s like I’m holding back so much that it’s hard to let anyone in. And I guess part of me fears that if I finally let those walls down, it might just be too much for anyone to handle.",
+        "query": "Yeah, it really does feel like a constant tug-of-war. Sometimes, I find myself just trying to put on a brave face, but inside, it’s like this storm is brewing. I wish I could just shake off those doubts and really believe that I'm enough, but it’s hard.",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "I push people away without even realizing it",
-            "If I finally let those walls down, it might just be too much for anyone to handle"
+            "I wish I could just shake off those doubts",
+            "I really believe that I'm enough"
           ],
           "emotions": [
-            "fear"
+            "anxiety"
           ],
           "behaviors": [
-            "holding back",
-            "pushing people away"
+            "put on a brave face"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)"
+            "Feeling trapped (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)",
-            "Social isolation (finding)",
-            "Fear of being in a small group (finding)"
+            "Pressured by others (finding)",
+            "Anxiety about going crazy (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that you're feeling conflicted about wanting to connect while fearing that vulnerability might be overwhelming. That tension between reaching out and worrying about being met with rejection can create a lot of internal struggle.",
-        "reasoning": null,
+        "response": "It sounds like you're carrying a heavy emotional burden, and the effort to maintain a brave front might be exhausting. Can you tell me more about what makes you doubt whether you're enough?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're carrying a lot of weight with that fear, and it's completely understandable why it might feel overwhelming. The way you're holding back seems to be a defense against that very fear, even if it keeps you feeling more alone than before. You're showing a lot of courage just by sharing this.",
-          "socratic_questioning": "It makes sense that you'd feel that way—wanting to protect yourself, but worried about overwhelming others. Can you tell me more about what happens when you do let someone in?",
-          "cognitive_restructuring": "It sounds like you're worried that being vulnerable might overwhelm others. Let me ask—have you ever noticed a time when someone responded differently than you expected? Sometimes, what feels like too much to us might not be as challenging for others as we imagine."
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot of internal conflict, and I can see how putting on a brave face might feel necessary when you're dealing with such strong emotions. That courage is really admirable, even if it comes with a storm brewing underneath.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling trapped (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like there's a lot of internal conflict for you right now. When you mention feeling like you're putting on a brave face while a storm is brewing inside, what makes you feel like that storm is particularly strong today?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a heavy internal conflict, trying to maintain strength while feeling overwhelmed by self-doubt. When you say you wish you could believe you're enough, what makes you think that might not be true?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -378,62 +486,21 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel that way. I just want to feel connected, but I end up pushing people away without realizing it. It’s like I’m holding back so much that it’s hard to let anyone in. And part of me fears that if I finally let those walls down, it might be too much for anyone to handle.",
+        "query": "I guess it’s all these moments where I feel like I don’t measure up. Like, when I see others doing well or getting attention, I start to wonder why I can’t be like that. It just makes me feel small, like maybe I’m not doing enough or that I’ll always be in the shadows. It just... it makes it hard to trust that I really matter.",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "seeing others doing well",
+            "getting attention from others"
+          ],
           "automatic_thoughts": [
-            "I end up pushing people away without realizing it",
-            "I'm holding back so much",
-            "If I finally let those walls down, it might be too much for anyone to handle"
+            "I don’t measure up",
+            "I can’t be like that",
+            "I’m not doing enough",
+            "I’ll always be in the shadows",
+            "I don’t really matter"
           ],
           "emotions": [
-            "fear"
-          ],
-          "behaviors": [
-            "pushing people away"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)"
-          ],
-          "neutral": [
-            "Social isolation (finding)",
-            "Social isolation (rejection) (finding)",
-            "Fear of being in a small group (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot of emotional weight, and it makes sense that you'd feel hesitant to let others in. The fear of overwhelming someone or being misunderstood can be really paralyzing. It's completely understandable why you might feel that way, especially when you're already holding so much back.",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're carrying a lot of emotional weight, and it makes sense that you'd feel hesitant to let others in. The fear of overwhelming someone or being misunderstood can be really paralyzing. It's completely understandable why you might feel that way, especially when you're already holding so much back.",
-          "socratic_questioning": "It sounds like you're carrying a lot of unspoken weight, and that fear of overwhelming others might be tied to some deep-seated beliefs about yourself. What might be behind that worry, and how does it connect to the walls you mentioned?",
-          "cognitive_restructuring": "It makes sense that you'd feel conflicted about opening up—there's a lot to unpack there. What do you think happens when you imagine lowering your walls?"
-        }
-      }
-    },
-    {
-      "turn": 9,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it really does feel heavy sometimes. I don’t want to make anyone uncomfortable or feel like they have to take care of me. But then it leaves me feeling so alone with all this stuff. I just wish I could find a way to express what I’m feeling without that fear of burdening someone. It’s frustrating.",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I don’t want to make anyone uncomfortable",
-            "I have to take care of me",
-            "I wish I could find a way to express what I’m feeling",
-            "I fear burdening someone"
-          ],
-          "emotions": [
-            "alone",
-            "frustrating"
+            "small"
           ],
           "behaviors": []
         },
@@ -443,22 +510,95 @@
             "Feeling isolated (finding)"
           ],
           "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Lack of pride (finding)",
+            "Feels life is meaningless (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that you'd feel that way—when you're worried about making others uncomfortable or feeling like a burden, it can definitely create a sense of isolation. But I wonder, how do you think that reluctance to express yourself might actually be affecting your own emotional well-being over time?",
-        "reasoning": null,
+        "response": "It sounds like those comparisons can really amplify feelings of being overlooked or insignificant. It makes sense that witnessing others' successes might stir up some discomfort about your own place in the world. We can work together to gently explore these thoughts and see what might be fueling them.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It makes sense that you'd feel that way—when you're worried about making others uncomfortable or feeling like a burden, it can definitely create a sense of isolation. But I wonder, how do you think that reluctance to express yourself might actually be affecting your own emotional well-being over time?",
-          "socratic_questioning": "It sounds like you're carrying a lot of pressure, especially around making others feel responsible for your well-being. Can you tell me more about a time when you felt like you were imposing on someone? What did they actually do or say in response?",
-          "cognitive_restructuring": "It makes sense that sharing your feelings can feel overwhelming, especially when you're worried about how others might respond. But have you ever considered that people might actually appreciate your honesty and want to support you?"
+          "validate_and_reflect": {
+            "response": "It sounds like those comparisons can really amplify feelings of being overlooked or insignificant. It makes sense that witnessing others' successes might stir up some discomfort about your own place in the world. We can work together to gently explore these thoughts and see what might be fueling them.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those comparisons are really weighing on you. Can you tell me more about what makes you think you don't measure up? And when you say you feel small, what's the evidence that supports that feeling?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that seeing others succeed can bring up feelings of inadequacy. However, it's important to consider that everyone experiences moments of self-doubt, even when others may appear to be doing well. Perhaps there are aspects of your own strengths and accomplishments that you might be overlooking.",
+            "reasoning": null
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really does. When I see others thriving, it kind of hits me in a tender spot. It’s like a reminder of all the things I feel like I’m not doing or achieving. I guess deep down, I just want to feel like I belong or that I make a difference somehow. But then those thoughts just spiral and make me feel even more lost.",
+        "schema": {
+          "triggers": [
+            "seeing others thriving"
+          ],
+          "automatic_thoughts": [
+            "reminder of all the things I feel like I’m not doing or achieving",
+            "I just want to feel like I belong",
+            "I make a difference somehow",
+            "those thoughts just spiral"
+          ],
+          "emotions": [
+            "tenderness",
+            "lost"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Altruism - mental defense mechanism (finding)"
+          ],
+          "contradiction": [
+            "Feels life is meaningless (finding)",
+            "Feeling empty (finding)",
+            "Feeling content (finding)",
+            "Positive self thoughts (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like seeing others succeed can really stir up some tender feelings for you, as if it highlights areas where you might feel unseen or unfulfilled. That desire to belong and make a difference seems to be a deep part of what you're holding onto, even when it leads to a sense of being lost.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like seeing others succeed can really stir up some tender feelings for you, as if it highlights areas where you might feel unseen or unfulfilled. That desire to belong and make a difference seems to be a deep part of what you're holding onto, even when it leads to a sense of being lost.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It makes sense that seeing others thrive might evoke those tender feelings. When you say you feel like you're not doing or achieving enough, what makes you think that's true?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that seeing others thrive might feel like a reminder of your own struggles. Could you tell me more about what you think actually happens when you see others doing well—how does that affect your sense of belonging or purpose?",
+            "reasoning": null
+          }
         }
       }
     }

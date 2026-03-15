@@ -48,13 +48,36 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly difficult to feel that way, especially when you're surrounded by people who care about you. I can only imagine how overwhelming it must be to feel unseen or unheard, even when others are right there with you. It’s completely understandable that you’d feel this way, and it’s okay to be honest about how heavy these feelings",
-        "reasoning": null,
+        "response": "It sounds like you're carrying a heavy sense of emptiness, even when surrounded by people who care about you. That feeling of not having anyone to talk to or a place you truly belong might be weighing on you deeply. It’s completely understandable that you’d feel this way, and it’s okay to explore how these thoughts are affecting your daily life.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds incredibly difficult to feel that way, especially when you're surrounded by people who care about you. I can only imagine how overwhelming it must be to feel unseen or unheard, even when others are right there with you. It’s completely understandable that you’d feel this way, and it’s okay to be honest about how heavy these feelings",
-          "socratic_questioning": "That's really tough to navigate, when you're surrounded by people you care about but still feel this emptiness. Can you tell me how being with others affects that feeling, and whether you think your",
-          "cognitive_restructuring": "It sounds like you're carrying a heavy weight that's hard to shake, even when surrounded by people who care about you. Maybe there's something about how you're interpreting these connections—perhaps they feel different than you expect?"
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a heavy sense of emptiness, even when surrounded by people who care about you. That feeling of not having anyone to talk to or a place you truly belong might be weighing on you deeply. It’s completely understandable that you’d feel this way, and it’s okay to explore how these thoughts are affecting your daily life.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're struggling to feel connected even when you're surrounded by people who care about you. Can you tell me more about what makes it hard for you to feel like you belong?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling empty (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feels life is meaningless (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a deep sense of emptiness, even when surrounded by people who care about you. This feeling might be telling you something about your inner world, perhaps that you're struggling to find connection or meaning in relationships. Let's explore what might be fueling this void.",
+            "reasoning": null
+          }
         }
       }
     },
@@ -62,45 +85,52 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just... sometimes it feels like I’m screaming inside, but nobody can hear me, you know? I look around and see people who want to support me, but I just can’t seem to reach out. It’s like this invisible wall that I can’t break through, and that makes everything seem even heavier. I feel like I should be okay, but... it’s exhausting",
+        "query": "Yeah, I guess it does feel heavy sometimes. I mean, it’s like I’m in a crowd, but I still feel... alone, you know? Even when people reach out, I struggle to let them in. It's hard to shake off this feeling that I don’t really fit anywhere.",
         "schema": {
           "triggers": [
-            "seeing people who want to support me"
+            "being in a crowd",
+            "people reaching out"
           ],
           "automatic_thoughts": [
-            "I’m screaming inside, but nobody can hear me",
-            "I can’t seem to reach out",
-            "there's an invisible wall I can’t break through",
-            "I should be okay"
+            "I don’t really fit anywhere",
+            "I struggle to let them in"
           ],
           "emotions": [
-            "exhaustion"
+            "alone",
+            "heavy"
           ],
-          "behaviors": [
-            "not reaching out"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Feeling like wanting to escape (finding)",
-            "Feeling suicidal (finding)",
+          "entailment": [
             "Feeling isolated (finding)",
-            "Feels everything is futile (finding)",
-            "Feeling despair (finding)"
+            "Feeling abandoned (finding)",
+            "Feeling unwanted (finding)",
+            "Feeling alienated (finding)"
+          ],
+          "neutral": [
+            "Fear of being a burden to others (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the exhaustion and isolation you're feeling might be weighing heavily on you, even when others seem available to support. The sense of being blocked or unseen could be making things feel incredibly difficult right now.",
-        "reasoning": null,
+        "response": "It sounds like being surrounded by others can still leave you feeling quite alone, and it might be really difficult to accept their attempts to connect. That sense of not quite fitting in could be weighing on you, making it hard to feel truly included or understood.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like the exhaustion and isolation you're feeling might be weighing heavily on you, even when others seem available to support. The sense of being blocked or unseen could be making things feel incredibly difficult right now.",
-          "socratic_questioning": "",
-          "cognitive_restructuring": ""
+          "validate_and_reflect": {
+            "response": "It sounds like being surrounded by others can still leave you feeling quite alone, and it might be really difficult to accept their attempts to connect. That sense of not quite fitting in could be weighing on you, making it hard to feel truly included or understood.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It makes sense that being in a crowd can feel heavy when you're struggling to connect. Can you tell me more about the times when you feel like you might actually fit in, even for just a moment?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that you'd feel that way when surrounded by others, especially when reaching out feels difficult. When you say you don't really fit anywhere, what makes you think that might be true?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -108,30 +138,29 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel like that. It’s like I’m stuck in my own head while everyone else is outside living their lives. I want to connect, but then I get this wave of... I don't know, fear maybe? Like, what if they don’t really understand me? Or worse, what if I push them away?",
+        "query": "It feels heavy sometimes, like I'm surrounded by people but still completely alone. Even when someone reaches out, I find it hard to let them in. There's this constant nagging feeling that I just don’t fit anywhere.",
         "schema": {
           "triggers": [
-            "feeling stuck in my own head",
-            "everyone else is outside living their lives"
+            "surrounded by people",
+            "someone reaches out"
           ],
           "automatic_thoughts": [
-            "what if they don’t really understand me?",
-            "what if I push them away?"
+            "I just don’t fit anywhere",
+            "I find it hard to let them in"
           ],
           "emotions": [
-            "fear"
+            "heavy",
+            "alone"
           ],
-          "behaviors": [
-            "want to connect"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
             "Feeling isolated (finding)",
             "Feeling alienated (finding)",
-            "Social isolation (finding)",
-            "Fear of being in a small group (finding)",
-            "Feeling like wanting to escape (finding)"
+            "Feeling abandoned (finding)",
+            "Feeling empty (finding)",
+            "Fear of being in a small group (finding)"
           ],
           "neutral": [],
           "contradiction": []
@@ -139,13 +168,36 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that you'd feel that way—like you're caught between wanting to connect and worrying about pushing people away. That internal conflict can really create a sense of being stuck, even when others seem to be moving forward. It’s understandable how that might feel overwhelming.",
-        "reasoning": null,
+        "response": "It sounds really difficult to feel that way, especially when you're surrounded by others but still feel completely alone. That sense of not fitting in must be incredibly heavy for you.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It makes sense that you'd feel that way—like you're caught between wanting to connect and worrying about pushing people away. That internal conflict can really create a sense of being stuck, even when others seem to be moving forward. It’s understandable how that might feel overwhelming.",
-          "socratic_questioning": "It makes sense that this thought would bring up fear. When you imagine that connection might push people away, how does that actually affect your ability to reach out?",
-          "cognitive_restructuring": "It makes sense that you'd feel hesitant when thinking about connecting with others, especially when you're feeling stuck inside your own head. Let’s try to look at that moment when you feel fear—what did you notice about the people around you? Was there any small moment where connection felt possible?"
+          "validate_and_reflect": {
+            "response": "It sounds really difficult to feel that way, especially when you're surrounded by others but still feel completely alone. That sense of not fitting in must be incredibly heavy for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being in a small group",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like being surrounded by people can still leave you feeling quite alone. When someone reaches out, it might be hard to accept that connection. How do you imagine that interaction might unfold if you could let them in?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a heavy burden, even amidst others. When you say you feel like you don't fit in, what makes you think that might not be true?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -153,45 +205,90 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it is overwhelming. I mean, I want to be open and let people in, but then I think about all the times I’ve tried and it didn't go well. It's like this cycle of wanting connection but being terrified of rejection. I feel so... alone with it. It’s frustrating. Why can’t it just be easier?",
+        "query": "It feels heavy sometimes, like I'm surrounded by people but still completely alone. Even when someone reaches out, I find it hard to let them in. There’s this nagging feeling that I just don’t fit anywhere, and it makes me feel... lost.",
         "schema": {
           "triggers": [
-            "wanting connection",
-            "thinking about past attempts"
+            "surrounded by people",
+            "someone reaches out"
           ],
           "automatic_thoughts": [
-            "it didn't go well",
-            "terrified of rejection",
-            "why can’t it just be easier"
+            "I just don’t fit anywhere"
           ],
           "emotions": [
-            "overwhelming",
             "alone",
-            "frustrating"
+            "lost"
           ],
-          "behaviors": []
+          "behaviors": [
+            "find it hard to let them in"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Social isolation (rejection) (finding)",
+          "entailment": [
             "Feeling isolated (finding)",
+            "Feeling abandoned (finding)",
             "Feeling alienated (finding)",
-            "Social isolation (finding)",
-            "Limited social contact (finding)"
+            "Feeling empty (finding)",
+            "Feeling unwanted (finding)"
           ],
+          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds really difficult to navigate those conflicting feelings—wanting to connect while also fearing the possibility of rejection. The frustration you're experiencing seems to stem from feeling stuck in a cycle of hope and disappointment. It's completely understandable how that might leave you feeling overwhelmed and alone.",
-        "reasoning": null,
+        "response": "It sounds like that weight is really heavy, especially when you're surrounded by others but still feel so alone. That persistent feeling of not fitting in must be really draining.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds really difficult to navigate those conflicting feelings—wanting to connect while also fearing the possibility of rejection. The frustration you're experiencing seems to stem from feeling stuck in a cycle of hope and disappointment. It's completely understandable how that might leave you feeling overwhelmed and alone.",
-          "socratic_questioning": "",
-          "cognitive_restructuring": "It makes sense that you feel overwhelmed by this cycle—wanting to connect while fearing rejection can feel like a heavy burden. Maybe you could think about one small step you've taken toward connection in the past, even if it didn't go perfectly?"
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a heavy burden even when surrounded by others, and that sense of being alone must be incredibly difficult. I can see how reaching out from others might feel challenging when you're feeling this way. It takes courage to share these feelings with me.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that feeling of not fitting in is really weighing on you. Can you tell me more about what makes you feel that way? What specific situations or experiences contribute to that sense of being alone?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a heavy weight even amidst others, and that persistent thought about not fitting in must be incredibly draining. Can you tell me about a time when you felt a connection despite that feeling?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -199,46 +296,48 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it feels like I'm just going around in circles. I keep hoping for a different outcome, but it’s like I’m always met with the same walls. It's hard to keep wanting to reach out when it feels so risky. I don’t know, maybe a part of me just expects things to go wrong, you know? It’s like I’m setting myself up for failure every time I",
+        "query": "Yeah, it is. It’s like I’m putting on a mask just to get through the day, but inside, I’m still feeling this emptiness. It makes me question if I’m even worth knowing, you know? Like maybe if I disappeared, no one would really notice.",
         "schema": {
-          "triggers": [
-            "going around in circles",
-            "hoping for a different outcome",
-            "feeling risky"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "always met with the same walls",
-            "expecting things to go wrong",
-            "setting myself up for failure"
+            "I’m putting on a mask just to get through the day",
+            "I’m not worth knowing",
+            "If I disappeared, no one would notice"
           ],
           "emotions": [
-            "frustration"
+            "emptiness"
           ],
-          "behaviors": [
-            "wanting to reach out"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Feeling like wanting to escape (finding)",
-            "Feeling hopeless (finding)",
-            "Anxiety about going crazy (finding)",
-            "Feels everything is futile (finding)",
-            "Loss of hope for the future (finding)"
+          "entailment": [
+            "Feeling empty (finding)",
+            "Feeling abandoned (finding)",
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)",
+            "Feeling of loss of feeling (finding)"
           ],
+          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds really frustrating to feel like you're hitting the same roadblocks again and again, and I can see how that might make reaching out feel overwhelming. It makes sense that you’d hesitate when you feel like you’re just setting yourself up for disappointment.",
-        "reasoning": null,
+        "response": "It sounds like you're carrying a heavy weight of emptiness, even while trying to put on a mask to navigate the day. The thought of disappearing without notice suggests a deep sense of being unseen or unimportant, which must be incredibly painful.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds really frustrating to feel like you're hitting the same roadblocks again and again, and I can see how that might make reaching out feel overwhelming. It makes sense that you’d hesitate when you feel like you’re just setting yourself up for disappointment.",
-          "socratic_questioning": "",
-          "cognitive_restructuring": ""
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a heavy weight of emptiness, even while trying to put on a mask to navigate the day. The thought of disappearing without notice suggests a deep sense of being unseen or unimportant, which must be incredibly painful.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're carrying a lot of weight with that mask, and underneath, there's this persistent emptiness. When you say you wonder if you're not worth knowing, what makes you think that no one would notice if you disappeared?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like the emptiness you're feeling is really hard to manage, and that's why you're putting on a mask just to get through the day. But maybe the mask isn't about hiding your worth—it could be more about how you're coping with the discomfort of that emptiness.",
+            "reasoning": null
+          }
         }
       }
     },
@@ -246,43 +345,65 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is frustrating. It’s like I want to believe things could be different, but then this voice in my head just keeps reminding me of past experiences. I guess I’m just tired of feeling let down. I don’t know how to silence that voice, or even if I want to. It feels safer to just... not try sometimes.",
+        "query": "Yeah, it is painful. It’s like I want to scream for someone to see me, but then I worry they might not want to. I guess I just feel like I’m stuck in this place where I don’t really matter. It's frustrating, you know?",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "things could be different",
-            "reminding me of past experiences",
-            "tired of feeling let down",
-            "feels safer to just not try"
+            "I want to scream for someone to see me",
+            "They might not want to see me",
+            "I feel like I’m stuck in this place where I don’t really matter"
           ],
           "emotions": [
-            "frustration"
+            "painful",
+            "frustrating"
           ],
-          "behaviors": [
-            "not try"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling abandoned (finding)",
+            "Feeling hopeless (finding)",
+            "Feeling unwanted (finding)"
+          ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Loss of hope for the future (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of losing emotional control (finding)",
-            "Feels everything is futile (finding)"
+            "Feeling suicidal (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I hear that frustration, and it sounds like you're carrying a lot of weight from past experiences. It makes sense that avoiding disappointment feels like a way to protect yourself. Let's explore how those feelings might be affecting your choices together.",
-        "reasoning": null,
+        "response": "It sounds like you're feeling really stuck and unseen, which must be incredibly frustrating. The desire to be noticed while worrying about rejection can really amplify those feelings. What do you think makes it hardest to feel seen right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "I hear that frustration, and it sounds like you're carrying a lot of weight from past experiences. It makes sense that avoiding disappointment feels like a way to protect yourself. Let's explore how those feelings might be affecting your choices together.",
-          "socratic_questioning": "",
-          "cognitive_restructuring": "It sounds like you're carrying a lot of weight from past experiences, and that internal dialogue can feel overwhelming. What if we thought about whether avoiding that \"voice\" might actually be keeping you stuck?"
+          "validate_and_reflect": {
+            "response": "It sounds like you're feeling really stuck and unseen, which must be incredibly frustrating. The desire to be noticed while worrying about rejection can really amplify those feelings. What do you think makes it hardest to feel seen right now?",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're caught in a tough spot where you want to be seen, but you're also afraid of being ignored or dismissed. What happens when someone does notice you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're feeling really stuck and invisible, which must be incredibly frustrating. Maybe you could say more about what it feels like when you think no one sees you?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -290,45 +411,48 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I hadn’t really thought about it that way. It’s just... every time I think of reaching out or trying something new, that weight feels heavier, like it's pulling me back. I can see how it stops me from making choices that could be better. But I’m scared too, like... what if it doesn’t work out? What if I end up feeling worse?",
+        "query": "I think it’s that fear of opening up and being vulnerable. If I share too much, what if it just pushes people away? It’s like I’m trapped in my own head, and I don’t know how to break out. I just keep thinking that maybe it’s easier to stay quiet than risk getting hurt.",
         "schema": {
-          "triggers": [
-            "thinking of reaching out",
-            "trying something new"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "that weight feels heavier",
-            "it stops me from making choices",
-            "what if it doesn’t work out?",
-            "what if I end up feeling worse?"
+            "what if it just pushes people away?",
+            "maybe it’s easier to stay quiet than risk getting hurt"
           ],
           "emotions": [
-            "scared"
+            "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Fear of losing emotional control (finding)",
-            "Fear of going out (finding)"
+            "Fear of saying the wrong thing (finding)",
+            "Fear of public speaking (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "neutral": [
-            "Feeling like wanting to escape (finding)",
-            "Anxiety about forced dependence (finding)"
+            "Fear of writing in public (finding)",
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that reaching out or trying something new feels heavy—it's completely understandable to feel hesitant when you're worried about the outcome or how it might affect you. Many people experience that kind of pull toward staying put, even when they know it might not be serving them well.",
-        "reasoning": null,
+        "response": "It sounds like you're carrying a heavy weight from staying silent, and the fear of pushing people away feels like another trap you're trying to escape. I can see how that might make it incredibly difficult to find a way out.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It makes sense that reaching out or trying something new feels heavy—it's completely understandable to feel hesitant when you're worried about the outcome or how it might affect you. Many people experience that kind of pull toward staying put, even when they know it might not be serving them well.",
-          "socratic_questioning": "It makes sense that the thought of something not working out feels heavy. Can you tell me more about how this fear affects your daily life or decisions?",
-          "cognitive_restructuring": "It makes sense that reaching out or trying something new feels overwhelming. The fear of things getting worse can make it hard to imagine a positive outcome. But maybe we can explore what it would look like if the situation didn’t have to be all-or-nothing—what might happen if we just considered it as one possibility among many?"
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a heavy weight from staying silent, and the fear of pushing people away feels like another trap you're trying to escape. I can see how that might make it incredibly difficult to find a way out.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're worried that being vulnerable might lead to rejection or push people away. How do you imagine others would respond if you shared more?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that you'd worry about vulnerability leading to rejection. But have you ever considered that staying quiet might also carry risks, like missing out on meaningful connections or allowing your own feelings to grow unspoken?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -336,45 +460,50 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just... it feels like I’m caught between wanting to move forward and being scared of what might happen. Sometimes I think about how nice it would be to break free from all this, but then I pull back. It’s just hard to shake off that voice that makes me doubt if it’s worth it. I feel like I’m missing out, but it's like I can’t",
+        "query": "It really does feel like a weight, like I'm just holding everything in to avoid the fallout. And the more I think about it, the more I feel stuck. There’s this part of me that really wants to connect, but then another part says it’s safer to just keep it all bottled up. It’s confusing, for sure.",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "I’m caught between wanting to move forward and being scared of what might happen",
-            "how nice it would be to break free from all this",
-            "I doubt if it’s worth it",
-            "I’m missing out"
+            "I'm just holding everything in to avoid the fallout",
+            "It's safer to just keep it all bottled up"
           ],
           "emotions": [
-            "fear"
+            "confusion",
+            "stuck"
           ],
-          "behaviors": [
-            "pull back",
-            "can’t shake off that voice"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling like wanting to escape (finding)",
-            "Fear of losing emotional control (finding)",
-            "Feeling trapped (finding)",
-            "Fear of being left alone during period of dependence (finding)"
+            "Feeling isolated (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)"
+            "Feeling abandoned (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling like wanting to escape (finding)",
+            "Emotionally detached (finding)",
+            "Feeling alienated (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're really caught in a tough internal tug-of-war, isn't it? The pull toward something better is strong, but the fear keeps pulling you back. That inner voice of doubt seems to be weighing you down, doesn't it?",
-        "reasoning": null,
+        "response": "It sounds like there's a heavy burden you're carrying, and it feels like you're caught between wanting to connect and fearing the consequences. That sense of being stuck can make it hard to see a way forward, but it's okay to explore what's really driving those conflicting feelings.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're really caught in a tough internal tug-of-war, isn't it? The pull toward something better is strong, but the fear keeps pulling you back. That inner voice of doubt seems to be weighing you down, doesn't it?",
-          "socratic_questioning": "It sounds like you're caught between a desire to move forward and some worries about what might happen. Can you tell me more about what those worries are, and how they make you feel? What’s the impact of holding onto them?",
-          "cognitive_restructuring": "It makes sense that you'd feel caught between wanting to move forward and fearing what might happen. When you're stuck in that internal conflict, it can feel overwhelming. What would your fear be if you actually succeeded in breaking free?"
+          "validate_and_reflect": {
+            "response": "It sounds like there's a heavy burden you're carrying, and it feels like you're caught between wanting to connect and fearing the consequences. That sense of being stuck can make it hard to see a way forward, but it's okay to explore what's really driving those conflicting feelings.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're feeling caught between wanting to connect and fearing that opening up might lead to negative consequences. Can you tell me more about how you think keeping things bottled up actually affects your ability to connect with others?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you're carrying a heavy burden, and the tension between wanting to connect and feeling safer keeping things inside is really confusing. Can you tell me more about how holding everything in affects your sense of safety or connection?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -382,45 +511,66 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel like a tug-of-war. I want to believe that things can change, but it’s hard when that doubt is so loud. It’s like I’m fighting against myself, and it can be exhausting. I just wish I could find a way to silence that voice, or at least tune it out a little. Sometimes I wonder if I’m just stuck like this forever",
+        "query": "Yeah, it does feel like a burden. I want to reach out, but the fear of what might happen always pulls me back. Sometimes I wonder if it's worth the risk to let someone in. It's just... really hard to be open when you're so used to hiding, you know?",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "things can change",
-            "doubt is so loud",
-            "fighting against myself",
-            "stuck like this forever"
+            "fear of what might happen",
+            "wonder if it's worth the risk to let someone in",
+            "hard to be open when you're so used to hiding"
           ],
           "emotions": [
-            "exhaustion"
+            "fear"
           ],
           "behaviors": [
-            "wish to silence that voice",
-            "wish to tune it out"
+            "want to reach out",
+            "pulls me back"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling trapped (finding)",
-            "Feeling powerless (finding)"
+            "Fear of being a burden to others (finding)",
+            "Fear of being watched (finding)",
+            "Fear of abandonment (finding)",
+            "Feeling isolated (finding)",
+            "Pressured by others (finding)"
           ],
-          "neutral": [
-            "Difficulty controlling emotions (finding)",
-            "Fear of losing emotional control (finding)",
-            "Difficulty understanding own emotions (finding)"
-          ],
+          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're caught in an internal tug-of-war, wishing things could change but feeling overwhelmed by doubt. That exhaustion must be incredibly draining, especially when you're fighting against your own thoughts. It's completely understandable to wish you could find some relief from the constant struggle.",
-        "reasoning": null,
+        "response": "It sounds like carrying that weight of worry is really heavy for you. The fear of burdening others can make it incredibly difficult to open up, even when you might want to.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you're caught in an internal tug-of-war, wishing things could change but feeling overwhelmed by doubt. That exhaustion must be incredibly draining, especially when you're fighting against your own thoughts. It's completely understandable to wish you could find some relief from the constant struggle.",
-          "socratic_questioning": "",
-          "cognitive_restructuring": "It sounds like you're carrying a heavy burden, especially when you feel like you're fighting against yourself. Maybe exploring whether there's room for small changes could help ease the exhaustion you're feeling. What if we thought about it differently—perhaps things don’t have to be stuck forever, and there might be ways to find relief even if things feel overwhelming right now?"
+          "validate_and_reflect": {
+            "response": "It sounds like carrying that weight of worry is really heavy for you. The fear of burdening others can make it incredibly difficult to open up, even when you might want to.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're carrying a lot of pressure when you think about reaching out. Can you tell me more about what specifically worries you when you imagine letting someone in? What's the worst-case scenario you're imagining?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Isolation",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that you'd feel that way—when you're used to keeping things inside, it can be really hard to open up. But maybe it's worth considering that reaching out doesn't always mean you'll end up being a burden. Sometimes, sharing can actually help both you and the other person.",
+            "reasoning": null
+          }
         }
       }
     },
@@ -428,45 +578,55 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is draining. Some days feel heavier than others, and I just want to find a way to feel lighter. I guess sometimes I just don’t know where to start. It’s like I want to scream for help, but the words just get stuck. I keep thinking maybe if I could just push through this, I could get to a better place, but right now it just",
+        "query": "It is heavy. I hate feeling like I might be a burden. It makes me hesitate, like I should just handle things on my own. But then I see people connecting and I think, what’s so wrong with wanting that? It just feels like a constant struggle.",
         "schema": {
           "triggers": [
-            "some days feel heavier than others"
+            "seeing people connecting"
           ],
           "automatic_thoughts": [
-            "I just want to find a way to feel lighter",
-            "I don’t know where to start",
-            "I want to scream for help",
-            "maybe if I could just push through this, I could get to a better place"
+            "I might be a burden",
+            "I should just handle things on my own",
+            "what’s so wrong with wanting that?",
+            "it feels like a constant struggle"
           ],
           "emotions": [
-            "draining"
+            "hate"
           ],
-          "behaviors": []
+          "behaviors": [
+            "hesitate"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Complaining of feeling depressed (finding)",
-            "Feeling despair (finding)"
+            "Fear of being a burden to others (finding)",
+            "Anxiety about forced dependence (finding)"
           ],
           "neutral": [
-            "Extremely emotionally deprived (finding)",
-            "Emotionally deprived (finding)"
+            "Fear of being in a small group (finding)"
           ],
           "contradiction": [
-            "Feeling empty (finding)"
+            "Feeling isolated (finding)",
+            "Social isolation (rejection) (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like carrying that weight is really",
-        "reasoning": null,
+        "response": "It sounds really heavy to feel that way, and I hear how much it hurts to think you might be a burden. It makes sense that you'd hesitate when you see others connecting, especially when it feels like such a struggle for you.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like carrying that weight is really",
-          "socratic_questioning": "",
-          "cognitive_restructuring": ""
+          "validate_and_reflect": {
+            "response": "It sounds really heavy to feel that way, and I hear how much it hurts to think you might be a burden. It makes sense that you'd hesitate when you see others connecting, especially when it feels like such a struggle for you.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're carrying a lot of weight with that feeling. When you see people connecting, does that thought about being a burden make you wonder how it might affect your ability to be part of that?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It makes sense that you'd feel that way—when you see others connecting, it can feel overwhelming to think about adding to their interactions. But maybe there's another way to look at it: what if people actually welcome the chance to support you?",
+            "reasoning": null
+          }
         }
       }
     }

@@ -590,7 +590,7 @@ def run_session(
             raw_reply = therapist_llm.chat(
                 therapist_messages,
                 temperature=0.15,
-                num_predict=5000,
+                num_predict=8000
             ).strip()
 
             therapist_reply = raw_reply
@@ -607,8 +607,8 @@ def run_session(
 
             therapist_reply = therapist_llm.chat(
                 therapist_messages,
-                temperature=0.15,
-                num_predict=5000,
+                temperature=0.1,
+                num_predict=8000,
             ).strip()
 
         if looks_like_therapist_leak(therapist_reply):
@@ -621,8 +621,7 @@ def run_session(
                     )
                 }],
                 temperature=0.1,
-                num_predict=5000,
-                top_p=0.7,
+                num_predict=8000
             ).strip()
 
             if rewritten:
@@ -678,7 +677,6 @@ def run_session(
         if therapist_mode == "cbt_mcot":
             therapist_block["protocol_used"] = protocol_used
             therapist_block["mcot_candidates"] = candidates
-            therapist_block["reasoning"] = reasoning
 
 
         turn_record = {

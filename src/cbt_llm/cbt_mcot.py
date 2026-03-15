@@ -89,8 +89,8 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
 
     raw = llm.chat(
         messages,
-        temperature=0.25,
-        num_predict=5000,
+        temperature=0.1,
+        num_predict=8000
     ).strip()
 
     reasoning = None

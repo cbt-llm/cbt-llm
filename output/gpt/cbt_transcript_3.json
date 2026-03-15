@@ -45,59 +45,69 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re frustrated with yourself for feeling lonely. What evidence do you have that feeling lonely is a personal failing? Are there other ways you might explain why you feel that way even when people are around?",
-        "reasoning": null
+        "response": "What kinds of situations or interactions make you feel most disconnected, even when people are around you? Have you noticed any patterns or thoughts that come up right before you start feeling lonely? What evidence might suggest that you’re not actually alone in those moments?",
+        "reasoning": {
+          "retrieved_concepts_used": [
+            {
+              "concept": "Feeling lonely (finding)",
+              "label": "entailment"
+            },
+            {
+              "concept": "Feeling isolated (finding)",
+              "label": "entailment"
+            }
+          ]
+        }
       }
     },
     {
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I guess I just feel like I should be able to connect with others easily, you know? When I’m surrounded by people, I want to feel included and happy, but instead, it just reminds me how distant I feel. It makes me think there’s something wrong with me, like I’m not doing enough to reach out or be part of things.",
+        "query": "I think I feel most disconnected in large groups or when I’m around people I don’t know well. It’s like I’m there, but I can’t really join in. Right before I start feeling lonely, I often get this voice in my head that says I'm not interesting enough or that others don’t want to talk to me. I guess I know on some level that there are people who",
         "schema": {
           "triggers": [
-            "surrounded by people"
+            "large groups",
+            "people I don’t know well"
           ],
           "automatic_thoughts": [
-            "I should be able to connect with others easily",
-            "there's something wrong with me",
-            "I'm not doing enough to reach out"
+            "I'm not interesting enough",
+            "others don’t want to talk to me"
           ],
           "emotions": [
-            "distant"
+            "disconnected",
+            "lonely"
           ],
-          "behaviors": []
+          "behaviors": [
+            "can't really join in"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Limited social contact (finding)"
+            "Feeling alienated (finding)"
           ],
           "neutral": [
+            "Fear of being in a small group (finding)",
             "Social isolation (rejection) (finding)"
           ],
           "contradiction": [
+            "Feeling isolated (finding)",
             "Social isolation (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you feel a strong expectation that you should connect easily, and when that doesn’t happen you think something is wrong with you. What evidence do you have that you are not doing enough to reach out? Are there moments when you have successfully connected or felt included that might challenge that belief?",
+        "response": "It sounds like being in large groups can feel isolating, and that inner voice can be hard to ignore. What evidence do you have that people don’t want to talk to you? Have there been moments when someone has reached out or engaged with you?",
         "reasoning": {
           "retrieved_concepts_used": [
-            {
-              "concept": "Feeling isolated (finding)",
-              "label": "entailment"
-            },
             {
               "concept": "Feeling alienated (finding)",
               "label": "entailment"
             },
             {
-              "concept": "Limited social contact (finding)",
-              "label": "entailment"
+              "concept": "Social isolation (rejection) (finding)",
+              "label": "neutral"
             }
           ]
         }
@@ -107,76 +117,30 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I have tried to reach out in small ways. I mean, I do make an effort to join conversations or invite people out sometimes. But when it doesn’t go as planned, those moments just feel overshadowed. It’s like they don’t count, and I end up focusing on the awkward silences instead. It’s frustrating because I really want to feel like I belong.",
+        "query": "Yeah, it can be really isolating. I just… I don’t know, it feels like I usually end up standing off to the side, like I’m invisible. Sometimes people do talk to me, and I can have good conversations, but I often focus on the times when it doesn’t go well. It’s hard to remember those positive times when I’m feeling that way.",
         "schema": {
           "triggers": [
-            "conversations",
-            "inviting people out",
-            "moments not going as planned"
+            "standing off to the side",
+            "people not talking to me"
           ],
           "automatic_thoughts": [
-            "those moments just feel overshadowed",
-            "they don’t count",
-            "focusing on the awkward silences"
+            "I’m invisible",
+            "I often focus on the times when it doesn’t go well",
+            "It’s hard to remember those positive times"
           ],
           "emotions": [
-            "frustration"
+            "isolation"
           ],
-          "behaviors": [
-            "trying to reach out",
-            "making an effort to join conversations",
-            "inviting people out"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling alienated (finding)",
-            "Feeling unwanted (finding)"
-          ],
-          "neutral": [
             "Feeling isolated (finding)",
-            "Limited social contact (finding)",
-            "Social isolation (rejection) (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like when a conversation doesn’t flow the way you’d hoped, you feel those moments don’t count. What evidence do you have that those awkward pauses mean you’re not belonging? Could there be other ways to view those silences that might still reflect connection?",
-        "reasoning": null
-      }
-    },
-    {
-      "turn": 3,
-      "patient": {
-        "role": "patient",
-        "query": "I don’t know, it just feels heavy when there’s silence. It’s like everyone’s waiting for someone to say something and I can’t find the words. I wish I could just let it go, but instead, I think it shows I’m not interesting enough or that I shouldn’t be there. It’s hard to see it as anything else.",
-        "schema": {
-          "triggers": [
-            "silence",
-            "everyone waiting for someone to say something"
-          ],
-          "automatic_thoughts": [
-            "I’m not interesting enough",
-            "I shouldn’t be there"
-          ],
-          "emotions": [
-            "heavy",
-            "anxiety"
-          ],
-          "behaviors": [
-            "wish I could just let it go"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling empty (finding)",
-            "Emotionally subdued (finding)",
-            "Fear of social gatherings (finding)",
-            "Feeling of loss of feeling (finding)"
+            "Social isolation (finding)",
+            "Feeling alienated (finding)"
           ],
           "neutral": [
+            "Social isolation (rejection) (finding)",
             "Fear of being in a small group (finding)"
           ],
           "contradiction": []
@@ -184,20 +148,69 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that you’re not interesting, and can you think of times when people have engaged with you? How might you view the silence as a pause rather than a judgment of your worth? You could try noticing one small thing you enjoy about being present, even if you don’t speak right away.",
+        "response": "It sounds like you’re feeling invisible and left on the sidelines, and that tends to make the negative moments stand out more. What evidence do you have that you’re truly invisible, and what evidence might suggest otherwise? Can you think of a recent conversation that felt positive, even if it was brief?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Feeling empty (finding)",
+              "concept": "Feeling isolated",
               "label": "entailment"
             },
             {
-              "concept": "Emotionally subdued (finding)",
+              "concept": "Social isolation",
               "label": "entailment"
             },
             {
-              "concept": "Fear of social gatherings (finding)",
+              "concept": "Feeling alienated",
               "label": "entailment"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I guess I have those moments too. There was this time at my friend’s party when someone asked me about a book I like, and we ended up chatting for a bit. It felt nice. But then it’s like everything else around it just fades away, you know? I keep reminding myself of those good moments, but they just feel so small compared to the times I feel like",
+        "schema": {
+          "triggers": [
+            "friend’s party",
+            "someone asked about a book"
+          ],
+          "automatic_thoughts": [
+            "everything else around it just fades away",
+            "good moments feel small compared to other times"
+          ],
+          "emotions": [
+            "nice"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling of loss of feeling (finding)",
+            "Reappearance of old thoughts (finding)"
+          ],
+          "neutral": [
+            "Pleasant memories (finding)",
+            "Emotionally warm (finding)",
+            "Feeling isolated (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you feel those pleasant moments at the party are fleeting and less significant than other times. What evidence do you have that they’re small? Are there occasions when those moments felt more substantial? How might you reframe them to see their value?",
+        "reasoning": {
+          "retrieved_concepts_used": [
+            {
+              "concept": "Feeling of loss of feeling (finding)",
+              "label": "unknown"
+            },
+            {
+              "concept": "Reappearance of old thoughts (finding)",
+              "label": "unknown"
             }
           ]
         }
@@ -207,19 +220,19 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I mean, I guess there have been moments where people have laughed at my jokes or seemed genuinely interested in what I had to say. But those moments feel so far apart, and I just hold onto the times where it felt like I was invisible. It's hard to think of the silence as anything but a sign that I’m not fitting in; it just feels so... isolating. As for enjoying",
+        "query": "Yeah, I remember that time at my friend’s party when someone asked about a book I like, and it was nice to chat. But then I think about how many times I’ve just stood there feeling invisible. Those good moments feel so small compared to all the times I just feel left out. It’s hard to shake off that feeling.",
         "schema": {
           "triggers": [
-            "people laughing at my jokes",
-            "people seeming interested in what I had to say",
-            "silence"
+            "friend’s party",
+            "someone asked about a book"
           ],
           "automatic_thoughts": [
-            "those moments feel far apart",
-            "I’m not fitting in"
+            "I’ve just stood there feeling invisible",
+            "good moments feel small compared to times I feel left out"
           ],
           "emotions": [
-            "isolating"
+            "nice",
+            "left out"
           ],
           "behaviors": []
         },
@@ -227,32 +240,27 @@
           "entailment": [
             "Feeling isolated (finding)",
             "Feeling alienated (finding)",
-            "Minimal outside social stimulation (finding)"
+            "Feeling abandoned (finding)",
+            "Feeling unwanted (finding)"
           ],
           "neutral": [
-            "Social isolation (finding)"
+            "Social isolation (rejection) (finding)"
           ],
-          "contradiction": [
-            "Sociable mood (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It seems like you’re interpreting silence as a sign that you’re invisible or not fitting in. What evidence do you have that this is always the case? Could there be other explanations for the quiet moments you experience?",
+        "response": "It sounds like those brief moments of connection feel small compared to the times you feel invisible. What evidence do you have that those good moments are truly insignificant? How might you view them as meaningful experiences in their own right?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Feeling isolated",
-              "label": "entailment"
+              "concept": "Feeling of loss of feeling (finding)",
+              "label": "unknown"
             },
             {
-              "concept": "Feeling alienated",
-              "label": "entailment"
-            },
-            {
-              "concept": "Minimal outside social stimulation",
-              "label": "entailment"
+              "concept": "Reappearance of old thoughts (finding)",
+              "label": "unknown"
             }
           ]
         }
@@ -262,40 +270,49 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I think a part of me knows that not every silence is bad, but it’s tough to separate that from how I feel in the moment. Sometimes I wonder if people are just distracted or lost in their thoughts, but my mind goes straight to those negative places. It's like a reflex, and I struggle to believe it's not about me. I don’t want to feel like I’m overthinking it",
+        "query": "I suppose I don’t really have solid evidence, it's more about how they just seem to fade away in my mind. When I think back on those moments, it’s like they’re overshadowed by all the awkward times. I guess I just struggle to hold onto the good feelings after they happen, like they’re fleeting. It’s like my brain just defaults to focusing on the negatives instead of cher",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "not every silence is bad",
-            "people are just distracted or lost in their thoughts",
-            "my mind goes straight to those negative places",
-            "it's not about me",
-            "I’m overthinking it"
+          "triggers": [
+            "thinking back on those moments",
+            "awkward times"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "they just seem to fade away",
+            "my brain defaults to focusing on the negatives"
+          ],
+          "emotions": [
+            "struggle"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Negative automatic thoughts (finding)"
+            "Unpleasant memories (finding)",
+            "Repressing painful memories (finding)",
+            "Pleasant memories (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Repressing thoughts (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Reliving traumatic memories (finding)",
+            "Amnesia for recent events (finding)"
           ],
-          "contradiction": [
-            "Loud thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that the silence is a reflection on you? Are there other explanations that could fit the situation? How might you test whether the negative interpretation is truly accurate?",
+        "response": "It sounds like you feel the good moments slip away, but have you noticed any times when a positive memory stayed with you? What was different about those moments that might have helped them linger? If we could identify those differences, we might find ways to keep the good feelings more present.",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Negative automatic thoughts (finding)",
+              "concept": "Unpleasant memories (finding)",
+              "label": "entailment"
+            },
+            {
+              "concept": "Repressing painful memories (finding)",
+              "label": "entailment"
+            },
+            {
+              "concept": "Pleasant memories (finding)",
               "label": "entailment"
             }
           ]
@@ -306,134 +323,132 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I mean, I guess I can see how sometimes people might just be thinking about something else or even just enjoying the moment. But when I'm in it, it feels so personal, like I’m the one at fault. Testing it sounds nice in theory, but it’s hard to break that habit of jumping to those conclusions. What if I reach out and it ends up being the same? I don",
+        "query": "It’s hard to say... I mean, there are a few times when a good memory has stuck around. Like that chat about the book, I remember feeling really connected in that moment. I guess maybe it was just being in a comfortable space and talking about something I love. But most of the time, it feels like those moments are just passing clouds, you know? It’s frustrating.",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "comfortable space",
+            "chat about the book"
+          ],
           "automatic_thoughts": [
-            "I’m the one at fault",
-            "What if I reach out and it ends up being the same?"
-          ],
-          "emotions": [],
-          "behaviors": [
-            "hard to break the habit of jumping to conclusions"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling unwanted (finding)"
-          ],
-          "neutral": [
-            "Fear of losing emotional control (finding)",
-            "Acting out - mental defense mechanism (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Tends to manipulate others (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of responsibility for how others feel. What evidence do you have that you’re the one at fault, and what evidence might suggest another perspective? Exploring those clues can help you see whether the conclusion you’re jumping to is the only possible one.",
-        "reasoning": null
-      }
-    },
-    {
-      "turn": 7,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, I guess I do feel that weight sometimes. It’s almost like I’ve convinced myself that if things go wrong, it’s because I messed up in some way. But, when I think about it, there have been times when others seemed just as shy or poor at starting conversations. It’s like I forget that everyone has their own struggles, too, and maybe it’s not all on",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "if things go wrong, it’s because I messed up",
-            "everyone has their own struggles"
+            "those moments are just passing clouds"
           ],
           "emotions": [
-            "weight"
+            "connected",
+            "frustrating"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Memories (observable entity)"
+          ],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of being in a small group (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Reappearance of old thoughts (finding)",
+            "Pleasant memories (finding)",
+            "Memory lapses (finding)"
           ],
           "contradiction": [
-            "Feeling isolated (finding)"
+            "Amnesia for remote events (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of self‑blame when things don’t go as planned. What evidence do you have that the problems were entirely your fault, and what other factors might have contributed? How might you reframe the situation to see it as a shared challenge rather than a personal failure?",
+        "response": "It sounds like you’re frustrated that most good moments feel fleeting, almost like passing clouds. What evidence do you have that these memories don’t linger, and can you think of any times when a memory stayed with you longer than you expected? Exploring those examples might help you see a different pattern in how you hold onto experiences.",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Anxiety about making mistakes",
-              "label": "neutral"
-            },
-            {
-              "concept": "Fear of being a burden to others",
-              "label": "neutral"
+              "concept": "Memories (observable entity)",
+              "label": "entailment"
             }
           ]
         }
       }
     },
     {
-      "turn": 8,
+      "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I think you're right, I do carry that blame. I guess when things go wrong, my mind jumps to the idea that if I had only tried harder or been more interesting, it would’ve turned out differently. But maybe it’s not just me; there are so many things at play like mood, timing, or even how others are feeling that day. It feels like a small shift, but",
+        "query": "Yeah, I guess I can see how that might be helpful. I remember a couple of times, like that weekend trip with my friends. We laughed so much and I still think about those moments occasionally. But then the heavy feelings creep back in, and I just feel like they get overshadowed pretty quickly. It’s like I can’t help but remember the times I felt out of place or awkward",
         "schema": {
           "triggers": [
-            "when things go wrong",
-            "mood",
-            "timing",
-            "how others are feeling that day"
+            "weekend trip with friends"
           ],
           "automatic_thoughts": [
-            "if I had only tried harder",
-            "if I had been more interesting, it would’ve turned out differently"
+            "I feel out of place",
+            "I feel awkward"
           ],
-          "emotions": [],
+          "emotions": [
+            "heavy",
+            "sad"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Tends to blame others (finding)",
-            "Feeling a failure (finding)",
-            "Feeling guilt (finding)",
-            "Feeling bad (finding)"
+            "Reappearance of old thoughts (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)"
+            "Repressing painful memories (finding)",
+            "Reliving traumatic memories (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Amnesia for recent events (finding)",
+            "Amnesia for remote events (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re attributing the outcome mainly to your effort. What evidence do you have that trying harder would have changed the result? And what other factors might have contributed to what happened?",
+        "response": "It sounds like those moments of feeling out of place are weighing heavily. What evidence do you have that you were actually out of place or awkward? Are there moments that suggest you were comfortable and enjoyed yourself?",
+        "reasoning": null
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "I mean, I guess I can think of a few times where I was comfortable, like that weekend with my friends. There were definitely laughs and good times. But then, there are also just so many moments where I felt like I didn’t belong, like I was just pretending to fit in. It’s hard to balance those feelings, you know? Sometimes it feels like the awkward moments just take",
+        "schema": {
+          "triggers": [
+            "weekend with friends",
+            "awkward moments"
+          ],
+          "automatic_thoughts": [
+            "I didn’t belong",
+            "I was just pretending to fit in"
+          ],
+          "emotions": [
+            "comfort",
+            "awkwardness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling alienated (finding)",
+            "Feeling unwanted (finding)"
+          ],
+          "neutral": [
+            "Fear of being in a small group (finding)"
+          ],
+          "contradiction": [
+            "Feeling isolated (finding)",
+            "Social isolation (rejection) (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re holding a belief that you’re not truly part of the group. What moments or thoughts make you feel that way, and are there any moments that suggest otherwise? Exploring both sides might help you see a more balanced view.",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Tends to blame others (finding)",
+              "concept": "Feeling alienated (finding)",
               "label": "entailment"
             },
             {
-              "concept": "Feeling a failure (finding)",
-              "label": "entailment"
-            },
-            {
-              "concept": "Feeling guilt (finding)",
-              "label": "entailment"
-            },
-            {
-              "concept": "Feeling bad (finding)",
+              "concept": "Feeling unwanted (finding)",
               "label": "entailment"
             }
           ]
@@ -444,36 +459,50 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I… I don’t really know. It just feels like I’m the one who has control over it, you know? If I put in more effort, maybe that would make a difference. But there are times where it feels like I did everything I could, and it still didn’t go well. It’s frustrating, because then I think… what’s the point? Maybe I’m just destined",
+        "query": "Yeah, I guess there are moments where I feel really on the outside. Like when everyone starts sharing inside jokes or stories from the past, and I’m just standing there trying to catch up. It makes me feel like I’m not really part of it, you know? But then I think about that weekend trip and how we all connected. It’s just... I wish those moments felt stronger than",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "everyone starts sharing inside jokes",
+            "stories from the past"
+          ],
           "automatic_thoughts": [
-            "If I put in more effort, maybe that would make a difference",
-            "I did everything I could, and it still didn’t go well",
-            "what’s the point?",
-            "Maybe I’m just destined"
+            "I’m not really part of it"
           ],
           "emotions": [
-            "frustrating"
+            "sadness"
           ],
-          "behaviors": []
+          "behaviors": [
+            "standing there trying to catch up"
+          ]
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Feeling a failure (finding)",
-            "Difficulty controlling emotions (finding)",
-            "Low self-control (finding)",
-            "Difficulty understanding own emotions (finding)",
-            "Incongruent personal expectations (finding)"
+            "Feeling alienated (finding)",
+            "Moderate level of egocentricity (finding)",
+            "Sociable mood (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling isolated (finding)",
+            "Social isolation (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling like a failure when things don’t go as planned. What evidence do you have that putting in more effort never changes the outcome, and what evidence might suggest otherwise? Could there be other factors at play that help explain why some attempts succeed while others don’t?",
-        "reasoning": null
+        "response": "It sounds like you feel left out when inside jokes come up. What signs might suggest you’re actually part of the group, even if it feels different right now? How could you view those moments differently, especially after remembering the weekend trip?",
+        "reasoning": {
+          "retrieved_concepts_used": [
+            {
+              "concept": "Feeling alienated (finding)",
+              "label": "neutral"
+            },
+            {
+              "concept": "Sociable mood (finding)",
+              "label": "neutral"
+            }
+          ]
+        }
       }
     }
   ]

@@ -45,13 +45,51 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like being with others still leaves you feeling isolated, and that can be frustrating. Feeling lonely in those moments is understandable, even if it feels like a mismatch between what’s happening around you and how you’re feeling.",
-        "reasoning": null,
+        "response": "It sounds like you’re experiencing a sense of loneliness even when surrounded by people, which can feel confusing and isolating. You also seem to be quick to criticize yourself for those feelings, adding another layer of frustration. It’s understandable to feel annoyed when your expectations of connection don’t match what’s happening.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like being with others still leaves you feeling isolated, and that can be frustrating. Feeling lonely in those moments is understandable, even if it feels like a mismatch between what’s happening around you and how you’re feeling.",
-          "socratic_questioning": "It sounds like you’re noticing a disconnect between being with people and feeling lonely. What thoughts or feelings come up that make you feel annoyed with yourself when that loneliness surfaces? Could there be other explanations for why you feel that way even in a crowd?",
-          "cognitive_restructuring": "Feeling lonely even when people are around can happen, so the idea that you’re “failing” by feeling that way may be a harsh judgment. Evidence shows that loneliness can persist in social settings, so the belief that you should always feel connected may be overstated. Instead of seeing it as a personal flaw, you could view it as a cue that you’re seeking a deeper connection that hasn’t yet been met."
+          "validate_and_reflect": {
+            "response": "It sounds like you’re experiencing a sense of loneliness even when surrounded by people, which can feel confusing and isolating. You also seem to be quick to criticize yourself for those feelings, adding another layer of frustration. It’s understandable to feel annoyed when your expectations of connection don’t match what’s happening.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "When you notice loneliness even though people are around, what thoughts or images come up that might be contributing to that feeling? Have you seen moments where being around others felt different, and what was different then?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’re noticing a cycle where loneliness leads to self‑annoyance. Can you think of times when being around others actually helped you feel less alone, even if just a little? Looking at those moments might give us a different perspective on how you experience connection.",
+            "reasoning": null
+          }
         }
       }
     },
@@ -59,46 +97,82 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s like being in a room full of people but still feeling like I’m on the outside looking in. It’s really hard to shake that feeling, especially when I want to connect but can’t seem to reach anyone. Sometimes I wonder if there’s something wrong with me, you know?",
+        "query": "Yeah, it’s really frustrating. Sometimes, even when I’m with friends or family, I just feel... off. Like, I should be enjoying it, but instead, I just feel this emptiness. And then I get mad at myself for not being able to just be present like everyone else seems to be.",
         "schema": {
           "triggers": [
-            "being in a room full of people"
+            "being with friends",
+            "being with family"
           ],
           "automatic_thoughts": [
-            "I’m on the outside looking in",
-            "there’s something wrong with me"
+            "I should be enjoying it",
+            "I get mad at myself for not being able to be present"
           ],
           "emotions": [
-            "loneliness",
-            "frustration"
+            "frustration",
+            "emptiness"
           ],
-          "behaviors": [
-            "want to connect",
-            "can't seem to reach anyone"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
             "Feeling isolated (finding)",
+            "Feeling empty (finding)",
             "Feeling alienated (finding)",
-            "Limited social contact (finding)",
-            "Feeling unwanted (finding)"
+            "Minimal outside social stimulation (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)"
+            "Feeling abandoned (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like being surrounded by people feels more like standing on the outside, and that can be really painful. Feeling disconnected and wondering if there’s something wrong with yourself is a common reaction when we feel left out. You’re not alone in experiencing that sense of isolation.",
-        "reasoning": null,
+        "response": "It sounds like you’re carrying a lot of frustration when you’re with people, and that emptiness can feel like a gap between what you expect and what’s happening. It’s understandable to feel upset when you think you should be enjoying the moment, but it’s also okay to notice that you’re not always able to be fully present. You’re not alone in feeling this way, and it’s a common experience for many people.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like being surrounded by people feels more like standing on the outside, and that can be really painful. Feeling disconnected and wondering if there’s something wrong with yourself is a common reaction when we feel left out. You’re not alone in experiencing that sense of isolation.",
-          "socratic_questioning": "What does that “outside looking in” feel like for you in the moment? Have you noticed any times when someone actually reached out or acknowledged you? How might you explore whether that feeling is about the situation or about how you view yourself?",
-          "cognitive_restructuring": "It sounds like you’re feeling disconnected even when surrounded by people. What specific thoughts or moments make you think something is wrong with you? Can you also recall any times when someone reached out or you felt included? Perhaps we can look at other ways to view that “outside looking in” feeling—maybe it’s a sign you’re still adjusting rather than a flaw in yourself."
+          "validate_and_reflect": {
+            "response": "It sounds like you’re carrying a lot of frustration when you’re with people, and that emptiness can feel like a gap between what you expect and what’s happening. It’s understandable to feel upset when you think you should be enjoying the moment, but it’s also okay to notice that you’re not always able to be fully present. You’re not alone in feeling this way, and it’s a common experience for many people.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What does it feel like when you’re “present” with friends or family, and how does that differ from the emptiness you’re noticing? Can you recall a moment when you felt more connected or engaged, even briefly? What might happen if you let yourself experience that moment without judging whether it meets a certain standard?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you expect to feel joy whenever you’re with friends or family, yet you notice a sense of emptiness instead. What evidence do you have that you’re not enjoying yourself, and what evidence might suggest you’re still connecting in other ways? Exploring those details could help you see whether the expectation is realistic or if there are other ways you’re engaging.",
+            "reasoning": null
+          }
         }
       }
     },
@@ -106,45 +180,68 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it just... it makes me question a lot of things. Like, why can’t I just fit in? I see others laughing and talking, and I feel like I’m invisible. It’s exhausting to keep pretending like it doesn’t bother me, but inside, it really eats away at me.",
+        "query": "Yeah, I guess it is a bit of a struggle. It feels like I’m in this bubble sometimes, watching everyone else connect and laugh while I just... can’t seem to join in. And then I think, what’s wrong with me? I start to feel like a burden, you know? It’s tough to shake that feeling off.",
         "schema": {
           "triggers": [
-            "seeing others laughing and talking"
+            "watching everyone else connect and laugh"
           ],
           "automatic_thoughts": [
-            "why can’t I just fit in?",
-            "I feel like I’m invisible",
-            "it really eats away at me"
+            "what's wrong with me?",
+            "I feel like a burden"
           ],
           "emotions": [
-            "exhaustion"
+            "struggle",
+            "tough"
           ],
           "behaviors": [
-            "pretending like it doesn’t bother me"
+            "can’t seem to join in"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling alienated (finding)",
             "Feeling isolated (finding)",
-            "Feeling unwanted (finding)"
+            "Feeling alienated (finding)",
+            "Sociable mood (finding)"
           ],
           "neutral": [
-            "Anxiety about appearing ridiculous (finding)",
-            "Fear of being in a small group (finding)"
+            "Fear of being in a small group (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling left out and invisible when you see others laughing, and that sense of not fitting in is draining you. You’re carrying that exhaustion while trying to act as if it doesn’t matter. It’s understandable to feel that way, and it’s okay to acknowledge those feelings.",
-        "reasoning": null,
+        "response": "It sounds like you’re feeling left out and unsure of how to join in, and that worries you. Those feelings of isolation and being a burden are common when we see others laughing together. It’s understandable that this would make it hard to shake off the struggle.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you’re feeling left out and invisible when you see others laughing, and that sense of not fitting in is draining you. You’re carrying that exhaustion while trying to act as if it doesn’t matter. It’s understandable to feel that way, and it’s okay to acknowledge those feelings.",
-          "socratic_questioning": "What does it feel like when you think you can’t fit in? Can you recall a time when you felt seen or included? What evidence do you have that you’re invisible, and what might suggest otherwise?",
-          "cognitive_restructuring": "What moments have you noticed where you actually felt part of the group? Is it possible that you’re interpreting others’ laughter as a sign of exclusion, when it might just be friendly? If you could think of a time when you felt included, how would that change the idea that you’re invisible?"
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling left out and unsure of how to join in, and that worries you. Those feelings of isolation and being a burden are common when we see others laughing together. It’s understandable that this would make it hard to shake off the struggle.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that you’re a burden? Have there been moments when people have welcomed you or responded kindly? How might you test that idea by looking at the situation from a different angle?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you feel left out and worry you might be a burden. Can you think of moments when people have actually welcomed you or when you’ve felt included? What evidence might suggest that you’re not a burden at all?",
+            "reasoning": null
+          }
         }
       }
     },
@@ -152,166 +249,30 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just... sometimes I wish I could be different or feel more at ease. But then I start overthinking everything, like what if they don't like me? Or what if I say the wrong thing? It feels so heavy, and I just end up retreating into myself instead.",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "what if they don't like me?",
-            "what if I say the wrong thing?"
-          ],
-          "emotions": [
-            "anxiety",
-            "heaviness"
-          ],
-          "behaviors": [
-            "retreating into myself"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Feeling isolated (finding)"
-          ],
-          "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Difficulty controlling emotions (finding)",
-            "Fear of being in a small group (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of worry about how others see you, and that can feel really heavy. Many people feel that way when they’re afraid of making a mistake or being judged. It’s understandable that you might pull back when those thoughts come up.",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you’re carrying a lot of worry about how others see you, and that can feel really heavy. Many people feel that way when they’re afraid of making a mistake or being judged. It’s understandable that you might pull back when those thoughts come up.",
-          "socratic_questioning": "When you picture them not liking you, what specific thoughts or signs pop up that make you feel that way? How certain are you that those signs truly mean they dislike you? What might be another way to interpret those same signs?",
-          "cognitive_restructuring": "It sounds like you’re assuming others will judge you harshly—do you have specific moments where that actually happened, or is it more a worry that hasn’t come to pass? Sometimes we jump to the worst‑case scenario, assuming people will notice and react negatively. Looking at times when people have responded kindly or simply ignored the concern can show that they’re often preoccupied with their own thoughts. This might help you see that the fear of being disliked isn’t always grounded in reality."
-        }
-      }
-    },
-    {
-      "turn": 4,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it just feels safer to pull back, you know? But then I end up feeling even lonelier. It's kind of a vicious cycle. I want to connect with people, but I feel like I can't, and it just makes everything feel... I don't know, pointless sometimes.",
+        "query": "It’s hard to shake off that feeling of being in a bubble. I just watch everyone else connect and enjoy themselves while I feel separate from it all. Then I get really frustrated with myself for not being able to just be part of it. It makes me feel like I’m a burden, and I can’t help but wonder why it’s so hard for me.",
         "schema": {
           "triggers": [
-            "pulling back",
-            "wanting to connect with people"
+            "watching everyone else connect and enjoy themselves"
           ],
           "automatic_thoughts": [
-            "I can't connect with people",
-            "everything feels pointless"
+            "I feel separate from it all",
+            "I get really frustrated with myself for not being able to just be part of it",
+            "I’m a burden",
+            "why it’s so hard for me"
           ],
           "emotions": [
-            "loneliness"
+            "frustration"
           ],
-          "behaviors": [
-            "pulling back"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Social withdrawal (finding)",
             "Feeling isolated (finding)",
-            "Fear of social group activities (finding)",
+            "Feeling alienated (finding)"
+          ],
+          "neutral": [
             "Fear of being in a small group (finding)",
-            "Minimal outside social stimulation (finding)"
-          ],
-          "neutral": [],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like pulling back feels safer, but it also leaves you feeling more isolated and like things lose meaning. That mix of safety and loneliness can feel like a stuck loop. You’re not alone in feeling that way, and it’s understandable to want connection while feeling unsure how to get it.",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like pulling back feels safer, but it also leaves you feeling more isolated and like things lose meaning. That mix of safety and loneliness can feel like a stuck loop. You’re not alone in feeling that way, and it’s understandable to want connection while feeling unsure how to get it.",
-          "socratic_questioning": "What does “feels safer” look like for you when you pull back? Can you think of a time when reaching out felt less risky or even rewarding? If you could try one small step toward connection, what might that look like, and how would you know if it feels safer or more challenging?",
-          "cognitive_restructuring": "It sounds like pulling back feels safe but then deepens your loneliness. Can you think of any times when you reached out and it went better than you expected? Looking at those moments might help you see whether the idea that you can’t connect is always true."
-        }
-      }
-    },
-    {
-      "turn": 5,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, exactly. It’s like I’m stuck between wanting to step forward and just retreating. I can see how people find joy in connection, but then I feel this big wall between us, and I don’t know how to break it down. It just feels so... frustrating and lonely.",
-        "schema": {
-          "triggers": [
-            "wanting to step forward",
-            "retreating",
-            "big wall between us"
-          ],
-          "automatic_thoughts": [
-            "I don’t know how to break it down"
-          ],
-          "emotions": [
-            "frustrating",
-            "lonely"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling alienated (finding)",
-            "Feeling isolated (finding)",
-            "Social isolation (finding)",
-            "Limited social contact (finding)"
-          ],
-          "neutral": [
             "Social isolation (rejection) (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you’re caught between wanting to move forward and feeling pulled back, and that sense of a barrier is weighing heavily on you.  \nFeeling stuck and isolated can be exhausting, and it’s natural to feel frustrated and lonely in that place.  \nYou’re not alone in experiencing that tension.",
-        "reasoning": null,
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you’re caught between wanting to move forward and feeling pulled back, and that sense of a barrier is weighing heavily on you.  \nFeeling stuck and isolated can be exhausting, and it’s natural to feel frustrated and lonely in that place.  \nYou’re not alone in experiencing that tension.",
-          "socratic_questioning": "What makes that wall feel so solid for you? Have you noticed any moments where a small crack seemed to open up? How could you test whether those thoughts about the wall are really true?",
-          "cognitive_restructuring": "It sounds like you might be assuming that no one can get past that wall, which can feel overwhelming. Have there been moments when you did manage to connect, even a little, that might challenge that idea? Maybe we can look at those times and see what made them possible."
-        }
-      }
-    },
-    {
-      "turn": 6,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it really is exhausting. Sometimes I wonder if I’ll ever find a way through that wall. I just wish it didn’t feel so overwhelming. I see others laughing and connecting, and it feels like I’m on the outside forever. It’s hard to hold onto hope when it feels so far away.",
-        "schema": {
-          "triggers": [
-            "seeing others laughing and connecting"
-          ],
-          "automatic_thoughts": [
-            "I’ll never find a way through that wall",
-            "it feels so overwhelming",
-            "I’m on the outside forever",
-            "it’s hard to hold onto hope"
-          ],
-          "emotions": [
-            "exhaustion",
-            "overwhelm",
-            "hopelessness"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling alienated (finding)",
-            "Feeling isolated (finding)"
-          ],
-          "neutral": [
-            "Feeling abandoned (finding)",
-            "Feeling like wanting to escape (finding)"
           ],
           "contradiction": [
             "Social isolation (finding)"
@@ -320,13 +281,281 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I hear how drained you feel, and it makes sense that the idea of a wall feels so hard to get past. Seeing others enjoy connection while you feel left out can feel especially painful and isolating. It’s understandable that hope feels distant right now, and you’re not alone in feeling that way.",
-        "reasoning": null,
+        "response": "It sounds like you’re feeling cut off from the group and frustrated that you can’t seem to join in. That sense of being a burden can be exhausting. It’s understandable to wonder why it feels so hard to connect when you’re watching others enjoy themselves.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "I hear how drained you feel, and it makes sense that the idea of a wall feels so hard to get past. Seeing others enjoy connection while you feel left out can feel especially painful and isolating. It’s understandable that hope feels distant right now, and you’re not alone in feeling that way.",
-          "socratic_questioning": "What do you think the “wall” looks like right now? Can you recall any moments when you felt even a little closer to the people laughing around you? How might you test whether that feeling of being on the outside is always true, or if there are times when it shifts?",
-          "cognitive_restructuring": "It sounds exhausting to feel like you’re stuck behind an impenetrable wall.  \nWhat moments, if any, have you had where you felt you made even a small step forward?  \nSometimes noticing those tiny advances can help us see that the wall isn’t as solid as it feels."
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling cut off from the group and frustrated that you can’t seem to join in. That sense of being a burden can be exhausting. It’s understandable to wonder why it feels so hard to connect when you’re watching others enjoy themselves.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What kinds of moments or thoughts make you feel most separate from the group?  \nCan you think of any times when you felt more connected, even if it was brief?  \nWhat evidence do you have that you’re a burden, and how might you test that idea?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’re feeling cut off and frustrated by that sense of separation. Have you noticed any moments where you felt included or where others seemed open to you? What evidence supports the idea that you’re a burden, and what evidence might challenge that? Let’s explore a different way of looking at the situation together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really is exhausting. I just keep thinking about how easy it seems for others, and I can’t help but feel like I’m doing something wrong. It’s like, am I not trying hard enough? Sometimes I just want to disappear instead of feeling like this all the time.",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "how easy it seems for others",
+            "I’m doing something wrong",
+            "am I not trying hard enough?"
+          ],
+          "emotions": [
+            "exhaustion",
+            "shame"
+          ],
+          "behaviors": [
+            "want to disappear"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about appearing ridiculous (finding)",
+            "Anxiety about going crazy (finding)",
+            "Feeling of discouragement (finding)",
+            "Feels everything is futile (finding)",
+            "Anxiety about having a fit (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re carrying a lot of exhaustion and a sense that others find things easier, which can feel like a heavy comparison. That self‑criticism—thinking you’re not doing enough—seems to be weighing on you. It’s understandable that you might feel like disappearing when those thoughts become overwhelming.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re carrying a lot of exhaustion and a sense that others find things easier, which can feel like a heavy comparison. That self‑criticism—thinking you’re not doing enough—seems to be weighing on you. It’s understandable that you might feel like disappearing when those thoughts become overwhelming.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feels everything is futile",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about having a fit",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Shame",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What specific moments make you feel like others are breezing through while you’re stuck?  \nCan you think of times when you felt you were putting in effort, even if the outcome wasn’t perfect?  \nWhat would it look like if you gave yourself credit for the effort you’re already making?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’re comparing yourself to others and feeling like you’re falling short. What evidence do you have that others are truly easier or that you’re not trying hard enough? And what evidence might suggest otherwise?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feels everything is futile",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it does get really heavy. I just wish I could shake off that self-criticism. It’s like a constant loop in my head, telling me I’m not good enough or that I’m failing somehow. And when it gets too much, I just want to retreat, you know? It’s hard to find a way back to feeling okay.",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I'm not good enough",
+            "I'm failing somehow"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "want to retreat"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Anxiety about making mistakes (finding)",
+            "Complaining of feeling depressed (finding)",
+            "Negative automatic thoughts (finding)",
+            "Excessive selfcriticism (finding)"
+          ],
+          "neutral": [
+            "Anxiety about collapsing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like the self‑criticism is weighing heavily on you, and when it feels too intense you want to pull back. That kind of loop can make it hard to feel okay. You’re not alone in experiencing this.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like the self‑criticism is weighing heavily on you, and when it feels too intense you want to pull back. That kind of loop can make it hard to feel okay. You’re not alone in experiencing this.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Excessive selfcriticism",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What does it feel like when you’re convinced you’re failing? Can you think of a recent moment when you actually did something well, even if it seemed small? How might you describe that success to yourself, and what would that say about the “not good enough” idea?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’re noticing a pattern of thoughts that say you’re not good enough. Have there been moments when you’ve succeeded or received positive feedback that might counter those thoughts? Looking at those moments could help you see a more balanced view of yourself.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Excessive selfcriticism",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really does feel like a heavy weight sometimes. I guess I just get so tired of battling those thoughts, like they're always there ready to drag me down. It’s comforting to hear that I’m not the only one who feels this way, but it’s also frustrating that it’s such a common struggle.",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "battling those thoughts",
+            "they're always there ready to drag me down"
+          ],
+          "emotions": [
+            "tired",
+            "frustrating",
+            "comforting"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Repressing thoughts (finding)",
+            "Intrusive thoughts (finding)",
+            "Fear of being a burden to others (finding)",
+            "Negative automatic thoughts (finding)",
+            "Anxiety about forced dependence (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I hear how exhausting it feels to keep fighting those thoughts that seem to be pulling you down. It’s understandable to feel both relief that you’re not alone and frustration that this struggle is so common. You’re not alone in carrying that weight.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I hear how exhausting it feels to keep fighting those thoughts that seem to be pulling you down. It’s understandable to feel both relief that you’re not alone and frustration that this struggle is so common. You’re not alone in carrying that weight.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "**REASONING:**\n{\n  \"retrieved_concepts_used\": [\"Intrusive thoughts (finding)\", \"Negative automatic thoughts (finding)\"]\n}\n\n**FINAL RESPONSE:**\nWhat moments have you noticed the thoughts easing up, even if just a little? How do you feel when you let them sit instead of fighting them? What might happen if you tried to observe them without immediately reacting?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you feel the thoughts are relentless, but you might also notice moments when they fade or you can choose not to engage. Have you seen any times when you felt less pulled down, even if just for a few minutes? That could suggest the thoughts aren’t always as powerful as they seem, and you can give them less weight.",
+            "reasoning": null
+          }
         }
       }
     },
@@ -334,43 +563,87 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Thank you for saying that. It really does feel heavy, like I’m carrying all this weight just trying to move through my days. Sometimes I think maybe I’m just not meant to feel that kind of connection, and that thought makes it even harder to keep trying. It’s like I can’t shake this belief that I’ll always be on the outside.",
+        "query": "Thanks for saying that. It really does help to know I'm not the only one. But at the same time, it just makes me question why we all go through this, you know? Sometimes it feels like a constant battle with no clear end in sight, and I just want to find a way to breathe easier.",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "feeling alone",
+            "constant battle"
+          ],
           "automatic_thoughts": [
-            "maybe I’m just not meant to feel that kind of connection",
-            "I’ll always be on the outside"
+            "questioning why we all go through this",
+            "wanting to breathe easier"
           ],
-          "emotions": [
-            "heavy"
-          ],
-          "behaviors": [
-            "trying to move through my days",
-            "keep trying"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feels everything is futile (finding)"
+          ],
           "neutral": [
-            "Feeling abandoned (finding)",
-            "Feels own body is unreal (finding)",
-            "Feels life is meaningless (finding)"
+            "Coming to terms with dying (finding)",
+            "Difficulty coping with grief responses (finding)",
+            "Working through the pain of grief (finding)"
           ],
           "contradiction": [
-            "Feeling isolated (finding)",
-            "Feeling empty (finding)"
+            "Feeling isolated (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that belief about never being able to connect is adding a lot of weight to your days. Have you noticed any moments where you did feel a connection, or times when that thought didn’t seem to fit? Looking at those moments might help us see if the belief holds up in all situations.",
-        "reasoning": null,
+        "response": "It sounds like you’re finding some comfort in knowing others share this experience, yet it also leaves you wondering why we all face such a relentless struggle. That mix of relief and frustration can feel overwhelming, especially when you’re looking for a way to breathe easier. I hear how hard it is to keep going when it feels like there’s no clear end in sight.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like that belief about never being able to connect is adding a lot of weight to your days. Have you noticed any moments where you did feel a connection, or times when that thought didn’t seem to fit? Looking at those moments might help us see if the belief holds up in all situations.",
-          "socratic_questioning": "What does it feel like when you say you’re “on the outside” – can you describe a specific moment that illustrates that? Have there been any times, even brief ones, when you felt a sense of connection, and what was different then? What evidence do you have that supports the idea you’re not meant to feel that connection, and what evidence might suggest otherwise?",
-          "cognitive_restructuring": "It sounds like you’re worried that you’re not meant to feel deep connection and that you’ll always feel like an outsider. What evidence do you have that supports that belief? On the other hand, can you recall any moments when you did feel connected, even briefly, or when others responded positively to you?"
+          "validate_and_reflect": {
+            "response": "It sounds like you’re finding some comfort in knowing others share this experience, yet it also leaves you wondering why we all face such a relentless struggle. That mix of relief and frustration can feel overwhelming, especially when you’re looking for a way to breathe easier. I hear how hard it is to keep going when it feels like there’s no clear end in sight.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feels everything is futile",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "constant battle",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What makes you think that everyone is going through this same struggle? Can you share some moments that support that idea, and maybe some moments that challenge it? And when you say you want to breathe easier, what would that look like in your daily life?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feels everything is futile",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Difficulty coping with grief responses",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Working through the pain of grief",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’re wrestling with the sense that this struggle is endless and that everyone shares it. What moments have you noticed that suggest there might be a pause or a shift in that pattern? Maybe we can explore some evidence that points to small wins or relief that could help you feel a bit more breathable.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feels everything is futile",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Difficulty coping with grief responses",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -378,44 +651,95 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I mean, there are times... like when I talk with a close friend or even when I’m just laughing with family. It feels good in those moments, but then it’s like I go right back to doubting myself afterward. Those little connections feel fragile, like they could just vanish if I think about them too much. It’s confusing, because I want to hold onto those moments, but",
+        "query": "Yeah, that really captures it. It's like I want to feel hopeful, but then that voice creeps in, reminding me of how long it’s been like this. I just sometimes feel so tired of fighting, wondering if it will ever really get better or if I’ll always be stuck in this cycle. It's hard to keep the hope alive.",
         "schema": {
-          "triggers": [
-            "talk with a close friend",
-            "laughing with family"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I doubt myself",
-            "those little connections feel fragile",
-            "they could just vanish if I think about them too much"
+            "reminding me of how long it’s been like this",
+            "wondering if it will ever really get better",
+            "if I’ll always be stuck in this cycle"
           ],
           "emotions": [
-            "good",
-            "confusing"
+            "hopeful",
+            "tired"
           ],
-          "behaviors": []
+          "behaviors": [
+            "fighting",
+            "keeping the hope alive"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Ability to resist obsessional thoughts (observable entity)",
-            "Able to resist obsessional thoughts (finding)",
-            "Fear of losing emotional control (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about losing emotional control (finding)"
+          "entailment": [
+            "Loss of hope for the future (finding)",
+            "Hopeful for the future (finding)"
           ],
-          "contradiction": []
+          "neutral": [
+            "Feels everything is futile (finding)",
+            "Reflecting stage of grief (finding)"
+          ],
+          "contradiction": [
+            "Feeling despair (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried that thinking about these moments might make them disappear. What evidence do you have that reflecting on them could actually cause that to happen? Have there been times when you’ve thought about a good interaction and felt even more connected afterward?",
-        "reasoning": null,
+        "response": "I hear how exhausting it feels to keep pushing forward when it seems like the same pattern keeps repeating. It makes sense that the voice of doubt can feel overwhelming, especially when you’re already feeling worn out. Yet you’re still holding onto that spark of hope, and that shows a resilience that can be a starting point for exploring what might help sustain it.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like you’re feeling a mix of warmth and uncertainty, and that can feel unsettling. You’re not alone in noticing how those moments can feel fragile when doubts creep in afterward. It’s understandable that you want to keep those connections alive.",
-          "socratic_questioning": "What evidence do you have that thinking about these moments will make them disappear? Can you recall a time when you enjoyed a conversation and it stayed meaningful afterward? How might you test that idea in a small, low‑stakes way?",
-          "cognitive_restructuring": "It sounds like you’re worried that these moments might disappear if you focus on them too much. What evidence do you have that they’ll vanish? Have you noticed times when they’ve lasted longer than you expect, or when you’ve reflected on them and still felt connected?"
+          "validate_and_reflect": {
+            "response": "I hear how exhausting it feels to keep pushing forward when it seems like the same pattern keeps repeating. It makes sense that the voice of doubt can feel overwhelming, especially when you’re already feeling worn out. Yet you’re still holding onto that spark of hope, and that shows a resilience that can be a starting point for exploring what might help sustain it.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of hope for the future (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Hopeful for the future (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "Can you tell me more about what that inner voice says when it reminds you of how long this has been going on? What evidence do you have that it will never get better, and are there any moments that suggest otherwise? How might you imagine a different pattern unfolding if you let hope guide you a bit more?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Hopeful for the future",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loss of hope for the future",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Reflecting stage of grief",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "cognitive_restructuring": {
+            "response": "It sounds like you’re feeling exhausted by the cycle and unsure if it can change. What evidence do you have that the situation has stayed the same, and what evidence might suggest it could shift? Sometimes looking at small moments of change can help us see that hope can still be nurtured.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Hopeful for the future",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loss of hope for the future",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Reflecting stage of grief",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -423,44 +747,60 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Sometimes I feel a flicker of hope when I'm with a close friend or laughing with family. Those moments are nice, but it never lasts. I end up questioning everything afterward, feeling like I might ruin it or just disappear again. It’s hard to hold onto those moments when they feel so fragile, like they could vanish at any second.",
+        "query": "Thanks for recognizing that. I think I do still want to believe there’s a way out of this. But sometimes it just feels so far away, like I’m reaching for something that keeps slipping through my fingers. I guess I worry that I’ll never really find what I need to feel okay again.",
         "schema": {
-          "triggers": [
-            "being with a close friend",
-            "laughing with family"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I might ruin it",
-            "I might just disappear again",
-            "those moments feel fragile"
+            "there’s a way out of this",
+            "it just feels so far away",
+            "I’m reaching for something that keeps slipping through my fingers",
+            "I’ll never really find what I need to feel okay again"
           ],
-          "emotions": [
-            "hope",
-            "anxiety"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Loss of hope for the future (finding)",
-            "Hopeful for the future (finding)",
-            "Feeling hopeless (finding)",
-            "Optimistic thoughts (finding)",
-            "Finding of level of hope (finding)"
+            "Conflicting stages of grief (finding)"
           ],
-          "neutral": [],
-          "contradiction": []
+          "neutral": [
+            "Loss of hope for the future (finding)",
+            "Depressive delusion of catastrophe (finding)"
+          ],
+          "contradiction": [
+            "Coming to terms with dying (finding)",
+            "Acceptance stage of grief (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re afraid that the good moments will slip away. What evidence do you have that they actually do vanish, or that you’re the one who’s going to lose them? Have you noticed any times when a happy moment stayed longer than you expected? Exploring that might help you see if the fear is as real as it feels.",
-        "reasoning": null,
+        "response": "I hear how hopeful you still feel about finding a way forward, even though it seems distant and elusive right now. It’s understandable to feel that sense of slipping away and worry that you might never find the relief you’re looking for. Those feelings can feel overwhelming, but they’re a natural part of navigating uncertainty.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
-          "validate_and_reflect": "It sounds like those brief moments of joy feel both precious and fleeting, and then you’re left wondering if you can keep them. That mix of hope and anxiety can feel exhausting, especially when you worry about ruining or losing those connections. It’s understandable to feel that fragility after the laughter fades.",
-          "socratic_questioning": "What makes you feel that these moments are so fragile? Can you think of a time when a similar feeling lasted longer than you expected? How might you view these moments differently if you saw them as just one part of a larger pattern?",
-          "cognitive_restructuring": "It sounds like you’re worried that the good moments will inevitably slip away, leaving you anxious afterward. What evidence supports that they will always vanish, and what evidence suggests they might linger or that you can savor them? We could try noticing how long you actually feel those moments and see if the fear of loss is as strong as it seems."
+          "validate_and_reflect": {
+            "response": "I hear how hopeful you still feel about finding a way forward, even though it seems distant and elusive right now. It’s understandable to feel that sense of slipping away and worry that you might never find the relief you’re looking for. Those feelings can feel overwhelming, but they’re a natural part of navigating uncertainty.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "When you picture a way out, what does that look like for you?  \nWhat signs or moments have made you feel that it’s slipping farther away?  \nIf you could imagine taking one small step toward that feeling, what might it be?",
+            "reasoning": null
+          },
+          "cognitive_restructuring": {
+            "response": "Feeling that relief is far away can feel exhausting. Can you think of times when you’ve felt a little better, even if it was brief? Looking at those moments might help us see what’s possible right now.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Conflicting stages of grief (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loss of hope for the future (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
         }
       }
     }

@@ -45,7 +45,7 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried about being fired and that you’re overthinking a lot. What evidence do you have that this will happen? And what evidence suggests it might not?",
+        "response": "It sounds like the worry about being fired is weighing heavily on you. What specific thoughts or situations at work make you feel that this might happen? What evidence do you have that supports or contradicts that worry?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
@@ -72,27 +72,31 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I’m just really anxious about my performance lately. I can’t shake off this feeling that I’m not doing enough, even though my boss hasn’t said anything directly. I keep replaying my last meeting in my mind, thinking I messed up something important. But, I mean, I’ve received good feedback before… it just feels like it could all change in an instant.",
+        "query": "Yeah, it really is heavy. I guess it’s just... sometimes I feel like my boss isn’t happy with my work, and I can’t shake the feeling that I’m not doing enough. I keep replaying meetings in my head, thinking maybe I said something stupid or that I’m falling behind. I don’t know, it just feels like one little mistake could be it.",
         "schema": {
           "triggers": [
-            "performance lately",
-            "last meeting"
+            "meetings",
+            "my boss's reaction"
           ],
           "automatic_thoughts": [
+            "my boss isn’t happy with my work",
             "I’m not doing enough",
-            "I messed up something important",
-            "it could all change in an instant"
+            "maybe I said something stupid",
+            "I’m falling behind",
+            "one little mistake could be it"
           ],
           "emotions": [
             "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "replaying meetings in my head"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Performance anxiety (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Feeling nervous (finding)",
+            "Feeling of discouragement (finding)",
+            "Feeling a failure (finding)",
+            "Feeling agitated (finding)",
             "Feeling tense (finding)"
           ],
           "neutral": [
@@ -103,20 +107,20 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried that a single slip could change everything, even though you’ve received positive feedback before. What evidence do you have that you’ve actually fallen short, and what evidence suggests you’ve met or exceeded expectations?",
+        "response": "It sounds like you’re carrying a lot of worry about how your boss perceives your work. What specific moments or feedback suggest that they’re unhappy, and can you think of any times when they’ve expressed appreciation or support? Looking at both sides might help you see a fuller picture.",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Performance anxiety",
+              "concept": "Feeling a failure (finding)",
               "label": "entailment"
             },
             {
-              "concept": "Feeling nervous",
+              "concept": "Feeling tense (finding)",
               "label": "entailment"
             },
             {
-              "concept": "Feeling tense",
-              "label": "entailment"
+              "concept": "Anxiety about making mistakes (finding)",
+              "label": "neutral"
             }
           ]
         }
@@ -126,54 +130,45 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I know, deep down, that I’ve received compliments and praise for my work. I can see those good moments, but when I make a mistake, it just feels so much heavier, you know? Like, my mind just fixates on that one misstep, and it overshadows everything else. It’s almost like I’m waiting for someone to call me out, even when things seem",
+        "query": "Yeah, I guess there have been a few times when they’ve said good things about my work, but those moments feel really overshadowed by the times when I felt criticized. Like, just recently, there was a project I thought went well, but then I got some feedback that made me feel like I didn’t meet expectations. It’s like I hold onto that more than the praise, you know",
         "schema": {
           "triggers": [
-            "making a mistake"
+            "times when they’ve said good things about my work",
+            "feedback that made me feel like I didn’t meet expectations"
           ],
           "automatic_thoughts": [
-            "my mind just fixates on that one misstep",
-            "it overshadows everything else",
-            "I’m waiting for someone to call me out"
+            "I hold onto criticism more than praise"
           ],
           "emotions": [
-            "heaviness"
+            "criticism"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling guilt (finding)"
+            "Tends to be sensitive to criticism (finding)",
+            "Feeling a failure (finding)"
           ],
-          "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Feeling ashamed (finding)"
-          ],
-          "contradiction": []
+          "neutral": [],
+          "contradiction": [
+            "Positive thoughts (finding)",
+            "Positive self thoughts (finding)",
+            "Comments on own writing (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that this one misstep is more important than the praise you’ve received? Can you think of a time when you felt proud of your work even after a mistake? How might you view the mistake differently if you considered it as a learning moment rather than a defining flaw?",
+        "response": "It sounds like criticism feels more powerful than praise for you. What evidence do you have that the criticism outweighs the praise? Are there moments when the praise felt meaningful or changed your view?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Feeling a failure (finding)",
+              "concept": "Tends to be sensitive to criticism",
               "label": "entailment"
             },
             {
-              "concept": "Feeling guilt (finding)",
-              "label": "entailment"
-            },
-            {
-              "concept": "Anxiety about making mistakes (finding)",
-              "label": "neutral"
-            },
-            {
-              "concept": "Feeling ashamed (finding)",
-              "label": "neutral"
+              "concept": "Feeling a failure",
+              "label": "unknown"
             }
           ]
         }
@@ -183,51 +178,47 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "It's hard to think about it that way. I mean, I know I’ve had moments where I felt proud, and I guess some mistakes didn’t derail everything. But when I mess up, it just sticks with me. I keep replaying it in my head, and it feels like it defines me in that moment. I want to see it as a learning moment, but it’s tough when",
+        "query": "I don’t know... I guess it’s just that the criticism sticks with me longer. It’s like a little voice in my head that keeps reminding me of my mistakes. The praise, while nice in the moment, fades away so quickly. I can think of a couple of times it felt good, but they can’t compete with the weight of feeling like I’m always under scrutiny. It’s",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "criticism",
+            "praise",
+            "feeling under scrutiny"
+          ],
           "automatic_thoughts": [
-            "it feels like it defines me in that moment"
+            "the criticism sticks with me longer",
+            "a little voice in my head reminds me of my mistakes",
+            "praise fades away quickly",
+            "I’m always under scrutiny"
           ],
           "emotions": [],
-          "behaviors": [
-            "keep replaying it in my head"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling bad (finding)"
+            "Tends to be sensitive to criticism (finding)",
+            "Tends to be critical of others (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling a failure (finding)",
-            "Undoing - mental defense mechanism (finding)"
+            "Tends to appear indifferent to praise or criticism (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
-          "contradiction": [
-            "Feeling ashamed (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re holding a strong belief that a single mistake defines you. What evidence do you have that supports that idea? And what evidence might suggest that it doesn’t? Exploring both sides could help you see the situation from a broader perspective.",
+        "response": "It sounds like criticism leaves a lasting impression for you. What specific moments make you feel that you’re always under scrutiny? Are there any times when you’ve felt safe or unjudged, even briefly?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Feeling bad (finding)",
+              "concept": "Tends to be sensitive to criticism",
               "label": "entailment"
             },
             {
-              "concept": "Anxiety about making mistakes (finding)",
-              "label": "neutral"
-            },
-            {
-              "concept": "Feeling a failure (finding)",
-              "label": "neutral"
-            },
-            {
-              "concept": "Undoing - mental defense mechanism (finding)",
-              "label": "neutral"
+              "concept": "Feeling a failure",
+              "label": "unknown"
             }
           ]
         }
@@ -237,43 +228,51 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I guess... I’ve always been really hard on myself. I mean, my parents were pretty strict, and it felt like I had to be perfect to get their approval. So, I think that sticks with me even now. But looking back, I’ve had plenty of times where I made a mistake and everything turned out okay. People move on, and I’ve moved on too. Still,",
+        "query": "Yeah, I guess there was that time during a team meeting when someone pointed out a mistake I made. It felt like everyone was focused on me, and I couldn’t shake that feeling afterward. But there are moments, like when I’m working late and it’s just me, where I don’t feel watched. But even then, I start to worry about how my work will be seen the next",
         "schema": {
           "triggers": [
-            "strict parents",
-            "need for approval"
+            "team meeting",
+            "working late"
           ],
           "automatic_thoughts": [
-            "I have to be perfect",
-            "I’ve made mistakes"
+            "everyone was focused on me",
+            "I couldn’t shake that feeling",
+            "how my work will be seen"
           ],
-          "emotions": [],
+          "emotions": [
+            "anxiety"
+          ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling unwanted (finding)",
+            "Feeling isolated (finding)",
+            "Anxiety about behavior or performance (finding)"
+          ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Tends to blame others (finding)",
-            "Fear of being a burden to others (finding)",
-            "Tends to be sensitive to criticism (finding)",
-            "Tends to fail to learn from adverse experience (finding)"
+            "Fear of being watched (finding)",
+            "Fear of being in a small group (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’ve noticed that mistakes haven’t always led to negative outcomes. What evidence do you have that being perfect is necessary for approval? And what evidence suggests that people still value you even when you’re not perfect?",
+        "response": "It sounds like that moment left a strong impression. What clues do you have that the whole team was actually focusing on you? How might someone else have seen the situation? What might be another way to think about how your work will be perceived?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Anxiety about making mistakes",
-              "label": "neutral"
+              "concept": "Feeling unwanted (finding)",
+              "label": "entailment"
             },
             {
-              "concept": "Tends to be sensitive to criticism",
-              "label": "neutral"
+              "concept": "Feeling isolated (finding)",
+              "label": "entailment"
+            },
+            {
+              "concept": "Anxiety about behavior or performance (finding)",
+              "label": "entailment"
             }
           ]
         }
@@ -283,17 +282,17 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Well, I guess when I think about it, my parents praised me more when I did well, and they didn’t respond the same way when I messed up. So it’s hard to shake that feeling that I need to be perfect to be liked or to be valued. But, there have definitely been times when friends and coworkers seemed to appreciate me for who I am, not just my accomplishments.",
+        "query": "I guess when I made that mistake, I just felt all eyes on me, like everyone was waiting for me to respond or defend myself. I mean, maybe they were focused on their own stuff too, and it wasn’t as big of a deal as I made it out to be. It’s just that it felt so personal in the moment. Thinking about how my work gets perceived, I guess",
         "schema": {
           "triggers": [
-            "parents praised me",
-            "did well",
-            "messed up",
-            "friends and coworkers appreciated me"
+            "made that mistake",
+            "everyone was waiting for me to respond or defend myself"
           ],
           "automatic_thoughts": [
-            "I need to be perfect to be liked",
-            "I need to be valued"
+            "they were focused on their own stuff too",
+            "it wasn’t as big of a deal as I made it out to be",
+            "it felt so personal in the moment",
+            "how my work gets perceived"
           ],
           "emotions": [],
           "behaviors": []
@@ -301,26 +300,31 @@
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Tends to appear indifferent to praise or criticism (finding)",
-            "Character trait finding of level of pride (finding)",
-            "Tends to be critical of others (finding)",
-            "Positive self thoughts (finding)",
-            "Perfectionistic character (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Fear of appearing ridiculous (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Acting out - mental defense mechanism (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’ve noticed a pattern where praise feels tied to flawless performance, yet you’ve also seen people value you for who you are. What evidence do you have that being imperfect actually hurts how others see you, and what evidence suggests they appreciate you regardless of mistakes? You might try framing your worth as something that can coexist with both effort and authenticity.",
+        "response": "It sounds like you felt a lot of pressure, yet you also think it might not have been as big as it seemed. What evidence do you have that people were actually waiting for you to respond, and what evidence suggests they were not? Exploring both sides could help you see the situation from a broader perspective.",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Perfectionistic character",
+              "concept": "Anxiety about saying the wrong thing",
               "label": "neutral"
             },
             {
-              "concept": "Positive self thoughts",
+              "concept": "Anxiety about making mistakes",
+              "label": "neutral"
+            },
+            {
+              "concept": "Fear of appearing ridiculous",
               "label": "neutral"
             }
           ]
@@ -331,40 +335,56 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I mean, I get that in theory, but it’s just hard to really believe it. I keep thinking that if people see me fail—even just once—they’ll start to doubt my abilities or my character. But then, I think about my friends who have messed up and how I didn’t think less of them. I guess I just wish I could internalize that for myself. It feels...",
+        "query": "Yeah, I see what you mean. I guess in that moment, it felt like everyone was silent and looking at me, which made it feel heavy, like I had to come up with the perfect answer. But then, I remember others were probably caught up in their own thoughts, too. It’s just difficult to separate what’s really happening from how I feel in those moments. It’s like",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "if people see me fail, they’ll start to doubt my abilities or my character",
-            "I wish I could internalize that for myself"
+          "triggers": [
+            "everyone was silent and looking at me"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "I had to come up with the perfect answer",
+            "others were probably caught up in their own thoughts"
+          ],
+          "emotions": [
+            "heavy"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)"
+            "Feeling tense (finding)",
+            "Feeling physically tense (finding)",
+            "Difficulty understanding own emotions (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Character trait finding of ability to learn from adverse experience (finding)",
-            "Undoing - mental defense mechanism (finding)",
-            "Idealization - mental defense mechanism (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Feeling nervous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that people will doubt you if you fail? Can you think of times when someone else failed and people still respected or supported them? How might you test whether that belief holds true in your own situation?",
+        "response": "It sounds like you felt a lot of pressure in that moment. What makes you think that everyone was watching you? Could there be other ways to interpret what was happening?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Feeling a failure (finding)",
+              "concept": "Feeling tense",
               "label": "entailment"
             },
             {
-              "concept": "Anxiety about making mistakes (finding)",
+              "concept": "Feeling physically tense",
+              "label": "entailment"
+            },
+            {
+              "concept": "Difficulty understanding own emotions",
+              "label": "entailment"
+            },
+            {
+              "concept": "Anxiety about saying the wrong thing",
+              "label": "neutral"
+            },
+            {
+              "concept": "Feeling nervous",
               "label": "neutral"
             }
           ]
@@ -375,50 +395,54 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I don’t know, it just feels so real to me. I hear that voice in my head telling me I’ll be a disappointment. I know I’ve seen friends bounce back from their mistakes and still be supported, but for some reason, I can’t quite connect that to myself. It just feels scarier when I think about my own failures. I guess testing it? It seems daunting...",
+        "query": "I guess it just felt like all the attention was on me, but maybe it was just my mind racing. I remember just wanting to shrink down and disappear, you know? It’s like I get so caught up in my worries that I overlook what’s actually going on. It’s hard to see things from another angle when I’m lost in my head.",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "all the attention was on me"
+          ],
           "automatic_thoughts": [
-            "I’ll be a disappointment",
-            "I can’t quite connect that to myself",
-            "It seems daunting"
+            "my mind racing",
+            "wanting to shrink down and disappear",
+            "caught up in my worries",
+            "overlook what’s actually going on",
+            "hard to see things from another angle"
           ],
-          "emotions": [
-            "fear",
-            "anxiety"
-          ],
-          "behaviors": [
-            "testing it"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Disorientated in place (finding)",
+            "Disorientation as to people, time and place (finding)",
+            "Mood-incongruent hallucination (finding)",
+            "Perception hysteria (finding)"
+          ],
           "neutral": [
-            "Feeling a failure (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Tends to fail to learn from adverse experience (finding)",
-            "Loss of hope for the future (finding)",
-            "Fear of losing emotional control (finding)"
+            "Delusion of own appearance (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that inner voice is really powerful right now. What specific moments or thoughts make you feel you might disappoint yourself? And how might you view those moments differently to see a more hopeful possibility?",
+        "response": "It sounds like you were feeling very exposed and overwhelmed by your own thoughts. What do you think might have been happening that made you feel like everyone was looking at you? When you say you wanted to shrink down and disappear, what does that feeling look like for you?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Feeling a failure (finding)",
-              "label": "neutral"
+              "concept": "Disorientated in place",
+              "label": "unknown"
             },
             {
-              "concept": "Anxiety about making mistakes (finding)",
-              "label": "neutral"
+              "concept": "Disorientation as to people, time and place",
+              "label": "unknown"
             },
             {
-              "concept": "Fear of losing emotional control (finding)",
-              "label": "neutral"
+              "concept": "Mood-incongruent hallucination",
+              "label": "unknown"
+            },
+            {
+              "concept": "Perception hysteria",
+              "label": "unknown"
             }
           ]
         }
@@ -428,84 +452,108 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, that voice can be relentless. I think about times when I’ve had to present something and I stumbled over my words, or when a project didn’t go as planned. It feels like everyone is judging me in those moments. But I guess, if I were to think differently, maybe I could see those slip-ups as just part of a larger journey. It’s just… hard to shift",
+        "query": "Yeah, it felt really overwhelming, like my heart was racing and I was just stuck. When I say I wanted to shrink down, I mean I just wanted to be invisible, like I wouldn’t have to face everyone. It’s almost like I’d rather blend into the wall than deal with the pressure. It’s hard to describe, but it’s like this mix of shame and anxiety bubbling up",
         "schema": {
           "triggers": [
-            "times when I’ve had to present something",
-            "when a project didn’t go as planned"
+            "pressure",
+            "facing everyone"
           ],
           "automatic_thoughts": [
-            "everyone is judging me",
-            "I stumbled over my words",
-            "those slip-ups are part of a larger journey"
+            "I want to be invisible",
+            "I'd rather blend into the wall"
           ],
           "emotions": [
+            "overwhelming",
+            "shame",
             "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "wanted to shrink down",
+            "felt stuck"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Tends to be sensitive to criticism (finding)"
+            "Fear of enclosed spaces (finding)",
+            "Feeling like wanting to escape (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Anxiety about appearing ridiculous (finding)"
+            "Anxiety about collapsing (finding)",
+            "Claustrophobia (finding)",
+            "Fear of collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried that everyone is judging you when you stumble. What evidence do you have that people are actually judging you? Are there moments when you felt they were supportive instead?",
-        "reasoning": null
+        "response": "I hear how intense that feeling of wanting to disappear feels. What does being “invisible” look like for you, and what evidence do you have that you can’t manage the pressure if you stay visible? How might you test a different possibility—like trying a small step toward facing the situation—and what might that experience reveal?",
+        "reasoning": {
+          "retrieved_concepts_used": [
+            {
+              "concept": "Disorientated in place",
+              "label": "unknown"
+            },
+            {
+              "concept": "Disorientation as to people, time and place",
+              "label": "unknown"
+            },
+            {
+              "concept": "Mood-incongruent hallucination",
+              "label": "unknown"
+            },
+            {
+              "concept": "Perception hysteria",
+              "label": "unknown"
+            }
+          ]
+        }
       }
     },
     {
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "It’s just this feeling I get, you know? I can’t really point to specific moments where someone outright judged me, but it’s like this weight on my chest that makes me think they’re all watching closely. I remember a time when a coworker actually helped me through a mistake I made, and they just kind of laughed it off. That felt nice, but it’s hard to hold",
+        "query": "Being invisible feels like just... not having to deal with anyone’s eyes on me, like I could just go through the motions without judgment. But it’s weird because when I think about it, I actually have managed a lot of pressure before—like those times when I got positive feedback after pushing through. It’s just that moment of feeling exposed that makes everything else fade. \n\nI guess testing a",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "being invisible",
+            "feeling exposed"
+          ],
           "automatic_thoughts": [
-            "they're all watching closely"
+            "not having to deal with anyone’s eyes on me",
+            "I could just go through the motions without judgment",
+            "I actually have managed a lot of pressure before",
+            "those times when I got positive feedback after pushing through"
           ],
-          "emotions": [
-            "anxiety"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Pressured by others (finding)"
+            "Being out of body (finding)"
           ],
           "neutral": [
-            "Anxiety about appearing ridiculous (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of being a burden to others (finding)",
-            "Fear of speaking to people in authority (finding)"
+            "Fear of being watched (finding)",
+            "Delusion of depersonalization (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Sublimation - mental defense mechanism (finding)",
+            "Omnipotence - mental defense mechanism (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that weight on your chest feels pretty heavy. What evidence do you have that people are actually judging you? You mentioned a coworker who laughed it off—does that suggest that others might be more supportive or neutral than you think?",
+        "response": "What evidence do you have that being seen always makes you feel exposed? Can you recall any moments when being visible felt manageable or even empowering? How might you reframe those moments of exposure to see them as opportunities rather than threats?",
         "reasoning": {
           "retrieved_concepts_used": [
             {
-              "concept": "Pressured by others",
+              "concept": "Being out of body (finding)",
               "label": "entailment"
             },
             {
-              "concept": "Anxiety about appearing ridiculous",
-              "label": "neutral"
-            },
-            {
-              "concept": "Anxiety about saying the wrong thing",
+              "concept": "Fear of being watched (finding)",
               "label": "neutral"
             }
           ]
