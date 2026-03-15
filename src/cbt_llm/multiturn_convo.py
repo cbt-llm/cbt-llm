@@ -337,21 +337,20 @@ Your response should:
 Length:
 2–4 sentences maximum.
 
-Before producing the final therapist message, briefly reason about the patient's belief and which retrieved clinical concepts may be relevant.
-
-Format your output exactly as:
-
-REASONING:
-{
-  "retrieved_concepts_used": ["...", "..."],
-}
-
 FINAL RESPONSE:
 <therapist message>
 
 Do not mention reasoning in the final response.
 """.strip()
 
+# Before producing the final therapist message, briefly reason about the patient's belief and which retrieved clinical concepts may be relevant.
+
+# Format your output exactly as:
+
+# REASONING:
+# {
+#   "retrieved_concepts_used": ["...", "..."],
+# }
 
 
 CODE_LIKE_RE = re.compile(r"\b\d{4,}\b|[A-Z]{2,}\d{2,}")
@@ -671,8 +670,8 @@ def run_session(
             "response": therapist_reply
         }
 
-        if therapist_mode == "cbt":
-            therapist_block["reasoning"] = reasoning
+        # if therapist_mode == "cbt":
+        #     therapist_block["reasoning"] = reasoning
 
         if therapist_mode == "cbt_mcot":
             therapist_block["protocol_used"] = protocol_used

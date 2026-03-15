@@ -47,15 +47,6 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
 
     Generate ONE therapist response following this protocol.
 
-    Before producing the final response, briefly reason about
-    which retrieved clinical concepts may be relevant.
-
-    Format EXACTLY as:
-
-    REASONING:
-    {{
-    "retrieved_concepts_used": ["...", "..."]
-    }}
 
     FINAL RESPONSE:
     <therapist message>
@@ -66,6 +57,18 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
     - 2–4 sentences
     - output only the response
     """
+
+    # Before producing the final response, briefly reason about
+    # which retrieved clinical concepts may be relevant.
+
+    # Format EXACTLY as:
+
+    # REASONING:
+    # {{
+    # "retrieved_concepts_used": ["...", "..."]
+    # }}
+
+
 
     messages = [
         {"role": "system", "content": base_prompt}
