@@ -178,7 +178,7 @@ CONTRADICTION — Conflicts with the patient’s experience and should NOT be us
 Use the clinical context only as cues when interpreting the patient’s experience.
 
 ━━━━━━━━━━━━━━━━━━━
-TREE OF THOUGHT REASONING
+MULTIPLE CHAIN OF THOUGHT REASONING
 ━━━━━━━━━━━━━━━━━━━
 
 Before generating the final response, internally simulate three candidate therapist responses — one for each CBT intervention principle.
@@ -330,27 +330,26 @@ CONSTRAINTS
 - Avoid repeating the same intervention style across consecutive turns.
 
 
-Your response should:
-- Sound like a natural therapist response
-- The therapist should focus on the belief or assumption underlying the patient's experience rather than only reflecting emotions.
+Before producing the final response, briefly reason about which retrieved clinical concepts AND/OR user schema elements
+may be relevant to the response.
 
-Length:
-2–4 sentences maximum.
+Return your answer EXACTLY in this structure:
+
+REASONING:
+{
+ "retrieved_concepts_used": ["...", "..."]
+}
 
 FINAL RESPONSE:
 <therapist message>
 
+Length:
+2–4 sentences maximum.
+
 Do not mention reasoning in the final response.
 """.strip()
 
-# Before producing the final therapist message, briefly reason about the patient's belief and which retrieved clinical concepts may be relevant.
 
-# Format your output exactly as:
-
-# REASONING:
-# {
-#   "retrieved_concepts_used": ["...", "..."],
-# }
 
 
 CODE_LIKE_RE = re.compile(r"\b\d{4,}\b|[A-Z]{2,}\d{2,}")
@@ -535,9 +534,11 @@ def run_session(
 
     for turn_idx in range(turns):
 
+
         schema = safe_extract_schema(last_patient) if use_schema else None
 
         rag = None
+        reasoning = None
 
         if use_rag:
             rag = findings_pipeline.get_findings(last_patient)
@@ -599,7 +600,12 @@ def run_session(
                     reasoning_text = raw_reply.split("REASONING:")[1].split("FINAL RESPONSE:")[0].strip()
                     therapist_reply = raw_reply.split("FINAL RESPONSE:")[1].strip()
                     reasoning = json.loads(reasoning_text)
+
+                    print("\n======= RAW COT REASONING ========")
+                    print(json.dumps(reasoning, indent=2))
+                    print("\n===============\n")
                 except Exception:
+                    print(raw_reply)
                     reasoning = None
 
         else:
@@ -670,8 +676,8 @@ def run_session(
             "response": therapist_reply
         }
 
-        # if therapist_mode == "cbt":
-        #     therapist_block["reasoning"] = reasoning
+        if therapist_mode == "cbt":
+            therapist_block["reasoning"] = reasoning
 
         if therapist_mode == "cbt_mcot":
             therapist_block["protocol_used"] = protocol_used

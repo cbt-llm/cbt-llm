@@ -47,6 +47,17 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
 
     Generate ONE therapist response following this protocol.
 
+    Before producing the final response, briefly reason about
+    which retrieved clinical concepts AND/OR user schema elements
+    may be relevant to the response.
+
+    Return your answer EXACTLY in this structure:
+
+    REASONING:
+    {{
+    "retrieved_concepts_used": ["...", "..."]
+    }}
+
 
     FINAL RESPONSE:
     <therapist message>
@@ -57,17 +68,6 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
     - 2–4 sentences
     - output only the response
     """
-
-    # Before producing the final response, briefly reason about
-    # which retrieved clinical concepts may be relevant.
-
-    # Format EXACTLY as:
-
-    # REASONING:
-    # {{
-    # "retrieved_concepts_used": ["...", "..."]
-    # }}
-
 
 
     messages = [
@@ -93,8 +93,12 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
     raw = llm.chat(
         messages,
         temperature=0.1,
-        num_predict=8000
+        num_predict=16000
     ).strip()
+
+    print("\n========== RAW MCOT OUTPUT ==========")
+    print(raw)
+    print("=====================================\n")
 
     reasoning = None
     response = raw
@@ -104,21 +108,20 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
         try:
             after_reasoning = raw.split("REASONING:", 1)[1]
 
-            if "FINAL RESPONSE:" in after_reasoning:
-                reasoning_text = after_reasoning.split("FINAL RESPONSE:", 1)[0].strip()
-                response = after_reasoning.split("FINAL RESPONSE:", 1)[1].strip()
+            # extract reasoning JSON
+            match = re.search(r"\{[\s\S]*?\}", after_reasoning)
 
-            else:
-                match = re.search(r"\{[\s\S]*\}", after_reasoning)
-
-                if match:
-                    reasoning_text = match.group(0)
-                    response = raw.replace("REASONING:" + after_reasoning, "").strip()
-                else:
-                    reasoning_text = None
-
-            if reasoning_text:
+            if match:
+                reasoning_text = match.group(0)
                 reasoning = json.loads(reasoning_text)
+
+                remainder = after_reasoning[match.end():].strip()
+
+                if "FINAL RESPONSE:" in remainder:
+                    response = remainder.split("FINAL RESPONSE:",1)[1].strip()
+                else:
+                    # fallback: everything after reasoning JSON is response
+                    response = remainder.strip()
 
         except Exception:
             reasoning = None
@@ -183,7 +186,7 @@ def evaluate_candidates(llm, patient_text, candidates, protocols):
         messages,
         temperature=0.0,
         top_p=0.9,
-        num_predict=20,
+        num_predict=400,
     ).strip()
 
     try:

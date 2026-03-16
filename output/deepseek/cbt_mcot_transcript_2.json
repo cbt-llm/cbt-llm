@@ -45,19 +45,45 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It's understandable that you're feeling anxious about work, especially when you're overthinking things. It can be really stressful to feel like there's always something wrong, even when there might not be.",
+        "response": "It sounds like the pressure at work is really weighing on you, and it makes sense that you'd feel anxious about potential outcomes. Many people experience similar worries, especially when they're thinking about how their actions might be perceived.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It's understandable that you're feeling anxious about work, especially when you're overthinking things. It can be really stressful to feel like there's always something wrong, even when there might not be.",
-            "reasoning": null
+            "response": "It sounds like the pressure at work is really weighing on you, and it makes sense that you'd feel anxious about potential outcomes. Many people experience similar worries, especially when they're thinking about how their actions might be perceived.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "entailment"
+                }
+              ]
+            }
           },
           "socratic_questioning": {
-            "response": "That sounds really stressful. Can you tell me more about what makes you feel like you're overthinking at work?",
-            "reasoning": null
+            "response": "It sounds like you're carrying a lot of pressure at work, and those thoughts about getting fired are really weighing on you. Can you tell me more about what specific thoughts tend to pop up when you're feeling this way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "emotions"
+                }
+              ]
+            }
           },
           "cognitive_restructuring": {
-            "response": "It makes sense that you'd feel anxious about making mistakes at work, especially when you're already feeling overwhelmed. Let's explore what thoughts might be contributing to that worry—could you tell me more about what specifically makes you feel like you're overthinking?",
+            "response": "It makes sense that you'd feel anxious when you're overthinking, especially in a work setting. Maybe you're worried about making mistakes or not being good enough. Have you noticed anything that suggests you're actually doing well lately?",
             "reasoning": null
           }
         }
@@ -67,52 +93,87 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it just feels like there's this pressure to always be perfect. I keep replaying conversations in my head, worrying I said the wrong thing or missed something important. I know it might not matter that much, but it feels like everything is on the line sometimes.",
+        "query": "Yeah, it’s just that I feel like I’m constantly under a microscope. Like, one small mistake and everything could come crashing down. I know I'm not perfect, but the thought of disappointing my boss or my team just fills me with dread. It’s exhausting, you know?",
         "schema": {
           "triggers": [
-            "pressure to always be perfect",
-            "replaying conversations",
-            "worrying about saying the wrong thing",
-            "feeling like everything is on the line"
+            "feeling under a microscope",
+            "making a small mistake",
+            "disappointing my boss",
+            "disappointing my team"
           ],
           "automatic_thoughts": [
-            "I said the wrong thing",
-            "I missed something important",
-            "it might not matter that much"
+            "everything could come crashing down",
+            "I'm not perfect",
+            "the thought of disappointing my boss or my team"
           ],
           "emotions": [
-            "anxiety"
+            "dread",
+            "exhaustion"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about saying the wrong thing (finding)",
             "Anxiety about making mistakes (finding)",
             "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
             "Anxiety about appearing ridiculous (finding)",
-            "Anxiety about going crazy (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Examination phobia (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that replaying conversations would feel overwhelming when you're carrying that pressure to be perfect. It sounds like you're often putting a lot of weight on small moments, which can really amplify the worry.",
+        "response": "It sounds like the weight of constant scrutiny is really wearing on you, and the fear of letting others down is causing a lot of emotional strain. That exhaustion you're feeling seems to be tied to this persistent worry about your performance.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It makes sense that replaying conversations would feel overwhelming when you're carrying that pressure to be perfect. It sounds like you're often putting a lot of weight on small moments, which can really amplify the worry.",
-            "reasoning": null
+            "response": "It sounds like the weight of constant scrutiny is really wearing on you, and the fear of letting others down is causing a lot of emotional strain. That exhaustion you're feeling seems to be tied to this persistent worry about your performance.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
           },
           "socratic_questioning": {
-            "response": "It makes sense that replaying conversations would feel overwhelming when you're carrying that pressure to be perfect. Can you tell me more about how that feeling of everything being on the line affects your daily life?",
-            "reasoning": null
+            "response": "It sounds like that thought about a small mistake leading to disaster is really weighing on you. Can you tell me more about how that specific thought feels in your mind?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling under a microscope",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "everything could come crashing down",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "the thought of disappointing my boss or my team",
+                  "label": "triggers"
+                }
+              ]
+            }
           },
           "cognitive_restructuring": {
-            "response": "It sounds like you're carrying a heavy weight with that need to be perfect. Can you tell me more about how you think everything is on the line? Maybe not everything is as intense as you're making it out to be.",
+            "response": "It sounds like the pressure you're feeling is really weighing on you. When you say \"everything could come crashing down,\" what makes you think that one small mistake might lead to such a dramatic outcome?",
             "reasoning": null
           }
         }
@@ -122,46 +183,66 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s like I can’t let anything slip. I keep thinking if I make one mistake, it’ll ruin everything. It's exhausting, honestly. Sometimes I wonder if anyone else feels this way or if it’s just me being too hard on myself.",
+        "query": "Yeah, it really is. Sometimes I feel like I can't even breathe properly when I think about it. I know I want to do well, but this pressure makes me second-guess everything I do. It’s like I’m stuck in this loop of anxiety and self-doubt.",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "if I make one mistake, it’ll ruin everything",
-            "I wonder if anyone else feels this way",
-            "it’s just me being too hard on myself"
+            "I can't even breathe properly when I think about it",
+            "this pressure makes me second-guess everything I do",
+            "I'm stuck in this loop of anxiety and self-doubt"
           ],
           "emotions": [
-            "exhaustion"
+            "anxiety",
+            "self-doubt"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
+            "Anxiety about having a fit (finding)",
             "Anxiety about making mistakes (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about going crazy (finding)",
-            "Obsessional thoughts of causing accidents (finding)",
-            "Anxiety about appearing ridiculous (finding)"
+            "Examination phobia (finding)",
+            "Performance anxiety (finding)",
+            "Pressured by others (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the weight of perfection is really taking a toll on you, and it's completely understandable to feel that way when you're constantly worried about mistakes. I can see how that kind of pressure would leave you feeling drained and overwhelmed.",
+        "response": "It sounds like the pressure you're feeling is really weighing on you, making it hard to even catch your breath. That sense of being stuck in a loop of anxiety and self-doubt must be incredibly draining.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the weight of perfection is really taking a toll on you, and it's completely understandable to feel that way when you're constantly worried about mistakes. I can see how that kind of pressure would leave you feeling drained and overwhelmed.",
+            "response": "It sounds like the pressure you're feeling is really weighing on you, making it hard to even catch your breath. That sense of being stuck in a loop of anxiety and self-doubt must be incredibly draining.",
             "reasoning": null
           },
           "socratic_questioning": {
-            "response": "It sounds like you're carrying a heavy weight with that thought. Can you imagine a moment where a mistake didn't end up being the disaster you feared?",
-            "reasoning": null
+            "response": "It sounds like you're caught in a cycle of anxiety and self-doubt. Can you tell me more about what that loop feels like for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Examination phobia",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Performance anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Loop",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
           },
           "cognitive_restructuring": {
-            "response": "It sounds like the pressure to be perfect is weighing heavily on you. Can you tell me about a time when you made a mistake but it didn’t turn out as worst-case as you feared?",
+            "response": "It sounds like the pressure you're feeling is creating a strong physical response, making it hard to stay grounded. When you're caught in that loop of anxiety, it can feel like your thoughts are controlling your body. Let’s try to break it down—what do you notice is triggering the most intense moments of self-doubt?",
             "reasoning": null
           }
         }
@@ -171,52 +252,57 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does drain me. I feel like I’m always on edge, just waiting for something to go wrong. And then when it does happen, even if it’s small, I just spiral. It's like I can't shake off that feeling of being not good enough.",
+        "query": "Yeah, it really is. It’s like I go into this mode where I just keep replaying every little detail in my head. I can’t help but think about all the things that could go wrong. It’s frustrating, because I know I can do my job well, but this fear just takes over.",
         "schema": {
-          "triggers": [
-            "waiting for something to go wrong",
-            "small events"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I can't shake off that feeling of being not good enough"
+            "I keep replaying every little detail in my head",
+            "all the things that could go wrong"
           ],
           "emotions": [
-            "drained",
-            "on edge"
+            "frustration",
+            "fear"
           ],
-          "behaviors": [
-            "spiral"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling despair (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Feeling suicidal (finding)",
-            "Tends to turn anger against self (finding)"
+            "Anxiety about going crazy (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Fear of going crazy (finding)",
+            "Anxiety about having a fit (finding)",
+            "Fear of losing emotional control (finding)"
           ],
-          "contradiction": [
-            "Feeling empty (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like carrying that weight of constant vigilance and self-doubt is really taking a toll on you. I can see how being perpetually on edge would leave you feeling drained and overwhelmed.",
+        "response": "It sounds like you're carrying a heavy weight of worry, replaying details and focusing on potential problems. That frustration makes sense when you're feeling like these fears are taking over, even though you know your abilities. It must be exhausting to feel like you're fighting against something you can't control.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like carrying that weight of constant vigilance and self-doubt is really taking a toll on you. I can see how being perpetually on edge would leave you feeling drained and overwhelmed.",
+            "response": "It sounds like you're carrying a heavy weight of worry, replaying details and focusing on potential problems. That frustration makes sense when you're feeling like these fears are taking over, even though you know your abilities. It must be exhausting to feel like you're fighting against something you can't control.",
             "reasoning": null
           },
           "socratic_questioning": {
-            "response": "How does that feeling of being not good enough affect how you approach situations or interact with others?",
-            "reasoning": null
+            "response": "When you say you replay every detail and focus on what could go wrong, what evidence supports that this thinking actually helps you in your job?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "emotions"
+                }
+              ]
+            }
           },
           "cognitive_restructuring": {
-            "response": "It makes sense that you'd feel drained when you're anticipating problems and then overwhelmed by them. Let's think about what might be fueling that feeling of being not good enough—could there be another way to look at it?",
+            "response": "It sounds like you're experiencing a cycle where certain thoughts take over, making it hard to focus on the present moment. Let’s explore this a bit—when you say you replay details and focus on potential problems, what evidence do you have that this fear is actually helping you in the moment?",
             "reasoning": null
           }
         }
@@ -226,44 +312,85 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "It definitely is heavy. I mean, I get what you’re saying—it feels like I’m always bracing for something bad to happen. Some days, I just want to let go, but I can't shake the feeling that if I do, everything will fall apart. It’s like I’m stuck in this cycle.",
+        "query": "Yeah, it really is exhausting. I wake up some mornings just feeling this tightness in my chest, and I wonder if I'm going to make it through the day without messing up. I guess I just wish I could silence that nagging voice in my head that keeps telling me I'm not enough. It feels so relentless sometimes.",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I'm always bracing for something bad to happen",
-            "If I let go, everything will fall apart",
-            "I'm stuck in this cycle"
+          "triggers": [
+            "waking up in the morning"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "wonder if I'm going to make it through the day without messing up",
+            "wish I could silence that nagging voice in my head",
+            "keeps telling me I'm not enough"
+          ],
+          "emotions": [
+            "exhaustion",
+            "tightness",
+            "relentlessness"
+          ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Psychogenic fatigue (finding)",
+            "Difficulty managing stress (finding)",
+            "Conflicting attitude towards exercise (finding)",
+            "Stress overload (finding)"
+          ],
           "neutral": [
-            "Anxiety about forced dependence (finding)",
-            "Anxiety about collapsing (finding)",
-            "Difficulty coping with grief responses (finding)",
-            "Fear of being a burden to others (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Poor daily routine (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like what you're carrying feels incredibly heavy, and I hear the frustration in your voice when you talk about wanting to let go but feeling stuck. That sense of being trapped in a cycle can be exhausting, and it’s completely understandable why you’d feel that way.",
+        "response": "It sounds like these feelings are really weighing on you, especially in the morning. The pressure you're feeling seems to create a cycle of exhaustion and self-doubt.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like what you're carrying feels incredibly heavy, and I hear the frustration in your voice when you talk about wanting to let go but feeling stuck. That sense of being trapped in a cycle can be exhausting, and it’s completely understandable why you’d feel that way.",
-            "reasoning": null
+            "response": "It sounds like these feelings are really weighing on you, especially in the morning. The pressure you're feeling seems to create a cycle of exhaustion and self-doubt.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Psychogenic fatigue",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Difficulty managing stress",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Automatic thoughts",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Emotions",
+                  "label": "emotions"
+                }
+              ]
+            }
           },
           "socratic_questioning": {
-            "response": "It makes sense that you'd feel stuck when you're worried about everything falling apart if you let go. Can you tell me more about what you mean by \"fall apart\"—how does that actually look in your life?",
-            "reasoning": null
+            "response": "That inner critic seems to be a constant companion for you in the morning. Can you tell me more about how that voice affects your day when it starts talking to you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waking up in the morning",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "emotions"
+                }
+              ]
+            }
           },
           "cognitive_restructuring": {
-            "response": "It makes sense that this feels overwhelming. Can you tell me more about a time when you felt like you were holding things together, but actually everything was okay?",
+            "response": "It sounds like those early morning moments can be particularly challenging, with that inner critic feeling especially loud. Can you imagine how your day might feel if that nagging voice wasn’t there?",
             "reasoning": null
           }
         }
@@ -273,58 +400,66 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is frustrating. I sometimes wonder if I’m just making things worse for myself by holding on so tight. I mean, I want to find a way to feel more free and not so weighed down, but the thought of letting go... it just scares me.",
+        "query": "Yeah, it really does. Mornings are the worst. I’ll lie in bed, trying to talk myself into getting up, but then my mind just spirals into all the things I could do wrong that day. I feel like I’m already defeated before I even start. It’s such a weird place to be in.",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "mornings",
+            "lying in bed"
+          ],
           "automatic_thoughts": [
-            "I'm making things worse for myself by holding on so tight",
-            "The thought of letting go scares me"
+            "things I could do wrong that day",
+            "I'm already defeated before I even start"
           ],
           "emotions": [
-            "frustration",
-            "fear"
+            "defeated"
           ],
-          "behaviors": []
+          "behaviors": [
+            "trying to talk myself into getting up"
+          ]
         },
         "retrieval": {
-          "entailment": [
-            "Fear of losing emotional control (finding)",
-            "Feeling trapped (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about forced dependence (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about loss of control (finding)"
+            "Depression worse in morning (finding)",
+            "Depression worse later in day (finding)",
+            "Poor daily routine (finding)",
+            "Anxiety about going crazy (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Daytime somnolence (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that you'd feel frustrated with that tension between wanting to let go and fearing what might happen. Many people experience that internal struggle, and it's okay to feel scared when something feels so uncertain.",
+        "response": "It sounds like mornings can feel really overwhelming for you, especially when you're lying in bed and anticipating all the things that might go wrong. That sense of being stuck before the day begins must be incredibly frustrating.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It makes sense that you'd feel frustrated with that tension between wanting to let go and fearing what might happen. Many people experience that internal struggle, and it's okay to feel scared when something feels so uncertain.",
+            "response": "It sounds like mornings can feel really overwhelming for you, especially when you're lying in bed and anticipating all the things that might go wrong. That sense of being stuck before the day begins must be incredibly frustrating.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of losing emotional control (finding)",
-                  "label": "entailment"
+                  "concept": "Depression worse in morning",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling trapped (finding)",
-                  "label": "entailment"
+                  "concept": "Poor daily routine",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It makes sense that you'd feel that way—holding on tightly can feel like the only way to stay safe, but I wonder what evidence supports that letting go would actually make things worse? What might happen if you tried to let go in a small way?",
+            "response": "How does that internal dialogue affect your ability to take action in the morning?",
             "reasoning": null
           },
           "cognitive_restructuring": {
-            "response": "It makes sense that the thought of letting go feels scary, especially when you're feeling so weighed down. But what would letting go actually look like in this moment?",
+            "response": "It sounds like your mind is already jumping ahead to the negative outcomes of the day. Can you tell me what evidence supports feeling defeated before you've even tried to start?",
             "reasoning": null
           }
         }
@@ -334,46 +469,64 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I guess that does make it a little easier to think about. But it’s still so hard to accept that fear. I feel like if I give in, then I’m failing somehow. It’s just... I don’t know, it feels like there’s this constant battle inside me.",
+        "query": "Yeah, it definitely is. It feels like my mind is racing with all these scenarios that probably won’t even happen. But in that moment, it’s hard to shake off that feeling. I just want to get up and feel ready for the day, but instead, I end up feeling paralyzed.",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "if I give in, then I’m failing somehow",
-            "there’s this constant battle inside me"
+            "my mind is racing with all these scenarios that probably won’t even happen",
+            "it’s hard to shake off that feeling"
           ],
           "emotions": [
-            "fear"
+            "paralyzed"
           ],
-          "behaviors": []
+          "behaviors": [
+            "want to get up and feel ready for the day",
+            "end up feeling paralyzed"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)"
+            "Feeling physically tense (finding)",
+            "Feeling tense (finding)",
+            "Feeling of being slowed down (finding)"
           ],
           "neutral": [
-            "Phobic avoidance - mental defense mechanism (finding)",
-            "Fear of collapsing (finding)",
-            "Able to resist dangerous thoughts with difficulty (finding)",
-            "Fear of being a burden to others (finding)"
+            "Anxiety about going crazy (finding)",
+            "Sense of impending doom (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It makes sense that this feeling is still challenging to accept. There's a lot of pressure to manage everything on your own, and that can create a lot of internal tension. It's okay to feel conflicted about giving in—it shows you're trying to balance your needs with the fear of letting yourself down.",
+        "response": "It sounds like the racing thoughts and that feeling of being stuck are really weighing on you. It makes sense that you’d want to feel ready and in control, but it can be tough when anxiety pulls you in different directions.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It makes sense that this feeling is still challenging to accept. There's a lot of pressure to manage everything on your own, and that can create a lot of internal tension. It's okay to feel conflicted about giving in—it shows you're trying to balance your needs with the fear of letting yourself down.",
+            "response": "It sounds like the racing thoughts and that feeling of being stuck are really weighing on you. It makes sense that you’d want to feel ready and in control, but it can be tough when anxiety pulls you in different directions.",
             "reasoning": null
           },
           "socratic_questioning": {
-            "response": "It makes sense that this feeling is still challenging to accept. Can you tell me more about what you mean by \"giving in\"? What does that look like in your mind?",
-            "reasoning": null
+            "response": "It makes sense that your mind feels like it's racing, and that can definitely make it hard to feel ready. Can you tell me what stands out most about those thoughts right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "behaviors"
+                }
+              ]
+            }
           },
           "cognitive_restructuring": {
-            "response": "It makes sense that this feeling of internal conflict is challenging to accept. When you say \"if I give in, then I'm failing somehow,\" what does \"failing\" mean to you in this context?",
+            "response": "It makes sense that those racing thoughts would feel overwhelming. Let's try to break down what's really happening when your mind jumps to these scenarios—what evidence do you have that they might not actually be as likely as they feel right now?",
             "reasoning": null
           }
         }
@@ -383,47 +536,100 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It’s just really hard to think about that fear. If I let it go, it feels like I’m failing. There’s this constant battle inside me, and it leaves me feeling exhausted. Sometimes I wonder if it’s even worth trying to change.",
+        "query": "Yeah, it really is. I want to feel in control, but then it’s like my brain takes over. I find myself just wanting to escape those feelings or shut them out, but that usually just makes things worse. It’s like I’m caught in this tug-of-war with myself.",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "If I let it go, it feels like I’m failing",
-            "Sometimes I wonder if it’s even worth trying to change"
+            "wanting to feel in control",
+            "my brain takes over",
+            "wanting to escape those feelings",
+            "shutting them out",
+            "caught in a tug-of-war with myself"
           ],
-          "emotions": [
-            "fear",
-            "exhaustion"
-          ],
-          "behaviors": []
+          "emotions": [],
+          "behaviors": [
+            "wanting to escape feelings",
+            "shutting feelings out"
+          ]
         },
         "retrieval": {
           "entailment": [
             "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Phobic avoidance - mental defense mechanism (finding)",
-            "Fear of going out (finding)",
-            "Fear of collapsing (finding)",
-            "Phobia (finding)"
+            "Difficulty controlling emotions (finding)",
+            "Anxiety about loss of control (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Unable to control emotions (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like carrying that weight is incredibly draining, and it's completely understandable why you'd feel that way. Facing something so intense can leave you feeling stuck and uncertain, but it's okay to acknowledge how much effort it's been.",
+        "response": "It sounds like you're really struggling with that internal battle, feeling caught between wanting control and your emotions taking over. That tug-of-war must be exhausting, and it's completely understandable how avoiding those feelings might feel like an escape.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like carrying that weight is incredibly draining, and it's completely understandable why you'd feel that way. Facing something so intense can leave you feeling stuck and uncertain, but it's okay to acknowledge how much effort it's been.",
-            "reasoning": null
+            "response": "It sounds like you're really struggling with that internal battle, feeling caught between wanting control and your emotions taking over. That tug-of-war must be exhausting, and it's completely understandable how avoiding those feelings might feel like an escape.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Difficulty controlling emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about loss of control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Unable to control emotions",
+                  "label": "neutral"
+                }
+              ]
+            }
           },
           "socratic_questioning": {
-            "response": "Sometimes it feels like letting go means failure. How might that feeling of failure be connected to your earlier thoughts about not being good enough?",
-            "reasoning": null
+            "response": "It sounds like you're caught between wanting control and feeling overwhelmed by your reactions. When you mentioned wanting to escape or shut things out, I'm curious—what would the worst-case scenario look like if you didn't have that urge to escape?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "wanting to feel in control",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "my brain takes over",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "wanting to escape those feelings",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "shutting them out",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "caught in a tug-of-war with myself",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                }
+              ]
+            }
           },
           "cognitive_restructuring": {
-            "response": "It sounds like you're carrying a heavy burden, and it's completely understandable why letting go feels like failure. But what if we considered that holding onto this fear might actually be preventing you from finding relief?",
+            "response": "It sounds like you're caught between wanting to manage your emotions and feeling overwhelmed by them. Maybe you could try thinking about whether resisting these feelings actually adds to the struggle or if there's another way to approach them.",
             "reasoning": null
           }
         }
@@ -433,51 +639,64 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is draining. I just feel caught in this loop, and acknowledging it makes me feel a little exposed, you know? Like if I admit how hard it is, I’m somehow more vulnerable. I guess part of me wants to fight through it, but then there’s this other part that just wants to hide away from it all.",
+        "query": "Yeah, it is exhausting. Sometimes I just wish I could turn off that part of my brain. I know avoiding it isn't helping in the long run, but facing it feels so overwhelming. I guess I'm just scared of how much it might hurt if I really dig into those feelings.",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "acknowledging it makes me feel exposed",
-            "if I admit how hard it is, I’m more vulnerable",
-            "part of me wants to fight through it",
-            "there’s this other part that just wants to hide away"
+            "wishing I could turn off that part of my brain",
+            "avoiding it isn't helping in the long run",
+            "facing it feels overwhelming",
+            "scared of how much it might hurt if I really dig into those feelings"
           ],
           "emotions": [
-            "drained",
-            "exposed",
-            "vulnerable"
+            "exhaustion",
+            "overwhelm",
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding it"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling alienated (finding)",
-            "Feeling trapped (finding)"
+            "Repressing thoughts (finding)",
+            "Fear of losing emotional control (finding)",
+            "Difficulty controlling emotions (finding)"
           ],
           "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Turning against the self - mental defense mechanism (finding)"
+            "Unable to resist obsessional thoughts (finding)"
           ],
           "contradiction": [
-            "Feeling isolated (finding)"
+            "Able to resist obsessional thoughts (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a heavy weight, feeling caught between wanting to push through and needing to retreat. That internal conflict must be exhausting, and it's completely understandable to feel vulnerable when you're honest about how much it's taking.",
+        "response": "It sounds like carrying that weight is really draining for you. It makes sense that you'd feel overwhelmed by the thought of digging into those heavy things. Facing difficult emotions can feel incredibly scary, even when we know it's necessary.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a heavy weight, feeling caught between wanting to push through and needing to retreat. That internal conflict must be exhausting, and it's completely understandable to feel vulnerable when you're honest about how much it's taking.",
-            "reasoning": null
+            "response": "It sounds like carrying that weight is really draining for you. It makes sense that you'd feel overwhelmed by the thought of digging into those heavy things. Facing difficult emotions can feel incredibly scary, even when we know it's necessary.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Repressing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                }
+              ]
+            }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're caught between wanting to push through and needing to protect yourself. Can you tell me more about how not addressing these feelings might affect you?",
+            "response": "What makes you think that facing these feelings might be worse than staying stuck in this exhausting cycle?",
             "reasoning": null
           },
           "cognitive_restructuring": {
-            "response": "It makes sense that acknowledging these feelings would feel overwhelming—vulnerability can feel like a loss of control. But maybe thinking of it as strength rather than weakness could help?",
+            "response": "It makes sense that the thought feels overwhelming and scary. But perhaps the pain of facing it now is different from what you're imagining—maybe it's not as intense as you fear, or it could even help reduce the long-term exhaustion you're feeling.",
             "reasoning": null
           }
         }
@@ -487,54 +706,84 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "It’s draining. I feel caught in this loop, and just admitting it makes me feel so exposed. If I say how hard it is, I feel vulnerable. Part of me wants to fight through it, but another part just wants to hide away.",
+        "query": "Yeah, it really is draining. I can feel that weight pressing on me all the time, and the idea of facing it just makes my heart race. I know there’s a part of me that wants to let it out, but another part just wants to hide. It’s confusing to want help but be so afraid of what that means.",
         "schema": {
-          "triggers": [
-            "admitting it",
-            "saying how hard it is"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "caught in this loop",
-            "feel so exposed",
-            "feel vulnerable",
-            "want to fight through it",
-            "want to hide away"
+            "facing it just makes my heart race",
+            "want help but be so afraid of what that means"
           ],
           "emotions": [
             "draining",
-            "vulnerable"
+            "confusing",
+            "afraid"
           ],
-          "behaviors": []
+          "behaviors": [
+            "wants to hide"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling trapped (finding)",
-            "Feeling alienated (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about becoming fat (finding)",
+            "Anxiety about altered body image (finding)"
           ],
           "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Emotionally deprived (finding)"
+            "Anxiety about collapsing (finding)",
+            "Anxiety about treatment (finding)"
           ],
-          "contradiction": [
-            "Feeling isolated (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the weight of this loop is making you feel emotionally drained, and the fear of being exposed adds to that exhaustion. It makes sense that you’d feel vulnerable when you say how hard it is—those conflicting parts must be competing for your energy.",
+        "response": "It sounds really heavy to carry that kind of pressure all the time, especially when you're caught between wanting relief and feeling afraid of what might happen. That internal conflict can be exhausting, and it's completely understandable how that would create confusion about what to do next.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It takes courage to share what you're going through, and it’s completely understandable to feel drained by it all. It’s okay to feel this way, and you’re not alone in wanting to protect yourself when things get overwhelming.",
-            "reasoning": null
+            "response": "It sounds really heavy to carry that kind of pressure all the time, especially when you're caught between wanting relief and feeling afraid of what might happen. That internal conflict can be exhausting, and it's completely understandable how that would create confusion about what to do next.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "weight",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "facing it",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "heart race",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "want help",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "afraid",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
           },
           "socratic_questioning": {
-            "response": "It sounds like there's a cycle you're caught in—what feels like a loop. Can you tell me more about how that cycle works?",
-            "reasoning": null
+            "response": "It sounds like the pressure of facing this situation is really weighing on you. Can you tell me more about what it would take for you to feel ready to reach out for help?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "facing it just makes my heart race",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "want help but be so afraid of what that means",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
           },
           "cognitive_restructuring": {
-            "response": "It makes sense that you'd feel that way—being vulnerable can feel risky, but it's also a strength. What if vulnerability wasn't about weakness, but about being honest with yourself? What might that look like for you?",
+            "response": "It sounds like there's a heavy weight you're carrying, and the thought of confronting it feels overwhelming. Maybe you could try thinking of it as a signal that you're ready to explore it, rather than something to avoid.",
             "reasoning": null
           }
         }
