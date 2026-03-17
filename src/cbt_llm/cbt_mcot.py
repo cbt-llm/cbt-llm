@@ -54,15 +54,15 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
     Return your answer EXACTLY in this structure:
 
     REASONING:
-    {{
     "retrieved_concepts_used": ["...", "..."]
-    }}
 
 
     FINAL RESPONSE:
     <therapist message>
 
     Rules:
+    - REASONING must ALWAYS appear.
+    - FINAL RESPONSE must contain only the therapist message.
     - natural therapist tone
     - do not explain CBT
     - 2–4 sentences

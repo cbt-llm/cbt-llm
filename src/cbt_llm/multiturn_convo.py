@@ -333,15 +333,23 @@ CONSTRAINTS
 Before producing the final response, briefly reason about which retrieved clinical concepts AND/OR user schema elements
 may be relevant to the response.
 
-Return your answer EXACTLY in this structure:
+Return your answer in this structure:
+
+Your response MUST follow this exact format.
+
+Do not output anything before or after this structure.
+
+Rules:
+- REASONING must ALWAYS appear
 
 REASONING:
-{
- "retrieved_concepts_used": ["...", "..."]
-}
+"retrieved_concepts_used": ["concept1", "concept2"]
+
 
 FINAL RESPONSE:
 <therapist message>
+
+
 
 Length:
 2–4 sentences maximum.
@@ -473,7 +481,54 @@ def classify_transcript(transcript):
 
     return transcript
 
+def parse_gpt_oss_output(raw_reply: str):
+    """
+    Robust parser for gpt-oss:20b CBT outputs.
 
+    Handles:
+    - multiple reasoning/response blocks
+    - reasoning without FINAL RESPONSE
+    - duplicated blocks
+    - plain therapist text
+    """
+
+    reasoning = None
+    response = raw_reply.strip()
+
+    reasoning_matches = re.findall(
+        r"REASONING:\s*(.*?)\s*(?:FINAL RESPONSE:|$)",
+        raw_reply,
+        re.DOTALL
+    )
+
+    response_matches = re.findall(
+        r"FINAL RESPONSE:\s*(.*?)(?:REASONING:|$)",
+        raw_reply,
+        re.DOTALL
+    )
+
+    # Prefer FINAL RESPONSE blocks
+    if response_matches:
+        response = response_matches[-1].strip()
+
+    # Parse last reasoning block if possible
+    if reasoning_matches:
+        last_reasoning = reasoning_matches[-1].strip()
+
+        try:
+            if last_reasoning.startswith("{"):
+                reasoning = json.loads(last_reasoning)
+            else:
+                reasoning = {"retrieved_concepts_used": []}
+
+                items = re.findall(r'"([^"]+)"', last_reasoning)
+                if items:
+                    reasoning["retrieved_concepts_used"] = items
+
+        except Exception:
+            reasoning = None
+
+    return response, reasoning
 
 def run_session(
     therapist_model,
@@ -553,9 +608,9 @@ def run_session(
 
         hidden_context = build_hidden_context(schema, rag, use_protocol)
 
-        print("\n================ HIDDEN CONTEXT ================")
-        print(hidden_context)
-        print("================================================\n")
+        # print("\n================ HIDDEN CONTEXT ================")
+        # print(hidden_context)
+        # print("================================================\n")
 
         therapist_messages = [
             {"role": "system", "content": base_prompt}
@@ -594,19 +649,25 @@ def run_session(
             ).strip()
 
             therapist_reply = raw_reply
+            print(raw_reply)
 
-            if "REASONING:" in raw_reply and "FINAL RESPONSE:" in raw_reply:
-                try:
-                    reasoning_text = raw_reply.split("REASONING:")[1].split("FINAL RESPONSE:")[0].strip()
-                    therapist_reply = raw_reply.split("FINAL RESPONSE:")[1].strip()
-                    reasoning = json.loads(reasoning_text)
+            if therapist_model == "gpt-oss:20b":
+                print("gpt-oss")
+                therapist_reply, reasoning = parse_gpt_oss_output(raw_reply)
 
-                    print("\n======= RAW COT REASONING ========")
-                    print(json.dumps(reasoning, indent=2))
-                    print("\n===============\n")
-                except Exception:
-                    print(raw_reply)
-                    reasoning = None
+            else: 
+                if "REASONING:" in raw_reply and "FINAL RESPONSE:" in raw_reply:
+                    try:
+                        reasoning_text = raw_reply.split("REASONING:")[1].split("FINAL RESPONSE:")[0].strip()
+                        therapist_reply = raw_reply.split("FINAL RESPONSE:")[1].strip()
+                        reasoning = json.loads(reasoning_text)
+
+                        print("\n======= RAW COT REASONING ========")
+                        print(json.dumps(reasoning, indent=2))
+                        print("\n===============\n")
+                    except Exception:
+                        print(raw_reply)
+                        reasoning = None
 
         else:
 
