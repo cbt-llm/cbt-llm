@@ -221,7 +221,10 @@ ollama serve
 > Leave this process running in a separate terminal.
 ### OpenAI (for closed models)
 
-To run experiments with GPT-4o, set your OpenAI API key:
+
+#### Model used for user simulation: `GPT-4o-mini`
+
+To run user simulation (GPT-4o-mini) and evaluation (GPT-5.1), set your OpenAI API key:
 
 ```sh
 export OPENAI_API_KEY=your_api_key_here
@@ -253,37 +256,42 @@ Once running, open the provided local URL in your browser.
 
 ---
 
-We evaluate CBT-aligned retrieval-augmented generation using a factorial design, varying:
+### Prerequisites
 
-* **Prompting mode**: baseline vs. CBT-guided
-* **Language model**: three open and closed LLMs
+* Ollama server running (for response generation)
+* OpenAI API key set (for user simulation)
 
-This results in a **2 × 3 factorial design**.
+```sh
+ollama serve
+export PYTHONPATH=src
+export OPENAI_API_KEY=your_api_key_here
+```
 
-### Models used
+We experiment CBT-aligned retrieval-augmented generation using a factorial design, varying:
+
+* **Prompting mode**: Baseline vs. CBT Chain-of-Thought (CoT) and Multiple Chains-of-Thought (McoT)
+* **Language model**: four open source LLMs
+
+Command for modes:
+- run under **baseline**, **cbt** and **cbt-mcot** system prompts modes.
+
+
+This results in a **3 × 4 factorial design**.
+
+### Models used for generation
 
 | Model               | Argument  | Backend    |
 | ------------------- | --------- | ---------- |
-| Gemma 2B            | `gemma`   | Ollama     |
-| Mistral 7B Instruct | `mistral` | Ollama     |
-| GPT-4o              | `gpt`     | OpenAI API |
+| Mistral 7B          | `mistral` | Ollama     |
+| DeepSeek R1 8B      | `deepseek`| Ollama     |
+| Gemma3-12B          | `gemma`   | Ollama     |
+| GPT-OSS-20B         | `gpt`     | Ollama     |
 
-Each model is run under both **baseline** and **CBT-guided** system prompts.
+
 Outputs are written to:
 
 ```
-output/{model}/
-```
-
-### Prerequisites
-
-* Ollama server running (for Gemma and Mistral)
-* OpenAI API key set (for GPT-4o)
-
-```sh
-export PYTHONPATH=src
-export OPENAI_API_KEY=your_api_key_here
-ollama serve
+output/{model}/{mode}_transcript_{number}.json
 ```
 
 ### Run experiments
@@ -319,7 +327,7 @@ Filter retrieved SNOMED findings using NLI (option `4`). Produces `nli_reranked_
 Run 
 
 ```sh
-./run_experiments.sh [baseline|cbt] ${MODEL}
+./run_experiments.sh [baseline|cbt|cbt_mcot] ${MODEL}
 ```
 
 Example:
@@ -327,51 +335,46 @@ Example:
 ```sh
 ./run_experiments.sh cbt gemma
 ./run_experiments.sh baseline mistral
-./run_experiments.sh cbt gpt
+./run_experiments.sh cbt_mcot gpt
 ```
 
 ## Generate Evaluation Plots
 
-#### Therapist-Side Evaluation
+#### CBT-guided Response Evaluation
 
-We evaluate therapist responses using an LLM-as-a-judge framework that scores:
+We evaluate therapist responses an LLM-as-a-Judge framework that scores:
 
 - Validation & reflection
 - Socratic questioning
 - Cognitive restructuring
-- Overall CBT quality
+- Protocol Effectivess
 
 Outputs are saved to:
 
 ```
+CHANGE
 evaluation/{model}/summary.csv
 evaluation/{model}/*.judge.jsonl
 ```
 
 Commands:
 
-```python src/cbt_llm/plot_cbt_eval.py --models gpt gemma mistral```
+```CHANGE python src/cbt_llm/plot_cbt_eval.py --models gpt gemma mistral```
 
-#### Patient-Side Sentiment Evaluation
+#### User Sentiment Evaluation
 
-Patient responses are analyzed using VADER compound sentiment scores as a proxy for emotional trajectory.
+User responses are analyzed using VADER compound a running average of sentiment scores as a proxy for emotional trajectory (baseline vs. CBT-CoT vs. CBT-MCoT).
 
-Generate Patient Evaluation Plots
+Generate Sentiment Evaluation Plots:
 
-This script produces:
-
-Patient sentiment trajectories (baseline vs. CBT-guided)
-
-Protocol-specific patient sentiment effects
-
-Cross-model aggregated patient effect
-
-```python src/cbt_llm/plot_patient_eval.py --models gpt gemma mistral```
+```CHANGE python src/cbt_llm/plot_patient_eval.py --models gpt gemma mistral```
 
 Outputs are saved to:
 
 ```
-evaluation/patient_plots/
+CHANGE evaluation/patient_plots/
 ```
+
+
 
 

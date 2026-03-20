@@ -252,12 +252,16 @@ def plot_combined_cumulative(all_summaries, out_dir, model):
 
     plt.axhline(0, linestyle="--", alpha=0.4)
 
-    plt.xlabel("User Turn")
-    plt.ylabel("Running Average VADER Sentiment")
+    plt.xlabel("User Turn", fontsize=16)
+    plt.ylabel("Running Average Sentiment", fontsize=16)
 
-    plt.legend(title="Mode")
+    plt.legend(
+        loc="lower right",   # force consistent placement
+        frameon=True,
+        fontsize=16
+    )
 
-    plt.title(f"{model_title(model)}: Cumulative User Sentiment")
+    plt.title("", fontsize=12)
 
     plt.tight_layout()
 
