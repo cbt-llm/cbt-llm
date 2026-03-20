@@ -3,7 +3,7 @@ import pandas as pd
 
 ROOT = Path("evals_summary")
 
-JUDGES = ["gpt-5.1", "qwen3-14b"]
+JUDGES = ["gpt-5.1", "qwen3-32b"]
 
 MODEL_NAMES = {
     "gemma": "gemma3:12b",

@@ -58,7 +58,7 @@ class EvalConfig:
     judge_model: str = "gpt-5.1"
 
     max_tokens: int = 3000
-    max_concurrent: int = 1
+    max_concurrent: int = 4
     retries: int = 3
 
 

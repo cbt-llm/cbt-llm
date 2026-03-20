@@ -12,7 +12,7 @@ import pandas as pd
 
 JUDGES = {
     "gpt-5.1": "GPT-5.1",
-    "qwen3-14b": "Qwen3-14B"
+    "qwen3-32b": "Qwen3-32B"
 }
 
 MODE_LABELS = {
@@ -29,7 +29,7 @@ MODE_COLORS = {
 
 JUDGE_LINESTYLE = {
     "gpt-5.1": "-",
-    "qwen3-14b": "--"
+    "qwen3-32b": "--"
 }
 
 MODEL_TITLES = {
