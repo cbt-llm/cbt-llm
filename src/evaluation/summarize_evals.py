@@ -79,7 +79,7 @@ def summarize_evals(eval_dir: Path, output_dir: Path):
     # =========================
 
     categories = [
-        "Validate & Reflect",
+        "Validate &\nReflect",
         "Socratic Questioning",
         "Cognitive Restructuring"
     ]
@@ -100,33 +100,25 @@ def summarize_evals(eval_dir: Path, output_dir: Path):
 
         ax.plot(angles, values, linewidth=2, label=mode)
         ax.fill(angles, values, alpha=0.2)
+        # ---- LABELS (clean outside placement) ----
+        ax.set_xticks(angles[:-1])
+        ax.set_xticklabels([])  # remove default labels
 
-    # ---- LABELS (THE REAL FIX) ----
-    ax.set_xticks(angles[:-1])
-    # remove default label
-    ax.set_xticklabels(categories, fontsize=16)
-
-    # manually redraw ONLY the right label
-    angle = angles[0]  # "Validate & Reflect"
-
-    ax.text(
-        angle,
-        1.07,  # radius > 1 pushes it outside cleanly
-        "Validate & Reflect",
-        ha='left',
-        va='center',
-        fontsize=16
-    )
-
-    # hide original overlapping label
-    ax.get_xticklabels()[0].set_visible(False)
-
-    # push labels OUTSIDE circle cleanly
-    ax.tick_params(axis='x', pad=20)
+        for angle, label in zip(angles[:-1], categories):
+            ax.text(
+                angle,
+                1.24,  # >1 pushes OUTSIDE circle
+                label,
+                ha='center',
+                va='center',
+                fontsize=16
+            )
+        
 
     # ---- RADIAL ----
     ax.set_ylim(0, 1)
     ax.set_rlabel_position(90)
+    ax.tick_params(axis='y', labelsize=14)  # increase circle number font
 
     # ---- CLEAN GRID ----
     ax.spines['polar'].set_alpha(0.3)
