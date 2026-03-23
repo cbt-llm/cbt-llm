@@ -191,3 +191,34 @@ output_path = os.path.join(INPUT_DIR, "concept_uncertainty_table.csv")
 df.to_csv(output_path, index=False)
 
 print(f"\nSaved to: {output_path}")
+
+
+# retrieval performance 
+
+# are we a
+
+# - how likely i retrieced from snomed ct * its usage across entailment
+
+# how likely retrieved concepts are identified as 
+
+# - does the concepts improve performance
+
+
+# all responses that came out mcot, cot-> how many were apt and above (V, CR, SQ)
+# -> is the response better because of snomed or 
+# -> label response
+# -> similarity to snomed vs. response 
+
+
+# Table baseline -> snomed ct or cognitive model 
+# if reponse is apt and higher with atleast then compare with -> snomed concepts (how much %)
+
+
+# Ethical considerations
+
+# manas's mental health paper: ethical consideration -> no personal transcripts
+# -> synthetic 
+
+
+# no such dataset exist for V, SQ, CR, so we use simulated conversation 
+

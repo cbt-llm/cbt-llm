@@ -340,7 +340,7 @@ Example:
 
 ## Generate Evaluation Plots
 
-#### CBT-guided Response Evaluation
+<!-- #### CBT-guided Response Evaluation
 
 We evaluate therapist responses an LLM-as-a-Judge framework that scores:
 
@@ -373,8 +373,82 @@ Outputs are saved to:
 
 ```
 CHANGE evaluation/patient_plots/
+``` -->
+
+#### Generate Evaluation Plots
+
+This section produces evaluation visualizations for both LLM response quality and user trajectory, supporting the analysis presented in the Results section.
+
+1. CBT-guided Response Evaluation
+
+We evaluate therapist responses using an LLM-as-a-Judge (LaaJ) framework, measuring both protocol adherence and response effectiveness.
+
+Evaluation Dimensions:
+- Validation & Reflection (V)
+- Socratic Questioning (SQ)
+- Cognitive Restructuring (CR)
+- Other / None (captures out-of-protocol behavior)
+- Protocol Effectiveness (Likert scale: 1 = least appropriate, 5 = most appropriate)
+
+What this captures:
+- Distribution of CBT techniques across models and modes
+- Adherence to structured CBT intervention flow
+- Quality of intervention as perceived by evaluators
+
+
+Run Evaluation Plot Generation:
+
+```sh
+python src/evaluation/plot_cbt_eval.py --models gpt gemma mistral deepseek
 ```
 
+Outputs saved to:
+
+`evaluation/response_eval/`
+
+2. Human Expert Evaluation
+
+We complement automated evaluation (LaaJ + sentiment) with human expert assessment to measure clinical appropriateness and protocol adherence.
+
+Evaluation Setup
+Evaluators: Clincal domain experts of varying experience level
+
+Data:
+- 4 conversations (one per model)
+- ~10 turns per conversation
+Each evaluated across 2 modes: CBT-CoT, CBT-MCoT
+
+Evaluation Dimensions:
+
+Each response is annotated on:
+
+1. Protocol Adherence (Multiple selections allowed per response)
+- Validation & Reflection (V)
+- Socratic Questioning (SQ)
+- Cognitive Restructuring (CR)
+- Other / None (important: captures deviation)
 
 
+2. Protocol Effectiveness (Likert)
+- 1 = Very Inappropriate
+- 5 = Very Appropriate
 
+Run Human Evaluation Aggregation: `python src/evaluation/human_eval.py`
+
+Outputs saved to: `evaluation/human_eval/`
+
+3. User Sentiment Evaluation
+
+We analyze user emotional trajectory across conversations as a proxy for intervention impact.
+
+Method
+- Sentiment computed using VADER compound score
+- Running average applied across turns
+Compared across: Baseline, CBT-CoT, CBT-MCoT
+
+Run Sentiment Plot Generation: 
+
+```sh
+```
+
+Outputs saved to: ``
