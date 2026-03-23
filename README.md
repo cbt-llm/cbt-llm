@@ -206,8 +206,7 @@ ollama --version
 Pull the models used in the experiments:
 
 ```sh
-ollama pull gemma:2b
-ollama pull mistral:7b-instruct
+ollama pull (model name)
 ```
 
 3. **Start the Ollama server**
