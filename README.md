@@ -315,7 +315,7 @@ Files generated:
 
 2. Run Concept generation pipelines:
 
-- `llm_pipeline` — LLM-based semantic extraction (option `2`)
+<!-- - `llm_pipeline` — LLM-based semantic extraction (option `2`) -->
 - `neo4j_pipeline` — SNOMED CT graph retrieval via MPNet embeddings (option `1`)
 
 3. Run NLI Re-ranking:
@@ -338,43 +338,6 @@ Example:
 ./run_experiments.sh cbt_mcot gpt
 ```
 
-## Generate Evaluation Plots
-
-<!-- #### CBT-guided Response Evaluation
-
-We evaluate therapist responses an LLM-as-a-Judge framework that scores:
-
-- Validation & reflection
-- Socratic questioning
-- Cognitive restructuring
-- Protocol Effectivess
-
-Outputs are saved to:
-
-```
-CHANGE
-evaluation/{model}/summary.csv
-evaluation/{model}/*.judge.jsonl
-```
-
-Commands:
-
-```CHANGE python src/cbt_llm/plot_cbt_eval.py --models gpt gemma mistral```
-
-#### User Sentiment Evaluation
-
-User responses are analyzed using VADER compound a running average of sentiment scores as a proxy for emotional trajectory (baseline vs. CBT-CoT vs. CBT-MCoT).
-
-Generate Sentiment Evaluation Plots:
-
-```CHANGE python src/cbt_llm/plot_patient_eval.py --models gpt gemma mistral```
-
-Outputs are saved to:
-
-```
-CHANGE evaluation/patient_plots/
-``` -->
-
 #### Generate Evaluation Plots
 
 This section produces evaluation visualizations for both LLM response quality and user trajectory, supporting the analysis presented in the Results section.
@@ -383,18 +346,16 @@ This section produces evaluation visualizations for both LLM response quality an
 
 We evaluate therapist responses using an LLM-as-a-Judge (LaaJ) framework, measuring both protocol adherence and response effectiveness.
 
-Evaluation Dimensions:
+Evaluation Dimensions using criteria defined in our `cbt-protocols.json`:
 - Validation & Reflection (V)
 - Socratic Questioning (SQ)
 - Cognitive Restructuring (CR)
-- Other / None (captures out-of-protocol behavior)
-- Protocol Effectiveness (Likert scale: 1 = least appropriate, 5 = most appropriate)
+- Protocol Effectiveness (breakdown using criteria defined in `cbt-protocols.json`)
 
-What this captures:
-- Distribution of CBT techniques across models and modes
-- Adherence to structured CBT intervention flow
-- Quality of intervention as perceived by evaluators
+Run LaaJ:
 
+`python src/evaluation/summarize_evals.py --laaj-model gpt-5.1 --model all`
+`python src/evaluation/summarize_evals.py --laaj-model qwen3-32b --model all`
 
 Run Evaluation Plot Generation:
 
@@ -422,20 +383,17 @@ Evaluation Dimensions:
 
 Each response is annotated on:
 
-1. Protocol Adherence (Multiple selections allowed per response)
+Protocol Adherence (Multiple selections allowed per response)
 - Validation & Reflection (V)
 - Socratic Questioning (SQ)
 - Cognitive Restructuring (CR)
 - Other / None (important: captures deviation)
 
-
-2. Protocol Effectiveness (Likert)
+Protocol Effectiveness (Likert)
 - 1 = Very Inappropriate
 - 5 = Very Appropriate
 
 Run Human Evaluation Aggregation: `python src/evaluation/human_eval.py`
-
-Outputs saved to: `evaluation/human_eval/`
 
 3. User Sentiment Evaluation
 
@@ -449,6 +407,5 @@ Compared across: Baseline, CBT-CoT, CBT-MCoT
 Run Sentiment Plot Generation: 
 
 ```sh
+python src/evaluation/overlay_user_sentiment.py --model (model) 
 ```
-
-Outputs saved to: ``
