@@ -341,7 +341,7 @@ Example:
 
 This section produces evaluation visualizations for both LLM response quality and user trajectory, supporting the analysis presented in the Results section.
 
-1. CBT-guided Response Evaluation
+### 1. CBT-guided Response Evaluation
 
 We evaluate therapist responses using an LLM-as-a-Judge (LaaJ) framework, measuring both protocol adherence and response effectiveness.
 
@@ -366,7 +366,7 @@ Outputs saved to:
 
 `evaluation/response_eval/`
 
-2. Human Expert Evaluation
+### 2. Human Expert Evaluation
 
 We complement automated evaluation (LaaJ + sentiment) with human expert assessment to measure clinical appropriateness and protocol adherence.
 
@@ -394,17 +394,44 @@ Protocol Effectiveness (Likert)
 
 Run Human Evaluation Aggregation: `python src/evaluation/human_eval.py`
 
-3. User Sentiment Evaluation
+### 3. User Affect Evaluation
+ 
+We model client emotion using the **valence-arousal (VA) model of emotion** ([Russell, 1980](https://doi.org/10.1037/h0077714)), replacing polarity-based sentiment 
+methods (e.g., VADER) with a multidimensional representation of affect.
 
-We analyze user emotional trajectory across conversations as a proxy for intervention impact.
+User utterances are scored with the NRC VAD Lexicon v2.1 (55k+ English words with valence + arousal scores) instead of [v1](https://aclanthology.org/P18-1017/) (22k+ English words). Scores are averaged per turn, then aggregated as a running mean across sessions.
 
-Method
-- Sentiment computed using VADER compound score
-- Running average applied across turns
-Compared across: Baseline, CBT-CoT, CBT-MCoT
+#### Lexicon Setup
+ 
+Download NRC VAD Lexicon v2.1 at ([NRC-VAD](https://saifmohammad.com/WebPages/nrc-vad.html)), unzip and place under `external_libs/`.
 
-Run Sentiment Plot Generation: 
+#### RealCBT Setup
+ 
+Download RealCBT Dataset zip at ([RealCBT](https://gitlab.com/xiaoyi.wang/realcbt-dataset)), unzip and place under `data/external/RealCBT/`.
+ 
+### A. Synthetic Transcripts
+ 
+Compare valence and arousal across Baseline and CBT-MCoT:
 
 ```sh
-python src/evaluation/overlay_user_sentiment.py --model (model) 
+python src/evaluation/overlay_user_sentiment.py --model <model>
 ```
+
+Outputs saved to `evaluation/user_sentiment_plots/{model}/`
+ 
+### B. RealCBT
+ 
+Scores real therapy transcripts as a baseline. Opening pleasantries (first 2 client utterances) are excluded.
+ 
+```sh
+python src/evaluation/realcbt_overlay_user_sentiments.py
+```
+
+Outputs saved to `evaluation/realcbt_sentiment_plots/`
+
+#### Interpreting Results
+
+Scores are on a **−1 to +1 scale** for Valence and Arousal.
+
+- **Valence** measures how positive/negative client language is; **arousal** measures activation level.
+- **Trajectory shape** in the VA circumplex shows the emotional arc across turns. Rightward drift = improving valence; squiggles reflect the non-linear nature of therapeutic dialogue. RealCBT trajectories serve as a human reference for comparison.
