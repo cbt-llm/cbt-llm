@@ -184,6 +184,13 @@ def summarize_cumulative(df: pd.DataFrame) -> pd.DataFrame:
 def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
     fig, ax = plt.subplots(figsize=(7, 6))
 
+    all_turns = []
+    for mode in ["baseline", "cot", "mcot"]:
+        df = all_summaries.get(mode)
+        if df is not None and not df.empty:
+            all_turns.extend(df["turn"].tolist())
+    turn_min, turn_max = min(all_turns), max(all_turns)
+
     for mode in ["baseline", "cot", "mcot"]:
         df = all_summaries.get(mode)
         if df is None or df.empty:
@@ -211,6 +218,7 @@ def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
 
     ax.set_xlabel("Valence", fontsize=14)
     ax.set_ylabel("Arousal", fontsize=14)
+    ax.set_title("Synthetic Transcript: User Valence-Arousal Trajectory")
 
     legend_elements = [
         Line2D([0], [0], color=CIRCUMPLEX_LEGEND_COLORS[mode],
@@ -222,12 +230,15 @@ def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
         Line2D([0], [0], marker="*", color="w", markerfacecolor="white",
                markeredgecolor="gray", markersize=12, label="End"),
     ]
-
-    ax.set_title("Synthetic Transcript: User Valence-Arousal Trajectory")
     ax.legend(handles=legend_elements, fontsize=12, frameon=True, loc="best")
-    ax.annotate("Dark → early turns   Bright → late turns",
-                xy=(0.02, 0.02), xycoords="axes fraction",
-                fontsize=9, color="gray")
+
+    # Shared neutral colorbar for turn reference
+    sm = cm.ScalarMappable(
+        cmap=cm.Greys,
+        norm=Normalize(vmin=turn_min, vmax=turn_max)
+    )
+    sm.set_array([])
+    plt.colorbar(sm, ax=ax, label="User Turn", shrink=0.6, pad=0.02)
 
     plt.tight_layout()
     plt.savefig(out_dir / f"{model}_va_circumplex.png", dpi=300, bbox_inches="tight")

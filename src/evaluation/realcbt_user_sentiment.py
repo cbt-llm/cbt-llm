@@ -220,7 +220,7 @@ def plot_va_circumplex(summary, out_path):
     ax.scatter(x[-1], y[-1], color="white", edgecolors="black",
                marker="*", s=250, zorder=6, label="End")
 
-    pad = 0.05
+    pad = 0.01
     ax.set_title("RealCBT Dataset: User Valence-Arousal Trajectory")
     ax.set_xlim(x.min() - pad, x.max() + pad)
     ax.set_ylim(y.min() - pad, y.max() + pad)
@@ -253,23 +253,6 @@ def main():
 
     summary.to_csv(SAVE_ROOT / "realcbt_cumulative_summary.csv", index=False)
 
-    _plot_dim(
-        summary,
-        y_col="mean_cumulative_valence",
-        sem_col="sem_valence",
-        y_label="Running Average Valence",
-        out_path=SAVE_ROOT / "realcbt_cumulative_valence.png",
-    )
-
-    _plot_dim(
-        summary,
-        y_col="mean_cumulative_arousal",
-        sem_col="sem_arousal",
-        y_label="Running Average Arousal",
-        out_path=SAVE_ROOT / "realcbt_cumulative_arousal.png",
-    )
-
-    plot_grid(summary, out_path=SAVE_ROOT / "realcbt_valence_arousal_grid.png")
     plot_va_circumplex(summary, out_path=SAVE_ROOT / "realcbt_va_circumplex.png")
 
     print(f"\nSaved to: {SAVE_ROOT}")
