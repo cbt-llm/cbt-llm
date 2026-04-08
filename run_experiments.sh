@@ -55,17 +55,18 @@ core_issue=(
 for i in "${!seeds[@]}"; do
   run=$((i+1))
   seed="${seeds[$i]}"
+  issue="${core_issues[$i]}"
 
-  echo "Seed $run"
+  echo "Seed $run — core issue: $issue"
 
   CMD=(
-    python -m src.cbt_llm.multiturn_convo
+    python -m cbt_llm.multiturn_convo
     --therapist_model "$MODEL"
     --therapist_mode "$MODE"
     --turns "$TURNS"
     --k "$K"
     --seed "$seed"
-    --core_issue "$core_issue"
+    --core_issue "$issue"
     --transcript_json "${OUTDIR}/${MODE}_transcript_${run}.json"
   )
 
