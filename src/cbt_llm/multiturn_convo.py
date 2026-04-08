@@ -81,9 +81,7 @@ You are simulating a human patient in an ongoing cognitive behavioral therapy (C
 
 Respond as the patient would in a real therapy session.
 
-Additional internal context:
-
-You are primarily struggling with: {core_issue}
+You are primarily struggling with: {core_issue}, keep the conversation on this core issue.
 
 Your responses should be internally guided by:
 - your personal history
@@ -559,7 +557,7 @@ def run_session(
                 "CBT mode MUST use user schema, RAG, and CBT protocols."
             )
         
-    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma3:4b", "deepseek-r1:8b"}
+    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma3:12b", "deepseek-r1:8b"}
 
     therapist_llm = (
         OllamaChat(therapist_model) if therapist_model in OLLAMA_MODELS
@@ -584,7 +582,7 @@ def run_session(
         raise ValueError(f"Unknown therapist_mode: {therapist_mode}")
 
     transcript = []
-    patient_chat = [{"role": "system", "content": PATIENT_SYSTEM}]
+    patient_chat = [{"role": "system", "content": PATIENT_SYSTEM.format(core_issue=core_issue)}]
     last_patient = seed
 
     schema_trace = []  # store schema per turn for CBT transcripts

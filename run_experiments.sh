@@ -55,9 +55,9 @@ core_issue=(
 for i in "${!seeds[@]}"; do
   run=$((i+1))
   seed="${seeds[$i]}"
-  issue="${core_issues[$i]}"
+  issue="${core_issue[$i]}"
 
-  echo "Seed $run — core issue: $issue"
+  echo "Seed $run: $seed — core issue: $issue"
 
   CMD=(
     python -m cbt_llm.multiturn_convo
