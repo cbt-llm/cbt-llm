@@ -141,7 +141,7 @@ def evaluate_candidates(llm, patient_text, candidates, protocols):
     Each response was generated using a different CBT intervention protocol.
 
     Select the response that BEST applies its protocol and would most effectively
-    move the therapy conversation forward.
+    move the therapy conversation forward to help the user draw better conclusions.
 
     Evaluation criteria:
     - correct application of the CBT intervention
@@ -194,19 +194,6 @@ def evaluate_candidates(llm, patient_text, candidates, protocols):
         return max(0, min(idx, len(candidates) - 1))
     except Exception:
         return 0
-
-
-# def classify_reasoning_concepts(reasoning, rag, schema):
-
-#     concepts = reasoning.get("retrieved_concepts_used", [])
-
-#     print("\n[DEBUG] Retrieved concepts from reasoning:")
-#     for c in concepts:
-#         print(" -", c)
-#     print()
-
-#     return reasoning
-
 
 
 def mcot_therapist_reply(

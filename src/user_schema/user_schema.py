@@ -8,6 +8,23 @@ load_dotenv()
 from openai import OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
+# # ever growing, cyclical context?
+# USER_CAT_PROMPT = """
+# Using the following workflow, extract: 
+
+# - Varying Appraisal checks
+# - changes in other emotional components
+# - emotion
+# - new appraisals
+# - changes in emotion components
+# - emotional experience changes
+
+# - view 1 or 2
+# """
+
+
+# per-turn context
 USER_SCHEMA_PROMPT = """
 You are a clinical-reasoning assistant trained to extract structured CBT cognitive model 
 from user text without diagnosing, labeling pathology, or adding interpretation.
@@ -15,7 +32,7 @@ from user text without diagnosing, labeling pathology, or adding interpretation.
 Field definitions:
 - Triggers: external situations or contexts that precede distress (not thoughts or beliefs).
 - Automatic thoughts: immediate internal interpretations or predictions.
-- Emotions: momentary affective states (single emotion words).
+- Emotions: momentary affective states.
 - Behaviors: observable actions or avoidance responses.
 
 The cognitive model describes how people’s thoughts and perceptions influence their lives.
@@ -98,6 +115,6 @@ def extract_user_schema(input_text: str) -> Dict[str, Any]:
 
 
 if __name__ == "__main__":
-    text = "I keep thinking my partner might leave me even though they reassure me. I avoid serious conversations because I'm scared of conflict."
+    text = "I feel calm most of the time, but sometimes when small things pile up, it feels like nothing is going the way it should, and I end up blowing up."
     out = extract_user_schema(text)
     print(json.dumps(out, indent=2))

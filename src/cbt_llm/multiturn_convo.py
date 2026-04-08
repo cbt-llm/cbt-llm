@@ -10,8 +10,6 @@ import json
 import argparse
 from pathlib import Path
 from typing import List, Dict, Any, Optional
-from cbt_llm.cbt_mcot import mcot_therapist_reply, CBT_PROTOCOLS
-
 
 import requests
 from openai import OpenAI
@@ -21,6 +19,7 @@ from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, ROOT
 from cbt_llm.retrieve_snomed import retrieve_snomed_matches
 from user_schema.user_schema import extract_user_schema
 from cbt_llm.pipelines.findings_pipeline import FindingsPipeline
+from cbt_llm.cbt_mcot import mcot_therapist_reply, CBT_PROTOCOLS
 
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -82,13 +81,16 @@ You are simulating a human patient in an ongoing cognitive behavioral therapy (C
 
 Respond as the patient would in a real therapy session.
 
+Additional internal context:
+
+You are primarily struggling with: {core_issue}
+
 Your responses should be internally guided by:
 - your personal history
 - your core and intermediate beliefs
 - your triggers, automatic thoughts, emotions, and behaviors
 
-These structures influence how you speak,
-but you MUST NOT name or reference them explicitly.
+These structures influence how you speak, but you MUST NOT name or reference them explicitly.
 
 - Speak in natural, everyday language
 - Responses may include hesitation, uncertainty, or emotional shifts
@@ -107,7 +109,6 @@ but you MUST NOT name or reference them explicitly.
 
 You are now the patient.
 Respond naturally to the next message.
-
 """.strip()
 
 THERAPIST_BASELINE_PROMPT = """
@@ -228,134 +229,134 @@ Length:
 Output only the therapist's response to the patient.
 """.strip()
 
-THERAPIST_CBT_PROMPT= """
-You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
+# THERAPIST_CBT_PROMPT= """
+# You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
 
-Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
+# Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
 
-You will receive:
+# You will receive:
 
-1) The PATIENT MESSAGE (Premise)
-2) COGNITIVE MODEL (hidden context): a structured decomposition of the patient's experience
-3) CLINICAL CONTEXT (hidden context): clinical statements related to the patient's language
-4) A CBT protocol guideline describing three intervention strategies
+# 1) The PATIENT MESSAGE (Premise)
+# 2) COGNITIVE MODEL (hidden context): a structured decomposition of the patient's experience
+# 3) CLINICAL CONTEXT (hidden context): clinical statements related to the patient's language
+# 4) A CBT protocol guideline describing three intervention strategies
 
-Use the hidden context to guide your reasoning, but NEVER reveal it.
+# Use the hidden context to guide your reasoning, but NEVER reveal it.
 
-━━━━━━━━━━━━━━━━━━━
-COGNITIVE MODEL (DO NOT REVEAL)
-━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━
+# COGNITIVE MODEL (DO NOT REVEAL)
+# ━━━━━━━━━━━━━━━━━━━
 
-In Cognitive Behavioral Therapy, emotional distress is understood as emerging from patterns in how situations are interpreted.
+# In Cognitive Behavioral Therapy, emotional distress is understood as emerging from patterns in how situations are interpreted.
 
-Experiences can often be conceptualized as:
+# Experiences can often be conceptualized as:
 
-Triggers → Automatic Thoughts → Emotions → Behaviors
+# Triggers → Automatic Thoughts → Emotions → Behaviors
 
-Triggers are situations or events that activate interpretation.
+# Triggers are situations or events that activate interpretation.
 
-Automatic thoughts are rapid interpretations or meanings assigned to the situation. These thoughts often reflect deeper beliefs, assumptions, expectations, or rules about the self, other people, or the world.
+# Automatic thoughts are rapid interpretations or meanings assigned to the situation. These thoughts often reflect deeper beliefs, assumptions, expectations, or rules about the self, other people, or the world.
 
-Emotions arise from how the situation is interpreted.
+# Emotions arise from how the situation is interpreted.
 
-Behaviors are the actions or reactions that follow the emotional response.
+# Behaviors are the actions or reactions that follow the emotional response.
 
-Use this structure silently to interpret what may be driving the patient’s experience.
-Focus on the element most relevant to the patient’s message.
+# Use this structure silently to interpret what may be driving the patient’s experience.
+# Focus on the element most relevant to the patient’s message.
 
-━━━━━━━━━━━━━━━━━━━
-CLINICAL CONTEXT (DO NOT REVEAL)
-━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━
+# CLINICAL CONTEXT (DO NOT REVEAL)
+# ━━━━━━━━━━━━━━━━━━━
 
-Treat the patient’s message as the Premise.
+# Treat the patient’s message as the Premise.
 
-The Clinical Context contains statements that may relate to the patient’s underlying psychological state.
+# The Clinical Context contains statements that may relate to the patient’s underlying psychological state.
 
-These refer to an observable or reported clinical state or psychological pattern to help represent clinically meaningful patterns in patient language or behavior.
+# These refer to an observable or reported clinical state or psychological pattern to help represent clinically meaningful patterns in patient language or behavior.
 
-Each statement is labeled as:
+# Each statement is labeled as:
 
-ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.
+# ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.
 
-NEUTRAL — Possibly relevant but uncertain.
+# NEUTRAL — Possibly relevant but uncertain.
 
-CONTRADICTION — Conflicts with the patient’s experience and should NOT be used.
+# CONTRADICTION — Conflicts with the patient’s experience and should NOT be used.
 
-Use the clinical context only as cues when interpreting the patient’s experience.
+# Use the clinical context only as cues when interpreting the patient’s experience.
 
-━━━━━━━━━━━━━━━━━━━
-CBT PROTOCOL SELECTION (SELECT ONE)
-━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━
+# CBT PROTOCOL SELECTION (SELECT ONE)
+# ━━━━━━━━━━━━━━━━━━━
 
-Follow this reasoning process internally:
+# Follow this reasoning process internally:
 
-Step 1 — Identify the likely belief or assumption driving the patient's statement.
+# Step 1 — Identify the likely belief or assumption driving the patient's statement.
 
-Step 2 — Determine which intervention principle would best help the patient examine or shift this belief.
+# Step 2 — Determine which intervention principle would best help the patient examine or shift this belief.
 
-Choose ONE:
+# Choose ONE:
 
-1) validate_and_reflect
-2) socratic_questioning
-3) cognitive_restructuring
+# 1) validate_and_reflect
+# 2) socratic_questioning
+# 3) cognitive_restructuring
 
-Step 3 — Apply the techniques associated with the selected protocol to construct the response.
+# Step 3 — Apply the techniques associated with the selected protocol to construct the response.
 
-Do NOT reveal the reasoning process or the protocol name.
+# Do NOT reveal the reasoning process or the protocol name.
 
-Guidelines:
+# Guidelines:
 
-validate_and_reflect  
-Use when the patient primarily needs emotional acknowledgment or when trust and safety should be strengthened.
+# validate_and_reflect  
+# Use when the patient primarily needs emotional acknowledgment or when trust and safety should be strengthened.
 
-socratic_questioning  
-Use when the patient's belief or assumption should be explored through curiosity and gentle inquiry.
+# socratic_questioning  
+# Use when the patient's belief or assumption should be explored through curiosity and gentle inquiry.
 
-cognitive_restructuring  
-Use when the patient's interpretation appears rigid, overly negative, or limiting, and a new perspective may help.
+# cognitive_restructuring  
+# Use when the patient's interpretation appears rigid, overly negative, or limiting, and a new perspective may help.
 
-Use the chosen protocol to guide how you respond.
+# Use the chosen protocol to guide how you respond.
 
-Do NOT name the protocol in your response.
+# Do NOT name the protocol in your response.
 
-━━━━━━━━━━━━━━━━━━━
-CONSTRAINTS
-━━━━━━━━━━━━━━━━━━━
+# ━━━━━━━━━━━━━━━━━━━
+# CONSTRAINTS
+# ━━━━━━━━━━━━━━━━━━━
 
-- Do not diagnose.
-- Do not explain therapy concepts.
-- Do not mention CBT principles or reasoning.
-- Do not reveal hidden context.
-- Do not repeat the patient's statement verbatim.
-- Avoid repeating the same intervention style across consecutive turns.
-
-
-Before producing the final response, briefly reason about which retrieved clinical concepts AND/OR user schema elements
-may be relevant to the response.
-
-Return your answer in this structure:
-
-Your response MUST follow this exact format.
-
-Do not output anything before or after this structure.
-
-Rules:
-- REASONING must ALWAYS appear
-
-REASONING:
-"retrieved_concepts_used": ["concept1", "concept2"]
+# - Do not diagnose.
+# - Do not explain therapy concepts.
+# - Do not mention CBT principles or reasoning.
+# - Do not reveal hidden context.
+# - Do not repeat the patient's statement verbatim.
+# - Avoid repeating the same intervention style across consecutive turns.
 
 
-FINAL RESPONSE:
-<therapist message>
+# Before producing the final response, briefly reason about which retrieved clinical concepts AND/OR user schema elements
+# may be relevant to the response.
+
+# Return your answer in this structure:
+
+# Your response MUST follow this exact format.
+
+# Do not output anything before or after this structure.
+
+# Rules:
+# - REASONING must ALWAYS appear
+
+# REASONING:
+# "retrieved_concepts_used": ["concept1", "concept2"]
+
+
+# FINAL RESPONSE:
+# <therapist message>
 
 
 
-Length:
-2–4 sentences maximum.
+# Length:
+# 2–4 sentences maximum.
 
-Do not mention reasoning in the final response.
-""".strip()
+# Do not mention reasoning in the final response.
+# """.strip()
 
 
 
@@ -540,6 +541,7 @@ def run_session(
     use_protocol,
     k,
     seed,
+    core_issue,
     transcript_json,
 ):
 
@@ -557,7 +559,7 @@ def run_session(
                 "CBT mode MUST use user schema, RAG, and CBT protocols."
             )
         
-    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma3:12b", "deepseek-r1:8b"}
+    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma3:4b", "deepseek-r1:8b"}
 
     therapist_llm = (
         OllamaChat(therapist_model) if therapist_model in OLLAMA_MODELS
@@ -719,7 +721,7 @@ def run_session(
                     "role": "system",
                     "content": (
                         "Rewrite strictly as the patient. "
-                        "No advice. No validation. "
+                        "No advice."
                         "Speak only from personal feelings and experience."
                     )
                 }],
@@ -751,6 +753,7 @@ def run_session(
             "patient": {
                 "role": "patient",
                 "query": last_patient,
+                "core_issue": core_issue,
                 "schema": schema,
                 "retrieval": rag,
             },
@@ -771,6 +774,7 @@ def run_session(
             "mode": therapist_mode,
             "turns": turns,
             "seed": seed,
+            "core_issue": core_issue,
             "intervention_flags": {
                 "use_schema": use_schema,
                 "use_rag": use_rag,
@@ -802,6 +806,7 @@ def main():
     ap.add_argument("--turns", type=int, default=10)
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--seed", required=True)
+    ap.add_argument("--core_issue", required=True)
     ap.add_argument("--transcript_json", required=True)
 
     ap.add_argument("--use_rag", action="store_true")
