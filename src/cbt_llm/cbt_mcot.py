@@ -28,6 +28,40 @@ def load_cbt_protocols():
 
 CBT_PROTOCOLS = load_cbt_protocols()
 
+def parse_reasoning_block(after_reasoning: str):
+    """Try multiple strategies to extract retrieved_concepts_used."""
+    
+    # strategy 1: valid JSON object
+    match = re.search(r"\{[\s\S]*?\}", after_reasoning)
+    if match:
+        try:
+            return json.loads(match.group(0))
+        except Exception:
+            pass
+    
+    # strategy 2: bare key-value without braces
+    # handles: "retrieved_concepts_used": ["a", "b"]
+    match = re.search(
+        r'"retrieved_concepts_used"\s*:\s*(\[[\s\S]*?\])',
+        after_reasoning
+    )
+    if match:
+        try:
+            concepts = json.loads(match.group(1))
+            return {"retrieved_concepts_used": concepts}
+        except Exception:
+            pass
+
+    # strategy 3: just pull quoted strings as concept list
+    items = re.findall(r'"([^"]+)"', after_reasoning.split("FINAL RESPONSE:")[0])
+    if items:
+        # filter out the key name itself
+        items = [i for i in items if i != "retrieved_concepts_used"]
+        return {"retrieved_concepts_used": items}
+
+    return None
+
+
 def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol):
 
     principle_prompt = f"""
@@ -53,9 +87,12 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
 
     Return your answer EXACTLY in this structure:
 
-    REASONING:
-    "retrieved_concepts_used": ["...", "..."]
+    Return your answer EXACTLY in this structure:
 
+    REASONING:
+    {{
+      "retrieved_concepts_used": ["...", "..."]
+    }}
 
     FINAL RESPONSE:
     <therapist message>
@@ -63,10 +100,12 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
     Rules:
     - REASONING must ALWAYS appear.
     - FINAL RESPONSE must contain only the therapist message.
-    - natural therapist tone
-    - do not explain CBT
-    - 2–4 sentences
-    - output only the response
+    - Natural therapist tone
+    - Do not explain CBT
+    - MAXIMUM 2 sentences.
+    - Do not overload the patient with too much information or too many questions. One question at a time.
+    - Output only the final response
+    - BAD (too long, too many questions): "What evidence do you have that you'll fail? How did you feel last time? What would a friend say? What small step could you take?"
     """
 
 
@@ -104,24 +143,19 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
     response = raw
 
     if "REASONING:" in raw:
-
         try:
             after_reasoning = raw.split("REASONING:", 1)[1]
 
-            # extract reasoning JSON
-            match = re.search(r"\{[\s\S]*?\}", after_reasoning)
+            reasoning = parse_reasoning_block(after_reasoning)
 
-            if match:
-                reasoning_text = match.group(0)
-                reasoning = json.loads(reasoning_text)
-
-                remainder = after_reasoning[match.end():].strip()
-
-                if "FINAL RESPONSE:" in remainder:
-                    response = remainder.split("FINAL RESPONSE:",1)[1].strip()
-                else:
-                    # fallback: everything after reasoning JSON is response
-                    response = remainder.strip()
+            # extract response
+            if "FINAL RESPONSE:" in after_reasoning:
+                response = after_reasoning.split("FINAL RESPONSE:", 1)[1].strip()
+            elif reasoning:
+                # fallback: everything after the reasoning block
+                match = re.search(r'\][\s\S]*', after_reasoning)
+                if match:
+                    response = match.group(0).lstrip(']\n ').strip()
 
         except Exception:
             reasoning = None
@@ -140,17 +174,25 @@ def evaluate_candidates(llm, patient_text, candidates, protocols):
 
     Each response was generated using a different CBT intervention protocol.
 
-    Select the response that BEST applies its protocol and would most effectively
-    move the therapy conversation forward to help the user draw better conclusions.
+    Your task: select the response that would most effectively move the therapy forward.
 
-    Evaluation criteria:
-    - correct application of the CBT intervention
-    - empathy and emotional attunement
-    - exploration or reframing of beliefs
-    - therapeutic usefulness
-    - natural conversational flow
+    Step 1 — Read the patient message carefully. Identify:
+    - Is the patient primarily expressing emotion and needing to feel heard?
+    - Is the patient articulating a specific belief or thought that could be examined?
+    - Is the patient stuck in a rigid interpretation that a broader view could help shift?
 
-    Return ONLY the number of the best response.
+    Step 2 — Match the clinical need to the protocol:
+    - validate_and_reflect: patient needs emotional acknowledgment BEFORE they can examine beliefs. Use early in rapport-building or when distress is high and the patient is not yet ready to reflect.
+    - socratic_questioning: patient has articulated a specific belief or assumption that can be tested with evidence. Use when the patient is stable enough to reflect and there is a clear belief to examine.
+    - alternative_perspective: patient is locked into one way of seeing a situation and a broader view would reduce distress. Use when the patient already feels heard and is repeating the same interpretation without movement.
+
+    Step 3 — Consider: has the patient already received validation in recent turns? If so, continuing to validate may not move the conversation forward. Prefer socratic_questioning or alternative_perspective if the patient is ready.
+
+    Step 4 — Output your reasoning in one sentence, then output the number of the best response.
+
+    Format your response EXACTLY as:
+    REASONING: <one sentence>
+    ANSWER: <number>
     """.strip()
 
     candidate_blocks = []
@@ -189,8 +231,15 @@ def evaluate_candidates(llm, patient_text, candidates, protocols):
         num_predict=400,
     ).strip()
 
+    print(f"\n=== JUDGE REASONING ===\n{result}\n======================\n")
+
     try:
-        idx = int(result) - 1
+        # extract ANSWER: N if present, otherwise try raw int
+        match = re.search(r'ANSWER:\s*(\d+)', result)
+        if match:
+            idx = int(match.group(1)) - 1
+        else:
+            idx = int(result.strip()) - 1
         return max(0, min(idx, len(candidates) - 1))
     except Exception:
         return 0

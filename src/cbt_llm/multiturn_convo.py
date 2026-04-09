@@ -11,13 +11,17 @@ import argparse
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
+import os
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+os.environ["HF_DATASETS_OFFLINE"] = "1"
+
 import requests
 from openai import OpenAI
 from neo4j import GraphDatabase
 
 from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, ROOT
 from cbt_llm.retrieve_snomed import retrieve_snomed_matches
-from user_schema.user_schema import extract_user_schema
+from user_schema.user_schema import extract_user_schema, update_user_schema
 from cbt_llm.pipelines.findings_pipeline import FindingsPipeline
 from cbt_llm.cbt_mcot import mcot_therapist_reply, CBT_PROTOCOLS
 
@@ -181,50 +185,6 @@ MULTIPLE CHAIN OF THOUGHT REASONING
 ━━━━━━━━━━━━━━━━━━━
 
 Before generating the final response, internally simulate three candidate therapist responses — one for each CBT intervention principle.
-
-For each candidate:
-
-1. Infer the belief or assumption that may be driving the patient's experience.
-2. Apply the intervention principle using its techniques.
-3. Consider how the patient might respond to that intervention.
-
-The three intervention candidates are:
-
-A) validate_and_reflect  
-Focus on emotional acknowledgment and alignment.
-
-B) socratic_questioning  
-Ask questions that help the patient examine the belief.
-
-C) cognitive_restructuring  
-Introduce a gentle alternative interpretation of the belief.
-
-Evaluate which candidate would most effectively move the conversation forward therapeutically.
-
-Select the strongest candidate.
-
-Do NOT reveal the reasoning or the other candidates.
-
-━━━━━━━━━━━━━━━━━━━
-CONSTRAINTS
-━━━━━━━━━━━━━━━━━━━
-
-- Do not diagnose.
-- Do not explain therapy concepts.
-- Do not mention CBT principles or reasoning.
-- Do not reveal hidden context.
-- Do not repeat the patient's statement verbatim.
-- Avoid repeating the same intervention style across consecutive turns.
-
-
-Your response should:
-- Sound like a natural therapist response
-- The therapist should focus on the belief or assumption underlying the patient's experience rather than only reflecting emotions.
-
-Length:
-2–4 sentences maximum.
-
-Output only the therapist's response to the patient.
 """.strip()
 
 # THERAPIST_CBT_PROMPT= """
@@ -374,13 +334,14 @@ def looks_like_patient_drift(text: str) -> bool:
 def looks_like_therapist_leak(text: str) -> bool:
     return any(x in text.lower() for x in ["snomed", "rag", "embedding"])
 
-def safe_extract_schema(text: str) -> Optional[Dict[str, Any]]:
-    if not extract_user_schema:
-        return None
+def safe_extract_schema(text: str, prior_schema: Optional[Dict] = None) -> Optional[Dict[str, Any]]:
     try:
-        return extract_user_schema(text)
+        result = extract_user_schema(text)
+        if all(len(v) == 0 for v in result.values()):
+            return prior_schema  # don't check if prior_schema is truthy, just return it
+        return result
     except Exception:
-        return None
+        return prior_schema  # on crash, return prior rather than None
 
 def sanitize_rag(raw):
     concepts = []
@@ -586,12 +547,28 @@ def run_session(
     last_patient = seed
 
     schema_trace = []  # store schema per turn for CBT transcripts
+    cumulative_schema = {"triggers": [], "automatic_thoughts": [], "emotions": [], "behaviors": []}
+
+    last_schema = {"triggers": [], "automatic_thoughts": [], "emotions": [], "behaviors": []}
 
     for turn_idx in range(turns):
 
 
-        schema = safe_extract_schema(last_patient) if use_schema else None
-
+        if use_schema:
+            turn_schema = safe_extract_schema(last_patient, prior_schema=last_schema)
+            updated = update_user_schema(cumulative_schema, last_patient)
+            
+            # only accept update if it adds something — never regress to empty
+            if any(len(v) > 0 for v in updated.values()):
+                cumulative_schema = updated
+            # else: keep previous cumulative_schema as-is
+            
+            schema = cumulative_schema
+            last_schema = turn_schema
+        else:
+            turn_schema = None
+            schema = None
+        print(cumulative_schema)
         rag = None
         reasoning = None
 
@@ -602,7 +579,8 @@ def run_session(
             schema_trace.append({
                 "turn": turn_idx,
                 "patient_text": last_patient,
-                "schema": schema,
+                "schema_turn": turn_schema,
+                "schema_cumulative": cumulative_schema,  # full accumulated model
                 "retrieval": rag,
             })
 
@@ -706,7 +684,7 @@ def run_session(
                 "content": therapist_reply
             }],
             temperature=0.9,
-            max_tokens=80,
+            max_tokens=200,
         )
 
         patient_reply = patient_resp.choices[0].message.content.strip()
@@ -724,7 +702,7 @@ def run_session(
                     )
                 }],
                 temperature=0.9,
-                max_tokens=80,
+                max_tokens=200,
             ).choices[0].message.content.strip()
 
         patient_chat.append({
