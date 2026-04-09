@@ -4,7 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile.",
+    "seed": "The main problem is these. Well, they tell me that it's a problem to do with musketsophrenia. These voices, they come and they. I heard these people talking about me and talking about how rubbish I am and what a failure I am, and I really just wish they'd leave me alone.",
+    "core_issue": "anxiety and fear",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -16,110 +17,101 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile.",
+        "query": "The main problem is these. Well, they tell me that it's a problem to do with musketsophrenia. These voices, they come and they. I heard these people talking about me and talking about how rubbish I am and what a failure I am, and I really just wish they'd leave me alone.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me"
+          ],
           "automatic_thoughts": [
-            "I don’t want to be a burden on other people",
-            "I have to pretend I’m fine"
+            "I am rubbish",
+            "I am a failure"
           ],
           "emotions": [],
-          "behaviors": [
-            "never share anything",
-            "smile"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Caring towards others (finding)",
-            "Sociable mood (finding)"
+            "Hears mocking voices (finding)",
+            "Loud thoughts (finding)"
           ],
           "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Noise phobia (finding)",
+            "Fear of deafness (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Hears voices laughing at self (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of worry that you might be a burden to those around you, which can make you hold back sharing and keep a smile on your face. That kind of self‑protection can feel exhausting, and it’s understandable that you want to keep things light for others. You’re not alone in feeling this way, and it’s okay to explore how you might ease that pressure on yourself.",
+        "response": "It sounds like the voices are telling you negative things and you feel overwhelmed and wish they would stop. How does that make you feel when they say those things?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of worry that you might be a burden to those around you, which can make you hold back sharing and keep a smile on your face. That kind of self‑protection can feel exhausting, and it’s understandable that you want to keep things light for others. You’re not alone in feeling this way, and it’s okay to explore how you might ease that pressure on yourself.",
+            "response": "It sounds like the voices are telling you negative things and you feel overwhelmed and wish they would stop. How does that make you feel when they say those things?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Hears mocking voices (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Caring towards others",
+                  "concept": "Loud thoughts (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Sociable mood",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Automatic thought: I don’t want to be a burden on other people",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Automatic thought: I have to pretend I’m fine",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Behavior: never share anything",
-                  "label": "behaviors"
-                },
-                {
-                  "concept": "Behavior: smile",
-                  "label": "behaviors"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Can you tell me about a time when you shared something and how it felt? What evidence do you have that sharing would make you a burden? How might you test whether that belief holds true in different situations?",
+            "response": "It sounds like these voices are really distressing. What evidence do you have that they are telling you you’re rubbish, and how do you know they are real?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Hears mocking voices (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Caring towards others",
+                  "concept": "Loud thoughts (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Sociable mood",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I don’t want to be a burden on other people",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I have to pretend I’m fine",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "never share anything",
-                  "label": "behaviors"
-                },
-                {
-                  "concept": "smile",
-                  "label": "behaviors"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re worried that opening up will weigh on others. Have you noticed any times when someone listened and offered help or simply understood? Sometimes sharing can actually strengthen connections rather than burden them.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It sounds like these voices are really harsh and making you feel worthless. If a close friend heard what you’re describing, what might they say to you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Hears mocking voices (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loud thoughts (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like these voices are making you feel very hurt and worthless. What do you think might help you feel a bit more in control of these thoughts?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "hearing voices",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts of worthlessness",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotional distress",
+                  "label": "unknown"
+                }
+              ]
+            }
           }
         }
       }
@@ -128,97 +120,136 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I’ve been feeling really overwhelmed lately. It's like I can’t keep up with everything, and then I just get stuck and freeze. I know I should be doing something, but I just feel so tired and lost.",
+        "query": "It just makes everything feel heavier, you know? Like I can’t escape it. Sometimes I feel really scared and just... lost. It’s hard to focus on anything else when that’s all I can hear.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me"
+          ],
           "automatic_thoughts": [
-            "I can’t keep up with everything",
-            "I should be doing something",
-            "I feel so tired and lost"
+            "I am rubbish",
+            "I am a failure"
           ],
           "emotions": [
-            "overwhelmed"
+            "scared",
+            "lost"
           ],
-          "behaviors": [
-            "get stuck",
-            "freeze"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling of being slowed down (finding)",
-            "Feeling trapped (finding)"
+            "Fear of deafness (finding)",
+            "Loud thoughts (finding)",
+            "Feeling like wanting to escape (finding)"
           ],
-          "neutral": [],
-          "contradiction": [
-            "Feeling agitated (finding)",
-            "Feeling stressed (finding)",
-            "Feeling empty (finding)"
-          ]
+          "neutral": [
+            "Noise phobia (finding)",
+            "Anxiety about collapsing (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a heavy load and feeling stuck, and that fatigue is making it hard to keep moving forward. The pressure to always be doing something can add to that sense of overwhelm. It's understandable to feel lost when everything feels so much at once.",
+        "response": "It sounds like the voices are weighing you down and making you feel trapped and frightened, and that must be exhausting. When you hear them, what does that sound like to you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a heavy load and feeling stuck, and that fatigue is making it hard to keep moving forward. The pressure to always be doing something can add to that sense of overwhelm. It's understandable to feel lost when everything feels so much at once.",
+            "response": "It sounds like the voices are weighing you down and making you feel trapped and frightened, and that must be exhausting. When you hear them, what does that sound like to you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of being slowed down",
+                  "concept": "fear of deafness",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling trapped",
+                  "concept": "loud thoughts",
                   "label": "entailment"
                 },
                 {
-                  "concept": "I can't keep up with everything",
-                  "label": "automatic_thoughts"
+                  "concept": "feeling like wanting to escape",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I should be doing something",
-                  "label": "automatic_thoughts"
+                  "concept": "hearing voices talking about me",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "I feel so tired and lost",
-                  "label": "automatic_thoughts"
+                  "concept": "scared",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "overwhelmed",
+                  "concept": "lost",
                   "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What does “doing something” look like for you right now? Can you think of a recent moment when you felt overwhelmed but still managed to take a step forward? What evidence do you have that you can’t keep up, and what evidence might suggest otherwise?",
+            "response": "It sounds like the voices feel overwhelming. What does it feel like when you try to focus on something else?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "It sounds like the voices feel overwhelming and make you feel stuck. If a close friend were listening, what might they say about how you’re coping with this?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelmed",
+                  "concept": "hearing voices talking about me",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I am rubbish",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I am a failure",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "scared",
                   "label": "emotions"
                 },
                 {
-                  "concept": "can't keep up",
-                  "label": "automatic_thoughts"
+                  "concept": "lost",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "should be doing something",
-                  "label": "automatic_thoughts"
+                  "concept": "fear of deafness",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feel tired and lost",
-                  "label": "automatic_thoughts"
+                  "concept": "loud thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wanting to escape",
+                  "label": "entailment"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re feeling overwhelmed and stuck. One way to explore this is to think about moments when you felt you were managing—what was different then? And moments when you felt frozen—what was different? Seeing those patterns might help you find ways to feel more in control.",
-            "reasoning": null
+          "safety_check": {
+            "response": "It sounds like the voices are weighing on you and making it hard to focus. What do you think might help you feel a little less overwhelmed right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling like wanting to escape",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loud thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Scared",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Lost",
+                  "label": "emotions"
+                }
+              ]
+            }
           }
         }
       }
@@ -227,118 +258,143 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel heavy. I wish I could just shake it off and move on, but instead, I end up feeling guilty for not doing enough. It’s like there's this constant voice telling me I should be handling everything better. It’s exhausting.",
+        "query": "Yeah, it’s really exhausting. It’s like this constant buzzing in my head, telling me I’m not good enough or that something bad is going to happen. It just spirals, and I end up feeling so anxious that I can't think straight.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me",
+            "constant buzzing in my head"
+          ],
           "automatic_thoughts": [
-            "I wish I could just shake it off and move on",
-            "I should be handling everything better"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "something bad is going to happen"
           ],
           "emotions": [
-            "guilt",
-            "exhaustion"
+            "scared",
+            "lost",
+            "anxious"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Complaining of feeling depressed (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about forced dependence (finding)",
-            "Fear of being a burden to others (finding)",
-            "Difficulty coping with grief responses (finding)",
-            "Feeling abandoned (finding)"
+            "Anxiety about behavior or performance (finding)",
+            "Performance anxiety (finding)",
+            "Anxiety about going crazy (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a heavy load and feeling like you’re not meeting your own expectations, which is exhausting. That internal voice of “I should be handling everything better” can make you feel guilty and stuck. It’s understandable that you’re overwhelmed by all of that.",
+        "response": "It sounds like you’re carrying a relentless inner voice that makes you feel inadequate and anxious, and that’s exhausting. What do you think might help you pause that spiral when it starts?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a heavy load and feeling like you’re not meeting your own expectations, which is exhausting. That internal voice of “I should be handling everything better” can make you feel guilty and stuck. It’s understandable that you’re overwhelmed by all of that.",
+            "response": "It sounds like you’re carrying a relentless inner voice that makes you feel inadequate and anxious, and that’s exhausting. What do you think might help you pause that spiral when it starts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling depressed",
-                  "label": "entailment"
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "guilt",
-                  "label": "emotions"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "exhaustion",
-                  "label": "emotions"
+                  "concept": "Anxiety about going crazy",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What does “handling everything better” actually look like for you? Are there moments when you feel you’ve done enough, or is it always a sense of unfinished business? How might you reframe that inner voice so it feels less exhausting and more supportive?",
+            "response": "It sounds exhausting. What evidence do you have that something bad is going to happen?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about forced dependence",
+                  "concept": "Anxiety about going crazy",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Difficulty coping with grief responses",
+                  "concept": "Anxiety about making mistakes",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Feeling abandoned",
+                  "concept": "Anxiety about collapsing",
                   "label": "neutral"
                 },
                 {
-                  "concept": "automatic thoughts: I wish I could just shake it off and move on",
-                  "label": "automatic_thoughts"
+                  "concept": "constant buzzing in my head",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts: I should be handling everything better",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts of not being good enough",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "emotions: guilt",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "emotions: exhaustion",
-                  "label": "emotions"
+                  "concept": "automatic thoughts of something bad happening",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re carrying a lot of pressure to manage everything, which can feel overwhelming. What evidence do you have that you’re not handling things well, and can you think of moments when you’ve actually managed them effectively? Exploring that might help you see a more balanced view of your efforts.",
+          "alternative_perspective": {
+            "response": "It sounds exhausting to feel that constant buzzing and worry. If a close friend were listening, what might they say about how you’re interpreting those thoughts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "guilt",
-                  "label": "emotions"
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "exhaustion",
-                  "label": "emotions"
+                  "concept": "Anxiety about going crazy",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "feeling depressed",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic thoughts about handling everything better",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "constant buzzing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts of not good enough",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear of something bad",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like these thoughts are exhausting and making it hard to think straight. What do you think might help you feel a bit more grounded when these thoughts come up?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about going crazy",
+                  "label": "neutral"
                 }
               ]
             }
@@ -350,80 +406,139 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, exactly. It’s like I’m my own worst critic sometimes. I know I’m doing my best, but then I see what others are achieving and I can’t help but compare myself. It just makes everything feel even more overwhelming.",
+        "query": "It’s exhausting, honestly. That buzzing in my head just doesn’t stop. I feel like I’m not good enough, and then I start thinking something bad is going to happen. Everything spirals, and I get so anxious that I can’t think straight.",
+        "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "seeing what others are achieving"
+            "hearing voices talking about me",
+            "constant buzzing in my head"
           ],
           "automatic_thoughts": [
-            "I'm my own worst critic",
-            "I can't help but compare myself"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "something bad is going to happen"
           ],
           "emotions": [
-            "overwhelming"
+            "scared",
+            "lost",
+            "anxious",
+            "exhausted"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Tends to be critical of others (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Tends to humiliate others (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Fear of being a burden to others (finding)"
+            "Anxiety about behavior or performance (finding)",
+            "Anxiety about going crazy (finding)",
+            "Performance anxiety (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
-          "contradiction": [
-            "Positive self thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of self‑criticism, especially when you see others succeed, and that can feel exhausting. Feeling overwhelmed in those moments is completely understandable. You’re not alone in noticing how comparison can amplify those emotions.",
+        "response": "It sounds like the constant buzzing and thoughts of not being good enough are exhausting and make you feel anxious and stuck. What might help you feel a little more grounded right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of self‑criticism, especially when you see others succeed, and that can feel exhausting. Feeling overwhelmed in those moments is completely understandable. You’re not alone in noticing how comparison can amplify those emotions.",
+            "response": "It sounds like the constant buzzing and thoughts of not being good enough are exhausting and make you feel anxious and stuck. What might help you feel a little more grounded right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "self-criticism",
+                  "concept": "anxiety about performance",
                   "label": "unknown"
                 },
                 {
-                  "concept": "comparison",
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anxiety about going crazy",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anxiety about collapsing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "buzzing in head",
                   "label": "unknown"
                 },
                 {
-                  "concept": "overwhelming feelings",
-                  "label": "emotions"
+                  "concept": "not good enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "something bad will happen",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What does it feel like for you when you notice others’ achievements? How do you think that comparison shapes your view of your own progress? What evidence do you have that this comparison is helping or hurting you?",
+            "response": "It sounds exhausting. What evidence do you have that something bad is going to happen right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "critical self",
-                  "label": "unknown"
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "comparison",
-                  "label": "unknown"
+                  "concept": "Anxiety about going crazy",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "overwhelming feelings",
-                  "label": "emotions"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re being very hard on yourself when you see others’ achievements. What evidence do you have that you’re actually falling short, and what evidence shows you’re doing well? Maybe we can find a more balanced view that acknowledges your effort while recognizing that everyone’s path is different.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It sounds exhausting, and I hear you feeling like the buzzing is overwhelming. If a close friend heard you describe that buzzing and your worries, what might they say to help you feel less alone?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about going crazy",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds exhausting to feel that constant buzzing and worry, and it’s understandable that it makes you feel not good enough. What do you think might help you feel a bit more grounded right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about going crazy",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
           }
         }
       }
@@ -432,68 +547,127 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "It really does feel like I’m in a cycle where I just keep beating myself up. I know I shouldn’t compare myself, but it’s so hard not to. It’s almost like I can’t help it, and then I just feel even more stuck. I wish I could break free from that thinking.",
+        "query": "I don't really know. I guess sometimes I just want to crawl into bed and hide from everything. But at the same time, I know that won't make it go away. Maybe just talking about it helps a little? I’m not sure.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I shouldn’t compare myself",
-            "I can’t help it",
-            "I feel even more stuck",
-            "I wish I could break free from that thinking"
+          "triggers": [
+            "hearing voices talking about me",
+            "constant buzzing in my head"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "something bad is going to happen"
+          ],
+          "emotions": [
+            "scared",
+            "lost",
+            "anxious",
+            "exhausted"
+          ],
           "behaviors": [
-            "beating myself up"
+            "wanting to crawl into bed and hide"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Thoughts of self harm (finding)",
-            "Complaining of feeling depressed (finding)"
+            "Repressing thoughts (finding)",
+            "Feeling like wanting to escape (finding)"
           ],
           "neutral": [
-            "Obsessional thoughts of causing harm to self (finding)",
-            "Delusion of own appearance (finding)"
+            "Anxiety about collapsing (finding)",
+            "Recurrent anxiety (finding)",
+            "Repressing painful memories (finding)"
           ],
-          "contradiction": [
-            "Positive self thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re caught in a loop of self‑criticism that feels almost inevitable, and that can be exhausting. You’re right that comparing yourself can feel hard to avoid, even when you know it’s not helpful. It’s understandable to feel stuck and wish for a way out. You’re not alone in feeling this way, and it’s okay to acknowledge how heavy it feels.",
+        "response": "It sounds like you’re feeling overwhelmed and exhausted, and you’re looking for a way to escape the noise and voices, but you also recognize that hiding might not solve the problem. What do you think might help you feel a bit more grounded right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re caught in a loop of self‑criticism that feels almost inevitable, and that can be exhausting. You’re right that comparing yourself can feel hard to avoid, even when you know it’s not helpful. It’s understandable to feel stuck and wish for a way out. You’re not alone in feeling this way, and it’s okay to acknowledge how heavy it feels.",
+            "response": "It sounds like you’re feeling overwhelmed and exhausted, and you’re looking for a way to escape the noise and voices, but you also recognize that hiding might not solve the problem. What do you think might help you feel a bit more grounded right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Thoughts of self harm (finding)",
+                  "concept": "Repressing thoughts (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Complaining of feeling depressed (finding)",
+                  "concept": "Feeling like wanting to escape (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "triggers: hearing voices, constant buzzing",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts: self-deprecation",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions: scared, lost, anxious, exhausted",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: wanting to crawl into bed and hide",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I’m curious—what does it feel like in the moment when you notice yourself comparing? What evidence do you have that this comparison is unavoidable, and what evidence might suggest it’s not?  \nIf you could pause that cycle for a moment, what might you do for yourself instead?",
+            "response": "It sounds like you’re feeling stuck between wanting to escape and knowing it won’t solve the problem. What evidence do you have that staying in bed will keep the voices or anxiety from coming back?",
             "reasoning": null
           },
-          "cognitive_restructuring": {
-            "response": "Sometimes we notice that the idea of not comparing ourselves feels like a rule, but we can look at moments when you have compared and still felt okay. What evidence do you have that comparing always leads to feeling stuck, and what evidence might suggest it doesn't? You might find that noticing small wins or progress can shift the focus from comparison to personal growth.",
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling overwhelmed and want to escape, but you also recognize that hiding isn’t a solution. If a close friend were watching you, what might they say about the situation?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "self-harm thoughts",
+                  "concept": "Repressing thoughts",
                   "label": "entailment"
                 },
                 {
-                  "concept": "depression",
+                  "concept": "Feeling like wanting to escape",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wanting to crawl into bed and hide",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "scared",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxious",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "exhausted",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling overwhelmed and want to escape, but you also recognize that hiding won’t solve it. What do you think might help you feel a bit more in control right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling like wanting to escape",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Repressing thoughts",
                   "label": "entailment"
                 }
               ]
@@ -506,96 +680,149 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is a lot to carry around. I sometimes wonder if I’m just not strong enough or if I’m failing in some way. It’s hard to shake off those feelings, and I just want to feel lighter, but it seems so far out of reach.",
+        "query": "Yeah, I guess I do recognize that hiding isn't really a solution. I just wish I knew what would work. Sometimes I think maybe just getting out for a walk might help, but then I get anxious about running into people or them seeing me like this. It's a real tug-of-war in my head.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I’m just not strong enough",
-            "I’m failing in some way",
-            "I just want to feel lighter",
-            "it seems so far out of reach"
+          "triggers": [
+            "hearing voices talking about me",
+            "constant buzzing in my head",
+            "anxiety about running into people"
           ],
-          "emotions": [],
-          "behaviors": []
+          "automatic_thoughts": [
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "something bad is going to happen",
+            "I wish I knew what would work"
+          ],
+          "emotions": [
+            "scared",
+            "lost",
+            "anxious",
+            "exhausted",
+            "frustrated"
+          ],
+          "behaviors": [
+            "wanting to crawl into bed and hide",
+            "considering going for a walk"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
+          "entailment": [
+            "Fear of being watched (finding)",
             "Fear of being a burden to others (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about loss of control (finding)",
-            "Anxiety about becoming fat (finding)"
+            "Fear of activities in public (finding)",
+            "Fear of going out (finding)",
+            "Fear of social gatherings (finding)"
           ],
+          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a heavy load and feeling like you’re not meeting your own expectations. Those thoughts of not being strong enough or failing can feel very real, especially when everything feels so overwhelming. It’s understandable that you’d want to feel lighter, and it can feel distant when you’re in that place. You’re not alone in feeling this way, and it’s okay to acknowledge how heavy it feels right now.",
+        "response": "It sounds like you’re caught between wanting to get out for a walk and feeling anxious about being seen, and you’re looking for a way to make it feel doable. What’s one small step that might help you feel a bit more comfortable about walking outside?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a heavy load and feeling like you’re not meeting your own expectations. Those thoughts of not being strong enough or failing can feel very real, especially when everything feels so overwhelming. It’s understandable that you’d want to feel lighter, and it can feel distant when you’re in that place. You’re not alone in feeling this way, and it’s okay to acknowledge how heavy it feels right now.",
+            "response": "It sounds like you’re caught between wanting to get out for a walk and feeling anxious about being seen, and you’re looking for a way to make it feel doable. What’s one small step that might help you feel a bit more comfortable about walking outside?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
+                  "concept": "fear of being watched",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about collapsing",
-                  "label": "neutral"
+                  "concept": "fear of activities in public",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about losing emotional control",
-                  "label": "neutral"
+                  "concept": "anxiety about running into people",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "neutral"
+                  "concept": "automatic thoughts of failure and not knowing what will work",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about becoming fat",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "automatic thoughts: I'm not strong enough, I'm failing, I want to feel lighter, it seems far out of reach",
-                  "label": "automatic_thoughts"
+                  "concept": "behaviors of hiding and considering a walk",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Can you think of a time when you felt strong or capable, even if it was brief? What evidence supports that you are capable of handling what’s on your plate? If you could imagine a different way of looking at the situation, what might that look like? How might that shift affect how you feel about carrying this load?",
+            "response": "What would it feel like to go for a walk and someone notices you—what thoughts or feelings arise, and how might you handle them?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of being a burden",
-                  "label": "neutral"
+                  "concept": "Fear of being watched",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about collapsing",
-                  "label": "neutral"
+                  "concept": "Fear of activities in public",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about losing emotional control",
-                  "label": "neutral"
+                  "concept": "Fear of going out",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about loss of control",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "automatic thoughts: I'm not strong enough, I'm failing, I want to feel lighter, it seems far out of reach",
-                  "label": "automatic_thoughts"
+                  "concept": "Fear of social gatherings",
+                  "label": "entailment"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re carrying a lot of doubt about your strength and success. What moments have you had where you felt capable or accomplished? Maybe we can explore those to see a more balanced view.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It’s understandable to feel anxious about being seen—what might a supportive friend say if they saw you walking? They might notice your courage and remind you that stepping out is a small but meaningful step.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being watched",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of activities in public",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of going out",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of social gatherings",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about running into people",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling torn between wanting to get out and feeling anxious about it. What might help you feel a bit more comfortable if you decided to go for a short walk?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being watched",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of activities in public",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about running into people",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Considering going for a walk",
+                  "label": "unknown"
+                }
+              ]
+            }
           }
         }
       }
@@ -604,79 +831,155 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "It really does feel heavy, like I’m just dragging this weight around all the time. I know I shouldn’t feel this way, but it’s hard to not get caught up in it. I appreciate hearing that I’m not alone in this. Sometimes I just wish I could see a way out, you know?",
+        "query": "I mean, I think if I could just go when it’s quiet, like early in the morning or later at night when fewer people are around, maybe that would help? But just thinking about it still makes my heart race a bit. I wish I could feel more at ease.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me",
+            "constant buzzing in my head",
+            "anxiety about running into people",
+            "thinking about going out when it's quiet"
+          ],
           "automatic_thoughts": [
-            "I shouldn’t feel this way",
-            "I wish I could see a way out"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "something bad is going to happen",
+            "I wish I knew what would work",
+            "I wish I could feel more at ease"
           ],
           "emotions": [
-            "heavy"
+            "scared",
+            "lost",
+            "anxious",
+            "exhausted",
+            "frustrated",
+            "heart racing"
           ],
-          "behaviors": []
+          "behaviors": [
+            "wanting to crawl into bed and hide",
+            "considering going for a walk",
+            "thinking about going out when it's quiet"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling trapped (finding)",
-            "Preoccupation with body weight (finding)"
+            "Fear of social gatherings (finding)",
+            "Fear of social group activities (finding)",
+            "Fear of going out (finding)"
           ],
           "neutral": [
-            "Feeling like wanting to escape (finding)",
-            "Feeling abandoned (finding)"
+            "Fear of using public toilets (finding)",
+            "Fear of activities in public (finding)"
           ],
-          "contradiction": [
-            "Feeling empty (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the heaviness you’re carrying feels like a constant burden, and you’re aware that you’re not supposed to feel that way, yet it’s hard to shake it. Feeling stuck and wishing for a way out can be exhausting. It’s reassuring to know that you’re not alone in feeling this way.",
+        "response": "It sounds like you’re hoping that going out when it’s quieter might feel safer, but the thought still makes your heart race and you wish you could feel more at ease. What would help you feel a little calmer when you think about going out?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the heaviness you’re carrying feels like a constant burden, and you’re aware that you’re not supposed to feel that way, yet it’s hard to shake it. Feeling stuck and wishing for a way out can be exhausting. It’s reassuring to know that you’re not alone in feeling this way.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What does it mean to you that you shouldn’t feel this way? How do you know that feeling heavy is something you need to avoid? What might happen if you let yourself experience that heaviness for a moment? And when you think about a way out, what does that look like for you?",
+            "response": "It sounds like you’re hoping that going out when it’s quieter might feel safer, but the thought still makes your heart race and you wish you could feel more at ease. What would help you feel a little calmer when you think about going out?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling trapped",
+                  "concept": "fear of going out",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Preoccupation with body weight",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Automatic thought: I shouldn’t feel this way",
-                  "label": "automatic_thoughts"
+                  "concept": "heart racing",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Automatic thought: I wish I could see a way out",
-                  "label": "automatic_thoughts"
+                  "concept": "wish to feel more at ease",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "thinking about going out when it's quiet",
+                  "label": "triggers"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re feeling stuck and thinking you shouldn’t feel this heavy. What evidence do you have that you’re not allowed to feel this way? Are there moments when you’ve felt a little lighter or found a small relief? Maybe we can look at those moments together.",
+          "socratic_questioning": {
+            "response": "It sounds like you hope a quieter setting might reduce your anxiety. What evidence do you have that going out when it's quiet will help you feel more at ease?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling trapped",
+                  "concept": "Fear of going out",
                   "label": "entailment"
                 },
                 {
-                  "concept": "preoccupation with body weight",
+                  "concept": "Fear of social gatherings",
                   "label": "entailment"
                 },
                 {
-                  "concept": "wish I could see a way out",
+                  "concept": "automatic thoughts about something bad happening",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions of anxiety and heart racing",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behavior of considering going out when quiet",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re hoping a quieter time might ease the anxiety—what do you think a supportive friend would say about that plan? They might suggest starting with a short walk and seeing how you feel.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear of social gatherings",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of going out",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about running into people",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "heart racing",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "desire for ease",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re hoping a quieter time might ease your anxiety, but even then your heart still races. What might help you feel more at ease when you’re thinking about going out?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "thinking about going out when it's quiet",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I wish I could feel more at ease",
                   "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "heart racing",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear of going out",
+                  "label": "entailment"
                 }
               ]
             }
@@ -688,84 +991,121 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, exactly. It’s like I’m constantly in my head, trying to figure everything out, and it just keeps looping back to that heaviness. I know I shouldn’t be so hard on myself, but it’s tough. I just want to feel like I can breathe again, you know?",
+        "query": "I don't know, maybe if I could just take small steps? Like just stepping outside for a minute or two, then coming back in. But even that feels overwhelming. I keep imagining the worst—what if something goes wrong? It’s hard to shake off those thoughts.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me",
+            "constant buzzing in my head",
+            "anxiety about running into people",
+            "thinking about going out when it's quiet",
+            "imagining the worst outcomes"
+          ],
           "automatic_thoughts": [
-            "I’m constantly in my head",
-            "I shouldn’t be so hard on myself",
-            "It just keeps looping back to that heaviness"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "something bad is going to happen",
+            "I wish I knew what would work",
+            "I wish I could feel more at ease",
+            "what if something goes wrong?"
           ],
           "emotions": [
-            "heaviness"
+            "scared",
+            "lost",
+            "anxious",
+            "exhausted",
+            "frustrated",
+            "heart racing",
+            "overwhelmed"
           ],
           "behaviors": [
-            "trying to figure everything out"
+            "wanting to crawl into bed and hide",
+            "considering going for a walk",
+            "thinking about going out when it's quiet",
+            "taking small steps outside for a minute or two"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Disorientation as to self (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Free-floating anxiety (finding)",
-            "Anxiety about loss of control (finding)",
-            "Anxiety about collapsing (finding)",
-            "Feeling like wanting to escape (finding)"
+            "Feeling like wanting to escape (finding)",
+            "Fear of going out (finding)",
+            "Anxiety about going crazy (finding)",
+            "Fear of walking (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What does that heaviness feel like when it comes back—does it show up in your thoughts, your breathing, or somewhere else? How do you know that you’re being too hard on yourself, and what might happen if you gave yourself a little permission to pause?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like stepping outside feels scary and you’re worried about things going wrong, which can feel overwhelming. What might help you feel a bit more comfortable about that minute outside?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re caught in a cycle of overthinking that leaves you feeling heavy and trapped. It’s understandable to feel frustrated when you’re trying to breathe easier and still feel weighed down. You’re not alone in feeling this way, and it’s okay to give yourself a break.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What does that heaviness feel like when it comes back—does it show up in your thoughts, your breathing, or somewhere else? How do you know that you’re being too hard on yourself, and what might happen if you gave yourself a little permission to pause?",
+            "response": "It sounds like stepping outside feels scary and you’re worried about things going wrong, which can feel overwhelming. What might help you feel a bit more comfortable about that minute outside?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "disorientation as to self",
-                  "label": "entailment"
+                  "concept": "triggers: stepping outside, anxiety about worst outcomes",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "free-floating anxiety",
-                  "label": "neutral"
+                  "concept": "automatic thoughts: something bad is going to happen",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "anxiety about loss of control",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "anxiety about collapsing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "feeling like wanting to escape",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "heaviness",
+                  "concept": "emotions: anxious, overwhelmed",
                   "label": "emotions"
-                },
-                {
-                  "concept": "being hard on self",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "looping back",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Do you notice any moments when the heaviness eases, even briefly? That could suggest the thoughts aren’t always overwhelming. You might try to see those thoughts as just passing mental events rather than facts, which could help you breathe a bit easier.",
+          "socratic_questioning": {
+            "response": "What evidence do you have that something bad will happen if you step outside for a minute? If it goes well, how might that change how you feel about stepping outside?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear of going out",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anxiety about worst outcomes",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "small steps outside",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "If a close friend were watching you step outside for a minute, what might they say about how you’re handling it? They might notice how brave you are, even if it feels scary.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear of going out",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anxiety about worst outcomes",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "small steps outside",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "imagining worst",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like stepping outside feels overwhelming and you’re worried about the worst. What would it look like if you could step outside for just a minute and then come back in?",
             "reasoning": null
           }
         }
@@ -775,115 +1115,158 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "That heaviness usually feels like a tightness in my chest, like I can't take a full breath. It kind of swirls in my thoughts, making everything seem more daunting than it is. I guess I know I’m being too hard on myself because I feel so drained by it, but at the same time, it’s like I just keep pushing myself. The idea of pausing is nice",
+        "query": "Yeah, it does feel scary. Maybe if I had someone with me, it wouldn't feel as daunting? But then I worry about burdening someone else. I guess I just want to feel a little more in control somehow.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me",
+            "constant buzzing in my head",
+            "anxiety about running into people",
+            "thinking about going out when it's quiet",
+            "imagining the worst outcomes",
+            "feeling alone in daunting situations"
+          ],
           "automatic_thoughts": [
-            "everything seems more daunting than it is",
-            "I’m being too hard on myself"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "something bad is going to happen",
+            "I wish I knew what would work",
+            "I wish I could feel more at ease",
+            "what if something goes wrong?",
+            "I don't want to burden someone else"
           ],
           "emotions": [
-            "drained"
+            "scared",
+            "lost",
+            "anxious",
+            "exhausted",
+            "frustrated",
+            "heart racing",
+            "overwhelmed",
+            "daunted"
           ],
           "behaviors": [
-            "keep pushing myself"
+            "wanting to crawl into bed and hide",
+            "considering going for a walk",
+            "thinking about going out when it's quiet",
+            "taking small steps outside for a minute or two",
+            "wanting someone to accompany me"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling physically tense (finding)"
+            "Fear of losing emotional control (finding)",
+            "Fear of being left alone (finding)"
           ],
           "neutral": [
-            "Anxiety about breathlessness (finding)"
+            "Fear of being left alone during period of dependence (finding)",
+            "Anxiety about loss of control (finding)",
+            "Anxiety about going crazy (finding)"
           ],
-          "contradiction": [
-            "Free-floating anxiety (finding)",
-            "Anxiety about collapsing (finding)",
-            "Feeling calm (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the heaviness in your chest is making tasks feel heavier than they really are. Have you noticed any moments when a task actually felt doable, or when you managed to breathe more easily? Maybe we can think of a small, realistic step you could try that feels less daunting, and see how that changes the picture.",
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like you’re feeling scared and overwhelmed, and you wish you had someone with you to feel less alone, but you’re also worried about burdening them. What would it look like if you could share that feeling with someone you trust?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the tightness in your chest is making everything feel heavier, and you’re noticing that while you’re aware you’re being hard on yourself, you still feel pulled to keep going. That sense of being drained yet compelled to push is a common experience when we’re carrying that kind of physical tension. It’s understandable to feel that way, and it’s okay to consider pausing as a possibility.",
+            "response": "It sounds like you’re feeling scared and overwhelmed, and you wish you had someone with you to feel less alone, but you’re also worried about burdening them. What would it look like if you could share that feeling with someone you trust?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling physically tense (finding)",
+                  "concept": "Fear of losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about breathlessness (finding)",
-                  "label": "neutral"
+                  "concept": "Fear of being left alone",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "drained",
+                  "concept": "automatic_thoughts: I don't want to burden someone else",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: scared, anxious, overwhelmed",
                   "label": "emotions"
                 },
                 {
-                  "concept": "keep pushing myself",
-                  "label": "behaviors"
+                  "concept": "behaviors: wanting someone to accompany me",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What does that heaviness in your chest look like when you notice it? How do you decide whether to keep pushing or to pause? What evidence do you have that the tasks are actually more daunting than they appear?",
+            "response": "What evidence do you have that having someone with you would actually make the situation feel less daunting?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts: everything seems more daunting than it is",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I’m being too hard on myself",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: drained",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: keep pushing myself",
-                  "label": "behaviors"
-                },
-                {
-                  "concept": "entailment: feeling physically tense",
+                  "concept": "fear of losing emotional control",
                   "label": "entailment"
+                },
+                {
+                  "concept": "fear of being left alone",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about loss of control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts about burdening someone",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions: scared, anxious, overwhelmed",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like the heaviness in your chest is making tasks feel heavier than they really are. Have you noticed any moments when a task actually felt doable, or when you managed to breathe more easily? Maybe we can think of a small, realistic step you could try that feels less daunting, and see how that changes the picture.",
+          "alternative_perspective": {
+            "response": "A trusted friend might notice that you’re already taking steps to feel more in control, like planning small outings. What do you think they would say about that?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "tightness in chest",
-                  "label": "emotions"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "drained",
-                  "label": "emotions"
+                  "concept": "Fear of being left alone",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "pushing myself",
-                  "label": "behaviors"
+                  "concept": "Worry about burdening someone else",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "being too hard on myself",
-                  "label": "automatic_thoughts"
+                  "concept": "Desire for control",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "everything seems more daunting",
-                  "label": "automatic_thoughts"
+                  "concept": "Wanting someone to accompany",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling scared and wanting more control, and you’re also worried about burdening others. What might be a small, manageable way to get support that feels less like a burden?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear of being left alone",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "pausing is nice",
+                  "concept": "anxiety about burdening others",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "desire for control",
                   "label": "unknown"
                 }
               ]
@@ -896,94 +1279,146 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I think there are times when I do feel a little lighter, usually when I’m doing something I enjoy, like spending time with friends or getting lost in a good book. But those moments feel so rare lately. The idea of taking a small step is kind of comforting, but I also worry that I might just end up feeling disappointed if it doesn’t go well. It’s like it’s hard",
+        "query": "I think it would feel kind of freeing, like I wouldn’t have to carry it all by myself. But then I’m worried they might not understand or that they’d brush it off as nothing. I don’t want to seem weak or like I'm overreacting. It’s just hard to find that balance of opening up without feeling like I’m asking too much.",
+        "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "doing something I enjoy",
-            "spending time with friends",
-            "getting lost in a good book"
+            "hearing voices talking about me",
+            "constant buzzing in my head",
+            "anxiety about running into people",
+            "thinking about going out when it's quiet",
+            "imagining the worst outcomes",
+            "feeling alone in daunting situations",
+            "worrying about being misunderstood when opening up"
           ],
           "automatic_thoughts": [
-            "those moments feel so rare lately",
-            "I might just end up feeling disappointed if it doesn’t go well",
-            "it’s hard"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "something bad is going to happen",
+            "I wish I knew what would work",
+            "I wish I could feel more at ease",
+            "what if something goes wrong?",
+            "I don't want to burden someone else",
+            "I don’t want to seem weak or like I'm overreacting"
           ],
           "emotions": [
-            "comforting"
+            "scared",
+            "lost",
+            "anxious",
+            "exhausted",
+            "frustrated",
+            "heart racing",
+            "overwhelmed",
+            "daunted",
+            "worried about being misunderstood"
           ],
-          "behaviors": []
+          "behaviors": [
+            "wanting to crawl into bed and hide",
+            "considering going for a walk",
+            "thinking about going out when it's quiet",
+            "taking small steps outside for a minute or two",
+            "wanting someone to accompany me",
+            "hesitating to open up to others"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Feeling of discouragement (finding)"
+          "entailment": [
+            "Fear of being a burden to others (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of abandonment (finding)"
           ],
-          "contradiction": [
-            "Feeling empty (finding)",
-            "Feeling hopeless (finding)",
-            "Emotionally subdued (finding)"
-          ]
+          "neutral": [
+            "Anxiety about resuming sexual relations (finding)",
+            "Social isolation (rejection) (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Have you noticed any recent moments when you did something you enjoy and felt lighter, even if it wasn’t perfect? It could be useful to list those times and see whether the idea that they’re rare really fits. Even if a step doesn’t go exactly as hoped, you can still find comfort in the effort itself. What might be a more balanced view of how often you experience those lighter moments?",
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like you’re hoping for relief but also worried that sharing might make you feel misunderstood or seen as weak. What might help you feel more comfortable opening up?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those moments of lightness feel precious but also fleeting, and you’re worried that trying again might lead to disappointment. That mix of hope and fear is something many people experience when they’re feeling low. It’s understandable to feel that it’s hard to keep those moments coming.",
+            "response": "It sounds like you’re hoping for relief but also worried that sharing might make you feel misunderstood or seen as weak. What might help you feel more comfortable opening up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling lighter",
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being misunderstood when opening up",
                   "label": "unknown"
                 },
                 {
-                  "concept": "rare moments",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "worry about disappointment",
+                  "concept": "Anxiety about opening up",
                   "label": "unknown"
-                },
-                {
-                  "concept": "feeling depressed",
-                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "How do you know that these moments are truly rare? What evidence might suggest they could be more frequent? If you took a small step and it didn’t go as you hoped, how might you still find value in the experience?",
+            "response": "It sounds like you’re weighing the risk of being misunderstood. What evidence do you have that sharing would make you seem weak or be brushed off?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling depressed",
-                  "label": "neutral"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling of discouragement",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "rare moments of enjoyment",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "worry about disappointment",
+                  "concept": "Fear of being misunderstood",
                   "label": "unknown"
                 },
                 {
-                  "concept": "small step",
+                  "concept": "Fear of overreacting",
                   "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Have you noticed any recent moments when you did something you enjoy and felt lighter, even if it wasn’t perfect? It could be useful to list those times and see whether the idea that they’re rare really fits. Even if a step doesn’t go exactly as hoped, you can still find comfort in the effort itself. What might be a more balanced view of how often you experience those lighter moments?",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It sounds like you’re balancing the relief of sharing with the worry that it might be dismissed or seen as weakness. What might a close friend say if you told them what’s on your mind?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts: I don't want to burden someone else, I don't want to seem weak or like I'm overreacting",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re torn between wanting relief and fearing judgment. What might be a small step you could take to share your feelings with someone you trust?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear of being a burden",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of being misunderstood",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts: I don’t want to burden someone else, I don’t want to seem weak or overreacting",
+                  "label": "unknown"
+                }
+              ]
+            }
           }
         }
       }

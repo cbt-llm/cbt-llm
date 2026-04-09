@@ -4,7 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything.",
+    "seed": "It's been quite busy at school because we've got our exams and we had, like, a test the next day, so I think I was just a bit, like, worried about that, so I was trying to focus on that instead.",
+    "core_issue": "self-esteem and confidence issues",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -16,103 +17,131 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I keep overthinking everything at work, and I'm scared I'm going to get fired even though nobody said anything.",
+        "query": "It's been quite busy at school because we've got our exams and we had, like, a test the next day, so I think I was just a bit, like, worried about that, so I was trying to focus on that instead.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "work"
+            "busy at school",
+            "exams",
+            "test the next day"
           ],
           "automatic_thoughts": [
-            "I'm scared I'm going to get fired",
-            "I keep overthinking everything"
+            "worried about exams and tests"
           ],
           "emotions": [
-            "fear"
+            "worried"
           ],
-          "behaviors": []
+          "behaviors": [
+            "trying to focus on studying"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Negative automatic thoughts (finding)",
-            "Anxiety about appearing ridiculous (finding)"
+            "Preoccupied (finding)",
+            "On examination - anxious (finding)"
           ],
-          "neutral": [],
+          "neutral": [
+            "On examination - disorientated (finding)"
+          ],
           "contradiction": [
-            "Able to resist dangerous thoughts (finding)"
+            "On examination - easily distractable (finding)",
+            "Mentally alert (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the worry about getting fired is weighing heavily on you, especially when you feel like you’re constantly overthinking. That kind of anxiety about making mistakes or saying the wrong thing can feel overwhelming, even if no one has raised concerns yet. It’s understandable to feel scared in that situation, and you’re not alone in experiencing that.",
+        "response": "It sounds like the upcoming test has been keeping you busy and worrying you, and you're focusing on studying to manage that. What does that worry feel like for you right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the worry about getting fired is weighing heavily on you, especially when you feel like you’re constantly overthinking. That kind of anxiety about making mistakes or saying the wrong thing can feel overwhelming, even if no one has raised concerns yet. It’s understandable to feel scared in that situation, and you’re not alone in experiencing that.",
+            "response": "It sounds like the upcoming test has been keeping you busy and worrying you, and you're focusing on studying to manage that. What does that worry feel like for you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overthinking at work",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "fear of being fired",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "anxiety about making mistakes",
+                  "concept": "Preoccupied (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "negative automatic thoughts",
+                  "concept": "On examination - anxious (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "triggers: busy at school, exams, test next day",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: worried about exams",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "emotions: worried",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: trying to focus on studying",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence have you seen that suggests you might actually be at risk of being fired? How have you handled similar worries in the past, and what was the outcome? If you could step back and look at the situation from a neutral perspective, what alternative explanations might fit the facts?",
+            "response": "It sounds like exams are a big source of stress. What evidence do you have that worrying about the test will actually help you do better?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "Preoccupied (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Negative automatic thoughts",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about appearing ridiculous",
+                  "concept": "On examination - anxious (finding)",
                   "label": "entailment"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Have you noticed any specific incidents at work that might support the idea that you could be fired, or any evidence that suggests otherwise? It could help to list both sides—what signs might indicate a problem, and what signs show you’re doing fine. Sometimes the fear of making a mistake can feel bigger than the reality, and looking at the facts can give a clearer picture.",
+          "alternative_perspective": {
+            "response": "It sounds like exams are really weighing on you. If a close friend were watching you, what might they say about how you’re coping with all that pressure?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about saying the wrong thing",
+                  "concept": "Preoccupied (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "On examination - anxious (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like exams are making you feel very worried and busy. What evidence do you have that you will fail?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Preoccupied (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Negative automatic thoughts",
+                  "concept": "On examination - anxious (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about appearing ridiculous",
-                  "label": "entailment"
+                  "concept": "triggers: busy at school, exams, test next day",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: worried about exams",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "emotions: worried",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: trying to focus on studying",
+                  "label": "unknown"
                 }
               ]
             }
@@ -124,95 +153,120 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is a lot. I find myself second-guessing everything I do at work, like I can't just focus on the task at hand. And then I start thinking about all the ways I could mess up, which just makes it worse. Sometimes, it feels like I could just get called into the boss's office any day and be let go just because I said something slightly wrong",
+        "query": "Yeah, I guess it feels pretty heavy, like this weight on my chest. I keep thinking that if I don't do well, it'll just confirm what I already believe about myself—like I'm just not good enough. It’s frustrating because I know I’ve worked hard, but then I get these thoughts that make it all feel pointless.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "work",
-            "thinking about messing up",
-            "fear of being called into the boss's office"
+            "busy at school",
+            "exams",
+            "test the next day"
           ],
           "automatic_thoughts": [
-            "I can't just focus on the task at hand",
-            "I could mess up",
-            "I could be let go just because I said something slightly wrong"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless"
           ],
           "emotions": [
-            "anxiety"
+            "worried",
+            "frustrated"
           ],
           "behaviors": [
-            "second-guessing everything I do"
+            "trying to focus on studying"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling of discouragement (finding)",
+            "Feeling a failure (finding)"
+          ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about going crazy (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Performance anxiety (finding)",
+            "Anxiety about behavior or performance (finding)",
+            "Anxiety about having a fit (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Can you tell me what evidence you have that a single mistake will lead to being let go? How might you view the situation if you considered that your boss has seen you handle challenges before? What might happen if you allowed yourself to focus on the task instead of the potential outcomes?",
+        "response": "What evidence do you have that not doing well will confirm you’re not good enough?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of worry about making mistakes and the possibility of being called into your boss’s office, which is making it hard to focus on your work. Feeling anxious about saying the wrong thing or being judged is a common experience, especially when the stakes feel high. It’s understandable that these thoughts can feel overwhelming and keep you second‑guessing.",
+            "response": "It sounds like you’re carrying a heavy weight of worry and frustration, feeling like a failure if things don’t go well even though you’ve worked hard. What would you say to a friend who’s feeling the same way?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "Feeling a failure (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
+                  "concept": "Feeling of discouragement (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about being called into the boss's office",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "Second-guessing",
-                  "label": "behaviors"
+                  "concept": "Anxiety about performance (finding)",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Can you tell me what evidence you have that a single mistake will lead to being let go? How might you view the situation if you considered that your boss has seen you handle challenges before? What might happen if you allowed yourself to focus on the task instead of the potential outcomes?",
+            "response": "What evidence do you have that not doing well will confirm you’re not good enough?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "Feeling of discouragement",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
+                  "concept": "Feeling a failure",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about being called into boss's office",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "Second-guessing behavior",
-                  "label": "behaviors"
-                },
-                {
-                  "concept": "thoughts of messing up",
-                  "label": "triggers"
+                  "concept": "Performance anxiety",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re worried that a small slip could lead to being fired. What evidence do you have that this will happen? Have there been times when a minor mistake didn’t result in serious consequences?",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "If a close friend were in your shoes, what would they say about the effort you’ve already put in? It might help to see that your hard work is a sign of growth, not just a test of worth.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of failure",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Performance anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re carrying a heavy weight of worry and self‑doubt, especially when you think a poor result would confirm you’re not good enough. What might help you feel a bit lighter right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about performance",
+                  "label": "unknown"
+                }
+              ]
+            }
           }
         }
       }
@@ -221,100 +275,119 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I feel really on edge at work all the time. I can't help but think that I'm going to mess something up, and it just spirals from there. It’s like I’m just waiting for the moment I’ll get pulled into the boss’s office and told I’m not good enough.",
+        "query": "Well, there have been times in the past when I didn’t meet my own expectations or I messed up, and it just felt like everyone noticed. It’s like those moments stick with me, and I can’t shake the feeling that I’m always one step away from proving everyone right. It just makes everything seem so much bigger than it is, you know?",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "at work"
+            "busy at school",
+            "exams",
+            "test the next day",
+            "past experiences of not meeting expectations"
           ],
           "automatic_thoughts": [
-            "I'm going to mess something up",
-            "I'm just waiting to be pulled into the boss's office",
-            "I'm not good enough"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless",
+            "always one step away from proving everyone right"
           ],
           "emotions": [
-            "on edge"
+            "worried",
+            "frustrated",
+            "overwhelmed"
           ],
-          "behaviors": []
+          "behaviors": [
+            "trying to focus on studying"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Feeling agitated (finding)"
+            "Feeling a failure (finding)"
           ],
           "neutral": [
-            "Difficulty managing stress (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about appearing ridiculous (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Have you noticed any moments when you actually performed well or received positive feedback? It might help to list those instances and compare them to the idea that you’re inevitably going to mess up. Sometimes we jump to the worst outcome without looking at the evidence that shows we can handle things. What might a more balanced view of your performance look like?",
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like past slip‑ups feel like a big deal and you’re worried you’re always on the brink of proving everyone right, which can make everything feel huge. When you notice that feeling, what’s the first thought that pops into your mind?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the day at work feels like a constant tightrope, with the worry of making a mistake and the fear of a critical conversation weighing heavily. That sense of being on edge is understandable, especially when you feel like the boss could be watching for any slip. You’re not alone in feeling this way, and it’s okay to acknowledge how stressful it is.",
+            "response": "It sounds like past slip‑ups feel like a big deal and you’re worried you’re always on the brink of proving everyone right, which can make everything feel huge. When you notice that feeling, what’s the first thought that pops into your mind?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
                   "concept": "Anxiety about making mistakes",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about losing emotional control",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about behavior or performance",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling agitated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Difficulty managing stress",
                   "label": "neutral"
+                },
+                {
+                  "concept": "Past experiences of not meeting expectations",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Automatic thoughts of being not good enough",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence supports the idea that you’ll mess something up? How do you know the boss will pull you in? What might happen if you don’t mess up? What would it look like if you were actually good enough?",
+            "response": "It sounds like these past experiences are weighing heavily on you. What evidence do you have that these moments stick with you and that everyone noticed?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "Feeling a failure (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about losing emotional control",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about behavior or performance",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling agitated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "at work",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic thoughts: I'm going to mess something up, I'm not good enough",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Have you noticed any moments when you actually performed well or received positive feedback? It might help to list those instances and compare them to the idea that you’re inevitably going to mess up. Sometimes we jump to the worst outcome without looking at the evidence that shows we can handle things. What might a more balanced view of your performance look like?",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It sounds like those moments feel like a big weight. If a close friend were watching you, what might they say about how you’re handling this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling a failure (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re carrying a lot of pressure from past mistakes and feeling like you’re always on the brink of proving everyone right. If a close friend were in your shoes, what might they say to you about those moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling a failure (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "past experiences of not meeting expectations",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worried",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "frustrated",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                }
+              ]
+            }
           }
         }
       }
@@ -323,69 +396,119 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I feel really on edge at work. I keep thinking I’m going to mess something up, and it just spirals out of control. It’s like I’m just waiting for the moment I’ll get called into the boss’s office and told I’m not good enough.",
+        "query": "Yeah, it's like this sudden rush of panic, and I just think, “Here we go again.” It’s almost like a loop—once that thought comes, it just spirals into all the reasons why I won't measure up. I can't help but feel overwhelmed, and it makes me want to just withdraw or avoid situations altogether.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "work"
+            "busy at school",
+            "exams",
+            "test the next day",
+            "past experiences of not meeting expectations"
           ],
           "automatic_thoughts": [
-            "I’m going to mess something up",
-            "I’ll get called into the boss’s office",
-            "I’m not good enough"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless",
+            "always one step away from proving everyone right",
+            "spirals into all the reasons why I won't measure up"
           ],
           "emotions": [
-            "anxiety"
+            "worried",
+            "frustrated",
+            "overwhelmed",
+            "panic"
           ],
-          "behaviors": []
+          "behaviors": [
+            "trying to focus on studying",
+            "withdrawing or avoiding situations"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about losing emotional control (finding)",
-            "Feeling agitated (finding)",
-            "Anxiety about making mistakes (finding)",
             "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
-            "Difficulty managing stress (finding)"
+            "Anxiety about having a fit (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Performance anxiety (finding)",
+            "Examination phobia (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling anxious about making a mistake and being judged by your boss. What evidence do you have that you’ll actually mess up? Have there been moments when you handled tasks well or received positive feedback? Maybe we can explore other ways to view the situation that feel less threatening.",
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like the panic rush you’re describing quickly spirals into thoughts of not measuring up, leaving you feeling overwhelmed and wanting to withdraw. What’s one small thing you’ve noticed that helps you feel a bit more grounded when that panic starts?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the anxiety at work feels overwhelming, and you’re worried about making a mistake and being judged. Those thoughts can feel like a loop that makes it hard to stay calm. It’s understandable to feel on edge when you’re afraid of being called out.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What specific moments at work make you feel like you might mess something up? Have there been times when you handled a task well—what was different then? If you imagined a different outcome, how might that change how you feel right now?",
+            "response": "It sounds like the panic rush you’re describing quickly spirals into thoughts of not measuring up, leaving you feeling overwhelmed and wanting to withdraw. What’s one small thing you’ve noticed that helps you feel a bit more grounded when that panic starts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "Anxiety about behavior or performance (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about behavior or performance",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling agitated",
-                  "label": "entailment"
+                  "concept": "Performance anxiety (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about losing emotional control",
-                  "label": "entailment"
+                  "concept": "Examination phobia (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re feeling anxious about making a mistake and being judged by your boss. What evidence do you have that you’ll actually mess up? Have there been moments when you handled tasks well or received positive feedback? Maybe we can explore other ways to view the situation that feel less threatening.",
+          "socratic_questioning": {
+            "response": "It sounds like this thought is really overwhelming. What evidence do you have that this thought of “here we go again” is true?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about performance",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Performance anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Examination phobia",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like the panic feels like a loop that makes you feel like you can’t meet expectations. If a close friend were watching you right now, what might they say about how you’re handling this?",
             "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like the sudden rush of panic is tied to your worries about exams and feeling like you won’t measure up, and that’s making you want to withdraw. What might help you feel a bit more grounded right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Performance anxiety (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Examination phobia (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
           }
         }
       }
@@ -394,63 +517,131 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I have gotten positive feedback before, but whenever I think of that, it feels almost like a fluke. I just focus on the times I messed up, you know? Like, I can't shake the feeling that I'm just one mistake away from everything crumbling. It's hard to feel confident when the anxious thoughts keep creeping in.",
+        "query": "I guess sometimes when I take a moment to breathe or step outside for fresh air, it helps a little. But then part of me feels guilty for taking that time, like I should be doing something more productive instead. It’s hard to balance that, you know? I want to feel better, but I also feel like I’m not allowed to take a break.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "busy at school",
+            "exams",
+            "test the next day",
+            "past experiences of not meeting expectations",
+            "feeling guilty for taking breaks"
+          ],
           "automatic_thoughts": [
-            "it feels almost like a fluke",
-            "I can't shake the feeling that I'm just one mistake away from everything crumbling",
-            "the anxious thoughts keep creeping in"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless",
+            "always one step away from proving everyone right",
+            "spirals into all the reasons why I won't measure up",
+            "I should be doing something more productive instead of taking a break"
           ],
           "emotions": [
-            "anxiety"
+            "worried",
+            "frustrated",
+            "overwhelmed",
+            "panic",
+            "guilty"
           ],
-          "behaviors": []
+          "behaviors": [
+            "trying to focus on studying",
+            "withdrawing or avoiding situations",
+            "taking moments to breathe or step outside for fresh air"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling a failure (finding)",
-            "Feeling nervous (finding)",
-            "Positive self thoughts (finding)"
+            "Feeling guilt (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)"
+            "Repressing thoughts (finding)",
+            "Feeling physically tense (finding)",
+            "Anxiety about collapsing (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that the positive feedback was just a fluke? When you think about the times you didn’t mess up, what does that suggest about your abilities? How might you view the feedback differently if you considered it a sign of growth rather than a one‑off?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re caught between wanting to rest and feeling guilty for taking that time, which can feel exhausting. When you step outside, what thoughts come up that make you feel guilty?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of worry that every slip could undo everything, even when people have praised you. That feeling of being on the brink of failure can make it hard to let yourself feel confident. It’s normal to notice the negative moments more than the positives, especially when anxiety is present.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What evidence do you have that the positive feedback was just a fluke? When you think about the times you didn’t mess up, what does that suggest about your abilities? How might you view the feedback differently if you considered it a sign of growth rather than a one‑off?",
+            "response": "It sounds like you’re caught between wanting to rest and feeling guilty for taking that time, which can feel exhausting. When you step outside, what thoughts come up that make you feel guilty?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "Feeling guilt (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
+                  "concept": "Feeling physically tense (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling nervous",
-                  "label": "entailment"
+                  "concept": "Anxiety about collapsing (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you might be seeing your successes as a fluke and focusing on mistakes. What evidence do you have that your achievements were not just luck? And what evidence suggests you can handle future challenges?",
-            "reasoning": null
+          "socratic_questioning": {
+            "response": "It sounds like you’re noticing a tension between needing rest and feeling guilty. What evidence do you have that taking a break is a waste of time, and how might that belief be affecting how you feel right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling guilt (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about collapsing (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "If a close friend were watching you, what might they say about taking a short break to breathe? That perspective might help you see that breaks can actually support your overall productivity.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling guilt (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about collapsing (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling physically tense (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling torn between wanting to rest and feeling guilty for taking that time. How do you think taking a short break might actually help you be more productive in the long run?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling guilt (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about collapsing (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
           }
         }
       }
@@ -459,66 +650,181 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I don’t know, it’s just that I always remember the mistakes more vividly. The times I got it right feel like they could’ve just been luck or something. It’s like I keep waiting for someone to see that I’m not as capable as they think I am. Being seen as good at my job feels fragile, and I’m terrified of losing that.",
+        "query": "Yeah, it's just that nagging feeling that I’m being lazy or that I’m wasting time. I think about all the things I should be doing instead, like work or projects that are piling up. It’s like I can’t let myself enjoy a moment without that judgment creeping in, and then it makes it even harder to actually relax.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "busy at school",
+            "exams",
+            "test the next day",
+            "past experiences of not meeting expectations",
+            "feeling guilty for taking breaks",
+            "thoughts about work or projects piling up"
+          ],
           "automatic_thoughts": [
-            "I always remember the mistakes more vividly",
-            "The times I got it right feel like they could’ve just been luck",
-            "I keep waiting for someone to see that I’m not as capable as they think I am",
-            "Being seen as good at my job feels fragile",
-            "I’m terrified of losing that"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless",
+            "always one step away from proving everyone right",
+            "spirals into all the reasons why I won't measure up",
+            "I should be doing something more productive instead of taking a break",
+            "nagging feeling that I’m being lazy or wasting time"
           ],
           "emotions": [
-            "fear"
+            "worried",
+            "frustrated",
+            "overwhelmed",
+            "panic",
+            "guilty",
+            "judgmental"
           ],
-          "behaviors": []
+          "behaviors": [
+            "trying to focus on studying",
+            "withdrawing or avoiding situations",
+            "taking moments to breathe or step outside for fresh air",
+            "struggling to relax"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about behavior or performance (finding)"
+            "Feeling physically tense (finding)",
+            "Feeling tense (finding)",
+            "Restlessness (finding)",
+            "Loss of interest in previously enjoyable activity (finding)",
+            "Feeling of discouragement (finding)"
           ],
-          "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Performance anxiety (finding)"
-          ],
-          "contradiction": [
-            "Able to remember new motor skills (finding)"
-          ]
+          "neutral": [],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re holding onto the idea that any slip-up proves you’re not good enough, while the successes feel accidental. Have you noticed any moments where you actually did something well and others acknowledged it? What evidence might suggest that your competence is real and not just a fleeting impression?",
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like you’re feeling guilty and judged when you try to relax, and that’s a common reaction when we’re overwhelmed. If you were talking to a supportive friend, what might they say to help you feel more at ease?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a heavy sense of doubt about your abilities, especially when you notice mistakes more than successes. Feeling that your competence is fragile and fearing that others might see you as less capable can be exhausting. It’s understandable that this would create a lot of anxiety about maintaining your performance.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What evidence do you have that your successes were just luck, and how might you view them differently? When you imagine someone noticing a mistake, what thoughts or feelings arise? How would you feel if you were seen as capable, even if you sometimes doubt yourself?",
+            "response": "It sounds like you’re feeling guilty and judged when you try to relax, and that’s a common reaction when we’re overwhelmed. If you were talking to a supportive friend, what might they say to help you feel more at ease?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "feeling tense",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about performance",
+                  "concept": "restlessness",
                   "label": "entailment"
                 },
                 {
-                  "concept": "belief that competence is fragile",
-                  "label": "automatic_thoughts"
+                  "concept": "guilty",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "judgmental",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re holding onto the idea that any slip-up proves you’re not good enough, while the successes feel accidental. Have you noticed any moments where you actually did something well and others acknowledged it? What evidence might suggest that your competence is real and not just a fleeting impression?",
-            "reasoning": null
+          "socratic_questioning": {
+            "response": "What evidence do you have that taking a break is a waste of time, and what evidence might suggest it could actually help you be more productive?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Restlessness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Automatic thoughts of laziness",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Guilt about taking breaks",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling a lot of pressure and guilt when you pause; if a close friend were watching you, what might they say about taking a brief break to recharge? They might remind you that rest can actually help you be more productive later.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "nagging feeling of laziness",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "work or projects piling up",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling guilty for taking breaks",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "restlessness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "physical tension",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling a lot of pressure and guilt when you try to relax, and that’s understandable given how much you’re juggling. What would it look like if you allowed yourself a brief break without feeling judged?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling guilty",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "restlessness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "judgmental",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "nagging feeling of laziness",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "work piling up",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "difficulty relaxing",
+                  "label": "unknown"
+                }
+              ]
+            }
           }
         }
       }
@@ -527,73 +833,167 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I mean, I guess there have been times when my coworkers said I did a good job on a project or something. But even then, I just brushed it off, thinking they were just being nice. It’s hard for me to really believe that those moments mean anything. My mind keeps going back to the times I struggled more than anything else, you know? It feels more real than the praise",
+        "query": "I don't know... maybe they’d tell me I deserve a break and that it’s okay to take time for myself. But then I’d probably just brush it off, thinking they don’t really understand. I guess it’s hard to believe that I actually deserve that support when I feel so behind or unaccomplished.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "coworkers said I did a good job",
-            "praise moments",
-            "times I struggled"
+            "busy at school",
+            "exams",
+            "test the next day",
+            "past experiences of not meeting expectations",
+            "feeling guilty for taking breaks",
+            "thoughts about work or projects piling up"
           ],
           "automatic_thoughts": [
-            "they were just being nice",
-            "those moments mean nothing",
-            "my mind keeps going back to the times I struggled"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless",
+            "always one step away from proving everyone right",
+            "spirals into all the reasons why I won't measure up",
+            "I should be doing something more productive instead of taking a break",
+            "nagging feeling that I’m being lazy or wasting time",
+            "hard to believe I deserve support when I feel behind or unaccomplished"
           ],
           "emotions": [
-            "doubt"
+            "worried",
+            "frustrated",
+            "overwhelmed",
+            "panic",
+            "guilty",
+            "judgmental"
           ],
           "behaviors": [
-            "brushed it off"
+            "trying to focus on studying",
+            "withdrawing or avoiding situations",
+            "taking moments to breathe or step outside for fresh air",
+            "struggling to relax"
           ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Negative automatic thoughts (finding)",
-            "Feeling a failure (finding)"
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling abandoned (finding)",
+            "Feeling alienated (finding)",
+            "Feeling unloved (finding)"
           ],
-          "contradiction": [
-            "Positive self thoughts (finding)",
-            "Positive thoughts (finding)",
-            "Character trait finding of effort at work (finding)"
-          ]
+          "neutral": [
+            "Fear of being left alone during period of dependence (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that the praise was just niceness, and what evidence might suggest it was genuine? How would you feel if you considered the possibility that those moments of recognition could reflect real strengths? What might happen if you allowed yourself to acknowledge those successes, even briefly, before your mind shifts back to the struggles?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re doubting whether you truly deserve a break, especially when you feel behind and judged by yourself. If someone did offer you that support, how might you feel about it?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like when your coworkers praised you, you felt it was just a nicety and couldn’t fully accept it, and you find yourself focusing on the struggles instead. That can be exhausting, and it’s understandable that the negative moments feel more vivid. You’re not alone in feeling that way.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What evidence do you have that the praise was just niceness, and what evidence might suggest it was genuine? How would you feel if you considered the possibility that those moments of recognition could reflect real strengths? What might happen if you allowed yourself to acknowledge those successes, even briefly, before your mind shifts back to the struggles?",
+            "response": "It sounds like you’re doubting whether you truly deserve a break, especially when you feel behind and judged by yourself. If someone did offer you that support, how might you feel about it?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Negative automatic thoughts",
-                  "label": "neutral"
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "neutral"
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "praise",
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "guilt",
                   "label": "triggers"
                 },
                 {
-                  "concept": "Behavior of brushing off praise",
-                  "label": "behaviors"
+                  "concept": "judgmental",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling behind or unaccomplished",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re discounting the praise you receive. Have you noticed any specific moments when the feedback matched what you actually did well? If you list those, you might see that the praise is based on real achievements, not just niceness. That could help balance the focus on your struggles.",
-            "reasoning": null
+          "socratic_questioning": {
+            "response": "What evidence do you have that you don't deserve a break, and what evidence might suggest you do?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re doubting whether others would see your need for rest. If a close friend were watching you, what might they say about taking a break?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "guilt",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "unaccomplished",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re doubting whether you truly deserve a break and worried that others might not understand your need for rest. What might it feel like if you allowed yourself that support and took a moment to pause?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling behind or unaccomplished",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling undeserving",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling guilty",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "frustrated",
+                  "label": "emotions"
+                }
+              ]
+            }
           }
         }
       }
@@ -602,53 +1002,139 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It’s just that I keep thinking of all the times I felt like I could have done better. So when I get praise, it feels like it can’t be based on something real. If I let myself think those moments were genuine, I guess it would feel… kind of nice, but then I’d worry about living up to that. It’s like opening a door I’m scared to step",
+        "query": "Honestly, I think I’d feel a little embarrassed or even guilty. Like, why should I get special treatment when there are so many things I haven’t finished? It’s like I want to believe I deserve it, but deep down, there’s that voice telling me I should be doing more first. It just feels so conflicted.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "getting praise"
+            "busy at school",
+            "exams",
+            "test the next day",
+            "past experiences of not meeting expectations",
+            "feeling guilty for taking breaks",
+            "thoughts about work or projects piling up"
           ],
           "automatic_thoughts": [
-            "I could have done better",
-            "praise can't be based on something real",
-            "worry about living up to that"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless",
+            "always one step away from proving everyone right",
+            "spirals into all the reasons why I won't measure up",
+            "I should be doing something more productive instead of taking a break",
+            "nagging feeling that I’m being lazy or wasting time",
+            "hard to believe I deserve support when I feel behind or unaccomplished",
+            "I feel embarrassed or guilty about receiving special treatment when I haven't finished everything"
           ],
           "emotions": [
-            "fear"
+            "worried",
+            "frustrated",
+            "overwhelmed",
+            "panic",
+            "guilty",
+            "judgmental",
+            "embarrassed",
+            "conflicted"
           ],
           "behaviors": [
-            "avoiding genuine moments"
+            "trying to focus on studying",
+            "withdrawing or avoiding situations",
+            "taking moments to breathe or step outside for fresh air",
+            "struggling to relax"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Positive thoughts (finding)"
-          ],
-          "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about making mistakes (finding)",
+            "Feeling guilt (finding)",
+            "Incongruent personal expectations (finding)",
+            "Complaining of feeling unhappy (finding)",
             "Feeling ashamed (finding)"
           ],
+          "neutral": [],
           "contradiction": [
-            "Positive self thoughts (finding)"
+            "Feeling excited (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What makes you think the praise you receive isn’t grounded in real accomplishments? Can you recall a time when someone praised you and you felt it was deserved? If you could imagine those moments as genuine, how might that change the way you feel about stepping into new opportunities?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re carrying a lot of guilt and feeling conflicted about whether you deserve support, especially when you’re still juggling unfinished tasks. When that inner voice urges you to keep going, what does it specifically say to you?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a sense that praise feels unearned and that accepting it could bring a pressure you’re not ready for. That mix of doubt and fear can make even positive moments feel uneasy. It’s understandable to feel hesitant about stepping into that space.",
-            "reasoning": null
+            "response": "It sounds like you’re carrying a lot of guilt and feeling conflicted about whether you deserve support, especially when you’re still juggling unfinished tasks. When that inner voice urges you to keep going, what does it specifically say to you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling guilt (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling ashamed (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Incongruent personal expectations (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
           },
           "socratic_questioning": {
-            "response": "What makes you think the praise you receive isn’t grounded in real accomplishments? Can you recall a time when someone praised you and you felt it was deserved? If you could imagine those moments as genuine, how might that change the way you feel about stepping into new opportunities?",
+            "response": "What evidence do you have that you don't deserve the support, and what evidence suggests you might? It sounds like that inner voice is weighing heavily on you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling guilt",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "incongruent personal expectations",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling ashamed",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts about not deserving support",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "conflict between wanting support and feeling guilty",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re carrying a lot of guilt and feeling like you’re not deserving of help—what might a supportive friend say to you in this situation? Maybe we can explore what evidence supports that you do deserve support.",
             "reasoning": null
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re doubting whether the praise truly reflects what you’ve done. What specific evidence do you have that the praise is based on your effort or skill, and what evidence might suggest otherwise? You might find that moments of genuine effort—like the time you helped a colleague or completed a project—are exactly what the praise is acknowledging. Seeing the praise as a recognition of those moments could help you feel more secure stepping through that door.",
-            "reasoning": null
+          "safety_check": {
+            "response": "It sounds like you're feeling guilty and conflicted about wanting special treatment while feeling you haven't finished everything. What do you think would help you feel more balanced about this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling guilt (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling ashamed (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling embarrassed (finding)",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Incongruent personal expectations (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
           }
         }
       }
@@ -657,97 +1143,152 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I don’t know… I guess I just can’t shake the feeling that people are being kind, or they’re just seeing what they want to see. It’s hard for me to believe it’s really based on my work. I can think of moments when someone said I did well, but I just remember the flaws or mistakes I made during that. Imagining those moments being real feels… risky",
+        "query": "Honestly, I’d feel a little embarrassed or even guilty. Like, why should I get special treatment when there are so many things I haven’t finished? I want to believe I deserve it, but deep down, there’s that voice telling me I should be doing more first. It just feels so conflicted.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "busy at school",
+            "exams",
+            "test the next day",
+            "past experiences of not meeting expectations",
+            "feeling guilty for taking breaks",
+            "thoughts about work or projects piling up"
+          ],
           "automatic_thoughts": [
-            "people are being kind",
-            "they're just seeing what they want to see",
-            "it's hard to believe it's really based on my work",
-            "I just remember the flaws or mistakes I made",
-            "imagining those moments being real feels risky"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless",
+            "always one step away from proving everyone right",
+            "spirals into all the reasons why I won't measure up",
+            "I should be doing something more productive instead of taking a break",
+            "nagging feeling that I’m being lazy or wasting time",
+            "hard to believe I deserve support when I feel behind or unaccomplished",
+            "I feel embarrassed or guilty about receiving special treatment when I haven't finished everything",
+            "there's a voice telling me I should be doing more first"
           ],
           "emotions": [
-            "fear"
+            "worried",
+            "frustrated",
+            "overwhelmed",
+            "panic",
+            "guilty",
+            "judgmental",
+            "embarrassed",
+            "conflicted"
           ],
-          "behaviors": []
+          "behaviors": [
+            "trying to focus on studying",
+            "withdrawing or avoiding situations",
+            "taking moments to breathe or step outside for fresh air",
+            "struggling to relax"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Changed perception of people (finding)"
+            "Feeling guilt (finding)",
+            "Incongruent personal expectations (finding)",
+            "Complaining of feeling unhappy (finding)",
+            "Feeling of discouragement (finding)"
           ],
-          "neutral": [
-            "Fear of appearing ridiculous (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Comments on own writing (finding)"
-          ],
-          "contradiction": []
+          "neutral": [],
+          "contradiction": [
+            "Feeling excited (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that people are genuinely kind to you? When you recall those moments, what specific thoughts or feelings make you doubt their sincerity? How might you test whether those compliments truly reflect your work or something else?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re feeling both guilty and embarrassed about asking for help, even though you recognize you deserve support. How do you think you might feel if you allowed yourself to accept that help without judgment?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of doubt about whether the positive feedback you receive is truly earned, and that uncertainty feels unsettling. Feeling unsure and wary of how others see you is a common experience, especially when you’re still working through past mistakes. It’s okay to acknowledge that tension and to give yourself space to explore it.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What evidence do you have that people are genuinely kind to you? When you recall those moments, what specific thoughts or feelings make you doubt their sincerity? How might you test whether those compliments truly reflect your work or something else?",
+            "response": "It sounds like you’re feeling both guilty and embarrassed about asking for help, even though you recognize you deserve support. How do you think you might feel if you allowed yourself to accept that help without judgment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Changed perception of people (finding)",
+                  "concept": "Feeling guilt (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of appearing ridiculous (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about appearing ridiculous (finding)",
-                  "label": "neutral"
+                  "concept": "Incongruent personal expectations (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Comments on own writing (finding)",
-                  "label": "neutral"
+                  "concept": "Emotions: guilty, embarrassed, conflicted",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re worried that compliments are just polite and that you’re only seeing the negatives. What evidence do you have that people truly appreciate your work? Are there moments where you felt genuinely recognized? Maybe we can look at those moments together and see if they hold up.",
+          "socratic_questioning": {
+            "response": "It sounds like you’re weighing a lot of expectations. What evidence do you have that taking a break means you’re not deserving of support?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of appearing ridiculous",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "anxiety about appearing ridiculous",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "comments on own writing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "changed perception of people",
+                  "concept": "Feeling guilt (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts about people being kind but not genuine",
+                  "concept": "Incongruent personal expectations (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re carrying a lot of guilt about needing support. If a close friend were in your shoes, what might they say about giving yourself a break?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling guilt (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Incongruent personal expectations (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts about deserving support",
                   "label": "unknown"
                 },
                 {
-                  "concept": "focus on flaws",
-                  "label": "automatic_thoughts"
+                  "concept": "conflicted emotions",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling guilty and conflicted about receiving support. What would it feel like to give yourself permission to take a break?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling guilt (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "fear",
-                  "label": "emotions"
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of conflict",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "User schema: guilt, conflict, voice telling to do more",
+                  "label": "unknown"
                 }
               ]
             }
@@ -759,62 +1300,153 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I don’t know… I guess when I think of evidence, I mostly just remember feeling like they were saying nice things to be polite. It’s hard to shake the thought that they might feel sorry for me or something. I just get this knot in my stomach thinking about it, like if I really believed it, I’d have to keep proving I’m worthy of that praise. What if I",
+        "query": "That’s a tough one. I think, on one hand, I’d feel a bit of relief, like maybe I could finally breathe a little easier. But then there's this other part that worries I’d feel weak or like I couldn’t handle things on my own. It’s so confusing because I know everyone needs help sometimes, but it just feels differently for me.",
+        "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "busy at school",
+            "exams",
+            "test the next day",
+            "past experiences of not meeting expectations",
+            "feeling guilty for taking breaks",
+            "thoughts about work or projects piling up"
+          ],
           "automatic_thoughts": [
-            "they might feel sorry for me",
-            "if I really believed it, I’d have to keep proving I’m worthy of that praise"
+            "worried about exams and tests",
+            "if I don't do well, it'll confirm I'm not good enough",
+            "thoughts that make it feel pointless",
+            "always one step away from proving everyone right",
+            "spirals into all the reasons why I won't measure up",
+            "I should be doing something more productive instead of taking a break",
+            "nagging feeling that I’m being lazy or wasting time",
+            "hard to believe I deserve support when I feel behind or unaccomplished",
+            "I feel embarrassed or guilty about receiving special treatment when I haven't finished everything",
+            "there's a voice telling me I should be doing more first",
+            "worry that needing help means I'm weak or can't handle things on my own"
           ],
           "emotions": [
-            "anxiety"
+            "worried",
+            "frustrated",
+            "overwhelmed",
+            "panic",
+            "guilty",
+            "judgmental",
+            "embarrassed",
+            "conflicted",
+            "relief"
           ],
-          "behaviors": []
+          "behaviors": [
+            "trying to focus on studying",
+            "withdrawing or avoiding situations",
+            "taking moments to breathe or step outside for fresh air",
+            "struggling to relax"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Delusion of unworthiness (finding)"
+            "Distress (finding)"
           ],
           "neutral": [
-            "Delusion of persecution (finding)",
-            "Altruism - mental defense mechanism (finding)",
-            "Religious delusion (finding)",
-            "Delusional projection - mental defense mechanism (finding)"
+            "Anxiety about collapsing (finding)",
+            "Feeling relief (finding)",
+            "Thoughts about dying (finding)",
+            "Anxiety about dying (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that people are saying those things out of pity rather than genuine appreciation? How might you interpret their comments if they were simply being polite? What would it look like if you let go of the idea that you need to keep proving your worth?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re noticing both a sense of relief and a worry about appearing weak—both are common when we reach for support. How does that feeling of weakness show up for you right now?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling a lot of uncertainty about how others see you, and that worry is making your stomach tighten. It’s understandable to feel uneasy when you’re not sure if the praise is genuine or just politeness. You’re not alone in feeling that way, and it’s okay to explore what that anxiety feels like.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What evidence do you have that people are saying those things out of pity rather than genuine appreciation? How might you interpret their comments if they were simply being polite? What would it look like if you let go of the idea that you need to keep proving your worth?",
+            "response": "It sounds like you’re noticing both a sense of relief and a worry about appearing weak—both are common when we reach for support. How does that feeling of weakness show up for you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Delusion of unworthiness",
+                  "concept": "Distress (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts of needing to prove worth",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety about collapsing (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "belief that others are pitying",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling relief (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Thoughts about dying (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about dying (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It seems you’re concerned that people’s praise comes from pity, which would mean you’d have to keep proving yourself. What specific moments make you think they’re feeling sorry, and what moments suggest they’re simply being kind? Looking at the evidence for and against that idea might help you see a different picture.",
-            "reasoning": null
+          "socratic_questioning": {
+            "response": "What evidence do you have that needing help means you’re weak? How might that differ from how others view asking for support?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Distress (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about collapsing (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Thoughts about dying (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about dying (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re torn between relief and feeling vulnerable. If a close friend were watching, what might they say about how you’re handling this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Distress (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling relief (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about dying (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're feeling both relief and worry about feeling weak. What does feeling weak mean to you in this situation?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Distress (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "relief",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling weak",
+                  "label": "unknown"
+                }
+              ]
+            }
           }
         }
       }

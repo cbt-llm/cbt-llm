@@ -4,7 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way.",
+    "seed": "Well, the doctors have said that I have cancer again. Had it a couple of years ago, and I beat it. And now they're saying that it's come back. It's not something I really want to talk about, but I'm still working and just trying to get through the day.",
+    "core_issue": "health-related worries",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -16,92 +17,128 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I feel lonely even when I'm around people, and then I get annoyed at myself for feeling that way.",
+        "query": "Well, the doctors have said that I have cancer again. Had it a couple of years ago, and I beat it. And now they're saying that it's come back. It's not something I really want to talk about, but I'm still working and just trying to get through the day.",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "around people"
+            "Receiving news of cancer recurrence"
           ],
           "automatic_thoughts": [
-            "I get annoyed at myself for feeling lonely"
+            "I have cancer again",
+            "I beat it before, but now it's back"
           ],
           "emotions": [
-            "lonely",
-            "annoyed"
+            "Distress",
+            "Anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Trying to get through the day",
+            "Continuing to work"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling lonely (finding)",
-            "Feeling alienated (finding)",
-            "Feeling empty (finding)"
+            "Adjustment to life threatening illness (finding)"
           ],
           "neutral": [
-            "Fear of being in a small group (finding)"
+            "Denial about illness severity (finding)",
+            "Fear of getting cancer (finding)",
+            "Coming to terms with dying (finding)",
+            "Difficulty coping with grief responses (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "When you’re with others, what does loneliness feel like for you?  \nWhat evidence do you have that being around people should make you feel less lonely?  \nCould there be another way to interpret those moments that might feel less self‑critical?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like hearing the news has been distressing, and you’re still pushing through work and daily tasks. What’s one small thing that brings you a bit of relief today?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like being around others can still leave you feeling disconnected, and then you’re hard on yourself for that. That mix of loneliness and self‑criticism can feel exhausting. It’s understandable to feel that way, and you’re not alone in experiencing this.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "When you’re with others, what does loneliness feel like for you?  \nWhat evidence do you have that being around people should make you feel less lonely?  \nCould there be another way to interpret those moments that might feel less self‑critical?",
+            "response": "It sounds like hearing the news has been distressing, and you’re still pushing through work and daily tasks. What’s one small thing that brings you a bit of relief today?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling lonely",
+                  "concept": "Adjustment to life threatening illness",
                   "label": "entailment"
                 },
                 {
-                  "concept": "feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "annoyed at self",
+                  "concept": "Distress",
                   "label": "emotions"
+                },
+                {
+                  "concept": "Anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Continuing to work",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Sometimes being around others doesn’t automatically erase that sense of loneliness. What moments or cues make you feel truly alone, even when people are nearby? It could help to consider whether your expectations of connection match what’s happening, and whether there are small ways you could shift that mismatch.",
+          "socratic_questioning": {
+            "response": "It sounds like you’re trying to keep going at work while dealing with this. What thoughts come up for you when you consider the possibility that the cancer might return?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lonely",
+                  "concept": "Adjustment to life threatening illness",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "Denial about illness severity",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "Fear of getting cancer",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling empty",
-                  "label": "entailment"
+                  "concept": "Coming to terms with dying",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Annoyed at myself",
+                  "concept": "Difficulty coping with grief responses",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Triggers: Receiving news of cancer recurrence",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Automatic thoughts: I have cancer again, I beat it before, but now it's back",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Emotions: Distress, Anxiety",
                   "label": "emotions"
+                },
+                {
+                  "concept": "Behaviors: Trying to get through the day, Continuing to work",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re carrying a lot of weight with this news. If a close friend heard about it, what might they say to help you feel less alone?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like this news is really overwhelming and you’re trying to keep going with work. How are you coping with the feelings that come up when you think about the recurrence?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Adjustment to life threatening illness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Denial about illness severity",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of getting cancer",
+                  "label": "neutral"
                 }
               ]
             }
@@ -113,117 +150,126 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "You know, when I’m with others, loneliness often creeps in anyway, like I’m there but not really part of it. It’s like I can see everyone laughing and chatting, and I just feel... off. I guess it’s frustrating because I keep thinking being around people should help, but it often doesn’t feel that way. I just end up feeling even more isolated sometimes, like",
+        "query": "Yeah, it has been really tough. I guess today, just taking a short walk outside felt nice. It helped clear my head a little, but... I keep worrying about my health, and sometimes I feel like I can't enjoy things like that.",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "being with others"
+            "Receiving news of cancer recurrence"
           ],
           "automatic_thoughts": [
-            "I’m there but not really part of it",
-            "being around people should help"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries"
           ],
           "emotions": [
-            "loneliness",
-            "frustration",
-            "isolation"
+            "Distress",
+            "Anxiety",
+            "Worry"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Social isolation (finding)",
-            "Feeling alienated (finding)",
-            "Feeling lonely (finding)"
+            "Positive thoughts (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)"
+            "Feeling stressed (finding)",
+            "Difficulty managing stress (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Positive self thoughts (finding)",
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like being around people can feel more like a reminder that you’re not fully connected, which can be really frustrating. Feeling that way can make you feel even more isolated, even when you’re surrounded by others. It’s understandable that this mismatch between what you hope for and what you experience can leave you feeling off.",
+        "response": "It sounds like the walk gave you a brief moment of relief, even though worries about your health still feel heavy, and that's a common experience. What about the walk made it feel nice?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like being around people can feel more like a reminder that you’re not fully connected, which can be really frustrating. Feeling that way can make you feel even more isolated, even when you’re surrounded by others. It’s understandable that this mismatch between what you hope for and what you experience can leave you feeling off.",
+            "response": "It sounds like the walk gave you a brief moment of relief, even though worries about your health still feel heavy, and that's a common experience. What about the walk made it feel nice?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling stressed",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Difficulty managing stress",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Positive thoughts (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Loneliness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Social isolation",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling lonely",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Being with others",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "Automatic thoughts: I'm there but not really part of it",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Being around people should help",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Frustration",
-                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Can you describe what it feels like when you notice that “off” feeling while others are laughing? What evidence do you have that being around people should automatically make you feel less lonely? Have you ever experienced a time when being with others did help, and what was different then? How might you explore a different perspective on those moments?",
+            "response": "What evidence do you have that your health worries prevent you from enjoying things like your walk?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "positive thoughts (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Loneliness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Social isolation",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Being with others",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "Automatic thought: being around people should help",
+                  "concept": "health worries",
                   "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "enjoyment of short walks",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Your belief that simply being around people should automatically lift loneliness is a strong expectation. What evidence do you have that this usually happens for you? And what evidence suggests it doesn’t? We could explore ways to adjust that expectation or find small moments that feel more genuine.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It sounds like the walk helped a bit. What might a close friend notice about how you’re handling this, and how could that perspective shift your view of enjoying moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "positive thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "short walk helped clear head",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "worry about health",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "difficulty enjoying moments",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like the walk helped you feel a bit clearer, but the worry about your health is still heavy. What do you think might help you feel more able to enjoy those moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling stressed",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Difficulty managing stress",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Positive thoughts (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
           }
         }
       }
@@ -232,107 +278,116 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, exactly. It’s like I’m seeking connection, but it just doesn’t happen. I keep telling myself it should be easier, you know? But then I find myself putting on a smile while feeling completely detached. It’s hard to shake that feeling of just being... there, and not really being part of anything.",
+        "query": "I think being outside, feeling the fresh air and sunshine, was nice. It helped me forget about everything for a moment. But then, right after, my mind started racing again, thinking about what could be wrong with me. It’s like I can’t let myself fully relax.",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "seeking connection"
+            "Receiving news of cancer recurrence",
+            "Being outside in fresh air and sunshine"
           ],
           "automatic_thoughts": [
-            "it should be easier",
-            "I feel completely detached"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries",
+            "I can't let myself fully relax"
           ],
           "emotions": [
-            "detachment"
+            "Distress",
+            "Anxiety",
+            "Worry"
           ],
           "behaviors": [
-            "putting on a smile"
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Feeling abandoned (finding)",
-            "Emotionally detached (finding)",
-            "Emotionally distant (finding)"
+            "Positive self thoughts (finding)"
           ],
-          "neutral": [],
-          "contradiction": []
+          "neutral": [
+            "Feeling like wanting to escape (finding)",
+            "Free-floating anxiety (finding)",
+            "Anxiety about going crazy (finding)"
+          ],
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re setting a high bar for how easy connection should feel, and that expectation can make the effort feel exhausting. You might try looking at moments when you’ve felt a spark of connection—even if it was brief—and see what made it possible. That could help you see that connection can happen in small, manageable ways, even if it doesn’t feel effortless right away.",
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like you had a brief moment of relief when you were outside, but then your worries came back, which can feel exhausting. What was it about being outside that felt nice to you?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re hoping for connection to come more easily, yet you’re left feeling detached and masking that with a smile. That can feel exhausting and confusing. It’s understandable to feel like you’re just “there” without really being part of anything.",
+            "response": "It sounds like you had a brief moment of relief when you were outside, but then your worries came back, which can feel exhausting. What was it about being outside that felt nice to you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts: I can't let myself fully relax",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Emotionally detached",
-                  "label": "entailment"
+                  "concept": "emotions: distress, anxiety",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Seeking connection",
-                  "label": "triggers"
+                  "concept": "behaviors: taking short walks outside",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Putting on a smile",
-                  "label": "behaviors"
+                  "concept": "clinical context: free-floating anxiety",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What does the idea that “it should be easier” look like for you? How do you know that the smile you put on is masking a deeper sense of detachment? What might happen if you explored a different perspective on what connection feels like?",
+            "response": "What evidence supports the thought that something is wrong right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling isolated",
-                  "label": "emoentailmenttions"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "feeling alienated",
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "positive self thoughts",
                   "label": "entailment"
-                },
-                {
-                  "concept": "feeling abandoned",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "emotionally detached",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "emotionally distant",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "seeking connection",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "it should be easier",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "detached",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "smile",
-                  "label": "behaviors"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re setting a high bar for how easy connection should feel, and that expectation can make the effort feel exhausting. You might try looking at moments when you’ve felt a spark of connection—even if it was brief—and see what made it possible. That could help you see that connection can happen in small, manageable ways, even if it doesn’t feel effortless right away.",
+          "alternative_perspective": {
+            "response": "It sounds like you’re holding onto that brief calm, but worry creeps back. If a close friend were watching, what might they say about how you’re handling that tension?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "positive self thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "free-floating anxiety (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts about cancer recurrence",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions: distress, anxiety, worry",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like the fresh air gave you a brief escape, but then worries quickly returned. What thoughts come up when you try to relax?",
             "reasoning": null
           }
         }
@@ -342,70 +397,66 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "It’s tough because I want to connect, but I feel like I’m just floating on the outside. I’ll be there, laughing along, but inside I’m still lonely, like I’m not really part of it. I wish it felt different, but most of the time, it just leaves me feeling even more isolated.",
+        "query": "It felt nice to just breathe and see the trees, I guess. Being in nature always seems to help me forget, even if just for a little while. But then, I started thinking about how long I can keep feeling okay or if something's really wrong with my body. It just sneaks back in, you know?",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "want to connect",
-            "laughing along"
+            "Receiving news of cancer recurrence",
+            "Being outside in fresh air and sunshine",
+            "Being in nature"
           ],
           "automatic_thoughts": [
-            "I’m just floating on the outside",
-            "I’m not really part of it",
-            "I wish it felt different"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries",
+            "I can't let myself fully relax",
+            "How long can I keep feeling okay?",
+            "Is something really wrong with my body?"
           ],
           "emotions": [
-            "lonely",
-            "isolated"
+            "Distress",
+            "Anxiety",
+            "Worry",
+            "Temporary relief"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
+          ]
         },
         "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Social isolation (finding)",
-            "Feeling lonely (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Social isolation (rejection) (finding)"
+            "Anxiety about loss of memory (finding)",
+            "Pleasant memories (finding)",
+            "Feeling like wanting to escape (finding)",
+            "Flashbacks have stopped (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I hear how much you want to feel included, yet it still feels like you’re on the periphery. It’s understandable to feel that way when the connection you’re hoping for doesn’t match how you experience it. You’re not alone in feeling this disconnect, and it’s okay to acknowledge that tension.",
+        "response": "It sounds like you’re finding a moment of calm in nature, yet worries about your health keep slipping back in. What do you think might help you hold onto that calm a bit longer?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I hear how much you want to feel included, yet it still feels like you’re on the periphery. It’s understandable to feel that way when the connection you’re hoping for doesn’t match how you experience it. You’re not alone in feeling this disconnect, and it’s okay to acknowledge that tension.",
+            "response": "It sounds like you’re finding a moment of calm in nature, yet worries about your health keep slipping back in. What do you think might help you hold onto that calm a bit longer?",
             "reasoning": null
           },
           "socratic_questioning": {
-            "response": "When you say you feel like you’re just floating on the outside, what does that look like for you in those moments? What evidence do you have that you’re not really part of the group? How might you imagine a different way of being there that feels more connected?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling lonely",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Social isolation",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Alienated",
-                  "label": "entailment"
-                }
-              ]
-            }
+            "response": "It sounds like the nature walk gave you a brief escape, but the worry about staying okay keeps surfacing. What evidence do you have that you can’t keep feeling okay?",
+            "reasoning": null
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re convinced you’re just an observer, but can you think of any moments when someone actually engaged with you or when you felt a sense of belonging? What evidence might challenge the idea that you’re completely outside the group? A more balanced view could be that you’re present, even if it feels distant, and that small signs of connection might be there if we look for them.",
+          "alternative_perspective": {
+            "response": "It sounds like the walk offered a brief escape, but the worries return. If a close friend were watching you, what might they say about how you’re handling these thoughts?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like the fresh air helps you feel better for a bit, but the worry about your health creeps back in. What evidence do you have that something is really wrong with your body?",
             "reasoning": null
           }
         }
@@ -415,117 +466,110 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I appreciate you saying that. It's just so frustrating sometimes, like I’m trying so hard, but I still end up feeling this gap. I want to feel like I belong, but it’s like there’s this invisible wall that keeps me out. It's exhausting, really, feeling caught between wanting to engage and this heaviness that holds me back.",
+        "query": "Yeah, it was nice to breathe in the fresh air and see the trees. But then, I started worrying about whether I really am okay or if something's going on that I’m not aware of. It really is exhausting just trying to enjoy things without those worries creeping back in.",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "trying so hard",
-            "wanting to engage"
+            "Receiving news of cancer recurrence",
+            "Being outside in fresh air and sunshine",
+            "Being in nature"
           ],
           "automatic_thoughts": [
-            "I still end up feeling this gap",
-            "there's this invisible wall that keeps me out",
-            "it's exhausting"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries",
+            "I can't let myself fully relax",
+            "How long can I keep feeling okay?",
+            "Is something really wrong with my body?",
+            "I worry about whether I really am okay or if something's going on that I’m not aware of"
           ],
           "emotions": [
-            "frustration",
-            "heaviness"
+            "Distress",
+            "Anxiety",
+            "Worry",
+            "Temporary relief",
+            "Exhaustion"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
+          ]
         },
         "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Feeling abandoned (finding)",
-            "Feeling trapped (finding)",
-            "Feeling empty (finding)"
+          "entailment": [],
+          "neutral": [
+            "Feeling like wanting to escape (finding)",
+            "Anxiety about going crazy (finding)",
+            "Anticipatory anxiety, mild (finding)",
+            "Free-floating anxiety (finding)"
           ],
-          "neutral": [],
-          "contradiction": []
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What does that invisible wall feel like when you’re trying to engage? Can you recall any moments when you felt it was less solid, or when you managed to get through it? What small steps might you try to test whether that feeling is a real barrier or something else?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you found a brief moment of calm, but then worries about your health resurfaced, leaving you feeling exhausted. What might help you hold onto that calm a little longer?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of frustration and a sense of being stuck, even when you’re putting in so much effort. I hear how heavy that feeling of a gap can be, and it’s understandable that it would feel exhausting. It makes sense that this would leave you feeling pulled between wanting to connect and feeling held back.",
+            "response": "It sounds like you found a brief moment of calm, but then worries about your health resurfaced, leaving you feeling exhausted. What might help you hold onto that calm a little longer?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling trapped",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "frustration",
+                  "concept": "worry about health, exhaustion, difficulty enjoying moments",
                   "label": "emotions"
-                },
-                {
-                  "concept": "heaviness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "gap",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What does that invisible wall feel like when you’re trying to engage? Can you recall any moments when you felt it was less solid, or when you managed to get through it? What small steps might you try to test whether that feeling is a real barrier or something else?",
+            "response": "What evidence do you have that something is going on that you’re not aware of?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "Anxiety about going crazy",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "Free-floating anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling abandoned",
-                  "label": "entailment"
+                  "concept": "Anticipatory anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling trapped",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "trying so hard",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "wanting to engage",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "invisible wall",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "frustration",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "heaviness",
-                  "label": "emotions"
+                  "concept": "Automatic thoughts about health worries",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you feel there's an invisible wall keeping you from belonging. What evidence do you have that this wall is truly impenetrable, and what evidence might suggest there are ways to get through it?",
+          "alternative_perspective": {
+            "response": "It sounds like the fresh air was a nice break, but the worry creeps back. If a trusted friend were watching you, what might they say about how you’re handling those worries?",
             "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you enjoyed the fresh air and trees, but then worries about your health surfaced and made it hard to fully relax. It must feel exhausting to try to enjoy moments while those worries keep creeping back in.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fresh air and trees",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "worry about health",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "free-floating anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
           }
         }
       }
@@ -534,75 +578,135 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "The invisible wall feels so heavy, like this weight on my chest that just tightens whenever I’m in a social situation. It's hard to breathe sometimes, and I find myself just withdrawing. There have been moments when I felt lighter, usually when someone reaches out to me, but they’re rare, you know? It’s like I can’t quite grasp how to get there more often. I guess",
+        "query": "I don't know... I guess it would be nice to just feel that calm more often. Maybe if I could remind myself that I’m okay in those moments. But it feels like whenever I start to relax, a thought pops up, and I’m right back in that cycle of worry. It’s frustrating.",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "social situation"
+            "Receiving news of cancer recurrence",
+            "Being outside in fresh air and sunshine",
+            "Being in nature"
           ],
           "automatic_thoughts": [
-            "the invisible wall feels heavy",
-            "it's hard to breathe",
-            "I can't quite grasp how to get there more often"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries",
+            "I can't let myself fully relax",
+            "How long can I keep feeling okay?",
+            "Is something really wrong with my body?",
+            "I worry about whether I really am okay or if something's going on that I’m not aware of",
+            "Whenever I start to relax, a thought pops up, and I’m right back in that cycle of worry"
           ],
           "emotions": [
-            "anxiety"
+            "Distress",
+            "Anxiety",
+            "Worry",
+            "Temporary relief",
+            "Exhaustion",
+            "Frustration"
           ],
           "behaviors": [
-            "withdrawing"
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
           ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Fear of collapsing (finding)",
-            "Fear of enclosed spaces (finding)",
-            "Fear of open spaces (finding)"
+          "entailment": [
+            "Feeling calm (finding)"
           ],
-          "contradiction": [
-            "Free-floating anxiety (finding)"
-          ]
+          "neutral": [
+            "Anticipatory anxiety, moderate (finding)",
+            "Anticipatory anxiety (finding)",
+            "Recurrent anxiety (finding)",
+            "Anxiety about making mistakes (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the weight of that invisible wall is really overwhelming, especially when you’re in social settings. Feeling like you can’t breathe and pulling back is a natural response to that pressure. It’s understandable that you notice a sense of relief when someone reaches out, even if those moments are few.",
+        "response": "It sounds like you’re frustrated because the calm you’re trying to hold slips away when a worry pops up, and that’s a common experience. What does that thought usually say when it appears?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the weight of that invisible wall is really overwhelming, especially when you’re in social settings. Feeling like you can’t breathe and pulling back is a natural response to that pressure. It’s understandable that you notice a sense of relief when someone reaches out, even if those moments are few.",
+            "response": "It sounds like you’re frustrated because the calm you’re trying to hold slips away when a worry pops up, and that’s a common experience. What does that thought usually say when it appears?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "invisible wall",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling calm (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "social situation",
-                  "label": "triggers"
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "breathing difficulty",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "withdrawal",
-                  "label": "behaviors"
-                },
-                {
-                  "concept": "rare moments of lightness",
-                  "label": "unknown"
+                  "concept": "Recurrent anxiety (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "When that heavy feeling comes up, what thoughts are running through your mind? How do you know that a brief reach-out is the only time it feels lighter? What might happen if you tried to notice the wall in a different way?",
-            "reasoning": null
+            "response": "What evidence do you have that the worry will inevitably follow every time you try to relax?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anticipatory anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you feel a heavy pressure in social settings and notice relief when someone reaches out. What evidence supports that this relief only happens when someone connects with you? Have there been moments when you felt lighter on your own?",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "When you’re in that calm moment, what might a close friend notice that you’re missing? It could help you see that calm is possible even with worries.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling calm (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety, moderate",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts about health worries",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Frustration",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re frustrated that the calm you’re trying to find keeps being interrupted by worry. What might help you notice when that worry starts, so you can gently bring yourself back to the calm?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling calm (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
           }
         }
       }
@@ -611,72 +715,153 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel overwhelming. It’s like every time I think of opening up, that wall just pushes me back down. And when someone finally does reach out, it’s like a breath of fresh air, but it doesn’t last long. I guess I just wish I could find a way to feel that relief more often, instead of always bracing myself for that heaviness.",
+        "query": "I don’t know... It would be nice to feel calm more often. Sometimes I try to remind myself that I’m okay, but then those worries just come crashing back in. It’s really frustrating when I finally get a moment to relax, and then my mind just takes over again.",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "thinking of opening up",
-            "someone reaching out"
+            "Receiving news of cancer recurrence",
+            "Being outside in fresh air and sunshine",
+            "Being in nature"
           ],
           "automatic_thoughts": [
-            "that wall just pushes me back down",
-            "wish I could find a way to feel that relief more often",
-            "always bracing myself for that heaviness"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries",
+            "I can't let myself fully relax",
+            "How long can I keep feeling okay?",
+            "Is something really wrong with my body?",
+            "I worry about whether I really am okay or if something's going on that I’m not aware of",
+            "Whenever I start to relax, a thought pops up, and I’m right back in that cycle of worry",
+            "I try to remind myself that I’m okay, but worries come crashing back in"
           ],
           "emotions": [
-            "overwhelming",
-            "relief",
-            "heaviness"
+            "Distress",
+            "Anxiety",
+            "Worry",
+            "Temporary relief",
+            "Exhaustion",
+            "Frustration",
+            "Desire for calm"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
+          ]
         },
         "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling like wanting to escape (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Emotionally distant (finding)",
-            "Difficulty coping with grief responses (finding)"
+            "Recurrent anxiety (finding)",
+            "Anxiety about going crazy (finding)",
+            "Moderate anxiety (finding)",
+            "Anticipatory anxiety, moderate (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "When you picture that wall pushing you back, what thoughts or feelings surface? Have there been moments when opening up felt less heavy, and what was different in those times? What might it look like if the relief you feel when someone reaches out could linger a bit longer?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re hoping for more calm, but the worries keep coming back, which is understandably frustrating. What does a calm moment feel like for you?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I hear how heavy it feels when you try to open up, and how that sense of being pushed back can make everything feel overwhelming. It sounds like the brief moments of relief you get when someone reaches out feel like a breath of fresh air, but then the heaviness returns. It must be exhausting to keep bracing for that weight. You’re not alone in feeling this way, and it’s understandable that you’d want more of those moments of ease.",
+            "response": "It sounds like you’re hoping for more calm, but the worries keep coming back, which is understandably frustrating. What does a calm moment feel like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "Desire for calm",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Feeling like wanting to escape",
-                  "label": "entailment"
+                  "concept": "Frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Anxiety about collapsing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Emotionally distant",
-                  "label": "neutral"
+                  "concept": "Worry cycle",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "When you picture that wall pushing you back, what thoughts or feelings surface? Have there been moments when opening up felt less heavy, and what was different in those times? What might it look like if the relief you feel when someone reaches out could linger a bit longer?",
-            "reasoning": null
+            "response": "It sounds like you’re noticing a pattern of worries resurfacing when you try to relax. What evidence do you have that those worries are actually happening right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "worries",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "relaxation",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "moderate anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you feel relief is fleeting and that you’re always bracing for heaviness. What moments have you noticed relief lasting longer, and what was different about those times? Maybe we can explore ways to build on those moments so the relief can stay a bit longer.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It sounds like you’re caught in a cycle of worry that interrupts your calm moments. If a trusted friend were watching you, what might they say about how you’re handling these worries?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "recurrent anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "moderate anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anticipatory anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts about cancer recurrence",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "frustration when calm moments are interrupted",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling frustrated when your worries return after a brief moment of calm. What do you think might help you hold onto that calm a bit longer?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "worry",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "desire for calm",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "temporary relief",
+                  "label": "emotions"
+                }
+              ]
+            }
           }
         }
       }
@@ -685,113 +870,139 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "When I picture the wall, it feels... suffocating, like I don’t have any way to reach out without being pushed back. I often think, “What if they don’t really want to know me?” or “What if I burden them with my feelings?” Those thoughts just trap me in anxiety. There have been moments, though, when I’ve opened up to someone and it felt",
+        "query": "A calm moment feels like... being at peace, I guess. Like when I can just sit and breathe without that heavy weight on my chest. But, it’s so short-lived, and then I start spiraling into what ifs about my health, and it’s like I can’t hold onto that feeling. It just slips away too quickly.",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "picturing the wall"
+            "Receiving news of cancer recurrence",
+            "Being outside in fresh air and sunshine",
+            "Being in nature"
           ],
           "automatic_thoughts": [
-            "What if they don’t really want to know me?",
-            "What if I burden them with my feelings?"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries",
+            "I can't let myself fully relax",
+            "How long can I keep feeling okay?",
+            "Is something really wrong with my body?",
+            "I worry about whether I really am okay or if something's going on that I’m not aware of",
+            "Whenever I start to relax, a thought pops up, and I’m right back in that cycle of worry",
+            "I try to remind myself that I’m okay, but worries come crashing back in",
+            "A calm moment feels like being at peace, but it slips away too quickly"
           ],
           "emotions": [
-            "suffocating",
-            "anxiety"
+            "Distress",
+            "Anxiety",
+            "Worry",
+            "Temporary relief",
+            "Exhaustion",
+            "Frustration",
+            "Desire for calm",
+            "Peace"
           ],
           "behaviors": [
-            "opened up to someone"
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of open spaces (finding)",
-            "Fear of enclosed spaces (finding)"
+            "Feeling calm (finding)",
+            "Calm character (finding)",
+            "Feeling physically tense (finding)",
+            "Feeling tense (finding)"
           ],
           "neutral": [
-            "Feeling isolated (finding)",
-            "Fear of collapsing (finding)",
-            "Anxiety about collapsing (finding)"
+            "Mild anxiety (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Do you notice any moments when someone actually showed interest or support when you opened up? It might help to list evidence that people do care, versus evidence that they don't. Sometimes the wall feels like a barrier, but the fact that you have opened up shows that connection is possible. What might be a more balanced way to view how others respond to you?",
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like you’re getting brief moments of peace that are quickly overtaken by worries about your health, and that can feel exhausting. What thoughts come up right when that calm starts to slip?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like picturing the wall makes you feel trapped and anxious, and you worry that others might not want to know you or that you could be a burden. Those thoughts can feel like a heavy weight that keeps you from reaching out. It’s understandable that opening up feels both scary and hopeful, and it’s a brave step to share those feelings.",
+            "response": "It sounds like you’re getting brief moments of peace that are quickly overtaken by worries about your health, and that can feel exhausting. What thoughts come up right when that calm starts to slip?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "picturing the wall",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic thoughts about being unwanted or burdensome",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "suffocating feeling",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear of enclosed spaces",
+                  "concept": "Feeling calm (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "fear of open spaces",
+                  "concept": "Feeling tense (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Mild anxiety (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts about health",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Emotions: distress, anxiety, peace",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Can you think of a time when someone did want to know you, or when you felt they were open to hearing you? What would it look like if you tried sharing a small part of what’s on your mind? How might you gauge whether you’re actually burdening them or not?",
+            "response": "What evidence supports the idea that calm moments will slip away, and what might happen if you let one stay a bit longer?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of open spaces",
+                  "concept": "Feeling calm (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "fear of enclosed spaces",
+                  "concept": "Feeling tense (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "feeling isolated",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "anxiety about collapsing",
+                  "concept": "Mild anxiety (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Do you notice any moments when someone actually showed interest or support when you opened up? It might help to list evidence that people do care, versus evidence that they don't. Sometimes the wall feels like a barrier, but the fact that you have opened up shows that connection is possible. What might be a more balanced way to view how others respond to you?",
+          "alternative_perspective": {
+            "response": "It sounds like you’re holding onto that calm for a brief moment before the worries return. If a close friend were watching you, what might they say about how you’re handling those moments?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of open spaces",
+                  "concept": "Feeling calm (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "fear of enclosed spaces",
+                  "concept": "Feeling tense (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "feeling isolated",
+                  "concept": "Mild anxiety (finding)",
                   "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re able to find those brief moments of peace, but they’re quickly replaced by worries about your health, which can feel exhausting. When you notice that calm slipping away, what thoughts or sensations come up for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling calm (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about collapsing",
+                  "concept": "Feeling tense (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Mild anxiety (finding)",
                   "label": "neutral"
                 }
               ]
@@ -804,86 +1015,116 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I think there have been times when people did show genuine interest, but it’s hard to hold onto those moments. They often get overshadowed by the times I felt dismissed or ignored, you know? It’s like I cling to the negative experiences because they just feel more real sometimes. I guess I’m just so used to expecting rejection that it's hard to see the other side. Trying to find that",
+        "query": "Yeah, it really does feel exhausting. I guess when that calm slips away, I start thinking about all the little signs in my body—the aches, the fatigue. It’s like my mind suddenly zooms in on them, and I just can’t help but wonder if they mean something serious. It’s hard to shake off those thoughts once they start.",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "times I felt dismissed",
-            "times I felt ignored"
+            "Receiving news of cancer recurrence",
+            "Being outside in fresh air and sunshine",
+            "Being in nature"
           ],
           "automatic_thoughts": [
-            "cling to the negative experiences",
-            "used to expecting rejection"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries",
+            "I can't let myself fully relax",
+            "How long can I keep feeling okay?",
+            "Is something really wrong with my body?",
+            "I worry about whether I really am okay or if something's going on that I’m not aware of",
+            "Whenever I start to relax, a thought pops up, and I’m right back in that cycle of worry",
+            "I try to remind myself that I’m okay, but worries come crashing back in",
+            "A calm moment feels like being at peace, but it slips away too quickly",
+            "I start thinking about all the little signs in my body—the aches, the fatigue",
+            "My mind suddenly zooms in on them, and I just can’t help but wonder if they mean something serious",
+            "It's hard to shake off those thoughts once they start"
           ],
-          "emotions": [],
-          "behaviors": []
+          "emotions": [
+            "Distress",
+            "Anxiety",
+            "Worry",
+            "Temporary relief",
+            "Exhaustion",
+            "Frustration",
+            "Desire for calm",
+            "Peace"
+          ],
+          "behaviors": [
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling unwanted (finding)",
-            "Feeling alienated (finding)"
+            "Feeling calm (finding)",
+            "Feeling physically tense (finding)",
+            "Fatigue (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)",
-            "Delusion of being loved (finding)",
-            "Difficulty understanding own emotions (finding)"
+            "Psychogenic fatigue (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the negative moments feel more vivid than the positive ones. Have you noticed any specific times when someone genuinely showed interest and how that felt? Sometimes the evidence for rejection can be balanced by moments of connection, and looking at those can help shift the focus. What might be a small way to remind yourself of those positive interactions?",
-        "protocol_used": "cognitive_restructuring",
+        "response": "It sounds like when the calm fades, you notice bodily sensations and worry they might signal something serious, leaving you feeling exhausted. What does a calm moment feel like for you before those worries arise?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those moments of feeling dismissed have left a strong impression, making it tough to remember the times when someone was genuinely interested. It's understandable that the negative experiences feel more vivid because they've become a familiar pattern. You’re not alone in noticing how that expectation of rejection can shape what you notice.",
+            "response": "It sounds like when the calm fades, you notice bodily sensations and worry they might signal something serious, leaving you feeling exhausted. What does a calm moment feel like for you before those worries arise?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling unwanted (finding)",
+                  "concept": "Feeling calm (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated (finding)",
+                  "concept": "Feeling physically tense (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "clinging to negative experiences",
-                  "label": "automatic_thoughts"
+                  "concept": "Fatigue (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "expecting rejection",
-                  "label": "automatic_thoughts"
+                  "concept": "Automatic thoughts about aches and fatigue",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What do you notice when you think about those moments of genuine interest? How might you tell the difference between the memories of being dismissed and the memories of being genuinely engaged? What could happen if you allowed those positive moments to stay in your mind for a bit longer?",
+            "response": "It sounds exhausting when those thoughts come up. What evidence do you have that these aches and fatigue mean something serious?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "Sometimes a friend might notice how hard you’re working to stay calm and suggest it’s okay to let yourself relax a bit more. What do you think a trusted friend would say about how you’re dealing with those body‑related worries?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds exhausting to feel those worries creep in when you’re trying to relax. What evidence do you have that these aches and fatigue mean something serious?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling dismissed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "clinging to negative experiences",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "expecting rejection",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "feeling alienated",
+                  "concept": "Feeling calm",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fatigue",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Worry about health",
+                  "label": "emotions"
                 }
               ]
             }
-          },
-          "cognitive_restructuring": {
-            "response": "It sounds like the negative moments feel more vivid than the positive ones. Have you noticed any specific times when someone genuinely showed interest and how that felt? Sometimes the evidence for rejection can be balanced by moments of connection, and looking at those can help shift the focus. What might be a small way to remind yourself of those positive interactions?",
-            "reasoning": null
           }
         }
       }
@@ -892,72 +1133,135 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I get what you're saying. There have been a couple of times where someone really listened, and it felt... warm, like I wasn't alone in that moment. I remember feeling a little lighter, like maybe I do matter somehow. But then it fades, and I forget about it in the noise of the other stuff. I suppose if I could find a way to hold onto those memories,",
+        "query": "A calm moment feels like... a warm blanket, I guess? There’s this lightness, and I can just enjoy where I am without that nagging fear. It’s like the world opens up a little, and I can breathe. But then, as soon as I notice something weird in my body, that feeling just collapses, and I’m back to being tense and worried. It’s just so frustrating!",
+        "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "someone really listened"
+            "Receiving news of cancer recurrence",
+            "Being outside in fresh air and sunshine",
+            "Being in nature"
           ],
           "automatic_thoughts": [
-            "I do matter somehow",
-            "I forget about it in the noise of the other stuff"
+            "I have cancer again",
+            "I beat it before, but now it's back",
+            "I can't enjoy things because of my health worries",
+            "I can't let myself fully relax",
+            "How long can I keep feeling okay?",
+            "Is something really wrong with my body?",
+            "I worry about whether I really am okay or if something's going on that I’m not aware of",
+            "Whenever I start to relax, a thought pops up, and I’m right back in that cycle of worry",
+            "I try to remind myself that I’m okay, but worries come crashing back in",
+            "A calm moment feels like being at peace, but it slips away too quickly",
+            "A calm moment feels like a warm blanket, and I can enjoy where I am without that nagging fear",
+            "I notice something weird in my body, and that feeling just collapses",
+            "It's hard to shake off those thoughts once they start"
           ],
           "emotions": [
-            "warm",
-            "lighter"
+            "Distress",
+            "Anxiety",
+            "Worry",
+            "Temporary relief",
+            "Exhaustion",
+            "Frustration",
+            "Desire for calm",
+            "Peace",
+            "Lightness"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Trying to get through the day",
+            "Continuing to work",
+            "Taking short walks outside"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Moderate level of egocentricity (finding)",
-            "Level of egocentricity (observable entity)",
-            "Emotional adjustment (observable entity)"
+            "Feeling calm (finding)",
+            "Feeling physically tense (finding)",
+            "Feeling tense (finding)"
           ],
           "neutral": [
-            "Ability to understand own emotions (observable entity)",
-            "Out of body experience (finding)"
+            "Mild anxiety (finding)",
+            "Anticipatory anxiety, mild (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those moments of being heard give you a real sense of warmth and worth, and it’s understandable that they fade when life gets busy. You’re noticing how valuable that feeling is, and it makes sense you’d want to keep it closer. What do you think might help you remember or revisit that sense of being seen?",
+        "response": "It sounds like you’re enjoying a brief, warm‑blanket‑like calm that lets you breathe, but when you notice something odd in your body that calm quickly dissolves into tension. What might help you keep that calm a little longer?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those moments of being heard give you a real sense of warmth and worth, and it’s understandable that they fade when life gets busy. You’re noticing how valuable that feeling is, and it makes sense you’d want to keep it closer. What do you think might help you remember or revisit that sense of being seen?",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What do you notice about the moments when you feel heard that make you feel you matter? When that feeling fades, what thoughts or events come to mind? How might you keep that sense of being valued in the midst of other noise?",
+            "response": "It sounds like you’re enjoying a brief, warm‑blanket‑like calm that lets you breathe, but when you notice something odd in your body that calm quickly dissolves into tension. What might help you keep that calm a little longer?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Moderate level of egocentricity (finding)",
+                  "concept": "Feeling calm (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Emotional adjustment (observable entity)",
+                  "concept": "Feeling tense (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Mild anxiety (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like those moments of being heard make you feel valued, but they fade quickly. What specific evidence do you have that you truly matter, and what evidence might suggest otherwise? Maybe we can think of ways to keep those positive feelings more present.",
+          "socratic_questioning": {
+            "response": "It sounds like the calm feels fragile when you notice something in your body. What does that noticing trigger for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "moderate level of egocentricity",
+                  "concept": "Feeling calm (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "emotional adjustment",
+                  "concept": "Feeling tense (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "ability to understand own emotions",
+                  "concept": "Mild anxiety (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like that calm moment feels like a warm blanket, but it can slip away when you notice something in your body. If a close friend were watching you, what might they say about how you’re handling those moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling calm (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling tense (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Mild anxiety (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re finding a brief sense of calm that’s quickly disrupted by bodily sensations, and that’s understandably frustrating. What do you think might help you hold onto that calm a bit longer?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling calm (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling tense (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Mild anxiety (finding)",
                   "label": "neutral"
                 }
               ]

@@ -4,7 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I feel calm most of the time, but sometimes when small things pile up it feels like nothing is going the way it should, and I end up blowing up.",
+    "seed": "I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently. I mean I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
+    "core_issue": "career and work-related concerns",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -16,80 +17,86 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I feel calm most of the time, but sometimes when small things pile up it feels like nothing is going the way it should, and I end up blowing up.",
+        "query": "I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently. I mean I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [
-            "small things pile up"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "nothing is going the way it should"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers."
           ],
-          "emotions": [
-            "calm"
-          ],
-          "behaviors": [
-            "blowing up"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling calm (finding)",
-            "Feeling agitated (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about collapsing (finding)",
-            "Difficulty managing stress (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Negative attitude (finding)",
+            "Fear of speaking to people in authority (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Incongruent personal expectations (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that sometimes small things can feel like they're piling up, and it might seem like nothing is going as planned. It's important to remember that everyone experiences these feelings from time to time. Let's explore together if there are any patterns or thoughts that might be contributing to this feeling.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It's great to hear your confidence, but it's also important to remember that everyone makes mistakes. Could we explore what a trusted friend or colleague might think about the situation? It could help us gain a more balanced perspective.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that sometimes small things can feel like they're piling up, and it might seem like nothing is going as planned. It's important to remember that everyone experiences these feelings from time to time. Let's explore together if there are any patterns or thoughts that might be contributing to this feeling.",
+            "response": "You seem very confident in your abilities, and it's clear that you take pride in your work. However, I want to make sure we're on the same page. Can you help me understand what makes you feel anxious about interactions with your coworkers? It's important for us to explore this together so we can find ways to reduce any unnecessary stress.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "small things pile up",
-                  "label": "triggers"
+                  "concept": "anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "nothing is going the way it should",
-                  "label": "automatic_thoughts"
+                  "concept": "negative attitude",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I've noticed that small things can sometimes feel overwhelming and make you feel like things aren't going as planned. Can we explore together what might be causing this feeling, and if there are any ways to manage these situations differently?",
+            "response": "\"It's impressive that you have such high confidence in your work. Can we explore together what evidence supports these thoughts, and if there might be other perspectives to consider?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "small things pile up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "nothing is going the way it should",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're feeling overwhelmed when small issues accumulate, and it seems like you might be thinking that everything should go smoothly all the time. Let's explore if this thought is helping or hindering your situation.",
+          "alternative_perspective": {
+            "response": "\"It's great to hear your confidence, but it's also important to remember that everyone makes mistakes. Could we explore what a trusted friend or colleague might think about the situation? It could help us gain a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "small things pile up",
-                  "label": "triggers"
+                  "concept": "Incongruent personal expectations (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "nothing is going the way it should",
-                  "label": "automatic_thoughts"
+                  "concept": "Negative attitude (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that you feel confident in your work and believe yourself to be an exceptional employee. However, it's natural to have concerns about interactions with coworkers. Let's explore these feelings together and see if we can find ways to manage any anxiety or fears you might have.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of saying the wrong thing",
+                  "label": "neutral"
                 }
               ]
             }
@@ -101,77 +108,95 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel like everything’s just stacking up lately. Like, even the little stuff just feels so heavy, you know? I don’t know, it’s like I can’t catch a break.",
+        "query": "I guess I just feel like I shouldn't be making mistakes at this point in my career. I mean, shouldn’t I have it all figured out? It’s frustrating to think about what others might say. I worry they'll see me as incompetent or not cut out for my job. It’s like I can’t shake off that feeling, no matter what.",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [
-            "everything stacking up",
-            "little stuff feeling heavy"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I can’t catch a break"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job."
           ],
-          "emotions": [],
+          "emotions": [
+            "frustration"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling of being slowed down (finding)",
-            "Feeling physically tense (finding)",
-            "Feeling tense (finding)",
-            "Feeling trapped (finding)"
+            "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
-            "Anxiety about collapsing (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed right now, as if everything is piling up and even the smallest things feel heavy. It's important to acknowledge these feelings and remember that it's okay to have difficult days. Let's work together to find ways to manage this stress more effectively.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling a lot of pressure to perform perfectly. Can we explore together what evidence supports this belief and if there might be alternative ways to view your performance?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed right now, as if everything is piling up and even the smallest things feel heavy. It's important to acknowledge these feelings and remember that it's okay to have difficult days. Let's work together to find ways to manage this stress more effectively.",
+            "response": "I understand that you're feeling frustrated because you think you should have it all figured out. It's natural to feel this way sometimes, especially when we're under pressure. Let's explore together why you might be worried about saying the wrong thing and what steps we can take to help alleviate those concerns.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "everything stacking up",
-                  "label": "triggers"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "little stuff feeling heavy",
-                  "label": "triggers"
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you're feeling overwhelmed with everything piling up and the little things seeming so heavy. Can you help me understand why you feel like you can't catch a break? Let's explore this thought together.",
+            "response": "\"It sounds like you're feeling a lot of pressure to perform perfectly. Can we explore together what evidence supports this belief and if there might be alternative ways to view your performance?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "everything stacking up",
-                  "label": "triggers"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "little stuff feeling heavy",
-                  "label": "triggers"
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're having a tough time lately, and it feels like everything is piling up. Let's take a closer look at this thought of yours - \"I can't catch a break.\" Have there been any specific instances where you felt this way? Sometimes, it can be helpful to examine the evidence for and against our thoughts to gain a clearer perspective.",
+          "alternative_perspective": {
+            "response": "\"It's understandable to feel frustrated when we make mistakes, especially as our careers progress. Let's explore what a trusted friend or outside observer might think about your situation. This could help us gain a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "everything stacking up",
-                  "label": "triggers"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "little stuff feeling heavy",
-                  "label": "triggers"
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see you're feeling quite frustrated with yourself, and it seems like there's a concern that others might perceive you as incompetent. Let's explore this together. Can you tell me more about what makes you think that?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 }
               ]
             }
@@ -183,81 +208,100 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Thanks, I guess it helps to talk about it. But sometimes I just feel like I’m not doing enough. It’s like I’m always behind or disappointing people, and that just makes it all worse.",
+        "query": "Yeah, I guess there's always this pressure to be perfect. I just keep thinking about how my colleagues seem to have everything under control, while I’m struggling with these little things. I don’t know if I can really see it any other way. What if I’m just not good enough? It’s hard for me to shake off that feeling.",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I’m not doing enough",
-            "I’m always behind",
-            "I’m disappointing people"
+          "triggers": [
+            "pressure to be perfect",
+            "seeing colleagues appear to have everything under control"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job.",
+            "What if I’m just not good enough?"
+          ],
+          "emotions": [
+            "frustration",
+            "self-doubt"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling abandoned (finding)"
+            "Pressured by peers (finding)",
+            "Pressured by others (finding)"
           ],
           "neutral": [
-            "Complaining of feeling depressed (finding)"
+            "Performance anxiety (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about having a fit (finding)"
           ],
-          "contradiction": [
-            "Feeling empty (finding)",
-            "Positive self thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand how you're feeling, it can be overwhelming when we feel like we're not meeting our own expectations. Let's explore together if there might be other factors contributing to this sense of falling behind or disappointing others.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're putting a lot of pressure on yourself. Have you ever considered what your coworkers might think about the situation? Maybe they're not as perfect as they seem, and it's okay to make mistakes.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how you're feeling, it can be overwhelming when we feel like we're not meeting our own expectations. Let's explore together if there might be other factors contributing to this sense of falling behind or disappointing others.",
+            "response": "\"It sounds like you're dealing with a lot of pressure to perform perfectly. It's understandable to feel that way, especially when it seems like your colleagues are doing well. But remember, everyone has their own challenges and struggles. Let's work together to help you focus on your strengths and find ways to manage this pressure.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
+                  "concept": "pressure to be perfect",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "neutral"
+                  "concept": "seeing colleagues appear to have everything under control",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're dealing with some challenging feelings about not meeting expectations. Let's explore these thoughts together and see if we can find ways to alleviate the pressure you're experiencing.",
+            "response": "\"It sounds like you're putting a lot of pressure on yourself to be perfect. Have you ever considered what evidence supports this belief? Or perhaps, what might be some alternative explanations for your colleagues appearing to have everything under control?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
+                  "concept": "Pressure to be perfect",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Complaining of feeling depressed",
+                  "concept": "Anxiety about making mistakes",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you might be having some thoughts about not meeting expectations. Let's explore these thoughts together and see if we can find a more balanced perspective.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're putting a lot of pressure on yourself. Have you ever considered what your coworkers might think about the situation? Maybe they're not as perfect as they seem, and it's okay to make mistakes.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "I'm not doing enough",
-                  "label": "automatic_thoughts"
+                  "concept": "pressure to be perfect",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "I'm always behind",
-                  "label": "automatic_thoughts"
+                  "concept": "seeing colleagues appear to have everything under control",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see how you might feel that way, but it's important to remember that everyone has their own struggles. Let's explore together if there are other ways to look at this situation and find some relief from those feelings of self-doubt.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "pressure to be perfect",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "I'm disappointing people",
-                  "label": "automatic_thoughts"
+                  "concept": "seeing colleagues appear to have everything under control",
+                  "label": "triggers"
                 }
               ]
             }
@@ -269,83 +313,102 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess there are a lot of things going on. It’s just hard to shake off this feeling like I’m not enough. Like, I always think I should be doing more, or I should be happier, but I just feel... stuck, I guess?",
+        "query": "I get that they might not be perfect, but it’s hard for me to see that when I’m in the middle of it. I just keep thinking everyone's judging me, like they can see all my mistakes laid out. I’m scared it’ll affect how they view me, and that makes it even harder to focus on my work. I just want to feel... capable, you know?",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "pressure to be perfect",
+            "seeing colleagues appear to have everything under control"
+          ],
           "automatic_thoughts": [
-            "I'm not enough",
-            "I should be doing more",
-            "I should be happier"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job.",
+            "What if I’m just not good enough?",
+            "Everyone's judging me and can see all my mistakes."
           ],
           "emotions": [
-            "stuck"
+            "frustration",
+            "self-doubt",
+            "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling trapped (finding)",
-            "Feeling diffident (finding)"
+            "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
-            "Low motivation (finding)",
-            "Loss of motivation (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about appearing ridiculous (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Performance anxiety (finding)"
           ],
-          "contradiction": [
-            "Feeling empty (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see that you're feeling quite stuck and struggling with feelings of inadequacy. It's important to remember that everyone has their own pace, and it's okay not to meet unrealistic expectations. Let's work together to explore these thoughts a bit more and find ways to ease this burden.",
+        "response": "I understand that it can be overwhelming to feel like everyone is judging you, especially when you're under pressure. It's important to remember that we all make mistakes and it's part of being human. Let's work together on finding ways to manage this anxiety so you can focus more on your work and less on what others might think.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see that you're feeling quite stuck and struggling with feelings of inadequacy. It's important to remember that everyone has their own pace, and it's okay not to meet unrealistic expectations. Let's work together to explore these thoughts a bit more and find ways to ease this burden.",
+            "response": "I understand that it can be overwhelming to feel like everyone is judging you, especially when you're under pressure. It's important to remember that we all make mistakes and it's part of being human. Let's work together on finding ways to manage this anxiety so you can focus more on your work and less on what others might think.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling trapped (finding)",
+                  "concept": "Anxiety about behavior or performance (entailment)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling diffident (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes (neutral)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I can see that you're feeling quite stuck and doubting yourself. Let's explore this a bit more. What makes you think you should be doing more or being happier? Can we take a closer look at what evidence supports these thoughts, and if there might be other perspectives to consider?",
+            "response": "\"It sounds like you're under a lot of pressure to perform perfectly. Can we explore together what evidence supports this belief, and if there might be alternative ways to view your situation?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling trapped (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling diffident (finding)",
-                  "label": "entailment"
+                  "concept": "Performance anxiety (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you might be having a hard time with self-criticism. Let's take a closer look at those thoughts and see if we can find some evidence that challenges them. Would you be open to exploring that together?",
+          "alternative_perspective": {
+            "response": "\"It's understandable to feel that way when you're under pressure. Let's explore what a trusted friend or colleague might say about your work performance, and how they might view you. This could help us find a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "I'm not enough",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "I should be doing more",
-                  "label": "automatic_thoughts"
+                  "concept": "Performance anxiety (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can understand how you might feel overwhelmed by the pressure to be perfect. It's important to remember that everyone makes mistakes, and it doesn't define your worth or competence. Let's explore ways to help you focus on your work without feeling judged.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I should be happier",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 }
               ]
             }
@@ -357,79 +420,111 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that. But it’s just hard to believe that sometimes, you know? I keep thinking about all the things I haven’t done or how I could have handled situations better. It’s like this loop that won’t stop playing in my head, and it’s exhausting.",
+        "query": "I know I should probably remind myself that everyone makes mistakes, but it just feels different when it’s happening to me. It’s like I can’t help but dwell on it. I keep replaying those moments in my head, and it’s exhausting. I really want to feel more confident, but then I think, what if I keep messing up?",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "pressure to be perfect",
+            "seeing colleagues appear to have everything under control"
+          ],
           "automatic_thoughts": [
-            "hard to believe",
-            "thinking about all the things I haven’t done",
-            "how I could have handled situations better",
-            "this loop that won’t stop playing in my head"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job.",
+            "What if I’m just not good enough?",
+            "Everyone's judging me and can see all my mistakes.",
+            "What if I keep messing up?"
           ],
           "emotions": [
-            "exhausting"
+            "frustration",
+            "self-doubt",
+            "fear",
+            "exhaustion"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Reappearance of old thoughts (finding)",
-            "Rumination - thoughts (finding)"
-          ],
+          "entailment": [],
           "neutral": [
             "Anxiety about making mistakes (finding)",
-            "Repressing thoughts (finding)",
-            "Positive self thoughts (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Feeling nervous (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about loss of control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand how difficult it can be to carry those thoughts and feelings, especially when you're thinking about the past and what could have been done differently. It's important to remember that everyone has moments of self-doubt, but try not to let them consume you. Let's work together to find a way to manage these thoughts more effectively.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling quite overwhelmed by the fear of making mistakes. Can we explore together what evidence you have that things will always go wrong? Let's consider some examples where things didn't turn out as expected, but also instances when they did.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how difficult it can be to carry those thoughts and feelings, especially when you're thinking about the past and what could have been done differently. It's important to remember that everyone has moments of self-doubt, but try not to let them consume you. Let's work together to find a way to manage these thoughts more effectively.",
+            "response": "\"I understand that you're feeling exhausted and worried about making mistakes. It's natural to feel this way sometimes, especially when we focus on our errors. Let's explore together how we can help you shift your thoughts and find more confidence.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Rumination - thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "neutral"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you're having a hard time believing in yourself and feeling exhausted by the thoughts of what you could have done differently. Let's explore these thoughts together, and see if we can find some evidence for and against them.",
+            "response": "\"It sounds like you're feeling quite overwhelmed by the fear of making mistakes. Can we explore together what evidence you have that things will always go wrong? Let's consider some examples where things didn't turn out as expected, but also instances when they did.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Rumination - thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "neutral"
+                  "concept": "self-doubt",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're struggling with some self-critical thoughts that are causing distress. Let's work together to explore if these thoughts are truly accurate or if they might be distorted in some way. We can look at evidence for and against them, and see if we can find a more balanced perspective.",
+          "alternative_perspective": {
+            "response": "\"It's understandable to feel frustrated and overwhelmed when you make a mistake. But remember, everyone makes errors from time to time. Let's explore what might happen if you do make a small mistake today. What could be the best, worst, and most realistic outcomes?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Rumination - thoughts",
-                  "label": "entailment"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "self-doubt",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how these moments might feel overwhelming, but remember that everyone makes mistakes. Let's explore ways to help you manage this anxiety and build your confidence.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety about making mistakes",
                   "label": "neutral"
+                },
+                {
+                  "concept": "self-doubt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
                 }
               ]
             }
@@ -441,79 +536,121 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I appreciate you saying that. It just feels like I’m always measuring myself against some impossible standard. I really want to let go of that, but it’s hard. Sometimes it just feels like I’m in this constant competition with myself, and I don’t even know how to change that.",
+        "query": "I know I should probably remind myself that everyone makes mistakes, but it just feels different when it’s happening to me. I keep replaying those moments in my head, and it’s exhausting. I really want to feel more confident, but then I think, what if I keep messing up?",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "measuring myself against some impossible standard",
-            "constant competition with myself"
+            "pressure to be perfect",
+            "seeing colleagues appear to have everything under control"
           ],
           "automatic_thoughts": [
-            "I want to let go of that",
-            "I don’t even know how to change that"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job.",
+            "What if I’m just not good enough?",
+            "Everyone's judging me and can see all my mistakes.",
+            "What if I keep messing up?",
+            "It feels different when mistakes happen to me."
           ],
           "emotions": [
-            "frustration"
+            "frustration",
+            "self-doubt",
+            "fear",
+            "exhaustion",
+            "lack of confidence"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Positive self thoughts (finding)",
-            "Moderate ego strength (finding)",
-            "Anxiety about altered body image (finding)",
-            "Feels own body is unreal (finding)",
-            "Preoccupation with body weight (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Feeling nervous (finding)",
+            "Anxiety about having a fit (finding)",
+            "Undoing - mental defense mechanism (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're putting a lot of pressure on yourself. Let's explore together if there are more realistic standards we can work towards, and find ways to ease this self-competition.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling quite overwhelmed with self-doubt and fear of making mistakes. Let's explore together what evidence you have that things will continue to go wrong, and if there might be alternative ways to approach the situation.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're putting a lot of pressure on yourself. Let's explore together if there are more realistic standards we can work towards, and find ways to ease this self-competition.",
+            "response": "\"It sounds like you're feeling quite exhausted and worried about making mistakes. It's natural to have these thoughts, especially when we care deeply about our work. Let's explore together how we can help you build more confidence.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "constant competition with myself",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "impossible standard",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes you think you're in constant competition with yourself? And what does it mean to measure yourself against an impossible standard? Let's explore these thoughts together.",
+            "response": "\"It sounds like you're feeling quite overwhelmed with self-doubt and fear of making mistakes. Let's explore together what evidence you have that things will continue to go wrong, and if there might be alternative ways to approach the situation.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "constant competition with myself",
-                  "label": "triggers"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "impossible standard",
-                  "label": "triggers"
+                  "concept": "self-doubt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Let's explore these thoughts together. It seems like you're setting high standards for yourself, which can be challenging. Have you considered that it might be helpful to set more realistic goals? We could work on identifying evidence for and against this belief, and find alternative ways of thinking about your abilities.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're really struggling with self-doubt and exhaustion. Have you ever considered what a trusted friend or colleague might say about your performance? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "constant competition with myself",
-                  "label": "triggers"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "measuring myself against some impossible standard",
-                  "label": "triggers"
+                  "concept": "self-doubt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "lack of confidence",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling quite exhausted and worried about making mistakes. It's important to remember that everyone makes errors, and it's okay not to be perfect. Let's explore some ways we can help boost your confidence.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -525,78 +662,137 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "It feels like I’m constantly measuring myself against impossible standards. I want to let go of that, but it’s hard. Sometimes it’s just this competition with myself, and I don’t know how to change that.",
+        "query": "I don’t know... I guess I just keep thinking about the last few times things didn’t go well. It’s like my brain goes straight to the worst-case scenario every time. I want to believe that I can improve or that things could go differently, but it’s hard to shake off that nagging fear that I’ll just mess up again. I feel stuck sometimes, you know?",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "measuring myself against impossible standards",
-            "competition with myself"
+            "pressure to be perfect",
+            "seeing colleagues appear to have everything under control"
           ],
           "automatic_thoughts": [
-            "I want to let go of that",
-            "it's hard",
-            "I don’t know how to change that"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job.",
+            "What if I’m just not good enough?",
+            "Everyone's judging me and can see all my mistakes.",
+            "What if I keep messing up?",
+            "It feels different when mistakes happen to me.",
+            "My brain goes straight to the worst-case scenario every time.",
+            "I have a nagging fear that I’ll just mess up again."
           ],
-          "emotions": [],
+          "emotions": [
+            "frustration",
+            "self-doubt",
+            "fear",
+            "exhaustion",
+            "lack of confidence",
+            "feeling stuck"
+          ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling a failure (finding)"
+          ],
           "neutral": [
-            "Anxiety about altered body image (finding)",
-            "Moderate ego strength (finding)",
-            "Preoccupation with body weight (finding)",
-            "Preoccupation with body size (finding)",
-            "Positive self thoughts (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Loss of hope for the future (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed by the high standards you set for yourself. It can be challenging, and it seems like you're often in competition with yourself. Let's explore together if there are more realistic expectations we can work towards.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're having a hard time shaking off that nagging fear. Let's explore together if there might be other, more positive outcomes to consider. What do you think?\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed by the high standards you set for yourself. It can be challenging, and it seems like you're often in competition with yourself. Let's explore together if there are more realistic expectations we can work towards.",
+            "response": "I understand that you're feeling a bit stuck and have been worrying about making mistakes. It's common to feel this way when things don't go as planned, but it's important to remember that everyone makes mistakes sometimes. Let's explore some ways we can work together to help you manage these feelings and move forward.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "triggers"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "self-doubt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
                   "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "lack of confidence",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling stuck",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes you think these high standards are unattainable? Can we explore together what might be the evidence for and against this belief, and consider alternative ways to approach your goals?",
+            "response": "What evidence do you have that things will go wrong this time? Can we explore some examples of times when things didn't turn out as badly as you initially thought?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "competition with myself",
-                  "label": "triggers"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "measuring myself against impossible standards",
-                  "label": "triggers"
+                  "concept": "worst-case scenario thinking",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling stuck",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're holding yourself to high expectations, and it can be challenging to let go. Let's explore together if there might be more realistic goals that work better for you.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're having a hard time shaking off that nagging fear. Let's explore together if there might be other, more positive outcomes to consider. What do you think?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "measuring myself against impossible standards",
-                  "label": "triggers"
+                  "concept": "worst-case scenario",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "competition with myself",
-                  "label": "triggers"
+                  "concept": "nagging fear",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "improve",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "things could go differently",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see how that fear of messing up again might be weighing on you. Let's explore together if there are any patterns or triggers that could help us understand this better and find ways to move forward with more confidence.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling stuck",
+                  "label": "emotions"
                 }
               ]
             }
@@ -608,78 +804,141 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It feels like I’m constantly measuring myself against impossible standards. I want to let go of that, but it’s hard. Sometimes it’s just this competition with myself, and I don’t know how to change that.",
+        "query": "I mean, I get what you’re saying, but it just feels so overwhelming. I wish I could picture those positive outcomes, but my mind immediately jumps to the negative. It’s like there’s this barrier that makes it hard to imagine anything going right. I want to believe it could be different, but it just feels safer to expect the worst.",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "measuring myself against impossible standards",
-            "competition with myself"
+            "pressure to be perfect",
+            "seeing colleagues appear to have everything under control"
           ],
           "automatic_thoughts": [
-            "I want to let go of that",
-            "it's hard",
-            "I don’t know how to change that"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job.",
+            "What if I’m just not good enough?",
+            "Everyone's judging me and can see all my mistakes.",
+            "What if I keep messing up?",
+            "It feels different when mistakes happen to me.",
+            "My brain goes straight to the worst-case scenario every time.",
+            "I have a nagging fear that I’ll just mess up again.",
+            "It feels overwhelming to picture positive outcomes; my mind jumps to the negative.",
+            "There's a barrier that makes it hard to imagine anything going right.",
+            "It feels safer to expect the worst."
           ],
-          "emotions": [],
+          "emotions": [
+            "frustration",
+            "self-doubt",
+            "fear",
+            "exhaustion",
+            "lack of confidence",
+            "feeling stuck",
+            "overwhelm"
+          ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Sense of impending doom (finding)",
+            "Loss of hope for the future (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
           "neutral": [
-            "Anxiety about altered body image (finding)",
-            "Moderate ego strength (finding)",
-            "Preoccupation with body weight (finding)",
-            "Preoccupation with body size (finding)",
-            "Positive self thoughts (finding)"
+            "Depressive delusion of catastrophe (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed by the high standards you set for yourself. It can be challenging, and it seems like you're often in competition with yourself. Let's work together to explore ways we might ease this pressure and find a more balanced approach.",
+        "response": "I understand how you feel, it can be really tough to focus on the positive when things seem overwhelming. Let's work together to find ways to break through that barrier and help you imagine a more hopeful future.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed by the high standards you set for yourself. It can be challenging, and it seems like you're often in competition with yourself. Let's work together to explore ways we might ease this pressure and find a more balanced approach.",
+            "response": "I understand how you feel, it can be really tough to focus on the positive when things seem overwhelming. Let's work together to find ways to break through that barrier and help you imagine a more hopeful future.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "triggers"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "lack of confidence",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling stuck",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelm",
                   "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes you think these high standards are unattainable? Can we explore together what might be the evidence for and against this belief, so we can find a more balanced approach to self-evaluation?",
+            "response": "I understand that things feel overwhelming right now, and it's hard to imagine positive outcomes. Let's explore together what might be keeping you from picturing a better scenario. Perhaps we can find ways to break down the situation into smaller, more manageable parts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "competition with myself",
-                  "label": "triggers"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "measuring myself against impossible standards",
-                  "label": "triggers"
+                  "concept": "lack of confidence",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelm",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're setting high expectations for yourself, and it can be challenging to meet them. Let's explore if these standards are realistic or if they might be causing some stress. Together, we can find ways to adjust them so they feel more achievable.",
+          "alternative_perspective": {
+            "response": "\"I understand how you feel, and it's completely normal to have negative thoughts sometimes. But let's explore what might happen if things go well instead. Can we think about one small positive outcome that could occur in your current situation?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "measuring myself against impossible standards",
-                  "label": "triggers"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "competition with myself",
-                  "label": "triggers"
+                  "concept": "lack of confidence",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelm",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "It feels safer to expect the worst",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that things feel overwhelming right now, and it's natural to worry about the future. Let's work together to find ways to shift your focus towards more positive outcomes. Would you be open to exploring some strategies for that?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "lack of confidence",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "overwhelm",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -691,79 +950,136 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, that would be nice. The pressure is just so relentless, and I don’t know how to ease up on myself. I mean, I want to feel okay with where I am, but I just keep pushing, you know? It’s like I can't help but think I should be doing better.",
+        "query": "I appreciate that, but it’s just... I think there’s a part of me that feels like I need to stay cautious. If I let myself hope too much and then things don’t turn out the way I want, it’ll hurt even more. It’s like protecting myself from disappointment, but that just keeps me stuck in this cycle of anxiety. I want to feel better, but it’s hard to change that mindset.",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "pressure"
+            "pressure to be perfect",
+            "seeing colleagues appear to have everything under control"
           ],
           "automatic_thoughts": [
-            "I should be doing better"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job.",
+            "What if I’m just not good enough?",
+            "Everyone's judging me and can see all my mistakes.",
+            "What if I keep messing up?",
+            "It feels different when mistakes happen to me.",
+            "My brain goes straight to the worst-case scenario every time.",
+            "I have a nagging fear that I’ll just mess up again.",
+            "It feels overwhelming to picture positive outcomes; my mind jumps to the negative.",
+            "There's a barrier that makes it hard to imagine anything going right.",
+            "It feels safer to expect the worst.",
+            "If I let myself hope too much, it’ll hurt even more.",
+            "Protecting myself from disappointment keeps me stuck in this cycle of anxiety."
           ],
           "emotions": [
-            "relentlessness"
+            "frustration",
+            "self-doubt",
+            "fear",
+            "exhaustion",
+            "lack of confidence",
+            "feeling stuck",
+            "overwhelm",
+            "anxiety"
           ],
-          "behaviors": [
-            "pushing myself"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Low self-control (finding)",
-            "Repressing thoughts (finding)",
-            "Difficulty managing stress (finding)",
-            "Anxiety about collapsing (finding)",
-            "Difficulty controlling emotions (finding)"
+            "Hopeful for the future (finding)",
+            "Loss of hope for the future (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anticipatory anxiety (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Optimistic thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed by the pressure and struggling to find a balance. It's common to have high expectations for ourselves, but it's important to remember that everyone has their own pace. Let's work together on finding ways to be kinder to yourself and reduce some of that relentlessness.",
-        "protocol_used": "validate_and_reflect",
+        "response": "I understand how you're feeling. It seems like you have a fear of disappointment, which might be causing some anxiety. Let's explore together if there are any alternative ways to approach your hopes without getting stuck in this cycle.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed by the pressure and struggling to find a balance. It's common to have high expectations for ourselves, but it's important to remember that everyone has their own pace. Let's work together on finding ways to be kinder to yourself and reduce some of that relentlessness.",
+            "response": "I understand how you're feeling, and it's completely normal to want to protect yourself from potential disappointment. Let's explore together if there are any thoughts or beliefs that might be contributing to this cycle of anxiety.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
                   "concept": "emotions",
-                  "label": "neutral"
+                  "label": "unknown"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Have you ever considered what might happen if you allowed yourself to take a break? Or perhaps, what evidence do you have that you should be doing better right now? Let's explore these thoughts together.",
+            "response": "I understand how you're feeling. It seems like you have a fear of disappointment, which might be causing some anxiety. Let's explore together if there are any alternative ways to approach your hopes without getting stuck in this cycle.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Low self-control (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Difficulty managing stress (finding)",
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I understand that you're feeling a bit guarded, and it makes sense given your concerns about disappointment. Let's explore together if there might be other ways to approach this situation that could help you feel more hopeful without increasing the risk of disappointment. What do you think?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "lack of confidence",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling stuck",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelm",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "anxiety",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "I understand that you're feeling quite relentless with the pressure, and it seems like you're having a hard time being kind to yourself. It might be helpful to explore together if there are any thoughts or beliefs that could be contributing to this self-criticism. Let's see if we can find a way to lighten your load.",
+          "safety_check": {
+            "response": "I understand how you feel, and it's important to protect yourself. But let's explore together if there might be a way to hope without fearing the potential pain. Would you be open to discussing that?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "neutral"
+                  "concept": "protecting oneself from disappointment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "cycle of anxiety",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -775,78 +1091,136 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Thanks for understanding. It’s just hard to see it that way when I’m in it. I guess I’m so used to pushing through that I don’t even know how to slow down. It feels uncomfortable to even think about cutting myself some slack.",
+        "query": "Yeah, I see what you're saying, and I guess I do have this fear. But it feels so deep-rooted, like I just can’t help but think of the worst. I want to find a way to approach things differently, but I don’t even know where to start. It’s hard to imagine a shift when I feel so tied to this anxiety.",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "pressure to be perfect",
+            "seeing colleagues appear to have everything under control"
+          ],
           "automatic_thoughts": [
-            "hard to see it that way when I’m in it",
-            "so used to pushing through",
-            "don’t even know how to slow down",
-            "uncomfortable to even think about cutting myself some slack"
+            "I am the best employee and make no errors.",
+            "I can't be wrong in my interactions with coworkers.",
+            "I shouldn't be making mistakes at this point in my career.",
+            "I worry they'll see me as incompetent or not cut out for my job.",
+            "What if I’m just not good enough?",
+            "Everyone's judging me and can see all my mistakes.",
+            "What if I keep messing up?",
+            "It feels different when mistakes happen to me.",
+            "My brain goes straight to the worst-case scenario every time.",
+            "I have a nagging fear that I’ll just mess up again.",
+            "It feels overwhelming to picture positive outcomes; my mind jumps to the negative.",
+            "There's a barrier that makes it hard to imagine anything going right.",
+            "It feels safer to expect the worst.",
+            "If I let myself hope too much, it’ll hurt even more.",
+            "Protecting myself from disappointment keeps me stuck in this cycle of anxiety.",
+            "I feel tied to this anxiety and don’t know where to start to change."
           ],
           "emotions": [
-            "uncomfortable"
+            "frustration",
+            "self-doubt",
+            "fear",
+            "exhaustion",
+            "lack of confidence",
+            "feeling stuck",
+            "overwhelm",
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Difficulty controlling emotions (finding)",
-            "Low self-control (finding)",
-            "Anxiety about forced dependence (finding)",
-            "Difficulty managing stress (finding)"
+          "entailment": [
+            "Fear of losing emotional control (finding)"
           ],
-          "contradiction": [
-            "Feeling of being slowed down (finding)"
-          ]
+          "neutral": [
+            "Fear of not coping with treatment (finding)",
+            "Fear of going out (finding)",
+            "Fear of collapsing (finding)",
+            "Anxiety about going crazy (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand it can be challenging to see things differently when we're so accustomed to our ways, and it feels uncomfortable to change. But remember, it's okay to take things at a pace that feels right for you. Let's explore together if there might be other ways to approach this situation that could feel more comfortable for you.",
-        "protocol_used": "validate_and_reflect",
+        "response": "What if we could explore together where these thoughts come from and how they affect you? It might help us find a way to shift your perspective. Would that be something you'd like to try?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand it can be challenging to see things differently when we're so accustomed to our ways, and it feels uncomfortable to change. But remember, it's okay to take things at a pace that feels right for you. Let's explore together if there might be other ways to approach this situation that could feel more comfortable for you.",
+            "response": "I understand that you're feeling overwhelmed and unsure of where to start. It's common for fears to feel deeply ingrained, but together we can work on finding new ways to approach things. Let's take it one step at a time.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "deep-rooted fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "worry",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "anxiety",
                   "label": "neutral"
+                },
+                {
+                  "concept": "feeling stuck",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're having a hard time seeing things differently, and that's okay. Let's explore together why it feels uncomfortable to slow down or give yourself some slack. Perhaps we can find alternative ways to approach this situation that feel more comfortable for you.",
+            "response": "What if we could explore together where these thoughts come from and how they affect you? It might help us find a way to shift your perspective. Would that be something you'd like to try?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
                   "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "label": "unknown"
                 },
                 {
                   "concept": "emotions",
-                  "label": "neutral"
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're having a hard time seeing things differently, and that's okay. Let's explore together if there might be alternative ways to approach this situation without pushing through so much. It could help you feel more comfortable in the long run.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're really struggling with these negative thoughts, and it can feel overwhelming. Let's work together to explore some alternative perspectives that might help you see things differently. For example, what if we looked at the best possible outcome for this situation? Or, how about considering what a trusted friend or colleague might say about your performance?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "worst-case scenario",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "feeling stuck",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that you're feeling overwhelmed and stuck in a cycle of anxiety. It's important to acknowledge these feelings, and together we can explore ways to help you manage them more effectively. Let's start by focusing on small steps towards change. What are some areas where you feel this anxiety is most present?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about going crazy",
                   "label": "neutral"
                 }
               ]

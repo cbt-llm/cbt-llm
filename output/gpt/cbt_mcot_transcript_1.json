@@ -4,7 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I feel calm most of the time, but sometimes when small things pile up it feels like nothing is going the way it should, and I end up blowing up.",
+    "seed": "I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently. I mean I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
+    "core_issue": "career and work-related concerns",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -16,80 +17,142 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I feel calm most of the time, but sometimes when small things pile up it feels like nothing is going the way it should, and I end up blowing up.",
+        "query": "I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently. I mean I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [
-            "small things pile up"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "nothing is going the way it should"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?"
           ],
-          "emotions": [
-            "calm"
-          ],
-          "behaviors": [
-            "blowing up"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling calm (finding)",
-            "Feeling agitated (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about collapsing (finding)",
-            "Difficulty managing stress (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Negative attitude (finding)",
+            "Fear of speaking to people in authority (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Incongruent personal expectations (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "When you feel that nothing is going the way it should, what specific evidence supports that? Are there moments when things are actually going okay, even if a few tasks are still pending? It might help to view the pile as a series of small tasks you can tackle one at a time rather than a complete collapse.",
-        "protocol_used": "cognitive_restructuring",
+        "response": "What evidence do you have that you might be wrong in these circumstances with your coworkers?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re usually calm, but when a few tasks start to stack up, you feel things aren’t going as planned. That shift can be unsettling and lead to frustration. It’s understandable that this can feel upsetting.",
+            "response": "It sounds like you’re proud of your performance but also worried that any slip could challenge that image. What would it feel like to let yourself be imperfect in a small way?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling calm",
-                  "label": "entailment"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling agitated",
-                  "label": "entailment"
+                  "concept": "Negative attitude",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Difficulty managing stress",
+                  "concept": "Fear of speaking to people in authority",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Incongruent personal expectations",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "When the small tasks start to pile up, what thoughts come to mind that make you feel like nothing is going right? How do you know those thoughts are accurate? What might be another way to look at those tasks?",
+            "response": "What evidence do you have that you might be wrong in these circumstances with your coworkers?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "small things pile up",
-                  "label": "triggers"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "nothing is going the way it should",
-                  "label": "automatic_thoughts"
+                  "concept": "Negative attitude",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "blowing up",
-                  "label": "behaviors"
+                  "concept": "Fear of speaking to people in authority",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Incongruent personal expectations",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "When you feel that nothing is going the way it should, what specific evidence supports that? Are there moments when things are actually going okay, even if a few tasks are still pending? It might help to view the pile as a series of small tasks you can tackle one at a time rather than a complete collapse.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "If a trusted friend were watching you, what might they say about how you handle these coworker situations? They might suggest that even small errors can be opportunities for growth.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Negative attitude",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of speaking to people in authority",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Incongruent personal expectations",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts about being the best employee and making no errors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you feel very confident in your work, but also worry about being wrong with coworkers. What evidence do you have that you might be wrong in these situations?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Negative attitude",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of speaking to people in authority",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Incongruent personal expectations",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "I am the best employee",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I make no errors",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "How can I be wrong",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
           }
         }
       }
@@ -98,82 +161,105 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s just how overwhelming everything feels sometimes. Like, when I look at my to-do list, it feels endless and the weight of it just makes me want to shut down. I know I have had moments that were okay, like when I completed a project or had a good conversation with a friend, but those moments seem so small compared to the chaos in my head. I don’t",
+        "query": "I guess I don't have a lot of solid evidence. It just feels like I'm always second-guessing myself, especially when I think about how my ideas are received. Sometimes I replay conversations in my head and wonder if I came off too harsh or if I misunderstood their reactions. It’s like a loop I can’t escape from.",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "looking at my to-do list"
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head"
           ],
           "automatic_thoughts": [
-            "everything feels overwhelming",
-            "the weight of it makes me want to shut down",
-            "those moments seem small compared to the chaos in my head"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions."
           ],
-          "emotions": [
-            "overwhelm"
-          ],
-          "behaviors": [
-            "want to shut down"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling agitated (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Negative automatic thoughts (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Fear of saying the wrong thing (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about collapsing (finding)",
-            "Difficulty managing stress (finding)",
-            "Mood swings (finding)"
+            "Moderate level of neuroticism (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What makes the to‑do list feel endless to you? How do you decide which tasks to tackle first, and what might happen if you broke it into smaller parts? When you think about those moments that went well, what do they suggest about your ability to handle the bigger picture?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re caught in a cycle of replaying conversations and second‑guessing how you came across, which can feel exhausting. What would it look like if you could pause that loop for a moment?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the to‑do list feels like a huge mountain, and that can make you feel like you might collapse. It’s understandable that those small wins feel dwarfed by the bigger picture. You’re not alone in feeling that way.",
+            "response": "It sounds like you’re caught in a cycle of replaying conversations and second‑guessing how you came across, which can feel exhausting. What would it look like if you could pause that loop for a moment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling agitated (finding)",
+                  "concept": "Anxiety about saying the wrong thing",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty managing stress (finding)",
-                  "label": "neutral"
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes the to‑do list feel endless to you? How do you decide which tasks to tackle first, and what might happen if you broke it into smaller parts? When you think about those moments that went well, what do they suggest about your ability to handle the bigger picture?",
+            "response": "What evidence do you have that your ideas were received harshly, and what might be another way to interpret those conversations? How could you test that alternative interpretation next time?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelm",
-                  "label": "emotions"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "to‑do list",
-                  "label": "triggers"
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "small successes",
-                  "label": "unknown"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "shut down",
-                  "label": "behaviors"
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you might be seeing the list as endless, which can feel overwhelming. When you look at it, can you pick one or two tasks that feel doable right now? You’ve already had moments of success—what did you do in those moments that helped you feel accomplished? Maybe the list feels bigger because you’re focusing on the total, but breaking it into smaller steps could make it feel more manageable.",
+          "alternative_perspective": {
+            "response": "It sounds like you’re stuck in a loop of self‑doubt. If a trusted friend were watching, what might they say about how you actually came across?",
             "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re stuck in a loop of replaying conversations and second‑guessing yourself. What evidence do you have that you came off too harsh?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "entailment"
+                }
+              ]
+            }
           }
         }
       }
@@ -182,114 +268,134 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I don’t really know, it just feels like there’s always something new piling on. Sometimes I just freeze up and don’t know where to start. I guess, when I think about those good moments, like chatting with my friend, it’s almost like... like I can handle things in the moment, but then I get back to this big mess and it feels too heavy again. It’s",
+        "query": "I think if I could pause it, maybe I’d feel a little lighter—like I could actually enjoy my work without the constant pressure hanging over me. I wouldn't be so fixated on how others perceive me, and I could focus more on the actual tasks at hand. But that’s easier said than done; the anxiety just creeps back in so quickly.",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "something new piling on",
-            "big mess"
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head",
+            "Constant pressure at work"
           ],
           "automatic_thoughts": [
-            "I don’t know where to start",
-            "it feels too heavy again"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions.",
+            "I can't enjoy my work because of the pressure and anxiety."
           ],
           "emotions": [
-            "overwhelm"
+            "Anxiety"
           ],
-          "behaviors": [
-            "freeze up"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling agitated (finding)"
+            "Feeling tense (finding)"
           ],
           "neutral": [
-            "Anxiety about losing emotional control (finding)",
-            "Mood swings (finding)",
-            "Anxiety about going crazy (finding)",
-            "Difficulty controlling emotions (finding)"
+            "Performance anxiety (finding)",
+            "Anxiety about behavior or performance (finding)",
+            "Anxiety about collapsing (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "When that pile of tasks appears, what thoughts or feelings surface first? How do you usually try to begin, and what stops you from taking that first step? What was different about the moments you felt you could handle things while chatting with your friend? What might be a small, manageable action you could try next time you feel that weight again?",
+        "response": "What evidence do you have that the anxiety will always creep back in, and what evidence might suggest it could stay away?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling overwhelmed by the constant stream of new tasks, and that can make it hard to know where to start. Even when you have those bright moments with a friend, the weight of everything else can bring you back to feeling heavy again. It’s understandable to feel stuck or frozen when the load feels too big.",
+            "response": "It sounds like the pressure at work feels like a heavy weight that makes it hard to enjoy your tasks, and you’re hoping a pause could lighten that load. When you think about pausing, what does that look like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelm",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "freeze up",
-                  "label": "behaviors"
-                },
-                {
-                  "concept": "feeling heavy",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "positive moments",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "agitated",
+                  "concept": "Feeling tense",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Performance anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Constant pressure at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Fixated on how others perceive me",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "When that pile of tasks appears, what thoughts or feelings surface first? How do you usually try to begin, and what stops you from taking that first step? What was different about the moments you felt you could handle things while chatting with your friend? What might be a small, manageable action you could try next time you feel that weight again?",
+            "response": "What evidence do you have that the anxiety will always creep back in, and what evidence might suggest it could stay away?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling agitated",
-                  "label": "agitated"
+                  "concept": "Feeling tense",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about losing emotional control",
+                  "concept": "Performance anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "difficulty controlling emotions",
+                  "concept": "Anxiety about behavior or performance",
                   "label": "neutral"
                 },
                 {
-                  "concept": "overwhelm",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "freeze up",
-                  "label": "behaviors"
-                },
-                {
-                  "concept": "big mess",
+                  "concept": "Constant pressure at work",
                   "label": "triggers"
+                },
+                {
+                  "concept": "Automatic thoughts about being the best employee, no errors, second-guessing",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re feeling overwhelmed by the constant stream of new tasks, yet you also remember moments when you managed to connect with a friend and feel okay. What evidence do you have that you can handle the situation, and what evidence suggests you can’t? Maybe we can think of ways to break the tasks into smaller, more manageable steps.",
+          "alternative_perspective": {
+            "response": "If a trusted friend were watching you at work, what might they notice about how you handle the pressure? It could give you a fresh perspective on your own strengths.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling agitated",
+                  "concept": "Feeling tense (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like the constant pressure at work is weighing heavily on you, making it hard to enjoy your tasks. What might a brief pause look like for you right now, even if it’s just a few minutes?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling tense",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about losing emotional control",
+                  "concept": "Performance anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Difficulty controlling emotions",
+                  "concept": "Anxiety about behavior or performance",
                   "label": "neutral"
+                },
+                {
+                  "concept": "Constant pressure at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Anxiety about work",
+                  "label": "emotions"
                 }
               ]
             }
@@ -301,101 +407,99 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I think the first thing that hits me is this wave of anxiety, you know? It’s like my heart races, and I just feel this tight knot in my stomach. I usually just end up staring at the list and feeling totally stuck. It’s frustrating because sometimes it feels like I just can’t breathe under all that pressure. \n\nBut when I was talking to my friend, it was different",
+        "query": "I know logically that sometimes I have good days where I feel more confident and things flow better, but it feels like those moments are so fleeting. The anxiety just feels like an old friend at this point, always waiting in the wings. I guess I hold onto the fear that I'll revert back to that state, like it's a part of who I am.",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "staring at the list",
-            "pressure"
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head",
+            "Constant pressure at work",
+            "Fear of reverting back to a state of anxiety"
           ],
           "automatic_thoughts": [
-            "I just can't breathe under all that pressure",
-            "I feel totally stuck"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions.",
+            "I can't enjoy my work because of the pressure and anxiety.",
+            "Good days are fleeting and won't last."
           ],
           "emotions": [
-            "anxiety",
-            "frustration"
+            "Anxiety",
+            "Fear"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Feeling nervous (finding)",
-            "Anxiety (finding)",
-            "On examination - fearful mood (finding)"
+          "entailment": [
+            "Anticipatory anxiety (finding)"
           ],
-          "contradiction": [
-            "Free-floating anxiety (finding)"
-          ]
+          "neutral": [
+            "Anticipatory anxiety, moderate (finding)",
+            "Recurrent anxiety (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anticipatory anxiety, mild (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the anxiety is really intense, making you feel trapped and as if you can’t breathe. That frustration of feeling stuck must be exhausting. It’s understandable that talking with your friend felt different—perhaps it offered a brief relief from that pressure.",
+        "response": "It sounds like you’re noticing how those good moments feel brief and that anxiety feels like a constant companion, which can feel exhausting. What does it feel like when that anxiety shows up?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the anxiety is really intense, making you feel trapped and as if you can’t breathe. That frustration of feeling stuck must be exhausting. It’s understandable that talking with your friend felt different—perhaps it offered a brief relief from that pressure.",
+            "response": "It sounds like you’re noticing how those good moments feel brief and that anxiety feels like a constant companion, which can feel exhausting. What does it feel like when that anxiety shows up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "pressure",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "feeling stuck",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "frustration",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "friend conversation",
-                  "label": "unknown"
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "When you say you feel like you can’t breathe under pressure, what does that look like for you? Have there been moments when you felt the same pressure but were able to breathe or move through it? What might be different if you approached that situation in another way?",
+            "response": "What evidence do you have that those good days are always fleeting? It might help to look at moments when they lasted longer and what made them different.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
+                  "concept": "anticipatory anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts of perfectionism and fear of being wrong",
                   "label": "emotions"
-                },
-                {
-                  "concept": "pressure",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "can't breathe",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "stuck",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "list",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "friend conversation",
-                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like the pressure feels overwhelming, but let’s look at what’s actually happening. What evidence do you have that you truly can’t breathe, and what evidence might suggest you can still manage the situation? You might find that the racing heart and tight stomach are normal stress responses that can be eased with a few slow breaths or a brief pause. Trying a simple breathing exercise right now could help you feel more in control and see that the “can't breathe” feeling isn’t permanent.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It sounds like you’re worried that those good days will slip away, but a friend might see them as proof that you can sustain confidence over time. What would a supportive friend say about how often you actually experience those moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling that anxiety is a constant presence, even when things go well. What do you think might help you hold onto those good moments a bit longer?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
           }
         }
       }
@@ -404,41 +508,53 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yes, exactly. It’s like in those moments I can forget everything for a bit and just be myself. But then, when I’m back to dealing with all that pressure, it feels like I’m right back in that tight space again. I wish I could keep that feeling of relief more often, but it just... slips away. It’s hard not to feel discouraged.",
+        "query": "It’s like this tightness in my chest, and everything starts to feel overwhelming. My thoughts race, and I struggle to think clearly. I end up either freezing up or getting really defensive, which just makes everything worse. It’s frustrating because I don’t want to act that way, but it’s hard to control in the moment.",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "dealing with pressure"
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head",
+            "Constant pressure at work",
+            "Fear of reverting back to a state of anxiety"
           ],
           "automatic_thoughts": [
-            "I wish I could keep that feeling of relief more often",
-            "it just slips away"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions.",
+            "I can't enjoy my work because of the pressure and anxiety.",
+            "Good days are fleeting and won't last."
           ],
           "emotions": [
-            "relief",
-            "discouraged"
+            "Anxiety",
+            "Fear",
+            "Frustration"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Freezing up",
+            "Getting defensive"
+          ]
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Anxiety about collapsing (finding)",
             "Anxiety about losing emotional control (finding)",
-            "Anxiety about loss of control (finding)",
-            "Emotionally subdued (finding)"
+            "Difficulty controlling emotions (finding)",
+            "Anxiety about collapsing (finding)",
+            "Unable to control emotions (finding)",
+            "Anxiety about having a heart attack (finding)"
           ],
-          "contradiction": [
-            "Feeling calm (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "When you notice that relief slipping, what thoughts or sensations come up that might be telling you why it’s hard to keep it? Can you think of a time when that relief lasted longer—what was different then? What might you try next time to extend that feeling?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like the tightness in your chest and racing thoughts are making you freeze or become defensive, and that frustration is understandable. What do you think might help you feel a bit more in control when that happens?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those brief moments of relief feel like a rare escape, and when they fade you’re left feeling stuck and discouraged. It’s understandable to feel frustrated when that sense of ease slips away. You’re not alone in noticing how quickly pressure can return.",
+            "response": "It sounds like the tightness in your chest and racing thoughts are making you freeze or become defensive, and that frustration is understandable. What do you think might help you feel a bit more in control when that happens?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -446,18 +562,50 @@
                   "label": "neutral"
                 },
                 {
-                  "concept": "Emotionally subdued",
+                  "concept": "Difficulty controlling emotions",
                   "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Unable to control emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about having a heart attack",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "triggers: constant pressure at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: I am the best employee they have ever had, I make no errors, I always second-guess myself",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions: anxiety, fear, frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: freezing up, getting defensive",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "When you notice that relief slipping, what thoughts or sensations come up that might be telling you why it’s hard to keep it? Can you think of a time when that relief lasted longer—what was different then? What might you try next time to extend that feeling?",
+            "response": "It sounds like the pressure is intense. When you feel that tightness and racing thoughts, what specific thoughts pop up first, and how do you know those thoughts are true?",
             "reasoning": null
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like relief feels fleeting, but have you noticed any moments when you were able to hold onto that calm a bit longer? What helped you stay relaxed then? Maybe relief is a skill you can practice, and it’s normal for it to ebb and flow rather than disappear entirely.",
+          "alternative_perspective": {
+            "response": "It sounds like the pressure is making you feel stuck and defensive. If a close friend were watching you right now, what might they say about how you’re handling the situation?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling really overwhelmed and stuck in a cycle of freezing and defensiveness. What do you think might help you feel a bit more in control when those thoughts start racing?",
             "reasoning": null
           }
         }
@@ -467,116 +615,158 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I think when that relief slips away, there’s this voice in my head that starts saying I’m not doing enough or that I’ll never get it all done. It’s like I go from feeling light to heavy in an instant. I can’t really recall a time when it lasted longer; maybe it was just a really good day or something? It feels out of reach right now. \n\nI",
+        "query": "It feels like this tightness in my chest whenever the pressure builds up, and everything can get overwhelming. My thoughts race, and I can’t think straight. I end up freezing up or getting really defensive, and it just makes things worse. I hate acting that way, but it’s so hard to control in the moment.",
+        "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "relief slips away"
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head",
+            "Constant pressure at work",
+            "Fear of reverting back to a state of anxiety",
+            "Pressure building up"
           ],
           "automatic_thoughts": [
-            "I’m not doing enough",
-            "I’ll never get it all done"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions.",
+            "I can't enjoy my work because of the pressure and anxiety.",
+            "Good days are fleeting and won't last."
           ],
           "emotions": [
-            "light",
-            "heavy"
+            "Anxiety",
+            "Fear",
+            "Frustration",
+            "Overwhelm"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Freezing up",
+            "Getting defensive"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling physically tense (finding)",
-            "Feeling relief (finding)",
-            "Feeling of being slowed down (finding)"
+            "Symptoms of stress (finding)"
           ],
           "neutral": [
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about having a heart attack (finding)",
             "Anxiety about collapsing (finding)",
-            "Difficulty managing stress (finding)"
+            "Anxiety about breathlessness (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like when that brief sense of relief fades, you notice a sudden shift to heaviness and a harsh inner voice telling you you’re not doing enough. That can feel exhausting, especially when it seems to come out of nowhere. It’s understandable that you might feel out of reach right now.",
+        "response": "It sounds like the pressure is making you feel a tight chest, racing thoughts, and you’re frustrated with freezing or becoming defensive, which is a common reaction when we’re overwhelmed. What’s one small thing you’ve noticed that helps you feel a bit more grounded when that pressure starts?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like when that brief sense of relief fades, you notice a sudden shift to heaviness and a harsh inner voice telling you you’re not doing enough. That can feel exhausting, especially when it seems to come out of nowhere. It’s understandable that you might feel out of reach right now.",
+            "response": "It sounds like the pressure is making you feel a tight chest, racing thoughts, and you’re frustrated with freezing or becoming defensive, which is a common reaction when we’re overwhelmed. What’s one small thing you’ve noticed that helps you feel a bit more grounded when that pressure starts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "relief slips away",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "feeling light to heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "voice says I'm not doing enough",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "feeling physically tense",
+                  "concept": "Symptoms of stress (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "feeling relief",
-                  "label": "entailment"
+                  "concept": "Anxiety about losing emotional control (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "feeling of being slowed down",
-                  "label": "entailment"
+                  "concept": "Anxiety about having a heart attack (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about collapsing (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about breathlessness (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "When that sense of relief fades, what’s the first thought that pops into your mind? How do you know that thought is accurate? What might be another way to view the situation when you notice that shift?",
+            "response": "When you feel that tightness and racing thoughts, what evidence do you have that the situation is truly dangerous or that you can't handle it? Exploring that could give us a clearer picture.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "relief slips away",
-                  "label": "triggers"
+                  "concept": "Symptoms of stress",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling light to heavy",
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about heart attack",
                   "label": "emotions"
                 },
                 {
-                  "concept": "feeling physically tense",
-                  "label": "entailment"
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "feeling slowed down",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I'm not doing enough",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'll never get it all done",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety about breathlessness",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "That shift from light to heavy sounds exhausting. Can you think of any moments when you actually finished a task or felt relief that stayed for a while? Those moments might suggest that the voice of “not doing enough” isn’t the whole story.",
+          "alternative_perspective": {
+            "response": "It sounds like the pressure feels like a tight chest and racing thoughts that lead to freezing or defensiveness. If a close friend were watching you, what might they say about how you’re handling that pressure?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling relief",
+                  "concept": "Symptoms of stress",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling heavy",
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about breathlessness",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like the pressure at work is making you feel tight in your chest and overwhelmed, and that’s understandably distressing. What thoughts or feelings come up when you notice that tightness?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Symptoms of stress",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about breathlessness",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Constant pressure at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Overwhelm",
                   "label": "emotions"
                 },
                 {
-                  "concept": "Feeling of being slowed down",
-                  "label": "entailment"
+                  "concept": "Freezing up",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Getting defensive",
+                  "label": "unknown"
                 }
               ]
             }
@@ -588,148 +778,167 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel exhausting. It’s like I’m constantly battling with myself. One moment I can feel okay, and then the next, I’m stuck in that negative spiral. It’s frustrating because I want to break free, but it’s like there’s this weight pulling me back down. I just wish I could find a way to hold onto those lighter moments a bit longer.",
+        "query": "Honestly, sometimes just stepping away for a moment helps. I’ll take a quick walk or breathe deeply, but it’s like I have to remind myself to do that before I spiral. It’s a small relief, but I still find myself forgetting more often than not. I get caught up in the moment, and then it’s as if my mind just takes over.",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head",
+            "Constant pressure at work",
+            "Fear of reverting back to a state of anxiety",
+            "Pressure building up",
+            "Getting caught up in the moment"
+          ],
           "automatic_thoughts": [
-            "I'm constantly battling with myself",
-            "I'm stuck in that negative spiral",
-            "There's this weight pulling me back down",
-            "I wish I could find a way to hold onto those lighter moments"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions.",
+            "I can't enjoy my work because of the pressure and anxiety.",
+            "Good days are fleeting and won't last.",
+            "I have to remind myself to take a break before I spiral."
           ],
           "emotions": [
-            "exhaustion",
-            "frustration"
+            "Anxiety",
+            "Fear",
+            "Frustration",
+            "Overwhelm",
+            "Relief"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Freezing up",
+            "Getting defensive",
+            "Taking a quick walk",
+            "Breathing deeply"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling like wanting to escape (finding)"
+            "Able to resist obsessional thoughts (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
+            "Anxiety about loss of control (finding)",
             "Anxiety about collapsing (finding)",
-            "Difficulty controlling emotions (finding)",
-            "Complaining of feeling depressed (finding)"
+            "Repressing thoughts (finding)",
+            "Low self-control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Can you tell me more about what that “weight” feels like when it pulls you back? What are some small moments that feel lighter, and what makes them feel that way? How might you keep those lighter moments in mind when the negative spiral starts?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re noticing that a brief walk or deep breathing gives you a little relief, even though you sometimes forget to use them before you feel overwhelmed. What’s one cue that might remind you to pause when you start to feel caught up?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling drained and caught in a cycle of self‑criticism, and that frustration is understandable. It’s normal to feel as if a heavy weight is pulling you back when you try to hold onto brighter moments. You deserve to find a way to keep those lighter feelings a bit longer.",
+            "response": "It sounds like you’re noticing that a brief walk or deep breathing gives you a little relief, even though you sometimes forget to use them before you feel overwhelmed. What’s one cue that might remind you to pause when you start to feel caught up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "exhaustion",
+                  "concept": "reminder to pause",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "overwhelm",
                   "label": "emotions"
                 },
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "negative spiral",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "weight pulling",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "holding onto lighter moments",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "feeling like wanting to escape",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "anxiety about going crazy",
+                  "concept": "self-control",
                   "label": "neutral"
                 },
                 {
-                  "concept": "anxiety about collapsing",
-                  "label": "neutral"
+                  "concept": "pressure at work",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "difficulty controlling emotions",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "complaining of feeling depressed",
-                  "label": "neutral"
+                  "concept": "coping strategies",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Can you tell me more about what that “weight” feels like when it pulls you back? What are some small moments that feel lighter, and what makes them feel that way? How might you keep those lighter moments in mind when the negative spiral starts?",
+            "response": "What signs do you notice that signal you’re about to spiral, and how might you use those as cues to pause? Could you think of a simple cue that would remind you to take a break before you feel overwhelmed?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "exhaustion",
+                  "concept": "Anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Overwhelm",
                   "label": "emotions"
                 },
                 {
-                  "concept": "negative spiral",
-                  "label": "automatic_thoughts"
+                  "concept": "Pressure at work",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "weight pulling",
-                  "label": "automatic_thoughts"
+                  "concept": "Automatic thoughts of perfection",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "lighter moments",
-                  "label": "automatic_thoughts"
+                  "concept": "Behavior: taking a quick walk",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Behavior: breathing deeply",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you feel a constant pull that keeps you from staying in lighter moments. What evidence do you have that this pull is always there? Are there times when you notice it less or when you can hold onto those lighter moments longer?",
+          "alternative_perspective": {
+            "response": "If a close friend were watching you, what might they say about the way you step away and breathe, and how could that help you remember to pause before you feel overwhelmed?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling like wanting to escape",
-                  "label": "entailment"
+                  "concept": "triggers: constant pressure at work, getting caught up in the moment",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Anxiety about going crazy",
+                  "concept": "automatic thoughts: I have to remind myself to take a break before I spiral",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions: anxiety, overwhelm",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: taking a quick walk, breathing deeply",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "clinical context: anxiety about loss of control, low self-control",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re noticing how quickly the anxiety can take over and that you sometimes forget to pause. What small cue could you use to remind yourself to take a breath or walk when you start to feel that way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about collapsing",
-                  "label": "neutral"
+                  "concept": "Overwhelm",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Difficulty controlling emotions",
-                  "label": "neutral"
+                  "concept": "Freezing up",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "neutral"
+                  "concept": "Taking a quick walk",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "I'm constantly battling with myself",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm stuck in that negative spiral",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "There's this weight pulling me back down",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I wish I could find a way to hold onto those lighter moments",
-                  "label": "automatic_thoughts"
+                  "concept": "Breathing deeply",
+                  "label": "unknown"
                 }
               ]
             }
@@ -741,61 +950,153 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It just feels exhausting. I’m always battling with myself. One moment I can feel okay, and then the next, I'm stuck in that negative spiral. It’s frustrating because I want to break free, but there’s this weight pulling me back down. I wish I could find a way to hold onto those lighter moments a bit longer.",
+        "query": "I think maybe setting a specific time in my day could help, like a little reminder on my phone. Something simple to check in with myself, you know? But even then, I worry that I’ll just ignore it or brush it off. It’s hard to break that cycle when I'm already feeling overwhelmed.",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head",
+            "Constant pressure at work",
+            "Fear of reverting back to a state of anxiety",
+            "Pressure building up",
+            "Getting caught up in the moment",
+            "Feeling overwhelmed"
+          ],
           "automatic_thoughts": [
-            "I'm always battling with myself",
-            "I'm stuck in that negative spiral",
-            "There's this weight pulling me back down"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions.",
+            "I can't enjoy my work because of the pressure and anxiety.",
+            "Good days are fleeting and won't last.",
+            "I have to remind myself to take a break before I spiral.",
+            "I worry that I’ll just ignore reminders to check in with myself."
           ],
           "emotions": [
-            "exhausting",
-            "frustrating"
+            "Anxiety",
+            "Fear",
+            "Frustration",
+            "Overwhelm",
+            "Relief"
           ],
           "behaviors": [
-            "want to break free",
-            "wish I could find a way to hold onto those lighter moments"
+            "Freezing up",
+            "Getting defensive",
+            "Taking a quick walk",
+            "Breathing deeply",
+            "Setting reminders to check in with myself"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Feeling like wanting to escape (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Difficulty controlling emotions (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Able to resist obsessional thoughts (finding)",
+            "Incongruent personal schedules (finding)",
+            "Poor daily routine (finding)",
+            "Ability to resist obsessional thoughts (observable entity)",
+            "Difficulty managing stress (finding)"
           ],
-          "contradiction": [
-            "Emotionally stable (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What do you notice happening right before you feel that pull back into the negative spiral? Are there specific thoughts or situations that seem to trigger that shift? How might you try a small change to see if you can keep those lighter moments a bit longer?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re recognizing that a simple phone reminder could be a helpful cue, but you’re also concerned it might slip past you when you’re overwhelmed. What might make that reminder feel more unavoidable or easier to notice?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling drained and caught in a cycle of self‑criticism, with moments of relief slipping away quickly. That frustration and sense of being pulled back can feel like a heavy weight that’s hard to shake. It’s understandable to want to hold onto those lighter moments longer, and many people find themselves in that same struggle.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What do you notice happening right before you feel that pull back into the negative spiral? Are there specific thoughts or situations that seem to trigger that shift? How might you try a small change to see if you can keep those lighter moments a bit longer?",
-            "reasoning": null
-          },
-          "cognitive_restructuring": {
-            "response": "It sounds like you feel a heavy pull that keeps you from staying in those lighter moments. What evidence do you have that you can’t hold onto them, and can you recall any times when you were able to stay in those lighter moments longer? What helped you then?",
+            "response": "It sounds like you’re recognizing that a simple phone reminder could be a helpful cue, but you’re also concerned it might slip past you when you’re overwhelmed. What might make that reminder feel more unavoidable or easier to notice?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling like wanting to escape",
-                  "label": "neutral"
+                  "concept": "Feeling overwhelmed",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Difficulty controlling emotions",
+                  "concept": "Setting reminders to check in",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Worry about ignoring reminders",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Overwhelm",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re worried that the reminder might be ignored even when you set it. What evidence do you have that you’ll ignore it, and how could you test that idea?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "reminder",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "worry about ignoring",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "self-check",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "If a close friend saw you set a reminder, what might they say about its usefulness? That could help you see a different angle on whether you might actually follow through.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "reminder",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "ignore it",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "checking in with myself",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "difficulty managing stress",
                   "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling overwhelmed and worried that you might ignore the reminders. What might happen if you do take a brief moment to check in, even if just for a minute?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Worry about ignoring reminders",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Need for self-check-in",
+                  "label": "unknown"
                 }
               ]
             }
@@ -807,72 +1108,125 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "It’s just exhausting. Sometimes I feel okay, but then I get pulled right back into that negative spiral. I want to break free, but it feels like there’s always this weight dragging me down. I really wish I could hold onto those lighter moments for longer. It’s like they’re just out of reach.",
+        "query": "I suppose if it was something a bit more personalized, like a message that really resonates with me, I might pay attention to it more. Maybe something encouraging or even a favorite song snippet as a reminder. But then again, part of me thinks that even if I set it up, I might just ignore it in the moment. It’s frustrating how easily I can dismiss things.",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head",
+            "Constant pressure at work",
+            "Fear of reverting back to a state of anxiety",
+            "Pressure building up",
+            "Getting caught up in the moment",
+            "Feeling overwhelmed",
+            "Thinking about personalized reminders"
+          ],
           "automatic_thoughts": [
-            "I get pulled right back into that negative spiral",
-            "It feels like there’s always this weight dragging me down",
-            "I wish I could hold onto those lighter moments for longer",
-            "They’re just out of reach"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions.",
+            "I can't enjoy my work because of the pressure and anxiety.",
+            "Good days are fleeting and won't last.",
+            "I have to remind myself to take a break before I spiral.",
+            "I worry that I’ll just ignore reminders to check in with myself.",
+            "Even if I set up personalized reminders, I might ignore them."
           ],
           "emotions": [
-            "exhaustion"
+            "Anxiety",
+            "Fear",
+            "Frustration",
+            "Overwhelm",
+            "Relief"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Freezing up",
+            "Getting defensive",
+            "Taking a quick walk",
+            "Breathing deeply",
+            "Setting reminders to check in with myself",
+            "Dismissing reminders"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling like wanting to escape (finding)",
-            "Rebound mood swings (finding)",
-            "Complaining of feeling depressed (finding)"
+            "Ability to direct attention (observable entity)"
           ],
           "neutral": [
-            "Difficulty controlling emotions (finding)",
-            "Mood swings (finding)"
+            "Mental alertness (observable entity)",
+            "Attitude towards care (observable entity)",
+            "Ability to remember day of the week (observable entity)",
+            "Personal health management behavior (observable entity)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a heavy load, and even when you catch a breath of relief, the weight seems to come rushing back. That can feel exhausting and frustrating. You’re not alone in feeling that the brighter moments slip away.",
-        "protocol_used": "validate_and_reflect",
+        "response": "What evidence do you have that a personalized reminder would actually capture your attention when you’re feeling overwhelmed?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a heavy load, and even when you catch a breath of relief, the weight seems to come rushing back. That can feel exhausting and frustrating. You’re not alone in feeling that the brighter moments slip away.",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What do you notice happening just before you feel pulled back into that negative spiral? Are there particular thoughts or situations that seem to trigger it? How might you test whether those thoughts are really the cause, or if something else is at play?",
-            "reasoning": null
-          },
-          "cognitive_restructuring": {
-            "response": "It sounds like you feel the negative spiral is almost inevitable, but there may be moments when it doesn’t take hold. Can you recall a time when you stayed in a lighter mood longer than usual, and what helped you stay there? Exploring that evidence might help you see that the spiral isn’t the only pattern you experience.",
+            "response": "It sounds like you’re frustrated that even a personalized reminder might slip past you, and that’s a common challenge. What kind of personalized message do you think would feel most engaging?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "negative spiral",
-                  "label": "automatic_thoughts"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "weight dragging down",
-                  "label": "automatic_thoughts"
+                  "concept": "personalized reminders",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "lighter moments",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "rebound mood swings",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling depressed",
-                  "label": "entailment"
+                  "concept": "potential for ignoring reminders",
+                  "label": "unknown"
                 }
               ]
             }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that a personalized reminder would actually capture your attention when you’re feeling overwhelmed?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Ability to direct attention",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Personal health management behavior",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "If a close friend were watching you, what might they suggest about using a personalized reminder? They might point out that giving the reminder a personal meaning could make it more likely to catch your attention before you dismiss it.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "personalized reminders",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "ignoring",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling frustrated that reminders might get ignored even when they’re personalized. What do you think might help you notice or act on them when they pop up?",
+            "reasoning": null
           }
         }
       }
@@ -881,48 +1235,156 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel heavy, like I’m stuck in this loop of struggle. Those little lighter moments are nice, but they feel so fleeting. I sometimes wonder if I’ll ever find a way to keep that feeling without it disappearing so quickly. It just makes everything feel harder.",
+        "query": "I can’t really think of solid evidence for that. I mean, I’ve tried little reminders before, but when I get into those overwhelmed states, it’s like I’m in a fog, and nothing seems to break through. I guess I just hope that maybe something special would stand out, but I know it’s not guaranteed. It feels disappointing to think about that.",
+        "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "Thinking about how my ideas are received",
+            "Replaying conversations in my head",
+            "Constant pressure at work",
+            "Fear of reverting back to a state of anxiety",
+            "Pressure building up",
+            "Getting caught up in the moment",
+            "Feeling overwhelmed",
+            "Thinking about personalized reminders",
+            "Getting into overwhelmed states"
+          ],
           "automatic_thoughts": [
-            "I’m stuck in this loop of struggle",
-            "I’ll ever find a way to keep that feeling without it disappearing"
+            "I am the best employee they have ever had.",
+            "I make no errors.",
+            "How can I be wrong when it comes to these circumstances with my coworkers?",
+            "I always second-guess myself.",
+            "I wonder if I came off too harsh or misunderstood their reactions.",
+            "I can't enjoy my work because of the pressure and anxiety.",
+            "Good days are fleeting and won't last.",
+            "I have to remind myself to take a break before I spiral.",
+            "I worry that I’ll just ignore reminders to check in with myself.",
+            "Even if I set up personalized reminders, I might ignore them.",
+            "I can't think of solid evidence for my reminders working.",
+            "When I get overwhelmed, it's like I'm in a fog."
           ],
           "emotions": [
-            "heavy",
-            "harder"
+            "Anxiety",
+            "Fear",
+            "Frustration",
+            "Overwhelm",
+            "Relief",
+            "Disappointment"
           ],
-          "behaviors": []
+          "behaviors": [
+            "Freezing up",
+            "Getting defensive",
+            "Taking a quick walk",
+            "Breathing deeply",
+            "Setting reminders to check in with myself",
+            "Dismissing reminders"
+          ]
         },
         "retrieval": {
-          "entailment": [
-            "Feels everything is futile (finding)",
-            "Feeling of loss of feeling (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Feeling empty (finding)",
-            "Working through the pain of grief (finding)",
-            "Feels life is meaningless (finding)"
+            "Ability to resist obsessional thoughts (observable entity)",
+            "Anticipatory anxiety (finding)",
+            "Forgets what has just heard (finding)",
+            "Anticipatory anxiety, mild (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Mental alertness (observable entity)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of weight and feeling that the brief moments of relief are fleeting, which makes everything feel even harder.  \nIt can be exhausting to feel stuck in a cycle where the light moments seem so short‑lived.  \nI hear how that uncertainty about holding onto those brighter feelings adds to the heaviness you’re experiencing.",
+        "response": "It sounds like you’re feeling disappointed and stuck in a fog when reminders don’t seem to help. What might feel like a small, noticeable change that could give you a sense of relief?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of weight and feeling that the brief moments of relief are fleeting, which makes everything feel even harder.  \nIt can be exhausting to feel stuck in a cycle where the light moments seem so short‑lived.  \nI hear how that uncertainty about holding onto those brighter feelings adds to the heaviness you’re experiencing.",
-            "reasoning": null
+            "response": "It sounds like you’re feeling disappointed and stuck in a fog when reminders don’t seem to help. What might feel like a small, noticeable change that could give you a sense of relief?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Disappointment",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
           },
           "socratic_questioning": {
-            "response": "When you notice those lighter moments, what does that feeling look like for you? How long do you think they usually last, and what might happen if you tried to extend them a little? What evidence do you have that they always fade quickly, and can you think of any times when they lingered a bit longer?",
-            "reasoning": null
+            "response": "It sounds like you’re feeling disappointed. What would it look like if a reminder actually helped you during one of those foggy moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anticipatory anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "overwhelmed states",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "reminders",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "disappointment",
+                  "label": "emotions"
+                }
+              ]
+            }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you’re worried that the brief moments of relief will vanish quickly, making everything feel more difficult. What evidence do you have that they will always disappear, and what evidence might suggest they can be extended or that other moments of ease could arise? Perhaps you could view these moments as stepping stones that can accumulate, rather than as isolated flashes.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "It’s understandable to feel disappointed when reminders don’t seem to cut through the fog. What might a supportive friend suggest to help those reminders become more noticeable when you’re overwhelmed?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Forgets what has just heard",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Ability to resist obsessional thoughts",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Overwhelmed states",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Disappointment",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling disappointed and stuck in a fog when you try reminders. What do you think might help you feel a bit more in control when those overwhelmed moments come up?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Disappointment",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Difficulty with reminders",
+                  "label": "unknown"
+                }
+              ]
+            }
           }
         }
       }

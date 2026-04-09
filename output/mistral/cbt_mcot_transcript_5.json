@@ -4,7 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Sometimes I can’t help but feel this void despite being with people who are close friends and family. I don't know if I am being ungrateful, but I don't feel like I have anyone to talk to when things get hard. I don't belong anywhere. I just don't want to wake up ever again.",
+    "seed": "I was doing okay, but, I mean, I got comfortable with that extra income, and so now my fear is that I've gotten too comfortable with it, and now that it's not there anymore, it's going to affect the fact I'm not going to be able to pay for food or my rent.",
+    "core_issue": "financial concerns",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -16,81 +17,94 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Sometimes I can’t help but feel this void despite being with people who are close friends and family. I don't know if I am being ungrateful, but I don't feel like I have anyone to talk to when things get hard. I don't belong anywhere. I just don't want to wake up ever again.",
+        "query": "I was doing okay, but, I mean, I got comfortable with that extra income, and so now my fear is that I've gotten too comfortable with it, and now that it's not there anymore, it's going to affect the fact I'm not going to be able to pay for food or my rent.",
+        "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "being with people who are close friends and family"
+            "loss of extra income"
           ],
           "automatic_thoughts": [
-            "I don't have anyone to talk to when things get hard",
-            "I don't belong anywhere",
-            "I just don't want to wake up ever again"
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent."
           ],
           "emotions": [
-            "void"
+            "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling empty (finding)",
-            "Feeling alienated (finding)"
+            "Anxiety about loss of control (finding)",
+            "Anxiety about forced dependence (finding)"
           ],
           "neutral": [
-            "Feeling abandoned (finding)",
-            "Feels life is meaningless (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of being a burden to others (finding)"
           ],
-          "contradiction": [
-            "Feeling isolated (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you might feel like you don't have someone to talk to when things get tough, even though you are surrounded by loved ones. It's important to acknowledge these feelings and explore them together, so we can work on finding ways to cope and connect with those around you.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're concerned about losing the extra income and how it might impact your ability to pay for necessities. Can we explore together what other resources or options you might have, just in case?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you might feel like you don't have someone to talk to when things get tough, even though you are surrounded by loved ones. It's important to acknowledge these feelings and explore them together, so we can work on finding ways to cope and connect with those around you.",
+            "response": "I understand that you've been managing well, but the loss of extra income has made you feel uneasy because you fear it might impact your ability to pay for essential expenses like food and rent. It's natural to worry about financial stability, and we can work together to explore ways to address this concern.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling empty",
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "Fear",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you might feel like you don't have someone to talk to when things get tough, even with friends and family around. It seems like you may be questioning your sense of belonging. Let's explore together what it means for you to belong and how we can work on finding ways to connect more deeply with those around you.",
+            "response": "\"It sounds like you're concerned about losing the extra income and how it might impact your ability to pay for necessities. Can we explore together what other resources or options you might have, just in case?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling empty",
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "Fear",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're having a tough time feeling connected, even with those closest to you. Let's explore together if there might be other reasons why you feel this way, and see if we can find some alternative ways of thinking about your situation.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're worried about managing without the extra income. Have you ever considered what a friend or outside observer might think about your situation? It could be helpful to hear another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling empty",
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
+                  "concept": "Fear",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that you've been feeling anxious and fearful since the extra income is no longer available. Let's explore these feelings together, and we can work on finding ways to manage your concerns.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Fear",
+                  "label": "neutral"
                 }
               ]
             }
@@ -102,80 +116,95 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s… it’s strange, I guess. I feel like I should be able to turn to my friends or family, but when I’m struggling, it’s like there’s this wall between us. I don’t know how to break through it or even if they really want to hear what I’m feeling. It's just really isolating.",
+        "query": "Yeah, it’s definitely weighing on me. I keep thinking about how tight things are right now, and losing that extra income just feels like it would be... catastrophic, you know? I guess I worry about how I’d handle everything—bills, groceries, just the day-to-day stuff. It’s hard to even consider what other options I might have.",
+        "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "struggling",
-            "wall between us"
+            "loss of extra income"
           ],
           "automatic_thoughts": [
-            "I should be able to turn to my friends or family",
-            "I don’t know how to break through it",
-            "they really want to hear what I’m feeling"
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries."
           ],
           "emotions": [
-            "isolating"
+            "fear",
+            "overwhelm"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Emotionally distant (finding)"
+            "Anxiety about loss of control (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)",
-            "Difficulty coping with grief responses (finding)"
+            "Anxiety about forced dependence (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that it can feel like there's a barrier between you and your loved ones when you're struggling. It's important to remember that everyone has their own challenges, and it might take some effort to bridge the gap. Let's explore ways we can help you connect with them more effectively.",
+        "response": "I understand that you're feeling quite anxious about the loss of your extra income, and it's natural to worry about managing bills and groceries. Let's take a moment to explore some options together, shall we?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that it can feel like there's a barrier between you and your loved ones when you're struggling. It's important to remember that everyone has their own challenges, and it might take some effort to bridge the gap. Let's explore ways we can help you connect with them more effectively.",
+            "response": "I understand that you're feeling quite anxious about the loss of your extra income, and it's natural to worry about managing bills and groceries. Let's take a moment to explore some options together, shall we?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Emotionally distant",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "I understand that you feel like there's a barrier between you and your loved ones when you're struggling. It can be challenging to know how to bridge that gap, especially when you're feeling so isolated. Let's explore together what might be getting in the way and see if we can find some solutions.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Difficulty coping with grief responses",
+                  "concept": "Anxiety about forced dependence",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're having a hard time connecting with those close to you, even when you need support. Let's explore together if there might be other ways to reach out or alternative perspectives on this situation that could help you feel less isolated.",
+          "socratic_questioning": {
+            "response": "I understand that you're feeling quite anxious about the loss of your extra income. It seems like you're worried about managing bills and groceries, and perhaps you feel like you might make a mistake or two along the way. Let's explore some options together. What small steps could help you manage your finances more effectively?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty coping with grief responses",
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I can understand why you're feeling anxious right now, but let's explore some other possibilities. What might a trusted friend or family member suggest as an alternative to handle this situation?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about loss of control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see how losing that extra income is causing you a lot of stress. It's natural to feel anxious when we face financial challenges, but let's explore some ways we might be able to manage this situation together. Would it help to start by identifying your current resources and potential solutions?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about loss of control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about forced dependence",
                   "label": "neutral"
                 }
               ]
@@ -188,77 +217,98 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I get that, but I guess I worry that if I open up too much, they might think I'm just being dramatic or that I'm a burden. I mean, it’s hard to shake that feeling that my problems aren't as important as everyone else’s. I don’t want to add to their stress.",
+        "query": "I appreciate that, but honestly, even thinking about options feels overwhelming. Like, I know I should be looking for solutions, but my mind just gets stuck in this cycle of what-ifs. What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out.",
+        "core_issue": "financial concerns",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "if I open up too much, they might think I'm just being dramatic",
-            "I'm a burden",
-            "my problems aren't as important as everyone else's",
-            "I don’t want to add to their stress"
+          "triggers": [
+            "loss of extra income"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries.",
+            "What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out."
+          ],
+          "emotions": [
+            "fear",
+            "overwhelm"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)"
+            "Difficulty making considered choices (finding)",
+            "Difficulty making decisions (finding)",
+            "Feeling trapped (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Stress due to family tension (finding)",
-            "Complaining of feeling depressed (finding)",
-            "Anxiety about collapsing (finding)"
+            "Feeling like wanting to escape (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Able to make considered choices (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you might feel concerned about opening up and worrying if your problems seem less important. It's common to have these thoughts, but it's essential to remember that everyone has their own struggles, and sharing yours doesn't make them any less valid or a burden. Let's work together on addressing these feelings so we can find ways for you to feel more comfortable expressing yourself without fear of judgment.",
-        "protocol_used": "validate_and_reflect",
+        "response": "I understand that you're feeling overwhelmed right now, and it can be hard to think about options when everything feels uncertain. Let's try to explore this together. What if we consider the best possible outcome? Can you imagine a situation where things work out despite the loss of extra income?",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you might feel concerned about opening up and worrying if your problems seem less important. It's common to have these thoughts, but it's essential to remember that everyone has their own struggles, and sharing yours doesn't make them any less valid or a burden. Let's work together on addressing these feelings so we can find ways for you to feel more comfortable expressing yourself without fear of judgment.",
+            "response": "I understand that you're feeling overwhelmed and stuck right now. It can be challenging to think about options when we're feeling this way, but remember, it's okay to take things one step at a time. Let's focus on finding small steps you could take to move forward.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others (finding)",
+                  "concept": "Difficulty making considered choices (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling trapped (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you might have concerns about opening up and worrying about being perceived as dramatic or a burden. It's important to remember that everyone has their own struggles, and it's okay to share yours without feeling like they aren't significant. Let's explore together why you think your problems might not be as important as others'.",
+            "response": "I understand that you're feeling overwhelmed and stuck in a cycle of what-ifs. Let's explore this together. Can we start by discussing some evidence that might suggest things will work out, even if it feels difficult right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Difficulty making considered choices (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "neutral"
+                  "concept": "Feeling trapped (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you might be concerned that sharing your feelings could come across as dramatic or burdensome. However, it's important to remember that everyone has their own struggles and it's okay to express yours without feeling guilty. Let's work together on finding ways to communicate more effectively and reduce any unnecessary stress for both of us.",
+          "alternative_perspective": {
+            "response": "I understand that you're feeling overwhelmed right now, and it can be hard to think about options when everything feels uncertain. Let's try to explore this together. What if we consider the best possible outcome? Can you imagine a situation where things work out despite the loss of extra income?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Difficulty making considered choices (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "neutral"
+                  "concept": "Feeling trapped (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that things feel overwhelming right now, and it's hard to see a way out. Let's take it one step at a time. Can we start by exploring some small steps you could take to help manage your situation?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Difficulty making considered choices (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling trapped (finding)",
+                  "label": "entailment"
                 }
               ]
             }
@@ -270,91 +320,100 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "It’s hard to shake off that worry, though. I really don’t want to be seen as weak or needy. I keep thinking that if I just deal with it on my own, I won’t have to face that judgment. But then I feel so alone, and it just circles back around. It’s exhausting, honestly.",
+        "query": "Imagining the best possible outcome feels... a bit far away. I mean, sure, it would be nice to think that I could find a new job or maybe even get by with what I have. But then I just spiral back into thinking about how risky that feels. What if I can’t keep up with everything? It’s like hope is so fragile right now, and I just don’t know if I can trust it.",
+        "core_issue": "financial concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "loss of extra income"
+          ],
           "automatic_thoughts": [
-            "I really don’t want to be seen as weak or needy",
-            "if I just deal with it on my own, I won’t have to face that judgment"
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries.",
+            "What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out.",
+            "Imagining the best possible outcome feels a bit far away. What if I can’t keep up with everything? Hope feels so fragile right now."
           ],
           "emotions": [
-            "worry",
-            "alone",
-            "exhausting"
+            "fear",
+            "overwhelm",
+            "hopelessness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being left alone during period of dependence (finding)",
-            "Anxiety about forced dependence (finding)",
-            "Fear of being a burden to others (finding)",
-            "Anxious avoidant attachment (finding)"
+            "Loss of hope for the future (finding)"
           ],
           "neutral": [
-            "Anxiety about not coping with parenthood (finding)"
+            "Depressive delusion of catastrophe (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Hopeful for the future (finding)",
+            "Optimistic thoughts (finding)",
+            "Finding of level of hope (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling quite overwhelmed and worried about appearing weak or needy. It's natural to feel this way, especially when we're going through challenging times. Let's explore these feelings together and see if we can find a way to alleviate some of the burden you're carrying.",
-        "protocol_used": "validate_and_reflect",
+        "response": "I understand where you're coming from. It's natural to feel anxious about the future, especially during challenging times. However, it's important to remember that hope isn't something that should be trusted blindly, but rather something we cultivate and nurture.\n\nHere are a few suggestions that might help:\n\n1. Small Steps: Instead of focusing on the big picture, try breaking things down into smaller, manageable steps. This can make the task seem less overwhelming and more achievable.\n\n2. Positive Affirmations: Practice positive self-talk. Remind yourself of your strengths and capabilities. Affirmations like \"I am capable,\" \"I can handle this,\" or \"I will find a solution\" can help boost your confidence.\n\n3. Mindfulness: Mindfulness practices, such as meditation or deep breathing exercises, can help reduce anxiety and stress, making it easier to focus on the present moment and the possibilities that lie ahead.\n\n4. Support Network: Reach out to friends, family, or a mental health professional if you're feeling overwhelmed. Having a support network can provide comfort and guidance during difficult times.\n\n5. Gratitude: Focusing on what you're grateful for can help shift your mindset from one of fear and anxiety to one of hope and positivity.\n\n6. Self-Care: Prioritize self-care activities that bring you joy and relaxation, such as reading, exercising, or spending time in nature. Taking care of yourself is essential for maintaining a positive outlook.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling quite overwhelmed and worried about appearing weak or needy. It's natural to feel this way, especially when we're going through challenging times. Let's explore these feelings together and see if we can find a way to alleviate some of the burden you're carrying.",
+            "response": "I understand that you're feeling a bit uncertain about the future and hope feels fragile right now. It's completely normal to have those feelings when facing changes, especially financial ones. Let's work together to explore ways we can help you manage these feelings and build your confidence in finding solutions.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being left alone during period of dependence",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about forced dependence",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you're feeling worried and concerned about appearing weak or needy. It seems like you're trying to avoid judgment by handling things on your own, but it's leaving you feeling alone. Let's explore together if there might be other ways to cope with this situation without having to face those feelings of isolation.",
+            "response": "\"It sounds like you're having a hard time imagining a positive outcome right now. Can we explore together what might be making it feel so fragile for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being left alone during period of dependence",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about forced dependence",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're worried about appearing weak or needy, and that might be making you feel lonely. But remember, asking for help is not a sign of weakness, it's a sign of strength. Let's explore together if there are other ways to think about this situation that could make you feel less alone.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're having a hard time imagining a positive future right now, and that hope can feel fragile. Let's explore what might be the best, worst, and most realistic outcomes for your situation. This could help us find some balance and strengthen your ability to hold multiple interpretations of the same event.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being left alone during period of dependence",
-                  "label": "entailment"
+                  "concept": "best possible outcome",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Anxiety about forced dependence",
-                  "label": "entailment"
+                  "concept": "hope feels fragile",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I hear you expressing some concerns about your future and the fragility of hope right now. It's understandable to feel that way when facing uncertainty, but let's explore together if there might be other ways to approach this situation that could help alleviate some of those fears.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -366,84 +425,112 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it is kind of overwhelming. I just wish I could, I don’t know, find a way to express myself without feeling all this pressure. It’s like every time I think about reaching out, I freeze up. Part of me wants to share what I’m going through, but the other part just feels so scared of how they'll react.",
+        "query": "I get that you’re trying to help, and I really do appreciate it, but that advice feels a bit... distant from where I’m at, you know? It’s just hard to think about doing those things when I’m feeling so stuck. Small steps sound nice in theory, but there’s this weight on my chest that makes even the small stuff feel huge. It’s like all the panic just clouds my ability to see what to even do next.",
+        "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "thinking about reaching out"
+            "loss of extra income"
           ],
           "automatic_thoughts": [
-            "I wish I could express myself",
-            "I freeze up",
-            "I'm scared of how they'll react"
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries.",
+            "What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out.",
+            "Imagining the best possible outcome feels a bit far away. What if I can’t keep up with everything? Hope feels so fragile right now.",
+            "Small steps sound nice in theory, but there’s this weight on my chest that makes even the small stuff feel huge."
           ],
           "emotions": [
-            "overwhelming",
-            "scared"
+            "fear",
+            "overwhelm",
+            "hopelessness",
+            "panic"
           ],
-          "behaviors": [
-            "freeze up",
-            "want to share"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)"
+            "Feeling trapped (finding)"
           ],
           "neutral": [
-            "Pressured by others (finding)",
-            "Difficulty coping with grief responses (finding)",
-            "Pressured by peers (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about loss of control (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about going crazy (finding)"
           ],
-          "contradiction": [
-            "Feeling isolated (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that reaching out can feel overwhelming, especially when you're worried about how others might react. It's important to remember that it's okay to have feelings of fear and vulnerability. Let's work together on finding ways to express yourself authentically without feeling like a burden or overwhelmed by others' reactions.",
+        "response": "I understand that things feel overwhelming right now, and it can be hard to focus on small steps when you're feeling stuck. Let's take a moment to breathe and acknowledge how difficult this situation is for you. It's okay to feel this way, and we can work together to find a path forward that feels more manageable.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that reaching out can feel overwhelming, especially when you're worried about how others might react. It's important to remember that it's okay to have feelings of fear and vulnerability. Let's work together on finding ways to express yourself authentically without feeling like a burden or overwhelmed by others' reactions.",
+            "response": "I understand that things feel overwhelming right now, and it can be hard to focus on small steps when you're feeling stuck. Let's take a moment to breathe and acknowledge how difficult this situation is for you. It's okay to feel this way, and we can work together to find a path forward that feels more manageable.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about losing emotional control (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Difficulty coping with grief responses (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling trapped (entailment)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I can see how you might feel overwhelmed, especially when you're thinking about reaching out. It seems like there's this part of you that wants to share your feelings but another part that's scared of the reaction. Have you ever considered what specific fears are holding you back? Let's explore those together.",
+            "response": "\"I understand that the weight on your chest makes it hard to imagine taking small steps right now. Let's focus on what's causing this feeling of being overwhelmed, and we can work together to find a way forward.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about losing emotional control (neutral)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Difficulty coping with grief responses (finding)",
+                  "concept": "Anxiety about going crazy (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you have a lot on your mind and it can be difficult to find the right words when you're feeling overwhelmed. Let's work together to explore some alternative ways of expressing yourself that might help reduce the pressure you feel.",
+          "alternative_perspective": {
+            "response": "I understand that it can feel overwhelming when you're dealing with so much at once. Let's focus on breaking things down into smaller, more manageable steps together. Would it be helpful to start by identifying one small action you could take today?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "concept": "fear",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "overwhelm",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I understand that things feel overwhelming right now, and it can be hard to see a way forward when we're feeling this stuck. Let's take a moment to breathe and focus on what you can manage today. What small step could we start with?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelm",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "panic",
                   "label": "emotions"
                 }
               ]
@@ -456,76 +543,102 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I think that would help. I just want to be able to say what I’m feeling without all this extra weight on it. It feels like I have to put on this brave face all the time, you know? But then, it just builds up inside, and I’m not even sure where to start when I do want to talk.",
+        "query": "I get that you’re trying to help, but honestly, that advice feels a bit... distant from where I’m at. It’s just hard to think about those things when I’m feeling so stuck. Small steps sound nice in theory, but there’s this weight on my chest that makes even the small stuff feel huge. All this panic just clouds my ability to see what I should do next.",
+        "core_issue": "financial concerns",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I have to put on this brave face all the time",
-            "It just builds up inside",
-            "I'm not even sure where to start when I do want to talk"
+          "triggers": [
+            "loss of extra income"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries.",
+            "What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out.",
+            "Imagining the best possible outcome feels a bit far away. What if I can’t keep up with everything? Hope feels so fragile right now.",
+            "Small steps sound nice in theory, but there’s this weight on my chest that makes even the small stuff feel huge.",
+            "All this panic just clouds my ability to see what I should do next."
+          ],
+          "emotions": [
+            "fear",
+            "overwhelm",
+            "hopelessness",
+            "panic"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Difficulty controlling emotions (finding)"
+            "Difficulty managing stress (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Complaining of feeling depressed (finding)",
-            "Fear of speaking on the phone (finding)",
-            "Fear of public speaking (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about loss of control (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed and unsure of how to express your feelings without putting on a brave face. It's important to remember that it's okay not to have all the answers, and it's even more important to share what you're going through. Let's work together to find ways for you to feel more comfortable sharing your emotions when you need to.",
+        "response": "I understand that the advice might feel distant right now, and it's okay to feel overwhelmed. Let's focus on what you can manage today. What small task could you tackle that feels achievable given your current situation?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and unsure of how to express your feelings without putting on a brave face. It's important to remember that it's okay not to have all the answers, and it's even more important to share what you're going through. Let's work together to find ways for you to feel more comfortable sharing your emotions when you need to.",
+            "response": "I understand that the advice might feel distant right now, and it's okay to feel overwhelmed. Let's focus on what you can manage today. What small task could you tackle that feels achievable given your current situation?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Difficulty controlling emotions",
-                  "label": "entailment"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "neutral"
+                  "concept": "difficulty managing stress",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you feel like you have to put on a brave face all the time, and it builds up inside. It's important to acknowledge these feelings without judgment. Let's explore together what might be causing this feeling of uncertainty when you want to express yourself.",
+            "response": "I understand that the advice might feel a bit overwhelming right now, given how heavy things feel. Let's take it one step at a time. Can we start by exploring what makes even small steps seem so daunting for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "Difficulty managing stress",
                   "label": "entailment"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're carrying a lot inside, and it can be tough to find the right words. Let's work together on finding ways to express your feelings more freely without feeling overwhelmed.",
+          "alternative_perspective": {
+            "response": "I understand that the advice might feel a bit overwhelming right now. It's important to remember that everyone experiences stress differently, and it's okay if small steps seem big at the moment. Let's focus on finding one manageable action you can take today, even if it seems small. We can work together to build up from there.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "Difficulty managing stress (entailment)",
                   "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I understand that things feel overwhelming right now, and it can be hard to focus on small steps when you're feeling this way. Let's take a moment to breathe and ground ourselves before we explore what might help you move forward.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
@@ -537,78 +650,120 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it would be nice to actually feel like I could share without all that pressure. Sometimes I wonder if I even know how to express what I really feel. It’s like there’s this jumble of thoughts and emotions, and I just don’t know how to untangle it. I want to be honest, but it feels risky.",
+        "query": "I don’t know... even thinking about a small task feels like too much. I guess I could look at my budget again? But that usually just makes me feel worse, like I’m staring at a reality I can’t change. It’s frustrating because I know I probably should do something, but it feels like I’m just dragging my feet.",
+        "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "pressure to share",
-            "risk of honesty"
+            "loss of extra income"
           ],
           "automatic_thoughts": [
-            "I don't know how to express what I really feel",
-            "there's a jumble of thoughts and emotions"
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries.",
+            "What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out.",
+            "Imagining the best possible outcome feels a bit far away. What if I can’t keep up with everything? Hope feels so fragile right now.",
+            "Small steps sound nice in theory, but there’s this weight on my chest that makes even the small stuff feel huge.",
+            "All this panic just clouds my ability to see what I should do next.",
+            "Thinking about a small task feels like too much, and looking at my budget usually just makes me feel worse."
           ],
-          "emotions": [],
+          "emotions": [
+            "fear",
+            "overwhelm",
+            "hopelessness",
+            "panic",
+            "frustration"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Showing emotion (finding)",
-            "Difficulty understanding own emotions (finding)"
+            "Feeling empty (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Fear of writing in public (finding)"
+            "Poor daily routine (finding)",
+            "Low self-control (finding)",
+            "Low motivation (finding)",
+            "Loss of motivation (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how you might feel that way. It's not uncommon to struggle with expressing our true feelings, especially when we fear making a mistake or being misunderstood. Let's work together to help you untangle those thoughts and emotions, so you can share honestly without feeling so much pressure.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling overwhelmed and finding it hard to take action. Have you considered breaking down your tasks into smaller, manageable steps? Sometimes, focusing on one thing at a time can make it feel less daunting.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you might feel that way. It's not uncommon to struggle with expressing our true feelings, especially when we fear making a mistake or being misunderstood. Let's work together to help you untangle those thoughts and emotions, so you can share honestly without feeling so much pressure.",
+            "response": "\"I understand that looking at your budget can feel overwhelming and frustrating right now, especially when you're feeling this way. It's important to remember that it's okay to take things one step at a time. Let's work together on finding a manageable approach to help you navigate this situation.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Difficulty understanding own emotions (finding)",
-                  "label": "entailment"
+                  "concept": "fear",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
-                  "label": "neutral"
+                  "concept": "overwhelm",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I can see that you're struggling to find the right words to express your feelings. It's common to feel anxious when we're unsure, but remember it's okay to make mistakes and learn from them. Let's explore together what might be holding you back and how we can work on untangling those thoughts and emotions.",
+            "response": "\"It sounds like you're feeling overwhelmed and finding it hard to take action. Have you considered breaking down your tasks into smaller, manageable steps? Sometimes, focusing on one thing at a time can make it feel less daunting.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Difficulty understanding own emotions (finding)",
-                  "label": "entailment"
+                  "concept": "Low motivation",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "concept": "Poor daily routine",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're dealing with a lot of thoughts and feelings, and it can be challenging to sort them out. Let's work together to help you find a way to express yourself more clearly and confidently.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're feeling overwhelmed right now. Let's try to find a way forward together. What if we looked at your budget as an opportunity to identify small steps that could help ease the burden? We can start with one step, and then build from there.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "difficulty understanding own emotions",
-                  "label": "entailment"
+                  "concept": "loss of extra income",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "anxiety about saying the wrong thing",
-                  "label": "neutral"
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelm",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "panic",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear that you're feeling overwhelmed right now. It can be difficult to take the first step, especially when we're feeling this way. Let's start small and focus on one thing at a time. How about we begin by looking at your budget together? We can explore some options and see what feels manageable for you.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
@@ -620,83 +775,107 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I wish I could share without all that pressure. I feel like I have to put on a brave face all the time. When I do want to talk, everything just feels tangled up inside. I want to be honest, but it feels risky.",
+        "query": "I see what you’re saying, but it’s tough to get on board with that. It feels like every small task has its own weight, and when I think about breaking things down, I just end up feeling more suffocated. It’s like I can’t even motivate myself to start, and then I feel guilty about that, which just adds to the whole mess. It’s frustrating.",
+        "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "pressure to share",
-            "wanting to talk"
+            "loss of extra income"
           ],
           "automatic_thoughts": [
-            "have to put on a brave face",
-            "everything feels tangled up inside",
-            "want to be honest but it feels risky"
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries.",
+            "What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out.",
+            "Imagining the best possible outcome feels a bit far away. What if I can’t keep up with everything? Hope feels so fragile right now.",
+            "Small steps sound nice in theory, but there’s this weight on my chest that makes even the small stuff feel huge.",
+            "All this panic just clouds my ability to see what I should do next.",
+            "Thinking about a small task feels like too much, and looking at my budget usually just makes me feel worse.",
+            "When I think about breaking things down, I just end up feeling more suffocated."
           ],
-          "emotions": [],
+          "emotions": [
+            "fear",
+            "overwhelm",
+            "hopelessness",
+            "panic",
+            "frustration",
+            "guilt"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of saying the wrong thing (finding)"
+            "Loss of motivation (finding)"
           ],
           "neutral": [
-            "Fear of writing in public (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of public speaking (finding)",
-            "Fear of speaking on the phone (finding)"
+            "Poor daily routine (finding)",
+            "Fear of being a burden to others (finding)",
+            "Low motivation (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Compulsive tidying (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you feel like there's a lot of pressure to always be perfect and put on a brave face. It can be overwhelming when you want to share your thoughts, but it feels risky. Let's work together to find ways for you to express yourself more comfortably without fearing the consequences.",
+        "response": "I understand how you're feeling, it can be overwhelming when tasks seem insurmountable. Let's explore ways to break things down into smaller steps that feel more manageable for you.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you feel like there's a lot of pressure to always be perfect and put on a brave face. It can be overwhelming when you want to share your thoughts, but it feels risky. Let's work together to find ways for you to express yourself more comfortably without fearing the consequences.",
+            "response": "I understand how you're feeling, it can be overwhelming when tasks seem insurmountable. Let's explore ways to break things down into smaller steps that feel more manageable for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of saying the wrong thing (finding)",
+                  "concept": "Loss of motivation",
                   "label": "entailment"
                 },
                 {
-                  "concept": "wanting to talk",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "I understand that you feel like there's a lot of pressure to always be perfect and say the right things. It can be overwhelming when we want to express ourselves honestly, but fear holds us back. Let's explore together what might happen if you were to let go of this fear and speak your mind more freely.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of saying the wrong thing (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "concept": "Poor daily routine",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're carrying a heavy burden of feeling like you need to always present a certain image. Let's explore together if there might be other ways to express yourself honestly without feeling so tangled up inside.",
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling overwhelmed with the thought of breaking tasks down right now. Have you noticed any patterns in your daily routine that might be contributing to this? Let's explore some ways we could make those small steps feel a bit more manageable.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "have to put on a brave face",
-                  "label": "automatic_thoughts"
+                  "concept": "Loss of motivation",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "everything feels tangled up inside",
-                  "label": "automatic_thoughts"
+                  "concept": "Poor daily routine",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I understand how you're feeling, and it can be overwhelming when every task feels heavy. Let's explore together if there might be a way to approach things differently so you don't feel suffocated. What small step could we start with that feels manageable for you?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "want to be honest but it feels risky",
-                  "label": "automatic_thoughts"
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand how you're feeling, it can be overwhelming when tasks feel heavy and motivation is low. Let's explore some ways to make things feel a bit more manageable without adding guilt to the mix.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
@@ -708,79 +887,112 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, that would be nice. It just feels like I'm always second-guessing myself. Even when I think I might be ready to share something, that little voice doubts me and says it won't matter anyway. I want to feel like it's okay to just be myself, flaws and all, without worrying about how others will react. It’s just hard to get there.",
+        "query": "I appreciate you wanting to help me break it down, but honestly, the idea of breaking things into smaller steps just feels... tedious right now. I guess I worry that even if I make those steps, they won’t lead to anything significant. It’s like I’m stuck in this cycle of trying and not really getting anywhere. I’m just tired of feeling like I’m spinning my wheels.",
+        "core_issue": "financial concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "loss of extra income"
+          ],
           "automatic_thoughts": [
-            "I'm always second-guessing myself",
-            "It won't matter anyway",
-            "I need to worry about how others will react"
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries.",
+            "What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out.",
+            "Imagining the best possible outcome feels a bit far away. What if I can’t keep up with everything? Hope feels so fragile right now.",
+            "Small steps sound nice in theory, but there’s this weight on my chest that makes even the small stuff feel huge.",
+            "All this panic just clouds my ability to see what I should do next.",
+            "Thinking about a small task feels like too much, and looking at my budget usually just makes me feel worse.",
+            "When I think about breaking things down, I just end up feeling more suffocated.",
+            "The idea of breaking things into smaller steps feels tedious, and I worry that they won’t lead to anything significant. I feel stuck in a cycle of trying and not getting anywhere."
           ],
           "emotions": [
-            "doubt",
-            "frustration"
+            "fear",
+            "overwhelm",
+            "hopelessness",
+            "panic",
+            "frustration",
+            "guilt",
+            "tiredness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)"
+            "Feeling trapped (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of writing in public (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Positive self thoughts (finding)"
+            "Difficulty making plans (finding)",
+            "Difficulty understanding more than three word instructions (finding)",
+            "Difficulty adhering to rules and boundaries (finding)",
+            "Difficulty comprehending written material (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling like you're constantly second-guessing yourself and worrying about how others will react. It's important to remember that everyone has flaws, and it's okay to be yourself. Let's work together on finding ways to silence that little voice of doubt and focus on your strengths.",
-        "protocol_used": "validate_and_reflect",
+        "response": "I understand that breaking things down can feel overwhelming right now, and it might seem like a tedious process. Let's explore together if there are any smaller steps you could take that would feel manageable for you, even if they seem small at first.",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling like you're constantly second-guessing yourself and worrying about how others will react. It's important to remember that everyone has flaws, and it's okay to be yourself. Let's work together on finding ways to silence that little voice of doubt and focus on your strengths.",
+            "response": "I understand that breaking things down can feel overwhelming right now, and it's okay to feel that way. Let's take a moment to acknowledge your feelings and then see if we can find a way forward together.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "fear",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "neutral"
+                  "concept": "overwhelm",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Have you ever considered what evidence supports that little voice in your head telling you it won't matter? What would happen if you took a chance and shared something, despite its doubts? Let's explore together.",
+            "response": "I understand that breaking things down can feel overwhelming right now. Let's explore what might make it easier for you to take those small steps, one at a time. What do you think could help you feel more in control?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "Difficulty making plans (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
+                  "concept": "Difficulty understanding more than three word instructions (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Let's explore these thoughts together. It seems like you have a tendency to doubt yourself and worry about others' reactions. We can work on finding evidence for and against these beliefs, so you can make more balanced decisions and feel more confident in your actions.",
+          "alternative_perspective": {
+            "response": "I understand that breaking things down can feel overwhelming right now, and it might seem like a tedious process. Let's explore together if there are any smaller steps you could take that would feel manageable for you, even if they seem small at first.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "I'm always second-guessing myself",
-                  "label": "automatic_thoughts"
+                  "concept": "difficulty making plans",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "It won't matter anyway",
-                  "label": "automatic_thoughts"
+                  "concept": "difficulty understanding more than three word instructions",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can understand how the idea of breaking things down might feel tedious right now, especially when it feels like you're stuck in a cycle. Let's explore some ways we could make those steps more manageable and less overwhelming.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "difficulty making plans",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling trapped",
+                  "label": "entailment"
                 }
               ]
             }
@@ -792,77 +1004,109 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that. It's just... I guess I’ve heard that so often before, and it’s hard to really believe it when I’m in the moment. I feel like my doubts are so loud, you know? It’s like they drown out everything else. I want to believe there’s a way to shift that, but it feels kind of distant right now.",
+        "query": "I appreciate that, but even thinking about it just feels heavy. It’s like, I know I should be able to take a small step, but I keep getting stuck in this loop of... well, what’s the point? I just don’t know if I have the energy to commit to anything, even if it’s small. It almost feels like I’m running on empty.",
+        "core_issue": "financial concerns",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I’ve heard that so often before",
-            "It’s hard to really believe it when I’m in the moment",
-            "My doubts are so loud",
-            "They drown out everything else",
-            "It feels kind of distant right now"
+          "triggers": [
+            "loss of extra income"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
+            "Losing that extra income feels like it would be catastrophic, and I worry about handling bills and groceries.",
+            "What if I can’t find anything? What if things get even tighter? It’s like I can’t see a way out.",
+            "Imagining the best possible outcome feels a bit far away. What if I can’t keep up with everything? Hope feels so fragile right now.",
+            "Small steps sound nice in theory, but there’s this weight on my chest that makes even the small stuff feel huge.",
+            "All this panic just clouds my ability to see what I should do next.",
+            "Thinking about a small task feels like too much, and looking at my budget usually just makes me feel worse.",
+            "When I think about breaking things down, I just end up feeling more suffocated.",
+            "The idea of breaking things into smaller steps feels tedious, and I worry that they won’t lead to anything significant. I feel stuck in a cycle of trying and not getting anywhere.",
+            "Even thinking about taking a small step feels heavy, and I keep getting stuck in this loop of... well, what’s the point? I don’t know if I have the energy to commit to anything."
+          ],
+          "emotions": [
+            "fear",
+            "overwhelm",
+            "hopelessness",
+            "panic",
+            "frustration",
+            "guilt",
+            "tiredness",
+            "heaviness"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Loud thoughts (finding)"
+            "Loss of motivation (finding)",
+            "Feeling empty (finding)",
+            "Feeling hopeless (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Obsessional doubts (finding)",
-            "Repressing thoughts (finding)"
+            "Low motivation (finding)",
+            "Increased motivation (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand how difficult it can be to believe in something when your thoughts are so loud and overwhelming. It's important to remember that everyone experiences self-doubt at times, but we can work together to find ways to manage them more effectively. Let's explore some strategies that might help you quiet those doubts a bit.",
-        "protocol_used": "validate_and_reflect",
+        "response": "I understand that you're feeling overwhelmed and unsure about taking small steps right now. It can be challenging to find the energy when we feel this way, but remember, even small changes can make a big difference over time. Let's explore what might help you get started. What do you think could be a first step, no matter how small?",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how difficult it can be to believe in something when your thoughts are so loud and overwhelming. It's important to remember that everyone experiences self-doubt at times, but we can work together to find ways to manage them more effectively. Let's explore some strategies that might help you quiet those doubts a bit.",
+            "response": "I understand that you're feeling overwhelmed and unsure about taking small steps right now. It can be challenging to find the energy when we feel this way, but remember, it's okay to take things one step at a time. Let's explore together what might make a small step feel more manageable for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Loud thoughts (finding)",
+                  "concept": "feeling hopeless",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Obsessional doubts (finding)",
+                  "concept": "low motivation",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand how difficult it can be to believe something when your doubts are so persistent. Have you ever considered what evidence supports these doubts, and if there might be other perspectives or alternatives?",
+            "response": "I understand that taking a step forward can feel overwhelming, especially when you're feeling low on energy. Let's explore together what might be making it difficult for you to take that first small step. What thoughts or feelings come up for you when you think about doing something new?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Loud thoughts (finding)",
+                  "concept": "Loss of motivation",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Obsessional doubts (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling hopeless",
+                  "label": "entailment"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "I understand that you've heard this before, and it can be challenging to fully embrace it in the heat of the moment. It sounds like your doubts are quite persistent, almost overwhelming at times. Let's explore together if there might be ways to manage those thoughts more effectively.",
+          "alternative_perspective": {
+            "response": "I understand that you're feeling overwhelmed and unsure about taking small steps right now. It can be challenging to find the energy when we feel this way, but remember, even small changes can make a big difference over time. Let's explore what might help you get started. What do you think could be a first step, no matter how small?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Loud thoughts (finding)",
+                  "concept": "Loss of motivation",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Obsessional doubts (finding)",
+                  "concept": "Feeling hopeless",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that you're feeling overwhelmed and unsure about taking small steps right now. It can be challenging to find the energy when we feel this way, but let's explore together if there might be a small action you could take that feels manageable for you today.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling hopeless",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "low motivation",
                   "label": "neutral"
                 }
               ]

@@ -4,7 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile.",
+    "seed": "The main problem is these. Well, they tell me that it's a problem to do with musketsophrenia. These voices, they come and they. I heard these people talking about me and talking about how rubbish I am and what a failure I am, and I really just wish they'd leave me alone.",
+    "core_issue": "anxiety and fear",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -16,78 +17,110 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I don’t want to be a burden on other people. So I never share anything and pretend I’m fine and smile.",
+        "query": "The main problem is these. Well, they tell me that it's a problem to do with musketsophrenia. These voices, they come and they. I heard these people talking about me and talking about how rubbish I am and what a failure I am, and I really just wish they'd leave me alone.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me"
+          ],
           "automatic_thoughts": [
-            "I don’t want to be a burden on other people.",
-            "I have to pretend I’m fine."
+            "I am rubbish",
+            "I am a failure"
           ],
           "emotions": [],
-          "behaviors": [
-            "never share anything",
-            "smile"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Caring towards others (finding)",
-            "Sociable mood (finding)"
+            "Hears mocking voices (finding)",
+            "Loud thoughts (finding)"
           ],
           "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Noise phobia (finding)",
+            "Fear of deafness (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Hears voices laughing at self (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're concerned about not wanting to be a burden on others. It's important to remember that sharing your feelings doesn't necessarily mean becoming a burden, but rather an opportunity for connection and understanding. Let's explore this thought further together.",
+        "response": "\"It sounds like you're dealing with some challenging thoughts and experiences. I want to make sure I understand correctly - you mentioned hearing people talk about you, and it feels as though they're saying you're rubbish and a failure? It can be really tough to hear those kinds of things, especially when they come from within your own mind. Let's take some time to explore these thoughts together and see if we can find ways to help you feel more at peace.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're concerned about not wanting to be a burden on others. It's important to remember that sharing your feelings doesn't necessarily mean becoming a burden, but rather an opportunity for connection and understanding. Let's explore this thought further together.",
+            "response": "\"It sounds like you're dealing with some challenging thoughts and experiences. I want to make sure I understand correctly - you mentioned hearing people talk about you, and it feels as though they're saying you're rubbish and a failure? It can be really tough to hear those kinds of things, especially when they come from within your own mind. Let's take some time to explore these thoughts together and see if we can find ways to help you feel more at peace.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "Hears voices talking about me",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
+                  "concept": "I am rubbish",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I am a failure",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It seems you're concerned about not wanting to be a burden on others. Can we explore together why you think sharing your feelings might burden them? Let's consider if there are other ways to connect without feeling like a burden.\"",
+            "response": "\"It sounds like you're having a tough time with these voices. Can you tell me more about what they say and how it makes you feel?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Hears mocking voices",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
+                  "concept": "I am rubbish",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I am a failure",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "\"It seems like you're worried about being a burden to others, which is understandable. However, it might be helpful to consider if your actions are truly burdensome or if you're just assuming they are. Let's explore this assumption together.\"",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're having a tough time with these voices. Let's explore what they might be saying and how it makes you feel. Can we start by discussing the best possible outcome if these voices were to stop?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Hears voices talking about me",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "I am rubbish",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I am a failure",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're having a tough time with those voices. I want to make sure we create a safe space for you to talk about them without judgment. Can you tell me more about what they've been saying lately?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Hears mocking voices (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
+                  "concept": "I am rubbish",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I am a failure",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -99,74 +132,101 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I guess I just... I feel like people have their own stuff to deal with, you know? Like, why would they want to take on my problems? It makes me hesitate to really open up. I don’t want to add to anyone’s stress.",
+        "query": "Yeah, it’s hard to explain. It's like I can't shake off that feeling that everyone is judging me. Sometimes, even when people are being nice, I just hear these negative whispers in my head, like I’m not good enough. It makes me feel so anxious, like I can’t even be myself around others.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "people have their own stuff to deal with",
-            "why would they want to take on my problems?",
-            "I don’t want to add to anyone’s stress"
+          "triggers": [
+            "hearing voices talking about me",
+            "feeling judged by others"
           ],
-          "emotions": [],
-          "behaviors": [
-            "hesitate to really open up"
-          ]
+          "automatic_thoughts": [
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Anxiety about appearing ridiculous (finding)",
+            "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
             "Anxiety about saying the wrong thing (finding)",
-            "Fear of writing in public (finding)",
-            "Fear of being in a small group (finding)"
+            "Fear of being in a small group (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you might feel like people have their own things going on, and it's natural to worry about adding to their stress. However, remember that everyone has challenges in life, and sharing your feelings can help build stronger connections with others. It's important not to assume that they don't want to listen or support you. Let's work together to find ways for you to feel more comfortable opening up.",
+        "response": "I'm really sorry to hear that you're feeling this way, but it sounds like you've been carrying a heavy burden. Let's work together to understand these feelings and thoughts better so we can find ways to help you feel more at ease. Can you tell me more about what triggers these negative whispers in your head?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you might feel like people have their own things going on, and it's natural to worry about adding to their stress. However, remember that everyone has challenges in life, and sharing your feelings can help build stronger connections with others. It's important not to assume that they don't want to listen or support you. Let's work together to find ways for you to feel more comfortable opening up.",
+            "response": "I'm really sorry to hear that you're feeling this way, but it sounds like you've been carrying a heavy burden. Let's work together to understand these feelings and thoughts better so we can find ways to help you feel more at ease. Can you tell me more about what triggers these negative whispers in your head?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "anxiety",
                   "label": "entailment"
+                },
+                {
+                  "concept": "feeling judged by others",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're concerned that your problems might be too much for others. Let's explore together why you think this way and if there are other possibilities to consider.",
+            "response": "\"It sounds like you're dealing with some challenging thoughts about yourself, and that's causing anxiety. Let's explore these thoughts together and see if we can find a different perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "anxiety",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you might be worried about imposing on others with your problems. Let's explore together if there are other ways to share your feelings without adding stress.",
+          "alternative_perspective": {
+            "response": "\"I understand that it can feel overwhelming when you hear those negative whispers in your head. Let's explore together what a trusted friend might say about the situation, and see if we can find a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "anxiety",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Hesitation to open up",
-                  "label": "behaviors"
+                  "concept": "feeling judged by others",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way, but it sounds like you might be hearing critical voices in your head. Let's work together to understand where these thoughts come from and find ways to challenge them. Would you feel comfortable sharing more about what triggers these negative whispers?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling judged by others",
+                  "label": "triggers"
                 }
               ]
             }
@@ -178,80 +238,146 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that, but I think there’s a part of me that really believes I should just handle things by myself. It’s like, if I can’t manage it on my own, then what does that say about me? I kind of feel weak or needy if I reach out.",
+        "query": "Thank you. I guess it can be triggered by the smallest things, like making a mistake at work or even just a weird look from someone. It’s like my mind goes into overdrive, imagining all the worst-case scenarios. I start to worry that they’re thinking I’m incompetent or just… not worth their time. It feels really overwhelming.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me",
+            "feeling judged by others",
+            "making a mistake at work",
+            "a weird look from someone"
+          ],
           "automatic_thoughts": [
-            "I should just handle things by myself",
-            "If I can’t manage it on my own, then what does that say about me?",
-            "I feel weak or needy if I reach out"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "they think I’m incompetent",
+            "I’m not worth their time"
           ],
           "emotions": [
-            "weak",
-            "needy"
+            "anxiety",
+            "overwhelm"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)"
+            "Anticipatory anxiety (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
-            "Fear of being a burden to others (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about going crazy (finding)"
           ],
-          "contradiction": [
-            "Caring towards others (finding)",
-            "Not involved in managing own affairs (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling a bit overwhelmed and perhaps even a little weak or needy when considering reaching out for help. It's important to remember that asking for support is a sign of strength, not weakness. Let's explore together why you might feel this way and see if we can find a more balanced perspective.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you have a tendency to catastrophize situations, imagining the worst-case scenarios. Can we explore together what evidence supports these thoughts and what alternative explanations might be possible?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling a bit overwhelmed and perhaps even a little weak or needy when considering reaching out for help. It's important to remember that asking for support is a sign of strength, not weakness. Let's explore together why you might feel this way and see if we can find a more balanced perspective.",
+            "response": "I'm sorry to hear that you're feeling overwhelmed. It sounds like you have a tendency to worry about what others might think of you, even in small situations. Let's work together to explore these thoughts and see if we can find ways to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "a weird look from someone",
+                  "label": "triggers"
+                },
+                {
                   "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "label": "unknown"
                 },
                 {
                   "concept": "emotions",
-                  "label": "emotions"
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand you're feeling a bit overwhelmed and perhaps questioning your ability to handle things independently. It's important to remember that everyone needs support sometimes, and it doesn't reflect weakness but rather strength to ask for help when needed. Let's explore together if there are any specific situations or beliefs that might be contributing to this thought pattern.",
+            "response": "\"It sounds like you have a tendency to catastrophize situations, imagining the worst-case scenarios. Can we explore together what evidence supports these thoughts and what alternative explanations might be possible?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "a weird look from someone",
+                  "label": "triggers"
+                },
+                {
                   "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "label": "unknown"
                 },
                 {
                   "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you have a tendency to catastrophize situations, which can lead to feelings of anxiety and overwhelm. Let's explore some alternative perspectives together. For instance, what might a trusted friend or colleague say about the situation? And how likely are those worst-case scenarios compared to more realistic outcomes?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "a weird look from someone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I am rubbish",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I am a failure",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "they think I’m incompetent",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "overwhelm",
                   "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're carrying a belief that you should handle things on your own, and it might be causing some distress. Let's explore together if there are other ways to approach this situation that could feel less overwhelming.",
+          "safety_check": {
+            "response": "I'm sorry to hear that you're feeling overwhelmed. It sounds like you have a tendency to worry about what others might think of you, even in small situations. Let's explore these thoughts together and see if we can find ways to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "a weird look from someone",
+                  "label": "triggers"
+                },
+                {
                   "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "label": "unknown"
                 },
                 {
                   "concept": "emotions",
-                  "label": "emotions"
+                  "label": "unknown"
                 }
               ]
             }
@@ -263,83 +389,112 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I get that in theory, but it’s just hard to shake that feeling. I mean, I’ve always had to be the strong one, you know? I worry if I show any cracks, people will see me differently or think I can’t handle things. It feels safer to just keep everything inside.",
+        "query": "I don't know… it feels too risky to even think about alternatives sometimes. It's just so easy to believe that I’m messing everything up. I mean, I’ve had moments where I’ve embarrassed myself or gotten things wrong, and those stick with me. It’s hard to shake off those memories, and I guess I just assume it’s going to happen again.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me",
+            "feeling judged by others",
+            "making a mistake at work",
+            "a weird look from someone",
+            "memories of embarrassing moments"
+          ],
           "automatic_thoughts": [
-            "I worry if I show any cracks, people will see me differently",
-            "I can't handle things"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "they think I’m incompetent",
+            "I’m not worth their time",
+            "I’m messing everything up",
+            "it’s going to happen again"
           ],
           "emotions": [
-            "fear"
+            "anxiety",
+            "overwhelm"
           ],
-          "behaviors": [
-            "keep everything inside"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Vulnerable personality (finding)",
-            "Fear of losing emotional control (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
             "Fear of saying the wrong thing (finding)",
-            "Isolation - mental defense mechanism (finding)"
+            "Fear of losing emotional control (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you've been carrying a heavy burden for quite some time. It's understandable to feel that way, especially when we've grown accustomed to being strong for others. But remember, it's okay to show vulnerability and ask for help when needed. Let's work together on finding ways to manage your feelings without feeling like you have to hide them.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you've had some difficult experiences that have left a lasting impact on your thoughts. Let's explore together if there might be other ways to interpret these situations and reduce the distress they cause.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you've been carrying a heavy burden for quite some time. It's understandable to feel that way, especially when we've grown accustomed to being strong for others. But remember, it's okay to show vulnerability and ask for help when needed. Let's work together on finding ways to manage your feelings without feeling like you have to hide them.",
+            "response": "I understand that you're feeling anxious and worried about making mistakes, and it seems like these past experiences are weighing heavily on your mind. It's natural to feel this way sometimes, but let's explore together if there might be other ways to approach things and reduce some of that anxiety.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "I worry if I show any cracks",
-                  "label": "automatic_thoughts"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "people will see me differently",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "keep everything inside",
-                  "label": "behaviors"
+                  "concept": "automatic thoughts of failure",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Have you ever considered that by keeping everything inside, you might be missing out on opportunities for support? Or perhaps there's a chance others would appreciate your vulnerability and understand that everyone has their moments of struggle?",
+            "response": "I understand that you're feeling anxious and it can be difficult to shake off past mistakes. Let's explore together what evidence supports the idea that everything will go wrong, and if there might be other possibilities as well.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "I worry if I show any cracks, people will see me differently",
-                  "label": "automatic_thoughts"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "It feels safer to just keep everything inside",
-                  "label": "behaviors"
+                  "concept": "automatic thoughts of failure",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions of anxiety",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "Maybe it's time we explore why you feel the need to be strong all the time. Let's consider if this belief serves you well and if there might be other ways to handle things without feeling like you have to hide your feelings.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you've had some difficult experiences that have left a lasting impact on your thoughts. Let's explore together if there might be other ways to interpret these situations and reduce the distress they cause.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "I worry if I show any cracks, people will see me differently",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "It feels safer to just keep everything inside",
-                  "label": "behaviors"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It can be incredibly difficult when we find ourselves dwelling on past mistakes or fears of future ones. Let's explore together if there might be other ways to approach these situations and help alleviate some of the anxiety.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of saying the wrong thing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "emotions: anxiety",
+                  "label": "emotions"
                 }
               ]
             }
@@ -351,79 +506,110 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I know you're trying to help, and it makes sense, but I can't shake this feeling that I should just deal with it. I’ve always been the one who pulls through, and it feels scary to think about opening up. What if it changes how people see me? It’s just... easier to keep it all bottled up, even if it’s exhausting.",
+        "query": "I don’t know… it feels too risky to even think about anything else. It’s just so easy to believe I’m messing everything up. I mean, I’ve embarrassed myself before, and those moments stick with me. It’s hard to shake off those memories, and I just assume it’s going to happen again.",
+        "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "someone trying to help"
+            "hearing voices talking about me",
+            "feeling judged by others",
+            "making a mistake at work",
+            "a weird look from someone",
+            "memories of embarrassing moments"
           ],
           "automatic_thoughts": [
-            "I should just deal with it",
-            "What if it changes how people see me?",
-            "It's easier to keep it all bottled up"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "they think I’m incompetent",
+            "I’m not worth their time",
+            "I’m messing everything up",
+            "it’s going to happen again",
+            "it feels too risky to think about anything else"
           ],
           "emotions": [
-            "scary",
-            "exhausted"
+            "anxiety",
+            "overwhelm"
           ],
-          "behaviors": [
-            "keeping it all bottled up"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)"
+            "Feeling ashamed (finding)"
           ],
           "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Difficulty understanding own emotions (finding)",
-            "Emotionally blunted character (finding)",
-            "Anxiety about saying the wrong thing (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about blushing (finding)",
+            "Undoing - mental defense mechanism (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you've always been the one who helps, and it can be scary to think about opening up. But remember, sharing your feelings doesn't make you a burden; it makes you human. It's okay to need help sometimes too. Let's work together on finding ways to cope without feeling overwhelmed.",
+        "response": "I understand that you're feeling anxious about the possibility of making mistakes and reliving past embarrassments. It's common to feel this way when we have negative experiences in our memory. Let's work together to explore how we can manage these thoughts and feelings more effectively.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've always been the one who helps, and it can be scary to think about opening up. But remember, sharing your feelings doesn't make you a burden; it makes you human. It's okay to need help sometimes too. Let's work together on finding ways to cope without feeling overwhelmed.",
+            "response": "I understand that you're feeling anxious about the possibility of making mistakes and reliving past embarrassments. It's common to feel this way when we have negative experiences in our memory. Let's work together to explore how we can manage these thoughts and feelings more effectively.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It's understandable that you might feel scared about opening up and worried about how people see you. Let's explore together why you think it would change their perception, and if there are other ways to cope without bottling everything up.",
+            "response": "\"I can see how you might feel that way, given your past experiences. But let's consider this together - what evidence do you have right now that it will definitely go wrong? And what could be a small step you take to help yourself feel more confident?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It's understandable that you might feel scared about opening up and worried about how people see you. Let's explore together if there are other ways to cope without bottling everything up, which seems exhausting for you.",
+          "alternative_perspective": {
+            "response": "\"I understand that you're feeling anxious and worried about making mistakes, especially given past experiences. It's natural to feel this way sometimes, but it's also important to remember that everyone makes mistakes. Let's explore some ways we can work together to help you manage these feelings and find a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way. It sounds like you've had some difficult experiences in the past, and it can be hard to move forward when those memories are so vivid. Let's talk about how we might be able to work together to help you manage these feelings and find a more balanced perspective.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
                   "label": "neutral"
+                },
+                {
+                  "concept": "embarrassing moments",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
                 }
               ]
             }
@@ -435,90 +621,116 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that, but I just feel like I should handle everything on my own. If I can't manage it by myself, it feels like it says something really negative about me. I worry I'll seem weak or needy if I reach out. I've always been the strong one, and the thought of showing any cracks is really scary to me. I just feel safer keeping everything inside, even if it wears",
+        "query": "It just feels too risky to think about anything else. I really struggle to believe that I’m not messing everything up. I remember moments where I embarrassed myself, and they just replay in my head. I can’t help but think it’ll happen again.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me",
+            "feeling judged by others",
+            "making a mistake at work",
+            "a weird look from someone",
+            "memories of embarrassing moments"
+          ],
           "automatic_thoughts": [
-            "I should handle everything on my own",
-            "If I can't manage it by myself, it says something really negative about me",
-            "I'll seem weak or needy if I reach out",
-            "I've always been the strong one",
-            "The thought of showing any cracks is really scary to me"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "they think I’m incompetent",
+            "I’m not worth their time",
+            "I’m messing everything up",
+            "it’s going to happen again"
           ],
           "emotions": [
-            "fear",
-            "anxiety"
+            "anxiety",
+            "overwhelm"
           ],
-          "behaviors": [
-            "keeping everything inside"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Fear of losing emotional control (finding)",
-            "Isolation - mental defense mechanism (finding)",
-            "Vulnerable personality (finding)",
-            "Feeling isolated (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Undoing - mental defense mechanism (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling like you should handle things on your own. It's important to remember that everyone needs support sometimes, and it doesn't reflect negatively on you. Let's explore together why reaching out might not be as scary as it seems.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"I understand that you're feeling quite anxious about making mistakes and the memories of past embarrassments are weighing heavily on your mind. It's natural to feel this way, but let's explore together if there might be other ways to interpret these situations or think about what a trusted friend might say about them.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling like you should handle things on your own. It's important to remember that everyone needs support sometimes, and it doesn't reflect negatively on you. Let's explore together why reaching out might not be as scary as it seems.",
+            "response": "\"I understand that you're feeling quite anxious and fearful about making mistakes, which might be leading to a cycle of negative thoughts. Let's explore these feelings together and find ways to manage them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Vulnerable personality",
+                  "concept": "undoing - mental defense mechanism",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you've been feeling like you should handle things on your own. It's important to remember that everyone needs support sometimes, and it doesn't reflect negatively on you. Let's explore together why you might feel this way and if there are other ways to cope with difficult situations without isolating yourself.",
+            "response": "\"It sounds like you're having some difficult thoughts about making mistakes and past embarrassments. Can we explore together what evidence supports these thoughts, and if there might be alternative ways to interpret them?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Isolation - mental defense mechanism",
-                  "label": "neutral"
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "memories of embarrassing moments",
+                  "label": "triggers"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you have a strong sense of self-reliance. However, sometimes it's okay to ask for help and not appear weak. Everyone needs support at times, and reaching out can actually show strength in vulnerability. Let's explore together if there might be alternative ways to think about this situation that could make asking for help feel less scary.",
+          "alternative_perspective": {
+            "response": "\"I understand that you're feeling quite anxious about making mistakes and the memories of past embarrassments are weighing heavily on your mind. It's natural to feel this way, but let's explore together if there might be other ways to interpret these situations or think about what a trusted friend might say about them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "I should handle everything on my own",
-                  "label": "automatic_thoughts"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "If I can't manage it by myself, it says something negative about me",
-                  "label": "automatic_thoughts"
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "I'll seem weak or needy if I reach out",
-                  "label": "automatic_thoughts"
+                  "concept": "memories of embarrassing moments",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been having some difficult thoughts about past mistakes and fears they might happen again. Let's take a moment to explore those feelings together, if you'd like?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "The thought of showing any cracks is really scary to me",
-                  "label": "automatic_thoughts"
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "memories of embarrassing moments",
+                  "label": "triggers"
                 }
               ]
             }
@@ -530,85 +742,108 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I guess it just feels really vulnerable to think about asking for help. I keep thinking about how people might react or if they’ll think less of me. It’s like this fear of being judged or seen as a burden, and that’s what keeps me from even trying.",
+        "query": "I appreciate you saying that, but honestly, it’s really hard for me to see it that way. I just feel like those moments define me, like I can’t escape them. I wish I could just let it go, but it’s like they’re stuck in my head, and I keep thinking people see me that way too. It’s exhausting.",
+        "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "thinking about asking for help"
+            "hearing voices talking about me",
+            "feeling judged by others",
+            "making a mistake at work",
+            "a weird look from someone",
+            "memories of embarrassing moments"
           ],
           "automatic_thoughts": [
-            "how people might react",
-            "they’ll think less of me",
-            "fear of being judged",
-            "fear of being seen as a burden"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "they think I’m incompetent",
+            "I’m not worth their time",
+            "I’m messing everything up",
+            "it’s going to happen again",
+            "those moments define me",
+            "people see me that way too"
           ],
           "emotions": [
-            "vulnerable",
-            "fear"
+            "anxiety",
+            "overwhelm",
+            "exhaustion"
           ],
-          "behaviors": [
-            "not trying to ask for help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Fear of not coping with treatment (finding)"
+            "Emotional adjustment (observable entity)",
+            "Difficulty understanding own emotions (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about treatment (finding)"
+            "Anxiety about appearing ridiculous (finding)",
+            "Delusion of own appearance (finding)",
+            "Anxiety about going crazy (finding)"
           ],
-          "contradiction": [
-            "Anxiety about collapsing (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It's completely normal to feel vulnerable when thinking about asking for help. It seems like you might be worried about how people will react or what they might think. Let's explore these thoughts together and see if we can find a way to make it easier for you to ask for the support you need.",
+        "response": "I'm really sorry to hear you feel this way, but it sounds like you're carrying a heavy burden. Let's work together to understand these moments and how they affect your self-perception. Can we start by exploring what triggers these thoughts for you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It's completely normal to feel vulnerable when thinking about asking for help. It seems like you might be worried about how people will react or what they might think. Let's explore these thoughts together and see if we can find a way to make it easier for you to ask for the support you need.",
+            "response": "I'm really sorry to hear you feel this way, but it sounds like you're carrying a heavy burden. Let's work together to understand these moments and how they affect your self-perception. Can we start by exploring what triggers these thoughts for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "emotions",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of not coping with treatment",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It's understandable that you might feel vulnerable when thinking about asking for help. It seems like there are some concerns about how people will react and whether they'll judge or see you as a burden. Let's explore these thoughts together, shall we?",
+            "response": "I understand how difficult it can be to let go of thoughts that feel so persistent. Let's explore together what evidence you have for these thoughts, and if there might be alternative ways to interpret those moments.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Fear of not coping with treatment",
+                  "concept": "emotions",
                   "label": "entailment"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It's understandable that asking for help can feel scary, especially when we worry about how others might react. Let's explore together if these thoughts are based on evidence or if they might be distorted in some way.",
+          "alternative_perspective": {
+            "response": "I understand how difficult it can be to let go of those thoughts, but remember that everyone has moments they'd rather forget. It doesn't define who you are today. Let's explore what a trusted friend or family member might say about the situation and see if that helps shift your perspective.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "emotions",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of not coping with treatment",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear you feel that way, but it sounds like those moments are weighing heavily on your mind. Let's work together to find a way to lessen their impact and help you move forward.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
                   "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -620,80 +855,135 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it is definitely a scary thought. I mean, what if they don’t understand? Or worse, what if they do and just don’t care? I get stuck in my head about it, replaying scenarios where it just goes wrong. I want to be brave, but that fear is paralyzing sometimes.",
+        "query": "Yeah, I guess it’s those little things, like when I make a mistake at work or when I’m in a social situation. Sometimes, even just seeing someone’s expression can flip a switch in my head. I get this rush of panic, and it feels like everyone is looking at me, waiting for me to mess up again. It’s really hard to focus on anything else when that happens.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices talking about me",
+            "feeling judged by others",
+            "making a mistake at work",
+            "a weird look from someone",
+            "memories of embarrassing moments",
+            "being in a social situation",
+            "seeing someone's expression"
+          ],
           "automatic_thoughts": [
-            "what if they don’t understand",
-            "what if they do and just don’t care",
-            "replaying scenarios where it just goes wrong"
+            "I am rubbish",
+            "I am a failure",
+            "I’m not good enough",
+            "they think I’m incompetent",
+            "I’m not worth their time",
+            "I’m messing everything up",
+            "it’s going to happen again",
+            "those moments define me",
+            "people see me that way too",
+            "everyone is looking at me, waiting for me to mess up again"
           ],
           "emotions": [
-            "scary",
-            "fear"
+            "anxiety",
+            "overwhelm",
+            "exhaustion",
+            "panic"
           ],
-          "behaviors": [
-            "get stuck in my head",
-            "paralyzing"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Anxiety about making mistakes (finding)",
+            "Mental alertness (observable entity)"
+          ],
           "neutral": [
-            "Fear of saying the wrong thing (finding)",
-            "Fear of being a burden to others (finding)",
-            "Social fear (finding)",
-            "Fear of speaking to people in authority (finding)",
-            "Fear of being watched (finding)"
+            "Anxiety about going crazy (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand how scary it can feel when you're unsure if they truly get it or care. It's a common fear, and I want to assure you that we'll work together to address these thoughts and feelings. Let's start by exploring them more deeply so we can find ways to manage them better.",
+        "response": "\"I can see how those situations might be challenging for you. It's common to feel anxious when making mistakes or being in social settings. Let's explore these feelings together and find ways to manage them.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how scary it can feel when you're unsure if they truly get it or care. It's a common fear, and I want to assure you that we'll work together to address these thoughts and feelings. Let's start by exploring them more deeply so we can find ways to manage them better.",
+            "response": "\"I can see how those situations might be challenging for you. It's common to feel anxious when making mistakes or being in social settings. Let's explore these feelings together and find ways to manage them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
                   "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "label": "unknown"
                 },
                 {
                   "concept": "emotions",
-                  "label": "emotions"
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're dealing with some intense fears about how others might react. Let's explore these thoughts together and see if we can find a way to manage them better.",
+            "response": "\"It sounds like those situations can be quite challenging for you. Can you tell me more about what thoughts come up when you find yourself in a social setting or making a mistake at work? I'm curious to understand how your thoughts might contribute to the feelings of panic.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "automatic_thoughts"
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "social situation",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing someone's expression",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "panic",
                   "label": "emotions"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're dealing with some challenging thoughts and feelings. Let's work together to explore these thoughts a bit more, and see if we can find ways to reduce that fear and increase your confidence.",
+          "alternative_perspective": {
+            "response": "\"It sounds like those moments can be quite overwhelming for you, and it's understandable to feel that way. Let's explore together if there might be other ways to interpret these situations, so they don't have such a strong impact on your emotions.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
                   "concept": "automatic thoughts",
-                  "label": "automatic_thoughts"
+                  "label": "unknown"
                 },
                 {
                   "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see how those situations might be challenging for you. It sounds like they trigger some intense feelings of anxiety and self-doubt. Let's explore these triggers a bit more to understand them better, shall we?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "social situation",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing someone's expression",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "panic",
                   "label": "emotions"
                 }
               ]
@@ -706,82 +996,88 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Thanks, I appreciate you saying that. It just feels really heavy sometimes, like I’m carrying this weight around. The thought of sharing it can be so intimidating, but maybe... if I can find a way to express what I’m feeling, it might lighten the load? I don’t know, it's just hard to imagine opening up without fear.",
+        "query": "Thanks, but it’s just so hard to imagine feeling okay in those situations. I mean, I’d love to be able to handle it better, but right now, I just feel like I’m constantly on edge. It’s like the fear is always just below the surface, waiting to bubble up. I wish I could just breathe and not feel that way.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [
-            "thought of sharing",
-            "imagining opening up"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "carrying this weight around",
-            "it might lighten the load",
-            "it's hard to imagine opening up without fear"
+            "I feel like I’m constantly on edge",
+            "the fear is always just below the surface"
           ],
           "emotions": [
-            "heavy",
-            "intimidating",
             "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)"
+            "Anticipatory anxiety (finding)"
           ],
           "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Difficulty coping with grief responses (finding)",
-            "Working through the pain of grief (finding)",
-            "Anxiety about saying the wrong thing (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about going crazy (finding)",
+            "Anticipatory anxiety, moderate (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that carrying this weight around can feel heavy and intimidating, especially when you consider sharing it with others. It's important to remember that everyone has their own burdens, and opening up doesn't mean becoming a burden. Let's explore together how we might find ways to express your feelings in a way that feels comfortable for you.",
+        "response": "I understand how difficult it can be to manage those feelings, especially when they seem so persistent. It's important to remember that it's okay to feel this way and that you don't have to face it alone. Let's work together to find ways for you to cope with these emotions and help you feel more at ease.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that carrying this weight around can feel heavy and intimidating, especially when you consider sharing it with others. It's important to remember that everyone has their own burdens, and opening up doesn't mean becoming a burden. Let's explore together how we might find ways to express your feelings in a way that feels comfortable for you.",
+            "response": "I understand how difficult it can be to manage those feelings, especially when they seem so persistent. It's important to remember that it's okay to feel this way and that you don't have to face it alone. Let's work together to find ways for you to cope with these emotions and help you feel more at ease.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Anticipatory anxiety (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Finding ways to express what you're feeling can be challenging, especially when we worry about how others might perceive us. It seems like there might be some underlying beliefs that make opening up feel intimidating. Let's explore these thoughts together and see if we can find a way to lighten the load.",
+            "response": "\"I understand how difficult it can be to manage these feelings, especially when they seem so persistent. Let's explore together what triggers this fear and if there are any patterns you notice. This might help us find ways for you to feel more at ease.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Anticipatory anxiety",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
+                  "concept": "Anxiety about losing emotional control",
                   "label": "neutral"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're carrying quite a heavy load. It can be intimidating to share our feelings, especially when we fear being a burden or worrying about what others might think. Let's explore together if there are alternative ways to express yourself that could help lighten the emotional weight.",
+          "alternative_perspective": {
+            "response": "I understand how difficult it can be to manage these feelings, especially when they seem so persistent. It's important to remember that everyone experiences fear in different ways and at varying intensities. Could we explore together what might help you feel more at ease in those situations? Perhaps we could start by identifying some small steps or coping strategies that could make a difference for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others (finding)",
+                  "concept": "Anticipatory anxiety",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear you're feeling this way, but it sounds like you've been dealing with a lot of anticipatory anxiety. It can be exhausting to feel constantly on edge. Let's see if we can find some ways to help you manage these feelings better. Would you be open to exploring that together?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control",
                   "label": "neutral"
                 }
               ]
@@ -794,83 +1090,95 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "That sounds... nice, I guess? But I still feel this knot in my stomach at the thought of being vulnerable. It’s like I want to, but then I pull back because I’m afraid of what might happen. I don’t want to end up feeling more exposed or rejected. I wish it was easier.",
+        "query": "It’s just so hard to imagine feeling okay in those situations. I’d love to handle it better, but right now, I just feel constantly on edge. The fear is always just below the surface, waiting to bubble up. I wish I could just breathe and not feel that way.",
+        "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [
-            "thought of being vulnerable"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I want to, but then I pull back",
-            "I'm afraid of what might happen",
-            "I don't want to end up feeling more exposed or rejected"
+            "I feel like I’m constantly on edge",
+            "the fear is always just below the surface",
+            "It’s hard to imagine feeling okay in those situations",
+            "I wish I could just breathe and not feel that way"
           ],
           "emotions": [
-            "anxiety"
+            "fear"
           ],
-          "behaviors": [
-            "pull back"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)"
+            "Anticipatory anxiety (finding)"
           ],
           "neutral": [
-            "Anxiety about blushing (finding)",
-            "Vulnerable personality (finding)",
-            "Social isolation (rejection) (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about having a heart attack (finding)",
+            "Fear of not coping with treatment (finding)"
           ],
-          "contradiction": [
-            "Feeling safe (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling a bit anxious about being vulnerable, and there might be fears lurking in the back of your mind. It's important to acknowledge these feelings and remember that it's okay to feel this way. Let's work together to explore these feelings further and find ways to manage them more effectively.",
+        "response": "\"I can see how difficult this must be for you, feeling constantly on edge and fearful. It's important to acknowledge these feelings and remember that it's okay not to have all the answers right now. Let's work together to find ways to manage your emotions and help you feel more at ease.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling a bit anxious about being vulnerable, and there might be fears lurking in the back of your mind. It's important to acknowledge these feelings and remember that it's okay to feel this way. Let's work together to explore these feelings further and find ways to manage them more effectively.",
+            "response": "\"I can see how difficult this must be for you, feeling constantly on edge and fearful. It's important to acknowledge these feelings and remember that it's okay not to have all the answers right now. Let's work together to find ways to manage your emotions and help you feel more at ease.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
+                  "concept": "fear",
                   "label": "neutral"
                 },
                 {
-                  "concept": "fear of losing emotional control",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're dealing with some fear and anxiety about being vulnerable. Let's explore these feelings a bit more. What makes you feel this way, and what would happen if things don't go as you expect?",
+            "response": "\"It sounds like you're experiencing a lot of fear in certain situations. Can you help me understand what makes those situations particularly challenging for you? And, have you noticed any patterns or triggers that seem to set off this feeling?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
+                  "concept": "fear",
                   "label": "neutral"
                 },
                 {
-                  "concept": "fear of losing emotional control",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "cognitive_restructuring": {
-            "response": "It sounds like you're dealing with some fear and anxiety about being vulnerable. Let's explore together if there might be other ways to approach this situation that could help reduce those feelings.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you're dealing with a lot of fear and anxiety, especially in certain situations. Have you ever considered what might happen if things went better than expected? What could be the best possible outcome for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
+                  "concept": "fear",
                   "label": "neutral"
                 },
                 {
-                  "concept": "fear of losing emotional control",
-                  "label": "entailment"
+                  "concept": "anxiety about losing emotional control",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how difficult it must be for you to manage these feelings of fear and anxiety. Let's take a moment to explore them together, so we can find ways to help you feel more at ease.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
