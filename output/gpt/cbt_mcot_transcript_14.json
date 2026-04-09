@@ -22,19 +22,20 @@
         "schema": {
           "triggers": [
             "Mary crying",
-            "feeling tired"
+            "feeling tired",
+            "difficulty getting out of bed"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed"
+            "I need extra help",
+            "I can't manage this alone"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed"
+            "sadness",
+            "fatigue"
           ],
           "behaviors": [
-            "staying in bed",
-            "seeking help"
+            "crying",
+            "staying in bed"
           ]
         },
         "retrieval": {
@@ -52,11 +53,11 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like Mary’s crying has left you feeling exhausted and overwhelmed, and you’re finding it hard to get out of bed. What might help you feel a bit more rested or supported right now?",
+        "response": "It sounds like you’re feeling really exhausted and overwhelmed by Mary’s crying, and it’s understandable that you need extra help and are finding it hard to get out of bed. What kind of support would feel most helpful to you right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like Mary’s crying has left you feeling exhausted and overwhelmed, and you’re finding it hard to get out of bed. What might help you feel a bit more rested or supported right now?",
+            "response": "It sounds like you’re feeling really exhausted and overwhelmed by Mary’s crying, and it’s understandable that you need extra help and are finding it hard to get out of bed. What kind of support would feel most helpful to you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -72,18 +73,33 @@
                   "label": "triggers"
                 },
                 {
-                  "concept": "extra help",
+                  "concept": "difficulty getting out of bed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "need extra help",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "can't get out of bed",
-                  "label": "automatic_thoughts"
+                  "concept": "can't manage alone",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like Mary’s crying has left you feeling exhausted and overwhelmed. What do you think might happen if you allowed yourself a brief rest or asked for help right now?",
+            "response": "What evidence do you have that you can't manage this alone?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Drowsy (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're feeling exhausted and overwhelmed by Mary's crying. What might a trusted friend say about how you're handling this?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -95,7 +111,11 @@
                   "label": "triggers"
                 },
                 {
-                  "concept": "tired",
+                  "concept": "feeling tired",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "difficulty getting out of bed",
                   "label": "triggers"
                 },
                 {
@@ -103,53 +123,7 @@
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "can't get out of bed",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds exhausting to feel so tired and overwhelmed by Mary’s crying. If a close friend were watching, what might they say about how you’re handling this, and what small step could you consider that might feel doable right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Mary crying",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "tired",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "extra help",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "can't get out of bed",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "drowsy",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you're feeling exhausted and overwhelmed by caring for Mary. What might help you feel a bit more rested or supported right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "tired",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "seeking help",
+                  "concept": "can't manage alone",
                   "label": "unknown"
                 }
               ]
@@ -162,109 +136,127 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s really draining. I just feel like I can’t do enough, like I’m always falling short, you know? Getting out of bed feels like a huge task some days, and I guess I just wish I could shake this heavy feeling. It’s hard to see any way forward when everything feels so… weighty.",
+        "query": "Yeah, I guess I just feel... really drained. Like, I want to be there for her, but sometimes it just feels like too much. I don't know, maybe if someone could just check in on me or take some of the load off for a bit? It’s hard to even think about what I need right now.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary crying",
-            "feeling tired"
+            "feeling drained",
+            "wanting to be there for her",
+            "feeling overwhelmed"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short"
+            "need support",
+            "too much responsibility",
+            "uncertainty about my needs"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed",
             "drained",
-            "heavy"
+            "overwhelmed"
           ],
           "behaviors": [
-            "staying in bed",
-            "seeking help"
+            "wanting someone to check in",
+            "desiring help"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling empty (finding)",
-            "Feeling hopeless (finding)",
-            "Feeling like wanting to escape (finding)"
+            "Extremely emotionally deprived (finding)",
+            "Feeling abandoned (finding)",
+            "Emotionally deprived (finding)",
+            "Feeling empty (finding)"
           ],
           "neutral": [
-            "Poor daily routine (finding)",
-            "Feeling abandoned (finding)"
+            "Emotionally distant (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling exhausted and overwhelmed, as if each day is a big hurdle and you’re falling short of what you think you should be doing. It’s understandable to feel that heavy, and many people feel the same when they’re carrying a lot—what’s one small thing that might ease that weight for you today?",
+        "response": "It sounds like you’re feeling drained and overwhelmed by the responsibility of being there for her, and you’re also missing some support for yourself. What would it look like if someone checked in on you right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling exhausted and overwhelmed, as if each day is a big hurdle and you’re falling short of what you think you should be doing. It’s understandable to feel that heavy, and many people feel the same when they’re carrying a lot—what’s one small thing that might ease that weight for you today?",
+            "response": "It sounds like you’re feeling drained and overwhelmed by the responsibility of being there for her, and you’re also missing some support for yourself. What would it look like if someone checked in on you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling empty (finding)",
-                  "label": "entailment"
+                  "concept": "feeling drained",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling hopeless (finding)",
-                  "label": "entailment"
+                  "concept": "overwhelmed",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling like wanting to escape (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic thoughts: I can't get out of bed, I can't do enough, I'm always falling short",
+                  "concept": "need support",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions: tired, overwhelmed, heavy",
-                  "label": "emotions"
+                  "concept": "emotionally deprived",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that you can't do enough? How might you view what “enough” looks like for you today?",
+            "response": "What would it feel like if someone shared some of that responsibility with you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling hopeless",
+                  "concept": "Extremely emotionally deprived",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling like wanting to escape",
+                  "concept": "Feeling abandoned",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Emotionally deprived",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re carrying a lot of weight right now. If a close friend were watching you, what might they say about how you’re handling this?",
-            "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling really drained and overwhelmed, and it’s hard to see a way forward. What small step might feel doable right now?",
+            "response": "It sounds like you’re feeling drained and overwhelmed while trying to support her. If a close friend were watching you, what might they suggest you do to take care of yourself right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling empty (finding)",
+                  "concept": "Extremely emotionally deprived",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling hopeless (finding)",
+                  "concept": "Feeling abandoned",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling like wanting to escape (finding)",
+                  "concept": "Emotionally deprived",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling drained",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "need support",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -276,156 +268,77 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "It’s just so exhausting. I feel like I’m constantly trying to keep up, but no matter what, I always end up feeling like I’m not good enough. Some days, just getting out of bed feels overwhelming, and I wish I could see a brighter side to things. Everything feels so heavy, like there’s this weight that just won’t lift.",
+        "query": "Honestly, I think it would help just to have someone ask how I'm doing without me having to put on a brave face. Maybe even just a simple, “Are you okay?” would mean a lot. But then, I worry that if I let anyone in, they'll see how... not okay I really am.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary crying",
-            "feeling tired"
+            "someone asking how I'm doing",
+            "someone asking 'Are you okay?'"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short",
-            "I'm not good enough"
+            "I have to put on a brave face",
+            "if I let anyone in, they'll see how not okay I really am"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed",
-            "drained",
-            "heavy"
+            "anxiety"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of being a burden to others (finding)"
+          ],
           "neutral": [
-            "Poor daily routine (finding)",
-            "Loss of motivation (finding)",
-            "Anxiety about collapsing (finding)",
-            "Feeling like wanting to escape (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Social isolation (rejection) (finding)",
+            "Fear of writing in public (finding)",
+            "Fear of social gatherings (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling exhausted and overwhelmed, especially when you think you’re not good enough and it’s hard to get out of bed. What’s one small thing that might help you feel a bit lighter today?",
+        "response": "It sounds like you’re craving a genuine check‑in but feel anxious that opening up might reveal how you’re really struggling. What would it feel like if someone offered that simple “Are you okay?” without expecting you to be strong all the time?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling exhausted and overwhelmed, especially when you think you’re not good enough and it’s hard to get out of bed. What’s one small thing that might help you feel a bit lighter today?",
+            "response": "It sounds like you’re craving a genuine check‑in but feel anxious that opening up might reveal how you’re really struggling. What would it feel like if someone offered that simple “Are you okay?” without expecting you to be strong all the time?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling tired",
-                  "label": "triggers"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "not good enough",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "getting out of bed feels overwhelming",
+                  "concept": "automatic thoughts of needing to put on a brave face",
                   "label": "unknown"
                 },
                 {
-                  "concept": "heavy weight",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "neutral: loss of motivation",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "neutral: anxiety about collapsing",
+                  "concept": "anxiety",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re carrying a lot of weight. What evidence do you have that you’re not good enough, and what moments might suggest otherwise?",
+            "response": "What evidence do you have that sharing how you’re really feeling would make others see you as a burden? I hear that you’re worried about being seen as a burden.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts: I can't do enough, I'm not good enough",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: tired, overwhelmed, heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: staying in bed",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "neutral clinical context: loss of motivation, anxiety about collapsing",
-                  "label": "neutral"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re carrying a lot of weight. If a close friend were watching you, what might they say about how you’re handling things?",
+            "response": "It sounds like you’re hoping for a simple check‑in but worry you’ll be seen as a burden. If a close friend asked how you’re doing, what might they say that could help you feel less alone?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling tired",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "not good enough",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "getting out of bed feels overwhelming",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "neutral: loss of motivation",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "neutral: anxiety about collapsing",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re carrying a heavy weight and feeling exhausted, and that can be really tough. What small thing might help you feel a bit lighter today?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling tired",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "not good enough",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "heavy weight",
-                  "label": "emotions"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 }
               ]
             }
@@ -437,160 +350,94 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I don’t know… I guess just getting through the day without feeling this pressure would be nice. But then I start to think about everything I have to do, and it just feels impossible. I want to feel lighter, but it’s like I’m stuck in this loop of feeling heavy and unworthy. It’s just really hard to break out of that.",
+        "query": "It would feel... kind of like a relief, I think? Like for a moment, I could just breathe without worrying about keeping it all together. But then there’s this nagging voice in my head telling me that I shouldn't burden anyone with my problems, you know? It's like, I have to be strong for everyone else, even when I feel so weak inside.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "Mary crying",
-            "feeling tired",
-            "thinking about everything I have to do"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short",
-            "I'm not good enough",
-            "it's impossible to get through the day"
+            "I shouldn't burden anyone with my problems",
+            "I have to be strong for everyone else"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed",
-            "drained",
-            "heavy",
-            "pressure",
-            "unworthy"
+            "relief",
+            "weakness"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling stressed (finding)",
-            "Complaining of feeling depressed (finding)",
-            "Feeling empty (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Positive self thoughts (finding)"
+            "Anxiety about collapsing (finding)",
+            "Fear of collapsing (finding)",
+            "Able to recognize own emotional pain and distress (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a heavy load of tasks and feeling unworthy, and that weight keeps looping in your mind. When you think about wanting to feel lighter, what small shift might help you feel a bit more relief right now?",
+        "response": "It sounds like you’re noticing a brief sense of relief when you let yourself breathe, but then a voice reminds you that you must stay strong for others, which feels exhausting. What does that voice say to you when you feel weak?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a heavy load of tasks and feeling unworthy, and that weight keeps looping in your mind. When you think about wanting to feel lighter, what small shift might help you feel a bit more relief right now?",
+            "response": "It sounds like you’re noticing a brief sense of relief when you let yourself breathe, but then a voice reminds you that you must stay strong for others, which feels exhausting. What does that voice say to you when you feel weak?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling stressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Anxiety about collapsing",
                   "label": "neutral"
                 },
                 {
-                  "concept": "User schema: emotions (tired, overwhelmed, heavy, pressure, unworthy), automatic thoughts (can't get out of bed, can't do enough, impossible to get through the day)",
-                  "label": "unknown"
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts: I shouldn't burden anyone with my problems",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Automatic thoughts: I have to be strong for everyone else",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence supports the idea that everything you have to do is impossible, and what evidence might suggest otherwise?",
+            "response": "It sounds like you’re feeling relief when you can breathe, but also worry about being a burden. What evidence do you have that sharing your struggles would burden others?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling stressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Anxiety about collapsing",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Automatic thoughts: 'I can't do enough', 'it's impossible to get through the day'",
+                  "concept": "Fear of collapsing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "I shouldn't burden anyone with my problems",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I have to be strong for everyone else",
                   "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re carrying a lot of pressure and feeling stuck in a loop of heaviness. If a trusted friend were watching, what might they say about how you’re managing this?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling stressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you're feeling overwhelmed and stuck in a cycle of heavy thoughts, and that can be exhausting. What would it feel like if you could pause and breathe for a few minutes?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling stressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling unworthy",
-                  "label": "emotions"
-                }
-              ]
-            }
+            "response": "It sounds like you’re relieved for a moment, yet still feel the pressure not to burden others and to stay strong. If a close friend heard you say that, what might they say to you?",
+            "reasoning": null
           }
         }
       }
@@ -599,134 +446,75 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I mean, I guess just having a moment to breathe would help. But then I think about how quickly time passes, and I feel guilty for not doing more. It’s like I want to take a break, yet I feel like I’m not allowed to. It’s frustrating because I know I need some space to just exist without all this pressure.",
+        "query": "It usually says things like, \"You can't afford to break down now,\" or, \"People are counting on you.\" It feels like if I let myself show any weakness, everything will fall apart. I know it’s not true, but in those moments, it feels so real, like I have to keep up this image of being the strong one.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "Mary crying",
-            "feeling tired",
-            "thinking about everything I have to do",
-            "thinking about how quickly time passes"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short",
-            "I'm not good enough",
-            "it's impossible to get through the day",
-            "I'm not allowed to take a break"
+            "You can't afford to break down now",
+            "People are counting on you",
+            "If I show any weakness, everything will fall apart",
+            "I have to keep up this image of being the strong one"
           ],
-          "emotions": [
-            "tired",
-            "overwhelmed",
-            "drained",
-            "heavy",
-            "pressure",
-            "unworthy",
-            "frustrated",
-            "guilty"
-          ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help",
-            "not taking breaks"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling calm (finding)",
-            "Feeling physically tense (finding)"
+            "Fear of collapsing (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Repressing thoughts (finding)",
+            "Vulnerable personality (finding)",
             "Anxiety about collapsing (finding)",
-            "Low self-control (finding)"
+            "Depressive delusion of catastrophe (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of pressure and guilt when you try to pause, and that’s exhausting. What would it feel like if you allowed yourself that brief break without judging yourself for taking it?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you feel a lot of pressure to stay strong. What evidence do you have that showing weakness will cause everything to fall apart?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of pressure and guilt when you try to pause, and that’s exhausting. What would it feel like if you allowed yourself that brief break without judging yourself for taking it?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling physically tense (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling calm (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
+            "response": "It sounds like you’re carrying a heavy sense that if you show vulnerability, everything could unravel, and that’s a tough place to be. What does that pressure feel like for you right now?",
+            "reasoning": null
           },
           "socratic_questioning": {
-            "response": "What evidence supports the idea that you’re not allowed to take a break? How might you feel if you tried a short pause and observed the outcome?",
+            "response": "It sounds like you feel a lot of pressure to stay strong. What evidence do you have that showing weakness will cause everything to fall apart?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling guilty for not doing more",
-                  "label": "emotions"
+                  "concept": "Fear of collapsing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling not allowed to take a break",
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts about needing to stay strong",
                   "label": "unknown"
-                },
-                {
-                  "concept": "frustration",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "pressure",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "time passes",
-                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re feeling both the urge to pause and the pressure not to, and that tension can feel exhausting. If a trusted friend were watching, what might they say about giving yourself that space?",
+            "response": "It sounds like you’re carrying a lot of weight. If a trusted friend were watching you, what might they say about how you’re handling this pressure?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling physically tense (finding)",
+                  "concept": "Fear of collapsing",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling calm (finding)",
+                  "concept": "Fear of losing emotional control",
                   "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling guilty and pressured, and you want a break but feel like you’re not allowed to take one. What would it look like if you allowed yourself that break?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling guilty",
-                  "label": "emotions"
                 },
                 {
-                  "concept": "feeling pressured",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "desire for a break",
+                  "concept": "automatic thoughts about needing to stay strong",
                   "label": "unknown"
-                },
-                {
-                  "concept": "automatic thought: I'm not allowed to take a break",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -738,129 +526,83 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "That sounds nice, like a little escape, but I just can’t shake the feeling that I don't deserve it. I always think about what I should be doing instead. It’s like I’m my own worst critic, and it just feels easier to push through the discomfort than to actually allow myself a moment of peace. I guess I’m scared of what would happen if I really let myself take a break.",
+        "query": "I guess... it’s more about what I’ve seen before. Like, I remember when I did lean on someone and it just seemed to overwhelm them. They pulled away, and I told myself I’d never let that happen again. So now it feels safer to just hold it all in, even though it gets heavy.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary crying",
-            "feeling tired",
-            "thinking about everything I have to do",
-            "thinking about how quickly time passes",
-            "thinking about what I should be doing instead"
+            "leaning on someone",
+            "someone pulling away"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short",
-            "I'm not good enough",
-            "it's impossible to get through the day",
-            "I'm not allowed to take a break",
-            "I don't deserve a break",
-            "I'm my own worst critic",
-            "it's easier to push through discomfort"
+            "I’ll never let that happen again",
+            "it feels safer to hold it all in"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed",
-            "drained",
-            "heavy",
-            "pressure",
-            "unworthy",
-            "frustrated",
-            "guilty",
-            "scared"
+            "overwhelm",
+            "heaviness"
           ],
           "behaviors": [
-            "staying in bed",
-            "seeking help",
-            "not taking breaks",
-            "pushing through discomfort"
+            "holding it all in"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Feeling like wanting to escape (finding)",
-            "Feeling calm (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Repressing thoughts (finding)",
-            "Anxiety about collapsing (finding)"
+            "Compulsive touching (finding)",
+            "Fear of being a burden to others (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of collapsing (finding)",
+            "Fear of falling while mobilizing (finding)"
           ],
-          "contradiction": [
-            "Not wanting to think about something (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of guilt and fear about taking a break, and that feeling of being your own harshest critic is weighing on you. What might happen if you let yourself pause for just a few minutes?",
-        "protocol_used": "validate_and_reflect",
+        "response": "What evidence do you have that leaning on someone always overwhelms them? Could there be situations where leaning on someone might feel safe for both of you?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of guilt and fear about taking a break, and that feeling of being your own harshest critic is weighing on you. What might happen if you let yourself pause for just a few minutes?",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "What might happen if you allowed yourself a moment of peace?",
+            "response": "It sounds like you’re carrying a lot of weight because you’re worried about burdening others, and that’s understandable. What does holding it all in feel like for you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling like wanting to escape",
-                  "label": "entailment"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about collapsing",
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that leaning on someone always overwhelms them? Could there be situations where leaning on someone might feel safe for both of you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "leaning on someone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "someone pulling away",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "fear of being a burden",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of losing emotional control",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "If a close friend were watching you, what might they say about taking a short break? It could help you see that a pause might actually give you more energy to handle what’s ahead.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling like wanting to escape",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling calm",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about collapsing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Automatic thoughts about not deserving a break",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Emotions of guilt and fear",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling guilty and worried about taking a break, and that’s understandable. What would it look like if you allowed yourself a brief moment of peace without feeling guilty?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling guilty",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "not deserving a break",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "fear of taking a break",
-                  "label": "unknown"
-                }
-              ]
-            }
+            "response": "It might be that the person pulling away was dealing with their own overwhelm, not a reflection of you—what do you think a close friend would say about how you’re handling this? Maybe they would suggest you try sharing a bit more gradually to see how they respond.",
+            "reasoning": null
           }
         }
       }
@@ -869,137 +611,81 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I do feel that guilt pretty strongly. If I took a pause, I keep thinking I’d just feel even worse about everything I’m not doing. It’s like I’m afraid of what I might confront in that silence. I don’t really know how to sit with those feelings without feeling even more overwhelmed. It’s frustrating.",
+        "query": "Well, I mean, I can't think of a lot of examples... but that one really stuck with me, you know? It was like I could see the shift in their face, and it just made me feel so small. It’s hard to imagine that leaning on someone could feel safe for both of us. I guess I just have this fear that I'll be too much for anyone.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary crying",
-            "feeling tired",
-            "thinking about everything I have to do",
-            "thinking about how quickly time passes",
-            "thinking about what I should be doing instead",
-            "the idea of taking a pause"
+            "seeing the shift in their face"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short",
-            "I'm not good enough",
-            "it's impossible to get through the day",
-            "I'm not allowed to take a break",
-            "I don't deserve a break",
-            "I'm my own worst critic",
-            "it's easier to push through discomfort",
-            "if I take a pause, I'll feel worse about everything I'm not doing",
-            "I'm afraid of what I might confront in silence"
+            "I feel small",
+            "leaning on someone might not feel safe",
+            "I'll be too much for anyone"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed",
-            "drained",
-            "heavy",
-            "pressure",
-            "unworthy",
-            "frustrated",
-            "guilty",
-            "scared",
-            "frustration with sitting with feelings"
+            "fear"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help",
-            "not taking breaks",
-            "pushing through discomfort",
-            "avoiding pauses"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling guilt (finding)",
-            "Feeling ashamed (finding)"
+            "Fear of being a burden to others (finding)",
+            "Social fear (finding)"
           ],
           "neutral": [
-            "Repressing thoughts (finding)",
-            "Delusion of guilt (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Fear of shaking (finding)",
+            "Fear of collapsing (finding)",
+            "Tends to exaggerate emotional expression inappropriately (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a strong sense of guilt and worry that pausing would make you feel even more overwhelmed, which is understandably frustrating. What might it look like if you could pause without that fear of feeling worse?",
+        "response": "It sounds like seeing that shift in their face made you feel small and worried that leaning on someone might not feel safe for either of you, and that you might be too much of a burden. Can you tell me more about what that fear feels like for you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a strong sense of guilt and worry that pausing would make you feel even more overwhelmed, which is understandably frustrating. What might it look like if you could pause without that fear of feeling worse?",
+            "response": "It sounds like seeing that shift in their face made you feel small and worried that leaning on someone might not feel safe for either of you, and that you might be too much of a burden. Can you tell me more about what that fear feels like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling ashamed (finding)",
+                  "concept": "Social fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "frustrated",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "automatic thoughts about not being able to pause",
+                  "concept": "Feeling small",
                   "label": "unknown"
+                },
+                {
+                  "concept": "Fear of leaning on someone",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re worried that silence will bring up more guilt. What evidence do you have that taking a pause will make you feel worse about everything you’re not doing?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling guilt (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling ashamed (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
+            "response": "It sounds like you’re worried about being a burden. What evidence do you have that leaning on someone would be unsafe for both of you?",
+            "reasoning": null
           },
           "alternative_perspective": {
-            "response": "If a close friend were watching you, what might they say about taking a short pause? They might see it as a chance to reset rather than a failure.",
+            "response": "If you asked a trusted friend what they saw when you felt small, what might they say? They might see that feeling as a normal part of connection, not a sign of being too much.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling ashamed",
+                  "concept": "Social fear",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes",
-                  "label": "neutral"
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like the guilt feels overwhelming and makes you worry that pausing will make you feel even worse. What might a brief pause look like that feels safe for you?",
-            "reasoning": null
           }
         }
       }
@@ -1008,162 +694,102 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I don’t know… I guess if I could pause, maybe it would feel like a relief for a moment. But then there’s this nagging thought that if I did, I’d just get lost in my own mind and end up feeling even more stuck. It’s like I wouldn’t know how to handle the silence without all those worries creeping back in.",
+        "query": "Yeah, it’s like this knot in my stomach when I think about opening up. I feel this wave of panic, like I'm teetering on the edge of something really shaky. What if they pull away again, or what if they just don’t get it? It makes me want to hide away, like it's easier to just deal with it on my own instead of risking that awkwardness or disappointment.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary crying",
-            "feeling tired",
-            "thinking about everything I have to do",
-            "thinking about how quickly time passes",
-            "thinking about what I should be doing instead",
-            "the idea of taking a pause"
+            "thinking about opening up",
+            "risking awkwardness",
+            "risking disappointment"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short",
-            "I'm not good enough",
-            "it's impossible to get through the day",
-            "I'm not allowed to take a break",
-            "I don't deserve a break",
-            "I'm my own worst critic",
-            "it's easier to push through discomfort",
-            "if I take a pause, I'll feel worse about everything I'm not doing",
-            "I'm afraid of what I might confront in silence",
-            "if I pause, I'll get lost in my own mind and feel even more stuck"
+            "what if they pull away again",
+            "what if they just don’t get it"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed",
-            "drained",
-            "heavy",
-            "pressure",
-            "unworthy",
-            "frustrated",
-            "guilty",
-            "scared",
-            "frustration with sitting with feelings",
-            "relief (momentary)"
+            "panic",
+            "fear"
           ],
           "behaviors": [
-            "staying in bed",
-            "seeking help",
-            "not taking breaks",
-            "pushing through discomfort",
-            "avoiding pauses"
+            "want to hide away",
+            "deal with it on my own"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of saying the wrong thing (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
           "neutral": [
-            "Repressing thoughts (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about blushing (finding)",
             "Anxiety about collapsing (finding)"
           ],
-          "contradiction": [
-            "Feeling calm (finding)",
-            "Not wanting to think about something (finding)",
-            "Loud thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence supports the idea that pausing will make you feel stuck, and can you think of a time when a pause felt helpful? How might you test that idea in a small, manageable way?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re feeling a knot in your stomach and panic when you think about opening up, worried they might pull away or not understand, and you’re leaning toward hiding away. It’s completely normal to feel that way; many people fear saying the wrong thing or losing control—what would it feel like if you could share just a small part of what’s on your mind?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re torn between the brief relief a pause might bring and the fear that silence could open up more worries. What might help you feel more comfortable with a short pause?",
+            "response": "It sounds like you’re feeling a knot in your stomach and panic when you think about opening up, worried they might pull away or not understand, and you’re leaning toward hiding away. It’s completely normal to feel that way; many people fear saying the wrong thing or losing control—what would it feel like if you could share just a small part of what’s on your mind?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts: 'if I take a pause, I'll feel worse about everything I'm not doing'",
-                  "label": "automatic_thoughts"
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions: 'overwhelmed', 'frustrated', 'guilty'",
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "knot in stomach",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "panic",
                   "label": "emotions"
                 },
                 {
-                  "concept": "behaviors: 'avoiding pauses'",
+                  "concept": "worry about pulling away",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "worry about not being understood",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "tendency to hide away",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence supports the idea that pausing will make you feel stuck, and can you think of a time when a pause felt helpful? How might you test that idea in a small, manageable way?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts: 'if I take a pause, I'll feel worse', 'I'm afraid of what I might confront in silence'",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: overwhelmed, frustrated",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: avoiding pauses",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "neutral: 'Anxiety about collapsing'",
-                  "label": "neutral"
-                }
-              ]
-            }
+            "response": "It sounds like you’re worried about losing control. What evidence do you have that opening up will lead to them pulling away or not understanding you?",
+            "reasoning": null
           },
           "alternative_perspective": {
-            "response": "If a close friend were watching you, what might they say about taking a short pause to breathe? Maybe a brief break could actually give you a clearer view of the worries that come up.",
+            "response": "It sounds like the fear of saying the wrong thing and losing control is really heavy. If a trusted friend were watching you, what might they say about how you’re handling this?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts: 'if I take a pause, I'll feel worse', 'I'm afraid of what I might confront in silence', 'if I pause, I'll get lost in my own mind and feel even more stuck'",
-                  "label": "automatic_thoughts"
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions: overwhelmed, heavy, frustration",
-                  "label": "emotions"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "behaviors: avoiding pauses",
+                  "concept": "automatic thoughts about pulling away",
                   "label": "unknown"
                 },
                 {
-                  "concept": "neutral: anxiety about collapsing",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling both relief at the idea of pausing and worry that silence might bring more anxiety. What do you think might help you feel more comfortable when you do take a pause?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "nagging thought",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "fear of silence",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "worries creeping back",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "idea of taking a pause",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic thought about getting stuck",
+                  "concept": "behaviors of hiding away",
                   "label": "unknown"
                 }
               ]
@@ -1176,145 +802,73 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I mean, I can’t really think of a specific time when pausing felt good. Mostly, it’s just this fear of what might come up if I actually take a break. It seems like I’d just end up spiraling into all the things I’m avoiding. I guess it’s easier to keep busy, but I know that doesn’t help in the long run. Testing it feels scary, though. What if it just makes everything worse?",
+        "query": "I don’t know... It feels a little scary, honestly. But maybe there’s a tiny part of me that thinks it might lift some weight, like just letting a little bit out. I guess I worry that if I start, I won’t be able to stop, or it won’t come out right. It’s hard to imagine what that would look like without feeling completely exposed.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "Mary crying",
-            "feeling tired",
-            "thinking about everything I have to do",
-            "thinking about how quickly time passes",
-            "thinking about what I should be doing instead",
-            "the idea of taking a pause"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short",
-            "I'm not good enough",
-            "it's impossible to get through the day",
-            "I'm not allowed to take a break",
-            "I don't deserve a break",
-            "I'm my own worst critic",
-            "it's easier to push through discomfort",
-            "if I take a pause, I'll feel worse about everything I'm not doing",
-            "I'm afraid of what I might confront in silence",
-            "if I pause, I'll get lost in my own mind and feel even more stuck",
-            "pausing feels scary because I might spiral into things I'm avoiding",
-            "keeping busy seems easier but doesn't help in the long run",
-            "testing taking a break feels scary"
+            "I worry that if I start, I won’t be able to stop",
+            "It won’t come out right",
+            "It's hard to imagine what that would look like without feeling completely exposed"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed",
-            "drained",
-            "heavy",
-            "pressure",
-            "unworthy",
-            "frustrated",
-            "guilty",
-            "scared",
-            "frustration with sitting with feelings",
-            "relief (momentary)"
+            "scary"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help",
-            "not taking breaks",
-            "pushing through discomfort",
-            "avoiding pauses"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Momentary confabulation (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Loss of interest in previously enjoyable activity (finding)",
-            "Not wanting to think about something (finding)",
-            "Anxiety about fainting (finding)"
+            "Anxiety about wetting self (finding)",
+            "Fear of losing control of bowels in public (finding)",
+            "Fear of losing control of bowels (finding)",
+            "Fear of swallowing (finding)",
+            "Anxiety about swallowing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried that pausing will let you spiral into the things you’re avoiding. What evidence do you have that taking a pause will make everything worse?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re feeling scared, yet you also notice a small hope that letting a little bit out might ease some pressure. What does that tiny part of you imagine might happen if you let a little bit out?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling a lot of fear about what might surface if you pause, and that’s a common worry when we’re used to staying busy. If you could picture a pause that feels safe, what might that look like for you?",
+            "response": "It sounds like you’re feeling scared, yet you also notice a small hope that letting a little bit out might ease some pressure. What does that tiny part of you imagine might happen if you let a little bit out?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of what might come up",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "spiraling into avoided thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "easier to stay busy",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "testing it feels scary",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re worried that pausing will let you spiral into the things you’re avoiding. What evidence do you have that taking a pause will make everything worse?",
+            "response": "It sounds scary—what evidence do you have that you won’t be able to stop if you start?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of spiraling",
-                  "label": "unknown"
+                  "concept": "Anxiety about wetting self",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "avoidance of pause",
-                  "label": "unknown"
+                  "concept": "Fear of losing control of bowels",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "anxiety about what might come up",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "belief that pausing will make everything worse",
-                  "label": "unknown"
+                  "concept": "Anxiety about swallowing",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re worried that pausing will make things worse—what might a supportive friend suggest you could do to keep that pause manageable?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic thoughts about pausing leading to spiraling",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions of fear and overwhelm",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behavior of avoiding breaks",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "trigger of thinking about what might come up",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re worried that pausing might pull you into the things you’re avoiding and make things feel worse. What would it feel like if you could try a very brief pause and simply notice what comes up?",
+            "response": "It sounds like you’re carrying a lot of worry about losing control and feeling exposed. If a trusted friend were watching you, what might they say about how you’re handling that fear?",
             "reasoning": null
           }
         }
@@ -1324,160 +878,95 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess I don’t really have solid evidence. It’s just that every time I’ve tried to slow down before, it feels like all the doubts and insecurities just flood in. I get overwhelmed by everything I’m not doing and how far behind I feel. It’s like those moments of quiet just amplify my fears instead of helping me find some clarity or peace. It feels safer to keep moving, even if it’s exhausting.",
+        "query": "Yeah, I think... maybe it could feel like a release, you know? Like letting air out of a balloon before it pops. But then I also picture all the emotions flooding out at once, and that’s terrifying. What if I can’t handle it or I get lost in it? I guess I’m scared it might open up a whole can of worms I’m not ready to deal with.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "Mary crying",
-            "feeling tired",
-            "thinking about everything I have to do",
-            "thinking about how quickly time passes",
-            "thinking about what I should be doing instead",
-            "the idea of taking a pause",
-            "moments of quiet"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I need extra help with Mary",
-            "I can't get out of bed",
-            "I can't do enough",
-            "I'm always falling short",
-            "I'm not good enough",
-            "it's impossible to get through the day",
-            "I'm not allowed to take a break",
-            "I don't deserve a break",
-            "I'm my own worst critic",
-            "it's easier to push through discomfort",
-            "if I take a pause, I'll feel worse about everything I'm not doing",
-            "I'm afraid of what I might confront in silence",
-            "if I pause, I'll get lost in my own mind and feel even more stuck",
-            "pausing feels scary because I might spiral into things I'm avoiding",
-            "keeping busy seems easier but doesn't help in the long run",
-            "testing taking a break feels scary",
-            "slowing down brings in doubts and insecurities",
-            "quiet moments amplify my fears instead of helping"
+            "it could feel like a release",
+            "all the emotions flooding out at once",
+            "what if I can’t handle it",
+            "I might get lost in it",
+            "it might open up a whole can of worms"
           ],
           "emotions": [
-            "tired",
-            "overwhelmed",
-            "drained",
-            "heavy",
-            "pressure",
-            "unworthy",
-            "frustrated",
-            "guilty",
-            "scared",
-            "frustration with sitting with feelings",
-            "relief (momentary)",
-            "exhausted"
+            "terrifying",
+            "scared"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help",
-            "not taking breaks",
-            "pushing through discomfort",
-            "avoiding pauses",
-            "keeping moving"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of losing emotional control (finding)",
+            "Feeling like wanting to escape (finding)",
+            "Feeling mixed emotions (finding)"
+          ],
           "neutral": [
-            "Low self-control (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anxiety about loss of control (finding)"
+            "Difficulty controlling emotions (finding)"
           ],
           "contradiction": [
-            "Feeling of being slowed down (finding)",
-            "Feeling calm (finding)"
+            "Emotionally subdued (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like when you try to pause, the doubts feel overwhelming and you end up feeling even more exhausted, which makes staying busy feel safer. What would a supportive friend say to you in that moment?",
+        "response": "It sounds like you’re torn between the idea that letting it out could feel freeing and the fear that it might overwhelm you—many people feel that way. Does that resonate with how you’re feeling right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like when you try to pause, the doubts feel overwhelming and you end up feeling even more exhausted, which makes staying busy feel safer. What would a supportive friend say to you in that moment?",
+            "response": "It sounds like you’re torn between the idea that letting it out could feel freeing and the fear that it might overwhelm you—many people feel that way. Does that resonate with how you’re feeling right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "low self-control",
-                  "label": "neutral"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about collapsing",
-                  "label": "neutral"
+                  "concept": "Feeling like wanting to escape",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about loss of control",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "automatic thoughts about pausing causing more fear",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions of overwhelm and exhaustion",
-                  "label": "unknown"
+                  "concept": "Feeling mixed emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What might happen if you tried a very short pause—say a minute or two—and how could you check whether the doubts you fear are actually more or less overwhelming than the exhaustion you feel?",
+            "response": "It sounds like you’re worried about losing control if the emotions come out. What evidence do you have that you can’t handle them?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about collapsing",
-                  "label": "neutral"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "neutral"
+                  "concept": "Feeling like wanting to escape",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Low self-control",
-                  "label": "neutral"
+                  "concept": "Feeling mixed emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like the quiet moments feel like a magnifying glass for your worries. If a close friend were watching, what might they say about the value of a brief pause in the midst of a busy day?",
-            "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like when you try to pause, the quiet brings up a lot of worries that feel overwhelming, and you feel safer just keeping busy even though it's exhausting. What might happen if you allowed yourself a brief pause without feeling judged by those worries?",
+            "response": "It sounds like you’re worried that letting those feelings out could overwhelm you, but a close friend might see it as a chance to release tension and maybe even feel lighter afterward. What do you think a supportive friend would say about the idea of letting the emotions out, even if it feels scary?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "fear",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling like wanting to escape",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "pausing",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "quiet",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "exhaustion",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "avoidance",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "anxiety about collapsing",
-                  "label": "neutral"
+                  "concept": "Feeling mixed emotions",
+                  "label": "entailment"
                 }
               ]
             }

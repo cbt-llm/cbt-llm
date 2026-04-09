@@ -21,19 +21,23 @@
         "core_issue": "academic and educational concerns",
         "schema": {
           "triggers": [
-            "upcoming paper deadlines"
+            "papers to write",
+            "night time",
+            "due tomorrow"
           ],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow"
+            "I know I can do it",
+            "I'll try to do it tomorrow",
+            "tomorrow doesn't happen"
           ],
           "emotions": [
             "annoyance",
+            "frustration",
             "stress"
           ],
           "behaviors": [
-            "procrastination",
-            "rushing to complete assignments"
+            "procrastinating",
+            "rushing to finish"
           ]
         },
         "retrieval": {
@@ -51,35 +55,35 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're dealing with some anxiety and procrastination when it comes to your schoolwork. Can we explore what might be causing this anxiety, or perhaps consider alternative strategies for managing your time more effectively?\"",
+        "response": "\"It sounds like you have a lot on your plate with papers to write, and it can be challenging to find the motivation to start. Have you noticed that when you procrastinate, it tends to lead to increased anxiety? Let's explore some strategies for managing this pattern together.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you find it challenging to start working on your papers, and the stress of procrastinating can make it even harder. Let's explore some strategies together to help manage this situation more effectively.",
+            "response": "\"It sounds like writing papers is a trigger for you, and it seems that your automatic thought is 'I can do it, but I'll try to do it tomorrow.' This might lead to feelings of annoyance, frustration, and stress. Let's explore why this pattern happens and what we can do to change it.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "procrastination",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "stress",
-                  "label": "emotions"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with some anxiety and procrastination when it comes to your schoolwork. Can we explore what might be causing this anxiety, or perhaps consider alternative strategies for managing your time more effectively?\"",
+            "response": "\"It sounds like you have a lot on your plate with papers to write, and it can be challenging to find the motivation to start. Have you noticed that when you procrastinate, it tends to lead to increased anxiety? Let's explore some strategies for managing this pattern together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
                   "concept": "procrastination",
                   "label": "unknown"
-                },
-                {
-                  "concept": "low motivation",
-                  "label": "neutral"
                 },
                 {
                   "concept": "anxiety about making mistakes",
@@ -89,34 +93,43 @@
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot of stress and procrastination when it comes to your schoolwork. Have you ever considered what might be causing this pattern? For example, what would a trusted friend say about your approach to writing papers?\"",
+            "response": "\"It sounds like you have a lot on your plate with papers due. Have you ever considered what might happen if you started working on them earlier in the day? What would a friend or family member suggest?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "procrastination",
-                  "label": "unknown"
+                  "concept": "papers to write",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "stress",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"It sounds like you're dealing with a lot of stress and procrastination when it comes to your schoolwork. Let's explore some strategies together to help manage these feelings and break the cycle.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "procrastination",
-                  "label": "unknown"
+                  "concept": "night time",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "stress",
-                  "label": "emotions"
+                  "concept": "due tomorrow",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I know I can do it",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'll try to do it tomorrow",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "tomorrow doesn't happen",
+                  "label": "automatic_thoughts"
                 },
                 {
                   "concept": "annoyance",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "stress",
                   "label": "emotions"
                 }
               ]
@@ -129,106 +142,101 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I’ve just been feeling overwhelmed with school lately. It’s like no matter how hard I try, I can’t keep up. I don’t know if it’s the pressure or if I’m just not good enough. It's frustrating.",
+        "query": "Okay, I guess I’ve just been feeling really overwhelmed with everything lately, especially with school. It’s like no matter how hard I try, I can't seem to keep up. I keep thinking I should be doing better, and that just makes me feel even worse.",
         "core_issue": "academic and educational concerns",
         "schema": {
           "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school"
+            "overwhelmed with everything",
+            "school"
           ],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up"
+            "I can't seem to keep up",
+            "I should be doing better"
           ],
           "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
-            "frustration"
+            "overwhelmed",
+            "worse"
           ],
-          "behaviors": [
-            "procrastination",
-            "rushing to complete assignments"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling stressed (finding)",
             "Feeling agitated (finding)",
-            "Feeling of being slowed down (finding)"
+            "Feeling stressed (finding)"
           ],
           "neutral": [
-            "Fear of school (finding)",
-            "Performance anxiety (finding)"
+            "Feeling of being slowed down (finding)",
+            "Difficulty managing stress (finding)",
+            "Poor daily routine (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how you might be feeling overwhelmed with all the pressure from school. It's important to remember that everyone struggles at times, and it's okay not to have everything figured out right away. Let's work together to find a way to manage your stress and help you succeed.",
+        "response": "\"It sounds like you're really struggling with feeling overwhelmed, especially with school. It's important to remember that everyone has their own pace and it's okay not to be perfect. Let's work together to find ways to manage your stress and help you feel more in control.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you might be feeling overwhelmed with all the pressure from school. It's important to remember that everyone struggles at times, and it's okay not to have everything figured out right away. Let's work together to find a way to manage your stress and help you succeed.",
+            "response": "\"It sounds like you're really struggling with feeling overwhelmed, especially with school. It's important to remember that everyone has their own pace and it's okay not to be perfect. Let's work together to find ways to manage your stress and help you feel more in control.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Pressure from school",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "\"I can see how you might be feeling overwhelmed with all the deadlines coming up. It's common to feel that way when we have a lot on our plate. Let's explore what's making it hard for you to keep up and find some strategies together.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling stressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling agitated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Performance anxiety",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot right now, and it's understandable to feel overwhelmed. Have you ever considered what a trusted friend might say about your situation? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "pressure from school",
+                  "concept": "overwhelmed",
                   "label": "triggers"
                 },
                 {
-                  "concept": "I can't keep up",
+                  "concept": "school",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I can't seem to keep up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I should be doing better",
                   "label": "automatic_thoughts"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "\"It sounds like you're really feeling the weight of your current situation with school. Can you tell me more about what specifically is causing this pressure and frustration?\"",
+          "socratic_questioning": {
+            "response": "\"It sounds like you're really struggling with feeling overwhelmed, especially with school. It's common to feel that way when things pile up. Let's explore what makes you think you can't keep up and why you believe you should be doing better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure from school",
+                  "concept": "overwhelmed",
                   "label": "triggers"
                 },
                 {
-                  "concept": "I can't keep up",
+                  "concept": "I can't seem to keep up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I should be doing better",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're really struggling with school right now. It's common to feel overwhelmed when we have a lot on our plate, and it's important to remember that everyone has their own pace. Let's explore what might be making things difficult for you, and see if we can find some strategies to help.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "school",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I can't seem to keep up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I should be doing better",
                   "label": "automatic_thoughts"
                 }
               ]
@@ -241,121 +249,94 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Thanks, I appreciate that. I guess I just feel like everyone else is handling it fine, and I’m falling behind. It makes me anxious, and then I just shut down instead of doing my work. It feels like a cycle I can’t break.",
+        "query": "Yeah, I know that. It’s just...sometimes it feels like everyone else has it figured out and I’m just falling behind. I hate feeling like I’m not doing enough, and it makes me anxious just thinking about all the things I need to get done. I want to be able to handle it, but instead, I just freeze up.",
         "core_issue": "academic and educational concerns",
         "schema": {
           "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school",
-            "comparing myself to others"
+            "feeling like everyone else has it figured out",
+            "thinking about all the things I need to get done"
           ],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up",
-            "everyone else is handling it fine"
+            "I’m just falling behind",
+            "I hate feeling like I’m not doing enough",
+            "I want to be able to handle it"
           ],
           "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
-            "frustration",
             "anxiety"
           ],
           "behaviors": [
-            "procrastination",
-            "rushing to complete assignments",
-            "shutting down"
+            "freeze up"
           ]
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
+            "Performance anxiety (finding)",
+            "Tends to procrastinate (finding)",
             "Difficulty managing stress (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Feeling stressed (finding)",
-            "Anxiety about behavior or performance (finding)"
+            "Anxiety about having a fit (finding)",
+            "Poor daily routine (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed and like you're falling behind. It can be challenging when we compare ourselves to others, but remember everyone has their own pace. Let's focus on what you can control and find ways to manage your anxiety so you can break this cycle.",
+        "response": "I understand that you're feeling overwhelmed and like everyone else has it all together. It's important to remember that we all have our own unique challenges, and it's okay not to be perfect. Let's work on finding ways to manage your stress and anxiety so you can take things one step at a time.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and like you're falling behind. It can be challenging when we compare ourselves to others, but remember everyone has their own pace. Let's focus on what you can control and find ways to manage your anxiety so you can break this cycle.",
+            "response": "I understand that you're feeling overwhelmed and like everyone else has it all together. It's important to remember that we all have our own unique challenges, and it's okay not to be perfect. Let's work on finding ways to manage your stress and anxiety so you can take things one step at a time.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure from school",
-                  "label": "triggers"
+                  "concept": "Performance anxiety (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "comparing myself to others",
-                  "label": "triggers"
+                  "concept": "Difficulty managing stress (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "anxiety about making mistakes",
+                  "concept": "Anxiety about having a fit (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling a bit overwhelmed and anxious about keeping up with everyone else. Can we explore what evidence supports this thought, and if there might be other ways to approach the situation?\"",
+            "response": "What makes you think everyone else has it all figured out? Can we explore what evidence supports that thought and what might be an alternative perspective?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
+                  "concept": "Performance anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "feeling behind",
-                  "label": "unknown"
+                  "concept": "Tends to procrastinate",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "shutting down",
-                  "label": "unknown"
+                  "concept": "Difficulty managing stress",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling overwhelmed by the pressure of keeping up with everyone else. Have you ever considered what a trusted friend might say if they were in your shoes? It could be helpful to hear another perspective.\"",
+            "response": "\"It sounds like you're carrying a heavy load of expectations. Have you ever considered what might happen if things don't go as planned? Or, perhaps, what would a trusted friend say about your current situation?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure from school",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "comparing myself to others",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "anxiety about making mistakes",
+                  "concept": "Performance anxiety",
                   "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"It sounds like you're feeling overwhelmed by the pressure and comparing yourself to others. It's common to feel anxious when we face challenges, but remember that everyone has their own pace. Let's explore ways to manage your anxiety and break this cycle together.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "pressure from school",
-                  "label": "triggers"
                 },
                 {
-                  "concept": "comparing myself to others",
-                  "label": "triggers"
+                  "concept": "Tends to procrastinate",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "anxiety about making mistakes",
+                  "concept": "Difficulty managing stress",
                   "label": "neutral"
                 }
               ]
@@ -368,115 +349,94 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I get that everyone has their own pace, but it just feels so isolating sometimes. I wish I could just find a way to keep up without feeling so much pressure. Sometimes I think about how much I wanted to do well, and now it just feels like I’m stuck. It’s disappointing.",
+        "query": "I appreciate that, but it’s hard, you know? I see my classmates thriving and I can’t help but think that maybe I’m just not cut out for this. It makes me feel really isolated, like I’m somehow different or not good enough. I just wish I could shake off this feeling of being stuck.",
         "core_issue": "academic and educational concerns",
         "schema": {
           "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school",
-            "comparing myself to others",
-            "feeling isolated"
+            "seeing classmates thriving"
           ],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up",
-            "everyone else is handling it fine",
-            "I wish I could just find a way to keep up without feeling so much pressure",
-            "it just feels like I’m stuck"
+            "maybe I’m just not cut out for this",
+            "I’m somehow different",
+            "I’m not good enough"
           ],
           "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
-            "frustration",
-            "anxiety",
-            "disappointment",
-            "isolation"
+            "isolation",
+            "stuck"
           ],
-          "behaviors": [
-            "procrastination",
-            "rushing to complete assignments",
-            "shutting down"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)",
+            "Social isolation (finding)",
+            "Feeling abandoned (finding)"
+          ],
           "neutral": [
-            "Performance anxiety (finding)",
-            "Feeling of being slowed down (finding)",
-            "Anxiety about having a fit (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Pressured by peers (finding)"
+            "Social isolation (rejection) (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed and isolated with all the pressure from school. It can be tough to keep up sometimes, but remember it's okay to take things one step at a time. Let's work together on finding ways to manage your stress levels and maintain a healthier balance.",
+        "response": "I understand that you're finding it challenging, and it's natural to feel a bit overwhelmed when you see your classmates thriving. It's important to remember that everyone has their own pace and journey. Let's work together to explore ways to boost your confidence and reduce feelings of isolation.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and isolated with all the pressure from school. It can be tough to keep up sometimes, but remember it's okay to take things one step at a time. Let's work together on finding ways to manage your stress levels and maintain a healthier balance.",
+            "response": "I understand that you're finding it challenging, and it's natural to feel a bit overwhelmed when you see your classmates thriving. It's important to remember that everyone has their own pace and journey. Let's work together to explore ways to boost your confidence and reduce feelings of isolation.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure from school",
-                  "label": "triggers"
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling isolated",
-                  "label": "triggers"
+                  "concept": "Social isolation",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions: disappointment",
-                  "label": "emotions"
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed with the pressure from school and comparing yourself to others. Have you ever considered what evidence supports your belief that you can't keep up? Let's explore that together.\"",
+            "response": "\"I understand that it can be challenging to see others thriving while you're feeling this way. Can we explore what evidence supports these thoughts of not being good enough? Let's consider if there might be other factors contributing to their success.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Performance anxiety (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "neutral"
+                  "concept": "Social isolation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed with the pressure and isolation right now. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing another perspective can help us feel less alone.\"",
+            "response": "\"I understand that it can feel challenging to see others thriving while you're struggling. It's important to remember that everyone has their own unique journey and pace. Let's explore what a trusted friend or family member might say about your situation, and consider if there are any small steps you could take to help yourself feel more connected.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure from school",
-                  "label": "triggers"
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling isolated",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're feeling this way, but I'm glad we can talk about it. It sounds like you're under a lot of pressure and feeling quite isolated. Let's see if we can find some ways to help alleviate those feelings together.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "pressure from school",
-                  "label": "triggers"
+                  "concept": "Social isolation",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling isolated",
-                  "label": "triggers"
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
                 }
               ]
             }
@@ -488,115 +448,105 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I understand that everyone has their own pace, but it feels so isolating sometimes. I wish I could just keep up without feeling so much pressure. I think about how much I wanted to do well, but now it feels like I’m just stuck. It’s really disappointing.",
+        "query": "It’s just hard for me to see everyone else doing well while I feel like I’m struggling. I feel really isolated, like I'm not measuring up or something. It just makes me anxious and stuck, and I don’t know how to move past it.",
         "core_issue": "academic and educational concerns",
         "schema": {
           "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school",
-            "comparing myself to others",
+            "seeing others doing well",
             "feeling isolated"
           ],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up",
-            "everyone else is handling it fine",
-            "I wish I could just find a way to keep up without feeling so much pressure",
-            "it just feels like I’m stuck"
+            "I'm not measuring up",
+            "I feel stuck"
           ],
           "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
-            "frustration",
-            "anxiety",
-            "disappointment",
-            "isolation"
+            "anxiety"
           ],
-          "behaviors": [
-            "procrastination",
-            "rushing to complete assignments",
-            "shutting down"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling stressed (finding)",
+            "Difficulty managing stress (finding)",
+            "Feeling a failure (finding)"
+          ],
           "neutral": [
-            "Feeling of being slowed down (finding)",
-            "Performance anxiety (finding)",
-            "Anxiety about having a fit (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Feeling isolated (finding)"
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm sorry to hear you're feeling this way, it can be tough when we feel overwhelmed and isolated. It's important to remember that everyone has their own pace, and it's okay if things don't always go as planned. Let's work together to find ways to manage your stress and help you feel more supported during these challenging times.",
+        "response": "\"It sounds like you're having a tough time seeing others succeed while feeling stuck and isolated. It's important to remember that everyone has their own journey, and it's okay if yours looks different. Let's work together on finding ways to cope with these feelings.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm sorry to hear you're feeling this way, it can be tough when we feel overwhelmed and isolated. It's important to remember that everyone has their own pace, and it's okay if things don't always go as planned. Let's work together to find ways to manage your stress and help you feel more supported during these challenging times.",
+            "response": "\"It sounds like you're having a tough time seeing others succeed while feeling stuck and isolated. It's important to remember that everyone has their own journey, and it's okay if yours looks different. Let's work together on finding ways to cope with these feelings.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "neutral"
+                  "concept": "seeing others doing well",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Performance anxiety",
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "I'm not measuring up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "anxiety",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and isolated right now. Can we explore what might be causing this pressure and how it affects your performance? Let's start by discussing the expectations you have for yourself, and if they are realistic or not.\"",
+            "response": "\"It sounds like you're feeling quite overwhelmed seeing others succeed while struggling yourself. Can we explore what makes you feel that way and if there are any alternative perspectives to consider?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "neutral"
+                  "concept": "seeing others doing well",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Performance anxiety",
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "I'm not measuring up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "anxiety",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed with the pressure and expectations. Have you ever considered what a trusted friend might say about your situation? It could provide a different perspective that helps lighten the load.\"",
+            "response": "\"It can be challenging to watch others succeed when we feel stuck. Have you ever considered what a trusted friend or family member might say about your situation? It could provide a different perspective and help ease some of that anxiety.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling isolated",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "pressure from school",
+                  "concept": "seeing others doing well",
                   "label": "triggers"
                 },
-                {
-                  "concept": "comparing myself to others",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm sorry to hear that you're feeling this way, it must be really tough. Can you tell me more about what's causing you to feel so isolated and under pressure? Let's see if we can find a way to help alleviate some of those feelings together.",
-            "reasoning": {
-              "retrieved_concepts_used": [
                 {
                   "concept": "feeling isolated",
-                  "label": "neutral"
+                  "label": "entailment"
                 },
                 {
-                  "concept": "pressure from school",
-                  "label": "triggers"
+                  "concept": "I'm not measuring up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
                 }
               ]
             }
@@ -608,101 +558,59 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "It’s just really hard. I see everyone else moving forward, and I feel like I’m standing still. It’s frustrating because I care so much about doing well, but it’s like the more I try, the more overwhelmed I get. I just feel really lost.",
+        "query": "Yeah, I guess I get that. It’s just really hard in the moment, you know? I keep thinking if I were just a little smarter or more organized, things would be easier. I want to believe it’s okay to be where I am, but it feels like I’m just failing.",
         "core_issue": "academic and educational concerns",
         "schema": {
-          "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school",
-            "comparing myself to others",
-            "feeling isolated"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up",
-            "everyone else is handling it fine",
-            "I wish I could just find a way to keep up without feeling so much pressure",
-            "it just feels like I’m stuck",
-            "I feel like I’m standing still",
-            "the more I try, the more overwhelmed I get",
-            "I just feel really lost"
+            "if I were just a little smarter or more organized, things would be easier",
+            "I’m just failing"
           ],
           "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
-            "frustration",
-            "anxiety",
-            "disappointment",
-            "isolation",
-            "feeling lost"
+            "frustration"
           ],
-          "behaviors": [
-            "procrastination",
-            "rushing to complete assignments",
-            "shutting down"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling lost (finding)"
+            "Feeling of discouragement (finding)"
           ],
           "neutral": [
-            "Loss of motivation (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Feeling lost (finding)",
             "Anxiety about having a fit (finding)",
-            "Low motivation (finding)"
+            "Loss of hope for the future (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed and lost amidst all the progress you see others making. It can be frustrating when we care deeply about doing well, but feel stuck. Let's work together to find ways to manage your feelings and move forward at a pace that feels right for you.",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds challenging to keep going when you're feeling this way. Can we explore together what evidence do you have that you're failing? Let's see if we can find a different perspective on your situation.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and lost amidst all the progress you see others making. It can be frustrating when we care deeply about doing well, but feel stuck. Let's work together to find ways to manage your feelings and move forward at a pace that feels right for you.",
+            "response": "I understand how you're feeling, it can be tough when things seem overwhelming. It's important to remember that everyone has their own pace and it's okay not to be perfect. Let's work together on finding ways to manage your thoughts and feelings more effectively.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
+                  "concept": "Feeling of discouragement",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling lost",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I can see how you might be feeling overwhelmed and lost, given the pressure from school and upcoming deadlines. Let's explore what makes you feel this way and find some strategies to manage your stress.\"",
+            "response": "It sounds challenging to keep going when you're feeling this way. Can we explore together what evidence do you have that you're failing? Let's see if we can find a different perspective on your situation.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "overwhelm",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"It sounds like you're feeling overwhelmed and frustrated, but it's important to remember that everyone has their own pace. Let's explore what a trusted friend or family member might say about your situation. How do you think they would encourage you?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling lost",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "overwhelm",
-                  "label": "automatic_thoughts"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
                   "concept": "frustration",
@@ -711,17 +619,17 @@
               ]
             }
           },
-          "safety_check": {
-            "response": "I'm sorry to hear that you're feeling this way, it sounds incredibly challenging. Can I ask if there have been any thoughts about not wanting to be here or hurting yourself? It's important for me to create a safe space for us to talk about these things.",
+          "alternative_perspective": {
+            "response": "You're absolutely right that things can feel challenging in the moment. It's important to remember that everyone has their own strengths and weaknesses, and it's okay not to be perfect. Let's explore what a trusted friend or family member might say about your situation. What do you think they would tell you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling lost",
-                  "label": "entailment"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "overwhelm",
-                  "label": "automatic_thoughts"
+                  "concept": "frustration",
+                  "label": "emotions"
                 }
               ]
             }
@@ -733,116 +641,80 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "It's just really hard. I see everyone else moving forward, and I feel like I’m standing still. It’s frustrating because I care so much about doing well, but it’s like the more I try, the more overwhelmed I get. I just feel really lost.",
+        "query": "It’s just really hard in the moment, you know? I keep thinking if I were just a little smarter or more organized, things would be easier. I want to believe it’s okay to be where I am, but it feels like I’m just failing.",
         "core_issue": "academic and educational concerns",
         "schema": {
           "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school",
-            "comparing myself to others",
-            "feeling isolated"
+            "hard moments"
           ],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up",
-            "everyone else is handling it fine",
-            "I wish I could just find a way to keep up without feeling so much pressure",
-            "it just feels like I’m stuck",
-            "I feel like I’m standing still",
-            "the more I try, the more overwhelmed I get",
-            "I just feel really lost"
+            "if I were just a little smarter or more organized, things would be easier",
+            "I’m just failing"
           ],
           "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
             "frustration",
-            "anxiety",
-            "disappointment",
-            "isolation",
-            "feeling lost"
+            "self-doubt"
           ],
-          "behaviors": [
-            "procrastination",
-            "rushing to complete assignments",
-            "shutting down"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling lost (finding)",
-            "Feeling a failure (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Loss of motivation (finding)",
-            "Low motivation (finding)",
-            "Anxiety about having a fit (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Feeling a failure (finding)",
+            "Feeling lost (finding)",
+            "Difficulty in thinking independently (finding)",
+            "Low self-control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling frustrated and lost, especially when you see others moving forward. It's important to remember that everyone has their own pace, and it's okay if things feel challenging right now. Let's work together to find ways to manage your feelings and move forward at a pace that feels comfortable for you.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're dealing with some tough moments right now. Can you help me understand what evidence do you have that you're failing? And how does it feel when things don't go as planned?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling frustrated and lost, especially when you see others moving forward. It's important to remember that everyone has their own pace, and it's okay if things feel challenging right now. Let's work together to find ways to manage your feelings and move forward at a pace that feels comfortable for you.",
+            "response": "\"I can see how difficult things might feel right now, and it's understandable to have thoughts like 'if only I were smarter or more organized.' But remember, everyone has moments of struggle. Let's work together to find ways to be kinder to yourself during these hard times.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
-                  "label": "entailment"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Frustration",
-                  "label": "emotions"
+                  "concept": "feeling a failure",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling overwhelmed and stuck, even though you care deeply about doing well. Can we explore together what might be causing this sense of being stuck? For example, when have you felt less overwhelmed in the past?\"",
+            "response": "\"It sounds like you're dealing with some tough moments right now. Can you help me understand what evidence do you have that you're failing? And how does it feel when things don't go as planned?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about having a fit",
+                  "concept": "Feeling a failure",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and lost amidst all the progress you see others making. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
+            "response": "\"It sounds like you're going through a tough time, and it's understandable to feel that way. But remember, everyone has moments of struggle. What would a trusted friend say if they were in your shoes? Let's explore that perspective together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
-                  "label": "entailment"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Frustration",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm sorry to hear that you're feeling this way. It sounds like a lot is on your plate right now. Can you tell me more about what makes you feel overwhelmed and lost?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling lost",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "overwhelm",
-                  "label": "automatic_thoughts"
+                  "concept": "feeling a failure",
+                  "label": "neutral"
                 }
               ]
             }
@@ -854,65 +726,44 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that, but it’s hard to see things that way. I just keep thinking that I should be able to handle this better. It’s like there’s this pressure to succeed, and every time I don't measure up, it just adds to the anxiety. I wish I didn’t feel this way.",
+        "query": "It feels like every time I get a grade back, I’m just disappointed in myself. I tell myself I should’ve studied harder or asked for help sooner. It’s just so frustrating and makes me feel so defeated. I know I’m trying, but it feels like it’s never good enough.",
         "core_issue": "academic and educational concerns",
         "schema": {
           "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school",
-            "comparing myself to others",
-            "feeling isolated",
-            "pressure to succeed"
+            "getting a grade back"
           ],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up",
-            "everyone else is handling it fine",
-            "I wish I could just find a way to keep up without feeling so much pressure",
-            "it just feels like I’m stuck",
-            "I feel like I’m standing still",
-            "the more I try, the more overwhelmed I get",
-            "I just feel really lost",
-            "I should be able to handle this better",
-            "every time I don't measure up, it just adds to the anxiety"
+            "I should've studied harder",
+            "I should've asked for help sooner",
+            "it's never good enough"
           ],
           "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
-            "frustration",
-            "anxiety",
             "disappointment",
-            "isolation",
-            "feeling lost"
+            "frustration",
+            "defeat"
           ],
-          "behaviors": [
-            "procrastination",
-            "rushing to complete assignments",
-            "shutting down"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)"
+            "Feeling a failure (finding)",
+            "Feeling of discouragement (finding)",
+            "Loss of motivation (finding)",
+            "Feeling hopeless (finding)"
           ],
           "neutral": [
-            "Anxiety about behavior or performance (finding)",
-            "Performance anxiety (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about having a fit (finding)"
+            "Fear of school (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed and like you should be able to handle things better. It's important to remember that everyone experiences pressure, and it's okay to feel this way. Let's work together on finding ways to manage your anxiety and reduce the pressure you're feeling.",
+        "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been putting in a lot of effort, and it can be disheartening when things don't go as planned. Let's talk about what you could do differently next time, but for now, let's focus on acknowledging your efforts and the progress you've made so far.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and like you should be able to handle things better. It's important to remember that everyone experiences pressure, and it's okay to feel this way. Let's work together on finding ways to manage your anxiety and reduce the pressure you're feeling.",
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been putting in a lot of effort, and it can be disheartening when things don't go as planned. Let's talk about what you could do differently next time, but for now, let's focus on acknowledging your efforts and the progress you've made so far.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -920,57 +771,46 @@
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about behavior or performance",
-                  "label": "neutral"
+                  "concept": "Loss of motivation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling hopeless",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you're feeling overwhelmed and wish things were easier. Let's explore together what might be causing this pressure to succeed and the anxiety it brings. Can we start by discussing your thoughts on why you feel you should always measure up?",
+            "response": "\"It sounds like you're really hard on yourself when grades don't meet your expectations. Let's explore what evidence supports these thoughts and if there might be other ways to interpret the situation.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about behavior or performance",
-                  "label": "neutral"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "performance anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "Loss of motivation",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you're feeling quite a bit of pressure to succeed, and it can be overwhelming. But let's consider for a moment, what would happen if you didn't meet your expectations? Would it really be the end of the world?\"",
+            "response": "\"It sounds like you're really hard on yourself when grades don't meet your expectations. Have you ever considered what a friend or someone outside of the situation might think about your efforts? It could be helpful to get another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about behavior or performance",
-                  "label": "neutral"
+                  "concept": "disappointment",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "performance anxiety",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I understand that you're feeling overwhelmed and wish things were easier. It's important to remember that it's okay not to be perfect, and everyone has their own pace. Let's explore some ways we can manage this pressure together.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "pressure to succeed",
-                  "label": "triggers"
+                  "concept": "defeat",
+                  "label": "emotions"
                 }
               ]
             }
@@ -982,124 +822,112 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I know you're trying to help, and I appreciate it. But it feels like I’m just stuck in this cycle and can’t see a way out. Sometimes it feels like no matter what I do, it’s just never enough. That just makes me feel even more anxious about everything.",
+        "query": "Thank you, I appreciate that. It just feels like no matter how much effort I put in, it’s never reflected in my grades. I guess I’m just really scared that I’ll never catch up or make the progress I want. It’s hard to recognize any progress when I’m so focused on the setbacks.",
         "core_issue": "academic and educational concerns",
         "schema": {
           "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school",
-            "comparing myself to others",
-            "feeling isolated",
-            "pressure to succeed"
+            "putting in effort",
+            "not seeing grades reflect effort",
+            "focusing on setbacks"
           ],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up",
-            "everyone else is handling it fine",
-            "I wish I could just find a way to keep up without feeling so much pressure",
-            "it just feels like I’m stuck",
-            "I feel like I’m standing still",
-            "the more I try, the more overwhelmed I get",
-            "I just feel really lost",
-            "I should be able to handle this better",
-            "every time I don't measure up, it just adds to the anxiety",
-            "no matter what I do, it’s just never enough"
+            "I'll never catch up",
+            "I'll never make progress",
+            "I can't recognize any progress"
           ],
           "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
-            "frustration",
-            "anxiety",
-            "disappointment",
-            "isolation",
-            "feeling lost"
+            "fear",
+            "frustration"
           ],
-          "behaviors": [
-            "procrastination",
-            "rushing to complete assignments",
-            "shutting down"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Difficulty managing stress (finding)",
-            "Feeling stressed (finding)"
+            "Fear of school (finding)"
           ],
           "neutral": [
-            "Anxiety about treatment (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about not coping with parenthood (finding)"
+            "Feeling a failure (finding)",
+            "Loss of motivation (finding)",
+            "Anxiety about having a fit (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling stuck and overwhelmed, and it's causing a lot of anxiety. It's important to remember that everyone has their own pace, and it's okay if things don't always go as planned. Let's work together to find ways to manage your stress and reduce this overwhelming feeling.",
+        "response": "You're putting in a lot of effort, and it's important to acknowledge that. It's understandable to feel frustrated when you don't see immediate results. Let's work together to find ways to celebrate small successes and focus on progress rather than setbacks.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling stuck and overwhelmed, and it's causing a lot of anxiety. It's important to remember that everyone has their own pace, and it's okay if things don't always go as planned. Let's work together to find ways to manage your stress and reduce this overwhelming feeling.",
+            "response": "You're putting in a lot of effort, and it's important to acknowledge that. It's understandable to feel frustrated when you don't see immediate results. Let's work together to find ways to celebrate small successes and focus on progress rather than setbacks.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "stress",
+                  "concept": "fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "overwhelm",
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "I'll never catch up",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "I'll never make progress",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can't recognize any progress",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling overwhelmed and stuck in a cycle of anxiety. Let's explore together what triggers these feelings and how they impact your daily life. Can we start by discussing one specific situation that's causing you stress right now?\"",
+            "response": "What evidence do you have that your effort isn't reflected in your grades? It can be difficult to see progress when we focus on setbacks. Let's explore some examples of times when your effort did pay off, even if it wasn't immediately visible in your grades.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "fear",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "I'll never catch up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'll never make progress",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and stuck in a cycle of anxiety. Let's explore together if there might be other ways to look at this situation that could help reduce some of the pressure you're feeling.\"",
+            "response": "\"It sounds like you're putting in a lot of effort, and it can be disheartening when the results don't immediately show. Let's talk about what small steps forward might look like, even if they aren't reflected in your grades yet.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "fear",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're feeling this way, but I want you to know that it's okay to feel overwhelmed sometimes. Let's take a moment to explore some of these thoughts and feelings together. Can we start by discussing what makes you feel like no matter what you do, it's never enough?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "I'll never catch up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'll never make progress",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -1111,131 +939,81 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I get that, but it’s hard to think that way when I feel so behind. I want to believe that it’s okay to take my time, but part of me thinks I should be doing better. It’s like there’s this constant voice in my head telling me I’m failing, and I don’t know how to quiet it down.",
+        "query": "I can see the point in that, but it just feels so hard to notice any small successes when I’m so caught up in what’s going wrong. I guess part of me worries that if I focus on the small wins, I might end up not pushing myself hard enough. It’s like I’m constantly trying to balance between being kind to myself and holding myself accountable.",
         "core_issue": "academic and educational concerns",
         "schema": {
-          "triggers": [
-            "upcoming paper deadlines",
-            "pressure from school",
-            "comparing myself to others",
-            "feeling isolated",
-            "pressure to succeed"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I know I can do it, but I can't sit down to start",
-            "I'll just do it tomorrow",
-            "I can't keep up",
-            "everyone else is handling it fine",
-            "I wish I could just find a way to keep up without feeling so much pressure",
-            "it just feels like I’m stuck",
-            "I feel like I’m standing still",
-            "the more I try, the more overwhelmed I get",
-            "I just feel really lost",
-            "I should be able to handle this better",
-            "every time I don't measure up, it just adds to the anxiety",
-            "no matter what I do, it’s just never enough",
-            "I feel like I’m failing",
-            "I should be doing better"
+            "it's hard to notice small successes",
+            "if I focus on small wins, I won't push myself hard enough",
+            "I need to balance being kind to myself and holding myself accountable"
           ],
-          "emotions": [
-            "annoyance",
-            "stress",
-            "overwhelm",
-            "frustration",
-            "anxiety",
-            "disappointment",
-            "isolation",
-            "feeling lost"
-          ],
-          "behaviors": [
-            "procrastination",
-            "rushing to complete assignments",
-            "shutting down"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling of being slowed down (finding)",
-            "Loss of initiative (finding)"
-          ],
+          "entailment": [],
           "neutral": [
             "Anxiety about making mistakes (finding)",
-            "Low self-control (finding)"
+            "Feeling a failure (finding)",
+            "Increased motivation (finding)",
+            "Anxiety about having a fit (finding)"
           ],
           "contradiction": [
-            "Racing thoughts (finding)"
+            "Positive self thoughts (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're dealing with a lot right now. It's understandable to feel overwhelmed and behind, but it's important to remember that everyone has their own pace. Let's explore what might be causing this constant voice in your head telling you that you're failing. Can we start by discussing some situations where you felt successful or capable?",
-        "protocol_used": "socratic_questioning",
+        "response": "It's understandable to feel that way, and it's important to acknowledge your efforts. Let's explore how focusing on small successes might help you push yourself harder without compromising self-compassion. What do you think?",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and behind. It's common to have self-doubts, especially when we're under pressure. Let's explore together how we can quiet that voice in your head and find a way to approach your work that feels more manageable for you.",
+            "response": "It sounds like you're dealing with a lot right now, and it can be challenging to find the balance between being kind to yourself and pushing yourself. Let's explore this a bit more - have you noticed any instances where focusing on small successes helped or hindered your progress?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of being slowed down",
-                  "label": "entailment"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Loss of initiative",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "increased motivation",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're dealing with a lot right now. It's understandable to feel overwhelmed and behind, but it's important to remember that everyone has their own pace. Let's explore what might be causing this constant voice in your head telling you that you're failing. Can we start by discussing some situations where you felt successful or capable?",
+            "response": "It's understandable that you might feel this way, and it's important to acknowledge your efforts. Let's explore how focusing on small successes can help you push yourself further without compromising self-compassion. What do you think about that?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of being slowed down",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Low self-control",
+                  "concept": "anxiety about making mistakes",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "increased motivation",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're dealing with a lot right now, and it can be challenging to quiet that critical voice in your head. Have you ever considered what a trusted friend or family member might say about the situation? Sometimes hearing an outside perspective can help us see things more clearly.",
+            "response": "It's understandable to feel that way, and it's important to acknowledge your efforts. Let's explore how focusing on small successes might help you push yourself harder without compromising self-compassion. What do you think?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I understand that you're feeling overwhelmed and like there's a constant voice in your head telling you that you're failing. It's important to remember that everyone has their own pace, and it's okay to take your time. Let's explore together how we can quiet that voice and find ways to manage the stress you're feeling.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "feeling a failure",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "increased motivation",
+                  "label": "neutral"
                 }
               ]
             }

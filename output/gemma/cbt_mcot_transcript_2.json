@@ -26,10 +26,11 @@
             "test the next day"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests"
+            "worried about the test",
+            "need to focus on studying"
           ],
           "emotions": [
-            "worried"
+            "worry"
           ],
           "behaviors": [
             "trying to focus on studying"
@@ -51,11 +52,11 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the exams and upcoming test are really weighing on you, and you're trying to focus on studying to manage that worry – can you tell me a little more about what specifically makes you feel worried about the test?",
+        "response": "It sounds like the pressure of the upcoming test is really weighing on you, and you're trying to focus on studying to manage that worry – can you tell me a little more about what goes through your mind when you think about the test itself?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like having exams and a test coming up has been really stressful, and it makes sense that you'd feel worried and try to focus on studying. That's a lot to handle!",
+            "response": "It sounds like having exams and a test coming up has been really stressful, and it makes sense that you'd be feeling worried and trying to focus on studying. Can you tell me a little more about what specifically is making you feel worried about the test?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -71,18 +72,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
+                  "concept": "validate_and_reflect",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like the exams and upcoming test are really weighing on you, and you're trying to focus on studying to manage that worry – can you tell me a little more about what specifically makes you feel worried about the test?",
+            "response": "It sounds like the pressure of the upcoming test is really weighing on you, and you're trying to focus on studying to manage that worry – can you tell me a little more about what goes through your mind when you think about the test itself?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -102,18 +99,18 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "preoccupied",
+                  "concept": "Preoccupied (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "On examination - anxious",
+                  "concept": "On examination - anxious (finding)",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're carrying a lot right now with exams and a test coming up – it's understandable that you'd feel worried. What's one thing you've done well in your studying so far?",
+            "response": "It sounds like you're feeling quite a bit of pressure with exams coming up, and it makes sense that you'd be trying to focus on studying to manage that worry. What's one thing you're telling yourself about the test that might be contributing to that worry?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -138,9 +135,55 @@
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like you're carrying a lot right now with exams and a test coming up. Are you having any thoughts of wanting to hurt yourself or not wanting to be here because of all this?",
+          }
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it just feels like there's this huge cloud hanging over me. I keep thinking, what if I mess it up? I know I should be studying, but sometimes I just freeze up, and then I feel even worse. It’s like I go from wanting to do well to being scared of failing, and then I'm just... stuck.",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [
+            "huge cloud hanging over me",
+            "freezing up",
+            "wanting to do well",
+            "scared of failing"
+          ],
+          "automatic_thoughts": [
+            "what if I mess it up?",
+            "I should be studying",
+            "I'm just stuck"
+          ],
+          "emotions": [
+            "fear",
+            "worse",
+            "scared"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Anxiety about making mistakes (finding)",
+            "Feeling tense (finding)",
+            "Feeling of discouragement (finding)",
+            "Feeling agitated (finding)"
+          ],
+          "neutral": [
+            "Anxiety about having a fit (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're carrying a lot right now, and it's understandable to feel stuck when you're caught between wanting to do well and fearing failure. That cloud hanging over you seems really heavy, and it's tough to move forward when those thoughts and feelings are so intense.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot right now, and it's understandable to feel stuck when you're caught between wanting to do well and fearing failure. That cloud hanging over you seems really heavy, and it's tough to move forward when those thoughts and feelings are so intense.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -160,146 +203,70 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 1,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it does feel really heavy. I guess I just keep thinking about how I’ve done in the past. I’m scared of not measuring up, you know? I feel like if I don’t do well, it’ll just prove that I’m not good enough, and that’s a really tough thought to shake off.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day"
-          ],
-          "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough"
-          ],
-          "emotions": [
-            "worried",
-            "heavy"
-          ],
-          "behaviors": [
-            "trying to focus on studying"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling nervous (finding)",
-            "Anxiety about behavior or performance (finding)"
-          ],
-          "neutral": [
-            "Examination phobia (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about having a fit (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like those past experiences are really influencing how you're feeling right now. Can you tell me more about what specifically about those past experiences makes you feel like not doing well on this exam would prove you're not good enough?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like those past experiences are really weighing on you right now, and it's understandable that you're feeling scared about not measuring up. That thought about not being good enough can be really difficult to deal with.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "scared of not measuring up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "if I don’t do well, it’ll prove that I’m not good enough",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like those past experiences are really influencing how you're feeling right now. Can you tell me more about what specifically about those past experiences makes you feel like not doing well on this exam would prove you're not good enough?",
+            "response": "It sounds like that cloud is really weighing on you, and it's tough to feel stuck like that. Can you tell me a little more about what goes through your mind when you start to feel like you're going to mess things up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "heavy",
-                  "label": "emotions"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "scared of not measuring up",
-                  "label": "automatic_thoughts"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "if I don’t do well, it’ll prove that I’m not good enough",
-                  "label": "automatic_thoughts"
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like those past experiences are really weighing on you right now. What's one thing a friend might say to help you put those past experiences into perspective?",
+            "response": "It sounds incredibly frustrating to feel that sense of being stuck and overwhelmed by those \"what if\" thoughts. Imagine a friend were in your shoes – what might they say about this cloud hanging over you and the pressure you're feeling?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "heavy",
-                  "label": "emotions"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "scared of not measuring up",
-                  "label": "automatic_thoughts"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "if I don’t do well, it’ll prove that I’m not good enough",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you're carrying a lot right now, and that thought about not being good enough is really weighing on you. Are you having any thoughts of wanting to hurt yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
+                  "concept": "behaviors",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "scared of not measuring up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "if I don’t do well, it’ll prove that I’m not good enough",
-                  "label": "automatic_thoughts"
+                  "concept": "alternative_perspective",
+                  "label": "unknown"
                 }
               ]
             }
@@ -311,84 +278,86 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "It just feels like every time I’ve tried something and failed, it just adds to this weight. Like, I remember getting low grades in school and how that felt. It kind of sticks with you, and I start to think that maybe I’m just not cut out for success. It's like a loop in my head that’s hard to break.",
+        "query": "Yeah, it really does feel heavy. Sometimes I just wish I could push that fear away and focus. But instead, I end up just feeling overwhelmed, and then I avoid everything altogether. It’s almost like I’m in this loop, you know? The more I think about it, the worse it gets.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past failures"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough",
-            "maybe I’m just not cut out for success"
+            "wish I could push that fear away",
+            "the more I think about it, the worse it gets"
           ],
           "emotions": [
-            "worried",
-            "heavy",
+            "fear",
             "overwhelmed"
           ],
           "behaviors": [
-            "trying to focus on studying",
-            "ruminating on past failures"
+            "avoid everything altogether"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling of discouragement (finding)",
-            "Feels everything is futile (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Loss of motivation (finding)",
-            "Low motivation (finding)"
+            "Fear of being a burden to others (finding)",
+            "Anxiety about loss of control (finding)",
+            "Anxiety about collapsing (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those past experiences are really impacting how you're viewing your current situation and your ability to succeed – can you tell me more about what goes through your mind when you recall those past failures?",
+        "response": "It sounds incredibly frustrating to feel trapped in that cycle. Can you tell me a little more about what happens when you try to \"push that fear away\"?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those past experiences, like the low grades, are really contributing to a sense of feeling overwhelmed and like you're doubting your ability to succeed. That loop in your head can be really tough to deal with.",
+            "response": "It sounds incredibly frustrating to feel that fear so intensely and to get caught in a cycle where thinking about it just makes it worse. It takes a lot of courage to acknowledge that loop, and I appreciate you sharing it with me.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
+                  "concept": "automatic_thoughts\\",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "wish I could push that fear away\\",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "the more I think about it, the worse it gets\\",
+                  "label": "automatic_thoughts"
                 },
                 {
                   "concept": "emotions",
                   "label": "unknown"
                 },
                 {
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                },
+                {
                   "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
+                  "concept": "avoid everything altogether",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "validate_and_reflect",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like those past experiences are really impacting how you're viewing your current situation and your ability to succeed – can you tell me more about what goes through your mind when you recall those past failures?",
+            "response": "It sounds incredibly frustrating to feel trapped in that cycle. Can you tell me a little more about what happens when you try to \"push that fear away\"?",
             "reasoning": {
               "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -402,20 +371,24 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "avoid",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly heavy to carry those past experiences and have them influencing how you see yourself now. What's one thing a friend might say to you about your abilities, knowing what you've been through?",
+            "response": "It sounds incredibly frustrating to feel trapped in that cycle, wanting to push the fear away but finding it just intensifies. What do you think might be going through your mind when you notice yourself starting to feel overwhelmed?",
             "reasoning": {
               "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -429,42 +402,7 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling of discouragement",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feels everything is futile",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly heavy, and it makes sense that past experiences would stick with you. Are you having thoughts of wanting to not be here or hurting yourself because of these feelings?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "past failures",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts",
+                  "concept": "alternative_perspective",
                   "label": "unknown"
                 }
               ]
@@ -477,131 +415,49 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, when I think about those failures, it's like this rush of shame and disappointment. I feel embarrassed and just… small, I guess? I start to wonder if everyone else sees me the way I see myself, and that thought is just overwhelming. It makes me hesitate to even try new things.",
+        "query": "It really is heavy. I want to push that fear away, but instead, I just feel overwhelmed. It’s like I’m stuck in this loop. The more I think about it, the worse it gets.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past failures"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough",
-            "maybe I’m just not cut out for success",
-            "wondering if everyone else sees me the way I see myself"
+            "I want to push that fear away",
+            "I'm stuck in this loop",
+            "The more I think about it, the worse it gets"
           ],
           "emotions": [
-            "worried",
-            "heavy",
-            "overwhelmed",
-            "shame",
-            "disappointment",
-            "embarrassed"
+            "fear",
+            "overwhelmed"
           ],
-          "behaviors": [
-            "trying to focus on studying",
-            "ruminating on past failures",
-            "hesitating to try new things"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling a failure (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Feeling ashamed (finding)",
-            "Feeling bad (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)"
+            "Fear of being a burden to others (finding)",
+            "Fear of collapsing (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of going out (finding)",
+            "Anxiety about loss of control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Okay, it sounds like those memories of past failures bring up a really intense experience – a rush of shame, disappointment, and embarrassment. You describe feeling \"small,\" and that worry about what others think is incredibly overwhelming, to the point where it's stopping you from trying new things. That sounds really difficult to deal with. \n\nIt takes a lot of courage to share that, and it's understandable that you'd feel that way when reflecting on those experiences. Can you tell me a little more about what goes through your mind when you start to wonder if others see you the way you see yourself?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds incredibly frustrating to feel like you're trying to push the fear away, and it's just getting stronger. Can you tell me a little more about what's happening as you try to push it away?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those memories bring up a really painful mix of feelings – shame, disappointment, and embarrassment – and it's understandable that you'd feel overwhelmed and hesitant to try new things when those feelings come up. It takes courage to share that, and I appreciate you describing it so openly.",
+            "response": "It sounds like you're carrying a lot right now, and it's understandable that you'd feel overwhelmed when trying to push those fears away. It takes courage to acknowledge feeling stuck in a loop like that.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "shame",
-                  "label": "entailment"
+                  "concept": "fear",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "disappointment",
+                  "concept": "overwhelmed",
                   "label": "emotions"
-                },
-                {
-                  "concept": "embarrassed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "feeling bad",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling a failure",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "anxiety about making mistakes",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like those memories bring up a lot of difficult feelings – shame, disappointment, and embarrassment. Can you tell me more about what goes through your mind when you imagine what others might think of you?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions: shame, disappointment, embarrassed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "automatic_thoughts: wondering if everyone else sees me the way I see myself",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "behaviors: hesitate to try new things",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like those memories bring up a lot of difficult feelings – shame, disappointment, and a sense of being small. What's one thing a friend might say to you about those past experiences, knowing you as well as you know yourself?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "shame",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "embarrassed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "feeling small",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
                 },
                 {
                   "concept": "automatic_thoughts",
@@ -614,41 +470,40 @@
               ]
             }
           },
-          "safety_check": {
-            "response": "That sounds incredibly difficult to carry around. I'm wondering, are you having thoughts of wanting to hurt yourself or not wanting to be here right now?",
+          "socratic_questioning": {
+            "response": "It sounds incredibly frustrating to feel like you're trying to push the fear away, and it's just getting stronger. Can you tell me a little more about what's happening as you try to push it away?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling ashamed",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling bad",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
+                  "concept": "socratic_questioning",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly frustrating to feel like you're trying to push the fear away, but it's just getting stronger – that loop can be really tough to break. What do you think might be happening that keeps pulling you back into those thoughts?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "heavy",
-                  "label": "emotions"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "shame",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: ruminating on past failures",
-                  "label": "triggers"
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
@@ -660,96 +515,64 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Thanks for saying that. It’s just… when I think about it, I imagine people looking at me and judging, even if they’re not saying anything. I guess I worry they see all my flaws and just think I’m not worth their time. It makes me feel exposed, like I have to somehow prove myself all over again, which feels impossible. I don’t know, it’s like I just freeze up.",
+        "query": "It really is heavy. I just wish I could push the fear away and focus. But instead, I freeze up and end up avoiding everything. It feels like I’m caught in this loop, and the more I think about it, the more it spirals.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past failures",
-            "imagining people judging me"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough",
-            "maybe I’m just not cut out for success",
-            "wondering if everyone else sees me the way I see myself",
-            "worry they see all my flaws and think I’m not worth their time",
-            "feeling like I have to prove myself all over again"
+            "wish I could push the fear away",
+            "the more I think about it, the more it spirals"
           ],
           "emotions": [
-            "worried",
-            "heavy",
-            "overwhelmed",
-            "shame",
-            "disappointment",
-            "embarrassed",
-            "exposed"
+            "fear"
           ],
           "behaviors": [
-            "trying to focus on studying",
-            "ruminating on past failures",
-            "hesitating to try new things",
-            "freezing up in social situations"
+            "freeze up",
+            "avoiding everything"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Anxiety about appearing ridiculous (finding)",
-            "Anxiety about altered body image (finding)",
-            "Fear of being a burden to others (finding)",
-            "Anxiety about saying the wrong thing (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Feeling ashamed (finding)"
+            "Fear of collapsing (finding)",
+            "Anxiety about dying (finding)",
+            "Fear of walking (finding)",
+            "Anxiety about collapsing (finding)",
+            "Fear of death (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "That sounds incredibly distressing – it takes a lot of energy to feel like you're constantly being evaluated. What makes you think people are judging you in that way?",
-        "protocol_used": "socratic_questioning",
+        "response": "Okay, it sounds like you're carrying a lot right now, and it's understandably overwhelming. You've described a really difficult cycle – feeling this heavy fear, wishing you could just make it go away so you can focus, but then finding yourself freezing up and avoiding things, which then makes the fear even worse. It's completely understandable that you feel caught in a loop.\n\nIt takes a lot of courage to acknowledge that kind of struggle. Can you tell me a little more about what happens *right before* you start to feel like you're spiraling? What thoughts or sensations are present when you notice the fear intensifying?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to feel like you're constantly being judged and having to prove yourself. That feeling of being exposed and freezing up must be really difficult to deal with.",
+            "response": "It sounds incredibly frustrating to feel so overwhelmed by fear and like it's controlling your actions. It takes a lot of courage to describe feeling caught in that kind of loop.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about appearing ridiculous",
-                  "label": "entailment"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling ashamed",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "triggers: imagining people judging me",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: wondering if everyone else sees me the way I see myself",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: embarrassed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: freezing up in social situations",
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "That sounds incredibly distressing – it takes a lot of energy to feel like you're constantly being evaluated. What makes you think people are judging you in that way?",
+            "response": "It sounds incredibly frustrating to feel trapped in that cycle. Can you tell me a little more about what happens when you start to think about it and it begins to spiral?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -767,65 +590,14 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
-                },
-                {
-                  "concept": "Anxiety about appearing ridiculous (finding)",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "That sounds incredibly uncomfortable, feeling like you're constantly being evaluated. If a friend were in your shoes, what do you think they might say about you worrying so much about what others think?",
+            "response": "It sounds incredibly frustrating to feel so stuck and overwhelmed by fear, especially when you're trying to focus. What's one thing that might help you feel a little less caught in that spiral, even if it’s small?",
             "reasoning": {
               "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about appearing ridiculous",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling ashamed",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "exposed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "freezing up",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly distressing, and it takes courage to share that. Are you having thoughts of wanting to hurt yourself or not wanting to be here right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about appearing ridiculous (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling ashamed (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -836,6 +608,10 @@
                 },
                 {
                   "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "validate_and_reflect",
                   "label": "unknown"
                 }
               ]
@@ -848,66 +624,516 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I don’t know, maybe it’s just how I feel inside? I see others being so confident and put together, and I start to think that’s what everyone expects from me. It’s like I can’t let them see me falter, or they’ll think I’m weak or not capable. It’s exhausting to keep up that front when I feel so fragile underneath.",
+        "query": "Yeah, it feels like it just kind of builds up. Sometimes it starts with a little worry, like, \"What if I don’t get this done?\" And then it turns into this big pressure in my chest. I can feel my heart racing, and I just... I don’t know, it’s like I can’t breathe or think. That's when I start to feel really trapped.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past failures",
-            "imagining people judging me",
-            "seeing others being confident"
+            "worry about not getting things done"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough",
-            "maybe I’m just not cut out for success",
-            "wondering if everyone else sees me the way I see myself",
-            "worry they see all my flaws and think I’m not worth their time",
-            "feeling like I have to prove myself all over again",
-            "everyone expects me to be confident and put together",
-            "if I falter, they’ll think I’m weak or not capable"
+            "I can’t breathe or think",
+            "I feel trapped"
           ],
           "emotions": [
-            "worried",
-            "heavy",
-            "overwhelmed",
-            "shame",
-            "disappointment",
-            "embarrassed",
-            "exposed",
-            "fragile",
-            "exhausted"
+            "anxiety",
+            "pressure"
           ],
-          "behaviors": [
-            "trying to focus on studying",
-            "ruminating on past failures",
-            "hesitating to try new things",
-            "freezing up in social situations"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Moderate ego strength (finding)",
-            "Low ego strength (finding)"
+          "entailment": [
+            "Feeling physically tense (finding)",
+            "Feeling tense (finding)",
+            "Anxiety about breathlessness (finding)",
+            "Feeling of being slowed down (finding)"
           ],
-          "contradiction": [
-            "Lack of pride (finding)"
-          ]
+          "neutral": [
+            "Anxiety about collapsing (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot of pressure to appear confident, and that’s understandably exhausting. What makes you believe that others expect you to be that way?",
+        "response": "It sounds like that initial worry about not getting things done can quickly escalate into a really overwhelming feeling of pressure and being trapped – and that physical sensation of not being able to breathe or think must be incredibly distressing. Can you tell me a little more about what that initial worry feels like?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like that initial worry about not getting things done can quickly escalate into a really overwhelming feeling of pressure and being trapped – and that physical sensation of not being able to breathe or think must be incredibly distressing. Can you tell me a little more about what that initial worry feels like?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling physically tense (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about breathlessness (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling of being slowed down (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that initial worry can quickly escalate into a really overwhelming experience – can you tell me a little more about what goes through your mind between that initial worry and feeling trapped?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling physically tense (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about breathlessness (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling of being slowed down (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing when that worry escalates into feeling trapped and unable to breathe – what do you think might be happening in your body or mind that allows that small worry to build into such a significant physical and mental experience?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "alternative_perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it starts off almost like a whisper, just a thought nagging at me. Like, \"What if I mess this up?\" But then it gets louder, and I start imagining all these worst-case scenarios. It feels like I’m in this tight space, and I can’t get out. There’s this mix of anxiety and like, disappointment in myself, I guess? It’s hard to explain...",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "What if I mess this up?",
+            "imagining worst-case scenarios"
+          ],
+          "emotions": [
+            "anxiety",
+            "disappointment"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Sense of impending doom (finding)",
+            "Feeling nervous (finding)"
+          ],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about collapsing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "Okay, it sounds like you're experiencing a really difficult cycle right now. It's helpful that you're able to identify how it begins – that initial, quiet thought, \"What if I mess this up?\" – and how it escalates into these worst-case scenarios and a feeling of being trapped. It makes sense that you'd feel anxious and disappointed in yourself when that's happening. \n\nIt takes courage to describe something that feels so complex and hard to put into words. It sounds like this thought process is creating a lot of distress for you. Can you tell me a little more about what happens *after* you start imagining those worst-case scenarios? What do you notice in your body, or what do you feel like you need to do?\n\n\n\n**Reasoning:**\n\n*   **CBT Intervention Principle Applied:** `validate_and_reflect` - The response prioritizes validating the patient's experience and reflecting back what they've shared to ensure understanding and build rapport.\n*   **Interpretation:** The patient is describing a thought-emotion-behavior cycle. The initial trigger (\"What if I mess this up?\") leads to automatic negative thoughts (worst-case scenarios), which then generates emotions (anxiety, disappointment) and a feeling of being trapped.\n*   **Clinical Context Utilization:** The response acknowledges the \"sense of impending doom\" and \"feeling nervous\" indicated in the clinical context, normalizing the patient's distress.\n*   **Advancing Insight:** The response highlights the cyclical nature of the patient's experience and encourages them to elaborate on the subsequent behaviors and sensations, setting the stage for further exploration.\n*   **Avoiding Hidden Context Reveal:** The response does not explicitly mention the cognitive model or clinical context.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're experiencing a really difficult cycle of thoughts and feelings, and it takes courage to describe it – I appreciate you sharing that. It's understandable that you'd feel anxious and disappointed when those \"what if\" thoughts start and lead to imagining worst-case scenarios.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "validate_and_reflect",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that initial thought, \"What if I mess this up?\", really sets off a chain of worrying for you – can you tell me a little more about what those worst-case scenarios look like?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like that initial thought, \"What if I mess this up?\", really spirals into a lot of worry and imagining difficult outcomes. What's one possible, realistic outcome you're concerned about?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "disappointment",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "imagining worst-case scenarios",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really does feel like it builds on itself. Once I start imagining those worst-case scenarios, my heart starts racing, and everything feels so tense. My stomach sinks, and I just want to run away or hide. I feel this urge to just avoid whatever I’m facing, like any responsibility or decision becomes too much. It’s hard to shake off that feeling.",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [
+            "imagining worst-case scenarios"
+          ],
+          "automatic_thoughts": [
+            "everything feels so tense",
+            "I want to run away or hide",
+            "any responsibility or decision becomes too much"
+          ],
+          "emotions": [
+            "fear",
+            "anxiety"
+          ],
+          "behaviors": [
+            "avoid facing responsibilities",
+            "avoid making decisions"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Sense of impending doom (finding)"
+          ],
+          "neutral": [
+            "Fear of collapsing (finding)",
+            "Anxiety about going crazy (finding)",
+            "Anxiety about collapsing (finding)",
+            "Depressive delusion of catastrophe (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like when you start imagining those worst-case scenarios, it creates a really overwhelming physical and emotional experience, and it makes sense that you'd want to escape from it. That feeling of wanting to run away or hide is understandable given what you're describing.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like when you start imagining those worst-case scenarios, it creates a really overwhelming physical and emotional experience, and it makes sense that you'd want to escape from it. That feeling of wanting to run away or hide is understandable given what you're describing.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to experience that build-up of anxiety and the strong urge to escape – what do you think is fueling those worst-case scenarios you're imagining?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to experience that build-up of anxiety and the strong urge to escape – what do you think might be going through your mind if a close friend were observing you experiencing this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really does take over. It’s like my body just reacts before I even have a chance to think about it. I know I should be facing things, but the thought of doing that just makes it worse. Sometimes I wonder if I’ll ever feel like I can handle it without feeling this way.",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I should be facing things",
+            "The thought of facing things makes it worse",
+            "I wonder if I’ll ever feel like I can handle it"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about losing emotional control (finding)",
+            "Anticipatory anxiety (finding)",
+            "Anticipatory anxiety, severe (finding)",
+            "Anxiety about collapsing (finding)",
+            "Difficulty controlling emotions (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly frustrating when your body reacts before you have a chance to think – can you tell me more about what that feels like in those moments?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly draining to feel like you have to constantly present a certain image to others, especially when you're feeling fragile. That pressure to appear confident can be a lot to manage.",
+            "response": "It sounds like you're experiencing a really difficult cycle, where your body's reaction feels automatic and overwhelming, and the thought of facing things actually increases that feeling. It takes a lot of courage to acknowledge that, and I hear your worry about whether you'll ever feel like you can handle it.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "validate_and_reflect",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly frustrating when your body reacts before you have a chance to think – can you tell me more about what that feels like in those moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly frustrating when your body reacts before you have a chance to process what's happening – what do you think might be going through your mind in those moments right before you react?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "It’s so strange, really. It’s like my mind goes blank, and I feel this wave of panic wash over me. My chest gets tight, and I just want to escape the situation. It’s almost like I’m watching myself from outside, knowing I should do something but feeling completely frozen. And then I end up disappointed in myself, which only makes everything worse.",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [
+            "situation"
+          ],
+          "automatic_thoughts": [
+            "my mind goes blank",
+            "I should do something",
+            "I feel disappointed in myself"
+          ],
+          "emotions": [
+            "panic",
+            "tightness",
+            "disappointment"
+          ],
+          "behaviors": [
+            "want to escape",
+            "feel frozen"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling like wanting to escape (finding)"
+          ],
+          "neutral": [
+            "Anxiety about collapsing (finding)",
+            "Fear of collapsing (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Free-floating anxiety (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "Okay, that sounds incredibly distressing. It's understandable that you'd find it strange to experience that. It sounds like when you're in these situations, your mind goes blank, panic arises, and you feel this urge to escape, almost like you're disconnected from yourself. Then, afterward, disappointment sets in. \n\nIt takes a lot of courage to describe something so unsettling. Can you tell me a little more about what's happening *right* when your mind goes blank? What's the situation like when you first notice this happening?\n\n\n\n**Reasoning:**\n\n*   **CBT Intervention Principle Applied:** `validate_and_reflect` - The initial response focuses on validating the patient's experience (\"That sounds incredibly distressing\") and reflecting back what they've shared to ensure understanding. I've highlighted key elements of their description (mind blanking, panic, urge to escape, disappointment) to show I'm tracking their experience.\n*   **Clinical Context Utilization:** The \"entailment\" regarding wanting to escape is acknowledged and incorporated into the reflection.\n*   **Avoiding Hidden Context:** I haven't revealed the Cognitive Model or Clinical Context.\n*   **Advancing Insight:** The follow-up question aims to gently probe deeper into the trigger (the \"right when your mind goes blank\") to begin exploring the chain of events. This is a subtle introduction to Socratic questioning, but prioritizes establishing rapport first.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly distressing to experience that feeling of being frozen and then disappointed in yourself afterward. It takes courage to describe what you're going through.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -934,7 +1160,7 @@
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're carrying a lot of pressure to appear confident, and that’s understandably exhausting. What makes you believe that others expect you to be that way?",
+            "response": "It sounds incredibly distressing to feel that sense of panic and then be frozen, watching yourself from the outside – what do you think might be contributing to your mind going blank in those moments?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -954,14 +1180,22 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
+                  "concept": "wanting to escape",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling frozen",
                   "label": "unknown"
+                },
+                {
+                  "concept": "disappointment",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly draining to feel like you need to maintain a certain image for others. What do you think someone who knows and cares about you might say about that expectation you're putting on yourself?",
+            "response": "That sounds incredibly distressing, and it's understandable you'd feel disappointed afterward. What do you think a friend might say about your reaction in those moments when you feel frozen?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -981,1034 +1215,15 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "wanting to escape",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling frozen",
                   "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly heavy, and it takes a lot of energy to feel like you need to maintain that image. Are you having thoughts of wanting to hurt yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 6,
-      "patient": {
-        "role": "patient",
-        "query": "I guess it’s just this feeling I’ve always had, maybe from childhood? Like, my family always praised my older siblings for their achievements, and I felt like I was just kind of… there. It’s like I learned to believe that if I didn’t succeed, I would just fade into the background. I don’t want to disappoint anyone, but at the same time, I’m terrified of failing. It’s like a constant battle in my head.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past failures",
-            "imagining people judging me",
-            "seeing others being confident",
-            "family praise for siblings' achievements"
-          ],
-          "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough",
-            "maybe I’m just not cut out for success",
-            "wondering if everyone else sees me the way I see myself",
-            "worry they see all my flaws and think I’m not worth their time",
-            "feeling like I have to prove myself all over again",
-            "everyone expects me to be confident and put together",
-            "if I falter, they’ll think I’m weak or not capable",
-            "if I don’t succeed, I will fade into the background"
-          ],
-          "emotions": [
-            "worried",
-            "heavy",
-            "overwhelmed",
-            "shame",
-            "disappointment",
-            "embarrassed",
-            "exposed",
-            "fragile",
-            "exhausted",
-            "terrified of failing"
-          ],
-          "behaviors": [
-            "trying to focus on studying",
-            "ruminating on past failures",
-            "hesitating to try new things",
-            "freezing up in social situations"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Feeling a failure (finding)",
-            "Fear of collapsing (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Fear of being in a small group (finding)"
-          ],
-          "neutral": [],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "That sounds incredibly difficult, and it makes sense that you'd feel conflicted given those experiences. Can you tell me more about what you mean by \"fade into the background\"?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you've carried this feeling for a long time, and it's understandably difficult to navigate the worry of disappointing others while also fearing failure. That constant battle in your head must be exhausting.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers: family praise for siblings' achievements",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: feeling like I have to prove myself all over again",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: shame, disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "entailment: Fear of being a burden to others (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "That sounds incredibly difficult, and it makes sense that you'd feel conflicted given those experiences. Can you tell me more about what you mean by \"fade into the background\"?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers: family praise for siblings' achievements",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: feeling like I have to prove myself all over again",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: shame, disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "entailment: fear of being a burden to others",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like that feeling of fading into the background has had a lasting impact, and it's understandable why you'd be feeling this internal conflict. If a friend were listening to you describe this, what do you think they might say about how you're viewing your own worth?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers: family praise for siblings' achievements",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: if I don’t succeed, I will fade into the background",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: shame, disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "alternative_perspective: asking what a trusted friend or outside observer might think about the situation",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly difficult, and it's understandable that you're feeling so overwhelmed. Are you having any thoughts of wanting to not be here or hurting yourself because of these feelings?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "ENTAILMENT",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 7,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it’s like I just don’t want to be invisible, you know? When I think about fading into the background, it feels like I won’t matter to anyone. Like, if I don’t achieve something or stand out, then what’s the point? I don’t want to feel like I’m not contributing or that I’m just… there, taking up space without really being noticed. It’s scary to think that I could just blend in and not leave any impact.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past failures",
-            "imagining people judging me",
-            "seeing others being confident",
-            "family praise for siblings' achievements"
-          ],
-          "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough",
-            "maybe I’m just not cut out for success",
-            "wondering if everyone else sees me the way I see myself",
-            "worry they see all my flaws and think I’m not worth their time",
-            "feeling like I have to prove myself all over again",
-            "everyone expects me to be confident and put together",
-            "if I falter, they’ll think I’m weak or not capable",
-            "if I don’t succeed, I will fade into the background",
-            "if I don’t achieve something or stand out, then what’s the point?",
-            "scared to blend in and not leave any impact"
-          ],
-          "emotions": [
-            "worried",
-            "heavy",
-            "overwhelmed",
-            "shame",
-            "disappointment",
-            "embarrassed",
-            "exposed",
-            "fragile",
-            "exhausted",
-            "terrified of failing",
-            "scared of being invisible"
-          ],
-          "behaviors": [
-            "trying to focus on studying",
-            "ruminating on past failures",
-            "hesitating to try new things",
-            "freezing up in social situations"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of being watched (finding)",
-            "Feeling alienated (finding)",
-            "Fear of being a burden to others (finding)",
-            "Feeling abandoned (finding)",
-            "Feeling isolated (finding)"
-          ],
-          "neutral": [],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like the thought of fading into the background brings up a real sense of worry for you – can you tell me more about what \"leaving an impact\" means to you?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like the thought of fading into the background brings up a really heavy feeling of not mattering, and that's understandably scary. It takes courage to share that vulnerability.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling isolated (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling abandoned (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "triggers: exams",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: if I don’t achieve something or stand out, then what’s the point?",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: worried",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "emotions: heavy",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like the thought of fading into the background brings up a real sense of worry for you – can you tell me more about what \"leaving an impact\" means to you?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling isolated (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling abandoned (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "triggers: exams",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: if I don’t achieve something or stand out, then what’s the point?",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: worried",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: ruminating on past failures",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like the thought of fading into the background brings up a deep fear of not mattering – that's understandable. What do you think someone who cares about you would say about your concerns about making an impact?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling isolated (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling abandoned (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "triggers: exams",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: if I don’t achieve something or stand out, then what’s the point?",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: worried",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: ruminating on past failures",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly painful, and it takes courage to share that. Are you having thoughts of wanting to hurt yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling isolated (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling abandoned (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "terrified of failing",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "scared of being invisible",
-                  "label": "emotions"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 8,
-      "patient": {
-        "role": "patient",
-        "query": "Leaving an impact… I guess it feels like making a difference in some way, like being remembered for something good. I think I want people to really see me and feel that I brought something valuable to their lives. It’s hard not to feel like it’s all just pressure, but I want to be someone who matters. Sometimes I’m not even sure if what I do is enough, and then I just feel overwhelmed by the need to prove that I’m worth noticing.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past failures",
-            "imagining people judging me",
-            "seeing others being confident",
-            "family praise for siblings' achievements"
-          ],
-          "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough",
-            "maybe I’m just not cut out for success",
-            "wondering if everyone else sees me the way I see myself",
-            "worry they see all my flaws and think I’m not worth their time",
-            "feeling like I have to prove myself all over again",
-            "everyone expects me to be confident and put together",
-            "if I falter, they’ll think I’m weak or not capable",
-            "if I don’t succeed, I will fade into the background",
-            "if I don’t achieve something or stand out, then what’s the point?",
-            "scared to blend in and not leave any impact",
-            "not sure if what I do is enough",
-            "overwhelmed by the need to prove that I’m worth noticing"
-          ],
-          "emotions": [
-            "worried",
-            "heavy",
-            "overwhelmed",
-            "shame",
-            "disappointment",
-            "embarrassed",
-            "exposed",
-            "fragile",
-            "exhausted",
-            "terrified of failing",
-            "scared of being invisible"
-          ],
-          "behaviors": [
-            "trying to focus on studying",
-            "ruminating on past failures",
-            "hesitating to try new things",
-            "freezing up in social situations"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Sense of purpose (observable entity)",
-            "Personal motivation (finding)",
-            "Finding of sense of purpose (finding)",
-            "Caring towards others (finding)"
-          ],
-          "neutral": [
-            "Extrinsic motivation (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like a deep desire to feel valued and leave a positive mark on the world. What does \"making a difference\" look like to you specifically?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you have a deep desire to make a positive impact and be seen for who you are, and it’s understandable that feeling that pressure can be overwhelming. It takes courage to share that, and I hear how much it means to you to feel valued and worthwhile.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Sense of purpose",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Personal motivation",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhausted",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "trying to focus on studying",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "ruminating on past failures",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "feeling like I have to prove myself all over again",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like a deep desire to feel valued and leave a positive mark on the world. What does \"making a difference\" look like to you specifically?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Sense of purpose",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Personal motivation",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Finding of sense of purpose",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhausted",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like leaving a positive impact and feeling valued is really important to you, and it's understandable that you feel pressure when you question whether your efforts are enough. What’s one thing a close friend might say to you about your contributions and value?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Sense of purpose",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Personal motivation",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Finding of sense of purpose",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
                 },
                 {
                   "concept": "disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "embarrassed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exposed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fragile",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhausted",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "terrified of failing",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "scared of being invisible",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "trying to focus on studying",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "ruminating on past failures",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "hesitating to try new things",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "freezing up in social situations",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly heavy, wanting to make a difference and feel seen. Are you having thoughts of wanting to be here, or thoughts of not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Sense of purpose",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Personal motivation",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Finding of sense of purpose",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "embarrassed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exposed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fragile",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhausted",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "terrified of failing",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "scared of being invisible",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "trying to focus on studying",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "ruminating on past failures",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "hesitating to try new things",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "freezing up in social situations",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 9,
-      "patient": {
-        "role": "patient",
-        "query": "I think making a difference would mean that people appreciate what I do or say, like they feel inspired or supported somehow. Maybe it’s helping someone through a tough time or sharing something that resonates with others. But then I start to doubt if I really have that ability. What if I try and it doesn’t land? It's like I want to connect, but the fear of falling short just makes me retreat back into myself.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past failures",
-            "imagining people judging me",
-            "seeing others being confident",
-            "family praise for siblings' achievements",
-            "desire to make a difference"
-          ],
-          "automatic_thoughts": [
-            "worried about exams and tests",
-            "scared of not measuring up",
-            "if I don’t do well, it’ll prove that I’m not good enough",
-            "maybe I’m just not cut out for success",
-            "wondering if everyone else sees me the way I see myself",
-            "worry they see all my flaws and think I’m not worth their time",
-            "feeling like I have to prove myself all over again",
-            "everyone expects me to be confident and put together",
-            "if I falter, they’ll think I’m weak or not capable",
-            "if I don’t succeed, I will fade into the background",
-            "if I don’t achieve something or stand out, then what’s the point?",
-            "scared to blend in and not leave any impact",
-            "not sure if what I do is enough",
-            "overwhelmed by the need to prove that I’m worth noticing",
-            "doubting my ability to make a difference",
-            "fear of trying and not landing"
-          ],
-          "emotions": [
-            "worried",
-            "heavy",
-            "overwhelmed",
-            "shame",
-            "disappointment",
-            "embarrassed",
-            "exposed",
-            "fragile",
-            "exhausted",
-            "terrified of failing",
-            "scared of being invisible",
-            "fear of falling short"
-          ],
-          "behaviors": [
-            "trying to focus on studying",
-            "ruminating on past failures",
-            "hesitating to try new things",
-            "freezing up in social situations",
-            "retreating back into myself"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Caring towards others (finding)",
-            "Sense of purpose (observable entity)"
-          ],
-          "neutral": [
-            "Respects others (finding)",
-            "Altruistic character (finding)",
-            "Understands principles of advocacy (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like making a difference is really important to you, and it’s understandable that the fear of not meeting that expectation can be difficult. What’s the strongest evidence you have that you wouldn’t be able to connect with someone or offer support?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like making a difference is really important to you, and it's tough when you're worried about whether you'll be able to achieve that. That retreat into yourself makes sense given how much you want to connect and the fear of falling short.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Caring towards others (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Sense of purpose (observable entity)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "doubting my ability to make a difference",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "fear of trying and not landing",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "embarrassed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exposed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fragile",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhausted",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "terrified of failing",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "scared of being invisible",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear of falling short",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "retreating back into myself",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like making a difference is really important to you, and it’s understandable that the fear of not meeting that expectation can be difficult. What’s the strongest evidence you have that you wouldn’t be able to connect with someone or offer support?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Sense of purpose (observable entity)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Caring towards others (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "doubting my ability to make a difference",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "fear of trying and not landing",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "disappointment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "embarrassed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exposed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fragile",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhausted",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "terrified of failing",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "scared of being invisible",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear of falling short",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "retreating back into myself",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like making a difference is really important to you, and it's understandable to feel discouraged when you worry about whether you'll achieve that. What's one thing a friend might say to you right now about your ability to connect with others?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Caring towards others (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Sense of purpose (observable entity)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic_thoughts: doubting my ability to make a difference",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: scared of being invisible",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: retreating back into myself",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you're carrying a lot of worry about whether you can truly make a difference, and that fear is making it hard to reach out. Are you having any thoughts of wanting to not be here because of these feelings?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Caring towards others (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Sense of purpose (observable entity)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "fear of failing",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "retreating back into myself",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhausted",
                   "label": "emotions"
                 }
               ]

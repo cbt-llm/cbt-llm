@@ -21,21 +21,26 @@
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents"
+            "finding a job",
+            "graduation",
+            "parents' support",
+            "living in the same town as parents"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money."
+            "I don't know what I want to do anymore",
+            "business may not be for me",
+            "I feel like I don't have a purpose",
+            "my purpose is to live off my parents' money"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss"
+            "helpless",
+            "hopeless",
+            "lost"
           ],
-          "behaviors": []
+          "behaviors": [
+            "relying on parents' money",
+            "avoiding job search"
+          ]
         },
         "retrieval": {
           "entailment": [
@@ -52,73 +57,46 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling stuck and unsure about your next steps, and that sense of helplessness and lack of purpose is weighing heavily on you. What’s one small thing you might try that could bring a bit of clarity or a sense of direction?",
+        "response": "It sounds like you’re feeling helpless and hopeless about finding a job and unsure of your purpose, especially with the support from your parents. What’s one small thing you might try that could help you feel a bit more in control?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling stuck and unsure about your next steps, and that sense of helplessness and lack of purpose is weighing heavily on you. What’s one small thing you might try that could bring a bit of clarity or a sense of direction?",
+            "response": "It sounds like you’re feeling helpless and hopeless about finding a job and unsure of your purpose, especially with the support from your parents. What’s one small thing you might try that could help you feel a bit more in control?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling hopeless",
+                  "concept": "Feeling hopeless (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling empty",
+                  "concept": "Feeling empty (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Loss of hope for the future",
+                  "concept": "Loss of hope for the future (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "I don't know what I want to do anymore",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I feel like I don't have a purpose",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Helpless",
+                  "concept": "helpless",
                   "label": "emotions"
                 },
                 {
-                  "concept": "Hopeless",
+                  "concept": "hopeless",
                   "label": "entailment"
                 },
                 {
-                  "concept": "At a loss",
+                  "concept": "lost",
                   "label": "emotions"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "What evidence supports the idea that you don't have a purpose, and how might you test that by trying something new?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling hopeless",
-                  "label": "entailment"
                 },
                 {
-                  "concept": "Loss of hope for the future",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Automatic thoughts: I don't know what I want to do, I don't have a purpose",
+                  "concept": "avoiding job search",
                   "label": "unknown"
                 }
               ]
             }
           },
-          "alternative_perspective": {
-            "response": "It might help to imagine what a close friend would say about your situation—what would they suggest you consider? Sometimes hearing that perspective can open up new possibilities.",
+          "socratic_questioning": {
+            "response": "It sounds like you’re feeling stuck. What evidence do you have that living off your parents’ money is the only way to find purpose?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -127,10 +105,6 @@
                 },
                 {
                   "concept": "Loss of hope for the future",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
                   "label": "entailment"
                 },
                 {
@@ -138,38 +112,23 @@
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Helpless",
-                  "label": "emotions"
+                  "concept": "I feel like I don't have a purpose",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Living off parents",
+                  "concept": "living off parents' money",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Finding a job",
-                  "label": "triggers"
+                  "concept": "helpless",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "It sounds like you’re feeling stuck and uncertain about your future. What’s one small step you might take to explore a new direction?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling hopeless",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Loss of hope for the future",
-                  "label": "entailment"
-                }
-              ]
-            }
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling stuck and unsure of your purpose. If a close friend were watching, what might they suggest you could do to start feeling more in control?",
+            "reasoning": null
           }
         }
       }
@@ -178,117 +137,116 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I do feel pretty stuck. It’s just... every time I think about what to do next, I get this overwhelming sense of doubt. Like, what if I make the wrong choice? It just makes it hard to even consider anything small, you know? I wish I could just figure things out without all this pressure.",
+        "query": "I guess I do feel a bit lost and overwhelmed. It's just that every time I think about applying for jobs or even updating my resume, I get this knot in my stomach. I want to feel in control, but it just seems so daunting... Maybe just looking at some job listings? That feels manageable, I suppose. But then I worry about not measuring up or making the right choice.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents"
+            "thinking about applying for jobs",
+            "updating my resume",
+            "looking at job listings"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?"
+            "I feel lost",
+            "I feel overwhelmed",
+            "I won't measure up",
+            "I might make the wrong choice"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed"
+            "fear",
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoid applying for jobs",
+            "avoid updating my resume"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling trapped (finding)",
-            "Difficulty making decisions (finding)",
-            "Difficulty making considered choices (finding)",
-            "Feeling nervous (finding)"
+            "Feeling lost (finding)",
+            "Anxiety about loss of control (finding)"
           ],
           "neutral": [
-            "Anxiety about having a fit (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Feeling hopeless (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling empty (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling stuck and overwhelmed by doubt, and that pressure makes even small decisions feel hard. What’s one small thing you might try that feels manageable right now?",
+        "response": "It sounds like you’re feeling lost and overwhelmed, and that knot in your stomach when you think about applying or updating your resume, which is a common way to feel when we’re anxious about losing control. What part of looking at job listings feels manageable for you right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling stuck and overwhelmed by doubt, and that pressure makes even small decisions feel hard. What’s one small thing you might try that feels manageable right now?",
+            "response": "It sounds like you’re feeling lost and overwhelmed, and that knot in your stomach when you think about applying or updating your resume, which is a common way to feel when we’re anxious about losing control. What part of looking at job listings feels manageable for you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling trapped (finding)",
+                  "concept": "Feeling lost",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty making decisions (finding)",
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling nervous (finding)",
-                  "label": "entailment"
+                  "concept": "Feeling overwhelmed",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Knot in stomach",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Desire for control",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that choosing a particular path will lead to a bad outcome? Maybe we can look at what you’ve learned from past decisions.",
+            "response": "It sounds like the idea of applying feels daunting because you worry about measuring up; what does feeling in control look like for you when you think about applying for a job?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling trapped",
+                  "concept": "Feeling lost",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty making decisions",
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling nervous",
-                  "label": "entailment"
+                  "concept": "Automatic thoughts: I won't measure up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Behaviors: avoid applying",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "A friend might say that making a mistake is part of learning, not a verdict, and that each choice is a chance to grow. What small step could you try that feels doable?",
+            "response": "It sounds like the thought of applying feels like a big leap that’s hard to control, and that knot in your stomach is a sign of that anxiety. If a close friend were watching you, what gentle advice might they offer about taking a small step, like just looking at a few job listings?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling trapped",
+                  "concept": "Feeling lost",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty making decisions",
+                  "concept": "Anxiety about loss of control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling nervous",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling stuck and overwhelmed by doubt about making the right choice. What would it look like if you could take one small step toward exploring your options without feeling that pressure?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling stuck",
+                  "concept": "Automatic thoughts of not measuring up",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Doubt about choices",
+                  "concept": "Behavior of avoiding applying",
                   "label": "unknown"
                 }
               ]
@@ -301,131 +259,102 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I mean, I think I could maybe update my resume or something. It doesn’t feel too intense, but at the same time, I keep thinking... what if I put myself out there and no one wants me? It makes my stomach churn just thinking about it. It’s like, do I really want to face that rejection again?",
+        "query": "I think just browsing them, like seeing what’s out there, feels okay. It’s kind of a distraction, too, from all the pressure I feel. But then I get stuck on what to even look for—I mean, do I go for something similar to what I had before, or try something new? And then I worry about whether I’ll even be good enough for whatever I choose.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents"
+            "browsing options",
+            "pressure I feel"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?",
-            "What if I put myself out there and no one wants me?"
+            "do I go for something similar to what I had before",
+            "worry about whether I’ll even be good enough"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Anxious"
+            "anxiety"
           ],
           "behaviors": [
-            "Consider updating resume"
+            "get stuck on what to look for"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling of discouragement (finding)"
+            "Personal motivation (finding)"
           ],
-          "neutral": [
-            "Feeling hopeless (finding)",
-            "Anxiety about having a fit (finding)"
-          ],
+          "neutral": [],
           "contradiction": [
-            "Feeling empty (finding)"
+            "Feeling safe (finding)",
+            "Feeling content (finding)",
+            "Minimal outside social stimulation (finding)",
+            "Hopeful for the future (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like updating your resume feels doable, but the worry about rejection is really weighing on you and making your stomach feel uneasy. How do you think you might feel if you could view that fear as just one possible outcome rather than a verdict on your worth?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you’re feeling stuck on whether to choose something familiar or new. What evidence do you have that you need to be “good enough” for whatever you choose?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like updating your resume feels doable, but the worry about rejection is really weighing on you and making your stomach feel uneasy. How do you think you might feel if you could view that fear as just one possible outcome rather than a verdict on your worth?",
+            "response": "It sounds like browsing feels like a helpful distraction from the pressure, but you’re also stuck deciding whether to stick with what’s familiar or try something new, and that worries you about being good enough. It’s understandable to feel anxious about making the right choice, and it’s okay to explore options at your own pace.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
+                  "concept": "personal motivation",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about having a fit (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Automatic thoughts about rejection",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Emotions: anxious, overwhelmed",
+                  "concept": "anxiety",
                   "label": "emotions"
+                },
+                {
+                  "concept": "pressure",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "decision-making",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like updating your resume feels manageable, but the fear of rejection is weighing on you. What evidence do you have that no one will want you if you put yourself out there?",
+            "response": "It sounds like you’re feeling stuck on whether to choose something familiar or new. What evidence do you have that you need to be “good enough” for whatever you choose?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
+                  "concept": "personal motivation (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling discouragement (finding)",
+                  "concept": "triggers: browsing options, pressure",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: similarity vs new, worry about being good enough",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about having a fit (finding)",
-                  "label": "neutral"
+                  "concept": "emotions: anxiety",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Automatic thought: 'What if I put myself out there and no one wants me?'",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Behavior: consider updating resume",
+                  "concept": "behaviors: getting stuck",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like the fear of rejection is really unsettling for you. If a close friend were in your shoes, what might they say to help you feel more confident about putting yourself out there?",
+            "response": "It can help to imagine what a trusted friend might say about taking a bit of time to explore new options instead of feeling stuck. What might that friend suggest you try first?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
+                  "concept": "personal motivation (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling hopeless (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Anxiety about having a fit (finding)",
-                  "label": "neutral"
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like the fear of rejection is making you hesitant to update your resume. What would be a small step you could take that feels manageable?",
-            "reasoning": null
           }
         }
       }
@@ -434,108 +363,101 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "That’s a tough one. I guess if I could see it that way, it might take off some of the weight. But then again, it’s hard to separate it, you know? I’ve struggled so much already, and hearing “no” just feels like more proof that I’m not good enough. It’s almost like I’m stuck in this loop, and I don’t know how to break out of it.",
+        "query": "Yeah, it’s definitely hard to shake that feeling. I guess I’ve always been told that if you want to succeed, you have to really stand out, you know? I think I just carry that pressure with me. It makes me feel like I have to prove something, like if I don’t excel right away, I’ll just be a failure. It’s exhausting, honestly.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents"
+            "pressure to succeed",
+            "need to stand out"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?",
-            "What if I put myself out there and no one wants me?",
-            "Hearing 'no' feels like proof that I'm not good enough."
+            "I have to prove something",
+            "If I don’t excel right away, I’ll be a failure"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Anxious"
+            "exhaustion"
           ],
-          "behaviors": [
-            "Consider updating resume"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Preoccupation with body weight (finding)"
+            "Anxiety about behavior or performance (finding)",
+            "Feeling a failure (finding)"
           ],
           "neutral": [
-            "Conflicting attitude towards exercise (finding)",
-            "Anxiety about forced dependence (finding)",
-            "Anxiety about altered body image (finding)",
-            "Anxiety about becoming fat (finding)"
+            "Anxiety about appearing ridiculous (finding)",
+            "Performance anxiety (finding)",
+            "Anxiety about having a fit (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like each rejection feels like proof that you’re not good enough, and that’s weighing you down. What might be one small thing you could do to challenge that feeling?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you’re carrying a lot of pressure. What evidence do you have that not excelling right away means you’re a failure?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like each rejection feels like proof that you’re not good enough, and that’s weighing you down. What might be one small thing you could do to challenge that feeling?",
+            "response": "It sounds like you’re carrying a heavy pressure to stand out and prove yourself, and that’s exhausting. What does that exhaustion feel like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "Pressure to succeed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Need to stand out",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Exhaustion",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that hearing “no” proves you’re not good enough?",
+            "response": "It sounds like you’re carrying a lot of pressure. What evidence do you have that not excelling right away means you’re a failure?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts about hearing 'no' as proof of inadequacy",
+                  "concept": "Anxiety about performance",
                   "label": "unknown"
                 },
                 {
-                  "concept": "emotions of helplessness and hopelessness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behavior of considering updating resume",
-                  "label": "unknown"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like hearing “no” feels like a personal verdict, but maybe there’s another way to look at it. If a trusted friend heard you say that, what might they say to help you see a different angle?",
-            "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like hearing “no” feels like proof that you’re not good enough. If a close friend were listening, what might they say to help you see a different view?",
+            "response": "It sounds exhausting, and I wonder what a supportive friend might say about the pressure you feel.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling stuck in a loop",
+                  "concept": "Anxiety about performance",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Hearing 'no' feels like proof of inadequacy",
-                  "label": "unknown"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Desire to see a different perspective",
-                  "label": "unknown"
+                  "concept": "Pressure to succeed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Need to stand out",
+                  "label": "triggers"
                 }
               ]
             }
@@ -547,104 +469,102 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it does weigh on me a lot. I guess I could try reaching out to someone from my past job, maybe just for a chat, but it’s hard to shake that fear of what they'll think of me. It’s like, I want to connect, but then I worry they’ll just see all my failures instead of the progress I’ve made. I don’t know if I’m ready for that.",
+        "query": "I don’t know, maybe it’s just what I’ve seen in my life—like, people around me always seemed to jump into things and do well right off the bat. I guess I feel like I should just know what I’m doing and have it all figured out. When that doesn’t happen, it's like I'm letting everyone down, including myself. It just makes every step feel like a bigger deal than it probably is.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents"
+            "seeing others succeed",
+            "not knowing what to do"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?",
-            "What if I put myself out there and no one wants me?",
-            "Hearing 'no' feels like proof that I'm not good enough.",
-            "I worry they'll just see all my failures instead of the progress I've made."
+            "I should know what I'm doing",
+            "I'm letting everyone down",
+            "every step is a big deal"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Anxious",
-            "Fearful"
+            "anxiety",
+            "shame"
           ],
-          "behaviors": [
-            "Consider updating resume",
-            "Try reaching out to someone from past job"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Difficulty maintaining relationships (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Limited social contact (finding)",
-            "Difficulty coping with grief responses (finding)"
+            "Loss of initiative (finding)",
+            "Tends not to plan ahead (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Fear of being a burden to others (finding)",
+            "Fear of saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried they’ll focus on your failures. What evidence do you have that they’ll see only that?",
+        "response": "What evidence do you have that you’re letting everyone down when you feel unsure?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re torn between wanting to reconnect and fearing that your past will be judged, which is a common worry when reaching out after a setback. What would it feel like if someone you trust just listened without judgment?",
+            "response": "It sounds like you’re feeling pressure to match others’ quick success, and when you don’t feel ready, you worry about letting people down and that each step feels huge, which can bring anxiety and shame. What would you say to a friend who felt the same way?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
+                  "concept": "Loss of initiative",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Difficulty maintaining relationships (finding)",
-                  "label": "entailment"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling pressure to match others' success",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re worried they’ll focus on your failures. What evidence do you have that they’ll see only that?",
-            "reasoning": null
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you’re worried they’ll focus on your failures, but you’ve also made progress. If a close friend were in your shoes, what might they say about your progress versus your fears?",
-            "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling anxious about how others might see you. What would it feel like to share your progress with someone you trust?",
+            "response": "What evidence do you have that you’re letting everyone down when you feel unsure?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts of needing to know everything",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It might help to think about how a supportive friend would view your situation. Many people feel uncertain and still find ways to move forward.",
+            "reasoning": {
+              "retrieved_concepts_used": [
                 {
                   "concept": "Anxiety about making mistakes",
-                  "label": "entailment"
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Difficulty maintaining relationships",
-                  "label": "entailment"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Automatic thoughts about failures",
-                  "label": "unknown"
+                  "concept": "Loss of initiative",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Emotions: anxious, fearful",
-                  "label": "emotions"
+                  "concept": "Tends not to plan ahead",
+                  "label": "neutral"
                 }
               ]
             }
@@ -656,126 +576,98 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I mean, I don’t really have anything solid to go on—it’s more like this nagging voice in my head. I just remember times when I felt like I was falling short, and those moments stick with me. I’m scared they’ll bring it up, or that I’ll be reminded of it, and it’s so hard to shake off that feeling of not being good enough. It’s almost easier to just avoid the whole thing altogether.",
+        "query": "I suppose it’s not that anyone's actually said anything to me directly, but... I just kind of feel that way sometimes. Like I’m not living up to expectations—mine and those of people around me. It’s more of a nagging thought, you know? It’s like this fear that if I don’t succeed right away, they’ll be disappointed, even if they haven’t expressed that. It’s hard to shake that feeling.",
         "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Being reminded of past failures"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?",
-            "What if I put myself out there and no one wants me?",
-            "Hearing 'no' feels like proof that I'm not good enough.",
-            "I worry they'll just see all my failures instead of the progress I've made.",
-            "I'm scared they'll bring up my past failures."
+            "I'm not living up to expectations",
+            "If I don't succeed right away, they'll be disappointed"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Anxious",
-            "Fearful",
-            "Feeling not good enough"
+            "fear"
           ],
-          "behaviors": [
-            "Consider updating resume",
-            "Try reaching out to someone from past job",
-            "Avoid situations that remind me of past failures"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Anxiety about making mistakes (finding)",
+          "entailment": [
             "Feeling a failure (finding)",
-            "Examination phobia (finding)"
+            "Incongruent personal expectations (finding)",
+            "Feeling of discouragement (finding)",
+            "Fear of saying the wrong thing (finding)"
+          ],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the memories of falling short are weighing heavily on you, and that fear of being reminded makes you want to avoid the situation. What would it feel like if you could let go of that nagging voice for a moment?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like this fear is weighing on you; what evidence do you have that people around you would be disappointed if you don't succeed right away?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the memories of falling short are weighing heavily on you, and that fear of being reminded makes you want to avoid the situation. What would it feel like if you could let go of that nagging voice for a moment?",
+            "response": "It sounds like you’re carrying a sense of not living up to expectations and fearing that you’ll disappoint others. What would it feel like if you could let go of that fear for a moment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "neutral"
+                  "concept": "Incongruent personal expectations",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling not good enough",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Avoidance behavior",
-                  "label": "unknown"
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re worried that people will focus on your past failures instead of your progress. What evidence do you have that they will do that?",
+            "response": "It sounds like this fear is weighing on you; what evidence do you have that people around you would be disappointed if you don't succeed right away?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
-                  "label": "neutral"
-                },
-                {
                   "concept": "Feeling a failure",
-                  "label": "neutral"
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about behavior or performance",
-                  "label": "neutral"
+                  "concept": "Incongruent personal expectations",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "User schema automatic thoughts about past failures and not being good enough",
-                  "label": "unknown"
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Automatic thoughts: 'I'm not living up to expectations', 'If I don't succeed right away, they'll be disappointed'",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like those memories are really heavy. If a close friend were watching you, what might they say about how you’re handling these worries?",
-            "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like you're carrying a lot of past disappointments that keep resurfacing and make you feel stuck. What would you say to a friend who was feeling the same way?",
+            "response": "If a close friend heard you say that, what might they say to help you see a different angle? It might help to think about any evidence that contradicts the idea that people will be disappointed.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling not good enough",
-                  "label": "emotions"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "fear of being reminded of past failures",
-                  "label": "triggers"
+                  "concept": "Incongruent personal expectations",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "avoidance",
-                  "label": "unknown"
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
                 }
               ]
             }
@@ -787,107 +679,90 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Honestly, it feels so appealing to think about just letting it go, even for a bit. I mean, the idea of not feeling that pressure, just enjoying a conversation without second-guessing myself... it sounds nice. But then I get anxious, thinking, what if that voice comes back even stronger later? It’s like I can’t help but hold onto it when I want so badly to be free of it.",
+        "query": "I guess I don’t have concrete evidence, more like a sense of it. I’ve seen how people celebrate achievements, and it seems like there’s always this rush to “do well” in life. It’s just... I kind of internalize that, thinking if I don’t fit that mold, I’ll somehow let them down. It's silly, right? But it feels so real in the moment. Sometimes I wonder if I’m just imagining things, but it still sticks with me.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Being reminded of past failures",
-            "Engaging in conversations"
+            "seeing people celebrate achievements",
+            "pressure to do well in life"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?",
-            "What if I put myself out there and no one wants me?",
-            "Hearing 'no' feels like proof that I'm not good enough.",
-            "I worry they'll just see all my failures instead of the progress I've made.",
-            "I'm scared they'll bring up my past failures.",
-            "What if that voice comes back even stronger later?"
+            "if I don’t fit that mold, I’ll let them down",
+            "I’m just imagining things"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Anxious",
-            "Fearful",
-            "Feeling not good enough",
-            "Desire for freedom from pressure"
+            "anxiety",
+            "fear"
           ],
-          "behaviors": [
-            "Consider updating resume",
-            "Try reaching out to someone from past job",
-            "Avoid situations that remind me of past failures",
-            "Hold onto anxious thoughts instead of letting go"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Delusion of control of voice (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Increased motivation (finding)",
+            "Delusion of grandiose ability (finding)",
+            "On examination - elated (finding)",
+            "Character trait finding of level of pride (finding)"
           ],
           "contradiction": [
-            "Fear of speaking on the phone (finding)",
-            "Loud thoughts (finding)"
+            "Extrinsic motivation (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re weighing the possibility of relief against the fear of the voice returning. What evidence do you have that the voice will come back stronger if you let go of the pressure right now?",
+        "response": "It sounds like you feel a lot of pressure to fit that mold. What evidence do you have that you will let others down if you don’t?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re caught between the relief of letting go and the worry that the voice might return stronger, and that’s a tough spot to be in. What would it feel like if you could give yourself that brief space to just enjoy the conversation?",
+            "response": "It sounds like you’re feeling a strong pressure to match others’ achievements, and that feeling is both unsettling and real. What does that pressure look like for you when it comes up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of wanting relief from pressure",
-                  "label": "unknown"
+                  "concept": "seeing people celebrate achievements",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Anxiety about the voice returning",
+                  "concept": "pressure to do well in life",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "internalizing that if I don’t fit that mold, I’ll let them down",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling silly but real",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re weighing the possibility of relief against the fear of the voice returning. What evidence do you have that the voice will come back stronger if you let go of the pressure right now?",
+            "response": "It sounds like you feel a lot of pressure to fit that mold. What evidence do you have that you will let others down if you don’t?",
             "reasoning": null
           },
           "alternative_perspective": {
-            "response": "If a close friend heard you say you want to relax in conversation, what might they say to reassure you? Many people find that the voice often fades when they give themselves permission to be present, so it might be worth exploring that possibility.",
+            "response": "It sounds like you’re carrying a lot of pressure that feels real in the moment. What might a trusted friend say about how you’re feeling right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Engaging in conversations",
+                  "concept": "seeing people celebrate achievements",
                   "label": "triggers"
                 },
                 {
-                  "concept": "What if that voice comes back even stronger later?",
+                  "concept": "pressure to do well in life",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "if I don’t fit that mold, I’ll let them down",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Feeling not good enough",
-                  "label": "emotions"
+                  "concept": "I’m just imagining things",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling a lot of pressure and fear that the voice might return stronger. What would it look like if you could let go of that pressure for a moment?",
-            "reasoning": null
           }
         }
       }
@@ -896,143 +771,109 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I guess there’s no solid proof, it's more about how it feels. I’ve had those moments of feeling lighter before, but it always seems to come back, like a wave crashing down. It's just hard to trust that I can really relax without it all coming back to haunt me later. That makes it tough to even consider taking that step.",
+        "query": "I guess it’s more about feelings than actual proof. Like, when my friends or family talk about their successes, I can’t help but compare myself. And then if I talk about my struggles, even if they’re supportive, I still feel this weight as if my journey isn’t... good enough. It’s like I’m scared that if I admit to feeling lost, they’ll think less of me, even if they don’t say it. It’s frustrating because I know it’s probably not",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Being reminded of past failures",
-            "Engaging in conversations"
+            "friends or family talk about their successes",
+            "talking about struggles"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?",
-            "What if I put myself out there and no one wants me?",
-            "Hearing 'no' feels like proof that I'm not good enough.",
-            "I worry they'll just see all my failures instead of the progress I've made.",
-            "I'm scared they'll bring up my past failures.",
-            "What if that voice comes back even stronger later?",
-            "I can't trust that I can really relax without it all coming back to haunt me."
+            "I’m not good enough",
+            "they’ll think less of me",
+            "my journey isn’t good enough"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Anxious",
-            "Fearful",
-            "Feeling not good enough",
-            "Desire for freedom from pressure",
-            "Difficulty trusting in moments of relief"
+            "fear",
+            "frustration"
           ],
           "behaviors": [
-            "Consider updating resume",
-            "Try reaching out to someone from past job",
-            "Avoid situations that remind me of past failures",
-            "Hold onto anxious thoughts instead of letting go",
-            "Struggle to take steps towards relaxation"
+            "comparing myself",
+            "avoiding sharing feelings"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of being a burden to others (finding)",
+            "Feeling a failure (finding)"
+          ],
           "neutral": [
-            "Rebound mood swings (finding)",
-            "Non-organic enduring personality change (finding)",
-            "Anticipatory anxiety, moderate (finding)",
-            "Anticipatory anxiety (finding)",
-            "Mood swings (finding)"
+            "Lack of pride (finding)",
+            "Delusion of own appearance (finding)",
+            "Depressive delusion of poverty (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling uncertain about staying relaxed because past relief has been followed by anxiety, and that uncertainty makes it hard to move forward. What would it feel like if you could hold onto that lighter feeling for a bit longer?",
+        "response": "It sounds like hearing about others' successes triggers a comparison that makes you feel your own journey isn’t good enough, and you worry that sharing your struggles might lead others to think less of you, which is understandably frustrating. What does it feel like when you think about sharing your struggles with them?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling uncertain about staying relaxed because past relief has been followed by anxiety, and that uncertainty makes it hard to move forward. What would it feel like if you could hold onto that lighter feeling for a bit longer?",
+            "response": "It sounds like hearing about others' successes triggers a comparison that makes you feel your own journey isn’t good enough, and you worry that sharing your struggles might lead others to think less of you, which is understandably frustrating. What does it feel like when you think about sharing your struggles with them?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anticipatory anxiety",
-                  "label": "neutral"
+                  "concept": "fear of being a burden",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions: anxious, fear, feeling not good enough",
+                  "concept": "feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "comparison",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear of judgment",
                   "label": "emotions"
                 },
                 {
-                  "concept": "automatic thought: can't trust relaxation",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that the feeling of lightness will inevitably return, and how might you test that idea by allowing yourself to enjoy it a bit longer?",
+            "response": "What evidence do you have that they will think less of you if you share your struggles?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anticipatory anxiety",
-                  "label": "neutral"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Mood swings",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Feeling lighter but wave crashing",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Trust issues with relaxation",
-                  "label": "unknown"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I hear how unsettling it feels when the calm fades. What might a supportive friend say about the idea that a brief sense of lightness could still be valuable, even if it sometimes recedes?",
+            "response": "If a close friend heard you share your struggles, what do you think they'd say? Maybe they'd see your honesty as a sign of strength rather than a flaw.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anticipatory anxiety",
-                  "label": "neutral"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling lighter",
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts: 'I’m not good enough'",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "behaviors: comparing myself",
                   "label": "unknown"
                 },
                 {
-                  "concept": "relaxation fears",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "trust issues",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling uncertain about whether you can stay relaxed without the anxiety returning, and that’s understandable. What might help you feel a bit more secure in those moments of calm?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "anticipatory anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "anxious feelings",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear of relapse",
+                  "concept": "behaviors: avoiding sharing feelings",
                   "label": "unknown"
                 }
               ]
@@ -1045,152 +886,111 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I think it would feel... freeing, maybe? Like I could breathe a little easier and just exist without constantly worrying. But then I also feel this knot in my stomach thinking about it. Like, what if I can’t hold onto it? It feels a bit like standing on a cliff, you know? I want to jump, but I’m terrified of crashing down.",
+        "query": "It’s kind of a mix of fear and vulnerability, I guess. I feel this tightness in my chest when I think about opening up—like, what if they don’t understand? Or worse, what if they start to see me differently? It makes me hesitate, even though I know they care. It just feels safer to keep it all inside, even if it gets heavy.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Being reminded of past failures",
-            "Engaging in conversations"
+            "thinking about opening up"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?",
-            "What if I put myself out there and no one wants me?",
-            "Hearing 'no' feels like proof that I'm not good enough.",
-            "I worry they'll just see all my failures instead of the progress I've made.",
-            "I'm scared they'll bring up my past failures.",
-            "What if that voice comes back even stronger later?",
-            "I can't trust that I can really relax without it all coming back to haunt me.",
-            "What if I can’t hold onto this feeling of freedom?"
+            "what if they don’t understand?",
+            "what if they start to see me differently?"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Anxious",
-            "Fearful",
-            "Feeling not good enough",
-            "Desire for freedom from pressure",
-            "Difficulty trusting in moments of relief",
-            "Tension in stomach"
+            "fear",
+            "vulnerability"
           ],
           "behaviors": [
-            "Consider updating resume",
-            "Try reaching out to someone from past job",
-            "Avoid situations that remind me of past failures",
-            "Hold onto anxious thoughts instead of letting go",
-            "Struggle to take steps towards relaxation"
+            "hesitate",
+            "keep it all inside"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Out of body experience (finding)",
-            "Being out of body (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Feels own body is unreal (finding)",
-            "Thoughts about dying (finding)"
+            "Fear of saying the wrong thing (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of public speaking (finding)",
+            "Fear of choking (finding)",
+            "Fear of speaking to people in authority (finding)"
           ],
-          "contradiction": [
-            "Free-floating anxiety (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re hoping for a sense of relief and ease, but you’re also worried that you might lose that feeling, like standing on a cliff and fearing a fall. What would it look like if you could hold onto that sense of ease for a little while?",
+        "response": "It sounds like you’re feeling a tightness in your chest and a fear that others might misunderstand or judge you, which can make you hold back even though you know they care. What’s the most unsettling thought that comes up when you consider opening up?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re hoping for a sense of relief and ease, but you’re also worried that you might lose that feeling, like standing on a cliff and fearing a fall. What would it look like if you could hold onto that sense of ease for a little while?",
+            "response": "It sounds like you’re feeling a tightness in your chest and a fear that others might misunderstand or judge you, which can make you hold back even though you know they care. What’s the most unsettling thought that comes up when you consider opening up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of freedom from pressure",
+                  "concept": "fear of saying the wrong thing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of public speaking",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of speaking to people in authority",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts about being misunderstood",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety",
-                  "label": "contradiction"
-                },
-                {
-                  "concept": "Fear",
+                  "concept": "emotions of fear and vulnerability",
                   "label": "emotions"
                 },
                 {
-                  "concept": "Knot in stomach",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Cliff metaphor",
+                  "concept": "behavior of hesitation and keeping thoughts inside",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that you can’t hold onto this feeling of freedom?",
+            "response": "It sounds like you’re feeling a lot of fear and vulnerability when you think about opening up. What evidence do you have that they will see you differently if you share?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment: Out of body experience",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "neutral: Thoughts about dying",
+                  "concept": "Fear of speaking to people in authority",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re torn between the relief you imagine and the fear of losing control. If a close friend heard you describe this, what might they say about the possibility of feeling both freedom and safety?",
+            "response": "If a close friend were watching you hesitate to open up, what might they say about sharing your thoughts? They might remind you that sharing often strengthens connection, not changes how they see you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Out of body experience",
-                  "label": "entailment"
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Desire for freedom from pressure",
-                  "label": "emotions"
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Tension in stomach",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Fear of falling",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling a lot of distress and uncertainty about your safety. Are you having thoughts of hurting yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "User expresses desire to jump, indicating potential suicidal ideation",
-                  "label": "unknown"
+                  "concept": "Fear of speaking to people in authority",
+                  "label": "neutral"
                 }
               ]
             }
@@ -1202,51 +1002,25 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess it would mean being able to approach things without all that heaviness weighing on me. Maybe I could talk to people openly, share what I’m really interested in without worrying about how it's going to be perceived. But then I get stuck again, thinking about how long that could last. It’s just hard to picture myself being in that space without the fear creeping back in.",
+        "query": "Yeah, that tightness is definitely there. I think what really gets to me is the thought that if I share my struggles, people will see me as weak or not capable. Like, I don’t want to be seen as someone who can’t handle things. It feels like a risk—what if they don’t see me the same way afterward? That fear can really keep me from being honest about how overwhelmed I feel.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Being reminded of past failures",
-            "Engaging in conversations",
-            "Thinking about approaching things openly"
+            "sharing struggles",
+            "being seen as weak",
+            "risk of judgment"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "What if I make the wrong choice?",
-            "What if I put myself out there and no one wants me?",
-            "Hearing 'no' feels like proof that I'm not good enough.",
-            "I worry they'll just see all my failures instead of the progress I've made.",
-            "I'm scared they'll bring up my past failures.",
-            "What if that voice comes back even stronger later?",
-            "I can't trust that I can really relax without it all coming back to haunt me.",
-            "What if I can’t hold onto this feeling of freedom?",
-            "How long could I really stay in a space without fear creeping back in?"
+            "people will see me as weak",
+            "I can't handle things",
+            "they won't see me the same way afterward"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Anxious",
-            "Fearful",
-            "Feeling not good enough",
-            "Desire for freedom from pressure",
-            "Difficulty trusting in moments of relief",
-            "Tension in stomach",
-            "Heaviness weighing on me"
+            "fear",
+            "overwhelm"
           ],
           "behaviors": [
-            "Consider updating resume",
-            "Try reaching out to someone from past job",
-            "Avoid situations that remind me of past failures",
-            "Hold onto anxious thoughts instead of letting go",
-            "Struggle to take steps towards relaxation",
-            "Get stuck thinking about how long relief could last"
+            "avoiding honesty"
           ]
         },
         "retrieval": {
@@ -1254,41 +1028,40 @@
             "Fear of being a burden to others (finding)"
           ],
           "neutral": [
-            "Enduring personality change after catastrophic experience (finding)",
-            "Ready for enhanced spiritual well-being (finding)",
-            "Fear of going out (finding)"
+            "Anxiety about collapsing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of collapsing (finding)",
+            "Fear of losing emotional control (finding)"
           ],
-          "contradiction": [
-            "Able to resist dangerous thoughts with ease (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re hoping to feel lighter and more open, but you’re worried that the heaviness might return. What might help you feel more confident that this lighter feeling can stay?",
+        "response": "It sounds like you’re feeling a tightness and worry that sharing your struggles might make others see you as weak, and that fear is keeping you from being honest. What does it feel like when you think about how others might react?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re hoping to feel lighter and more open, but you’re worried that the heaviness might return. What might help you feel more confident that this lighter feeling can stay?",
+            "response": "It sounds like you’re feeling a tightness and worry that sharing your struggles might make others see you as weak, and that fear is keeping you from being honest. What does it feel like when you think about how others might react?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of being a burden to others",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "desire for freedom from pressure",
-                  "label": "emotions"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "fear of heaviness returning",
-                  "label": "unknown"
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re hoping to feel lighter and more open. What would it look like if you could stay in that open, relaxed space a bit longer?",
+            "response": "It sounds like this fear is holding you back. What evidence do you have that sharing your struggles will make others see you as weak?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1296,22 +1069,18 @@
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of going out",
+                  "concept": "Anxiety about collapsing",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Automatic thoughts about fear creeping back",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Desire for freedom from pressure",
-                  "label": "emotions"
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re worried the lightness might fade—what might a trusted friend say about staying in that space?",
+            "response": "If a close friend were watching, what might they think about you sharing your struggles? It could help to consider how they might see it.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1319,39 +1088,12 @@
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of going out",
+                  "concept": "Anxiety about collapsing",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Fear of failure",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re hoping to feel lighter and more open, but you’re worried the fear might return. What evidence do you have that the fear will come back?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "fear of being a burden to others",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "fear creeping back",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "heaviness weighing on me",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "worry about duration of relief",
-                  "label": "unknown"
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
                 }
               ]
             }

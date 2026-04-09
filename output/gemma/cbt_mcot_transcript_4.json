@@ -21,13 +21,19 @@
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me"
+            "hearing voices",
+            "people talking about me"
           ],
           "automatic_thoughts": [
+            "it's a problem",
             "I'm rubbish",
-            "I'm a failure"
+            "I'm a failure",
+            "I wish they'd leave me alone"
           ],
-          "emotions": [],
+          "emotions": [
+            "frustration",
+            "sadness"
+          ],
           "behaviors": []
         },
         "retrieval": {
@@ -46,11 +52,11 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly distressing to be hearing voices saying such hurtful things about you – that you're rubbish and a failure. It makes complete sense that you'd want them to stop.",
+        "response": "Okay, it sounds incredibly distressing to be hearing voices saying those things about you – that you're rubbish and a failure, and that people are talking about you. It's understandable that you'd wish they'd just leave you alone. It takes a lot of courage to share something like this, especially when it's connected to a diagnosis like muscophenia.\n\n\n\nLet's take a moment to just acknowledge how difficult this must be. It sounds like these voices are causing you a lot of frustration and sadness. Can you tell me a little more about what it's like when you hear these voices? For example, what situations tend to trigger them, or what do they say specifically?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to be hearing voices saying such hurtful things about you – that you're rubbish and a failure. It makes complete sense that you'd want them to stop.",
+            "response": "It sounds incredibly distressing to be hearing voices saying those things about you, and to feel like they won't leave you alone. It takes a lot of courage to share something like that.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -59,6 +65,10 @@
                 },
                 {
                   "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 },
                 {
@@ -69,7 +79,7 @@
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to be hearing these voices saying such harsh things about you – what do you think it is about these voices that makes them feel so personal?",
+            "response": "It sounds incredibly distressing to be hearing these voices and having people talk about you in such a negative way – what do you think might be contributing to these voices and the things they're saying?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -78,6 +88,10 @@
                 },
                 {
                   "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 },
                 {
@@ -88,7 +102,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to be hearing these voices saying such harsh things about you. Can you imagine what someone who cares about you might say about those voices and what they're telling you?",
+            "response": "It sounds incredibly distressing to be hearing these voices and having people talk about you in such a negative way; it's understandable that you wish they'd just go away. Can you imagine what someone who cares about you might say about these voices and the thoughts you're having?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -100,26 +114,11 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly distressing to be hearing voices saying those things about you. Are you having thoughts of wanting to hurt yourself or not wanting to be here because of this?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
+                  "concept": "emotions",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
+                  "concept": "alternative_perspective",
                   "label": "unknown"
                 }
               ]
@@ -132,46 +131,52 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is distressing. Sometimes it feels like there’s this constant noise in my head, telling me I’m not good enough. I just wish I could drown it out or make it go away. It’s exhausting.",
+        "query": "Yeah, it’s really hard. Sometimes, it feels like they just pop up out of nowhere, especially when I'm in a crowded place or even just at home trying to relax. They say things like I’m worthless or that nobody cares about me. It really makes it hard to focus on anything else. It’s like they drown everything else out, you know? I feel so alone in those moments.",
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head"
+            "crowded place",
+            "at home trying to relax"
           ],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
-            "I'm not good enough"
+            "I’m worthless",
+            "nobody cares about me"
           ],
           "emotions": [
-            "distress",
-            "exhaustion"
+            "alone"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about behavior or performance (finding)",
-            "Complaining of feeling depressed (finding)"
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)",
+            "Feeling unwanted (finding)",
+            "Feeling unloved (finding)"
           ],
           "neutral": [
-            "Performance anxiety (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Social isolation (rejection) (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly distressing to have that constant, critical voice in your head, and it's completely understandable that you're feeling exhausted. It takes a lot of energy to deal with that kind of inner criticism.",
+        "response": "Okay, it sounds like you're going through a really difficult time. It takes courage to share these feelings, and I appreciate you doing so. It’s understandable that you’d feel overwhelmed when these thoughts – like \"I’m worthless\" or \"nobody cares about me\" – arise, especially when you're trying to relax or in a crowded place. It sounds incredibly distressing to have those thoughts \"pop up\" and essentially take over your focus, leaving you feeling so alone.\n\nIt sounds like these thoughts are really impacting how you're experiencing things right now. Can you tell me a little more about what it's like when you notice these thoughts arising? What happens right before you start thinking these things?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to have that constant, critical voice in your head, and it's completely understandable that you're feeling exhausted. It takes a lot of energy to deal with that kind of inner criticism.",
+            "response": "It sounds incredibly distressing to have those thoughts intrude, especially when you're trying to relax or are in a crowded place, and to feel so alone when they do. It takes a lot of courage to share that, and I want you to know I hear you.",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unwanted (finding)",
+                  "label": "entailment"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -183,20 +188,12 @@
                 {
                   "concept": "emotions",
                   "label": "unknown"
-                },
-                {
-                  "concept": "exhaustion",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "That sounds incredibly difficult to deal with – it's understandable that you're feeling exhausted. Can you tell me a little more about what that \"noise\" sounds like when it tells you that you're not good enough?",
+            "response": "It sounds incredibly distressing to have those thoughts intrude, especially when you're trying to relax. Can you tell me a little more about what happens right before you notice these thoughts – what's going on in the situation?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -212,14 +209,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "exhaustion",
-                  "label": "emotions"
+                  "concept": "Feeling unwanted (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly draining to have those kinds of thoughts constantly playing in your head. What do you think someone who cares about you would say about you calling yourself \"not good enough\"?",
+            "response": "It sounds incredibly distressing to have those thoughts intrude, especially when you're trying to relax. Can you imagine what a supportive friend might say to you when you're experiencing those thoughts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -235,31 +232,12 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "exhaustion",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly distressing, and it's understandable that you'd want it to stop. Are you having thoughts of wanting to hurt yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "feeling unwanted",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "exhaustion",
-                  "label": "emotions"
+                  "concept": "feeling unloved",
+                  "label": "entailment"
                 }
               ]
             }
@@ -271,47 +249,46 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does take a toll. There are days when I just feel overwhelmed, like I can’t keep up with everything—my work, my relationships, just… life. It’s like I’m always waiting for something bad to happen, you know?",
+        "query": "Um, well, sometimes I’m just doing something normal, like watching TV or talking to someone. And then, suddenly, it feels like a switch flips. I start to feel this heaviness in my chest, like I can’t breathe right, and then those thoughts rush in. It’s like they cloud everything. I just want to escape or disappear sometimes. It’s really disorienting, and I don’t know how to make it stop when it happens.",
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head",
-            "feeling overwhelmed by work and relationships"
+            "watching TV",
+            "talking to someone"
           ],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
-            "I'm not good enough",
-            "I'm always waiting for something bad to happen"
+            "thoughts rush in",
+            "everything is clouded"
           ],
           "emotions": [
-            "distress",
-            "exhaustion",
-            "overwhelm"
+            "heaviness",
+            "disorientation"
           ],
-          "behaviors": []
+          "behaviors": [
+            "want to escape",
+            "want to disappear"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling of being slowed down (finding)"
+            "Feeling like wanting to escape (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Difficulty managing stress (finding)",
+            "Free-floating anxiety (finding)",
+            "Unable to resist dangerous thoughts (finding)",
             "Anxiety about collapsing (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Intrusive thoughts (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly draining to feel constantly overwhelmed and like you're bracing for something bad to happen. That’s a lot to carry, and it makes sense that it would take a toll.",
+        "response": "Okay, that sounds really distressing. It takes a lot of courage to describe something like that. It sounds like these episodes are quite sudden and disruptive, and leave you feeling disoriented and wanting to escape. \n\nIt's helpful that you've identified some triggers – watching TV or talking to someone – and you've described the physical sensations, like the heaviness in your chest, and the rush of thoughts that follow. It sounds like you're experiencing a significant shift in how you feel and think when these triggers occur. \n\nCould you tell me a little more about what those \"thoughts\" are like when they rush in? What kinds of things are you thinking when you feel that heaviness and disorientation?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly draining to feel constantly overwhelmed and like you're bracing for something bad to happen. That’s a lot to carry, and it makes sense that it would take a toll.",
+            "response": "It sounds like these experiences are really unsettling, and it’s tough to feel like you’re losing control when that “switch” flips. It takes courage to describe something so disorienting, and I want to make sure I understand what you're going through.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -319,18 +296,26 @@
                   "label": "unknown"
                 },
                 {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
                   "concept": "emotions",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "feeling like wanting to escape (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly draining to feel that constant pressure and anticipation. Can you tell me more about what goes through your mind when you feel like you can’t keep up?",
+            "response": "That sounds incredibly unsettling – it’s understandable that you’d want it to stop. Can you tell me a little more about what those rushing thoughts are like when this happens?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -350,14 +335,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "feeling overwhelmed",
-                  "label": "triggers"
+                  "concept": "feeling like wanting to escape",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly draining to feel like you're constantly bracing for something bad to happen – what do you think might be a more balanced or realistic way of looking at things, even just for a moment?",
+            "response": "That sounds incredibly unsettling, and it makes sense that you'd want it to stop. Can you imagine what a friend might say about what you're experiencing when that \"switch\" flips?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -377,35 +362,8 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds incredibly difficult to carry that weight. Are you having thoughts of wanting to hurt yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling overwhelmed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "waiting for something bad to happen",
-                  "label": "automatic_thoughts"
+                  "concept": "feeling like wanting to escape (finding)",
+                  "label": "entailment"
                 }
               ]
             }
@@ -417,55 +375,48 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "It feels like I’m always on edge, waiting for something to go wrong. Even small things can set me off, and then I spiral. I just wish I could feel calm for a moment without that fear creeping in.",
+        "query": "Yeah, I can try. They’re usually really harsh, like maybe I’m not good enough or that I’m going to screw everything up. Sometimes it’s more vague, like a feeling that something is wrong and that I just can’t put my finger on it. I end up questioning everything, like if I’m really doing okay in life or if I’m just pretending to be fine. It’s like a spiral, and it gets harder to climb out of. I just want to feel safe",
         "core_issue": "anxiety and fear",
         "schema": {
-          "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head",
-            "feeling overwhelmed by work and relationships",
-            "small things setting me off"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
             "I'm not good enough",
-            "I'm always waiting for something bad to happen"
+            "I'm going to screw everything up",
+            "Something is wrong",
+            "Am I really doing okay in life?",
+            "Am I just pretending to be fine?"
           ],
           "emotions": [
-            "distress",
-            "exhaustion",
-            "overwhelm",
             "fear",
-            "edginess"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "questioning everything"
+          ]
         },
         "retrieval": {
-          "entailment": [
-            "Anticipatory anxiety (finding)",
-            "Anticipatory anxiety, mild (finding)",
-            "Anticipatory anxiety, moderate (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about going crazy (finding)"
+            "Anxiety about behavior or performance (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about going crazy (finding)",
+            "Negative automatic thoughts (finding)"
           ],
-          "contradiction": [
-            "Feeling calm (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly distressing to feel constantly on edge and anticipating things going wrong. Can you tell me a little more about what goes through your mind when you notice yourself starting to feel that way?",
+        "response": "It sounds like these thoughts – like \"I'm not good enough\" or \"I'm going to screw everything up\" – can really pull you down, and I hear how unsettling it is when you can't quite pinpoint what's wrong. Can you tell me more about what happens right before you start questioning everything?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to feel constantly on edge and like you're bracing for something bad to happen. It takes a lot of energy to live like that, and I hear your wish for a moment of calm.",
+            "response": "It sounds like you're experiencing a lot of self-doubt and worry, and it's understandable that you'd want to feel safe. It takes courage to describe these kinds of thoughts and feelings, and I appreciate you sharing them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
@@ -473,22 +424,18 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to feel constantly on edge and anticipating things going wrong. Can you tell me a little more about what goes through your mind when you notice yourself starting to feel that way?",
+            "response": "It sounds like these thoughts – like \"I'm not good enough\" or \"I'm going to screw everything up\" – can really pull you down, and I hear how unsettling it is when you can't quite pinpoint what's wrong. Can you tell me more about what happens right before you start questioning everything?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
@@ -496,22 +443,18 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly draining to feel that constant sense of anticipation and worry. What do you think a friend might say about you feeling this way, given how hard you're working to manage things?",
+            "response": "It sounds incredibly distressing to experience these thoughts and feel like you're caught in a cycle – wanting to feel safe while these doubts keep pulling you down. What's one thing, even a small one, that might suggest you *are* doing okay, despite these harsh thoughts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
@@ -519,34 +462,7 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds incredibly distressing to feel constantly on edge and overwhelmed by that fear. Are you having thoughts of wanting to hurt yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
@@ -559,72 +475,44 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "When I start to feel that way, it’s like this wave of panic hits. I think about all the things that could go wrong—sometimes even the most unlikely scenarios. It’s hard to shake off that feeling, and I just spiral deeper into worry. I keep telling myself to stay calm, but it feels like my mind has other plans.",
+        "query": "Um, sure. It’s often something small, like I might get an email at work or someone just mentions something casually. I’ll start to overthink it, like, did I say the wrong thing? Did I mess up? Then my heart starts racing, and I feel like everything’s closing in. It’s like my mind just jumps to the worst-case scenario, and I can’t shake that feeling. It makes me feel so... helpless.",
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head",
-            "feeling overwhelmed by work and relationships",
-            "small things setting me off"
+            "email at work",
+            "casual mention"
           ],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
-            "I'm not good enough",
-            "I'm always waiting for something bad to happen",
-            "I think about all the things that could go wrong"
+            "did I say the wrong thing?",
+            "did I mess up?",
+            "worst-case scenario"
           ],
           "emotions": [
-            "distress",
-            "exhaustion",
-            "overwhelm",
-            "fear",
-            "edginess",
-            "panic",
-            "worry"
+            "anxiety",
+            "helplessness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Sense of impending doom (finding)",
-            "Feeling nervous (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Feeling physically tense (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
             "Anxiety about making mistakes (finding)",
-            "Anxiety about collapsing (finding)"
+            "Anxiety about losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly distressing to be caught in that cycle of worry and panic—what specifically goes through your mind as you feel that wave of panic starting?",
+        "response": "It sounds incredibly distressing when these small triggers lead to such a strong reaction – that feeling of things closing in and that sense of helplessness. Can you tell me a little more about what happens right after you start thinking, \"Did I say the wrong thing?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to experience that wave of panic and get caught up in worrying about all sorts of possibilities—it's understandable that you'd feel stuck. It takes a lot of effort to try and calm yourself when your mind feels like it's going in a different direction.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions: panic",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "automatic_thoughts: 'I think about all the things that could go wrong'",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "behaviors: 'I keep telling myself to stay calm'",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds incredibly distressing to be caught in that cycle of worry and panic—what specifically goes through your mind as you feel that wave of panic starting?",
+            "response": "It sounds like these small triggers, like an email or a casual comment, can really set off a cascade of thoughts and feelings for you, and leave you feeling helpless. That must be really distressing.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -644,18 +532,49 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "sense of impending doom",
+                  "concept": "Anxiety about saying the wrong thing (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "feeling nervous",
+                  "concept": "Feeling physically tense (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing when these small triggers lead to such a strong reaction – that feeling of things closing in and that sense of helplessness. Can you tell me a little more about what happens right after you start thinking, \"Did I say the wrong thing?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to be caught in that cycle of worry and panic, especially when trying to calm yourself doesn’t seem to help. What's one thing a close friend might say to you when they see you getting caught up in these thoughts?",
+            "response": "It sounds incredibly distressing when these small triggers lead to such a strong reaction – that feeling of things closing in and being helpless can be really overwhelming. If a friend were watching this unfold, what do you think they might notice about your thought process as you jump to that worst-case scenario?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -675,31 +594,12 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "ENTAILMENT — Sense of impending doom (finding)",
+                  "concept": "Anxiety about saying the wrong thing (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "ENTAILMENT — Feeling nervous (finding)",
+                  "concept": "Fear of losing emotional control (finding)",
                   "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly distressing, and it takes a lot of effort to try and manage that panic. Are you having thoughts of wanting to hurt yourself or not wanting to be here right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions: panic",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "automatic_thoughts: 'I think about all the things that could go wrong'",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "triggers: feeling overwhelmed",
-                  "label": "emotions"
                 }
               ]
             }
@@ -711,82 +611,54 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I usually start picturing the worst-case scenarios, like everything falling apart. I think about letting people down or not being able to handle a situation. It’s like my brain just jumps to the most negative outcome, and before I know it, I feel completely overwhelmed. I really wish I could stop that from happening.",
+        "query": "Yeah, it’s like a wave hits me. I can feel my stomach drop, and my thoughts start racing. I replay the conversation over and over in my head, dissecting every word. I often think about how the other person might be judging me, and then I just want to retreat. It’s like I get paralyzed; I can’t focus on anything else. I feel so exposed and dread the idea of facing anyone afterward. It’s exhausting.",
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head",
-            "feeling overwhelmed by work and relationships",
-            "small things setting me off"
+            "conversation"
           ],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
-            "I'm not good enough",
-            "I'm always waiting for something bad to happen",
-            "I think about all the things that could go wrong",
-            "I picture the worst-case scenarios",
-            "I think about letting people down",
-            "I won't be able to handle a situation"
+            "the other person might be judging me",
+            "I replay the conversation over and over",
+            "I dissect every word"
           ],
           "emotions": [
-            "distress",
-            "exhaustion",
-            "overwhelm",
             "fear",
-            "edginess",
-            "panic",
-            "worry"
+            "anxiety",
+            "dread",
+            "exhaustion"
           ],
-          "behaviors": []
+          "behaviors": [
+            "want to retreat",
+            "get paralyzed",
+            "can't focus on anything else"
+          ]
         },
         "retrieval": {
-          "entailment": [
-            "Negative automatic thoughts (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Depressive delusion of catastrophe (finding)",
-            "Anxiety about collapsing (finding)",
-            "Fear of collapsing (finding)"
+            "Fear of speaking to people in authority (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of public speaking (finding)",
+            "Fear of speaking on the phone (finding)",
+            "Fear of social gatherings (finding)"
           ],
-          "contradiction": [
-            "Able to resist dangerous thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly distressing when your mind jumps to those worst-case scenarios – what do you think might be contributing to your brain going there so quickly?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds incredibly distressing to experience that wave of anxiety and then get caught up in replaying conversations and worrying about what others think—it's completely understandable that you feel exhausted. Can you tell me a little more about what specifically triggers these intense reactions?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing when your mind jumps to those worst-case scenarios and leaves you feeling overwhelmed – it takes a lot of strength to recognize and talk about that. It makes sense that you'd want to find a way to stop that from happening.",
+            "response": "It sounds incredibly distressing to experience that wave of anxiety and then get caught up in replaying conversations and worrying about what others think—it's completely understandable that you feel exhausted. Can you tell me a little more about what specifically triggers these intense reactions?",
             "reasoning": {
               "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
                 },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds incredibly distressing when your mind jumps to those worst-case scenarios – what do you think might be contributing to your brain going there so quickly?",
-            "reasoning": {
-              "retrieved_concepts_used": [
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -798,22 +670,41 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to experience that wave of anxiety and then get caught up in replaying the conversation – what’s the most concerning thing you notice when you dissect every word?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Depressive delusion of catastrophe (finding)",
-                  "label": "neutral"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about collapsing (finding)",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing when your mind jumps to those worst-case scenarios – it's understandable that you'd want to find a way to manage that. Sometimes, when we're caught up in those thoughts, it can be helpful to consider, if a friend were experiencing this, what might they say about the likelihood of everything falling apart?",
+            "response": "It sounds incredibly distressing to experience that wave of anxiety and replay conversations so intensely – it's understandable that you'd feel exhausted. What's one thing that might be going through the other person's mind during that conversation?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -823,59 +714,8 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "behaviors",
                   "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly distressing, and it takes a lot of energy to deal with those kinds of thoughts. Are you having thoughts of wanting to hurt yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "I'm not good enough",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I think about all the things that could go wrong",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I picture the worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I think about letting people down",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "overwhelm",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "fear",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "worry",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "entailment",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Negative automatic thoughts (finding)",
-                  "label": "entailment"
                 }
               ]
             }
@@ -887,94 +727,44 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I guess it might be from past experiences where things really did go wrong. I’ve been in situations where I felt unprepared and ended up regretting it. So now, I just keep thinking that if I anticipate the worst, maybe I can somehow prevent it, even though it doesn’t really help. It’s like I just can’t break that cycle.",
+        "query": "Yeah, I guess it can be pretty random sometimes. I know certain situations get to me more, like meeting new people or being in a group where I feel out of place. Even just receiving criticism, even if it’s constructive, sends me spiraling. It’s like I can’t handle any hint of negativity, and I start to feel this pressure building up. I worry a lot about how I’m perceived, and then I just feel trapped again. It’s frustrating, because I wish I",
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head",
-            "feeling overwhelmed by work and relationships",
-            "small things setting me off",
-            "past experiences where things went wrong"
+            "meeting new people",
+            "being in a group where I feel out of place",
+            "receiving criticism"
           ],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
-            "I'm not good enough",
-            "I'm always waiting for something bad to happen",
-            "I think about all the things that could go wrong",
-            "I picture the worst-case scenarios",
-            "I think about letting people down",
-            "I won't be able to handle a situation",
-            "if I anticipate the worst, maybe I can prevent it"
+            "I can't handle any hint of negativity",
+            "I worry a lot about how I'm perceived",
+            "I feel trapped"
           ],
           "emotions": [
-            "distress",
-            "exhaustion",
-            "overwhelm",
-            "fear",
-            "edginess",
-            "panic",
-            "worry",
-            "regret"
+            "frustration",
+            "pressure"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Preoccupation with disaster (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anticipation - mental defense mechanism (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Fear of going crazy (finding)",
-            "Fear of collapsing (finding)"
+            "Anxiety about going crazy (finding)",
+            "Tends to turn anger against self (finding)",
+            "Mood swings (finding)",
+            "Feeling isolated (finding)",
+            "Difficulty understanding own emotions (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those past experiences have really shaped how you approach situations now. Can you tell me more about what happens when you anticipate the worst – what do you notice, and how does it affect you?",
-        "protocol_used": "socratic_questioning",
+        "response": "Okay, it sounds like you've identified some really challenging situations that trigger a cascade of difficult feelings. You mentioned meeting new people, being in groups where you feel out of place, and even constructive criticism can lead to feeling overwhelmed. You used the phrase \"it sends me spiraling,\" and you described feeling trapped and experiencing pressure. It's understandable that you'd feel frustrated when these things happen.\n\nIt takes a lot of courage to recognize these patterns and articulate how they affect you. Can you tell me a little more about what happens *right before* you start to feel that pressure building up? I'm curious to hear more about what's going through your mind in those moments.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those past experiences have really left a mark, and it makes sense that you'd want to protect yourself from feeling that way again. It takes a lot of effort to keep anticipating the worst, and it's understandable that you feel stuck in that cycle.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers: past experiences where things went wrong",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: I'm always waiting for something bad to happen",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I think about all the things that could go wrong",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I picture the worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: worry",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "emotions: fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like those past experiences have really shaped how you approach situations now. Can you tell me more about what happens when you anticipate the worst – what do you notice, and how does it affect you?",
+            "response": "It sounds like these situations – meeting new people, being in a group, or even constructive criticism – can really trigger a cascade of difficult feelings and thoughts for you. It takes courage to recognize and share that, and I appreciate you describing it.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -987,89 +777,61 @@
                 },
                 {
                   "concept": "emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those situations – meeting new people, being in a group, or even constructive criticism – trigger a cascade of feelings for you; what do you think is happening right before you start to feel that pressure building up?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those situations – meeting new people, being in a group, or even constructive criticism – can really trigger a cascade of difficult feelings for you. What's one thing that might help you feel a little less trapped in those moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
                 },
                 {
                   "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "anticipation - mental defense mechanism (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like those past experiences have really shaped how you approach situations now, and it makes sense you'd want to avoid repeating them. What do you think someone who cares about you would say about this cycle of anticipating the worst?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers: past experiences where things went wrong",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: I'm always waiting for something bad to happen",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I think about all the things that could go wrong",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I picture the worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: worry",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "emotions: fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "alternative_perspective: exploration of evidence, alternatives, and implications",
+                  "concept": "alternative_perspective",
                   "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like those past experiences have really left a mark, and it makes sense you'd want to protect yourself from feeling that way again. Are you having thoughts of wanting to hurt yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers: past experiences where things went wrong",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts: I'm always waiting for something bad to happen",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I think about all the things that could go wrong",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I picture the worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions: worry",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "emotions: fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "entailment: Preoccupation with disaster (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "neutral: Anticipation - mental defense mechanism (finding)",
-                  "label": "neutral"
                 }
               ]
             }
@@ -1081,63 +843,44 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "When I start anticipating the worst, I feel this tightness in my chest, and my heart races. It’s like my body is preparing for a fight or flight, but there’s no real danger. It makes me anxious and can even lead to me avoiding certain situations altogether. I just don’t want to go through that discomfort again. It's a tough spot to be in.",
+        "query": "Yeah, I guess it can be pretty random sometimes. I know certain situations get to me more, like meeting new people or being in a group where I feel out of place. Even just receiving criticism, even if it’s constructive, sends me spiraling. It’s like I can’t handle any hint of negativity, and I start to feel this pressure building up. I worry a lot about how I’m perceived, and then I just feel trapped again. It’s frustrating because I wish I could",
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head",
-            "feeling overwhelmed by work and relationships",
-            "small things setting me off",
-            "past experiences where things went wrong",
-            "anticipating the worst"
+            "meeting new people",
+            "being in a group where I feel out of place",
+            "receiving criticism"
           ],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
-            "I'm not good enough",
-            "I'm always waiting for something bad to happen",
-            "I think about all the things that could go wrong",
-            "I picture the worst-case scenarios",
-            "I think about letting people down",
-            "I won't be able to handle a situation",
-            "if I anticipate the worst, maybe I can prevent it"
+            "I can't handle any hint of negativity",
+            "I worry a lot about how I'm perceived",
+            "I feel trapped"
           ],
           "emotions": [
-            "distress",
-            "exhaustion",
-            "overwhelm",
-            "fear",
-            "edginess",
-            "panic",
-            "worry",
-            "regret",
-            "anxiety"
+            "frustration",
+            "pressure"
           ],
-          "behaviors": [
-            "avoiding certain situations"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Anticipatory anxiety (finding)",
-            "Sense of impending doom (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Fear of having a heart attack (finding)",
-            "Fear of collapsing (finding)",
-            "Anxiety about having a heart attack (finding)"
+            "Anxiety about going crazy (finding)",
+            "Tends to turn anger against self (finding)",
+            "Mood swings (finding)",
+            "Feeling isolated (finding)",
+            "Difficulty understanding own emotions (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Okay, it sounds incredibly distressing to experience that physical reaction – the tightness in your chest and racing heart – especially when you feel like it's triggered by anticipating the worst. It makes complete sense that you'd want to avoid those situations to escape that discomfort. It's tough to be in a place where your body is reacting as if there's real danger when you know, logically, that there isn't.\n\nIt sounds like you're describing a physiological response that's linked to your anticipation of negative outcomes. Can you tell me a little more about what goes through your mind *right before* you start feeling that tightness in your chest and your heart starts racing?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like those situations – meeting new people, being in a group, or even constructive criticism – trigger a cascade of difficult feelings and thoughts for you. Can you tell me a little more about what goes through your mind when you feel that pressure building up?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to experience that physical reaction – the tightness in your chest and racing heart – when you're anticipating the worst, especially when there's no immediate threat. It takes a lot of courage to describe feeling so stuck.",
+            "response": "It sounds like those situations – meeting new people, being in a group, or even constructive criticism – can really trigger a cascade of difficult feelings and thoughts for you. It takes courage to recognize and share that, and I appreciate you describing it.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1150,25 +893,17 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
+                  "label": "neutral"
                 },
                 {
                   "concept": "behaviors",
                   "label": "unknown"
-                },
-                {
-                  "concept": "anticipatory anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "sense of impending doom",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to experience that physical reaction and then feel compelled to avoid situations – that’s a tough spot to be in. Can you tell me a little more about what goes through your mind when you start anticipating the worst?",
+            "response": "It sounds like those situations – meeting new people, being in a group, or even constructive criticism – trigger a cascade of difficult feelings and thoughts for you. Can you tell me a little more about what goes through your mind when you feel that pressure building up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1181,100 +916,37 @@
                 },
                 {
                   "concept": "emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those situations – meeting new people, being in a group, or even constructive criticism – can really trigger a cascade of difficult feelings for you. What's one thing that a friend might notice about how you handle these situations?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
                 },
                 {
                   "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "anticipatory anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "sense of impending doom",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly distressing to experience that physical reaction and then feel compelled to avoid situations because of it. What do you think might be going through your mind when you notice that tightness in your chest and racing heart?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "I'm always waiting for something bad to happen",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I think about all the things that could go wrong",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I picture the worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "fear",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "panic",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "anticipating the worst",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "entailment",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Anticipatory anxiety (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Sense of impending doom (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly distressing, and it makes sense you'd want to avoid that discomfort. Are you having thoughts of wanting to hurt yourself or not wanting to be here right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anticipatory anxiety (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Sense of impending doom (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "emotions: anxiety",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: avoiding certain situations",
+                  "concept": "alternative_perspective",
                   "label": "unknown"
                 }
               ]
@@ -1287,64 +959,47 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Right before that happens, I usually start to imagine all the things that could go wrong in a situation. I think about how people might react or what they might say. It’s like I’m playing out these scenarios in my head, and it just builds up. Sometimes, it feels almost like a movie scene where I can see everything unfolding, and it just triggers that panic response. It’s frustrating because I know it’s only in my head, but it still feels so real.",
+        "query": "Yeah, when I feel that pressure rising, it’s like my mind goes into overdrive. I start thinking things like, “What if I embarrass myself?” or “What if they think I’m incapable?” My heart races, I feel like I need to get out of the situation, and I get this sense of impending doom. It’s overwhelming, and I can’t seem to shake the feeling that I’m on the edge of something bad happening. It’s like I can’t calm myself",
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head",
-            "feeling overwhelmed by work and relationships",
-            "small things setting me off",
-            "past experiences where things went wrong",
-            "anticipating the worst"
+            "pressure rising",
+            "being in a situation with others"
           ],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
-            "I'm not good enough",
-            "I'm always waiting for something bad to happen",
-            "I think about all the things that could go wrong",
-            "I picture the worst-case scenarios",
-            "I think about letting people down",
-            "I won't be able to handle a situation",
-            "if I anticipate the worst, maybe I can prevent it",
-            "I imagine how people might react or what they might say"
+            "What if I embarrass myself?",
+            "What if they think I’m incapable?",
+            "I’m on the edge of something bad happening."
           ],
           "emotions": [
-            "distress",
-            "exhaustion",
+            "anxiety",
             "overwhelm",
-            "fear",
-            "edginess",
-            "panic",
-            "worry",
-            "regret",
-            "anxiety"
+            "fear"
           ],
           "behaviors": [
-            "avoiding certain situations"
+            "feel like I need to get out of the situation"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling physically tense (finding)",
+            "Sense of impending doom (finding)",
+            "Feeling nervous (finding)"
+          ],
           "neutral": [
-            "Situational panic attack (finding)",
-            "Complaining of panic attack (finding)",
-            "Panic attack (finding)",
+            "Anxiety about collapsing (finding)",
             "Fear of collapsing (finding)"
           ],
-          "contradiction": [
-            "Non-situational panic attack (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly distressing to experience those vivid scenarios and the panic that follows. Can you tell me, what's usually going through your mind when you start imagining these \"movie scenes\"?",
-        "protocol_used": "socratic_questioning",
+        "response": "Okay, it sounds incredibly distressing to experience that pressure and have your mind racing with thoughts like, \"What if I embarrass myself?\" or \"What if they think I’m incapable?\". It's understandable that you'd feel overwhelmed and want to escape the situation when your heart is racing and you're experiencing that sense of impending doom. \n\nIt takes a lot of courage to describe what you're going through. It sounds like these thoughts and feelings are really impacting your ability to feel calm. Can you tell me a little more about what it's like when you notice that pressure rising? What specifically triggers that feeling?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to be caught up in these vivid scenarios and to feel that panic building – it makes sense that you'd find it frustrating. It takes a lot of energy to carry those mental movies around with you.",
+            "response": "It sounds incredibly distressing to experience that pressure and have your mind racing with worries about embarrassing yourself or being seen as incapable – it's completely understandable that you feel overwhelmed and want to escape the situation. It takes a lot of courage to share that, and I want to acknowledge how difficult that must be.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1361,13 +1016,17 @@
                 },
                 {
                   "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to experience those vivid scenarios and the panic that follows. Can you tell me, what's usually going through your mind when you start imagining these \"movie scenes\"?",
+            "response": "It sounds incredibly distressing to experience that sense of overwhelm and impending doom – what do you notice happening physically when you have those thoughts about embarrassing yourself or being seen as incapable?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1384,36 +1043,17 @@
                 },
                 {
                   "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to be caught up in those vivid scenarios, and it's understandable that it triggers a panic response. If a friend were watching this unfold, what do you think they might notice about how you're predicting these events?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "That sounds incredibly distressing, and it makes sense that you'd feel frustrated by these vivid scenarios. Are you having thoughts of wanting to hurt yourself or not wanting to be here right now?",
+            "response": "It sounds incredibly distressing to feel that sense of impending doom and have your mind racing with those \"what if\" thoughts. Imagine a friend was experiencing this – what might they say to reassure themselves and try to put things in perspective?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1430,6 +1070,10 @@
                 },
                 {
                   "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
@@ -1442,221 +1086,82 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "It’s a mix of things, honestly. There’s this voice telling me I’m going to mess up or that people will judge me. I start thinking about how I’ll look in front of others, or what they’ll think if I fail. And then the fear kicks in, and suddenly it feels like everyone’s watching, waiting for me to stumble. It’s like I’m putting on this performance, and the pressure just builds.",
+        "query": "Thank you, it helps to say it out loud. The pressure usually builds when things feel unpredictable, like when I’m in a meeting and someone asks me a question unexpectedly. Or even when I’m just hanging out with friends and someone talks about a sensitive topic, and I suddenly feel exposed. It’s that fear of being caught off guard, I guess. It’s like my mind goes blank, and then all I can think about is how everyone is looking at me and judging me. That’s",
         "core_issue": "anxiety and fear",
         "schema": {
           "triggers": [
-            "hearing voices talking about me",
-            "constant noise in my head",
-            "feeling overwhelmed by work and relationships",
-            "small things setting me off",
-            "past experiences where things went wrong",
-            "anticipating the worst",
-            "feeling judged by others"
+            "unpredictable situations",
+            "meeting with unexpected questions",
+            "sensitive topics with friends"
           ],
           "automatic_thoughts": [
-            "I'm rubbish",
-            "I'm a failure",
-            "I'm not good enough",
-            "I'm always waiting for something bad to happen",
-            "I think about all the things that could go wrong",
-            "I picture the worst-case scenarios",
-            "I think about letting people down",
-            "I won't be able to handle a situation",
-            "if I anticipate the worst, maybe I can prevent it",
-            "I imagine how people might react or what they might say",
-            "I'm going to mess up",
-            "everyone's watching, waiting for me to stumble"
+            "fear of being caught off guard",
+            "everyone is looking at me",
+            "everyone is judging me"
           ],
           "emotions": [
-            "distress",
-            "exhaustion",
-            "overwhelm",
             "fear",
-            "edginess",
-            "panic",
-            "worry",
-            "regret",
-            "anxiety",
-            "pressure"
+            "anxiety"
           ],
           "behaviors": [
-            "avoiding certain situations"
+            "saying things out loud",
+            "going blank"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about behavior or performance (finding)",
-            "Performance anxiety (finding)",
-            "Feeling nervous (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Feeling nervous (finding)",
+            "Fear of public speaking (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Pressured by others (finding)"
           ],
-          "neutral": [
-            "Stage fright (finding)",
-            "Anxiety about saying the wrong thing (finding)"
-          ],
+          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those thoughts and the feeling of being watched create a lot of pressure – what do you notice about the voice telling you that you’ll mess up?",
+        "response": "It sounds like those unpredictable moments can really trigger a strong reaction – that feeling of being exposed and then the worry about what others are thinking. Can you tell me a little more about what goes through your mind in those moments right before you feel your mind go blank?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to feel like you're constantly performing and under scrutiny, and that inner voice can be really unsettling. It takes a lot of courage to share that, and I appreciate you describing what that experience is like for you.",
+            "response": "It sounds like those unpredictable moments, like unexpected questions or sensitive conversations, can really trigger a strong reaction in you, and it's understandable that you'd feel exposed and anxious when that happens. It takes courage to share that, and I appreciate you putting it into words.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts\\",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "I'm going to mess up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I think about how I’ll look in front of others",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "everyone’s watching, waiting for me to stumble",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
                   "concept": "emotions",
                   "label": "unknown"
-                },
-                {
-                  "concept": "fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "pressure",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "entailment",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling nervous (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like those thoughts and the feeling of being watched create a lot of pressure – what do you notice about the voice telling you that you’ll mess up?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts: I'm going to mess up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I think about how people might react or what they might say",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts: everyone’s watching, waiting for me to stumble",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions: fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "emotions: anxiety",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: avoiding certain situations",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly distressing to feel like you're constantly performing and under scrutiny. If a friend were watching you go through this, what do you think they might notice about the situation?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts\\",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "I'm going to mess up\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I think about all the things that could go wrong\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I imagine how people might react or what they might say\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "fear\\",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "anxiety\\",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "pressure\\",
-                  "label": "emotions"
                 },
                 {
                   "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "avoiding certain situations\\",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Anxiety about behavior or performance (finding)\\",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling nervous (finding)",
+                  "concept": "Anxiety about saying the wrong thing (finding)",
                   "label": "entailment"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "That sounds incredibly distressing, and it takes a lot of courage to share that. Are you having thoughts of wanting to hurt yourself or not wanting to be here?",
+          "socratic_questioning": {
+            "response": "It sounds like those unpredictable moments can really trigger a strong reaction – that feeling of being exposed and then the worry about what others are thinking. Can you tell me a little more about what goes through your mind in those moments right before you feel your mind go blank?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts\\",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "I'm going to mess up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "everyone’s watching, waiting for me to stumble",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
@@ -1664,24 +1169,39 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "fear",
-                  "label": "emotions"
+                  "concept": "behaviors",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "anxiety",
+                  "concept": "Anxiety about saying the wrong thing (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "pressure",
-                  "label": "emotions"
-                },
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those unpredictable moments can be really unsettling, and it's understandable that you'd feel exposed and anxious when that happens. What do you think a close friend might say about your reaction in those situations?",
+            "reasoning": {
+              "retrieved_concepts_used": [
                 {
                   "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "feeling judged by others",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
                 }
               ]
             }

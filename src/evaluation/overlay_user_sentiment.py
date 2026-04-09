@@ -8,7 +8,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib.colors import Normalize, LinearSegmentedColormap
-from matplotlib.lines import Line2D
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -16,24 +15,13 @@ OUTPUT_ROOT = PROJECT_ROOT / "output"
 SAVE_ROOT = PROJECT_ROOT / "evaluation" / "user_sentiment_plots"
 SAVE_ROOT.mkdir(parents=True, exist_ok=True)
 
-# Download NRC VAD v2.1 lexicon directory (https://saifmohammad.com/WebPages/nrc-vad.html)
-# and please place the unzipped folder at: project/external_libs/
 NRC_VAD_DIR = PROJECT_ROOT / "external_libs" / "NRC-VAD-Lexicon-v2.1"
 
-MODE_LABELS = {
-    "mcot": "CBT-MCoT",
-}
-
-# Truncated Purples — skip lightest 35% to match RealCBT's truncated Blues style
 CIRCUMPLEX_CMAP = LinearSegmentedColormap.from_list(
     "truncated_purples",
     cm.Purples(np.linspace(0.35, 1.0, 256))
 )
 
-
-# =========================
-# LEXICON
-# =========================
 
 def load_nrc_vad(lexicon_dir: Path) -> dict:
     unigrams_dir = lexicon_dir / "Unigrams"
@@ -52,16 +40,11 @@ def load_nrc_vad(lexicon_dir: Path) -> dict:
 
     valence = _load_dim("unigrams-valence-NRC-VAD-Lexicon-v2.1.txt")
     arousal = _load_dim("unigrams-arousal-NRC-VAD-Lexicon-v2.1.txt")
-
     common = set(valence) & set(arousal)
     vad_dict = {w: {"valence": valence[w], "arousal": arousal[w]} for w in common}
     print(f"NRC VAD lexicon loaded: {len(vad_dict):,} unigrams\n")
     return vad_dict
 
-
-# =========================
-# HELPERS
-# =========================
 
 def coverage_report(messages, vad_dict):
     total_tokens, matched_tokens = 0, 0
@@ -100,6 +83,14 @@ def load_transcript_files(model: str) -> dict:
         if mode is not None:
             grouped[mode].append(fp)
     return grouped
+
+
+def load_transcript_with_metadata(fp: Path) -> tuple[list, str]:
+    with fp.open("r", encoding="utf-8") as f:
+        obj = json.load(f)
+    messages = obj.get("transcript", []) if isinstance(obj, dict) else []
+    core_issue = obj.get("metadata", {}).get("core_issue", "unknown") if isinstance(obj, dict) else "unknown"
+    return messages, core_issue
 
 
 def extract_messages(fp: Path) -> list:
@@ -184,10 +175,6 @@ def summarize_cumulative(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-# =========================
-# PLOTTING
-# =========================
-
 def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
     df = all_summaries.get("mcot")
     if df is None or df.empty:
@@ -216,8 +203,9 @@ def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
     pad = 0.01
     ax.set_xlim(x.min() - pad, x.max() + pad)
     ax.set_ylim(y.min() - pad, y.max() + pad)
+    ax.invert_yaxis()
 
-    ax.set_title(f"CBT-MCoT: User Valence-Arousal Trajectory")
+    ax.set_title("CBT-MCoT: User Valence-Arousal Trajectory")
     ax.set_xlabel("Valence", fontsize=14)
     ax.set_ylabel("Arousal", fontsize=14)
     ax.legend(fontsize=12, frameon=True, loc="upper right")
@@ -230,10 +218,6 @@ def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
     plt.savefig(out_dir / f"{model}_va_circumplex.png", dpi=300, bbox_inches="tight")
     plt.close()
 
-
-# =========================
-# MAIN
-# =========================
 
 def main():
     parser = argparse.ArgumentParser()

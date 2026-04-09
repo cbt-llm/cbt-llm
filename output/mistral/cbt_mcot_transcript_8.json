@@ -21,15 +21,22 @@
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs"
+            "parents found a needle",
+            "parents told me to stop drugs"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house"
+            "they know what I'm doing",
+            "I'll be kicked out of the house"
           ],
-          "emotions": [],
-          "behaviors": []
+          "emotions": [
+            "fear",
+            "shame",
+            "anxiety"
+          ],
+          "behaviors": [
+            "using heroin",
+            "hiding drugs"
+          ]
         },
         "retrieval": {
           "entailment": [
@@ -47,65 +54,50 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you've been struggling with heroin addiction for a while now, and it seems like your parents have found out. They're concerned about your drug use and have asked you to stop. It must be difficult to hear them say they might kick you out if they find drugs again. Let's talk more about how you're feeling and what we can do to help you manage this situation.",
+        "response": "I understand that you've been using heroin for some time now, and it seems your parents have discovered this. They've expressed their concern and asked you to stop. It must be difficult to hear, but I'm here to help you navigate through this. Let's start by discussing how you feel about their request.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've been struggling with heroin addiction for a while now, and it seems like your parents have found out. They're concerned about your drug use and have asked you to stop. It must be difficult to hear them say they might kick you out if they find drugs again. Let's talk more about how you're feeling and what we can do to help you manage this situation.",
+            "response": "I understand that you've been using heroin for some time now, and it seems your parents have discovered this. They've expressed their concern and asked you to stop. It must be difficult to hear, but I'm here to help you navigate through this. Let's start by discussing how you feel about their request.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Addiction (finding)",
-                  "label": "entailment"
+                  "concept": "parents found a needle",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Pressured by parents (finding)",
-                  "label": "entailment"
+                  "concept": "parents told me to stop drugs",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you've been using heroin for a while now, and it seems like your parents have found out. They're concerned about your drug use and have asked you to stop. Can you help me understand what thoughts or feelings come up when you think about their request?",
+            "response": "\"I can understand how you might feel scared and anxious about your parents finding out about your drug use. Let's explore what would happen if you did take that step towards stopping. What do you think could be the best outcome?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Addiction (finding)",
-                  "label": "entailment"
+                  "concept": "parents found a needle",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Pressured by parents (finding)",
-                  "label": "entailment"
+                  "concept": "parents told me to stop drugs",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I can understand how you might feel scared about the consequences of your drug use. Let's explore what other people, like a trusted friend or an outside observer, might think about this situation. What do you think they would say?\"",
+            "response": "\"It sounds like you're feeling quite anxious about your parents finding out about your drug use and the threat of being kicked out. Have you ever considered how a trusted friend or family member might react if they were in your shoes? It could be helpful to explore different perspectives on this situation.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Parents finding a needle in my room",
+                  "concept": "parents found a needle",
                   "label": "triggers"
                 },
                 {
-                  "concept": "Parents telling me to stop using drugs",
+                  "concept": "parents told me to stop drugs",
                   "label": "triggers"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see this must be really tough for you, and I'm here to help. Can you tell me more about how you feel when your parents talk to you about stopping drugs?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Addiction (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Pressured by parents (finding)",
-                  "label": "entailment"
                 }
               ]
             }
@@ -117,111 +109,82 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s been really tough. I mean, I get why they’re upset, and I know I should probably stop, but it feels like they just don’t understand what I’m going through. When they say they might kick me out, it just hits me hard, like I can’t even imagine being alone.",
+        "query": "Yeah, it’s... it’s definitely tough to hear. I mean, I get where they’re coming from, but it makes me feel so ashamed. I don’t know, it feels like they’re disappointed in me, and that just makes everything harder. Sometimes, I feel like they don’t really understand what I’m going through. It’s frustrating.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
+            "hearing feedback",
+            "perceived disappointment from others"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through"
+            "they're disappointed in me",
+            "they don't understand what I'm going through"
           ],
           "emotions": [
-            "Feeling upset",
-            "Feeling alone"
+            "shame",
+            "frustration"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Feeling abandoned (finding)"
+            "Feeling ashamed (finding)"
           ],
           "neutral": [
-            "Pressured by parents (finding)",
-            "Feeling like wanting to escape (finding)"
+            "Difficulty coping with grief responses (finding)",
+            "Pressured by others (finding)",
+            "Pressured by peers (finding)",
+            "Complaining of feeling depressed (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that it's tough, and I can see why you feel this way. It must be hard to imagine being alone. Let's talk more about how you're feeling and what we can do to help you navigate through this difficult time.",
+        "response": "\"I can see how you might feel that way, and it's completely understandable to feel ashamed when we perceive disappointment from others. Let's work together to explore these feelings more deeply.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that it's tough, and I can see why you feel this way. It must be hard to imagine being alone. Let's talk more about how you're feeling and what we can do to help you navigate through this difficult time.",
+            "response": "\"I can see how you might feel that way, and it's completely understandable to feel ashamed when we perceive disappointment from others. Let's work together to explore these feelings more deeply.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling ashamed",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling abandoned",
-                  "label": "entailment"
+                  "concept": "perceived disappointment from others",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I understand that it's difficult to feel like your parents don't understand you. Can you help me understand more about what you mean by 'they just don't understand what I'm going through?'\"",
+            "response": "\"I can see how you might feel that way, but let's explore what evidence supports this thought. Can we consider other possibilities as well?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling ashamed",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling abandoned",
-                  "label": "entailment"
+                  "concept": "perceived disappointment from others",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that it's difficult to feel like your parents don't understand you. Let's explore what a trusted friend or family member might say about the situation, and how they might help you navigate this challenge.\"",
+            "response": "\"I can see how you might feel that way, but let's consider another perspective. How about we think about what a trusted friend or family member might say about the situation? It could help us see things differently.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling ashamed",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling abandoned",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're feeling this way, and I can understand why your parents' concerns might be causing you distress. It sounds like you're struggling with feelings of isolation and fear of being alone. Let's talk more about how we can work through these emotions together.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling abandoned",
-                  "label": "entailment"
+                  "concept": "Perceived disappointment from others",
+                  "label": "triggers"
                 }
               ]
             }
@@ -233,103 +196,92 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just this overwhelming sense of dread, you know? Like, what if I really end up on my own? Sometimes I just feel so lost, and I don’t know how to fix things. It's like I’m constantly walking on eggshells, trying to avoid more conflict.",
+        "query": "I guess... I just wish I could express what I’m feeling without it coming off as whining or something. It’s like, I don’t want to burden anyone, but at the same time, I feel so alone in all this. It’s exhausting trying to keep it all together when I can’t even figure things out myself.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
+            "wanting to express feelings",
+            "fear of burdening others",
+            "feeling alone",
+            "trying to keep it together"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through",
-            "What if I really end up on my own?",
-            "I feel so lost and don’t know how to fix things",
-            "I’m constantly walking on eggshells to avoid conflict"
+            "I don't want to burden anyone",
+            "I feel so alone",
+            "I can't figure things out"
           ],
           "emotions": [
-            "Feeling upset",
-            "Feeling alone",
-            "Overwhelming sense of dread"
+            "exhaustion"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling like wanting to escape (finding)",
-            "Fear of being left alone (finding)",
-            "Disorientation as to self (finding)",
-            "Feeling lost (finding)"
+            "Feeling isolated (finding)",
+            "Feeling diffident (finding)",
+            "Difficulty understanding own emotions (finding)",
+            "Feeling abandoned (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)"
+            "Complaining of feeling depressed (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're feeling quite overwhelmed and unsure about your future. Can we explore together what small steps might help you feel more in control?\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I'm really sorry that you feel this way, it must be incredibly difficult for you. It's important to remember that expressing your feelings is a normal part of life and not something to be ashamed of. Let's work together on finding ways to communicate more effectively without worrying about burdening others or feeling alone.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I can see how you might feel that way. It's a tough situation, and it's normal to feel overwhelmed sometimes. Let's work together to find ways to manage this stress and help you move forward.\"",
+            "response": "I'm really sorry that you feel this way, it must be incredibly difficult for you. It's important to remember that expressing your feelings is a normal part of life and not something to be ashamed of. Let's work together on finding ways to communicate more effectively without worrying about burdening others or feeling alone.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
+                  "concept": "Feeling isolated",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Overwhelming sense of dread",
-                  "label": "emotions"
+                  "concept": "Difficulty understanding own emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and unsure about your future. Can we explore together what small steps might help you feel more in control?\"",
+            "response": "\"It sounds like you're carrying a heavy burden and feeling alone in doing so. Can we explore together what might be some alternative ways to express your feelings without fear of being perceived as whining?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
+                  "concept": "Feeling isolated",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Overwhelming sense of dread",
-                  "label": "emotions"
+                  "concept": "Difficulty understanding own emotions",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling diffident",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and unsure about the future. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing another perspective can help us see things more clearly.\"",
+            "response": "\"It sounds like you're struggling with finding the right balance between sharing your feelings and not wanting to burden others. Let's explore together if there might be other ways to communicate that feel less burdensome for both of us.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
-                  "label": "entailment"
+                  "concept": "wanting to express feelings",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Overwhelming sense of dread",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how you might be feeling overwhelmed and lost right now. It's a tough situation to navigate, but remember that it's okay to ask for help when things feel too much. Let's take this one step at a time.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling lost",
-                  "label": "entailment"
+                  "concept": "fear of burdening others",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Overwhelming sense of dread",
-                  "label": "emotions"
+                  "concept": "feeling alone",
+                  "label": "triggers"
                 }
               ]
             }
@@ -341,107 +293,80 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I guess I am feeling overwhelmed. It’s like everything is piling up and I can’t see a way out. But the idea of taking steps... I don’t know, it just feels so daunting. What if I try and it all falls apart? I’ve been here before, and it just hurts too much to think about failing again.",
+        "query": "Thanks, I appreciate that. I know I should probably just say what I feel, but it’s hard to shake off the thought that I’ll just be dismissed or that it won’t matter. I start to second-guess myself, like, “Is this really important?” or “Am I just overreacting?” And then I just... hold it all in.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
-          "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through",
-            "What if I really end up on my own?",
-            "I feel so lost and don’t know how to fix things",
-            "I’m constantly walking on eggshells to avoid conflict",
-            "The idea of taking steps feels daunting",
-            "What if I try and it all falls apart?",
-            "I've been here before, and it just hurts too much to think about failing again"
+            "I'll just be dismissed",
+            "It won't matter",
+            "Is this really important?",
+            "Am I just overreacting?"
           ],
-          "emotions": [
-            "Feeling upset",
-            "Feeling alone",
-            "Overwhelming sense of dread",
-            "Feeling overwhelmed"
-          ],
-          "behaviors": []
+          "emotions": [],
+          "behaviors": [
+            "hold it all in"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling trapped (finding)",
-            "Feeling agitated (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Difficulty understanding own emotions (finding)"
           ],
           "neutral": [
-            "Feeling like wanting to escape (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anxiety about loss of control (finding)"
+            "Feeling emotionally hurt (finding)",
+            "Difficulty coping with grief responses (finding)",
+            "Immature emotional adjustment (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see that you're feeling quite overwhelmed right now, and it's understandable to feel that way when things seem to be piling up. It might be helpful for us to explore some small steps you could take to move forward without feeling too daunted by the big picture. Would that be okay with you?",
+        "response": "I appreciate your honesty and I want you to know that it's okay to feel anxious. It's common for people to worry about being dismissed or overreacting, especially when sharing feelings. Let's work together on finding ways to express yourself more comfortably.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see that you're feeling quite overwhelmed right now, and it's understandable to feel that way when things seem to be piling up. It might be helpful for us to explore some small steps you could take to move forward without feeling too daunted by the big picture. Would that be okay with you?",
+            "response": "I appreciate your honesty and I want you to know that it's okay to feel anxious. It's common for people to worry about being dismissed or overreacting, especially when sharing feelings. Let's work together on finding ways to express yourself more comfortably.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "neutral"
+                  "concept": "Difficulty understanding own emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and scared about taking steps, especially after past experiences. Let's explore this fear together. Can you tell me more about what makes the idea of trying again so daunting for you?\"",
+            "response": "\"It's understandable to feel anxious about expressing yourself, but remember that it's okay not to have all the answers. Let's explore together why you think your feelings might be important and if they are truly indicative of overreacting.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "neutral"
+                  "concept": "Difficulty understanding own emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling overwhelmed and scared of taking steps because you fear failure. Let's explore what might happen if things don't go as planned, and see if we can find a way to move forward together.\"",
+            "response": "\"It's understandable to feel anxious about expressing yourself, but remember that it's okay not to have all the answers. Let's explore together what might happen if you do share your feelings and also consider alternative perspectives on their importance.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I can see how you might feel that way, it's a lot to handle. Let's take things one step at a time and explore what small steps could help you move forward without feeling overwhelmed.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Anxiety about loss of control",
-                  "label": "neutral"
+                  "concept": "Difficulty understanding own emotions",
+                  "label": "entailment"
                 }
               ]
             }
@@ -453,107 +378,85 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I feel really overwhelmed right now. It’s like everything is just piling up, and I can’t see a way out. The thought of trying to change things feels so daunting. What if I try and it all falls apart? I’ve been through that before, and it just hurts too much to even think about failing again.",
+        "query": "Thanks for saying that. I guess... it’s just that every time I open up, I feel this knot in my stomach. Like, what if my feelings aren’t valid or if they’re too much? It’s like I’m trying to convince myself to be okay with being vulnerable, but I just keep pulling back. I know it’s not healthy, but it’s so hard to let that guard down.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
+            "opening up",
+            "being vulnerable"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through",
-            "What if I really end up on my own?",
-            "I feel so lost and don’t know how to fix things",
-            "I’m constantly walking on eggshells to avoid conflict",
-            "The idea of taking steps feels daunting",
-            "What if I try and it all falls apart?",
-            "I've been here before, and it just hurts too much to think about failing again"
+            "my feelings aren’t valid",
+            "my feelings are too much",
+            "I need to convince myself to be okay"
           ],
           "emotions": [
-            "Feeling upset",
-            "Feeling alone",
-            "Overwhelming sense of dread",
-            "Feeling overwhelmed"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "pulling back",
+            "keeping guard up"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling stressed (finding)",
-            "Feeling trapped (finding)",
-            "Feeling agitated (finding)"
+            "Difficulty understanding own emotions (finding)",
+            "Vulnerable personality (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Difficulty managing stress (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Unable to understand own emotions (finding)",
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're feeling overwhelmed and scared of trying to change things because you fear failure. Can we explore together what might happen if things don't go as planned? Let's consider the evidence, alternatives, and implications.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I appreciate you sharing that with me. It sounds like you're struggling to trust your feelings and being vulnerable can be challenging for you. Let's work together on understanding these feelings better, so we can find ways to make it easier for you to let your guard down when needed.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry that you're feeling this way, it sounds incredibly overwhelming. Let's take a moment to understand what you're going through. You mentioned feeling daunted by the thought of change and fearing failure. Can you tell me more about those feelings?",
+            "response": "I appreciate you sharing that with me. It sounds like you're struggling to trust your feelings and being vulnerable can be challenging for you. Let's work together on understanding these feelings better, so we can find ways to make it easier for you to let your guard down when needed.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Vulnerable personality (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling overwhelmed and scared of trying to change things because you fear failure. Can we explore together what might happen if things don't go as planned? Let's consider the evidence, alternatives, and implications.\"",
+            "response": "I appreciate you sharing your feelings with me. It sounds like there's a part of you that doubts the validity of your emotions, and it makes you feel anxious about being vulnerable. Let's explore together what might be causing this doubt and see if we can find a way to help you feel more comfortable with your feelings.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Vulnerable personality (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling overwhelmed and scared of trying to change things because you fear failure. Let's explore what a trusted friend might say about your situation, or consider the best and worst possible outcomes. This could help us find a more balanced perspective.\"",
+            "response": "I understand how difficult it can be to trust your feelings, especially when you're feeling vulnerable. Let's explore together what a trusted friend or outside observer might think about opening up and being vulnerable. This could help us gain some perspective on the situation.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry that you're feeling so overwhelmed right now. It sounds like you're carrying a heavy burden. Can we take it one step at a time? Let's start by exploring what thoughts are making you feel this way.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Vulnerable personality (finding)",
+                  "label": "entailment"
                 }
               ]
             }
@@ -565,116 +468,90 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I feel really overwhelmed right now. Everything just feels like it’s piling up, and I can’t see a way out. The thought of trying to change things is so daunting. What if I try and it all falls apart? I’ve been through that before, and it really hurts to think about failing again.",
+        "query": "I appreciate that. It’s just that every time I try to open up, I get this knot in my stomach. What if my feelings aren’t valid or if they’re too much? I keep trying to convince myself to be okay with being vulnerable, but I just end up pulling back. I know it’s not good for me, but it’s really hard to let my guard down.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
+            "trying to open up",
+            "being vulnerable"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through",
-            "What if I really end up on my own?",
-            "I feel so lost and don’t know how to fix things",
-            "I’m constantly walking on eggshells to avoid conflict",
-            "The idea of taking steps feels daunting",
-            "What if I try and it all falls apart?",
-            "I've been here before, and it just hurts too much to think about failing again"
+            "my feelings aren’t valid",
+            "my feelings are too much",
+            "I need to convince myself to be okay"
           ],
           "emotions": [
-            "Feeling upset",
-            "Feeling alone",
-            "Overwhelming sense of dread",
-            "Feeling overwhelmed"
+            "anxiety",
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "pulling back",
+            "not letting my guard down"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling stressed (finding)",
-            "Feeling trapped (finding)"
+            "Difficulty understanding own emotions (finding)",
+            "Feeling emotionally hurt (finding)",
+            "Difficulty controlling emotions (finding)"
           ],
           "neutral": [
-            "Difficulty managing stress (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Vulnerable personality (finding)",
+            "Unable to understand own emotions (finding)"
           ],
-          "contradiction": [
-            "Feeling agitated (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're feeling quite overwhelmed right now. Can we explore together what might make taking a step feel so daunting? Perhaps we can start by discussing some of the specific concerns that come to mind when you think about making changes.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I appreciate your honesty and openness. It can be challenging to navigate feelings of uncertainty about the validity of our emotions, especially when we're trying to be vulnerable. Let's explore together what might be causing this knot in your stomach and see if we can find a way to make it easier for you to let your guard down.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed right now, and the thought of making changes can feel daunting. It's important to remember that change often comes in small steps, and it's okay if things don't go perfectly at first. Let's explore some manageable steps together that might help you move forward.",
+            "response": "I appreciate your honesty and openness. It can be challenging to navigate feelings of uncertainty about the validity of our emotions, especially when we're trying to be vulnerable. Let's explore together what might be causing this knot in your stomach and see if we can find a way to make it easier for you to let your guard down.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "The idea of taking steps feels daunting",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "What if I try and it all falls apart?",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling emotionally hurt (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed right now. Can we explore together what might make taking a step feel so daunting? Perhaps we can start by discussing some of the specific concerns that come to mind when you think about making changes.\"",
+            "response": "I appreciate your honesty and openness. It's understandable to feel uncertain about sharing your feelings, especially when you question their validity. Let's explore together what evidence supports these thoughts and if there might be alternative perspectives to consider.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "The idea of taking steps feels daunting",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "What if I try and it all falls apart?",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling emotionally hurt (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling overwhelmed and scared of trying to change things because you fear failure. Let's explore what a trusted friend might say about the situation, or consider some small steps that could help you move forward without feeling too daunted.\"",
+            "response": "\"It sounds like you're struggling with validating your feelings and being vulnerable. Let's explore what a trusted friend or family member might say about this situation. What do you think they would tell you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "difficulty understanding own emotions",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I'm really sorry that you're feeling this way, but I'm here to help. It sounds like you're facing a lot right now. Let's take it one step at a time. Can we start by exploring what small steps you might be able to take towards change?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "feeling emotionally hurt",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Thought of trying and fearing failure",
-                  "label": "unknown"
+                  "concept": "difficulty controlling emotions",
+                  "label": "entailment"
                 }
               ]
             }
@@ -686,118 +563,84 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it just feels like there’s so much at stake. If I mess up, it's not just me that gets affected, and that really weighs on me. I worry about disappointing the people who are already frustrated with me. It’s hard to shake that feeling that I’ll just end up letting everyone down again.",
+        "query": "Thanks for understanding. It’s just... I think a part of me worries that if I really show how I feel, it’ll just push people away. Like, what if they can’t handle it? And sometimes, I even wonder if I should just deal with things myself instead of risking that discomfort. It’s confusing, because I want to connect, but I also feel so scared of getting hurt.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
-          "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through",
-            "What if I really end up on my own?",
-            "I feel so lost and don’t know how to fix things",
-            "I’m constantly walking on eggshells to avoid conflict",
-            "The idea of taking steps feels daunting",
-            "What if I try and it all falls apart?",
-            "I've been here before, and it just hurts too much to think about failing again",
-            "If I mess up, it's not just me that gets affected",
-            "I worry about disappointing the people who are already frustrated with me",
-            "I’ll just end up letting everyone down again"
+            "If I show how I feel, it’ll push people away",
+            "What if they can’t handle it?",
+            "I should just deal with things myself instead of risking discomfort"
           ],
           "emotions": [
-            "Feeling upset",
-            "Feeling alone",
-            "Overwhelming sense of dread",
-            "Feeling overwhelmed",
-            "Feeling weighed down"
+            "worry",
+            "confusion",
+            "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)",
-            "Fear of being a burden to others (finding)",
-            "Feeling a failure (finding)",
-            "Feeling of discouragement (finding)"
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)"
+            "Difficulty understanding own emotions (finding)",
+            "Social isolation (rejection) (finding)",
+            "Unable to understand own emotions (finding)",
+            "Difficulty controlling emotions (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how you might feel that way, it's a heavy load to carry. Let's work together on finding ways to manage these feelings and reduce the pressure you're experiencing.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're dealing with some complex feelings about sharing your emotions. Can we explore together what might happen if you did share them, and what evidence do you have that people wouldn't be able to handle it?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you might feel that way, it's a heavy load to carry. Let's work together on finding ways to manage these feelings and reduce the pressure you're experiencing.",
+            "response": "I understand that you're feeling a bit confused and scared about showing your feelings to others. It's important to remember that everyone has their own way of coping, and it's okay if yours is different from others. Let's work together to help you feel more comfortable expressing yourself without fear of being judged or rejected.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others (finding)",
+                  "concept": "Fear of losing emotional control (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying quite a heavy load, feeling that everyone is relying on you. Can we explore together what would happen if you made a mistake? What might be the best and worst outcomes?\"",
+            "response": "\"It sounds like you're dealing with some complex feelings about sharing your emotions. Can we explore together what might happen if you did share them, and what evidence do you have that people wouldn't be able to handle it?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Fear of losing emotional control (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I can understand why you might feel that way, but let's consider the possibility that there are other ways to approach this situation. What if you could take steps towards change without letting everyone down? It's worth exploring, don't you think?\"",
+            "response": "I understand that you're feeling a bit overwhelmed and scared about showing your feelings, fearing it might push people away. Let's explore together if there are other ways to connect without putting too much pressure on yourself or others.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Fear of losing emotional control (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how you might feel that way. It's tough when we worry about disappointing those who care about us. Let's explore some ways to manage these feelings and reduce the pressure you're experiencing.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
+                  "concept": "Social isolation (rejection) (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "Difficulty controlling emotions (finding)",
                   "label": "neutral"
                 }
               ]
@@ -810,112 +653,84 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It feels like there’s so much at stake. If I mess up, it’s not just me affected, and that really weighs on me. I worry about disappointing the people who are already frustrated with me. It’s hard to shake this feeling that I’ll just end up letting everyone down again.",
+        "query": "Yeah, I guess exploring that sounds... okay. I mean, when I think about sharing, I get this mix of hope and fear, like maybe they’d actually understand me, but then there's this voice in my head saying it’ll just turn into a big mess. I’ve had experiences where I felt pushed away before, so it’s hard to shake that off. But maybe I’m just holding onto those past moments too tightly?",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
+            "thinking about sharing",
+            "past experiences of being pushed away"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through",
-            "What if I really end up on my own?",
-            "I feel so lost and don’t know how to fix things",
-            "I’m constantly walking on eggshells to avoid conflict",
-            "The idea of taking steps feels daunting",
-            "What if I try and it all falls apart?",
-            "I've been here before, and it just hurts too much to think about failing again",
-            "If I mess up, it's not just me that gets affected",
-            "I worry about disappointing the people who are already frustrated with me",
-            "I’ll just end up letting everyone down again",
-            "It feels like there’s so much at stake"
+            "they’d actually understand me",
+            "it’ll just turn into a big mess",
+            "maybe I’m just holding onto those past moments too tightly"
           ],
           "emotions": [
-            "Feeling upset",
-            "Feeling alone",
-            "Overwhelming sense of dread",
-            "Feeling overwhelmed",
-            "Feeling weighed down"
+            "hope",
+            "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Feeling a failure (finding)"
+            "Fear of saying the wrong thing (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Fear of losing emotional control (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Fear of writing in public (finding)",
+            "Fear of being in a small group (finding)",
+            "Fear of social group activities (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Social isolation (rejection) (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I can see how you might feel that way, but let's explore what would happen if things don't go as planned. What are some possible outcomes, and how could you cope with them?\"",
+        "response": "What makes you think it might turn into a big mess? Can we explore that thought together and see if there's another perspective to consider?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you might feel that way, and it's understandable to worry about disappointing those close to you. Let's work together on finding ways to address your concerns without adding unnecessary pressure.",
+            "response": "I can see how that might be a challenge. It sounds like you have some concerns about sharing and the potential outcomes. Let's take it one step at a time, shall we? Perhaps we could start by exploring those thoughts and feelings a bit more.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I can see how you might feel that way, but let's explore what would happen if things don't go as planned. What are some possible outcomes, and how could you cope with them?\"",
+            "response": "What makes you think it might turn into a big mess? Can we explore that thought together and see if there's another perspective to consider?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I can understand how you might feel like there's a lot at stake. It's natural to worry about disappointing the people we care about, but it's also important to remember that everyone makes mistakes. Let's explore what a trusted friend or family member might say about your situation and see if that helps broaden your perspective.\"",
+            "response": "Have you ever considered what a trusted friend might think about sharing your thoughts with us? It could provide a different perspective and help ease some of that fear.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how you might feel that way, and it's understandable to worry about disappointing those close to you. Let's explore some ways we can work together to help alleviate these feelings and find a path forward.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -927,132 +742,95 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I don’t know, it’s hard to even think about it. I guess if things don’t go as planned, I’d feel even more alone, and that scares me. I just worry that I wouldn’t handle it well, like I’d just shut down or spiral further. It's like I can't even picture a way to cope with that kind of disappointment.",
+        "query": "I guess... it’s just the memories of times I tried to share and ended up feeling judged or misunderstood. It felt like I was putting myself out there, and then it just... backfired. I don’t want to feel that hurt again. But deep down, I also know that not every situation will be like that. It’s just hard to break free from those old patterns in my mind.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
+            "memories of sharing",
+            "feeling judged",
+            "feeling misunderstood"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through",
-            "What if I really end up on my own?",
-            "I feel so lost and don’t know how to fix things",
-            "I’m constantly walking on eggshells to avoid conflict",
-            "The idea of taking steps feels daunting",
-            "What if I try and it all falls apart?",
-            "I've been here before, and it just hurts too much to think about failing again",
-            "If I mess up, it's not just me that gets affected",
-            "I worry about disappointing the people who are already frustrated with me",
-            "I’ll just end up letting everyone down again",
-            "It feels like there’s so much at stake",
-            "If things don’t go as planned, I’d feel even more alone",
-            "I worry that I wouldn’t handle disappointment well and would shut down or spiral further",
-            "I can't even picture a way to cope with disappointment"
+            "I will be judged again",
+            "I will be misunderstood again",
+            "not every situation will be like that"
           ],
           "emotions": [
-            "Feeling upset",
-            "Feeling alone",
-            "Overwhelming sense of dread",
-            "Feeling overwhelmed",
-            "Feeling weighed down",
-            "Feeling scared"
+            "hurt",
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding sharing",
+            "holding back"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling abandoned (finding)",
-            "Feeling isolated (finding)"
+            "Reappearance of old thoughts (finding)"
           ],
           "neutral": [
-            "Loss of hope for the future (finding)",
-            "Anxiety about going crazy (finding)",
-            "Depressive delusion of catastrophe (finding)"
+            "Repressing painful memories (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Feeling ashamed (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how this situation might feel overwhelming and scary. It's natural to worry about the future, especially when we're facing challenges. Let's work together to explore some ways you could cope with disappointment and find a path forward that feels less daunting.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"I can understand how those past experiences might make you hesitant to share again. But remember, not every situation needs to be the same. Let's explore together if there are ways to approach sharing differently this time.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how this situation might feel overwhelming and scary. It's natural to worry about the future, especially when we're facing challenges. Let's work together to explore some ways you could cope with disappointment and find a path forward that feels less daunting.",
+            "response": "I can see how those past experiences might make you hesitant to share again. It's understandable to feel that way, but remember, not every situation will be like that. Let's work together to find ways to manage your fears and build confidence in sharing.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling alone",
-                  "label": "emotions"
+                  "concept": "Reappearance of old thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Overwhelming sense of dread",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Anxiety about going crazy",
+                  "concept": "Fear of saying the wrong thing (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and scared about the possibility of things not going as planned. Can we explore together what might make it difficult for you to cope with disappointment? And, have you ever experienced a situation where you felt alone or isolated, and how did you manage that?\"",
+            "response": "\"It sounds like you've had some difficult experiences in the past when sharing. It's understandable to feel hesitant about opening up again, but it's also important to remember that not every situation will be the same. Let's explore together what might make this time different.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling alone",
-                  "label": "emotions"
+                  "concept": "Reappearance of old thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about going crazy",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Depressive delusion of catastrophe",
+                  "concept": "Fear of saying the wrong thing (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and scared about what might happen if things don't go as planned. Let's explore this a bit more, but first, I want to remind you that it's okay to feel this way. It's important to remember that everyone experiences setbacks differently, and there are many ways to cope with them. Could we discuss what a trusted friend or family member might suggest if they were in your shoes?\"",
+            "response": "\"I can understand how those past experiences might make you hesitant to share again. But remember, not every situation needs to be the same. Let's explore together if there are ways to approach sharing differently this time.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling alone",
-                  "label": "emotions"
+                  "concept": "memories of sharing",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Overwhelming sense of dread",
-                  "label": "emotions"
+                  "concept": "feeling judged",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Anxiety about going crazy",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're feeling this way. It sounds like things are incredibly difficult for you right now, and it's understandable to feel scared and overwhelmed. Let's take one step at a time. Can we start by exploring what might be causing these feelings of loneliness and dread?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling alone",
-                  "label": "emotions"
+                  "concept": "feeling misunderstood",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Overwhelming sense of dread",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Anxiety about going crazy",
-                  "label": "neutral"
+                  "concept": "not every situation will be like that",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -1064,149 +842,95 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that, but honestly, even thinking about it feels heavy. It’s like I want to move forward, but the thought of facing more disappointment just pulls me back. I don’t want to feel even more lost than I already do. What if I can’t do it? What if I just end up back where I started?",
+        "query": "It's just the memories of times I tried to share and felt judged or misunderstood. I was vulnerable, and then it just... backfired. I don’t want to feel that hurt again. But deep down, I also know that not every situation will be like that. It’s just hard to break free from those old patterns in my mind.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in my room",
-            "Parents telling me to stop using drugs",
-            "Parents saying they might kick me out"
+            "memories of sharing",
+            "feeling judged",
+            "feeling misunderstood"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They just don’t understand what I’m going through",
-            "What if I really end up on my own?",
-            "I feel so lost and don’t know how to fix things",
-            "I’m constantly walking on eggshells to avoid conflict",
-            "The idea of taking steps feels daunting",
-            "What if I try and it all falls apart?",
-            "I've been here before, and it just hurts too much to think about failing again",
-            "If I mess up, it's not just me that gets affected",
-            "I worry about disappointing the people who are already frustrated with me",
-            "I’ll just end up letting everyone down again",
-            "It feels like there’s so much at stake",
-            "If things don’t go as planned, I’d feel even more alone",
-            "I worry that I wouldn’t handle disappointment well and would shut down or spiral further",
-            "I can't even picture a way to cope with disappointment",
-            "Even thinking about it feels heavy",
-            "What if I can’t do it?",
-            "What if I just end up back where I started?"
+            "I will be judged again",
+            "I will be misunderstood again",
+            "not every situation will be like that"
           ],
           "emotions": [
-            "Feeling upset",
-            "Feeling alone",
-            "Overwhelming sense of dread",
-            "Feeling overwhelmed",
-            "Feeling weighed down",
-            "Feeling scared",
-            "Feeling heavy"
+            "hurt",
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding sharing",
+            "withdrawing"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling lost (finding)",
-            "Feeling hopeless (finding)"
+            "Reappearance of old thoughts (finding)",
+            "Unpleasant memories (finding)"
           ],
           "neutral": [
-            "Loss of hope for the future (finding)",
-            "Coming to terms with dying (finding)"
+            "Repressing painful memories (finding)",
+            "Reliving traumatic memories (finding)",
+            "Repressing thoughts (finding)"
           ],
-          "contradiction": [
-            "Hopeful for the future (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling quite heavy-hearted about the situation. Let's explore together what a trusted friend might say to help lighten your load. What do you think they would suggest?",
-        "protocol_used": "alternative_perspective",
+        "response": "\"I can see how those past experiences have left a mark on you. It's understandable to feel hesitant about sharing again, but it's also important to remember that not every situation will be the same. Let's explore together what might make this time different.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling quite heavy-hearted about the situation. It's natural to feel this way when facing challenges, but remember that every step forward is progress, no matter how small. Let's focus on taking one step at a time and see where it leads us.",
+            "response": "I understand that you've had some difficult experiences when sharing in the past, and it's natural to feel hesitant. It's important to remember that not every situation will be like those in the past. Let's work together to find ways to approach sharing that feel safer for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "Reappearance of old thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling weighed down",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling scared",
-                  "label": "emotions"
+                  "concept": "Unpleasant memories (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you're feeling quite heavy-hearted about the prospect of moving forward. It can be scary to face potential disappointment, but let's explore together what might happen if things go well instead. What do you think could be some positive outcomes for you?",
+            "response": "\"I can see how those past experiences have left a mark on you. It's understandable to feel hesitant about sharing again, but it's also important to remember that not every situation will be the same. Let's explore together what might make this time different.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "Reappearance of old thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling weighed down",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling scared",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "What if I try and it all falls apart?",
-                  "label": "automatic_thoughts"
+                  "concept": "Unpleasant memories (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I understand that you're feeling quite heavy-hearted about the situation. Let's explore together what a trusted friend might say to help lighten your load. What do you think they would suggest?",
+            "response": "\"I understand how difficult it can be to break free from old patterns, especially when they're rooted in past experiences. But remember, not every situation needs to be the same as those memories. Let's explore together what a more positive outcome might look like.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "memories of sharing",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling weighed down",
-                  "label": "emotions"
+                  "concept": "feeling judged",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Overwhelming sense of dread",
-                  "label": "emotions"
+                  "concept": "feeling misunderstood",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling scared",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see that you're feeling quite heavy-hearted about the situation. It's important to acknowledge these feelings, and I want to assure you that we'll work together to find a way forward. Let's start by exploring what might be causing this sense of dread and fear. Can you tell me more about what you mean when you say you don't want to feel even more lost than you already do?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling weighed down",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling scared",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling lost",
-                  "label": "entailment"
+                  "concept": "not every situation will be like that",
+                  "label": "automatic_thoughts"
                 }
               ]
             }

@@ -20,13 +20,15 @@
         "query": "I thought I should. I've been feeling quite bad for quite a while, so I thought maybe it's time to see someone about it because I don't want to feel like this anymore.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I thought I should see someone about it"
+            "I thought I should see someone",
+            "It's time to see someone about it",
+            "I don't want to feel like this anymore"
           ],
-          "emotions": [],
+          "emotions": [
+            "bad"
+          ],
           "behaviors": []
         },
         "retrieval": {
@@ -44,15 +46,11 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’ve been feeling bad for a while and you’re thinking about seeing someone to help you feel better. What kind of support or help do you think would be most helpful for you right now?",
+        "response": "It sounds like you’ve been feeling bad for a while and you’re thinking about seeing someone to help you feel better. What does feeling “bad” look like for you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’ve been feeling bad for a while and you’re thinking about seeing someone to help you feel better. What kind of support or help do you think would be most helpful for you right now?",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you’re looking for relief. What do you think might help you feel better if you were to talk to someone?",
+            "response": "It sounds like you’ve been feeling bad for a while and you’re thinking about seeing someone to help you feel better. What does feeling “bad” look like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -66,36 +64,21 @@
               ]
             }
           },
-          "alternative_perspective": {
-            "response": "It sounds like you’ve been feeling pretty stuck lately. What might a trusted friend say about how you’re feeling right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling emotionally hurt",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Complaining of feeling depressed",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "feeling quite bad for quite a while",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I thought I should see someone about it",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
+          "socratic_questioning": {
+            "response": "It sounds like you’re hoping for relief. What would you hope to get out of seeing someone right now?",
+            "reasoning": null
           },
-          "safety_check": {
-            "response": "It sounds like you're feeling really distressed and upset. Are you having thoughts about hurting yourself or not wanting to be here?",
+          "alternative_perspective": {
+            "response": "If a trusted friend heard you say you’re feeling bad and want help, what might they say? What are the best, worst, and most realistic outcomes you can imagine?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
                   "concept": "Feeling emotionally hurt (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed (finding)",
+                  "label": "neutral"
                 }
               ]
             }
@@ -107,79 +90,104 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I guess I just want to feel more, I don’t know, solid? Like I can trust my own thoughts and choices. Sometimes I just get stuck in my head, feeling like I’m not good enough or that I’ll mess things up. It’s hard to even imagine what real support would look like… I just want to feel… confident, I guess.",
+        "query": "It feels like this heavy weight on my chest, you know? I often second-guess everything I do, thinking that I’m not good enough or that I’ll mess things up. It’s just this constant nagging feeling that kind of dims everything around me.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up"
+            "I'm not good enough",
+            "I'll mess things up"
           ],
           "emotions": [
-            "feeling stuck",
-            "wanting to feel confident"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "second-guess everything"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Ready for enhanced self-concept (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about behavior or performance (finding)",
+            "Feeling of discouragement (finding)"
           ],
-          "neutral": [],
+          "neutral": [
+            "Anxiety about collapsing (finding)"
+          ],
           "contradiction": [
-            "Feeling content (finding)",
-            "Emotionally stable (finding)",
-            "Ready for enhanced spiritual well-being (finding)",
-            "Positive self thoughts (finding)"
+            "Free-floating anxiety (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling stuck and doubting your own thoughts and choices, and you want to feel more confident and solid. What would feeling more solid look like for you?",
+        "response": "It sounds like you’re carrying a heavy, anxious weight that makes you doubt yourself and second-guess every choice, and that can feel exhausting. What’s one small thing you’ve noticed that helps you feel a bit lighter, even if it’s just a moment?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling stuck and doubting your own thoughts and choices, and you want to feel more confident and solid. What would feeling more solid look like for you?",
+            "response": "It sounds like you’re carrying a heavy, anxious weight that makes you doubt yourself and second-guess every choice, and that can feel exhausting. What’s one small thing you’ve noticed that helps you feel a bit lighter, even if it’s just a moment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Ready for enhanced self-concept (finding)",
+                  "concept": "Anxiety about making mistakes",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Automatic thoughts: 'I'm not good enough', 'I'll mess things up'",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Behavior: second-guess everything",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What would it feel like to trust your own thoughts and choices, and how might you notice that happening in a small moment today?",
+            "response": "What evidence do you have that you will mess things up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Ready for enhanced self-concept (finding)",
+                  "concept": "Anxiety about making mistakes",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts: 'I'm not good enough', 'I'll mess things up'",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "behaviors: second-guess everything",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re looking for a sense of solidity and confidence. If a close friend were watching you, what might they say about the strengths you’re already showing?",
+            "response": "If a close friend heard you describe this weight, what might they say to help you see a different angle? They might remind you that everyone makes mistakes and that you’ve handled challenges before.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Ready for enhanced self-concept (finding)",
+                  "concept": "Anxiety about making mistakes",
                   "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling uncertain about trusting your own thoughts and choices, and that’s really tough. What would it look like for you to feel more confident in those moments?",
-            "reasoning": {
-              "retrieved_concepts_used": [
+                },
                 {
-                  "concept": "Ready for enhanced self-concept (finding)",
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement",
                   "label": "entailment"
                 }
               ]
@@ -192,32 +200,30 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I suppose feeling solid would mean making decisions without second-guessing myself all the time. Like, if I make a mistake, I wouldn’t berate myself for it, but just... learn and move on. I want to feel like I deserve to be proud of my choices instead of thinking they’re all wrong. It's just so hard to imagine that sometimes.",
+        "query": "I guess sometimes when I'm with close friends, I can forget about all that doubt for a little while. We laugh and share stories, and for a moment, I feel... I don’t know, maybe more like myself? But then it’s like I come back to reality, and that weight just creeps back in.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while"
+            "being with close friends",
+            "laughing",
+            "sharing stories"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up",
-            "I think I don’t deserve to be proud of my choices"
+            "I can forget about all that doubt",
+            "I feel more like myself",
+            "the weight creeps back in"
           ],
-          "emotions": [
-            "feeling stuck",
-            "wanting to feel confident",
-            "feeling hard to imagine feeling solid"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling content (finding)",
-            "Feeling calm (finding)"
+            "Preoccupation with body weight (finding)"
           ],
           "neutral": [
-            "Positive self thoughts (finding)",
-            "Moderate ego strength (finding)"
+            "Anxiety about altered body image (finding)",
+            "Fear of becoming fat (finding)",
+            "Anxiety about becoming fat (finding)"
           ],
           "contradiction": [
             "Feels own body is unreal (finding)"
@@ -226,93 +232,54 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re hoping to feel more confident and less self‑critical, so you can make decisions without constantly doubting yourself. What would it feel like to let go of that self‑berating and just learn from mistakes?",
+        "response": "It sounds like being with friends gives you a brief break from the weight worries, and then they return when you’re alone again. That feeling of the weight creeping back is something many people notice—what does that sense of weight feel like for you right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re hoping to feel more confident and less self‑critical, so you can make decisions without constantly doubting yourself. What would it feel like to let go of that self‑berating and just learn from mistakes?",
+            "response": "It sounds like being with friends gives you a brief break from the weight worries, and then they return when you’re alone again. That feeling of the weight creeping back is something many people notice—what does that sense of weight feel like for you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling stuck",
-                  "label": "emotions"
+                  "concept": "Preoccupation with body weight",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "wanting to feel confident",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "positive self thoughts",
+                  "concept": "Anxiety about altered body image",
                   "label": "neutral"
                 },
                 {
-                  "concept": "moderate ego strength",
+                  "concept": "Fear of becoming fat",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that you deserve to be proud of your choices?",
+            "response": "When you notice the weight creeping back, what thoughts or feelings come up that make you think it’s a real concern?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "positive self thoughts",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "moderate ego strength",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "feeling content",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling calm",
+                  "concept": "Preoccupation with body weight",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re aiming for a kinder view of yourself—what might a supportive friend say when you make a mistake? That perspective could help you feel more proud of your choices.",
+            "response": "It sounds like the laughter with friends gives you a brief sense of being yourself, but the weight worries return afterward. If a close friend were watching, what might they say about how you’re handling those moments?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling content (finding)",
+                  "concept": "Preoccupation with body weight",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Positive self thoughts (finding)",
+                  "concept": "Anxiety about altered body image",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Moderate ego strength (finding)",
+                  "concept": "Fear of becoming fat",
                   "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re hoping to feel more confident and kinder toward yourself when you make mistakes. What would it feel like if you could let go of that self-berating and just learn from the mistake?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "self-berating",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "confidence",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "self-compassion",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "desire to feel proud",
-                  "label": "unknown"
                 }
               ]
             }
@@ -324,108 +291,86 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I think it would feel... freeing? Like a weight lifted off my shoulders, maybe? But at the same time, I worry that if I let go of that harsh voice, I won’t be able to push myself to improve. It’s like I need that criticism to keep me in check, but I also hate how it makes me feel small and trapped. It’s such a confusing mix of feelings.",
+        "query": "Right now, it feels a bit suffocating, like I’m wrapped in too many layers. It makes me hesitate when I want to reach out or share things with others. I just end up doubting if they’d even care or understand, and then I just... pull back. It’s frustrating.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while"
+            "feeling suffocated",
+            "wanting to reach out",
+            "doubting others' care"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up",
-            "I think I don’t deserve to be proud of my choices",
-            "I worry that if I let go of that harsh voice, I won’t be able to push myself to improve"
+            "they wouldn’t care",
+            "they wouldn’t understand"
           ],
           "emotions": [
-            "feeling stuck",
-            "wanting to feel confident",
-            "feeling hard to imagine feeling solid",
-            "feeling small and trapped",
-            "confusion about mixed feelings"
+            "frustration"
           ],
-          "behaviors": []
+          "behaviors": [
+            "hesitate to share",
+            "pull back"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Repressing thoughts (finding)",
-            "Negative automatic thoughts (finding)",
-            "Positive self thoughts (finding)",
-            "Feeling ashamed (finding)"
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)"
           ],
-          "contradiction": []
+          "neutral": [
+            "Social isolation (rejection) (finding)",
+            "Emotionally distant (finding)"
+          ],
+          "contradiction": [
+            "Social isolation (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re torn between wanting relief from that harsh inner voice and fearing that letting it go might leave you feeling less driven. What does that inner voice usually say when you feel it’s keeping you on track?",
+        "response": "It sounds like you’re feeling suffocated and doubting whether others will care, which is understandably frustrating. What’s one small thing you might try to share with someone you trust?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re torn between wanting relief from that harsh inner voice and fearing that letting it go might leave you feeling less driven. What does that inner voice usually say when you feel it’s keeping you on track?",
+            "response": "It sounds like you’re feeling suffocated and doubting whether others will care, which is understandably frustrating. What’s one small thing you might try to share with someone you trust?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Negative automatic thoughts",
-                  "label": "neutral"
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling ashamed",
-                  "label": "neutral"
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling stuck",
-                  "label": "emotions"
+                  "concept": "triggers: feeling suffocated",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling small and trapped",
-                  "label": "emotions"
+                  "concept": "automatic thoughts: they wouldn't care",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that the harsh voice is actually helping you improve?",
+            "response": "It sounds like you’re feeling frustrated. What evidence do you have that people won’t care or understand when you share?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Negative automatic thoughts",
-                  "label": "neutral"
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling ashamed",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "neutral"
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re caught between wanting to feel lighter and fearing you’ll lose motivation. If a close friend were listening, what might they suggest about balancing that harsh voice with encouragement?",
+            "response": "It sounds like you’re feeling suffocated and hesitant to reach out. What might a trusted friend say about how you’re feeling right now?",
             "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling torn between wanting relief from that harsh inner critic and fearing that it’s what keeps you motivated. What evidence do you have that the harsh voice is actually helping you improve?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "negative automatic thoughts",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "feeling small and trapped",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "confusion about mixed feelings",
-                  "label": "emotions"
-                }
-              ]
-            }
           }
         }
       }
@@ -434,121 +379,106 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s definitely torn. That voice, it just whispers all those doubts—like, “You’re not as talented as others,” or “You’ll never keep up.” It feels like it’s trying to protect me from failure, but it just ends up making me feel overwhelmed. I guess it makes me feel like I have to constantly prove myself, which is exhausting.",
+        "query": "I don’t know... maybe I could try sharing how I’ve been feeling lately? But then I worry they’ll think I’m such a downer or that I should just handle it myself. It feels easier to keep it all inside, you know? Like, if I say something, it’ll just make it more real.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while"
+            "thinking about sharing feelings",
+            "worrying about others' opinions"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up",
-            "I think I don’t deserve to be proud of my choices",
-            "I worry that if I let go of that harsh voice, I won’t be able to push myself to improve",
-            "I hear a voice that whispers doubts like 'You’re not as talented as others' and 'You’ll never keep up'"
+            "they'll think I'm a downer",
+            "I should handle it myself",
+            "saying something will make it more real"
           ],
           "emotions": [
-            "feeling stuck",
-            "wanting to feel confident",
-            "feeling hard to imagine feeling solid",
-            "feeling small and trapped",
-            "confusion about mixed feelings",
-            "feeling overwhelmed"
+            "anxiety"
           ],
           "behaviors": [
-            "feeling the need to constantly prove myself"
+            "keeping feelings inside"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Ability to understand own emotions (observable entity)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Difficulty understanding own emotions (finding)",
-            "Delusion of control of voice (finding)",
-            "Unable to understand own emotions (finding)",
-            "Able to understand own emotions (finding)"
+            "Complaining of feeling depressed (finding)",
+            "Depressed mood (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Complaining of feeling unhappy (finding)",
+            "Complaining of tearfulness (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the voice is making you feel overwhelmed. What evidence do you have that proving yourself is the only way to keep that voice from causing distress?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re feeling anxious about opening up, worried that others might see you as a downer and that sharing could make your feelings feel even more real, so you’re leaning toward keeping them inside. It’s pretty common to feel that way—many people worry about how they’ll be perceived when they share their struggles; what might be a small, low‑stakes way you could test that idea?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like that inner voice is telling you you’re not good enough and that you need to prove yourself, which is exhausting and overwhelming. When that voice comes up, what’s the first thing you notice about how you feel?",
+            "response": "It sounds like you’re feeling anxious about opening up, worried that others might see you as a downer and that sharing could make your feelings feel even more real, so you’re leaning toward keeping them inside. It’s pretty common to feel that way—many people worry about how they’ll be perceived when they share their struggles; what might be a small, low‑stakes way you could test that idea?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Ability to understand own emotions",
-                  "label": "entailment"
+                  "concept": "anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic_thoughts about self-doubt",
-                  "label": "unknown"
+                  "concept": "worrying about others' opinions",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions of overwhelm and exhaustion",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors of constant proving",
+                  "concept": "keeping feelings inside",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like the voice is making you feel overwhelmed. What evidence do you have that proving yourself is the only way to keep that voice from causing distress?",
+            "response": "What evidence do you have that sharing will make things worse? It might help to look at what actually happens when you share.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Ability to understand own emotions",
-                  "label": "entailment"
+                  "concept": "anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "automatic thoughts: 'they'll think I'm a downer'",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "entailment"
+                  "concept": "automatic thoughts: 'I should handle it myself'",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "behaviors",
+                  "concept": "automatic thoughts: 'saying something will make it more real'",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "behaviors: keeping feelings inside",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like that inner voice is really heavy, and it’s exhausting to feel you have to prove yourself all the time. If a trusted friend heard that voice, what might they say to you about how you’re handling it?",
+            "response": "If a trusted friend heard you share, what do you think they might say? Sometimes sharing can feel less real because it becomes a concrete conversation, but it can also bring relief.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "anxiety about saying the wrong thing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "keeping feelings inside",
                   "label": "unknown"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Ability to understand own emotions",
-                  "label": "entailment"
+                  "concept": "worrying about others' opinions",
+                  "label": "triggers"
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like that inner voice is putting a lot of pressure on you and making you feel exhausted. What would you say to a friend who was feeling the same way?",
-            "reasoning": null
           }
         }
       }
@@ -557,149 +487,100 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I don’t know... it just feels like I’ve always been told that hard work equals worth, you know? If I’m not constantly achieving or proving I can do something, then I feel like I’m not enough. It’s like there’s this pressure to always be doing more. Even when I do accomplish something, that voice just shifts to “What’s next?” instead of letting me feel good about it.",
+        "query": "Yeah, I guess it does feel a bit like a risk. Maybe I could start with something small, like just mentioning I’ve had a rough week or something? But then I get stuck thinking, what if they don’t respond the way I hope? I just... don’t want to feel even more alone in it.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while",
-            "being told that hard work equals worth"
+            "mentioning a rough week"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up",
-            "I think I don’t deserve to be proud of my choices",
-            "I worry that if I let go of that harsh voice, I won’t be able to push myself to improve",
-            "I hear a voice that whispers doubts like 'You’re not as talented as others' and 'You’ll never keep up'",
-            "If I’m not constantly achieving or proving I can do something, then I feel like I’m not enough",
-            "There’s pressure to always be doing more"
+            "what if they don’t respond the way I hope?",
+            "I don’t want to feel even more alone"
           ],
           "emotions": [
-            "feeling stuck",
-            "wanting to feel confident",
-            "feeling hard to imagine feeling solid",
-            "feeling small and trapped",
-            "confusion about mixed feelings",
-            "feeling overwhelmed",
-            "feeling pressure to achieve"
+            "fear",
+            "anxiety"
           ],
           "behaviors": [
-            "feeling the need to constantly prove myself"
+            "get stuck in thoughts"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Loss of motivation (finding)",
-            "Increased motivation (finding)",
-            "Feeling of discouragement (finding)",
-            "Feels everything is futile (finding)"
+            "Fear of saying the wrong thing (finding)"
           ],
           "neutral": [
-            "Low motivation (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Social isolation (rejection) (finding)",
+            "Fear of writing in public (finding)",
+            "Complaining of feeling depressed (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of pressure. When you think about a recent accomplishment, what thoughts come up that make you feel you’re not enough?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re worried that sharing your rough week might lead to a response that makes you feel even more alone, and that fear is keeping you stuck in your thoughts. What might make you feel a bit more at ease about sharing that small piece?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of pressure that makes it hard to celebrate your achievements. What would it feel like if you could pause that voice for a moment?",
+            "response": "It sounds like you’re worried that sharing your rough week might lead to a response that makes you feel even more alone, and that fear is keeping you stuck in your thoughts. What might make you feel a bit more at ease about sharing that small piece?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Loss of motivation (finding)",
+                  "concept": "Fear of saying the wrong thing",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feels everything is futile (finding)",
-                  "label": "entailment"
+                  "concept": "Social isolation (rejection)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic thoughts about not being enough",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "pressure to constantly prove oneself",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "voice shifting to “What’s next?”",
-                  "label": "unknown"
+                  "concept": "Complaining of feeling depressed",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re carrying a lot of pressure. When you think about a recent accomplishment, what thoughts come up that make you feel you’re not enough?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Loss of motivation (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feels everything is futile (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic thoughts about not being enough",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "pressure to constantly prove oneself",
-                  "label": "unknown"
-                }
-              ]
-            }
+            "response": "It sounds like you’re worried about feeling even more alone. What evidence do you have that they won’t respond the way you hope?",
+            "reasoning": null
           },
           "alternative_perspective": {
-            "response": "It sounds like the pressure to keep proving yourself is exhausting. If a close friend heard you say that, what might they say to help you see that your worth isn’t tied only to constant achievement?",
+            "response": "If a close friend were listening, what might they say about you sharing that rough week? That could help you see a different angle.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of discouragement (finding)",
+                  "concept": "Fear of saying the wrong thing",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feels everything is futile (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Loss of motivation (finding)",
-                  "label": "entailment"
+                  "concept": "Social isolation (rejection)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Increased motivation (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re carrying a lot of pressure and feeling like you’re never enough. What would it feel like to pause and notice the value in what you’ve already achieved?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling of pressure to constantly achieve",
-                  "label": "unknown"
+                  "concept": "Fear of writing in public",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "self-doubt about worth",
-                  "label": "unknown"
+                  "concept": "Complaining of feeling depressed",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic thoughts of not being enough",
-                  "label": "unknown"
+                  "concept": "what if they don’t respond the way I hope",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I don’t want to feel even more alone",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -711,168 +592,95 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Well, I recently finished a project that I thought was pretty good. But instead of feeling proud, I just kept thinking about how it could’ve been better, how I missed some details, or what everyone else might think. It’s like, no matter how much I do, I can’t shake that feeling that it doesn’t measure up. I just wish I could feel okay with what I did, but I just spiral back into those doubts.",
+        "query": "I think maybe if I knew they’d be supportive or that they wouldn’t judge me... like, if I felt safe opening up. But then again, I always wonder if I’m just burdening them with my problems. It’s hard to shake that feeling, even though I know everyone has their struggles too.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while",
-            "being told that hard work equals worth",
-            "finishing a project"
+            "thinking about support",
+            "fear of judgment",
+            "desire to open up"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up",
-            "I think I don’t deserve to be proud of my choices",
-            "I worry that if I let go of that harsh voice, I won’t be able to push myself to improve",
-            "I hear a voice that whispers doubts like 'You’re not as talented as others' and 'You’ll never keep up'",
-            "If I’m not constantly achieving or proving I can do something, then I feel like I’m not enough",
-            "There’s pressure to always be doing more",
-            "I keep thinking about how it could’ve been better and what everyone else might think"
+            "wondering if I'm burdening them",
+            "everyone has their struggles too"
           ],
           "emotions": [
-            "feeling stuck",
-            "wanting to feel confident",
-            "feeling hard to imagine feeling solid",
-            "feeling small and trapped",
-            "confusion about mixed feelings",
-            "feeling overwhelmed",
-            "feeling pressure to achieve",
-            "feeling disappointed in my accomplishments"
+            "anxiety",
+            "fear"
           ],
-          "behaviors": [
-            "feeling the need to constantly prove myself"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling a failure (finding)",
-            "Positive self thoughts (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling ashamed (finding)",
-            "Feeling guilt (finding)"
+            "Fear of being a burden to others (finding)",
+            "Relationship problems with family members due to mental condition (finding)",
+            "Relationship problems with family members due to medical condition (finding)",
+            "Complaining of feeling depressed (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling isolated (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling disappointed and doubting the quality of your work, even though you put a lot of effort into it. What would it feel like to give yourself a bit of credit for what you did?",
+        "response": "It sounds like you’re anxious about being judged and worried you might be a burden, which can feel really heavy. What would it feel like to share your thoughts with someone you trust?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling disappointed and doubting the quality of your work, even though you put a lot of effort into it. What would it feel like to give yourself a bit of credit for what you did?",
+            "response": "It sounds like you’re anxious about being judged and worried you might be a burden, which can feel really heavy. What would it feel like to share your thoughts with someone you trust?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Positive self thoughts",
-                  "label": "entailment"
+                  "concept": "Relationship problems with family members due to mental condition",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling stuck",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling disappointed in my accomplishments",
-                  "label": "emotions"
+                  "concept": "Complaining of feeling depressed",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re worried about how others see it. What evidence do you have that your project didn’t meet your own standards?",
+            "response": "What evidence do you have that sharing your thoughts would actually burden them?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Positive self thoughts (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "Fear of being a burden to others",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Feeling ashamed (finding)",
+                  "concept": "Relationship problems with family members due to mental condition",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "Complaining of feeling depressed",
                   "label": "neutral"
-                },
-                {
-                  "concept": "automatic thoughts about not deserving pride",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions of disappointment and overwhelm",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors of constantly proving oneself",
-                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re caught in a cycle of self‑critique. If a trusted friend were looking at your finished project, what would they say about it?",
+            "response": "It sounds like you’re worried about being a burden, yet you also recognize that everyone has struggles. What might a trusted friend say if you shared your thoughts with them?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Positive self thoughts (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling stuck in a loop of self‑doubt even after finishing something you thought was good. What would it feel like to give yourself permission to be proud of what you accomplished?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Positive self thoughts (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "Fear of being a burden to others",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Feeling ashamed (finding)",
+                  "concept": "Relationship problems with family members due to mental condition",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "Complaining of feeling depressed",
                   "label": "neutral"
-                },
-                {
-                  "concept": "User schema: finishing a project",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "User schema: feeling disappointed",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "User schema: feeling stuck",
-                  "label": "emotions"
                 }
               ]
             }
@@ -884,110 +692,85 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I think it would feel... weird? Like, I’m not used to it. I mean, part of me wants to feel good about what I did, but then there's this other part that just dismisses it. Like if I let myself feel proud, it would somehow be false, like I’m fooling myself. It’s hard to know how to balance that, you know?",
+        "query": "I think it could feel... kind of freeing, maybe? Like finally taking a breath after holding it in for too long. But there’s also this knot in my stomach just thinking about it. I guess I fear that if I open up, it’ll just show how weak I am, and that’s hard to reconcile.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while",
-            "being told that hard work equals worth",
-            "finishing a project"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up",
-            "I think I don’t deserve to be proud of my choices",
-            "I worry that if I let go of that harsh voice, I won’t be able to push myself to improve",
-            "I hear a voice that whispers doubts like 'You’re not as talented as others' and 'You’ll never keep up'",
-            "If I’m not constantly achieving or proving I can do something, then I feel like I’m not enough",
-            "There’s pressure to always be doing more",
-            "I keep thinking about how it could’ve been better and what everyone else might think",
-            "If I let myself feel proud, it would somehow be false, like I’m fooling myself"
+            "if I open up, it’ll just show how weak I am"
           ],
           "emotions": [
-            "feeling stuck",
-            "wanting to feel confident",
-            "feeling hard to imagine feeling solid",
-            "feeling small and trapped",
-            "confusion about mixed feelings",
-            "feeling overwhelmed",
-            "feeling pressure to achieve",
-            "feeling disappointed in my accomplishments",
-            "feeling weird about feeling proud"
+            "fear",
+            "anxiety"
           ],
-          "behaviors": [
-            "feeling the need to constantly prove myself"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Excessively proud character (finding)",
-            "Lack of pride (finding)",
-            "Feeling guilt (finding)",
-            "Anxiety about blushing (finding)"
+            "Anxiety about choking (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about swallowing (finding)",
+            "Feels own body is unreal (finding)",
+            "Anxiety about wetting self (finding)"
           ],
-          "contradiction": [
-            "Feeling ashamed (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re noticing a tension between wanting to feel good about what you did and feeling that it might be false. What evidence do you have that feeling proud would be a lie or that you’re fooling yourself?",
+        "response": "It sounds like you’re noticing both a sense of relief and a knot of fear. What evidence do you have that opening up will make you look weak?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re caught between wanting to celebrate your accomplishment and feeling like you’re not truly deserving. It’s common to feel that way; what would it feel like if you allowed yourself to acknowledge the effort you put in?",
+            "response": "It sounds like you’re feeling a mix of relief and unease—like a breath of fresh air but also a knot in your stomach. What’s the most pressing worry that’s keeping that knot tight?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "lack of pride",
-                  "label": "neutral"
+                  "concept": "automatic_thoughts: if I open up, it’ll just show how weak I am",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "feeling guilt",
+                  "concept": "emotions: fear, anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "clinical context: anxiety about choking, collapsing, swallowing",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re noticing a tension between wanting to feel good about what you did and feeling that it might be false. What evidence do you have that feeling proud would be a lie or that you’re fooling yourself?",
+            "response": "It sounds like you’re noticing both a sense of relief and a knot of fear. What evidence do you have that opening up will make you look weak?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts about not deserving pride",
-                  "label": "unknown"
+                  "concept": "Anxiety about choking",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "feeling weird about feeling proud",
-                  "label": "emotions"
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "neutral context: lack of pride, feeling guilt",
+                  "concept": "Anxiety about swallowing",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feels own body is unreal",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about wetting self",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re torn between wanting to feel proud and feeling that it would be false. If a close friend heard you say you’re not proud of yourself, what might they say?",
+            "response": "It sounds like you’re feeling both relief and a knot of fear—what might a trusted friend say if they heard you worry about appearing weak? They might remind you that vulnerability can be a sign of strength, not weakness.",
             "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like you’re torn between wanting to celebrate your achievements and feeling like you can’t fully accept that pride. What would it feel like if you let yourself feel proud without feeling it’s false?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions: feeling proud, feeling dismissed",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic thoughts: feeling false, self-doubt",
-                  "label": "unknown"
-                }
-              ]
-            }
           }
         }
       }
@@ -996,144 +779,85 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I guess part of me thinks that if I felt proud, it would mean I’m ignoring the flaws or mistakes. It’s like I’d be pretending things are better than they really are. Plus, I’ve been told before that I shouldn’t settle for “good enough.” So, it’s hard to shake off that feeling that if I’m not striving for perfect, I’m not doing it right. It makes it really difficult to just appreciate the effort and the outcome.",
+        "query": "I don’t know... it’s just this voice in my head that says if I need help, it means I can’t handle things myself. Like, I should be stronger or more capable. I just... I keep thinking about times when I’ve seen others struggle and how I’ve judged them, even if I didn’t mean to. It feels like I’m projecting that onto myself too.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while",
-            "being told that hard work equals worth",
-            "finishing a project",
-            "being told that I shouldn’t settle for 'good enough'"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up",
-            "I think I don’t deserve to be proud of my choices",
-            "I worry that if I let go of that harsh voice, I won’t be able to push myself to improve",
-            "I hear a voice that whispers doubts like 'You’re not as talented as others' and 'You’ll never keep up'",
-            "If I’m not constantly achieving or proving I can do something, then I feel like I’m not enough",
-            "There’s pressure to always be doing more",
-            "I keep thinking about how it could’ve been better and what everyone else might think",
-            "If I let myself feel proud, it would somehow be false, like I’m fooling myself",
-            "If I felt proud, it would mean I’m ignoring the flaws or mistakes"
+            "if I need help, it means I can’t handle things myself",
+            "I should be stronger or more capable",
+            "I’ve judged others who struggle"
           ],
-          "emotions": [
-            "feeling stuck",
-            "wanting to feel confident",
-            "feeling hard to imagine feeling solid",
-            "feeling small and trapped",
-            "confusion about mixed feelings",
-            "feeling overwhelmed",
-            "feeling pressure to achieve",
-            "feeling disappointed in my accomplishments",
-            "feeling weird about feeling proud"
-          ],
-          "behaviors": [
-            "feeling the need to constantly prove myself"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Character trait finding of level of pride (finding)"
+            "Fear of being a burden to others (finding)",
+            "Anxiety about forced dependence (finding)",
+            "Thoughts of self harm (finding)",
+            "Negative automatic thoughts (finding)"
           ],
           "neutral": [
-            "Feeling ashamed (finding)",
-            "Lack of pride (finding)",
-            "Excessively proud character (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Able to recognize own emotional pain and distress (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re worried that feeling proud might hide your mistakes. What evidence do you have that feeling proud would mean you’re ignoring those flaws?",
+        "response": "Can you think of a time when you asked for help and it didn’t mean you were weak?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re worried that feeling proud would feel like ignoring your mistakes, and that the pressure to never settle for “good enough” makes it hard to celebrate your achievements. What would it feel like to recognize the effort while still acknowledging the areas you’d like to improve?",
+            "response": "It sounds like you’re feeling a lot of pressure to be self‑reliant and worry that asking for help might make you seem weak, and that might be echoing how you’ve judged others. What does it feel like when that voice says you can’t handle things?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling proud, ignoring flaws",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "pressure to not settle for 'good enough'",
-                  "label": "unknown"
+                  "concept": "Anxiety about forced dependence",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "difficulty appreciating effort",
-                  "label": "unknown"
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re worried that feeling proud might hide your mistakes. What evidence do you have that feeling proud would mean you’re ignoring those flaws?",
+            "response": "Can you think of a time when you asked for help and it didn’t mean you were weak?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling proud",
-                  "label": "emotions"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "not good enough",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "pressure to achieve",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "lack of pride",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "If a trusted friend heard you say you can’t feel proud because it feels like ignoring flaws, what might they suggest about recognizing effort while still learning from mistakes? Maybe they would remind you that pride can coexist with humility, and that celebrating progress doesn’t erase the chance to grow.",
+            "response": "If a close friend heard you say that needing help means you’re weak, what might they say to you? They might remind you that asking for help is a sign of strength, not a sign of failure.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Character trait finding of level of pride (finding)",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "neutral"
+                  "concept": "Anxiety about forced dependence",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Lack of pride (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re carrying a lot of pressure to be perfect and that makes it hard to feel proud of your achievements. It’s understandable to feel that way, especially when you’ve been told not to settle for “good enough.”",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling proud",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "pressure to be perfect",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "not settling for 'good enough'",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "lack of pride",
-                  "label": "neutral"
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
                 }
               ]
             }
@@ -1145,125 +869,87 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess I don’t really have solid evidence, it’s mostly just this feeling I’ve carried for so long. It’s like a voice in my head that says if I focus on the good, I’ll lose sight of what needs to be improved. I think I’ve just always connected my self-worth to my performance and my ability to fix things. It’s hard to separate that from feeling proud, like they can’t coexist.",
+        "query": "Hmm... well, I guess there was that time in college when I really struggled with a project. I asked a professor for guidance, and instead of feeling weak, I felt relieved. But then I started to second-guess myself again, thinking maybe I should have figured it out on my own. It’s like I can see that asking for help can be a good thing, but then my mind jumps in and twists it around.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while",
-            "being told that hard work equals worth",
-            "finishing a project",
-            "being told that I shouldn’t settle for 'good enough'"
+            "struggled with a project",
+            "asked a professor for guidance"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I feel like I’m not good enough or that I’ll mess things up",
-            "I think I don’t deserve to be proud of my choices",
-            "I worry that if I let go of that harsh voice, I won’t be able to push myself to improve",
-            "I hear a voice that whispers doubts like 'You’re not as talented as others' and 'You’ll never keep up'",
-            "If I’m not constantly achieving or proving I can do something, then I feel like I’m not enough",
-            "There’s pressure to always be doing more",
-            "I keep thinking about how it could’ve been better and what everyone else might think",
-            "If I let myself feel proud, it would somehow be false, like I’m fooling myself",
-            "If I felt proud, it would mean I’m ignoring the flaws or mistakes",
-            "If I focus on the good, I’ll lose sight of what needs to be improved",
-            "I’ve always connected my self-worth to my performance and my ability to fix things",
-            "Feeling proud and self-worth can’t coexist"
+            "maybe I should have figured it out on my own",
+            "asking for help is weak"
           ],
           "emotions": [
-            "feeling stuck",
-            "wanting to feel confident",
-            "feeling hard to imagine feeling solid",
-            "feeling small and trapped",
-            "confusion about mixed feelings",
-            "feeling overwhelmed",
-            "feeling pressure to achieve",
-            "feeling disappointed in my accomplishments",
-            "feeling weird about feeling proud"
+            "relief",
+            "self-doubt"
           ],
-          "behaviors": [
-            "feeling the need to constantly prove myself"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Character trait finding of level of pride (finding)",
-            "Lack of pride (finding)"
+            "Pressured by others (finding)",
+            "Difficulty in thinking independently (finding)"
           ],
           "neutral": [
-            "Excessively proud character (finding)",
-            "Moderate ego strength (finding)"
+            "Fear of being a burden to others (finding)",
+            "Pressured by peers (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
-          "contradiction": [
-            "Feeling ashamed (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re noticing a tension between pride and improvement. Can you think of a time when you felt proud of something and also recognized something to improve?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you felt relief when you reached out for help, but then your mind started to question whether you should have handled it alone—something many people experience when they feel pressured to be independent. What was it about asking for help that made you feel relieved?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a long‑standing voice that worries that celebrating your achievements might make you overlook areas for growth, and that’s a common struggle when self‑worth feels tied to performance. What might it feel like if you could let pride exist without feeling it threatens your worth?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Lack of pride (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling stuck",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "feeling proud",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "self-worth tied to performance",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you’re noticing a tension between pride and improvement. Can you think of a time when you felt proud of something and also recognized something to improve?",
+            "response": "It sounds like you felt relief when you reached out for help, but then your mind started to question whether you should have handled it alone—something many people experience when they feel pressured to be independent. What was it about asking for help that made you feel relieved?",
             "reasoning": null
           },
-          "alternative_perspective": {
-            "response": "It sounds like you feel pride and improvement can’t coexist. What might a close friend say if they heard you describe that tension?",
+          "socratic_questioning": {
+            "response": "It sounds like you felt relief when you asked for help, but then wondered if you should have handled it yourself. What evidence supports the idea that you should have figured it out on your own?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Lack of pride (finding)",
+                  "concept": "Pressured by others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Character trait finding of level of pride (finding)",
+                  "concept": "Difficulty in thinking independently",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "It sounds like you’re feeling stuck between wanting to improve and feeling proud, and that inner voice makes it hard to see them as separate. What would it look like if you could recognize both pride and the need for improvement at the same time?",
+          "alternative_perspective": {
+            "response": "It sounds like you’re balancing relief with a lingering doubt that asking for help is a sign of weakness. If a close friend were watching, what would they say about the value of reaching out when you’re stuck?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "lack of pride",
+                  "concept": "Pressured by others",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Difficulty in thinking independently",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 }
               ]
             }

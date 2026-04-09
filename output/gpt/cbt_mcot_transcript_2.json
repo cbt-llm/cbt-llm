@@ -26,10 +26,11 @@
             "test the next day"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests"
+            "worried about the test",
+            "need to focus on studying"
           ],
           "emotions": [
-            "worried"
+            "worry"
           ],
           "behaviors": [
             "trying to focus on studying"
@@ -51,11 +52,42 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the upcoming test has been keeping you busy and worrying you, and you're focusing on studying to manage that. What does that worry feel like for you right now?",
+        "response": "It sounds like the upcoming test is making you feel anxious and you’re trying to focus on studying. What’s one thing you’ve found helpful in managing that worry so far?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the upcoming test has been keeping you busy and worrying you, and you're focusing on studying to manage that. What does that worry feel like for you right now?",
+            "response": "It sounds like the upcoming test is making you feel anxious and you’re trying to focus on studying. What’s one thing you’ve found helpful in managing that worry so far?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Preoccupied (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "On examination - anxious (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What does worrying about the test look like for you? How does that affect your studying?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -71,11 +103,11 @@
                   "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts: worried about exams",
-                  "label": "triggers"
+                  "concept": "automatic thoughts: worried about the test",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions: worried",
+                  "concept": "emotions: worry",
                   "label": "emotions"
                 },
                 {
@@ -85,38 +117,8 @@
               ]
             }
           },
-          "socratic_questioning": {
-            "response": "It sounds like exams are a big source of stress. What evidence do you have that worrying about the test will actually help you do better?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Preoccupied (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "On examination - anxious (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
           "alternative_perspective": {
-            "response": "It sounds like exams are really weighing on you. If a close friend were watching you, what might they say about how you’re coping with all that pressure?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Preoccupied (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "On examination - anxious (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like exams are making you feel very worried and busy. What evidence do you have that you will fail?",
+            "response": "It sounds like you’re feeling a lot of worry about the test. If a close friend were watching you, what might they say about how you’re handling the upcoming test?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -128,19 +130,19 @@
                   "label": "entailment"
                 },
                 {
-                  "concept": "triggers: busy at school, exams, test next day",
+                  "concept": "triggers: busy at school, exams, test the next day",
                   "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts: worried about exams",
-                  "label": "triggers"
+                  "concept": "automatic thoughts: worried about the test",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions: worried",
+                  "concept": "emotions: worry",
                   "label": "emotions"
                 },
                 {
-                  "concept": "behaviors: trying to focus on studying",
+                  "concept": "behaviors: trying to focus",
                   "label": "unknown"
                 }
               ]
@@ -153,120 +155,92 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it feels pretty heavy, like this weight on my chest. I keep thinking that if I don't do well, it'll just confirm what I already believe about myself—like I'm just not good enough. It’s frustrating because I know I’ve worked hard, but then I get these thoughts that make it all feel pointless.",
+        "query": "Yeah, I guess I’ve been trying to break my study sessions into smaller chunks. It’s less overwhelming that way, but sometimes I still find myself just staring at the material and feeling like I’m not making any progress. It’s frustrating, you know? I just keep doubting if I’m actually capable of doing well.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day"
+            "staring at the material",
+            "feeling overwhelmed"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless"
+            "I'm not making any progress",
+            "I doubt my capability to do well"
           ],
           "emotions": [
-            "worried",
-            "frustrated"
+            "frustration"
           ],
-          "behaviors": [
-            "trying to focus on studying"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling of discouragement (finding)",
-            "Feeling a failure (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Performance anxiety (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Anxiety about having a fit (finding)"
+            "Anxiety about having a fit (finding)",
+            "Repressing thoughts (finding)",
+            "On examination - disorientated (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Easily distracted (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that not doing well will confirm you’re not good enough?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re making a good effort by breaking things up, yet you still feel stuck and frustrated, doubting your ability. What’s one small thing you could try that might help you feel a bit more in control right now?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a heavy weight of worry and frustration, feeling like a failure if things don’t go well even though you’ve worked hard. What would you say to a friend who’s feeling the same way?",
+            "response": "It sounds like you’re making a good effort by breaking things up, yet you still feel stuck and frustrated, doubting your ability. What’s one small thing you could try that might help you feel a bit more in control right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
+                  "concept": "Easily distracted",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about performance (finding)",
+                  "concept": "Feeling overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Doubting capability",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that not doing well will confirm you’re not good enough?",
+            "response": "It sounds like you’re feeling stuck. What evidence do you have that you’re not making progress?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of discouragement",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Performance anxiety",
+                  "concept": "Anxiety about making mistakes",
                   "label": "neutral"
+                },
+                {
+                  "concept": "Easily distracted",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "triggers: staring at material",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts: I'm not making any progress",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: frustration",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "If a close friend were in your shoes, what would they say about the effort you’ve already put in? It might help to see that your hard work is a sign of growth, not just a test of worth.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling of discouragement",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of failure",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Performance anxiety",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re carrying a heavy weight of worry and self‑doubt, especially when you think a poor result would confirm you’re not good enough. What might help you feel a bit lighter right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about performance",
-                  "label": "unknown"
-                }
-              ]
-            }
+            "response": "It sounds like you’re feeling stuck, but maybe there are small wins you’re not noticing. If a close friend were watching you study, what might they say about how you’re handling this?",
+            "reasoning": null
           }
         }
       }
@@ -275,116 +249,134 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Well, there have been times in the past when I didn’t meet my own expectations or I messed up, and it just felt like everyone noticed. It’s like those moments stick with me, and I can’t shake the feeling that I’m always one step away from proving everyone right. It just makes everything seem so much bigger than it is, you know?",
+        "query": "Thanks, I appreciate that. I mean, I could maybe set a timer for just 15 minutes and focus only on one thing. That might help. But then I worry that I’ll just get distracted or not even know where to start. I don’t know… it’s like I want to make progress, but I’m scared of failing again.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past experiences of not meeting expectations"
+            "setting a timer",
+            "focusing on one thing",
+            "worrying about distractions",
+            "not knowing where to start",
+            "fear of failing"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless",
-            "always one step away from proving everyone right"
+            "I might get distracted",
+            "I won't know where to start",
+            "I want to make progress",
+            "I'm scared of failing again"
           ],
           "emotions": [
-            "worried",
-            "frustrated",
-            "overwhelmed"
+            "worry",
+            "fear"
           ],
           "behaviors": [
-            "trying to focus on studying"
+            "setting a timer",
+            "avoiding tasks"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)"
+            "Difficulty directing attention (finding)",
+            "Able to resist obsessional thoughts (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Easily distracted (finding)",
+            "Racing thoughts (finding)",
+            "Repressing thoughts (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like past slip‑ups feel like a big deal and you’re worried you’re always on the brink of proving everyone right, which can make everything feel huge. When you notice that feeling, what’s the first thought that pops into your mind?",
+        "response": "It sounds like you’re thinking about setting a 15‑minute timer to stay focused, but you’re still worried about getting distracted or not knowing where to begin, and that fear of failure is weighing on you. What’s one small step that might make starting feel less intimidating?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like past slip‑ups feel like a big deal and you’re worried you’re always on the brink of proving everyone right, which can make everything feel huge. When you notice that feeling, what’s the first thought that pops into your mind?",
+            "response": "It sounds like you’re thinking about setting a 15‑minute timer to stay focused, but you’re still worried about getting distracted or not knowing where to begin, and that fear of failure is weighing on you. What’s one small step that might make starting feel less intimidating?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
+                  "concept": "Difficulty directing attention",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about making mistakes",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Past experiences of not meeting expectations",
+                  "concept": "worry",
                   "label": "triggers"
                 },
                 {
-                  "concept": "Automatic thoughts of being not good enough",
-                  "label": "unknown"
+                  "concept": "fear",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "setting a timer",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "not knowing where to start",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like these past experiences are weighing heavily on you. What evidence do you have that these moments stick with you and that everyone noticed?",
+            "response": "What evidence do you have that setting a 15‑minute timer will lead to distraction, and what might happen if you try it anyway?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
+                  "concept": "Difficulty directing attention",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Easily distracted",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Racing thoughts",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts about distraction",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Fear of failing",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like those moments feel like a big weight. If a close friend were watching you, what might they say about how you’re handling this?",
+            "response": "If a close friend were watching you try a 15‑minute timer, what might they say about how you’re handling the possibility of distraction? It could be helpful to think about how you’ve managed similar moments before.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re carrying a lot of pressure from past mistakes and feeling like you’re always on the brink of proving everyone right. If a close friend were in your shoes, what might they say to you about those moments?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling a failure (finding)",
+                  "concept": "Difficulty directing attention",
                   "label": "entailment"
                 },
                 {
-                  "concept": "past experiences of not meeting expectations",
+                  "concept": "Easily distracted",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Racing thoughts",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "worry",
                   "label": "triggers"
                 },
                 {
-                  "concept": "worried",
-                  "label": "automatic_thoughts"
+                  "concept": "fear",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "frustrated",
-                  "label": "emotions"
+                  "concept": "setting a timer",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
+                  "concept": "avoiding tasks",
+                  "label": "unknown"
                 }
               ]
             }
@@ -396,116 +388,96 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it's like this sudden rush of panic, and I just think, “Here we go again.” It’s almost like a loop—once that thought comes, it just spirals into all the reasons why I won't measure up. I can't help but feel overwhelmed, and it makes me want to just withdraw or avoid situations altogether.",
+        "query": "Yeah, I think maybe just picking one page to read or a single problem to work on might help? But then I get this voice in my head saying it's not enough, like I should be doing more or that I’ll never catch up. It’s hard to silence that thought, you know?",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past experiences of not meeting expectations"
+            "picking one page to read",
+            "working on a single problem"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless",
-            "always one step away from proving everyone right",
-            "spirals into all the reasons why I won't measure up"
+            "it's not enough",
+            "I should be doing more",
+            "I’ll never catch up"
           ],
-          "emotions": [
-            "worried",
-            "frustrated",
-            "overwhelmed",
-            "panic"
-          ],
-          "behaviors": [
-            "trying to focus on studying",
-            "withdrawing or avoiding situations"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about behavior or performance (finding)"
+            "Difficulty directing attention (finding)",
+            "Slow flow of thought (finding)",
+            "Impaired ability to learn new material (finding)"
           ],
           "neutral": [
-            "Anxiety about having a fit (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Performance anxiety (finding)",
-            "Examination phobia (finding)"
+            "Easily distracted (finding)",
+            "Sluggish thought (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the panic rush you’re describing quickly spirals into thoughts of not measuring up, leaving you feeling overwhelmed and wanting to withdraw. What’s one small thing you’ve noticed that helps you feel a bit more grounded when that panic starts?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you’re feeling pressured; what evidence do you have that focusing on just one page or problem is not enough?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the panic rush you’re describing quickly spirals into thoughts of not measuring up, leaving you feeling overwhelmed and wanting to withdraw. What’s one small thing you’ve noticed that helps you feel a bit more grounded when that panic starts?",
+            "response": "It sounds like you’re trying to focus on one page or problem, but you’re also hearing a voice that says you’re not doing enough and that you’ll never catch up. What does that voice say when you try to focus on just one page?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
+                  "concept": "Difficulty directing attention (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Performance anxiety (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Examination phobia (finding)",
-                  "label": "neutral"
+                  "concept": "Slow flow of thought (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like this thought is really overwhelming. What evidence do you have that this thought of “here we go again” is true?",
+            "response": "It sounds like you’re feeling pressured; what evidence do you have that focusing on just one page or problem is not enough?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about performance",
-                  "label": "unknown"
+                  "concept": "Difficulty directing attention",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Performance anxiety",
-                  "label": "neutral"
+                  "concept": "Slow flow of thought",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Examination phobia",
-                  "label": "neutral"
+                  "concept": "Impaired ability to learn new material",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts: 'it's not enough', 'I should be doing more', 'I'll never catch up'",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like the panic feels like a loop that makes you feel like you can’t meet expectations. If a close friend were watching you right now, what might they say about how you’re handling this?",
-            "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like the sudden rush of panic is tied to your worries about exams and feeling like you won’t measure up, and that’s making you want to withdraw. What might help you feel a bit more grounded right now?",
+            "response": "It sounds like you’re trying to manage the pressure by narrowing focus, which can be helpful. If a close friend were watching you, what might they say about tackling just one page at a time?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
+                  "concept": "Difficulty directing attention",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "neutral"
+                  "concept": "Slow flow of thought",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Performance anxiety (finding)",
-                  "label": "neutral"
+                  "concept": "Impaired ability to learn new material",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Examination phobia (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts: 'it's not enough', 'I should be doing more', 'I'll never catch up'",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -517,127 +489,96 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I guess sometimes when I take a moment to breathe or step outside for fresh air, it helps a little. But then part of me feels guilty for taking that time, like I should be doing something more productive instead. It’s hard to balance that, you know? I want to feel better, but I also feel like I’m not allowed to take a break.",
+        "query": "I guess... it just feels like everyone else is managing to do so much more. I see my classmates talking about their notes, and it makes me think I should be doing more too. I feel like if I don’t keep up, I’ll fall behind completely. It’s like there’s this constant race I’m not even sure I signed up for.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past experiences of not meeting expectations",
-            "feeling guilty for taking breaks"
+            "classmates talking about their notes"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless",
-            "always one step away from proving everyone right",
-            "spirals into all the reasons why I won't measure up",
-            "I should be doing something more productive instead of taking a break"
+            "everyone else is managing more",
+            "I should be doing more",
+            "if I don’t keep up, I’ll fall behind"
           ],
           "emotions": [
-            "worried",
-            "frustrated",
-            "overwhelmed",
-            "panic",
-            "guilty"
+            "anxiety"
           ],
-          "behaviors": [
-            "trying to focus on studying",
-            "withdrawing or avoiding situations",
-            "taking moments to breathe or step outside for fresh air"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling guilt (finding)"
+            "Feeling of being slowed down (finding)"
           ],
           "neutral": [
-            "Repressing thoughts (finding)",
-            "Feeling physically tense (finding)",
-            "Anxiety about collapsing (finding)"
+            "Low motivation (finding)",
+            "Increased motivation (finding)",
+            "Tends to procrastinate (finding)",
+            "Poor daily routine (finding)"
           ],
-          "contradiction": [
-            "Feeling calm (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re caught between wanting to rest and feeling guilty for taking that time, which can feel exhausting. When you step outside, what thoughts come up that make you feel guilty?",
-        "protocol_used": "validate_and_reflect",
+        "response": "What evidence do you have that you’re falling behind, and how might you measure progress in a way that feels realistic?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re caught between wanting to rest and feeling guilty for taking that time, which can feel exhausting. When you step outside, what thoughts come up that make you feel guilty?",
+            "response": "It sounds like hearing your classmates talk about their notes makes you feel anxious and pressured to keep up, and you worry you might fall behind if you don’t match their pace. It’s common to feel slowed down when we compare ourselves to others—what would a supportive friend say to you in this moment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "Feeling of being slowed down (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling physically tense (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts about others managing more",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about collapsing (finding)",
-                  "label": "neutral"
+                  "concept": "anxiety",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re noticing a tension between needing rest and feeling guilty. What evidence do you have that taking a break is a waste of time, and how might that belief be affecting how you feel right now?",
+            "response": "What evidence do you have that you’re falling behind, and how might you measure progress in a way that feels realistic?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "Feeling of being slowed down",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling physically tense (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts about falling behind",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about collapsing (finding)",
-                  "label": "neutral"
+                  "concept": "classmates talking about notes",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "If a close friend were watching you, what might they say about taking a short break to breathe? That perspective might help you see that breaks can actually support your overall productivity.",
+            "response": "If a close friend were watching you, what might they say about how you’re handling this situation? It could be helpful to remember that everyone’s pace and study habits differ, so you might not be as far behind as it feels.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "Feeling of being slowed down",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about collapsing (finding)",
+                  "concept": "Low motivation",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Feeling physically tense (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling torn between wanting to rest and feeling guilty for taking that time. How do you think taking a short break might actually help you be more productive in the long run?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling guilt (finding)",
-                  "label": "entailment"
+                  "concept": "Procrastination",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling physically tense (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Anxiety about collapsing (finding)",
+                  "concept": "Poor daily routine",
                   "label": "neutral"
                 }
               ]
@@ -650,178 +591,70 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it's just that nagging feeling that I’m being lazy or that I’m wasting time. I think about all the things I should be doing instead, like work or projects that are piling up. It’s like I can’t let myself enjoy a moment without that judgment creeping in, and then it makes it even harder to actually relax.",
+        "query": "It just feels like everyone else is managing to do so much more. I see my classmates talking about their notes, and it makes me think I should be doing more too. If I don’t keep up, I feel like I’ll fall behind completely. It’s like there’s this constant race I’m not even sure I signed up for.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past experiences of not meeting expectations",
-            "feeling guilty for taking breaks",
-            "thoughts about work or projects piling up"
+            "classmates talking about their notes"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless",
-            "always one step away from proving everyone right",
-            "spirals into all the reasons why I won't measure up",
-            "I should be doing something more productive instead of taking a break",
-            "nagging feeling that I’m being lazy or wasting time"
+            "I should be doing more",
+            "If I don’t keep up, I’ll fall behind completely",
+            "There’s a constant race I’m not sure I signed up for"
           ],
           "emotions": [
-            "worried",
-            "frustrated",
-            "overwhelmed",
-            "panic",
-            "guilty",
-            "judgmental"
+            "anxiety"
           ],
-          "behaviors": [
-            "trying to focus on studying",
-            "withdrawing or avoiding situations",
-            "taking moments to breathe or step outside for fresh air",
-            "struggling to relax"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling physically tense (finding)",
-            "Feeling tense (finding)",
-            "Restlessness (finding)",
-            "Loss of interest in previously enjoyable activity (finding)",
-            "Feeling of discouragement (finding)"
+            "Feeling of being slowed down (finding)"
           ],
-          "neutral": [],
+          "neutral": [
+            "Poor daily routine (finding)",
+            "Time seems to go very slowly (finding)",
+            "Low motivation (finding)",
+            "Increased motivation (finding)"
+          ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling guilty and judged when you try to relax, and that’s a common reaction when we’re overwhelmed. If you were talking to a supportive friend, what might they say to help you feel more at ease?",
-        "protocol_used": "validate_and_reflect",
+        "response": "What evidence do you have that you will fall behind if you don’t keep up? Maybe we could explore what a realistic pace looks like for you.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling guilty and judged when you try to relax, and that’s a common reaction when we’re overwhelmed. If you were talking to a supportive friend, what might they say to help you feel more at ease?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling tense",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "restlessness",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "guilty",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "judgmental",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                }
-              ]
-            }
+            "response": "It sounds like you’re feeling anxious and pressured when you see classmates talking about their notes, and you worry that if you don’t keep up you’ll fall behind. What does “doing more” look like for you right now?",
+            "reasoning": null
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that taking a break is a waste of time, and what evidence might suggest it could actually help you be more productive?",
+            "response": "What evidence do you have that you will fall behind if you don’t keep up? Maybe we could explore what a realistic pace looks like for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling tense",
+                  "concept": "Feeling of being slowed down",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Restlessness",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Automatic thoughts of laziness",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Guilt about taking breaks",
-                  "label": "unknown"
+                  "concept": "Low motivation",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re feeling a lot of pressure and guilt when you pause; if a close friend were watching you, what might they say about taking a brief break to recharge? They might remind you that rest can actually help you be more productive later.",
+            "response": "It might help to remember that everyone’s pace is different and that you’re not alone in feeling this way. If a close friend saw you feeling like this, what might they say about how you’re handling it?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "nagging feeling of laziness",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "work or projects piling up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "feeling guilty for taking breaks",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "restlessness",
+                  "concept": "Feeling of being slowed down",
                   "label": "entailment"
                 },
                 {
-                  "concept": "physical tension",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "overwhelmed",
+                  "concept": "anxiety",
                   "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling a lot of pressure and guilt when you try to relax, and that’s understandable given how much you’re juggling. What would it look like if you allowed yourself a brief break without feeling judged?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling guilty",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "feeling tense",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "restlessness",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "judgmental",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "nagging feeling of laziness",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "work piling up",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "difficulty relaxing",
-                  "label": "unknown"
                 }
               ]
             }
@@ -833,164 +666,94 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I don't know... maybe they’d tell me I deserve a break and that it’s okay to take time for myself. But then I’d probably just brush it off, thinking they don’t really understand. I guess it’s hard to believe that I actually deserve that support when I feel so behind or unaccomplished.",
+        "query": "Yeah, it feels like everyone else is managing so much better than me. I see my classmates talking about their notes and it just makes me feel like I should be doing more. If I don't keep up, I worry I'll fall behind completely. It's like there's this race going on, and I'm not even sure I want to be in it.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past experiences of not meeting expectations",
-            "feeling guilty for taking breaks",
-            "thoughts about work or projects piling up"
+            "seeing classmates talking about their notes"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless",
-            "always one step away from proving everyone right",
-            "spirals into all the reasons why I won't measure up",
-            "I should be doing something more productive instead of taking a break",
-            "nagging feeling that I’m being lazy or wasting time",
-            "hard to believe I deserve support when I feel behind or unaccomplished"
+            "everyone else is managing better",
+            "I should be doing more",
+            "I'll fall behind completely",
+            "there's a race going on"
           ],
           "emotions": [
-            "worried",
-            "frustrated",
-            "overwhelmed",
-            "panic",
-            "guilty",
-            "judgmental"
+            "anxiety"
           ],
-          "behaviors": [
-            "trying to focus on studying",
-            "withdrawing or avoiding situations",
-            "taking moments to breathe or step outside for fresh air",
-            "struggling to relax"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling abandoned (finding)",
-            "Feeling alienated (finding)",
-            "Feeling unloved (finding)"
+            "Feeling of being slowed down (finding)",
+            "Anxiety about behavior or performance (finding)",
+            "Pressured by peers (finding)"
           ],
           "neutral": [
-            "Fear of being left alone during period of dependence (finding)"
+            "Performance anxiety (finding)",
+            "Anxiety about having a fit (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re doubting whether you truly deserve a break, especially when you feel behind and judged by yourself. If someone did offer you that support, how might you feel about it?",
+        "response": "It sounds like seeing your classmates talk about their notes makes you feel anxious and pressured, as if you’re in a race you’re not sure you want to join. What would it look like if you could step back from that comparison for a moment?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re doubting whether you truly deserve a break, especially when you feel behind and judged by yourself. If someone did offer you that support, how might you feel about it?",
+            "response": "It sounds like seeing your classmates talk about their notes makes you feel anxious and pressured, as if you’re in a race you’re not sure you want to join. What would it look like if you could step back from that comparison for a moment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling of being slowed down",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
+                  "concept": "Anxiety about behavior or performance",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling unloved",
+                  "concept": "Pressured by peers",
                   "label": "entailment"
-                },
-                {
-                  "concept": "guilt",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "judgmental",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "feeling behind or unaccomplished",
-                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that you don't deserve a break, and what evidence might suggest you do?",
+            "response": "It sounds like you’re feeling pressured. What evidence do you have that you will fall behind if you don’t keep up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling of being slowed down",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "Anxiety about performance",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Feeling unloved",
+                  "concept": "Pressured by peers",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re doubting whether others would see your need for rest. If a close friend were watching you, what might they say about taking a break?",
+            "response": "If a close friend were watching you, what might they say about how you’re handling the pressure of keeping up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling of being slowed down",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
+                  "concept": "Anxiety about behavior or performance",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling unloved",
+                  "concept": "Pressured by peers",
                   "label": "entailment"
-                },
-                {
-                  "concept": "guilt",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "unaccomplished",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re doubting whether you truly deserve a break and worried that others might not understand your need for rest. What might it feel like if you allowed yourself that support and took a moment to pause?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling behind or unaccomplished",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling undeserving",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling guilty",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "frustrated",
-                  "label": "emotions"
                 }
               ]
             }
@@ -1002,135 +765,91 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Honestly, I think I’d feel a little embarrassed or even guilty. Like, why should I get special treatment when there are so many things I haven’t finished? It’s like I want to believe I deserve it, but deep down, there’s that voice telling me I should be doing more first. It just feels so conflicted.",
+        "query": "I don’t know… Stepping back feels like it would be nice, but I guess I still feel like I need to prove something to myself. If I’m not comparing myself to them, then what am I measuring my worth against? It’s like if I didn’t have that pressure, I wouldn’t know if I’m doing okay or not. It’s hard to imagine being okay with just… being.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past experiences of not meeting expectations",
-            "feeling guilty for taking breaks",
-            "thoughts about work or projects piling up"
+            "stepping back",
+            "comparing myself to them"
           ],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless",
-            "always one step away from proving everyone right",
-            "spirals into all the reasons why I won't measure up",
-            "I should be doing something more productive instead of taking a break",
-            "nagging feeling that I’m being lazy or wasting time",
-            "hard to believe I deserve support when I feel behind or unaccomplished",
-            "I feel embarrassed or guilty about receiving special treatment when I haven't finished everything"
+            "need to prove something to myself",
+            "measuring my worth",
+            "if I didn’t have that pressure, I wouldn’t know if I’m doing okay"
           ],
           "emotions": [
-            "worried",
-            "frustrated",
-            "overwhelmed",
-            "panic",
-            "guilty",
-            "judgmental",
-            "embarrassed",
-            "conflicted"
+            "anxiety",
+            "pressure"
           ],
-          "behaviors": [
-            "trying to focus on studying",
-            "withdrawing or avoiding situations",
-            "taking moments to breathe or step outside for fresh air",
-            "struggling to relax"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling guilt (finding)",
-            "Incongruent personal expectations (finding)",
-            "Complaining of feeling unhappy (finding)",
-            "Feeling ashamed (finding)"
+            "Pressured by others (finding)",
+            "Pressured by peers (finding)",
+            "Fear of losing emotional control (finding)"
           ],
-          "neutral": [],
-          "contradiction": [
-            "Feeling excited (finding)"
-          ]
+          "neutral": [
+            "Fear of being a burden to others (finding)",
+            "Lack of pride (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of guilt and feeling conflicted about whether you deserve support, especially when you’re still juggling unfinished tasks. When that inner voice urges you to keep going, what does it specifically say to you?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like stepping back feels nice but you worry about proving something. How do you know that proving something to yourself is necessary to feel okay?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of guilt and feeling conflicted about whether you deserve support, especially when you’re still juggling unfinished tasks. When that inner voice urges you to keep going, what does it specifically say to you?",
+            "response": "Stepping back feels like a relief, yet you’re still carrying that pressure to prove yourself and measure your worth, which keeps you anxious. What might it feel like to let yourself just be, without that need to prove anything?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "Pressured by others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling ashamed (finding)",
+                  "concept": "Pressured by peers",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Incongruent personal expectations (finding)",
+                  "concept": "Fear of losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling unhappy (finding)",
-                  "label": "entailment"
+                  "concept": "triggers: stepping back, comparing myself to them",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: need to prove something to myself, measuring my worth",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: anxiety, pressure",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that you don't deserve the support, and what evidence suggests you might? It sounds like that inner voice is weighing heavily on you.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling guilt",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "incongruent personal expectations",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling ashamed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic thoughts about not deserving support",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "conflict between wanting support and feeling guilty",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you’re carrying a lot of guilt and feeling like you’re not deserving of help—what might a supportive friend say to you in this situation? Maybe we can explore what evidence supports that you do deserve support.",
+            "response": "It sounds like stepping back feels nice but you worry about proving something. How do you know that proving something to yourself is necessary to feel okay?",
             "reasoning": null
           },
-          "safety_check": {
-            "response": "It sounds like you're feeling guilty and conflicted about wanting special treatment while feeling you haven't finished everything. What do you think would help you feel more balanced about this?",
+          "alternative_perspective": {
+            "response": "Sometimes people discover that letting go of the need to prove themselves can reveal a different sense of worth. What might a trusted friend say if you let yourself just be, without comparing or proving anything?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "Pressured by others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling ashamed (finding)",
+                  "concept": "Pressured by peers",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling embarrassed (finding)",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Incongruent personal expectations (finding)",
+                  "concept": "Fear of losing emotional control",
                   "label": "entailment"
                 }
               ]
@@ -1143,155 +862,94 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Honestly, I’d feel a little embarrassed or even guilty. Like, why should I get special treatment when there are so many things I haven’t finished? I want to believe I deserve it, but deep down, there’s that voice telling me I should be doing more first. It just feels so conflicted.",
+        "query": "I don’t know… Stepping back feels nice in theory, but I feel like I need to prove something to myself. If I’m not comparing myself to others, then how do I know if I’m doing okay? It’s like without that pressure, I wouldn’t know if I’m enough. It’s hard to imagine just being okay with… just being.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past experiences of not meeting expectations",
-            "feeling guilty for taking breaks",
-            "thoughts about work or projects piling up"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless",
-            "always one step away from proving everyone right",
-            "spirals into all the reasons why I won't measure up",
-            "I should be doing something more productive instead of taking a break",
-            "nagging feeling that I’m being lazy or wasting time",
-            "hard to believe I deserve support when I feel behind or unaccomplished",
-            "I feel embarrassed or guilty about receiving special treatment when I haven't finished everything",
-            "there's a voice telling me I should be doing more first"
+            "I need to prove something to myself",
+            "I won't know if I'm doing okay without comparison",
+            "Without pressure, I wouldn't know if I'm enough"
           ],
           "emotions": [
-            "worried",
-            "frustrated",
-            "overwhelmed",
-            "panic",
-            "guilty",
-            "judgmental",
-            "embarrassed",
-            "conflicted"
+            "anxiety",
+            "uncertainty"
           ],
           "behaviors": [
-            "trying to focus on studying",
-            "withdrawing or avoiding situations",
-            "taking moments to breathe or step outside for fresh air",
-            "struggling to relax"
+            "stepping back"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling guilt (finding)",
-            "Incongruent personal expectations (finding)",
-            "Complaining of feeling unhappy (finding)",
-            "Feeling of discouragement (finding)"
+            "Fear of being a burden to others (finding)",
+            "Fear of losing emotional control (finding)"
           ],
-          "neutral": [],
-          "contradiction": [
-            "Feeling excited (finding)"
-          ]
+          "neutral": [
+            "Moderate ego strength (finding)",
+            "Finding of self-control (finding)",
+            "Anxiety about appearing ridiculous (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling both guilty and embarrassed about asking for help, even though you recognize you deserve support. How do you think you might feel if you allowed yourself to accept that help without judgment?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like stepping back feels appealing, but you’re unsure if it’s enough. What would it look like if you could step back and still feel you’re doing okay without comparison?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling both guilty and embarrassed about asking for help, even though you recognize you deserve support. How do you think you might feel if you allowed yourself to accept that help without judgment?",
+            "response": "It sounds like stepping back feels appealing, but you’re still worried about proving yourself and feeling enough, which can be a source of anxiety. What does that pressure feel like when you’re taking a step back?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of discouragement (finding)",
+                  "concept": "fear of losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Incongruent personal expectations (finding)",
-                  "label": "entailment"
+                  "concept": "automatic thoughts about proving oneself and needing comparison",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Emotions: guilty, embarrassed, conflicted",
+                  "concept": "emotions of anxiety and uncertainty",
                   "label": "emotions"
+                },
+                {
+                  "concept": "behavior of stepping back",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re weighing a lot of expectations. What evidence do you have that taking a break means you’re not deserving of support?",
+            "response": "It sounds like stepping back feels appealing, but you’re unsure if it’s enough. What would it look like if you could step back and still feel you’re doing okay without comparison?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling guilt (finding)",
+                  "concept": "fear of being a burden",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Incongruent personal expectations (finding)",
+                  "concept": "fear of losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts: need to prove something, comparison, pressure",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re carrying a lot of guilt about needing support. If a close friend were in your shoes, what might they say about giving yourself a break?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling guilt (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Incongruent personal expectations (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic thoughts about deserving support",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "conflicted emotions",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling guilty and conflicted about receiving support. What would it feel like to give yourself permission to take a break?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling guilt (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of conflict",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "User schema: guilt, conflict, voice telling to do more",
-                  "label": "unknown"
-                }
-              ]
-            }
+            "response": "A supportive friend might see stepping back as a chance to notice your own progress, not just a comparison. What would they say about your need to prove yourself?",
+            "reasoning": null
           }
         }
       }
@@ -1300,150 +958,82 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "That’s a tough one. I think, on one hand, I’d feel a bit of relief, like maybe I could finally breathe a little easier. But then there's this other part that worries I’d feel weak or like I couldn’t handle things on my own. It’s so confusing because I know everyone needs help sometimes, but it just feels differently for me.",
+        "query": "Yeah, that’s a good question. Maybe it would mean just focusing on what I enjoy and finding my own pace. I guess I’d feel more at ease, but I still wonder if I’d just end up feeling lost or like I’m wasting time. It’s hard to picture myself being okay without that constant measure of success.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day",
-            "past experiences of not meeting expectations",
-            "feeling guilty for taking breaks",
-            "thoughts about work or projects piling up"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "worried about exams and tests",
-            "if I don't do well, it'll confirm I'm not good enough",
-            "thoughts that make it feel pointless",
-            "always one step away from proving everyone right",
-            "spirals into all the reasons why I won't measure up",
-            "I should be doing something more productive instead of taking a break",
-            "nagging feeling that I’m being lazy or wasting time",
-            "hard to believe I deserve support when I feel behind or unaccomplished",
-            "I feel embarrassed or guilty about receiving special treatment when I haven't finished everything",
-            "there's a voice telling me I should be doing more first",
-            "worry that needing help means I'm weak or can't handle things on my own"
+            "I might feel lost",
+            "I might be wasting time",
+            "I can't be okay without success"
           ],
           "emotions": [
-            "worried",
-            "frustrated",
-            "overwhelmed",
-            "panic",
-            "guilty",
-            "judgmental",
-            "embarrassed",
-            "conflicted",
-            "relief"
+            "anxiety",
+            "unease"
           ],
-          "behaviors": [
-            "trying to focus on studying",
-            "withdrawing or avoiding situations",
-            "taking moments to breathe or step outside for fresh air",
-            "struggling to relax"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Distress (finding)"
+            "Maintained capacity for enjoyment (finding)"
           ],
           "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Feeling relief (finding)",
-            "Thoughts about dying (finding)",
-            "Anxiety about dying (finding)"
+            "Loss of interest in previously enjoyable activity (finding)",
+            "Finding of enjoyment of life (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Loss of capacity for enjoyment (finding)",
+            "Minimal outside social stimulation (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re noticing both a sense of relief and a worry about appearing weak—both are common when we reach for support. How does that feeling of weakness show up for you right now?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you’re worried that focusing on enjoyment might leave you feeling directionless. What evidence do you have that this shift will inevitably lead to feeling lost or wasting time?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re noticing both a sense of relief and a worry about appearing weak—both are common when we reach for support. How does that feeling of weakness show up for you right now?",
+            "response": "It sounds like you’re hoping to slow down and focus on what you enjoy, yet you’re still worried you might feel lost or waste time, and you feel success is a constant measure of being okay. What might it feel like to let yourself enjoy something without that success check?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Distress (finding)",
+                  "concept": "Maintained capacity for enjoyment (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about collapsing (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts: I might feel lost, I might be wasting time, I can't be okay without success",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Feeling relief (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Thoughts about dying (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Anxiety about dying (finding)",
-                  "label": "neutral"
+                  "concept": "emotions: anxiety, unease",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that needing help means you’re weak? How might that differ from how others view asking for support?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Distress (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about collapsing (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Thoughts about dying (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Anxiety about dying (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
+            "response": "It sounds like you’re worried that focusing on enjoyment might leave you feeling directionless. What evidence do you have that this shift will inevitably lead to feeling lost or wasting time?",
+            "reasoning": null
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re torn between relief and feeling vulnerable. If a close friend were watching, what might they say about how you’re handling this?",
+            "response": "It sounds like you’re worried about feeling lost or wasting time, yet you also see that focusing on enjoyment could bring ease. If a close friend were watching you try this new pace, what might they say about how you’re handling the idea of not needing constant success?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Distress (finding)",
+                  "concept": "Maintained capacity for enjoyment (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling relief (finding)",
-                  "label": "neutral"
+                  "concept": "I might feel lost",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Anxiety about dying (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you're feeling both relief and worry about feeling weak. What does feeling weak mean to you in this situation?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Distress (finding)",
-                  "label": "entailment"
+                  "concept": "I might be wasting time",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "relief",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "feeling weak",
-                  "label": "unknown"
+                  "concept": "I can't be okay without success",
+                  "label": "automatic_thoughts"
                 }
               ]
             }

@@ -21,21 +21,26 @@
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents"
+            "finding a job",
+            "graduation",
+            "parents' support",
+            "living in the same town as parents"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money."
+            "I don't know what I want to do",
+            "business may not be for me",
+            "I feel like I don't have a purpose",
+            "I'm just living off my parents' money"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss"
+            "helpless",
+            "hopeless",
+            "lost"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding job search",
+            "relying on parents' money"
+          ]
         },
         "retrieval": {
           "entailment": [
@@ -52,81 +57,106 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "You seem to be feeling quite lost and unsure about your future, especially regarding your career. It's understandable to feel that way when you're not certain about your path. Let's explore some options together and see if we can find a direction that feels more meaningful for you.",
-        "protocol_used": "validate_and_reflect",
+        "response": "Have you ever considered asking a friend or family member for their thoughts on your situation? It might help you see things from a different perspective.",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "You seem to be feeling quite lost and unsure about your future, especially regarding your career. It's understandable to feel that way when you're not certain about your path. Let's explore some options together and see if we can find a direction that feels more meaningful for you.",
+            "response": "You seem to be feeling lost and unsure about your future, especially regarding finding a job and figuring out what you truly want. It's understandable to feel this way after graduation, and it's okay not to have everything figured out right away. Let's explore these feelings together and see if we can find some clarity.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling hopeless (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Living in the same town as parents",
+                  "concept": "finding a job",
                   "label": "triggers"
                 },
                 {
-                  "concept": "I don't know what I want to do anymore.",
+                  "concept": "graduation",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "parents' support",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "living in the same town as parents",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I don't know what I want to do",
                   "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "helpless",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopeless",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "lost",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What are some things you've enjoyed or found meaningful in your life so far? And how might those passions or interests help guide your career choices and sense of purpose?",
+            "response": "What are some things you enjoyed or found interesting during your studies that could help guide your career search?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling hopeless (finding)",
-                  "label": "entailment"
+                  "concept": "finding a job",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Loss of hope for the future (finding)",
-                  "label": "entailment"
+                  "concept": "graduation",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "parents' support",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "living in the same town as parents",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I don't know what I want to do",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I feel like I don't have a purpose",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "What if your friend were in your shoes? What would they say about finding a job and feeling like you don't have a purpose?",
+            "response": "Have you ever considered asking a friend or family member for their thoughts on your situation? It might help you see things from a different perspective.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Finding a job",
+                  "concept": "finding a job",
                   "label": "triggers"
                 },
                 {
-                  "concept": "Graduation",
+                  "concept": "graduation",
                   "label": "triggers"
                 },
                 {
-                  "concept": "Living in the same town as parents",
+                  "concept": "parents' support",
                   "label": "triggers"
                 },
                 {
-                  "concept": "I don't know what I want to do anymore.",
+                  "concept": "living in the same town as parents",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I don't know what I want to do",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "My purpose is just to live off my parents' money.",
+                  "concept": "I feel like I don't have a purpose",
                   "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you're going through a tough time figuring out your path and purpose. Let's take it one step at a time, shall we? Can you tell me more about what you mean by \"living off your parents' money\"?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling helpless (finding)",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Loss of hope for the future (finding)",
-                  "label": "entailment"
                 }
               ]
             }
@@ -138,120 +168,77 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I do feel a bit lost. It's just… I thought I’d be further along by now, you know? Sometimes I just stare at job listings and feel overwhelmed, like nothing really fits or speaks to me. It makes me doubt if I’m even on the right track.",
+        "query": "I guess I have thought about it, but I’m not sure. I mean, it’s tricky. I don’t want to burden anyone with my issues or feel like I’m relying too much on them. Sometimes, I just feel like it’s better to keep things to myself.",
         "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Staring at job listings"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "I thought I’d be further along by now.",
-            "Nothing really fits or speaks to me.",
-            "I doubt if I’m even on the right track."
+            "I don't want to burden anyone with my issues",
+            "I might be relying too much on them",
+            "It's better to keep things to myself"
           ],
-          "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling lost (finding)",
-            "Getting lost (finding)",
-            "Feeling hopeless (finding)",
-            "Feeling empty (finding)",
-            "Feeling trapped (finding)"
+            "Fear of being a burden to others (finding)",
+            "Preoccupied with emotional problems (finding)"
           ],
-          "neutral": [],
+          "neutral": [
+            "Fear of not coping with treatment (finding)",
+            "Fear of writing in public (finding)",
+            "Fear of medical treatment (finding)"
+          ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It's understandable to feel overwhelmed sometimes, especially when you're trying to find the right path. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, getting another perspective can help us see things more clearly.\"",
-        "protocol_used": "alternative_perspective",
+        "response": "\"It sounds like you're dealing with some complex feelings about sharing your thoughts and emotions. It's understandable to feel that way, but remember it's okay to ask for support when needed. Let's explore together if there are ways to express yourself without feeling like a burden.\"",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can understand why you might feel that way, it's a common feeling when we're unsure about our path. Let's take some time to explore these feelings and see if we can find a way forward together.",
+            "response": "\"It sounds like you're dealing with some complex feelings about sharing your thoughts and emotions. It's understandable to feel that way, but remember it's okay to ask for support when needed. Let's explore together if there are ways to express yourself without feeling like a burden.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Getting lost",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling hopeless",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
+                  "concept": "Preoccupied with emotional problems",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What are some things that make you feel like you're on the right track, even if it doesn't seem like it at first glance?",
+            "response": "\"It sounds like you're concerned about not wanting to burden others and relying too much on them. Let's explore together if there are other ways to cope that might make you feel more comfortable.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Getting lost",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling hopeless",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling empty",
+                  "concept": "Preoccupied with emotional problems",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable to feel overwhelmed sometimes, especially when you're trying to find the right path. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, getting another perspective can help us see things more clearly.\"",
+            "response": "\"It sounds like you're worried about burdening others and relying too much on them. Have you ever considered what a trusted friend might think about sharing your feelings? It could help us explore alternative perspectives together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Overwhelmed",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're feeling this way, but I'm here to help. Can we take a moment to talk about how you're feeling and see if we can find some ways to make things feel a bit more manageable?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling lost",
+                  "concept": "Preoccupied with emotional problems",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Overwhelmed",
-                  "label": "emotions"
                 }
               ]
             }
@@ -263,109 +250,86 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I feel really lost right now. I thought I’d be doing better in my career by this point, but it just feels like I’m stuck. When I look at job listings, it’s overwhelming, and I start to doubt if I’m even meant to be in this field. I can’t shake the feeling that something's off.",
+        "query": "Yeah, I get that. I just worry that if I open up, people might see me differently, or maybe think I’m weak. I mean, it feels like everyone else has it all figured out, and I’m just... struggling to keep up.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Staring at job listings"
+            "opening up to people",
+            "seeing others succeed"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "I thought I’d be further along by now.",
-            "Nothing really fits or speaks to me.",
-            "I doubt if I’m even on the right track.",
-            "I feel really lost right now.",
-            "It just feels like I’m stuck.",
-            "I start to doubt if I’m even meant to be in this field.",
-            "I can’t shake the feeling that something's off."
+            "people might see me differently",
+            "people might think I’m weak",
+            "everyone else has it all figured out",
+            "I’m just struggling to keep up"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed"
+            "worry",
+            "fear",
+            "shame"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling lost (finding)",
-            "Feeling hopeless (finding)",
-            "Feeling trapped (finding)",
-            "Feeling a failure (finding)"
+            "Fear of saying the wrong thing (finding)",
+            "Fear of being a burden to others (finding)",
+            "Vulnerable personality (finding)"
           ],
           "neutral": [
-            "Loss of hope for the future (finding)"
+            "Anxiety about saying the wrong thing (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Introvert (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand how you feel, it can be overwhelming when things don't go as planned. Let's take a moment to explore what's causing this feeling of being stuck and see if we can find some ways to move forward together.",
+        "response": "It's completely normal to feel this way sometimes. Vulnerability can be scary, but it's also a sign of strength. Remember, everyone has their own battles and struggles, even if they don't always show it on the surface. Sharing your feelings with trusted friends or a mental health professional can help lighten the load and bring you closer to others.\n\nAlso, try not to compare yourself to others. Comparison often leads to feelings of inadequacy. Instead, focus on your own progress and celebrate your small victories. Remember, it's okay to ask for help when you need it. You don't have to carry the weight of the world on your shoulders alone.\n\nLastly, remember that being open about your struggles can inspire others to do the same and create a supportive community. So, take one step at a time, and know that it's okay to ask for help when you need it. You are stronger than you think.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how you feel, it can be overwhelming when things don't go as planned. Let's take a moment to explore what's causing this feeling of being stuck and see if we can find some ways to move forward together.",
+            "response": "I understand that you might be feeling a bit vulnerable about opening up to people. It's common to worry about how others perceive us, but remember, it takes courage to share our feelings. Let's work together on building your confidence and exploring ways to manage these concerns.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost (finding)",
+                  "concept": "Fear of saying the wrong thing (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Overwhelmed (emotion)",
-                  "label": "emotions"
+                  "concept": "Vulnerable personality (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What are some specific job listings you find overwhelming? Let's explore why they make you feel that way and if there might be other options that better suit your interests.",
+            "response": "\"It sounds like you're concerned about how others might perceive you if you open up. Have you ever considered that sharing your feelings could also bring you closer to people, rather than pushing them away?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost (finding)",
+                  "concept": "Fear of saying the wrong thing",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Overwhelmed (emotion)",
-                  "label": "emotions"
+                  "concept": "Vulnerable personality",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite stuck right now, and it can be overwhelming when looking at job listings. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
+            "response": "\"It's understandable to feel that way sometimes, but remember, everyone has their own struggles. You're not alone in this. Let's explore what a trusted friend or family member might think about you opening up.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling lost (finding)",
-                  "label": "entailment"
+                  "concept": "people might see me differently",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Feeling trapped (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I understand you feel lost and stuck right now, which can be overwhelming. Let's explore these feelings together and see if we can find a way to move forward that feels more meaningful for you.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling lost (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling trapped (finding)",
-                  "label": "entailment"
+                  "concept": "everyone else has it all figured out",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -377,113 +341,82 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Thanks for understanding. I guess I just feel like I’m not really excited about anything anymore. I used to have this vision of where I wanted to go, but now everything seems too far away, and I’m not sure how to get there. It’s frustrating because I want to feel motivated again, but it’s like I’m just treading water.",
+        "query": "I appreciate that, but it’s hard not to compare myself. I see people moving forward in their careers, and I just feel... stuck. Like, what am I doing wrong? Sometimes I think if I just pushed harder or was more assertive, things would change, but when I try, it just doesn't seem to work out. It’s frustrating.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Staring at job listings"
+            "seeing people moving forward in their careers"
           ],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "I thought I’d be further along by now.",
-            "Nothing really fits or speaks to me.",
-            "I doubt if I’m even on the right track.",
-            "I feel really lost right now.",
-            "It just feels like I’m stuck.",
-            "I start to doubt if I’m even meant to be in this field.",
-            "I can’t shake the feeling that something's off.",
-            "I’m not really excited about anything anymore.",
-            "Everything seems too far away, and I’m not sure how to get there.",
-            "I want to feel motivated again, but it’s like I’m just treading water."
+            "I am doing something wrong",
+            "if I pushed harder, things would change",
+            "when I try, it doesn't work out"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Frustrated"
+            "stuck",
+            "frustration"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Loss of motivation (finding)",
-            "Loss of interest in previously enjoyable activity (finding)",
-            "Feeling of discouragement (finding)"
+            "Incongruent personal expectations (finding)"
           ],
           "neutral": [
-            "Low motivation (finding)",
-            "Loss of hope for the future (finding)"
+            "Personal motivation (finding)",
+            "Hopeful for the future (finding)",
+            "Personality change (finding)",
+            "Personality trait typical of long term functioning (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry that you're feeling this way, but I'm unable to provide the help that you need. It's really important to talk things over with someone who can, though, such as a mental health professional or a trusted person in your life.\n\nRemember, it's okay not to feel okay all the time, and seeking help is a sign of strength. If you're struggling to find someone to talk to, there are many resources available online and hotlines that can offer support. Here are a few:\n\n* Crisis Text Line (USA): Text HOME to 741741\n* Samaritans (UK): Call 116 123 or email jo@samaritans.org\n* Lifeline Australia: Call 13 11 14\n* Crisis Services Canada: Call 1-833-456-4566 or text 45645\n\nI hope you find the help and support that you need. Take care.",
-        "protocol_used": "socratic_questioning",
+        "response": "I understand that you're feeling stuck and frustrated, especially when you see others progressing in their careers. It's natural to compare ourselves to others, but it can be challenging. Let's explore together what might be holding you back and how we can work on finding a solution that feels right for you.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've lost some of the excitement and motivation you once had. Let's work together to understand what might be causing these feelings, and explore ways to help you regain that spark.",
+            "response": "I understand that you're feeling stuck and frustrated, especially when you see others progressing in their careers. It's natural to compare ourselves to others, but it can be challenging. Let's explore together what might be holding you back and how we can work on finding a solution that feels right for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Loss of motivation (finding)",
+                  "concept": "Incongruent personal expectations (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
+                  "concept": "Personal motivation (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling a bit lost and discouraged right now, which is understandable. Can we explore what might be getting in the way of your motivation? Perhaps we can identify some small steps that could help you feel more excited about moving forward?\"",
+            "response": "I understand that you're feeling stuck and frustrated, especially when you see others advancing in their careers. It's natural to compare ourselves to others, but it can sometimes lead us to question our own abilities. Let's explore what might be holding you back and discuss some strategies for moving forward.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Loss of motivation",
+                  "concept": "Incongruent personal expectations (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of discouragement",
-                  "label": "entailment"
+                  "concept": "Personal motivation (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling a bit stuck and discouraged. Have you ever thought about what might be keeping you from feeling motivated again? Or perhaps, if there's something that could help you feel more excited about your future?\"",
+            "response": "I understand that you're feeling stuck and frustrated, especially when you see others advancing in their careers. It's natural to feel this way, but it's important to remember that everyone has their own pace. Let's explore what a trusted friend or family member might say about your situation. What do you think they would tell you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Loss of motivation (finding)",
+                  "concept": "Incongruent personal expectations (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've lost some of your excitement and motivation. Let's work together to find ways to reignite that spark. Can we start by exploring what might be getting in the way?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Loss of motivation (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
+                  "concept": "Personal motivation (finding)",
+                  "label": "neutral"
                 }
               ]
             }
@@ -495,134 +428,86 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I appreciate you saying that. It’s just hard to imagine picking up the phone and reaching out to someone. I keep thinking that I should be able to handle this myself, but it just feels heavier every day. I want to be proactive, but I keep getting stuck in this cycle of doubt and confusion.",
+        "query": "That sounds good, but I don’t always know what’s really holding me back. Maybe it’s just this fear of failing or not being good enough. It’s like this voice in my head tells me I’ll never measure up. It makes it hard to even think about taking risks or trying something new.",
         "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Staring at job listings",
-            "Thinking about reaching out for help"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "I thought I’d be further along by now.",
-            "Nothing really fits or speaks to me.",
-            "I doubt if I’m even on the right track.",
-            "I feel really lost right now.",
-            "It just feels like I’m stuck.",
-            "I start to doubt if I’m even meant to be in this field.",
-            "I can’t shake the feeling that something's off.",
-            "I’m not really excited about anything anymore.",
-            "Everything seems too far away, and I’m not sure how to get there.",
-            "I want to feel motivated again, but it’s like I’m just treading water.",
-            "I should be able to handle this myself.",
-            "It feels heavier every day.",
-            "I keep getting stuck in this cycle of doubt and confusion."
+            "fear of failing",
+            "not being good enough",
+            "I'll never measure up"
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Frustrated",
-            "Confused"
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding risks",
+            "not trying something new"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Working through the pain of grief (finding)",
-            "Feeling abandoned (finding)"
+          "entailment": [
+            "Fear of going out (finding)",
+            "Anxiety about behavior or performance (finding)"
           ],
-          "contradiction": [
-            "Ready for enhanced family coping (finding)",
-            "Ready for enhanced community coping (finding)"
-          ]
+          "neutral": [
+            "Personal motivation (finding)",
+            "Low self-control (finding)",
+            "Increased motivation (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that reaching out for help can feel challenging, but it's a sign of strength. Let's explore together why you think you should handle things on your own and how this cycle of doubt and confusion is affecting you.",
-        "protocol_used": "socratic_questioning",
+        "response": "What if we explored the possibility that you have more potential than this voice in your head suggests? Could there be other ways to look at this situation that might help you feel less held back?",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that reaching out for help can feel difficult, but it's a sign of strength. You mentioned feeling stuck in a cycle of doubt and confusion. Let's explore these feelings together and find ways to break free from this cycle.",
+            "response": "I understand that you're struggling with these thoughts about not measuring up and fear of failure. It can be overwhelming, but remember it's okay to have those feelings. Let's work together to explore where they come from and find ways to manage them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "fear of failing",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "not being good enough",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that reaching out for help can feel challenging, but it's a sign of strength. Let's explore together why you think you should handle things on your own and how this cycle of doubt and confusion is affecting you.",
+            "response": "What evidence do you have that this fear is stopping you from doing what you want? Let's explore it together.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "fear of failing",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "not being good enough",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable to feel that way, especially when you're dealing with so much. Have you ever considered what a trusted friend or family member might suggest about reaching out for help? It could provide a fresh perspective and help break the cycle of doubt.\"",
+            "response": "What if we explored the possibility that you have more potential than this voice in your head suggests? Could there be other ways to look at this situation that might help you feel less held back?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "fear of failing",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how difficult it might feel to reach out for help, but remember that asking for support is a sign of strength. Let's explore together what might be keeping you from taking that step and find ways to move forward.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Helpless",
-                  "label": "emotions"
+                  "concept": "not being good enough",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Hopeless",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "At a loss",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Frustrated",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Confused",
-                  "label": "emotions"
+                  "concept": "I'll never measure up",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -634,122 +519,80 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I guess I just have this feeling that asking for help means I’m not strong enough or capable enough. Like, shouldn't I have figured things out by now? It’s hard to admit I’m struggling, especially when I see others seemingly moving forward. I really want to break out of this cycle, but I’m scared of what that even looks like.",
+        "query": "I guess that could be nice to think about, but it feels kind of scary, too. Like, what if I believe that and still don’t see any change? I mean, it’s hard to let go of that voice when it feels so... real, you know? It’s just there all the time, reminding me of my doubts.",
         "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [
-            "Finding a job",
-            "Graduation",
-            "Living in the same town as parents",
-            "Staring at job listings",
-            "Thinking about reaching out for help"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I don't know what I want to do anymore.",
-            "I feel like I don't have a purpose.",
-            "My purpose is just to live off my parents' money.",
-            "I thought I’d be further along by now.",
-            "Nothing really fits or speaks to me.",
-            "I doubt if I’m even on the right track.",
-            "I feel really lost right now.",
-            "It just feels like I’m stuck.",
-            "I start to doubt if I’m even meant to be in this field.",
-            "I can’t shake the feeling that something's off.",
-            "I’m not really excited about anything anymore.",
-            "Everything seems too far away, and I’m not sure how to get there.",
-            "I want to feel motivated again, but it’s like I’m just treading water.",
-            "I should be able to handle this myself.",
-            "It feels heavier every day.",
-            "I keep getting stuck in this cycle of doubt and confusion.",
-            "Asking for help means I’m not strong enough or capable enough.",
-            "I should have figured things out by now.",
-            "It's hard to admit I'm struggling."
+            "What if I believe that and still don’t see any change?",
+            "It's hard to let go of that voice when it feels so real.",
+            "It's just there all the time, reminding me of my doubts."
           ],
           "emotions": [
-            "Helpless",
-            "Hopeless",
-            "At a loss",
-            "Overwhelmed",
-            "Frustrated",
-            "Confused",
-            "Scared"
+            "scary",
+            "doubt"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Fear of not coping with treatment (finding)"
+            "Ability to resist thoughts (observable entity)",
+            "Ability to resist dangerous thoughts (observable entity)",
+            "Reappearance of old thoughts (finding)"
           ],
           "neutral": [
-            "Anxiety about forced dependence (finding)",
-            "Feeling trapped (finding)",
-            "Difficulty in thinking independently (finding)"
+            "Thoughts about dying (finding)",
+            "Ability to resist obsessional thoughts (observable entity)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It's understandable to feel like asking for help might mean you're not strong enough. But remember, everyone needs support at times. Let's explore what might happen if you did reach out for help and how it could help you break this cycle.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I understand that it can feel scary and overwhelming to question these thoughts, especially when they seem so real. It's important to remember that you're not alone in this process, and we'll work together to find ways to manage them more effectively. Let's start by exploring what makes these thoughts particularly challenging for you.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how you might feel that way, it's common to worry about appearing weak or vulnerable. But remember, asking for help is a sign of strength and courage, not weakness. Let's explore together what might be holding you back from reaching out.",
+            "response": "I understand that it can feel scary and overwhelming to question these thoughts, especially when they seem so real. It's important to remember that you're not alone in this process, and we'll work together to find ways to manage them more effectively. Let's start by exploring what makes these thoughts particularly challenging for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "scary",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Difficulty in thinking independently",
-                  "label": "neutral"
+                  "concept": "doubt",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It's understandable to feel like asking for help might mean you're not strong enough. But remember, everyone needs support at times. Let's explore what might happen if you did reach out for help and how it could help you break this cycle.\"",
+            "response": "It's understandable that you might feel a bit scared. Let's explore together what evidence suggests that change won't happen, and if there are any alternative ways to approach this voice in your mind.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
+                  "concept": "Ability to resist thoughts (observable entity)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty in thinking independently",
-                  "label": "neutral"
+                  "concept": "Reappearance of old thoughts (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand how you might feel that way, but it takes courage to ask for help. It doesn't mean you're weak or incapable. In fact, it shows strength and determination. Let's explore what a trusted friend might say about your situation, and we can work together to find a way out of this cycle.\"",
+            "response": "\"It's understandable that you might feel a bit scared about exploring new perspectives, but remember, it's okay to have doubts. Let's work together to find ways to manage those feelings and see if we can make some progress.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Difficulty in thinking independently",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really glad you reached out today. It takes courage to admit when we're struggling, and it doesn't mean you're weak or incapable. Let's explore together why asking for help might feel difficult for you, and find ways to reframe that thought.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Difficulty in thinking independently (finding)",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -761,83 +604,80 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I guess I just feel like asking for help means I’m not strong enough or capable. Shouldn’t I have figured things out by now? It’s tough to admit I’m struggling, especially when I see others moving forward. I want to break out of this cycle, but I’m scared of what that even looks like.",
+        "query": "I guess that could be nice, but it feels scary, too. What if I believe that and still don’t see any change? It’s hard to let go of that voice when it feels so real, you know? It’s just there all the time, reminding me of my doubts.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "Asking for help means I’m not strong enough or capable enough.",
-            "Shouldn’t I have figured things out by now?",
-            "It’s tough to admit I’m struggling, especially when I see others moving forward.",
-            "I want to break out of this cycle, but I’m scared of what that even looks like."
+            "What if I believe that and still don’t see any change?",
+            "It’s hard to let go of that voice when it feels so real.",
+            "It’s just there all the time, reminding me of my doubts."
           ],
           "emotions": [
-            "Scared"
+            "scary",
+            "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of not coping with treatment (finding)",
-            "Fear of being a burden to others (finding)",
-            "Fear of being left alone during period of dependence (finding)"
+            "Ability to resist thoughts (observable entity)",
+            "Ability to resist dangerous thoughts (observable entity)",
+            "Reappearance of old thoughts (finding)",
+            "Able to resist dangerous thoughts (finding)"
           ],
           "neutral": [
-            "Anxiety about forced dependence (finding)",
-            "Anxiety about treatment (finding)"
+            "Delusion of control of voice (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It's understandable to feel that way sometimes, but let's explore these thoughts together. What makes you think asking for help means you're not strong enough? And what would it mean if you did ask for help?\"",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It sounds like you're having a hard time letting go of those thoughts, even though they're causing you distress. Let's explore together if there might be other ways to interpret the situation that could help reduce your fear.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're struggling with feelings of inadequacy and fear when asking for help. It's important to remember that everyone needs support at times, and it takes strength to reach out. Let's explore these thoughts together.\"",
+            "response": "I understand that you're feeling scared and it's hard to let go of those thoughts. It's completely normal to have doubts, especially when dealing with something new. Let's work together to find ways to manage these feelings and help you move forward.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It's understandable to feel that way sometimes, but let's explore these thoughts together. What makes you think asking for help means you're not strong enough? And what would it mean if you did ask for help?\"",
+            "response": "\"It sounds like you're having a tough time with those persistent thoughts and feelings. Let's explore them together, one step at a time. What evidence can you think of that supports the idea that things might change for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable to feel that way sometimes, but remember, asking for help is a sign of strength, not weakness. Many people struggle and need support at times. Let's explore what might happen if you did take that step out of the cycle.\"",
+            "response": "\"It sounds like you're having a hard time letting go of those thoughts, even though they're causing you distress. Let's explore together if there might be other ways to interpret the situation that could help reduce your fear.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I understand that it can be difficult to ask for help, especially when you feel like it might mean admitting weakness or being a burden. It's important to remember that asking for help is a sign of strength, not weakness. Let's explore together what might be holding you back from seeking the support you need.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of not coping with treatment (finding)",
-                  "label": "entailment"
                 },
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -849,102 +689,78 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I think it’s just this voice in my head that tells me I should be able to handle things on my own. It feels like asking for help would be admitting I’m failing somehow, like I’m not living up to some expectation. If I did reach out, maybe it would feel like I’m giving up, and I really don’t want to feel like that.",
+        "query": "Yeah, I see what you mean. It’s just that those thoughts have been there for so long, it feels like they’re part of me. I want to let them go, but then I start questioning everything. What if it’s all just wishful thinking? I don’t know if I can really change how I see things.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "Asking for help means I’m not strong enough or capable enough.",
-            "Shouldn’t I have figured things out by now?",
-            "It’s tough to admit I’m struggling, especially when I see others moving forward.",
-            "I want to break out of this cycle, but I’m scared of what that even looks like.",
-            "I should be able to handle things on my own.",
-            "Asking for help would be admitting I’m failing somehow.",
-            "Reaching out would feel like I’m giving up."
+            "those thoughts have been there for so long",
+            "they're part of me",
+            "what if it’s all just wishful thinking?",
+            "I don’t know if I can really change how I see things"
           ],
-          "emotions": [
-            "Scared"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Pressured by others (finding)",
-            "Fear of losing emotional control (finding)"
+            "Reappearance of old thoughts (finding)",
+            "Persistent thoughts (finding)"
           ],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Anxiety about forced dependence (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Harmful thoughts (finding)",
+            "Intrusive thoughts (finding)",
+            "Negative automatic thoughts (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you have a strong sense of self-reliance, and asking for help can feel challenging. Let's explore together what might happen if you did reach out for support.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "Have you ever considered what a trusted friend or family member might say about these thoughts? Sometimes, getting an outside perspective can help us see things differently.",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "You're absolutely right that it can feel challenging to ask for help. It's important to remember that everyone needs support sometimes, and reaching out doesn't mean you've failed or given up. Let's explore together why you might think asking for help feels like a sign of weakness.",
+            "response": "It's understandable that these thoughts have been with you for a while, and it can be challenging to let them go. However, remember that change is possible, even if it might seem difficult at first. Let's explore together how we can work on this.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Asking for help means I’m not strong enough or capable enough.",
-                  "label": "automatic_thoughts"
+                  "concept": "Reappearance of old thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I should be able to handle things on my own.",
-                  "label": "automatic_thoughts"
+                  "concept": "Persistent thoughts (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you have a strong sense of self-reliance, and asking for help can feel challenging. Let's explore together what might happen if you did reach out for support.\"",
+            "response": "Have you ever considered what evidence supports these thoughts being a part of you, rather than something that can change?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Asking for help means I’m not strong enough or capable enough.",
-                  "label": "automatic_thoughts"
+                  "concept": "Persistent thoughts",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I should be able to handle things on my own.",
-                  "label": "automatic_thoughts"
+                  "concept": "Negative automatic thoughts",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you have a strong sense of self-reliance, and asking for help can feel challenging. Let's explore together if there might be other ways to view this situation that could make it easier for you to ask for support when needed.\"",
+            "response": "Have you ever considered what a trusted friend or family member might say about these thoughts? Sometimes, getting an outside perspective can help us see things differently.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Asking for help means I’m not strong enough or capable enough.",
-                  "label": "automatic_thoughts"
+                  "concept": "Persistent thoughts",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I should be able to handle things on my own.",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"It sounds like you're dealing with a lot, and it can be tough when we feel like asking for help means we're not strong enough. But remember, reaching out doesn't mean giving up – it means taking a step towards getting the support you need.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Asking for help means I’m not strong enough or capable enough.",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I should be able to handle things on my own.",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Reaching out would feel like I’m giving up.",
-                  "label": "automatic_thoughts"
+                  "concept": "Negative automatic thoughts",
+                  "label": "neutral"
                 }
               ]
             }
@@ -956,102 +772,101 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it does come from a place of wanting to be self-sufficient. But the idea of reaching out just makes me anxious. What if I get judged or they think I can't handle my responsibilities? I don’t know… it feels safer to just keep it all inside, even if it’s really heavy.",
+        "query": "I mean, I think about what they might say, but there’s still this fear that they won’t really understand. Sometimes, it feels easier to just keep it all inside rather than risk judgment or pity. I guess I just don’t want to burden them, or maybe I’m just afraid of how they’d respond. It’s complicated.",
         "core_issue": "career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "thinking about what they might say",
+            "risk of judgment",
+            "risk of pity",
+            "fear of how they’d respond"
+          ],
           "automatic_thoughts": [
-            "Asking for help means I’m not strong enough or capable enough.",
-            "Shouldn’t I have figured things out by now?",
-            "It’s tough to admit I’m struggling, especially when I see others moving forward.",
-            "I want to break out of this cycle, but I’m scared of what that even looks like.",
-            "I should be able to handle things on my own.",
-            "Asking for help would be admitting I’m failing somehow.",
-            "Reaching out would feel like I’m giving up.",
-            "What if I get judged or they think I can't handle my responsibilities?"
+            "they won’t really understand",
+            "it’s easier to keep it all inside",
+            "I don’t want to burden them"
           ],
           "emotions": [
-            "Scared",
-            "Anxious"
+            "fear"
           ],
           "behaviors": [
-            "Keeping feelings inside"
+            "keeping it all inside"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Fear of going out (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Not involved in managing own affairs (finding)",
-            "Fear of abandonment (finding)",
-            "Pressured by others (finding)"
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of losing emotional control (finding)",
+            "Difficulty coping with grief responses (finding)",
+            "Ability to understand own emotions (observable entity)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It's completely normal to feel anxious about reaching out and seeking help, especially when you value self-sufficiency. However, it's important to remember that everyone needs support at times, and asking for help is a sign of strength rather than weakness.\n\nHere are some steps that might help you navigate this situation:\n\n1. Identify the source of your anxiety: Understanding why you feel anxious can help you address the root cause and find ways to manage it. In your case, it seems like fear of judgment or being perceived as unable to handle responsibilities is a major concern.\n\n2. Practice self-compassion: Be kind to yourself and acknowledge that it's okay to ask for help when needed. Remember that everyone has moments where they struggle, and seeking support doesn't mean you're weak – it means you're human.\n\n3. Choose the right person to reach out to: Select someone who you trust, respect, and feel comfortable confiding in. This could be a friend, family member, or mentor who has shown understanding and empathy in the past.\n\n4. Prepare what you want to say: Write down your thoughts and feelings before reaching out. This can help you articulate your needs clearly and confidently. Remember to focus on how you're feeling rather than making assumptions about the other person's judgment or expectations.\n\n5. Reach out: Take a deep breath, and make that first step. You don't have to share everything at once – start with a simple message expressing your feelings and asking for advice or support.\n\n6. Be open to feedback: If the person you reach out to offers advice or suggestions, be open to hearing them out. Remember that their intentions are likely to help and support you, even if their advice may not align with what you expected.\n\n7. Practice self-care: Taking care of yourself is essential in managing anxiety and stress. Engage in activities that bring you joy and relaxation, such as exercise, meditation, or spending time with loved ones.\n\n8. Seek professional help if needed: If your feelings of anxiety persist or become overwhelming, consider reaching out to a mental health professional for support. They can provide guidance and tools to help you manage your emotions and navigate difficult situations.",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It sounds like you're dealing with some complex feelings about sharing your thoughts. I want to assure you that I'm here to listen and understand, not to judge or pity. Let's take this one step at a time.\"",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I can see how you might feel that way, and it's important to remember that reaching out for help doesn't mean you're weak. It takes strength to ask for what you need. Let's explore together why you think others might judge or abandon you.\"",
+            "response": "\"It sounds like you're dealing with some complex feelings about sharing your thoughts. I want to assure you that I'm here to listen and understand, not to judge or pity. Let's take this one step at a time.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "fear",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Fear of abandonment",
-                  "label": "neutral"
+                  "concept": "risk of judgment",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "risk of pity",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "keeping it all inside",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I can see how you might feel that way, but it's important to remember that reaching out for help doesn't make you a burden. In fact, it shows strength and courage. Can we explore together what might happen if you did reach out? What would be the best-case scenario?\"",
+            "response": "\"It sounds like you have some concerns about sharing your feelings with others, and that's understandable. Let's explore together why you think they might not understand or how you could feel judged or pitied. We can work on finding ways to address those fears.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Pressured by others",
+                  "concept": "emotions",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable that you might feel anxious about reaching out for help. Sometimes, we can worry about what others think or fear being judged. But remember, it takes courage to ask for support and it doesn't mean you're failing or incapable. Let's explore together if there are trusted people in your life who would understand and support you.\"",
+            "response": "\"It sounds like you're worried about how others might react. Have you ever considered what a trusted friend or family member might think if they knew everything? It could help broaden your perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "fear",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Fear of abandonment",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I can understand why you might feel anxious about reaching out for help. It's important to remember that seeking support doesn't mean you're a burden, but rather taking care of yourself. Let's explore some ways we could reach out without feeling judged or overwhelmed.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "risk of judgment",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear of abandonment",
-                  "label": "neutral"
+                  "concept": "risk of pity",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "keeping it all inside",
+                  "label": "unknown"
                 }
               ]
             }
@@ -1063,106 +878,86 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I appreciate you sharing all that, but it feels a bit overwhelming to think about all those steps. I know it’s normal to feel anxious, but it’s hard to shake off that voice telling me I should just be able to manage things. I mean, part of me wants to connect with someone, but then I just freeze up. It's frustrating because I can see the benefits of reaching out, but actually doing it feels like a huge leap for me.",
+        "query": "I appreciate that. It’s just... part of me wants to open up, but another part feels like I’ll be exposing too much of myself. It’s like I’m caught in this tug-of-war between wanting to connect and trying to protect myself. I don’t even know where to start.",
         "core_issue": "career and work-related concerns",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "Asking for help means I’m not strong enough or capable enough.",
-            "Shouldn’t I have figured things out by now?",
-            "It’s tough to admit I’m struggling, especially when I see others moving forward.",
-            "I want to break out of this cycle, but I’m scared of what that even looks like.",
-            "I should be able to handle things on my own.",
-            "Asking for help would be admitting I’m failing somehow.",
-            "Reaching out would feel like I’m giving up.",
-            "What if I get judged or they think I can't handle my responsibilities?",
-            "I should just be able to manage things."
+            "I'll be exposing too much of myself",
+            "I'm caught in a tug-of-war",
+            "I want to connect but need to protect myself",
+            "I don't even know where to start"
           ],
-          "emotions": [
-            "Scared",
-            "Anxious",
-            "Frustrated"
-          ],
-          "behaviors": [
-            "Keeping feelings inside",
-            "Freezing up when wanting to connect with someone"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about losing emotional control (finding)",
-            "Feeling isolated (finding)"
+            "Feeling alienated (finding)"
           ],
-          "neutral": [
-            "Anxiety about not coping with parenthood (finding)",
-            "Mature emotional adjustment (finding)"
-          ],
+          "neutral": [],
           "contradiction": [
-            "Ready for enhanced family coping (finding)"
+            "Social isolation (rejection) (finding)",
+            "Emotionally distant (finding)",
+            "Feeling isolated (finding)",
+            "Emotionally detached (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that it can feel overwhelming to think about all these steps, especially when you're already feeling anxious. It's important to remember that it's okay to feel this way and that reaching out for help is a sign of strength, not weakness. Let's take things one step at a time and explore how we can make connecting with someone less daunting for you.",
+        "response": "It sounds like you're dealing with some complex feelings about opening up. It's completely normal to have mixed emotions, and it's important to remember that we'll take things at your pace. Let's focus on understanding these feelings a bit more before moving forward.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that it can feel overwhelming to think about all these steps, especially when you're already feeling anxious. It's important to remember that it's okay to feel this way and that reaching out for help is a sign of strength, not weakness. Let's take things one step at a time and explore how we can make connecting with someone less daunting for you.",
+            "response": "It sounds like you're dealing with some complex feelings about opening up. It's completely normal to have mixed emotions, and it's important to remember that we'll take things at your pace. Let's focus on understanding these feelings a bit more before moving forward.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about losing emotional control (finding)",
-                  "label": "entailment"
+                  "concept": "I'll be exposing too much of myself",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Feeling isolated (finding)",
-                  "label": "entailment"
+                  "concept": "I'm caught in a tug-of-war",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I want to connect but need to protect myself",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I don't even know where to start",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It's understandable to feel anxious and overwhelmed when dealing with so many thoughts. Let's break it down a bit. When you say you freeze up, what specifically makes you hesitate about reaching out?",
+            "response": "It sounds like you're dealing with a complex mix of emotions and thoughts. Let's explore them together, one step at a time. Can we start by discussing what specifically makes you feel like you might be exposing too much?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about losing emotional control (finding)",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling isolated (finding)",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I understand that it can feel overwhelming to take the first step towards reaching out. It's important to remember that everyone experiences anxiety and self-doubt at times, especially when we're trying something new. Let's explore together what might help you feel more comfortable about connecting with someone.",
+            "response": "I understand that you're feeling torn between wanting to connect and protecting yourself. It can be challenging to navigate these feelings, but it's important to remember that everyone has moments like this. Let's explore together what might help you find a balance that feels right for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about losing emotional control (finding)",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling isolated (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I understand that it can feel overwhelming to take those steps, especially when you're dealing with such strong feelings. It's important to remember that reaching out for help is a sign of strength, not weakness. Let's explore together how we might make this process feel more manageable for you.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about losing emotional control (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling isolated (finding)",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }

@@ -21,15 +21,22 @@
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs"
+            "parents found a needle in my room",
+            "parents told me to stop doing drugs"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house"
+            "they know what I'm doing",
+            "I'm going to be kicked out of the house"
           ],
-          "emotions": [],
-          "behaviors": []
+          "emotions": [
+            "fear",
+            "shame",
+            "anxiety"
+          ],
+          "behaviors": [
+            "using heroin",
+            "hiding drugs"
+          ]
         },
         "retrieval": {
           "entailment": [
@@ -47,30 +54,15 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling caught and worried that your parents discovered your drug use and threatened to kick you out. How did that situation make you feel right now?",
+        "response": "It sounds like you’re feeling scared and ashamed that your parents found the needle and are threatening to kick you out. What was going through your mind when they discovered it?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling caught and worried that your parents discovered your drug use and threatened to kick you out. How did that situation make you feel right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Addiction (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Pressured by parents (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you’re worried about your parents’ reaction. What evidence do you have that they will actually kick you out if they find more drugs?",
+            "response": "It sounds like you’re feeling scared and ashamed that your parents found the needle and are threatening to kick you out. What was going through your mind when they discovered it?",
             "reasoning": null
           },
-          "alternative_perspective": {
-            "response": "It sounds like you’re feeling caught between your parents’ expectations and your own habits. If a close friend were watching this, what might they say about what’s happening?",
+          "socratic_questioning": {
+            "response": "It sounds like you’re worried about their reaction. What evidence do you have that they will actually kick you out if they find more drugs?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -84,8 +76,8 @@
               ]
             }
           },
-          "safety_check": {
-            "response": "That sounds like a lot of pressure and fear about what your parents might do if they find more drugs. What do you think might happen if you tried to talk to them about your drug use?",
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling a lot of pressure and fear about what your parents think. If a close friend were in your shoes, what might they say to you about the situation?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -95,18 +87,6 @@
                 {
                   "concept": "Pressured by parents (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Parents finding a needle in the room",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "Parents telling me to stop using drugs",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "If I don't stop using drugs, I will be kicked out of the house",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -118,95 +98,102 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "It makes me feel really anxious and, honestly, kind of trapped. I keep thinking about what they might do, and it just... it's hard to shake off that feeling. I feel like they won't understand, and I don't want to let them down.",
+        "query": "I just... I felt this wave of panic, you know? Like, I thought I had it all hidden, and then suddenly it was out in the open. I just... I was scared about what they would think of me, and then the shame hit me hard. It felt like everything I was trying to manage just crumbled in a moment.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs"
+            "sudden exposure of hidden feelings"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down"
+            "what will they think of me?",
+            "everything is crumbling"
           ],
           "emotions": [
-            "anxious",
-            "trapped"
+            "panic",
+            "fear",
+            "shame"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)",
-            "Anxious avoidant attachment (finding)",
-            "Fear of being left alone during period of dependence (finding)"
+            "Feeling ashamed (finding)",
+            "Feeling guilt (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about saying the wrong thing (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of writing in public (finding)",
+            "Repressing painful memories (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling really anxious and trapped, worried that your parents might find out about your drug use and that they won’t understand or that you’ll let them down. What would it help you to feel more in control of this situation?",
+        "response": "It sounds like you felt a sudden wave of panic and shame when your hidden feelings were exposed, and you worried about how others would view you. What thoughts were most prominent when you felt everything crumbled?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling really anxious and trapped, worried that your parents might find out about your drug use and that they won’t understand or that you’ll let them down. What would it help you to feel more in control of this situation?",
-            "reasoning": null
-          },
-          "socratic_questioning": {
-            "response": "It sounds like this anxiety is heavy; what evidence do you have that your parents will react in a way that makes you feel trapped?",
+            "response": "It sounds like you felt a sudden wave of panic and shame when your hidden feelings were exposed, and you worried about how others would view you. What thoughts were most prominent when you felt everything crumbled?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of losing emotional control",
+                  "concept": "Feeling ashamed",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxious avoidant attachment",
+                  "concept": "Feeling guilt",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of being left alone during dependence",
-                  "label": "unknown"
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic thoughts about parents knowing drug use",
-                  "label": "unknown"
+                  "concept": "Fear of writing in public",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions: anxious, trapped",
+                  "concept": "Repressing painful memories",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "triggers: sudden exposure of hidden feelings",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: what will they think of me?",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: panic, fear, shame",
                   "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re feeling overwhelmed. What evidence do you have that others will think negatively about you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling ashamed",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of what others think",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re feeling trapped by worries about your parents’ reaction. If a close friend were watching, what might they say about how you’re handling this?",
+            "response": "It sounds like the sudden exposure of your hidden feelings triggered panic and shame, making you feel everything was crumbling. If a close friend were watching, what might they say about how you handled that moment?",
             "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling really anxious and trapped, and that worries me. Are you having thoughts of hurting yourself or feeling like you don’t want to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "anxious",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "trapped",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear of losing emotional control",
-                  "label": "entailment"
-                }
-              ]
-            }
           }
         }
       }
@@ -215,94 +202,101 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I don’t know... maybe if I could just talk to them without feeling like I’m going to be judged? But then again, I’m scared of their reaction. It’s like I want to open up, but I feel so overwhelmed by what they might think. It just makes everything feel heavier.",
+        "query": "Yeah, it was like I couldn't escape that voice in my head saying, “They’ll see who you really are, and they won't like it.” I just felt so vulnerable, like everything I built up was just gone. It’s frustrating because I thought I was doing okay, but in that moment, I felt so exposed.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
-          "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs",
-            "Fear of being judged by parents"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down",
-            "I want to open up, but I'm scared of their reaction"
+            "They’ll see who you really are, and they won't like it.",
+            "I thought I was doing okay."
           ],
           "emotions": [
-            "anxious",
-            "trapped",
-            "overwhelmed"
+            "vulnerability",
+            "frustration",
+            "exposure"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being in a small group (finding)",
-            "Fear of speaking to people in authority (finding)"
+            "Fear of losing emotional control (finding)",
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)",
-            "Pressured by parents (finding)",
-            "Pressured by peers (finding)"
+            "Feeling ashamed (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Emotionally subdued (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling anxious and overwhelmed, worried about being judged and scared of how your parents might react. What would it feel like if you could share your thoughts with them without that fear?",
+        "response": "It sounds like you felt exposed and vulnerable when that voice came up, and it was frustrating because you thought you were doing okay. Can you tell me more about what that vulnerability felt like?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling anxious and overwhelmed, worried about being judged and scared of how your parents might react. What would it feel like if you could share your thoughts with them without that fear?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of being judged by parents",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Desire to open up but scared of reaction",
-                  "label": "unknown"
-                }
-              ]
-            }
+            "response": "It sounds like you felt exposed and vulnerable when that voice came up, and it was frustrating because you thought you were doing okay. Can you tell me more about what that vulnerability felt like?",
+            "reasoning": null
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re feeling overwhelmed by the possibility of judgment. What evidence do you have that your parents will judge you harshly if you share?",
-            "reasoning": null
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you’re feeling overwhelmed by fear of judgment, but if a trusted friend were listening, what might they say about your situation?",
+            "response": "It sounds like you’re feeling exposed. What evidence do you have that people will see you as you fear?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of being judged by parents",
-                  "label": "triggers"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "overwhelmed by potential reaction",
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling ashamed",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts: 'They’ll see who you really are, and they won't like it.'",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Automatic thoughts: 'I thought I was doing okay.'",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Emotions: vulnerability, frustration, exposure",
                   "label": "emotions"
-                },
-                {
-                  "concept": "pressure from parents",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "fear of speaking to authority",
-                  "label": "unknown"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "It sounds like you’re torn between wanting to share with your parents and fearing how they might react, which is making you feel overwhelmed and heavy.",
-            "reasoning": null
+          "alternative_perspective": {
+            "response": "If a trusted friend were watching you right now, what might they say about how you’re handling that feeling of exposure? It might help to consider that perspective.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Automatic thought: They’ll see who you really are, and they won't like it",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Emotion: vulnerability, frustration, exposure",
+                  "label": "emotions"
+                }
+              ]
+            }
           }
         }
       }
@@ -311,122 +305,89 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I think it would be a relief, but then there's this part of me that doubts it could ever go that way. What if they just don’t get it? I imagine telling them and then seeing disappointment in their faces. That’s what really keeps me stuck. It just feels easier to keep it all inside, even if it's painful.",
+        "query": "It was... overwhelming, like I was standing in front of a crowd with no clothes on. I felt this tightness in my chest, and my stomach dropped. It’s like all the insecurities just came rushing back, and I wanted to disappear. I kept thinking, “What if they really see me and judge me?” It’s so hard to shake that feeling.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs",
-            "Fear of being judged by parents"
+            "standing in front of a crowd"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down",
-            "I want to open up, but I'm scared of their reaction",
-            "What if they just don’t get it?",
-            "I imagine telling them and then seeing disappointment in their faces"
+            "What if they really see me and judge me?"
           ],
           "emotions": [
-            "anxious",
-            "trapped",
             "overwhelmed",
-            "relieved",
-            "painful"
+            "anxiety"
           ],
           "behaviors": [
-            "keeping it all inside"
+            "wanted to disappear"
           ]
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Conflicting stages of grief among family members (finding)"
+            "Anxiety about altered body image (finding)",
+            "Feels own body is unreal (finding)",
+            "Stage fright (finding)",
+            "Fear of awareness under general anesthetic (finding)"
           ],
           "contradiction": [
-            "Patient aware of carer's feelings about dying (finding)",
-            "Carer aware of patient's feelings about dying (finding)",
-            "Able to recognize own emotional pain and distress (finding)",
-            "Acceptance stage of grief (finding)"
+            "Normal grief reaction to life event (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re torn between the relief of sharing and the fear that your parents might not understand, which makes you feel stuck and prefer to keep it inside. What would help you feel more comfortable about opening up to them?",
+        "response": "It sounds like you felt exposed and anxious, as if the crowd was judging you, and that made you want to disappear. What was it about that feeling of being judged that felt most frightening to you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re torn between the relief of sharing and the fear that your parents might not understand, which makes you feel stuck and prefer to keep it inside. What would help you feel more comfortable about opening up to them?",
+            "response": "It sounds like you felt exposed and anxious, as if the crowd was judging you, and that made you want to disappear. What was it about that feeling of being judged that felt most frightening to you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts: 'What if they just don’t get it?', 'I imagine telling them and then seeing disappointment in their faces'",
-                  "label": "automatic_thoughts"
+                  "concept": "stage fright",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions: anxious, overwhelmed",
+                  "concept": "anxiety about being judged",
                   "label": "emotions"
-                },
-                {
-                  "concept": "behaviors: keeping it all inside",
-                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re worried about disappointment. What evidence do you have that they won’t understand, and how might they actually respond if you shared your feelings?",
+            "response": "What evidence do you have that people would actually judge you, and how might you test that idea?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Parents telling me to stop using drugs",
-                  "label": "triggers"
+                  "concept": "Stage fright",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Fear of being judged by parents",
-                  "label": "triggers"
+                  "concept": "Anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Automatic thoughts: They won't understand, I imagine disappointment",
+                  "concept": "Body image concerns",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "If a close friend were in your shoes, what might they say or think about opening up to your parents? It could help us consider other possibilities beyond the fear of disappointment.",
+            "response": "If a close friend were watching you, what might they notice that could help you feel less judged? They might see that you’re doing your best, and that most people are too busy with their own worries to focus on you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts: 'What if they just don’t get it?'",
-                  "label": "automatic_thoughts"
+                  "concept": "stage fright",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions: anxious, trapped, overwhelmed",
+                  "concept": "anxiety about being judged",
                   "label": "emotions"
                 },
                 {
-                  "concept": "behaviors: keeping it all inside",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling a mix of hope and fear about sharing this with your parents, and that fear of disappointment is keeping you from opening up. What do you think would happen if you did share it, even if it’s just a small step?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "fear of disappointment",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "keeping it inside",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "hope vs fear",
+                  "concept": "body image insecurity",
                   "label": "unknown"
                 }
               ]
@@ -439,146 +400,121 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I guess... maybe if I had a clearer idea of what to say or if I felt more prepared for their response. But even then, I can’t shake this feeling that it won’t go well. It’s just hard to imagine them reacting in a way that I really hope for. It’s like this hope is mixed with a lot of fear, and it’s just confusing.",
+        "query": "I guess it’s just this fear that I’m not enough, you know? Like, if they see the real me, they’ll realize I don’t measure up to whatever standard they have in their heads. It’s like I can’t shake this feeling that I’ll be rejected or ridiculed, and that thought just makes everything feel so heavy. I wish I could just brush it off, but it lingers.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
-          "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs",
-            "Fear of being judged by parents"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down",
-            "I want to open up, but I'm scared of their reaction",
-            "What if they just don’t get it?",
-            "I imagine telling them and then seeing disappointment in their faces",
-            "I can’t shake this feeling that it won’t go well",
-            "It's hard to imagine them reacting in a way that I really hope for"
+            "I'm not enough",
+            "They'll realize I don't measure up",
+            "I'll be rejected or ridiculed"
           ],
           "emotions": [
-            "anxious",
-            "trapped",
-            "overwhelmed",
-            "relieved",
-            "painful",
-            "confused",
-            "fearful"
+            "fear",
+            "anxiety"
           ],
           "behaviors": [
-            "keeping it all inside"
+            "wish I could brush it off"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling nervous (finding)"
+            "Fear of being a burden to others (finding)",
+            "Anxiety about appearing ridiculous (finding)",
+            "Social fear (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of speaking on the phone (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Fear of speaking to people in authority (finding)"
+            "Fear of being in a small group (finding)",
+            "Anxiety about altered body image (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that they will react negatively, and what evidence might suggest a different reaction?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re carrying a heavy worry that you’re not enough and that people might see you as falling short, which can feel overwhelming. When you think about that fear, what’s the most vivid image that comes to mind?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a mix of hope and fear about how your parents might react, and that uncertainty is weighing on you. What might help you feel a bit more prepared or less anxious about the conversation?",
+            "response": "It sounds like you’re carrying a heavy worry that you’re not enough and that people might see you as falling short, which can feel overwhelming. When you think about that fear, what’s the most vivid image that comes to mind?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling nervous (finding)",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
-                  "label": "neutral"
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Fear of speaking to people in authority (finding)",
-                  "label": "neutral"
+                  "concept": "Social fear",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts about parents knowing about drug use",
-                  "label": "unknown"
+                  "concept": "I'm not enough",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions: anxious, confused",
-                  "label": "emotions"
+                  "concept": "They'll realize I don't measure up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'll be rejected or ridiculed",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that they will react negatively, and what evidence might suggest a different reaction?",
+            "response": "What evidence do you have that people will see you as not enough, and can you think of a time when that didn't happen?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling nervous (finding)",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
-                  "label": "neutral"
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Fear of speaking to people in authority (finding)",
-                  "label": "neutral"
+                  "concept": "Social fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts: 'I'm not enough', 'They'll realize I don't measure up', 'I'll be rejected or ridiculed'",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re holding a lot of hope and fear at once—what might a close friend say about how your parents could react?",
+            "response": "If a close friend were watching, what might they say about how you’re feeling right now? It could help us see other ways to look at the situation.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxious",
-                  "label": "emotions"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "fear of being judged by parents",
-                  "label": "triggers"
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "hope mixed with fear",
-                  "label": "unknown"
+                  "concept": "Social fear",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "parents telling me to stop using drugs",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling a mix of hope and fear about how your parents might react. What would help you feel more prepared for that conversation?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "anxious",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fearful",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "confused",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "hope",
+                  "concept": "automatic thoughts: 'I'm not enough', 'They'll realize I don't measure up', 'I'll be rejected or ridiculed'",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "parents reaction",
+                  "concept": "emotions: fear, anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behavior: wish I could brush it off",
                   "label": "unknown"
                 }
               ]
@@ -591,149 +527,93 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I don’t know if I have concrete evidence. It’s more like my mind runs with worst-case scenarios. I remember moments when I felt judged in the past, and those stick with me. But... I guess there have been times they’ve been understanding too. It's just hard to focus on those when the fear is so loud.",
+        "query": "Yeah, it really does feel heavy. When I think about that fear, I picture myself standing in a spotlight, everyone staring at me, waiting for me to mess up. It’s like my flaws are amplified, and all I can feel is this intense pressure, like a spotlight that’s too bright. It makes me want to just shrink down and disappear.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs",
-            "Fear of being judged by parents"
+            "standing in a spotlight",
+            "everyone staring at me"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down",
-            "I want to open up, but I'm scared of their reaction",
-            "What if they just don’t get it?",
-            "I imagine telling them and then seeing disappointment in their faces",
-            "I can’t shake this feeling that it won’t go well",
-            "It's hard to imagine them reacting in a way that I really hope for",
-            "My mind runs with worst-case scenarios",
-            "I remember moments when I felt judged in the past, and those stick with me"
+            "I will mess up",
+            "my flaws are amplified"
           ],
           "emotions": [
-            "anxious",
-            "trapped",
-            "overwhelmed",
-            "relieved",
-            "painful",
-            "confused",
-            "fearful"
+            "fear",
+            "pressure"
           ],
           "behaviors": [
-            "keeping it all inside"
+            "want to shrink down",
+            "want to disappear"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of being watched (finding)"
+            "Fear of being a burden to others (finding)",
+            "Fear of becoming fat (finding)",
+            "Fear of going out (finding)"
           ],
           "neutral": [
-            "Delusion of guilt (finding)",
-            "Repression - mental defense mechanism (finding)",
-            "Social fear (finding)",
-            "Delusion of persecution (finding)"
+            "Fear of collapsing (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re carrying a lot of anxiety about how your parents might react, and that past moments of judgment feel very vivid, even though there have also been times they were supportive. When you think of those supportive moments, what was one detail that stands out to you?",
+        "response": "It sounds like the spotlight feels so intense that you feel like shrinking away, and that pressure can feel overwhelming. What does that pressure feel like for you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re carrying a lot of anxiety about how your parents might react, and that past moments of judgment feel very vivid, even though there have also been times they were supportive. When you think of those supportive moments, what was one detail that stands out to you?",
+            "response": "It sounds like the spotlight feels so intense that you feel like shrinking away, and that pressure can feel overwhelming. What does that pressure feel like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being watched (finding)",
-                  "label": "entailment"
+                  "concept": "fear of being judged",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Social fear",
-                  "label": "neutral"
+                  "concept": "intense pressure",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Past judgment experiences",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Mixed supportive memories",
+                  "concept": "desire to shrink",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re aware of both the times you’ve felt judged and the times your parents have been understanding. What evidence do you have that they might respond supportively if you shared your thoughts?",
+            "response": "What evidence do you have that you will actually mess up when everyone is watching?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of being watched (finding)",
-                  "label": "entailment"
+                  "concept": "fear of being judged",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "social fear",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "past judged moments",
+                  "concept": "automatic thoughts of failure",
                   "label": "unknown"
                 },
                 {
-                  "concept": "moments of understanding",
-                  "label": "unknown"
+                  "concept": "emotional pressure",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like the fear is loud, but you also remember times when they were understanding. What might a close friend say about how you’re feeling right now?",
+            "response": "If a close friend were watching you, what might they say about the spotlight feeling? Often, the fear of being judged is amplified, and the reality might be that most people are more focused on themselves.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being watched (finding)",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Social fear",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Past judgment",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Understanding moments",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Worst-case scenarios",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling overwhelmed by fear and past judgments, but you also notice moments when your parents have been understanding. What might help you bring those moments of understanding to the forefront when the fear feels loud?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "past judgments",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "fear of being judged by parents",
-                  "label": "triggers"
+                  "concept": "Fear of going out",
+                  "label": "entailment"
                 }
               ]
             }
@@ -745,122 +625,117 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I think about those past moments when I felt judged, and it just clings to me. It’s like my mind has this loop playing of the worst things that could happen. I know there have been understanding times, but they seem so far away when I’m caught up in the fear. It makes everything feel heavy and confusing.",
+        "query": "It... it feels like this weight on my chest, like I can't breathe properly. And then there’s this rush of anxiety, like my heart is racing, and I just want to run away. It's like I'm caught in this cycle of worrying about what others think and then feeling even worse about myself for worrying. It’s exhausting, honestly.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
-          "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs",
-            "Fear of being judged by parents"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down",
-            "I want to open up, but I'm scared of their reaction",
-            "What if they just don’t get it?",
-            "I imagine telling them and then seeing disappointment in their faces",
-            "I can’t shake this feeling that it won’t go well",
-            "It's hard to imagine them reacting in a way that I really hope for",
-            "My mind runs with worst-case scenarios",
-            "I remember moments when I felt judged in the past, and those stick with me",
-            "Those past moments when I felt judged cling to me",
-            "My mind has a loop playing of the worst things that could happen",
-            "Understanding times seem far away when I'm caught up in fear"
+            "worrying about what others think",
+            "feeling worse about myself for worrying"
           ],
           "emotions": [
-            "anxious",
-            "trapped",
-            "overwhelmed",
-            "relieved",
-            "painful",
-            "confused",
-            "fearful",
-            "heavy"
+            "anxiety",
+            "exhaustion"
           ],
           "behaviors": [
-            "keeping it all inside"
+            "wanting to run away"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)"
+            "Anxiety (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Repression - mental defense mechanism (finding)",
-            "Repressing painful memories (finding)",
-            "Delusion of guilt (finding)"
+            "Free-floating anxiety (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about breathlessness (finding)",
+            "Anticipatory anxiety (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those past moments of feeling judged keep looping in your mind, making everything feel heavy and confusing. What’s one small thing you could do right now to feel a bit lighter?",
+        "response": "It sounds like you’re carrying a heavy, tight feeling in your chest with a racing heart, and that worry about what others think is adding to the exhaustion. What small thing might help you feel a bit more grounded right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those past moments of feeling judged keep looping in your mind, making everything feel heavy and confusing. What’s one small thing you could do right now to feel a bit lighter?",
+            "response": "It sounds like you’re carrying a heavy, tight feeling in your chest with a racing heart, and that worry about what others think is adding to the exhaustion. What small thing might help you feel a bit more grounded right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of being judged by parents",
-                  "label": "triggers"
+                  "concept": "Anxiety (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about past judgment",
-                  "label": "unknown"
+                  "concept": "Free-floating anxiety (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "heavy and confusing emotions",
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "worrying about what others think",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling worse about myself for worrying",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "exhaustion",
                   "label": "emotions"
                 },
                 {
-                  "concept": "repeating worst‑case loop",
+                  "concept": "wanting to run away",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like those past moments feel very vivid and heavy. What evidence do you have that the worst‑case scenario will actually happen?",
-            "reasoning": null
-          },
-          "alternative_perspective": {
-            "response": "It sounds like those past moments feel very vivid and heavy right now. If a close friend were watching you, what might they say about how you’re handling this fear?",
+            "response": "What evidence do you have that others are judging you, and how does that evidence influence how you feel about yourself?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of losing emotional control (finding)",
+                  "concept": "Anxiety",
                   "label": "entailment"
+                },
+                {
+                  "concept": "worrying about what others think",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling worse about myself for worrying",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "It sounds like those past moments of judgment feel like a heavy loop that’s hard to break, and that’s understandably confusing and overwhelming. What would it look like if you could step back from that loop, even just for a few minutes?",
+          "alternative_perspective": {
+            "response": "If a trusted friend heard you describe this, what might they say about how you’re handling the situation? They might point out that feeling the weight and racing heart is a common response to anxiety, and that you’re not alone in this.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "worst-case scenarios",
-                  "label": "automatic_thoughts"
+                  "concept": "Anxiety (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "fear of being judged",
-                  "label": "triggers"
+                  "concept": "Free-floating anxiety (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxious",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "confusing",
-                  "label": "unknown"
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "entailment"
                 }
               ]
             }
@@ -872,143 +747,102 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I guess... I could try writing it down? Maybe just getting some of those thoughts out on paper might help. It feels a little less daunting than actually saying it out loud, but I don’t know if it’ll really make a difference. It’s just hard to imagine feeling lighter at all.",
+        "query": "I don’t know... maybe just taking a moment to breathe? I sometimes forget to do that when everything gets intense. But even just the idea of pausing feels hard, like it’s another thing I’m supposed to be good at. I guess I worry that I won’t do it right or that I’ll just end up feeling the same way again.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs",
-            "Fear of being judged by parents"
+            "intense situations",
+            "the idea of pausing"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down",
-            "I want to open up, but I'm scared of their reaction",
-            "What if they just don’t get it?",
-            "I imagine telling them and then seeing disappointment in their faces",
-            "I can’t shake this feeling that it won’t go well",
-            "It's hard to imagine them reacting in a way that I really hope for",
-            "My mind runs with worst-case scenarios",
-            "I remember moments when I felt judged in the past, and those stick with me",
-            "Those past moments when I felt judged cling to me",
-            "My mind has a loop playing of the worst things that could happen",
-            "Understanding times seem far away when I'm caught up in fear",
-            "It feels daunting to say it out loud, but writing it down might help",
-            "I don’t know if writing it down will really make a difference",
-            "It's hard to imagine feeling lighter at all"
+            "I’m supposed to be good at this",
+            "I worry that I won’t do it right",
+            "I’ll just end up feeling the same way again"
           ],
           "emotions": [
-            "anxious",
-            "trapped",
-            "overwhelmed",
-            "relieved",
-            "painful",
-            "confused",
-            "fearful",
-            "heavy"
+            "anxiety",
+            "frustration"
           ],
           "behaviors": [
-            "keeping it all inside",
-            "considering writing thoughts down"
+            "forgetting to breathe",
+            "avoiding pausing"
           ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Anxiety about altered body image (finding)",
-            "Repressing thoughts (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Poor daily routine (finding)"
+          "entailment": [
+            "Feeling physically tense (finding)",
+            "Feeling tense (finding)"
           ],
-          "contradiction": []
+          "neutral": [
+            "Anxiety about collapsing (finding)",
+            "Anxiety about fainting (finding)"
+          ],
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling hesitant but hopeful that putting your thoughts on paper might ease the pressure. What would it feel like if you actually wrote them down?",
+        "response": "It sounds like you’re feeling tense and anxious when things get intense, and you worry that pausing is another skill you need to master, which makes it feel hard. What does a pause feel like for you right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling hesitant but hopeful that putting your thoughts on paper might ease the pressure. What would it feel like if you actually wrote them down?",
+            "response": "It sounds like you’re feeling tense and anxious when things get intense, and you worry that pausing is another skill you need to master, which makes it feel hard. What does a pause feel like for you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Repressing thoughts",
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about losing emotional control",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Poor daily routine",
-                  "label": "neutral"
+                  "concept": "Feeling tense",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like writing could feel less intimidating than speaking. What might you notice about your thoughts if you wrote them down?",
+            "response": "What evidence do you have that you can’t pause successfully, and how might a brief pause change how you feel physically?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxious",
-                  "label": "emotions"
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "fear of judgment",
+                  "concept": "Anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts about being good at pausing",
                   "label": "unknown"
-                },
-                {
-                  "concept": "writing thoughts down",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling lighter",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "trapped",
-                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "If a close friend were watching you, what might they say about the idea of writing your thoughts down? It could be a gentle step toward feeling lighter.",
+            "response": "It sounds like you’re worried that pausing isn’t something you’re naturally good at, which can add to the tension you feel. If a close friend were watching you, what might they say about taking a brief pause?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxious",
-                  "label": "emotions"
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
+                  "concept": "Anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "writing thoughts down",
+                  "concept": "Automatic thoughts about being good at pausing",
                   "label": "unknown"
                 },
                 {
-                  "concept": "feeling lighter",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "fear of judgment",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling uncertain about whether writing down your thoughts will help, but it could be a useful step. What would it feel like to try writing a few thoughts for just a few minutes?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "validate_and_reflect",
+                  "concept": "Behavior of forgetting to breathe",
                   "label": "unknown"
                 }
               ]
@@ -1021,155 +855,106 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I think it might feel... like a small step in the right direction, maybe? Like I’m acknowledging what’s going on inside me, even if it doesn’t fix everything. But at the same time, I worry about what I would read back. It might just bring up more feelings, and I’m not sure I’m ready for that either.",
+        "query": "A pause? It feels... unsettling, I guess. Like, there’s this part of me that wants to just keep moving, keep distracting myself from those feelings. But when I think about actually stopping, it’s like all the worries come rushing in, and I don’t know how to handle them. It’s almost like I’m afraid of what I might find if I really sit with my thoughts for a moment.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs",
-            "Fear of being judged by parents"
+            "a pause",
+            "thinking about stopping"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down",
-            "I want to open up, but I'm scared of their reaction",
-            "What if they just don’t get it?",
-            "I imagine telling them and then seeing disappointment in their faces",
-            "I can’t shake this feeling that it won’t go well",
-            "It's hard to imagine them reacting in a way that I really hope for",
-            "My mind runs with worst-case scenarios",
-            "I remember moments when I felt judged in the past, and those stick with me",
-            "Those past moments when I felt judged cling to me",
-            "My mind has a loop playing of the worst things that could happen",
-            "Understanding times seem far away when I'm caught up in fear",
-            "It feels daunting to say it out loud, but writing it down might help",
-            "I don’t know if writing it down will really make a difference",
-            "It's hard to imagine feeling lighter at all",
-            "It might feel like a small step in the right direction, acknowledging what's going on inside me",
-            "I worry about what I would read back; it might just bring up more feelings"
+            "worries come rushing in",
+            "afraid of what I might find"
           ],
           "emotions": [
-            "anxious",
-            "trapped",
-            "overwhelmed",
-            "relieved",
-            "painful",
-            "confused",
-            "fearful",
-            "heavy"
+            "unsettling",
+            "fear"
           ],
           "behaviors": [
-            "keeping it all inside",
-            "considering writing thoughts down"
+            "keep moving",
+            "distracting myself"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Emotional adjustment (observable entity)"
+            "Repressing thoughts (finding)",
+            "Feeling tense (finding)",
+            "Momentary confabulation (finding)",
+            "Feeling physically tense (finding)"
           ],
-          "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Able to recognize own emotional pain and distress (finding)",
-            "Anxiety about resuming sexual relations (finding)",
-            "Positive self thoughts (finding)"
-          ],
-          "contradiction": []
+          "neutral": [],
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling both hopeful about taking a small step and also anxious about what you might uncover when you read your own words. What might help you feel more comfortable about that possibility?",
+        "response": "It sounds like when you pause, you feel unsettled and tense, and you’re tempted to keep moving or distract yourself to avoid those worries. What does that urge to keep moving feel like for you right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling both hopeful about taking a small step and also anxious about what you might uncover when you read your own words. What might help you feel more comfortable about that possibility?",
+            "response": "It sounds like when you pause, you feel unsettled and tense, and you’re tempted to keep moving or distract yourself to avoid those worries. What does that urge to keep moving feel like for you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about saying the wrong thing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Able to recognize own emotional pain and distress",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Emotional adjustment",
+                  "concept": "Repressing thoughts",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Writing thoughts down",
+                  "concept": "Feeling tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Momentary confabulation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: pause",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Worry about reading back",
+                  "concept": "automatic thoughts: worries rushing in",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions: unsettling, fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: keep moving, distracting",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re weighing the potential relief against the risk of more discomfort. What do you think might happen if you did write it down and then read it back?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Emotional adjustment (observable entity)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Able to recognize own emotional pain and distress (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
+            "response": "It sounds like you’re feeling unsettled when you pause. What might happen if you let yourself sit with those worries for a brief moment?",
+            "reasoning": null
           },
           "alternative_perspective": {
-            "response": "It sounds like writing could be a small step, but also a source of discomfort. If a close friend were in your shoes, what might they say about the idea of putting your thoughts on paper?",
+            "response": "If a close friend were watching you, what might they suggest about taking that pause? You might find that a brief pause could feel less scary when you think of it as a chance to notice what’s happening, rather than a threat.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Emotional adjustment (observable entity)",
+                  "concept": "Repressing thoughts (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling tense (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Able to recognize own emotional pain and distress (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling hopeful about taking a small step, but also anxious about what you might uncover when you read your thoughts. It’s understandable to feel uncertain about whether you’re ready to face those feelings.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "anxious",
-                  "label": "emotions"
+                  "concept": "Momentary confabulation (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "worry about reading back",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "small step",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "acknowledging feelings",
-                  "label": "unknown"
+                  "concept": "Feeling physically tense (finding)",
+                  "label": "entailment"
                 }
               ]
             }
@@ -1181,142 +966,120 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I think it might feel like a small step, but I worry about what I’d read back. It could just bring up more feelings, and I’m not sure I’m ready for that. Just thinking about it makes me feel kind of anxious, like I’m opening a can of worms. It’s hard to believe it would really help, and the idea of facing it all is pretty overwhelming.",
+        "query": "Yeah, it’s definitely that urge to just keep busy, like I have to find something to do to keep my mind from spiraling. It feels... frantic, I guess. There’s this energy in me that feels restless, like if I stop, all those thoughts will just crash over me like a wave. It’s almost like I’m running from something, but I can’t really see what it is.",
         "core_issue": "other miscellaneous concerns",
         "schema": {
           "triggers": [
-            "Parents finding a needle in the room",
-            "Parents telling me to stop using drugs",
-            "Fear of being judged by parents"
+            "urge to keep busy",
+            "energy in me",
+            "feeling restless"
           ],
           "automatic_thoughts": [
-            "My parents know about my drug use",
-            "If I don't stop using drugs, I will be kicked out of the house",
-            "They won't understand, and I don't want to let them down",
-            "I want to open up, but I'm scared of their reaction",
-            "What if they just don’t get it?",
-            "I imagine telling them and then seeing disappointment in their faces",
-            "I can’t shake this feeling that it won’t go well",
-            "It's hard to imagine them reacting in a way that I really hope for",
-            "My mind runs with worst-case scenarios",
-            "I remember moments when I felt judged in the past, and those stick with me",
-            "Those past moments when I felt judged cling to me",
-            "My mind has a loop playing of the worst things that could happen",
-            "Understanding times seem far away when I'm caught up in fear",
-            "It feels daunting to say it out loud, but writing it down might help",
-            "I don’t know if writing it down will really make a difference",
-            "It's hard to imagine feeling lighter at all",
-            "It might feel like a small step in the right direction, acknowledging what's going on inside me",
-            "I worry about what I would read back; it might just bring up more feelings",
-            "Just thinking about writing it down makes me feel anxious, like I’m opening a can of worms",
-            "It's hard to believe it would really help, and the idea of facing it all is pretty overwhelming"
+            "have to find something to do",
+            "if I stop, thoughts will crash over me"
           ],
           "emotions": [
-            "anxious",
-            "trapped",
-            "overwhelmed",
-            "relieved",
-            "painful",
-            "confused",
-            "fearful",
-            "heavy"
+            "frantic"
           ],
           "behaviors": [
-            "keeping it all inside",
-            "considering writing thoughts down"
+            "keep busy",
+            "run from something"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Able to recognize own emotional pain and distress (finding)",
-            "Emotional adjustment (observable entity)"
+            "Racing thoughts (finding)",
+            "Able to resist obsessional thoughts (finding)",
+            "Feeling like wanting to escape (finding)",
+            "Intrusive thoughts (finding)",
+            "Compulsion to act on thoughts (finding)"
           ],
-          "neutral": [
-            "Fear of writing in public (finding)",
-            "Anxiety about treatment (finding)",
-            "Thoughts about dying (finding)"
-          ],
+          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling anxious and uncertain about whether writing down your thoughts will help, and you worry it might bring up more feelings. What might make you feel more comfortable trying it in a way that feels safe for you?",
-        "protocol_used": "validate_and_reflect",
+        "response": "What evidence do you have that if you stop being busy, thoughts will crash over you?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling anxious and uncertain about whether writing down your thoughts will help, and you worry it might bring up more feelings. What might make you feel more comfortable trying it in a way that feels safe for you?",
+            "response": "It sounds like you’re feeling a strong urge to stay busy to keep your mind from spiraling, and that restlessness feels frantic, as if stopping would let thoughts crash over you. What does it feel like when you try to pause and notice those thoughts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxious",
-                  "label": "automatic_thoughts"
+                  "concept": "Racing thoughts",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
+                  "concept": "Compulsion to act on thoughts",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "fear of writing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "emotional pain",
+                  "concept": "Feeling like wanting to escape",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I hear how anxious you feel about opening that can of worms. If you could write just one sentence about what’s on your mind, what might that look like?",
-            "reasoning": null
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you’re worried that writing could stir up more pain, which is understandable. If a close friend were in your shoes, what might they say about taking a small step like jotting down a few thoughts?",
+            "response": "What evidence do you have that if you stop being busy, thoughts will crash over you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Able to recognize own emotional pain and distress",
+                  "concept": "Racing thoughts",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about treatment",
-                  "label": "neutral"
+                  "concept": "Intrusive thoughts",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Fear of writing in public",
-                  "label": "neutral"
+                  "concept": "Compulsion to act on thoughts",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Emotional adjustment",
+                  "concept": "Feeling like wanting to escape",
                   "label": "entailment"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "It sounds like you’re feeling a lot of anxiety and uncertainty about writing down your thoughts. Would you like to explore what might help you feel a bit more prepared or safe before you try it?",
+          "alternative_perspective": {
+            "response": "It sounds like you’re racing to keep your mind from a wave of thoughts. What might a trusted friend suggest you do when you feel that urge to stay busy?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxious",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear of writing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "writing thoughts down",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotional pain",
+                  "concept": "racing thoughts",
                   "label": "entailment"
+                },
+                {
+                  "concept": "intrusive thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "compulsion to act",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling like wanting to escape",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "urge to keep busy",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "energy in me",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "restless",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "frantic",
+                  "label": "emotions"
                 }
               ]
             }

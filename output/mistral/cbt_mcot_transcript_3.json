@@ -21,19 +21,21 @@
         "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "Receiving news of cancer recurrence"
+            "doctors saying cancer has come back"
           ],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back"
+            "I can't believe this is happening again",
+            "I thought I beat this",
+            "I have to keep working despite this"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear"
+            "fear",
+            "anxiety",
+            "sadness"
           ],
           "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day"
+            "trying to get through the day",
+            "avoiding talking about it"
           ]
         },
         "retrieval": {
@@ -51,22 +53,26 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry to hear that you're dealing with this again. It can be overwhelming, and it's completely normal to feel anxious and fearful. Let's take a moment to explore how you've been coping so far, and what might help you manage these feelings better.",
-        "protocol_used": "socratic_questioning",
+        "response": "I'm really sorry to hear that you're dealing with this again. It can be overwhelming, but it's important to remember that you've already faced this challenge before and come out stronger. Let's explore how you might feel if things turn out differently than expected. What do you think a trusted friend or family member would say about your situation?",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry to hear that you've been diagnosed with cancer again. It must be incredibly difficult for you right now. I want you to know that it's okay to feel overwhelmed and scared, and we can work together to help you navigate this challenging time. Let's start by discussing how you're feeling about the diagnosis and what thoughts are going through your mind.",
+            "response": "I'm really sorry to hear that you're going through this again. It sounds like it's a lot to take in, and I can understand why you might not want to talk about it. But remember, we're here to help you navigate this difficult time together. Can you tell me more about what you're feeling right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
                   "concept": "Adjustment to life threatening illness (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Denial about illness severity (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I'm really sorry to hear that you're dealing with this again. It can be overwhelming, and it's completely normal to feel anxious and fearful. Let's take a moment to explore how you've been coping so far, and what might help you manage these feelings better.",
+            "response": "\"I'm really sorry to hear that you're going through this again. It can be difficult to cope when something like cancer comes back, especially after you thought you had beaten it. Can we explore together what thoughts and feelings come up for you when you think about this situation? And how are you managing your work while dealing with this?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -81,7 +87,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "I'm really sorry to hear that you're dealing with this again. It must be incredibly difficult. Have you ever thought about how others close to you might view your situation? What would a trusted friend or family member say if they were here right now?",
+            "response": "I'm really sorry to hear that you're dealing with this again. It can be overwhelming, but it's important to remember that you've already faced this challenge before and come out stronger. Let's explore how you might feel if things turn out differently than expected. What do you think a trusted friend or family member would say about your situation?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -91,21 +97,6 @@
                 {
                   "concept": "Difficulty coping with grief responses (finding)",
                   "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're dealing with this again. It must be incredibly difficult. Can we take some time today to talk about how you're feeling and what thoughts are coming up for you?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Receiving news of cancer recurrence",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "Adjustment to life threatening illness (finding)",
-                  "label": "entailment"
                 }
               ]
             }
@@ -117,103 +108,92 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Thanks. I guess... I’ve been trying to distract myself, but it doesn’t really work for long. I find myself just cycling back to those worries about my health. I feel like I can’t escape them, and it’s exhausting.",
+        "query": "Thanks. I guess I just feel really anxious about it all. I often think about how I might react if things don't go as planned. A trusted friend might say that I tend to worry too much... and that things usually end up being okay, but it’s hard to see it that way when I’m in the moment. I just keep imagining the worst-case scenarios.",
         "core_issue": "health-related worries",
         "schema": {
-          "triggers": [
-            "Receiving news of cancer recurrence"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health"
+            "I might react if things don't go as planned",
+            "I tend to worry too much",
+            "Things usually end up being okay",
+            "I keep imagining the worst-case scenarios"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion"
+            "anxiety"
           ],
-          "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about body function or health (finding)",
-            "Ability to resist obsessional thoughts (observable entity)"
+            "Feeling nervous (finding)",
+            "Feeling tense (finding)",
+            "Feeling physically tense (finding)"
           ],
           "neutral": [
-            "Obsessional thoughts of disease (finding)",
-            "Repressing thoughts (finding)"
+            "Anxiety about going crazy (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
-          "contradiction": [
-            "Able to resist obsessional thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I can see how this news has been weighing on you. It's understandable to have concerns about your health, especially after a recurrence. Let's work together to find ways to manage these worries and help you feel more at ease.\"",
+        "response": "\"It sounds like you're feeling quite anxious, and it's understandable to worry about things not going as planned. Your trusted friend might remind us that worrying too much can be a common response, but it's also important to remember that things usually do end up being okay. Let's explore together how we can help you manage your anxiety in the moment.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I can see how this news has been weighing on you. It's understandable to have concerns about your health, especially after a recurrence. Let's work together to find ways to manage these worries and help you feel more at ease.\"",
+            "response": "\"It sounds like you're feeling quite anxious, and it's understandable to worry about things not going as planned. Your trusted friend might remind us that worrying too much can be a common response, but it's also important to remember that things usually do end up being okay. Let's explore together how we can help you manage your anxiety in the moment.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about body function or health (finding)",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Ability to resist obsessional thoughts (observable entity)",
-                  "label": "entailment"
+                  "concept": "worrying too much",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "trusted friend's perspective",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're having a hard time escaping your worries about your health. Can you help me understand what evidence you have that these thoughts are true? And how do they compare to other times in your life when you faced challenges?\"",
+            "response": "It sounds like you're dealing with a lot of anxiety. Let's explore this together. When you think about the worst-case scenarios, can you also consider what evidence supports these fears and what evidence might suggest otherwise?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about body function or health (finding)",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
-                  "label": "neutral"
+                  "concept": "worrying too much",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "imagining worst-case scenarios",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having a hard time escaping those worries about your health. Have you ever considered what a trusted friend might say about this situation? It could provide some additional perspective.\"",
+            "response": "\"It sounds like you're dealing with a lot of anxiety. It can be challenging to see things differently when we're in the thick of it, but I wonder if your trusted friend might offer some insight. They often say that you tend to worry too much, and yet things usually end up being okay. Let's explore this idea together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about body function or health (finding)",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I can see how overwhelming it feels to have those worries about your health constantly on your mind. It's important that we find a way for you to manage them better, so let's explore some strategies together.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about body function or health (finding)",
-                  "label": "entailment"
+                  "concept": "worrying too much",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
-                  "label": "neutral"
+                  "concept": "trusted friend's perspective",
+                  "label": "unknown"
                 }
               ]
             }
@@ -225,103 +205,88 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I've been trying to distract myself, but it doesn’t help for long. I keep circling back to my health worries, and it feels like I can’t escape them. It's just so exhausting.",
+        "query": "I really appreciate that. I just feel so anxious all the time about everything related to my health. It’s like I’m always waiting for something bad to happen. Friends say I'm overreacting, but when I’m in those moments, it feels so real and overwhelming. It’s hard to shake off that worry, even when I know things usually turn out fine.",
         "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "Receiving news of cancer recurrence"
+            "thoughts about health",
+            "waiting for something bad to happen"
           ],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health"
+            "I'm always waiting for something bad to happen",
+            "friends say I'm overreacting",
+            "it feels so real and overwhelming"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion"
+            "anxiety"
           ],
           "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself",
-            "Circling back to health worries"
+            "worrying",
+            "struggling to shake off worry"
           ]
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Obsessional thoughts of disease (finding)",
-            "Ability to resist obsessional thoughts (observable entity)",
-            "Unable to resist obsessional thoughts (finding)",
-            "Repressing thoughts (finding)"
+            "Anticipatory anxiety (finding)",
+            "Anxiety about body function or health (finding)",
+            "Anticipatory anxiety, moderate (finding)",
+            "Anxiety about treatment (finding)",
+            "Anticipatory anxiety, severe (finding)"
           ],
-          "contradiction": [
-            "Able to resist obsessional thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed by your health worries and it feels like they're hard to escape. It's important to acknowledge these feelings, and we can work together to find ways to manage them more effectively.",
+        "response": "I understand how you're feeling, and it's completely normal to have concerns about your health. It sounds like you've been experiencing a lot of anxiety lately. Let's work together to find ways to manage these feelings and help you feel more at ease.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed by your health worries and it feels like they're hard to escape. It's important to acknowledge these feelings, and we can work together to find ways to manage them more effectively.",
+            "response": "I understand how you're feeling, and it's completely normal to have concerns about your health. It sounds like you've been experiencing a lot of anxiety lately. Let's work together to find ways to manage these feelings and help you feel more at ease.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
+                  "concept": "anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Unable to resist obsessional thoughts (finding)",
-                  "label": "neutral"
+                  "concept": "health concerns",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "overreacting",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're having a hard time finding peace with your health worries. Can we explore together what keeps bringing you back to them? Let's start by looking at the evidence that supports these thoughts and any alternative perspectives.\"",
+            "response": "\"It sounds like you're dealing with a lot of anxiety, especially when it comes to your health. Can we explore together what evidence supports these feelings and what might be alternative explanations?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
+                  "concept": "anxiety about body function or health",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Unable to resist obsessional thoughts (finding)",
+                  "concept": "anticipatory anxiety",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having a hard time escaping your worries about your health. Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, hearing another perspective can help us feel less overwhelmed.\"",
+            "response": "\"I understand that you're feeling anxious, especially about your health. It can be overwhelming and hard to shake off the worry. Let's explore what a trusted friend might say about this situation. What do you think they would tell you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
+                  "concept": "anxiety about body function or health",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Unable to resist obsessional thoughts (finding)",
+                  "concept": "anticipatory anxiety",
                   "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I understand that you're feeling exhausted and overwhelmed by your health worries. It can be challenging to find ways to cope, but let's explore some strategies together.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
                 }
               ]
             }
@@ -333,67 +298,60 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I’ve been trying to keep myself busy, but no matter what I do, those health worries just come creeping back. It’s like I can’t catch a break, and it really wears me down. I just feel so anxious all the time.",
+        "query": "Thank you for understanding. It does feel like I’m stuck in this cycle of worry, and it’s exhausting. I know I should be able to relax or distract myself, but my thoughts just keep circling back. I guess sometimes I’m scared of what might really be wrong, even if I know it’s probably nothing. It's kind of hard to talk about, honestly.",
         "core_issue": "health-related worries",
         "schema": {
-          "triggers": [
-            "Receiving news of cancer recurrence"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health",
-            "No matter what I do, those health worries just come creeping back"
+            "I'm stuck in this cycle of worry",
+            "I should be able to relax or distract myself",
+            "I'm scared of what might really be wrong",
+            "It's probably nothing"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion",
-            "Feeling worn down"
+            "exhaustion",
+            "fear"
           ],
-          "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself",
-            "Circling back to health worries",
-            "Trying to keep myself busy"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Difficulty managing stress (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about body function or health (finding)",
-            "Anxiety about having a heart attack (finding)",
-            "Anticipatory anxiety, severe (finding)",
-            "Anticipatory anxiety (finding)"
+            "Anxiety about treatment (finding)",
+            "Recurrent anxiety (finding)",
+            "Anxiety about loss of control (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about body function or health (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I understand that you've been trying to keep busy, but your health worries still come back. It sounds exhausting and anxiety-provoking. Let's take a moment to explore these feelings together.\"",
+        "response": "I understand that you're feeling stuck in a cycle of worry, and it can be exhausting. It's common to feel anxious when we're dealing with recurring concerns, especially if they relate to treatment or loss of control. Let's work together to explore these feelings more deeply and find ways to manage them.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I understand that you've been trying to keep busy, but your health worries still come back. It sounds exhausting and anxiety-provoking. Let's take a moment to explore these feelings together.\"",
+            "response": "I understand that you're feeling stuck in a cycle of worry, and it can be exhausting. It's common to feel anxious when we're dealing with recurring concerns, especially if they relate to treatment or loss of control. Let's work together to explore these feelings more deeply and find ways to manage them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Anxiety about treatment (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "Recurrent anxiety (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about loss of control (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I can see how you're feeling overwhelmed by your health worries, and it's understandable to feel anxious when they persist despite your efforts. Let's explore together what evidence supports these worries and what alternatives might exist.\"",
+            "response": "\"It sounds like you're dealing with a lot of worry and fear, which can be exhausting. Let's explore these feelings together. Can you tell me more about what triggers this cycle of thoughts for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -401,42 +359,35 @@
                   "label": "neutral"
                 },
                 {
-                  "concept": "Health worries",
-                  "label": "automatic_thoughts"
+                  "concept": "Recurrent anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Being worn down",
-                  "label": "unknown"
+                  "concept": "Fear",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you're feeling overwhelmed with health worries and anxiety, even when trying to keep busy. It might be helpful to consider what a trusted friend or loved one would say about your situation. Sometimes, hearing another perspective can help us feel more balanced.\"",
+            "response": "\"It sounds like you're dealing with a lot of worry and anxiety. Let's explore together if there might be other ways to look at this situation that could help reduce some of the distress you're feeling.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I can see how difficult this must be for you, constantly worrying about your health. It's important to acknowledge these feelings and take a moment to breathe. Let's explore some ways we can manage your anxiety together.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety",
+                  "concept": "anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Health worries",
+                  "concept": "worry",
                   "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "distress",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
                 }
               ]
             }
@@ -448,119 +399,101 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is. Sometimes, I feel like I’m on this endless loop of worry. It’s just hard. I mean, I know I shouldn’t feel this way, but I can’t help it. What if something is really wrong? It just gnaws at me.",
+        "query": "Yeah, it’s definitely tiring. Sometimes, I feel like I’m constantly on high alert, and it makes it hard to enjoy anything. I want to trust that things will be okay, but there’s this nagging voice in my head that keeps telling me to be careful, to prepare for the worst. It’s frustrating to feel that way, especially when I know I should be able to enjoy life more.",
         "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "Receiving news of cancer recurrence"
+            "constant high alert",
+            "feeling unable to enjoy life"
           ],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health",
-            "No matter what I do, those health worries just come creeping back",
-            "What if something is really wrong?"
+            "I need to be careful",
+            "prepare for the worst",
+            "I should be able to enjoy life"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion",
-            "Feeling worn down"
+            "frustration"
           ],
-          "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself",
-            "Circling back to health worries",
-            "Trying to keep myself busy",
-            "Feeling like I'm on an endless loop of worry"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
             "Anxiety about going crazy (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Fear of going crazy (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Fear of losing emotional control (finding)"
+            "Difficulty managing stress (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about loss of control (finding)",
+            "Anxiety about not coping with parenthood (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're going through a lot. It's understandable to feel anxious and worried, especially when dealing with something as significant as a cancer recurrence. Let's explore these feelings together and see if we can find some ways to manage them.\"",
+        "response": "\"It sounds like you're dealing with a lot right now. Can we explore what evidence supports the idea that you need to be careful and prepare for the worst? Let's start by looking at specific instances where this thought has been helpful or harmful for you.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling anxious and fearful, and it's natural to have these feelings given the news about your cancer recurrence. It can be overwhelming, but remember that it's okay to feel this way. Let's work together to explore some ways we can manage these feelings and help you find a sense of peace.",
+            "response": "\"It sounds like you're dealing with a lot right now. You mentioned feeling constantly on high alert and struggling to enjoy life. It's understandable that this can feel overwhelming. Let's take some time to explore these feelings together, and I'll be here to help you navigate them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "constant high alert",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "feeling unable to enjoy life",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I need to be careful",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "prepare for the worst",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're going through a lot. It's understandable to feel anxious and worried, especially when dealing with something as significant as a cancer recurrence. Let's explore these feelings together and see if we can find some ways to manage them.\"",
+            "response": "\"It sounds like you're dealing with a lot right now. Can we explore what evidence supports the idea that you need to be careful and prepare for the worst? Let's start by looking at specific instances where this thought has been helpful or harmful for you.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety",
+                  "concept": "anxiety about going crazy",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Fear",
+                  "concept": "difficulty managing stress",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Exhaustion",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Feeling worn down",
-                  "label": "emotions"
+                  "concept": "anxiety about losing emotional control",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you're feeling anxious and fearful, and it's natural to have those feelings when dealing with something as significant as a cancer recurrence. Let's explore some alternative perspectives together. For instance, what might a trusted friend or family member say about your situation? Or, what are the best, worst, and most realistic outcomes you can think of?\"",
+            "response": "\"It sounds like you're dealing with a lot right now. You mentioned feeling constantly on high alert and having trouble enjoying life. It's understandable that this can feel frustrating. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things differently.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety",
-                  "label": "neutral"
+                  "concept": "constant high alert",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear",
-                  "label": "neutral"
+                  "concept": "feeling unable to enjoy life",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how you're feeling overwhelmed, and it's completely understandable given the news about your cancer recurrence. Let's take a moment to explore these feelings together. Can you tell me more about what you mean when you say \"What if something is really wrong?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "I need to be careful",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "prepare for the worst",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -572,110 +505,97 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Thanks. I just... I guess it feels so heavy sometimes, like I’m carrying this weight around all the time. I want to be optimistic, but it’s hard when those thoughts sneak back in. I just keep thinking about what I could have missed or what I should be doing differently.",
+        "query": "I guess there have been times when being cautious helped me avoid some issues, like when I was really diligent about going to the doctor and it turned out I had something that needed attention. But there are also plenty of times when my worrying kept me from doing things I wanted to do, like travel or just hang out with friends without feeling anxious. It’s like I can't really tell when my cautiousness is useful anymore.",
         "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "Receiving news of cancer recurrence"
+            "going to the doctor",
+            "wanting to travel",
+            "wanting to hang out with friends"
           ],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health",
-            "No matter what I do, those health worries just come creeping back",
-            "What if something is really wrong?",
-            "What could I have missed or should be doing differently?"
+            "my worrying keeps me from doing things",
+            "I can't tell when my cautiousness is useful"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion",
-            "Feeling worn down",
-            "Feeling heavy"
+            "anxiety"
           ],
           "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself",
-            "Circling back to health worries",
-            "Trying to keep myself busy",
-            "Feeling like I'm on an endless loop of worry"
+            "avoiding travel",
+            "avoiding socializing"
           ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Feeling a failure (finding)",
-            "Loss of hope for the future (finding)"
+          "entailment": [
+            "Worried (finding)"
           ],
-          "contradiction": [
-            "Hopeful for the future (finding)",
-            "Optimistic thoughts (finding)",
-            "Positive self thoughts (finding)"
-          ]
+          "neutral": [
+            "Anxiety about making mistakes (finding)",
+            "Anticipatory anxiety (finding)",
+            "Anticipatory anxiety, moderate (finding)",
+            "Anticipatory anxiety, mild (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're carrying a heavy burden with those thoughts about your health. Let's explore together what evidence supports these thoughts and what alternatives might exist.\"",
+        "response": "\"It seems like being cautious has helped you in some situations, such as going to the doctor. But it can also hold you back from doing things you enjoy, like traveling or spending time with friends. Can we explore when and why you feel your worrying is helpful versus harmful?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I can see how you might feel that way, carrying such a heavy load. It's understandable to have thoughts about what could have been done differently or what you might be missing. Let's work together to explore these thoughts and find ways to lighten your burden.\"",
+            "response": "It sounds like you've had experiences where being cautious has been helpful, such as going to the doctor when needed. However, it can also be challenging to determine when your caution is useful or not, especially when it comes to activities like traveling and socializing. Let's explore this together and see if we can find a way to help you make decisions that feel more balanced for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "wanting to travel",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "wanting to hang out with friends",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying a heavy burden with those thoughts about your health. Let's explore together what evidence supports these thoughts and what alternatives might exist.\"",
+            "response": "\"It seems like being cautious has helped you in some situations, such as going to the doctor. But it can also hold you back from doing things you enjoy, like traveling or spending time with friends. Can we explore when and why you feel your worrying is helpful versus harmful?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "wanting to travel",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "wanting to hang out with friends",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy burden with those cancer worries. Have you ever considered what a trusted friend might say about your situation? It could help to see things from another perspective.\"",
+            "response": "\"It sounds like being cautious has helped you in some situations, such as going to the doctor. But it can also hold you back from doing things you enjoy, like traveling or spending time with friends. Have you ever considered what a trusted friend might say about finding a balance between caution and enjoying life?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
+                  "concept": "going to the doctor",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "traveling",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I can see how you might feel overwhelmed with all those thoughts and emotions. Let's take it one step at a time, shall we? What's been going through your mind lately?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "wanting to hang out with friends",
+                  "label": "triggers"
                 }
               ]
             }
@@ -687,112 +607,90 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really does feel heavy. But it’s tough to see any evidence that goes against it, you know? I just keep imagining the worst-case scenarios, and it’s hard to shake that feeling that something might be wrong. It’s like I’m stuck in my own head, and I don’t really know how to get out of it.",
+        "query": "I think there have been moments when being cautious helped me, like that time I went to the doctor and found out something needed attention. But then there are times when it just holds me back, like when I avoid traveling or even just hanging out with friends because of my worries. I can't really figure out when my caution is actually helpful anymore. It's frustrating.",
         "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "Receiving news of cancer recurrence"
+            "going to the doctor",
+            "avoiding traveling",
+            "avoiding hanging out with friends"
           ],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health",
-            "No matter what I do, those health worries just come creeping back",
-            "What if something is really wrong?",
-            "What could I have missed or should be doing differently?",
-            "I just keep imagining the worst-case scenarios"
+            "caution is helpful",
+            "caution holds me back",
+            "I can't figure out when caution is helpful"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion",
-            "Feeling worn down",
-            "Feeling heavy"
+            "frustration"
           ],
           "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself",
-            "Circling back to health worries",
-            "Trying to keep myself busy",
-            "Feeling like I'm on an endless loop of worry",
-            "Feeling stuck in my own head"
+            "avoiding traveling",
+            "avoiding hanging out with friends"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Sense of impending doom (finding)",
-            "Feeling physically tense (finding)",
-            "Feeling of discouragement (finding)",
-            "Feeling tense (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Thoughts about dying (finding)"
+            "Difficulty comprehending concept of danger (finding)",
+            "Fear of contracting disease (finding)",
+            "Fear of injury (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Unable to comprehend concept of danger (finding)",
+            "Able to comprehend concept of danger (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence can you find that suggests things might not be as bad as they seem? It's understandable to feel stuck in your thoughts, but let's see if we can find a way out together.",
+        "response": "\"It sounds like you're struggling to determine when caution is helpful and when it might be holding you back. Let's explore some examples together, starting with a time when being cautious helped you. Can you think of any specific instances?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see why you're feeling so heavy right now. It's understandable to have these thoughts and feelings when dealing with something as challenging as a cancer recurrence. Let's work together to find ways to manage your worries and help you feel more at ease.",
+            "response": "I understand that you're feeling frustrated because sometimes being cautious helps, but other times it seems to hold you back. Let's explore together when caution might be helpful and when it may not, so we can find a balance that works for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence can you find that suggests things might not be as bad as they seem? It's understandable to feel stuck in your thoughts, but let's see if we can find a way out together.",
+            "response": "\"It sounds like you're struggling to determine when caution is helpful and when it might be holding you back. Let's explore some examples together, starting with a time when being cautious helped you. Can you think of any specific instances?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "avoiding traveling",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "avoiding hanging out with friends",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, it can help to see things from another perspective.",
+            "response": "\"It sounds like caution has been helpful in some situations, such as going to the doctor. But it can also feel restrictive when you're avoiding activities like traveling or spending time with friends. Let's explore together if there are ways we can find a balance between being cautious and enjoying life.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "avoiding traveling",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see why you're feeling so heavy right now. It sounds like your thoughts are really focused on the worst-case scenarios, and that's making it hard to shake that feeling of something being wrong. Let's work together to find a way out of this loop.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "avoiding hanging out with friends",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "caution holds me back",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -804,113 +702,113 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I guess... there have been times when I’ve felt okay, or even really good. Sometimes, I have days where I’m not thinking about my health at all. But then those thoughts come rushing back, and it's like I forget those moments. It’s frustrating because I want to hold onto that feeling, but the worries always seem to overshadow it.",
+        "query": "Yeah, I can think of a time. A few years ago, I had this persistent pain that I just couldn't shake off. I was really worried about it, and I decided to go to the doctor. They did some tests and found out it was something that needed treatment. I felt relieved that I took that step, but now I wonder if I was overreacting to my concerns. It’s like I can’t help but second-guess myself.",
         "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "Receiving news of cancer recurrence"
+            "persistent pain",
+            "going to the doctor",
+            "tests results"
           ],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health",
-            "No matter what I do, those health worries just come creeping back",
-            "What if something is really wrong?",
-            "What could I have missed or should be doing differently?",
-            "I just keep imagining the worst-case scenarios",
-            "I forget the times when I feel okay or good"
+            "I was overreacting to my concerns",
+            "I can't help but second-guess myself"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion",
-            "Feeling worn down",
-            "Feeling heavy",
-            "Frustration"
+            "worried",
+            "relieved"
           ],
           "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself",
-            "Circling back to health worries",
-            "Trying to keep myself busy",
-            "Feeling like I'm on an endless loop of worry",
-            "Feeling stuck in my own head"
+            "decided to go to the doctor"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Able to recognize own emotional pain and distress (finding)"
+          ],
           "neutral": [
-            "Anxiety about body function or health (finding)",
-            "Obsessional thoughts of disease (finding)",
-            "Denial about illness severity (finding)",
-            "Anxiety about loss of control (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Feeling guilt (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Have you ever noticed that there are times when your worries about your health seem to take over, even though there have been moments when you've felt okay? It can be frustrating, but it might help to explore what triggers these thoughts and how they affect your daily life.",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It sounds like you had a difficult time deciding whether to go to the doctor about your persistent pain. It's understandable to feel uncertain, especially when we worry about overreacting or making mistakes. Have you ever considered what a trusted friend might think about your situation? Sometimes it can be helpful to get another perspective.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It's understandable that you might feel frustrated when your worries about your health overshadow the good moments. Let's focus on those times when you feel okay or even really good, and see if we can find ways to hold onto those feelings a bit longer.",
+            "response": "\"It's understandable that you might feel uncertain about your decision to seek medical help. Many people experience self-doubt when dealing with health concerns. Let's explore these feelings together and see if we can find a way to reduce your worries.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about body function or health (finding)",
-                  "label": "neutral"
+                  "concept": "persistent pain",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
-                  "label": "neutral"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "tests results",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Have you ever noticed that there are times when your worries about your health seem to take over, even though there have been moments when you've felt okay? It can be frustrating, but it might help to explore what triggers these thoughts and how they affect your daily life.",
+            "response": "\"It's understandable that you might feel a bit unsure about your decision to go to the doctor. Can we explore together what led you to think you were overreacting? Let's consider the evidence and see if there are any alternative perspectives.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
-                  "label": "neutral"
+                  "concept": "persistent pain",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Anxiety about body function or health (finding)",
-                  "label": "neutral"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "tests results",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "Have you ever thought about what it might be like to focus on those moments when you feel okay, rather than the worries that come creeping back? It could help you hold onto that feeling a little longer.",
+            "response": "\"It sounds like you had a difficult time deciding whether to go to the doctor about your persistent pain. It's understandable to feel uncertain, especially when we worry about overreacting or making mistakes. Have you ever considered what a trusted friend might think about your situation? Sometimes it can be helpful to get another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Obsessional thoughts of disease (finding)",
-                  "label": "neutral"
+                  "concept": "persistent pain",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Anxiety about body function or health (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you've been having a tough time lately, with your health worries coming and going. It can be frustrating when those thoughts overshadow the good moments. Let's explore ways to help you hold onto those positive feelings more easily.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "tests results",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I was overreacting to my concerns",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can't help but second-guess myself",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -922,116 +820,87 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I definitely notice that. It’s like a switch flips, and suddenly I’m consumed by those thoughts again. I guess it’s usually when I’m feeling a bit vulnerable or stressed about other things. It’s just frustrating because I want to enjoy those good moments without the shadow of worry hanging over me.",
+        "query": "I remember a few years ago when I had this pain that just wouldn’t go away. I was so worried about it that I finally went to the doctor, and they found something that needed treatment. It felt like a relief to get that sorted out, but now I find myself wondering if I was just overreacting. I can’t shake this feeling of second-guessing myself every time something comes up.",
         "core_issue": "health-related worries",
         "schema": {
           "triggers": [
-            "Receiving news of cancer recurrence",
-            "Feeling vulnerable or stressed about other things"
+            "pain that wouldn’t go away",
+            "going to the doctor",
+            "finding something that needed treatment"
           ],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health",
-            "No matter what I do, those health worries just come creeping back",
-            "What if something is really wrong?",
-            "What could I have missed or should be doing differently?",
-            "I just keep imagining the worst-case scenarios",
-            "I forget the times when I feel okay or good"
+            "wondering if I was just overreacting",
+            "second-guessing myself"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion",
-            "Feeling worn down",
-            "Feeling heavy",
-            "Frustration"
+            "worry",
+            "relief"
           ],
-          "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself",
-            "Circling back to health worries",
-            "Trying to keep myself busy",
-            "Feeling like I'm on an endless loop of worry",
-            "Feeling stuck in my own head"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Reappearance of old thoughts (finding)",
-            "Intrusive thoughts (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Negative automatic thoughts (finding)",
-            "Obsessional thoughts (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Denial about illness severity (finding)",
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": [
-            "Repressing thoughts (finding)"
+            "Able to understand generalized pain (finding)",
+            "Able to recognize own emotional pain and distress (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Have you noticed that your worries about your health tend to come up more when you're feeling vulnerable or stressed? It's understandable that these thoughts can be frustrating, but let's explore together if there are any patterns we can identify and ways to manage them.",
+        "response": "\"It's understandable to have concerns when dealing with health issues. Can we explore together what evidence you have that you might be overreacting this time? Let's consider both your thoughts and feelings.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how those thoughts might be overwhelming, especially when you're feeling vulnerable. It's important to acknowledge them and try to find ways to manage them so they don't take over your good moments. Let's work together on that.",
+            "response": "I'm glad you mentioned your past experience with pain and seeking medical help. It sounds like you might have some concerns about whether you were right to worry or if you overreacted. It's common for people to question themselves in situations like this, especially when it comes to health matters. Let's explore these thoughts together and see if we can find a way to ease your mind.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Intrusive thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Negative automatic thoughts (finding)",
+                  "concept": "denial about illness severity",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Have you noticed that your worries about your health tend to come up more when you're feeling vulnerable or stressed? It's understandable that these thoughts can be frustrating, but let's explore together if there are any patterns we can identify and ways to manage them.",
+            "response": "\"It's understandable to have concerns when dealing with health issues. Can we explore together what evidence you have that you might be overreacting this time? Let's consider both your thoughts and feelings.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Intrusive thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Negative automatic thoughts (finding)",
+                  "concept": "Denial about illness severity (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "Have you ever considered what a trusted friend or family member might say about these thoughts creeping back when you're feeling vulnerable? It could be helpful to hear another perspective.",
+            "response": "\"It's understandable to feel a bit unsure after seeking help, but remember that your initial concern led you to get the issue addressed. Let's explore together if there might be other situations where trusting your instincts could be beneficial.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Intrusive thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "worry",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Negative automatic thoughts (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how those moments of vulnerability might bring back old thoughts. It's understandable to feel overwhelmed when you're dealing with a lot at once. Let's focus on finding ways to manage your worries and enjoy the good times, shall we?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Receiving news of cancer recurrence",
-                  "label": "triggers"
+                  "concept": "relief",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Feeling vulnerable or stressed about other things",
-                  "label": "triggers"
+                  "concept": "second-guessing",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -1043,97 +912,79 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I have noticed that. It’s almost like when I’m already feeling a bit down or stressed, the worries just ramp up. I guess it makes sense, but it’s still hard to deal with. Sometimes, it feels like I’m just spiraling, and I don’t know how to grab hold of it. It’s like I want to manage it, but I just feel so overwhelmed.",
+        "query": "I guess I do have some evidence that I might be overreacting, like when I think about how much I’ve worried in the past and things turned out to be fine. But those feelings creep in, and it just feels so real in the moment. Sometimes I wonder if I'm just missing something important if I don’t worry enough. It’s hard to separate those feelings from what I actually know. I just wish I could find some balance.",
         "core_issue": "health-related worries",
         "schema": {
-          "triggers": [
-            "Receiving news of cancer recurrence",
-            "Feeling vulnerable or stressed about other things",
-            "Feeling a bit down or stressed"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I have cancer again",
-            "I beat it before, but now it's back",
-            "I can't escape my worries about my health",
-            "No matter what I do, those health worries just come creeping back",
-            "What if something is really wrong?",
-            "What could I have missed or should be doing differently?",
-            "I just keep imagining the worst-case scenarios",
-            "I forget the times when I feel okay or good",
-            "It feels like I'm just spiraling and don't know how to grab hold of it"
+            "I might be overreacting",
+            "Things turned out to be fine in the past",
+            "I’m missing something important if I don’t worry enough",
+            "It’s hard to separate feelings from what I actually know"
           ],
           "emotions": [
-            "Anxiety",
-            "Fear",
-            "Exhaustion",
-            "Feeling worn down",
-            "Feeling heavy",
-            "Frustration",
-            "Feeling overwhelmed"
+            "worry",
+            "anxiety"
           ],
-          "behaviors": [
-            "Continuing to work",
-            "Trying to get through the day",
-            "Trying to distract myself",
-            "Circling back to health worries",
-            "Trying to keep myself busy",
-            "Feeling like I'm on an endless loop of worry",
-            "Feeling stuck in my own head"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
             "Anxiety about going crazy (finding)",
-            "Anxiety about losing emotional control (finding)",
             "Anxiety about making mistakes (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anticipatory anxiety (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Anticipatory anxiety, mild (finding)",
+            "Anticipatory anxiety, severe (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how you're feeling overwhelmed, and it makes sense that when you're already feeling a bit down or stressed, the worries just seem to ramp up. It's important to acknowledge those feelings and try to find ways to manage them. Let's explore some strategies together to help you feel more in control.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you have a lot of evidence that things usually turn out fine, even when you worry. Have you ever considered what a trusted friend might say about your situation? Sometimes it can be helpful to get another perspective.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you're feeling overwhelmed, and it makes sense that when you're already feeling a bit down or stressed, the worries just seem to ramp up. It's important to acknowledge those feelings and try to find ways to manage them. Let's explore some strategies together to help you feel more in control.",
+            "response": "\"You've shared some important insights about your thoughts and feelings. It can be challenging to balance worry with trusting our own judgment. Let's explore together how we might find that balance.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "I might be overreacting",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Things turned out to be fine in the past",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "It's hard to separate feelings from what I actually know",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're having a hard time managing your worries, especially when you're already feeling down or stressed. Can we explore together what triggers these feelings and how they make you feel? This might help us find ways to break the cycle.\"",
+            "response": "\"It sounds like you have a lot of evidence that things usually turn out fine, even when you worry. Have you ever considered what a trusted friend might say about your situation? Sometimes it can be helpful to get another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Automatic thoughts",
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "evidence",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Emotions",
+                  "concept": "friend's perspective",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having a tough time managing your thoughts and feelings right now. Let's explore some ways to help you find a more balanced perspective.\"",
+            "response": "\"It sounds like you've been struggling with feelings of worry and anxiety, and it can be difficult to separate those feelings from what you actually know. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, getting another perspective can help us find balance.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1142,21 +993,6 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how you're feeling overwhelmed with everything going on. Let's take a moment to focus on what we can manage right now, and then gradually work our way through the rest. How about that?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]

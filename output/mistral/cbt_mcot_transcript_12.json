@@ -20,13 +20,14 @@
         "query": "I thought I should. I've been feeling quite bad for quite a while, so I thought maybe it's time to see someone about it because I don't want to feel like this anymore.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I thought I should see someone about it"
+            "I thought I should see someone",
+            "It's time to see someone about it"
           ],
-          "emotions": [],
+          "emotions": [
+            "bad"
+          ],
           "behaviors": []
         },
         "retrieval": {
@@ -44,65 +45,50 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really glad that you've recognized the need for help and have taken the first step towards seeking support. It takes a lot of courage to acknowledge one's feelings and seek assistance.\n\nIf you haven't already, consider reaching out to a mental health professional such as a therapist or counselor. They can provide you with strategies and tools to manage your emotions and help you navigate through difficult times.\n\nAdditionally, there are many online resources available that offer advice and support for those dealing with emotional distress. Here are some organizations that may be helpful:\n\n1. National Alliance on Mental Illness (NAMI): <https://www.nami.org/>\n2. Substance Abuse and Mental Health Services Administration (SAMHSA) National Helpline: 1-800-662-HELP (4357)\n3. Crisis Text Line: Text HOME to 741741 in the United States\n4. The Trevor Project (for LGBTQ+ youth): 1-866-488-7386 or Text START to 678678\n5. RAINN (Rape, Abuse & Incest National Network): 1-800-656-HOPE (4673)\n\nRemember, it's okay to ask for help and it's important to take care of your mental health. You are not alone in this journey, and there are people who want to support you.",
+        "response": "I'm really glad to hear that you're taking steps towards seeking help. It takes a lot of courage to acknowledge and address mental health issues. Reaching out for support is the first step in finding relief and improving your overall well-being.\n\nIf you haven't already, consider reaching out to a mental health professional such as a therapist or counselor. They can provide guidance, support, and evidence-based treatments to help you manage your feelings and improve your quality of life.\n\nAdditionally, there are many online resources available that offer advice, coping strategies, and support groups for various mental health conditions. It's important to remember that taking care of your mental health is just as important as physical health, and seeking help is a sign of strength, not weakness.\n\nIf you need someone to talk to right now, there are also crisis hotlines available 24/7, such as the National Suicide Prevention Lifeline in the US (1-800-273-TALK) or Crisis Text Line (text HOME to 741741). These resources are confidential and free of charge.\n\nTake care of yourself and remember that it's okay to ask for help when you need it. You deserve to feel better, and there are people and resources available to support you on your journey towards improved mental health.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've been feeling quite bad for some time now, and it seems like you've decided to seek help because of this. That takes courage, and I'm here to support you on your journey towards feeling better. Let's start by exploring what brought you here today.",
+            "response": "\"I can understand why you might be feeling bad for a while and thinking it's time to seek help. It takes courage to reach out, and I'm here to support you.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling quite bad for quite a while",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "thought I should see someone about it",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I'm glad you reached out today. Can you tell me more about what's been making you feel so bad for such a long time? And why did you decide it was time to seek help now?\"",
+            "response": "\"I'm glad you've reached out. You mentioned feeling bad for a while and wanting to see someone about it. Can you tell me more about what makes you feel this way? And have you noticed any changes in your mood or behavior that might be related?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling quite bad for quite a while",
-                  "label": "triggers"
+                  "concept": "Feeling emotionally hurt (entailment)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "thoughts of seeking help",
-                  "label": "unknown"
+                  "concept": "Complaining of feeling depressed (neutral)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you've been feeling quite down for some time now. Have you ever considered what might happen if you sought professional help? What could be the best or worst outcomes?\"",
+            "response": "\"It sounds like you've been feeling quite bad for a while now, and you're considering seeking help. Have you ever thought about what might happen if you didn't seek help? What could be the best or worst possible outcomes?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling quite bad for quite a while",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "thoughts of seeking help",
+                  "concept": "emotions",
                   "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really glad you reached out today. It sounds like you've been going through a tough time and have been feeling quite bad for quite a while. I want to make sure we create a safe space for you to talk about what you're experiencing, so I just wanted to ask if you've ever had thoughts about hurting yourself or not wanting to be here?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "thoughts of deliberate self harm (finding)",
-                  "label": "neutral"
                 },
                 {
-                  "concept": "anxiety about treatment (finding)",
-                  "label": "neutral"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -114,104 +100,82 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Thank you for saying that. I guess it does feel a bit like a big step to even talk about it. Honestly, I still feel like I'm stuck in this place where I don’t really believe I deserve support or help. It’s hard to shake that feeling, you know?",
+        "query": "I appreciate that, but I’m really just here to talk about how I’m feeling. It’s not always easy for me to open up, you know? I often feel like I’m not good enough or that what I say doesn’t really matter. It’s like I’m stuck in my head, and it's exhausting.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help"
+            "I'm not good enough",
+            "What I say doesn't really matter",
+            "I'm stuck in my head"
           ],
           "emotions": [
-            "feeling stuck"
+            "exhaustion"
           ],
-          "behaviors": []
+          "behaviors": [
+            "difficulty opening up"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)"
+            "Feeling diffident (finding)",
+            "Feeling lost (finding)"
           ],
           "neutral": [
-            "Mature emotional adjustment (finding)",
-            "Enduring personality change after psychiatric illness (finding)",
-            "Anxiety about treatment (finding)",
-            "Acceptance stage of grief (finding)"
+            "Complaining of feeling depressed (finding)",
+            "Feeling hopeless (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Emotionally subdued (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It's understandable to feel a bit anxious when seeking support for the first time. Can you tell me more about what makes you think you don't deserve help? Let's explore that together.\"",
+        "response": "I understand that opening up can be difficult for you, and it's important to acknowledge your feelings. Let's explore more about what makes you feel like you're not good enough or that what you say doesn't matter. Can we start by discussing a specific situation where these thoughts come up?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It takes courage to acknowledge when we're struggling and seek help. It sounds like you might be having some doubts about whether you truly deserve that support. Let's explore those feelings together, so we can work on finding a way forward.\"",
+            "response": "I appreciate your honesty, and I want you to know that it's okay to feel the way you do. It can be difficult to open up, but remember that our conversations are a safe space for you to express yourself without judgment. Let's take things one step at a time, and together we can work on understanding these feelings better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling quite bad for quite a while",
-                  "label": "triggers"
+                  "concept": "Feeling diffident",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "talking about seeking support",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I thought I should see someone about it",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I don’t really believe I deserve support or help",
-                  "label": "automatic_thoughts"
+                  "concept": "Complaining of feeling depressed",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It's understandable to feel a bit anxious when seeking support for the first time. Can you tell me more about what makes you think you don't deserve help? Let's explore that together.\"",
+            "response": "I understand that opening up can be difficult for you, and it's important to acknowledge your feelings. Let's explore more about what makes you feel like you're not good enough or that what you say doesn't matter. Can we start by discussing a specific situation where these thoughts come up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling diffident",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about treatment",
+                  "concept": "Complaining of feeling depressed",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable to feel that way, but let's consider this for a moment. If you were a friend in your situation, what would you say about seeking help? Could there be other reasons why you might deserve it?\"",
+            "response": "I understand that you might find it difficult to open up, and I appreciate your willingness to share. It's common for people to have thoughts like \"I'm not good enough\" or feel like their words don't matter. Let's explore together if there are other ways you could view these situations.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling stuck",
-                  "label": "emotions"
+                  "concept": "Feeling diffident",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I don’t really believe I deserve support or help",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"It's understandable to feel that way, but remember that seeking help is a sign of strength. Let's explore together why you might be feeling like you don't deserve it.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling stuck",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "I don’t really believe I deserve support or help",
-                  "label": "automatic_thoughts"
+                  "concept": "Complaining of feeling depressed",
+                  "label": "neutral"
                 }
               ]
             }
@@ -223,115 +187,110 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I think it’s just… I’ve always felt like I'm not good enough. Like, no matter what I do, it just never feels like it’s enough. So when I think about asking for help, it’s like I’m saying I can’t handle things on my own, and that feels shameful. It’s like a cycle I can’t break.",
+        "query": "Well, I guess it usually happens when I’m around friends or at work. I’ll be in a conversation, and I just freeze up, thinking that whatever I say won’t be interesting or worthwhile. It’s like I can feel my heart racing, and I just… withdraw. I don’t want to seem foolish or anything.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support"
+            "around friends",
+            "at work",
+            "in a conversation"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help",
-            "I'm not good enough; no matter what I do, it's never enough",
-            "Asking for help means I can't handle things on my own, which feels shameful"
+            "whatever I say won’t be interesting",
+            "whatever I say won’t be worthwhile",
+            "I don’t want to seem foolish"
           ],
           "emotions": [
-            "feeling stuck",
-            "shame"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "freeze up",
+            "withdraw"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling ashamed (finding)"
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Anxiety about forced dependence (finding)",
-            "Feeling trapped (finding)",
-            "Anxiety about behavior or performance (finding)"
+            "Fear of public speaking (finding)",
+            "Anxiety about collapsing (finding)",
+            "Fear of speaking on the phone (finding)",
+            "Fear of speaking to people in authority (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're carrying a heavy burden. Let's explore together if there might be other ways to view your situation, where asking for help could be seen as a sign of strength rather than weakness.\"",
-        "protocol_used": "alternative_perspective",
+        "response": "I can see that you often feel anxious in social situations, especially when you're around friends or at work. It seems like you worry about saying something uninteresting or worthless, which leads to feelings of anxiety and withdrawal. Let's explore these thoughts together and find ways to manage them better.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry that you've been feeling this way for quite some time. It takes a lot of courage to reach out and acknowledge these feelings. Let's work together to explore why you might be feeling like you're not good enough, and how we can break this cycle of self-doubt.",
+            "response": "I can see that you often feel anxious in social situations, especially when you're around friends or at work. It seems like you worry about saying something uninteresting or worthless, which leads to feelings of anxiety and withdrawal. Let's explore these thoughts together and find ways to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling ashamed",
-                  "label": "entailment"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about forced dependence",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying a heavy burden of self-doubt. Let's explore together if there are any specific situations or experiences that make you feel this way, and consider alternative perspectives on your abilities.\"",
+            "response": "\"It sounds like you're experiencing anxiety when in conversations, especially around friends or at work. Can we explore what makes you feel that whatever you say won't be interesting or worthwhile? Let's start by considering the evidence for and against this thought.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "neutral"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling ashamed (finding)",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy burden. Let's explore together if there might be other ways to view your situation, where asking for help could be seen as a sign of strength rather than weakness.\"",
+            "response": "\"It sounds like you're experiencing anxiety in social situations, especially when around friends or at work. You mentioned feeling that whatever you say won't be interesting or worthwhile, which might lead to feelings of anxiety. Have you ever considered what a trusted friend or outside observer might think about your contributions in these conversations? It could provide a different perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "neutral"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling ashamed (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry that you're feeling this way. It sounds like you've been struggling with feelings of not being good enough, and that asking for help can feel shameful. Let's explore these thoughts together and see if we can find a way to break this cycle.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Feeling ashamed (finding)",
-                  "label": "entailment"
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
@@ -343,101 +302,98 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I get that. But it’s hard to see it that way. I mean, part of me thinks that if I ask for help, it just shows that I’m failing or that I’m weak. It's like… I should be able to do this on my own, right? It feels embarrassing, I guess.",
+        "query": "Yeah, that sounds about right. I just don’t want to make a fool of myself, so I end up saying less and less. It’s frustrating because I really do want to connect with people, but it’s like there’s this wall. I guess I just feel so heavy sometimes, like I’m carrying around this fear.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support"
+            "wanting to connect with people",
+            "fear of making a fool of myself"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help",
-            "I'm not good enough; no matter what I do, it's never enough",
-            "Asking for help means I can't handle things on my own, which feels shameful",
-            "If I ask for help, it shows that I’m failing or that I’m weak",
-            "I should be able to do this on my own"
+            "I end up saying less and less",
+            "there's this wall"
           ],
           "emotions": [
-            "feeling stuck",
-            "shame",
-            "embarrassment"
+            "frustration",
+            "fear",
+            "heaviness"
           ],
-          "behaviors": []
+          "behaviors": [
+            "saying less",
+            "avoiding connection"
+          ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of saying the wrong thing (finding)",
+            "Fear of public speaking (finding)"
+          ],
           "neutral": [
-            "Difficulty in thinking independently (finding)",
-            "Pressured by others (finding)",
-            "Learning difficulties (finding)",
-            "Pressured by peers (finding)",
-            "Difficulty solving problems (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of speaking on the phone (finding)",
+            "Fear of speaking to people in authority (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you might feel embarrassed about asking for help, but it's important to remember that seeking support is a sign of strength, not weakness. Can we explore together why you think asking for help feels shameful?",
+        "response": "What makes you think that you'll make a fool of yourself? Can we explore the evidence for and against this thought?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you might feel embarrassed about asking for help, but it's important to remember that seeking support is a sign of strength, not weakness. It takes courage to acknowledge when we need assistance. Let's explore more about these feelings together.",
+            "response": "I can see how you might feel that way, and it's completely understandable to feel anxious about connecting with others. Let's work together on finding ways to manage this fear and connect more comfortably.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "fear of making a fool of myself",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "heaviness",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you might feel embarrassed about asking for help, but it's important to remember that seeking support is a sign of strength, not weakness. Can we explore together why you think asking for help feels shameful?",
+            "response": "What makes you think that you'll make a fool of yourself? Can we explore the evidence for and against this thought?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "fear of making a fool of myself",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "heaviness",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you might feel embarrassed about asking for help. But remember, seeking support doesn't mean you're weak or a failure. It takes strength to ask for help when you need it. Let's explore together what a trusted friend might say about this situation.\"",
+            "response": "\"It sounds like you're carrying a heavy burden of fear and frustration. Have you ever considered what a trusted friend might say about your situation? It could provide a different perspective that helps lighten the load.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "fear of making a fool of myself",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I understand that you might feel embarrassed about asking for help. It's important to remember that seeking support doesn't mean you're failing or weak, but rather a sign of strength and self-awareness. How do you usually feel when you think about reaching out for help?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "heaviness",
+                  "label": "emotions"
                 }
               ]
             }
@@ -449,105 +405,86 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that perspective, but it’s tough for me to see it that way. I just remember times when I did ask for help and people didn’t really take me seriously. It makes me think, “Why even bother?” It’s like I’m just setting myself up for more disappointment or… I don’t know, feeling even more worthless.",
+        "query": "I suppose it’s mostly from past experiences where I’ve stumbled over my words or said something awkward. I remember a few times people laughed at me, and it just… stuck with me. On the other hand, there are times when friends seem to enjoy what I say, but those moments don’t feel real in comparison. It’s like the negative stuff overshadows everything else.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support",
-            "remembering times when I asked for help and wasn't taken seriously"
+            "past experiences",
+            "people laughed at me"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help",
-            "I'm not good enough; no matter what I do, it's never enough",
-            "Asking for help means I can't handle things on my own, which feels shameful",
-            "If I ask for help, it shows that I’m failing or that I’m weak",
-            "I should be able to do this on my own",
-            "Why even bother asking for help if it leads to disappointment?",
-            "I'm just setting myself up for more disappointment or feeling even more worthless"
+            "I stumble over my words",
+            "I say something awkward",
+            "the negative stuff overshadows everything else"
           ],
           "emotions": [
-            "feeling stuck",
             "shame",
-            "embarrassment",
-            "feeling worthless"
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Conflicting attitude towards care (finding)",
-            "Caring towards others (finding)",
-            "Altruism - mental defense mechanism (finding)",
-            "Pressured by others (finding)"
+          "entailment": [],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of being laughed at (finding)",
+            "Humor - mental defense mechanism (finding)",
+            "Difficulty understanding own emotions (finding)",
+            "Able to understand humor (finding)"
           ],
-          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you've had experiences where asking for help didn't feel helpful. It can be disheartening, but let's focus on finding people who will take your concerns seriously and provide the support you need. Would it be okay if we explore ways to find those individuals together?",
+        "response": "I'm here to help you explore these feelings and thoughts together. It seems like past experiences have left a lasting impact on how you perceive yourself in social situations. Let's work on understanding those feelings better, shall we?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've had experiences where asking for help didn't feel helpful. It can be disheartening, but let's focus on finding people who will take your concerns seriously and provide the support you need. Would it be okay if we explore ways to find those individuals together?",
+            "response": "I'm here to help you explore these feelings and thoughts together. It seems like past experiences have left a lasting impact on how you perceive yourself in social situations. Let's work on understanding those feelings better, shall we?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Conflicting attitude towards care",
-                  "label": "entailment"
+                  "concept": "past experiences",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you've had experiences where seeking help didn't feel helpful. It can be disheartening, but let's explore what makes a difference when asking for support this time around. What would make it easier for you to ask for help now?",
+            "response": "Have you noticed that sometimes your mind jumps to thoughts about past experiences where things didn't go as well? It seems like those memories might be playing a role in how you feel now. Let's explore together if there are any patterns or ways we can shift this perspective.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Conflicting attitude towards care",
-                  "label": "entailment"
+                  "concept": "past experiences",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Pressured by others",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you've had experiences where asking for help didn't feel supportive. It's important to remember that everyone has unique circumstances and it might not always be easy to provide the right kind of support. Let's explore what a trusted friend or family member might say about your situation, and how they could offer understanding and encouragement.\"",
+            "response": "\"It sounds like you've had some challenging experiences in the past that have left a lasting impact. It's understandable to feel self-conscious when those memories resurface. Let's explore how we can shift your focus towards more positive moments and help you find ways to manage these feelings.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Conflicting attitude towards care",
-                  "label": "entailment"
+                  "concept": "past experiences",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry that you've had those experiences in the past. It can be difficult to ask for help when we fear not being taken seriously. Let's explore together if there might be other ways to seek support that feel more comfortable for you, so you don't have to worry about feeling disappointed again.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Conflicting attitude towards care",
-                  "label": "entailment"
+                  "concept": "people laughed at me",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "negative stuff overshadows everything else",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -559,563 +496,57 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "It’s hard for me to see it that way. I remember times when I did ask for help, and it felt like people didn’t really take me seriously. It makes me think, “Why even bother?” I’m just afraid of setting myself up for more disappointment or feeling even more worthless.",
+        "query": "Yeah, I think that could help. It's just hard to shake off those memories, you know? Sometimes I wonder if I’m always gonna feel this way. I want to be more confident, but it feels like I’m stuck in this loop of worry and doubt.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support",
-            "remembering times when I asked for help and wasn't taken seriously"
+            "memories",
+            "loop of worry and doubt"
           ],
           "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help",
-            "I'm not good enough; no matter what I do, it's never enough",
-            "Asking for help means I can't handle things on my own, which feels shameful",
-            "If I ask for help, it shows that I’m failing or that I’m weak",
-            "I should be able to do this on my own",
-            "Why even bother asking for help if it leads to disappointment?",
-            "I'm just setting myself up for more disappointment or feeling even more worthless"
+            "I’m always gonna feel this way",
+            "I want to be more confident"
           ],
           "emotions": [
-            "feeling stuck",
-            "shame",
-            "embarrassment",
-            "feeling worthless"
+            "worry",
+            "doubt"
           ],
           "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Pressured by others (finding)",
-            "Conflicting attitude towards care (finding)",
-            "Altruism - mental defense mechanism (finding)"
-          ],
-          "neutral": [
-            "Pressured by peers (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "I'm really sorry that you've felt this way in the past. It can be difficult when we feel like our concerns aren't taken seriously. Let's work together to find ways for you to ask for help and feel supported, without fear of disappointment or judgment.",
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "I'm really sorry that you've felt this way in the past. It can be difficult when we feel like our concerns aren't taken seriously. Let's work together to find ways for you to ask for help and feel supported, without fear of disappointment or judgment.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Conflicting attitude towards care (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "\"I'm here to help you explore these feelings and thoughts. Let's start by discussing your experiences when you asked for help in the past. What made you feel like people didn't take you seriously? And how did that make you feel about asking for help again?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Conflicting attitude towards care",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Altruism - mental defense mechanism",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"I understand that you've had experiences where asking for help didn't feel helpful. It's important to remember that everyone has different ways of supporting each other, and it might be worth considering what a supportive friend or family member would say about your situation.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Conflicting attitude towards care (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry that you've felt this way. It can be difficult when we feel like our needs aren't being met, and it's understandable to worry about asking for help again. Let's explore together what might make it easier for you to ask for support in the future.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Conflicting attitude towards care (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 6,
-      "patient": {
-        "role": "patient",
-        "query": "Thanks for saying that. I guess it feels nice to be heard, but I still have this nagging worry that I’ll just end up feeling rejected again. What if I put myself out there and it’s still the same old story? It’s just scary to think about.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support",
-            "remembering times when I asked for help and wasn't taken seriously",
-            "worrying about feeling rejected again"
-          ],
-          "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help",
-            "I'm not good enough; no matter what I do, it's never enough",
-            "Asking for help means I can't handle things on my own, which feels shameful",
-            "If I ask for help, it shows that I’m failing or that I’m weak",
-            "I should be able to do this on my own",
-            "Why even bother asking for help if it leads to disappointment?",
-            "I'm just setting myself up for more disappointment or feeling even more worthless",
-            "What if I put myself out there and it’s still the same old story?"
-          ],
-          "emotions": [
-            "feeling stuck",
-            "shame",
-            "embarrassment",
-            "feeling worthless",
-            "fear"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling unwanted (finding)",
-            "Feeling alienated (finding)",
-            "Feeling isolated (finding)",
-            "Feeling abandoned (finding)"
-          ],
-          "neutral": [
-            "Social isolation (rejection) (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "\"It sounds like you're worried that reaching out might lead to more disappointment. Let's explore what would happen if things don't go as planned. What could be the best and worst possible outcomes?\"",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "\"I can see how you might feel scared, and it's understandable to worry about being rejected again. Let's explore together what we can do to help you feel more supported.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling rejected again",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "scary",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "\"It sounds like you're worried that reaching out might lead to more disappointment. Let's explore what would happen if things don't go as planned. What could be the best and worst possible outcomes?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling rejected again",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "scary to think about",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"I can understand why you might feel scared, but let's consider the possibility that things could be different this time. What would be the best possible outcome if you did seek help?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling rejected again",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "scary to think about",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I can see that you're feeling scared and worried about being rejected again. Let's explore these feelings together, and we can work on finding ways to manage them.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling rejected again",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "fear",
-                  "label": "emotions"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 7,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, I mean, the worst would be that I get shut down again and just feel even more alone. But maybe the best could be… maybe someone actually understands me? It’s just hard to imagine anything positive when I’ve felt let down so many times. It’s like I keep bracing for the worst.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support",
-            "remembering times when I asked for help and wasn't taken seriously",
-            "worrying about feeling rejected again",
-            "bracing for the worst due to past letdowns"
-          ],
-          "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help",
-            "I'm not good enough; no matter what I do, it's never enough",
-            "Asking for help means I can't handle things on my own, which feels shameful",
-            "If I ask for help, it shows that I’m failing or that I’m weak",
-            "I should be able to do this on my own",
-            "Why even bother asking for help if it leads to disappointment?",
-            "I'm just setting myself up for more disappointment or feeling even more worthless",
-            "What if I put myself out there and it’s still the same old story?",
-            "The worst would be getting shut down again and feeling even more alone",
-            "It's hard to imagine anything positive after feeling let down so many times"
-          ],
-          "emotions": [
-            "feeling stuck",
-            "shame",
-            "embarrassment",
-            "feeling worthless",
-            "fear",
-            "feeling alone"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)"
-          ],
-          "neutral": [
-            "Depressive delusion of catastrophe (finding)",
-            "Extremely emotionally deprived (finding)",
-            "Complaining of feeling depressed (finding)",
-            "Difficulty coping with grief responses (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "I can see how you've been feeling quite isolated and braced for disappointment. It's understandable to feel that way after experiencing letdowns in the past. Let's work together to explore ways we can help you cope with these feelings and find some hope, even when it seems hard to imagine.",
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "I can see how you've been feeling quite isolated and braced for disappointment. It's understandable to feel that way after experiencing letdowns in the past. Let's work together to explore ways we can help you cope with these feelings and find some hope, even when it seems hard to imagine.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling alone",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "bracing for the worst",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "What if you could find a way to not automatically brace for the worst? What might that look like, and how would it feel?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "worrying about feeling rejected again",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "bracing for the worst due to past letdowns",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "What if, instead of bracing for the worst, you could imagine a situation where someone truly understands and supports you?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "worst",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "best",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "bracing for the worst",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how you've been bracing yourself for disappointment. Let's explore together if there might be a way to approach seeking support differently this time, so it feels less daunting and more hopeful.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "worrying about feeling rejected again",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "bracing for the worst due to past letdowns",
-                  "label": "triggers"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 8,
-      "patient": {
-        "role": "patient",
-        "query": "Thank you for saying that. It means a lot to know you see where I'm coming from. I guess… I want to feel some hope, but I'm just so scared of getting hurt again. It's like I want to break free from this weight, but every time I try, it feels like I just sink back down. I don't know how to change that.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support",
-            "remembering times when I asked for help and wasn't taken seriously",
-            "worrying about feeling rejected again",
-            "bracing for the worst due to past letdowns",
-            "wanting to feel hope but being scared of getting hurt again",
-            "trying to break free from this weight but feeling like sinking back down"
-          ],
-          "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help",
-            "I'm not good enough; no matter what I do, it's never enough",
-            "Asking for help means I can't handle things on my own, which feels shameful",
-            "If I ask for help, it shows that I’m failing or that I’m weak",
-            "I should be able to do this on my own",
-            "Why even bother asking for help if it leads to disappointment?",
-            "I'm just setting myself up for more disappointment or feeling even more worthless",
-            "What if I put myself out there and it’s still the same old story?",
-            "The worst would be getting shut down again and feeling even more alone",
-            "It's hard to imagine anything positive after feeling let down so many times",
-            "Every time I try to change, I just sink back down"
-          ],
-          "emotions": [
-            "feeling stuck",
-            "shame",
-            "embarrassment",
-            "feeling worthless",
-            "fear",
-            "feeling alone",
-            "wanting hope but feeling scared"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of losing emotional control (finding)",
-            "Fear of being a burden to others (finding)"
-          ],
-          "neutral": [
-            "Anxiety about losing emotional control (finding)",
-            "Fear of not coping with treatment (finding)",
-            "Feeling emotionally hurt (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "What makes you think you might get hurt again? Can we explore what happened in the past and how it's affecting your current feelings of hope?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "I can see why you might feel that way, and it's understandable to be afraid of getting hurt again. Let's explore together how we can work on finding some hope without the fear.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling stuck",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "wanting hope but feeling scared",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "What makes you think you might get hurt again? Can we explore what happened in the past and how it's affecting your current feelings of hope?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "wanting hope but feeling scared",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "What if we explore the best possible outcome? Can you imagine what it might look like to break free from this weight and feel hope instead of fear? Let's consider that together.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling stuck",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "wanting hope but feeling scared",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can understand why you might feel scared, and it's important to acknowledge those feelings. Let's explore together how we can find some hope without getting hurt again.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling alone",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "wanting hope but feeling scared",
-                  "label": "emotions"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 9,
-      "patient": {
-        "role": "patient",
-        "query": "It’s just those moments that stick with me, you know? Like when I opened up to someone and they just brushed it off or made me feel silly for feeling how I did. I think about those times, and it just makes me hesitate to try again. It’s like I’m afraid that if I let myself hope, I’ll just end up feeling even more rejected. It feels safer to just keep things in.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "feeling quite bad for quite a while",
-            "talking about seeking support",
-            "remembering times when I asked for help and wasn't taken seriously",
-            "worrying about feeling rejected again",
-            "bracing for the worst due to past letdowns",
-            "wanting to feel hope but being scared of getting hurt again",
-            "trying to break free from this weight but feeling like sinking back down",
-            "moments when I opened up and was brushed off or made to feel silly"
-          ],
-          "automatic_thoughts": [
-            "I thought I should see someone about it",
-            "I don’t really believe I deserve support or help",
-            "I'm not good enough; no matter what I do, it's never enough",
-            "Asking for help means I can't handle things on my own, which feels shameful",
-            "If I ask for help, it shows that I’m failing or that I’m weak",
-            "I should be able to do this on my own",
-            "Why even bother asking for help if it leads to disappointment?",
-            "I'm just setting myself up for more disappointment or feeling even more worthless",
-            "What if I put myself out there and it’s still the same old story?",
-            "The worst would be getting shut down again and feeling even more alone",
-            "It's hard to imagine anything positive after feeling let down so many times",
-            "Every time I try to change, I just sink back down",
-            "If I let myself hope, I’ll just end up feeling even more rejected"
-          ],
-          "emotions": [
-            "feeling stuck",
-            "shame",
-            "embarrassment",
-            "feeling worthless",
-            "fear",
-            "feeling alone",
-            "wanting hope but feeling scared",
-            "hesitation"
-          ],
-          "behaviors": [
-            "keeping things in"
-          ]
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Fear of saying the wrong thing (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of losing emotional control (finding)",
-            "Social isolation (rejection) (finding)",
-            "Fear of abandonment (finding)"
+            "Repressing painful memories (finding)",
+            "Anxiety about loss of memory (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Reliving traumatic memories (finding)",
+            "Repressing thoughts (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry that you've had those experiences where you felt dismissed or invalidated. It can be really tough to open up and feel like you're not being heard. Let's work together to find ways for you to feel more hopeful without fearing rejection.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're struggling with some persistent feelings of worry and doubt, and it's natural to wonder if they'll always be there. Let's explore together what might be keeping these thoughts going and see if we can find a way to break the cycle.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry that you've had those experiences where you felt dismissed or invalidated. It can be really tough to open up and feel like you're not being heard. Let's work together to find ways for you to feel more hopeful without fearing rejection.",
+            "response": "\"I can understand how difficult it is to break free from those memories and the loop of worry. It's important to remember that feelings are temporary, and everyone experiences self-doubt at times. Let's work together on finding ways to build your confidence.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "behaviors",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've had some difficult experiences where you felt dismissed or invalidated. Can we explore together what makes you hesitant to open up again, and how that might be connected to your fear of feeling rejected?\"",
+            "response": "\"It sounds like you're struggling with some persistent feelings of worry and doubt, and it's natural to wonder if they'll always be there. Let's explore together what might be keeping these thoughts going and see if we can find a way to break the cycle.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1130,26 +561,153 @@
             }
           },
           "alternative_perspective": {
-            "response": "\"I can understand why you might feel hesitant after those experiences. It's important to remember that not everyone may respond the way we hope, but it doesn't mean that every interaction will be like that. Let's explore what a trusted friend or outside observer might think about your situation and see if that helps broaden your perspective.\"",
+            "response": "\"It sounds like you're struggling with some persistent feelings of worry and doubt, and it's understandable to feel stuck sometimes. Have you ever considered what a trusted friend or family member might say about your situation? Their perspective could provide a different outlook that helps you move forward.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling alone",
-                  "label": "emotions"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "fear of getting hurt again",
-                  "label": "emotions"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "That sounds good, I think. It’s a bit overwhelming to think about where to start, though. I guess I just keep going back to those moments when I felt embarrassed or less than, and it makes it hard to see anything else. I really want to break free from that, but I’m not sure how.",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [
+            "thinking about where to start",
+            "moments of embarrassment"
+          ],
+          "automatic_thoughts": [
+            "I feel less than",
+            "I can't see anything else"
+          ],
+          "emotions": [
+            "overwhelmed",
+            "embarrassment"
+          ],
+          "behaviors": [
+            "keep going back to past moments",
+            "feeling stuck"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling ashamed (finding)"
+          ],
+          "neutral": [
+            "Anxiety about blushing (finding)",
+            "Difficulty controlling emotions (finding)",
+            "Mature emotional adjustment (finding)",
+            "Repressing painful memories (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that you're feeling overwhelmed and it can be difficult to see beyond those moments of embarrassment. Let's focus on finding a way forward together, one step at a time.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that you're feeling overwhelmed and it can be difficult to see beyond those moments of embarrassment. Let's focus on finding a way forward together, one step at a time.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "hesitation",
-                  "label": "emotions"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "\"I'm really sorry that you've had those experiences where you felt dismissed or invalidated. It can be hard to open up again after feeling that way, and it makes sense that you might feel hesitant. Let's explore some ways we could work together to help you feel more hopeful without fearing rejection.\"",
+          "socratic_questioning": {
+            "response": "What are some situations or moments where you felt less than, and what thoughts were going through your mind at that time? Let's explore those together to find a way forward.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I can understand why you might feel overwhelmed when thinking about where to start. It's common to get stuck in our automatic thoughts and emotions, especially when they are negative. Let's explore some alternative perspectives together that may help broaden your view and reduce the intensity of these feelings.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, one step at a time sounds more manageable. I just don't want to keep feeling this way. It’s like I want to break out of my shell, but there's this fear holding me back. I want to feel lighter, you know?",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I don't want to keep feeling this way",
+            "There's this fear holding me back",
+            "I want to break out of my shell"
+          ],
+          "emotions": [
+            "fear"
+          ],
+          "behaviors": [
+            "want to feel lighter"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling like wanting to escape (finding)"
+          ],
+          "neutral": [
+            "Anxiety about collapsing (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about treatment (finding)",
+            "Fear of not coping with treatment (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I understand that you're feeling fearful and wanting to break free from something. It sounds like you're carrying a heavy burden. Let's explore together what might be causing this fear and how we can work towards feeling lighter.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I understand that you're feeling fearful and wanting to break free from something. It sounds like you're carrying a heavy burden. Let's explore together what might be causing this fear and how we can work towards feeling lighter.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1157,8 +715,252 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "behaviors",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What emotions are you experiencing when you say you don't want to keep feeling this way? And what thoughts come up for you when you mention wanting to break out of your shell but feeling held back by fear?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I understand that you're feeling fearful and wanting to break free from something. It sounds like this fear is holding you back from feeling lighter. Let's explore together what a trusted friend or outside observer might say about your situation, and see if we can find a way to lighten the load.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I think that would help. It’s tough to even think about what’s causing it sometimes. There’s this nagging feeling that I just won’t measure up to what people expect of me. I guess I just want to feel like I belong and that I'm enough, you know? But that fear of letting people down lingers.",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I won't measure up to what people expect of me",
+            "I want to feel like I belong",
+            "I'm not enough",
+            "I fear letting people down"
+          ],
+          "emotions": [
+            "fear"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Anxiety about behavior or performance (finding)",
+            "Fear of being a burden to others (finding)",
+            "Feeling a failure (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
+          "neutral": [
+            "Inadequate personality (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "What evidence do you have that people expect more from you than you can deliver? And how might your fear of letting people down be affecting your sense of belonging and self-worth?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "You're absolutely right. It can be challenging to navigate those feelings, especially when we worry about not meeting expectations and fear letting people down. Let's take some time to explore these thoughts together and see if we can find a way to ease that anxiety.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that people expect more from you than you can deliver? And how might your fear of letting people down be affecting your sense of belonging and self-worth?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're dealing with some heavy feelings, and it's understandable to worry about not meeting expectations. Let's explore together if there might be other ways to look at this situation that could help alleviate some of your concerns.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "I guess I don’t have concrete proof that they expect more, but it feels like I always have to keep up, you know? Like, maybe there’s this unspoken standard I should meet. It’s like my mind just jumps to the worst-case scenario—that if I don’t meet those expectations, I’ll be rejected or judged. That fear wraps around everything and makes it hard to just be myself. I want to feel accepted, but it feels like I'm always on thin ice.",
+        "core_issue": "self-esteem and confidence issues",
+        "schema": {
+          "triggers": [
+            "unspoken standards",
+            "expectations",
+            "fear of rejection",
+            "judgment"
+          ],
+          "automatic_thoughts": [
+            "I always have to keep up",
+            "there's an unspoken standard I should meet",
+            "if I don’t meet those expectations, I’ll be rejected or judged"
+          ],
+          "emotions": [
+            "fear",
+            "anxiety"
+          ],
+          "behaviors": [
+            "struggling to be myself",
+            "feeling like I'm on thin ice"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Incongruent personal expectations (finding)",
+            "Feeling alienated (finding)"
+          ],
+          "neutral": [
+            "Pressured by peers (finding)",
+            "Pressured by others (finding)",
+            "Social isolation (rejection) (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that you feel like there's an unspoken standard to meet and that fear of not meeting it can make you feel anxious. It's important to remember that everyone has their own pace, and it's okay if things don't always go as planned. Let's explore together how we can help you manage these feelings and find a way for you to be yourself without the fear of rejection or judgment.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that you feel like there's an unspoken standard to meet and that fear of not meeting it can make you feel anxious. It's important to remember that everyone has their own pace, and it's okay if things don't always go as planned. Let's explore together how we can help you manage these feelings and find a way for you to be yourself without the fear of rejection or judgment.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "unspoken standards",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "expectations",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of rejection",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "judgment",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're carrying a heavy burden of expectations. Can we explore together what evidence supports these fears and what alternative outcomes might be possible?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "unspoken standards",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "expectations",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of rejection",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "judgment",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're setting high expectations for yourself, and that can be overwhelming. Let's explore what might happen if those expectations aren't met. What do you think a trusted friend or family member would say about this situation?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "unspoken standards",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "expectations",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of rejection",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "judgment",
+                  "label": "triggers"
                 }
               ]
             }

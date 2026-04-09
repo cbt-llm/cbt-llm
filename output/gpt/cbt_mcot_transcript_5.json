@@ -24,7 +24,8 @@
             "loss of extra income"
           ],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent."
+            "I'm too comfortable with the extra income",
+            "I won't be able to pay for food or rent"
           ],
           "emotions": [
             "fear"
@@ -46,11 +47,49 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling anxious about losing that extra income and worried it might affect your ability to pay for food and rent. What thoughts come up for you when you imagine not having that extra income?",
+        "response": "It sounds like you’re feeling a lot of worry about losing that extra income and how it might impact your basic needs, and that fear feels pretty intense right now. Can you tell me what that worry looks like for you at the moment?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling anxious about losing that extra income and worried it might affect your ability to pay for food and rent. What thoughts come up for you when you imagine not having that extra income?",
+            "response": "It sounds like you’re feeling a lot of worry about losing that extra income and how it might impact your basic needs, and that fear feels pretty intense right now. Can you tell me what that worry looks like for you at the moment?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about loss of control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about forced dependence",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear about paying food or rent",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're worried that losing the extra income will make it hard to pay for food or rent. What evidence do you have that you won't be able to manage those expenses without it?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about loss of control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about forced dependence",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts about inability to pay for food or rent",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "If a close friend heard about this, what might they suggest you consider about your ability to manage the change?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -67,40 +106,6 @@
                 }
               ]
             }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're worried about losing control over your finances. What evidence do you have that you won't be able to pay for food or rent now that the extra income is gone?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about loss of control",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about forced dependence",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "If a close friend were looking at this, what might they say about your ability to handle the change? It could help you see other ways to manage.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about loss of control",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about forced dependence",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling anxious about losing that extra income and how it might affect your ability to pay for food and rent. What worries are most pressing to you right now?",
-            "reasoning": null
           }
         }
       }
@@ -109,157 +114,101 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I just start to feel this tightness in my chest. I think about how hard it is to make ends meet as it is, and losing that income just feels like another weight added on. It’s like I can see all the bills piling up and I don't know how I’d handle it.",
+        "query": "Yeah, it’s just this constant nagging feeling in the back of my mind. I can’t shake the thought that if something happens, like losing that income, everything could fall apart. I keep imagining how hard it would be to pay bills, or even put food on the table. It makes me feel anxious all the time.",
         "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet"
+            "losing income"
           ],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up."
+            "everything could fall apart",
+            "hard to pay bills",
+            "hard to put food on the table"
           ],
           "emotions": [
-            "fear",
-            "tightness in chest"
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling of discouragement (finding)",
-            "Feeling of loss of feeling (finding)",
-            "Feeling stressed (finding)"
+            "Sense of impending doom (finding)"
           ],
           "neutral": [
             "Anxiety about collapsing (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Fear of collapsing (finding)",
+            "Obsessional thoughts of being robbed (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the loss of that extra income is tightening your chest and adding a heavy weight of bills that feels overwhelming. What’s one small step you’ve taken before that helped you feel a bit more in control when finances were tight?",
+        "response": "It sounds like the fear of losing your income is weighing heavily on you, making you feel like everything could collapse and that’s understandably anxiety‑provoking. What’s one small thing that’s been most challenging for you to handle right now?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like the loss of that extra income is tightening your chest and adding a heavy weight of bills that feels overwhelming. What’s one small step you’ve taken before that helped you feel a bit more in control when finances were tight?",
+            "response": "It sounds like the fear of losing your income is weighing heavily on you, making you feel like everything could collapse and that’s understandably anxiety‑provoking. What’s one small thing that’s been most challenging for you to handle right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "loss of extra income",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "tightness in chest",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "bills piling up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "feeling of discouragement",
+                  "concept": "Sense of impending doom",
                   "label": "entailment"
                 },
                 {
-                  "concept": "feeling of loss of feeling",
-                  "label": "entailment"
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "feeling stressed",
-                  "label": "entailment"
+                  "concept": "Fear of collapsing",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like the bills are a big worry. What evidence do you have that you won't be able to manage them?",
+            "response": "What evidence do you have that losing your income will cause everything to fall apart?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling stressed",
+                  "concept": "Sense of impending doom",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling discouragement",
-                  "label": "unknown"
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling loss of feeling",
-                  "label": "unknown"
+                  "concept": "Fear of collapsing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Automatic thoughts about inability to manage bills",
-                  "label": "unknown"
+                  "concept": "Automatic thoughts: everything could fall apart",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Trigger: losing income",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like the loss feels like a big added weight; what might a supportive friend say to you right now? Maybe they would remind you that you’ve handled tough times before.",
+            "response": "If a trusted friend were watching you, what might they say to help you see other possibilities? You might also consider what small steps you’ve taken in the past to keep things running.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of discouragement",
+                  "concept": "Sense of impending doom",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of loss",
-                  "label": "entailment"
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling stressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Automatic thoughts about losing income",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "tightness in chest",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like the loss of that extra income is adding a lot of pressure, and that tightness in your chest is a clear sign of how stressful this feels for you. What might be one small step you could take to feel a bit more in control of the bills right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling stressed",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of loss",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling discouraged",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Loss of extra income",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "Fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Tightness in chest",
-                  "label": "emotions"
+                  "concept": "Fear of collapsing",
+                  "label": "neutral"
                 }
               ]
             }
@@ -271,119 +220,92 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I mean, sometimes I’ve tried budgeting, you know, just sitting down and writing everything out. It helps a little, but then I get stuck when I realize how little I actually have left over. It's like, no matter what I do, it feels like I’m just fighting against the tide.",
+        "query": "I guess it's just balancing my expenses. I find myself obsessing over every little thing I spend, and it’s exhausting. Sometimes I feel like I’m living in survival mode, which makes me anxious about even the smallest purchases. It distracts me from enjoying anything.",
         "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet",
-            "budgeting attempts"
+            "balancing expenses",
+            "small purchases"
           ],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up.",
-            "No matter what I do, it feels like I’m just fighting against the tide."
+            "obsessing over spending",
+            "living in survival mode"
           ],
           "emotions": [
-            "fear",
-            "tightness in chest",
-            "frustration"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "distracted from enjoying things"
+          ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Compulsive buying (finding)",
+            "Preoccupation of thought (finding)"
+          ],
           "neutral": [
-            "Low self-control (finding)",
-            "Difficulty making plans (finding)",
             "Compulsive hoarding (finding)",
             "Obsessional thoughts of throwing things away (finding)"
           ],
           "contradiction": [
-            "Repressing thoughts (finding)"
+            "Able to resist obsessional thoughts (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling stuck and overwhelmed when you see how little you have left after budgeting. What does that feeling of fighting against the tide look like for you?",
+        "response": "It sounds like you’re feeling overwhelmed by the need to keep track of every expense, and that anxiety is pulling you away from enjoying life. What’s one small thing you’ve noticed that helps you feel a bit more relaxed about spending?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling stuck and overwhelmed when you see how little you have left after budgeting. What does that feeling of fighting against the tide look like for you?",
+            "response": "It sounds like you’re feeling overwhelmed by the need to keep track of every expense, and that anxiety is pulling you away from enjoying life. What’s one small thing you’ve noticed that helps you feel a bit more relaxed about spending?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "Compulsive buying",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling stuck",
+                  "concept": "Preoccupation of thought",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "budgeting challenges",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re feeling stuck and frustrated. What evidence do you have that the budget won’t help you feel more in control?",
+            "response": "It sounds exhausting. What evidence do you have that obsessing over every purchase is preventing you from enjoying life?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "budgeting attempts",
-                  "label": "triggers"
+                  "concept": "Compulsive buying (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts about fighting against the tide",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions of frustration and fear",
-                  "label": "emotions"
+                  "concept": "Preoccupation of thought (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "If a trusted friend were watching you budget and feel stuck, what might they suggest? It might help to remember that even small adjustments can add up over time, and that many people find ways to shift their spending gradually.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "budgeting attempts",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "feeling stuck",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "difficulty making plans",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like budgeting gives you a bit of relief, but then you feel stuck and overwhelmed by how little you have left. What do you think might help you feel less like you’re fighting against the tide?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "budgeting attempts",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "frustration",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "feeling stuck",
-                  "label": "unknown"
-                }
-              ]
-            }
+            "response": "It sounds exhausting to feel like you’re in survival mode every time you think about a small purchase. If a close friend were watching you, what might they say about how you’re handling these expenses?",
+            "reasoning": null
           }
         }
       }
@@ -392,140 +314,97 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I’ve tried budgeting before, but it’s frustrating. I’ll sit down and write everything out, and I can’t shake the feeling that no matter how carefully I plan, there’s always something unexpected that pops up. I just feel so overwhelmed sometimes, like I'm always a step behind.",
+        "query": "I don’t know, maybe when I’m with friends and we laugh about silly stuff, I can forget about it for a little while. But then I feel guilty afterward, like I shouldn’t have spent anything. It’s such a back-and-forth. I want to enjoy those moments, but the worry always creeps back in.",
         "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet",
-            "budgeting attempts",
-            "unexpected expenses"
+            "being with friends",
+            "laughing about silly stuff"
           ],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up.",
-            "No matter what I do, it feels like I’m just fighting against the tide.",
-            "No matter how carefully I plan, there's always something unexpected that pops up."
+            "I shouldn’t have spent anything",
+            "the worry always creeps back in"
           ],
           "emotions": [
-            "fear",
-            "tightness in chest",
-            "frustration",
-            "overwhelm"
+            "guilt",
+            "worry"
           ],
-          "behaviors": []
+          "behaviors": [
+            "forgetting about it for a little while",
+            "enjoying those moments"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Difficulty making plans (finding)",
-            "Tends not to plan ahead (finding)",
-            "Difficulty making decisions (finding)"
+            "Feeling guilt (finding)"
           ],
           "neutral": [
-            "Forgets what was going to do (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Difficulty controlling emotions (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
-          "contradiction": [
-            "Tends to plan ahead (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling frustrated and overwhelmed by the unpredictability of expenses, and that can make budgeting feel like a constant uphill battle. What’s one small change you think might help you feel a bit more in control?",
+        "response": "It sounds like you’re trying to enjoy time with friends and laugh, but then you’re left feeling guilty about spending. What does that guilt feel like for you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling frustrated and overwhelmed by the unpredictability of expenses, and that can make budgeting feel like a constant uphill battle. What’s one small change you think might help you feel a bit more in control?",
+            "response": "It sounds like you’re trying to enjoy time with friends and laugh, but then you’re left feeling guilty about spending. What does that guilt feel like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Difficulty making plans",
+                  "concept": "Feeling guilt (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty making decisions",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "overwhelm",
-                  "label": "emotions"
+                  "concept": "Difficulty controlling emotions (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What thoughts run through your mind when you feel like you’re always a step behind? How do those thoughts make you feel?",
+            "response": "What evidence supports the idea that you shouldn’t have spent anything, and what evidence might suggest otherwise?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Difficulty making plans",
+                  "concept": "Feeling guilt",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty making decisions",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Difficulty controlling emotions",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "If a close friend were watching you, what might they say about how you handle unexpected expenses? Consider what a realistic outcome might look like if you built a small buffer into your plan.",
+            "response": "It might help to imagine what a close friend would say about your enjoyment—perhaps they'd point out that you’re simply balancing responsibility with fun. What would that friend suggest you do to keep the guilt from pulling you back?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "difficulty making plans",
+                  "concept": "Feeling guilt (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "difficulty making decisions",
-                  "label": "entailment"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "budgeting attempts",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "unexpected expenses",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "overwhelm",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like budgeting feels frustrating and you’re feeling overwhelmed by unexpected expenses. What part of the budgeting process feels most overwhelming to you?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "budgeting attempts",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "unexpected expenses",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic thought about unexpected pop-ups",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "difficulty making plans",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "difficulty making decisions",
-                  "label": "entailment"
+                  "concept": "Difficulty controlling emotions (finding)",
+                  "label": "neutral"
                 }
               ]
             }
@@ -537,86 +416,131 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I guess I could try tracking my spending a bit more closely. Maybe just being aware of where the money goes would help? But then, that thought also stresses me out because I worry about what I'll find. It’s like, what if I see something that just makes it worse?",
+        "query": "It feels heavy, like this weight on my chest. I start replaying the evening in my head and thinking about how I could have saved that money instead. It's frustrating because those moments are supposed to be fun, but the guilt just makes me anxious and regretful, like I’ve messed up somehow.",
         "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet",
-            "budgeting attempts",
-            "unexpected expenses",
-            "considering tracking spending"
+            "replaying the evening",
+            "thinking about saving money"
           ],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up.",
-            "No matter what I do, it feels like I’m just fighting against the tide.",
-            "No matter how carefully I plan, there's always something unexpected that pops up.",
-            "Tracking my spending might help, but I'm scared of what I'll find."
+            "I could have saved that money",
+            "I’ve messed up somehow"
           ],
           "emotions": [
-            "fear",
-            "tightness in chest",
             "frustration",
-            "overwhelm",
-            "stress"
+            "anxiety",
+            "guilt",
+            "regret"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)"
+            "Feeling guilt (finding)",
+            "Feeling bad (finding)",
+            "Feeling ashamed (finding)",
+            "Feeling of discouragement (finding)"
           ],
           "neutral": [
-            "Compulsive hoarding (finding)",
-            "Obsessional thoughts of being robbed (finding)",
-            "Compulsive buying (finding)",
-            "Obsessional thoughts of throwing things away (finding)"
+            "Anxiety about making mistakes (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re torn between the idea that tracking could help and the worry that it might make things feel worse, which is a common reaction when we’re trying to manage finances. What would it feel like if you could look at the numbers without that fear?",
+        "response": "It sounds like replaying that evening is weighing heavily on you, bringing guilt, frustration, and anxiety. What part of that replay feels most painful?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re torn between the idea that tracking could help and the worry that it might make things feel worse, which is a common reaction when we’re trying to manage finances. What would it feel like if you could look at the numbers without that fear?",
+            "response": "It sounds like replaying that evening is weighing heavily on you, bringing guilt, frustration, and anxiety. What part of that replay feels most painful?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "Feeling guilt (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Feeling bad (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling ashamed (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts: I could have saved that money, I’ve messed up somehow",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: frustration, anxiety, guilt, regret",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that tracking your spending will make things worse?",
+            "response": "It sounds like you’re carrying a lot of guilt. What evidence do you have that you could have saved that money?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "Feeling guilt",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Feeling ashamed",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It might help to think about what a supportive friend would say—perhaps they'd remind you that seeing the numbers could actually give you a clearer picture and a chance to adjust before things get worse. What’s one small thing you could track that feels manageable right now?",
+            "response": "If a trusted friend heard you describe that evening, what might they say to help you see it differently? They might remind you that one night doesn’t define your overall financial habits.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "Feeling guilt (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Feeling bad (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling ashamed (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts: I could have saved that money",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: frustration, anxiety, guilt, regret",
+                  "label": "emotions"
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re hoping tracking could help, but also worried it might add stress. What would make you feel more at ease about trying it?",
-            "reasoning": null
           }
         }
       }
@@ -625,97 +549,106 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I think it would feel… freeing, in a way? But it’s hard to shake off that anxiety about what I might find. I keep thinking that maybe it would just confirm my fears, like there’s really no hope of getting ahead. I guess that fear keeps me from even wanting to try.",
+        "query": "Yeah, it does weigh on me. I think it’s the fact that I can’t just enjoy the moment without immediately thinking about the consequences. Like, why can’t I just let go for a bit? It feels painful to realize that I’m missing out on life because I’m so fixated on money. It just makes everything feel so... heavy.",
         "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet",
-            "budgeting attempts",
-            "unexpected expenses",
-            "considering tracking spending"
+            "thinking about consequences",
+            "fixated on money"
           ],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up.",
-            "No matter what I do, it feels like I’m just fighting against the tide.",
-            "No matter how carefully I plan, there's always something unexpected that pops up.",
-            "Tracking my spending might help, but I'm scared of what I'll find.",
-            "Maybe tracking my spending would just confirm my fears, like there’s really no hope of getting ahead."
+            "I can't enjoy the moment",
+            "I'm missing out on life"
           ],
           "emotions": [
-            "fear",
-            "tightness in chest",
-            "frustration",
-            "overwhelm",
-            "stress",
-            "anxiety"
+            "pain",
+            "heaviness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling like wanting to escape (finding)"
+            "Preoccupation with ruin (finding)"
           ],
           "neutral": [
-            "Thoughts about dying (finding)"
+            "Fear of being a burden to others (finding)",
+            "Devaluation - mental defense mechanism (finding)",
+            "Anxiety about forced dependence (finding)"
           ],
           "contradiction": [
-            "Hopeful for the future (finding)",
-            "Ready for enhanced hope (finding)",
-            "Feeling safe (finding)"
+            "Preoccupation with body weight (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling a mix of relief at the idea of getting a clearer picture and a strong fear that it might just confirm your worries, which is making it hard to even start. What might it feel like to try tracking for just a short period, like a week, to see what you find?",
+        "response": "It sounds like the constant focus on future outcomes and the pressure of money is making it hard to enjoy the present, and that heaviness feels painful. What would it feel like if you could let that worry sit for just a short moment?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling a mix of relief at the idea of getting a clearer picture and a strong fear that it might just confirm your worries, which is making it hard to even start. What might it feel like to try tracking for just a short period, like a week, to see what you find?",
+            "response": "It sounds like the constant focus on future outcomes and the pressure of money is making it hard to enjoy the present, and that heaviness feels painful. What would it feel like if you could let that worry sit for just a short moment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of tracking spending",
-                  "label": "emotions"
+                  "concept": "preoccupation with ruin",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling of escape",
-                  "label": "unknown"
+                  "concept": "fixated on money",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "anxiety about future",
+                  "concept": "painful heaviness",
                   "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re worried that tracking might confirm your fears. What evidence do you have that it will, and what evidence might suggest otherwise?",
+            "response": "It sounds like this is weighing heavily on you. What evidence do you have that thinking about consequences stops you from enjoying the moment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling like wanting to escape (finding)",
+                  "concept": "preoccupation with ruin",
                   "label": "entailment"
+                },
+                {
+                  "concept": "fear of being a burden",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "devaluation",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anxiety about forced dependence",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like the idea of tracking could feel like a test that might confirm your fears, but a friend might see it as a chance to spot patterns you didn’t notice before—what do you think they would say? Even if the results are tough, they could also reveal small wins that help you feel more in control.",
+            "response": "If a close friend heard you say you can’t enjoy the moment because of money worries, what might they say? They might suggest that a brief moment of enjoyment could actually help you think more clearly about your finances.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling like wanting to escape (finding)",
+                  "concept": "preoccupation with ruin",
                   "label": "entailment"
+                },
+                {
+                  "concept": "fixated on money",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "pain",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "heaviness",
+                  "label": "emotions"
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling both a sense of potential relief and a lot of anxiety about what you might discover, and that fear is holding you back. What would it feel like to try tracking your spending for just a few days and see what you find?",
-            "reasoning": null
           }
         }
       }
@@ -724,137 +657,130 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, that sounds... kind of manageable, I guess? Just a week doesn’t seem too daunting. But then I think about how stressful it might be to face those numbers every day, like it’s a reminder of how tight things are. It just feels like I'm poking a bear or something.",
+        "query": "I don’t know... it might feel kind of freeing, I guess? But then there’s this voice in my head that immediately jumps in with all the “what ifs.” It’s like, if I let go for even a second, something bad will happen. But, yeah, it’s tiring to always be on edge. I wish I could just breathe and not think about it for a while.",
         "core_issue": "financial concerns",
         "schema": {
-          "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet",
-            "budgeting attempts",
-            "unexpected expenses",
-            "considering tracking spending",
-            "facing daily spending numbers"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up.",
-            "No matter what I do, it feels like I’m just fighting against the tide.",
-            "No matter how carefully I plan, there's always something unexpected that pops up.",
-            "Tracking my spending might help, but I'm scared of what I'll find.",
-            "Maybe tracking my spending would just confirm my fears, like there’s really no hope of getting ahead.",
-            "Facing those numbers every day feels like a reminder of how tight things are, like I'm poking a bear."
+            "if I let go for even a second, something bad will happen",
+            "what ifs"
           ],
           "emotions": [
-            "fear",
-            "tightness in chest",
-            "frustration",
-            "overwhelm",
-            "stress",
-            "anxiety"
+            "anxiety",
+            "tiredness"
           ],
-          "behaviors": []
+          "behaviors": [
+            "always be on edge",
+            "wish to breathe and not think about it"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about having a fit (finding)",
-            "Difficulty managing stress (finding)",
-            "Anxiety about not coping with parenthood (finding)",
-            "Poor daily routine (finding)",
-            "Difficulty in remembering dates (finding)"
+          "entailment": [
+            "Feeling like wanting to escape (finding)"
           ],
-          "contradiction": []
+          "neutral": [
+            "Fear of losing emotional control (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about going crazy (finding)"
+          ],
+          "contradiction": [
+            "Feeling calm (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like seeing those numbers each day feels like a constant reminder of how tight your budget is, and that can feel overwhelming. What does that feeling of “poking a bear” look like for you right now?",
+        "response": "It sounds like you’re caught between a sense of relief and a wave of anxious “what ifs” that keep you on edge and exhausted. When you try to breathe, what thoughts or feelings come up for you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like seeing those numbers each day feels like a constant reminder of how tight your budget is, and that can feel overwhelming. What does that feeling of “poking a bear” look like for you right now?",
+            "response": "It sounds like you’re caught between a sense of relief and a wave of anxious “what ifs” that keep you on edge and exhausted. When you try to breathe, what thoughts or feelings come up for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "facing daily spending numbers",
-                  "label": "triggers"
+                  "concept": "Feeling like wanting to escape",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "tracking spending",
-                  "label": "triggers"
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "budgeting attempts",
-                  "label": "triggers"
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "fear",
+                  "concept": "Anxiety about going crazy",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts: 'if I let go for even a second, something bad will happen'",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "overwhelm",
+                  "concept": "emotions: anxiety, tiredness",
                   "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: always be on edge, wish to breathe and not think about it",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that facing those numbers every day will actually make the situation feel tighter, and how might you view it differently?",
+            "response": "What evidence do you have that something bad will happen if you let go for a second? It might help to think about a time when you let go and nothing bad happened.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about having a fit (finding)",
+                  "concept": "Feeling like wanting to escape",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Difficulty managing stress (finding)",
+                  "concept": "Anxiety about collapsing",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Poor daily routine (finding)",
+                  "concept": "Anxiety about going crazy",
                   "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts: if I let go for even a second, something bad will happen",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "automatic thoughts: what ifs",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It can feel like a constant reminder, but a supportive friend might see it as a chance to build a new habit. What do you think a close friend would notice about how you’re handling the daily numbers?",
+            "response": "It sounds like you’re torn between a desire to feel free and a fear that letting go might lead to something bad. If a close friend heard you say you’re tired of being on edge, what might they suggest you try first?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "budgeting attempts",
-                  "label": "triggers"
+                  "concept": "Feeling like wanting to escape (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "unexpected expenses",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "fear",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "overwhelm",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "stress",
+                  "concept": "Fear of losing emotional control",
                   "label": "neutral"
                 },
                 {
-                  "concept": "anxiety",
+                  "concept": "Anxiety about collapsing",
                   "label": "neutral"
                 },
                 {
-                  "concept": "poor daily routine",
+                  "concept": "Anxiety about going crazy",
                   "label": "neutral"
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like seeing those numbers every day feels like a constant reminder of how tight things are, almost like you’re poking a bear. What might help you feel a bit more in control when you look at those numbers?",
-            "reasoning": null
           }
         }
       }
@@ -863,151 +789,78 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It just feels like this looming dread, you know? Like if I look too closely, I’ll realize how bad things really are, and then I’ll spiral into worry. It’s exhausting to think about, and I just want to avoid that sinking feeling. It's like I’m stuck between wanting to know and being terrified of the truth.",
+        "query": "I don’t know... it might feel kind of freeing, I guess? But then there’s this voice in my head that immediately jumps in with all the “what ifs.” It’s like, if I let go for even a second, something bad will happen. But it’s tiring to always be on edge. I wish I could just breathe and not think about it for a while.",
         "core_issue": "financial concerns",
         "schema": {
-          "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet",
-            "budgeting attempts",
-            "unexpected expenses",
-            "considering tracking spending",
-            "facing daily spending numbers"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up.",
-            "No matter what I do, it feels like I’m just fighting against the tide.",
-            "No matter how carefully I plan, there's always something unexpected that pops up.",
-            "Tracking my spending might help, but I'm scared of what I'll find.",
-            "Maybe tracking my spending would just confirm my fears, like there’s really no hope of getting ahead.",
-            "Facing those numbers every day feels like a reminder of how tight things are, like I'm poking a bear.",
-            "If I look too closely, I’ll realize how bad things really are, and then I’ll spiral into worry."
+            "if I let go for even a second, something bad will happen",
+            "what ifs"
           ],
           "emotions": [
-            "fear",
-            "tightness in chest",
-            "frustration",
-            "overwhelm",
-            "stress",
             "anxiety",
-            "dread",
-            "exhaustion"
+            "tiredness"
           ],
           "behaviors": [
-            "avoiding thinking about finances"
+            "always be on edge"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Sense of impending doom (finding)",
-            "Fear of going crazy (finding)",
-            "Obsessional doubts (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Fear of losing emotional control (finding)",
+            "Anxiety about collapsing (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling like wanting to escape (finding)",
+            "Feeling calm (finding)",
+            "Free-floating anxiety (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling a heavy dread that makes you want to avoid looking at the situation, and that’s exhausting. What would it feel like if you could step back from that dread for a moment?",
+        "response": "It sounds like you’re caught between a sense of freedom and a persistent voice of worry that keeps you on edge, which must be exhausting. What’s the one thing that worries you most when you think about letting go?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling a heavy dread that makes you want to avoid looking at the situation, and that’s exhausting. What would it feel like if you could step back from that dread for a moment?",
+            "response": "It sounds like you’re caught between a sense of freedom and a persistent voice of worry that keeps you on edge, which must be exhausting. What’s the one thing that worries you most when you think about letting go?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "sense of impending doom",
-                  "label": "entailment"
+                  "concept": "fear of losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "fear",
-                  "label": "entailment"
+                  "concept": "anxiety about collapsing",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "exhaustion",
+                  "concept": "automatic thoughts of 'what ifs'",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "tiredness from being on edge",
                   "label": "emotions"
-                },
-                {
-                  "concept": "avoidance",
-                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re caught between wanting to know and fearing the outcome. What evidence do you have that looking more closely will actually make things worse?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Sense of impending doom",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of going crazy",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Obsessional doubts",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Automatic thoughts about looking too closely",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Fear, dread, avoidance",
-                  "label": "emotions"
-                }
-              ]
-            }
+            "response": "It sounds exhausting to stay on edge. What evidence do you have that something bad will happen if you let go for even a second?",
+            "reasoning": null
           },
           "alternative_perspective": {
-            "response": "If a close friend were watching you, what might they say about how you’re handling this fear? They might suggest that a small, manageable look could actually reduce the dread.",
+            "response": "It sounds exhausting to stay on edge all the time. If a close friend were listening, what might they say about the idea of letting go for a moment?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Sense of impending doom",
-                  "label": "entailment"
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Fear of going crazy",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Obsessional doubts",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re caught between wanting to know what’s going on and fearing the truth, which can feel exhausting and overwhelming. If you could picture a small, manageable step toward understanding without feeling too much dread, what might that look like?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "overwhelm",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "dread",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "avoidance",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "sense of impending doom",
-                  "label": "entailment"
+                  "concept": "Anxiety about collapsing",
+                  "label": "neutral"
                 }
               ]
             }
@@ -1019,145 +872,110 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "That’s a tough one. I guess if I could step back, it might feel like a relief, like I could breathe a little easier. But then there’s that nagging thought—what if it’s worse than I fear? It feels like I’d have to confront something really uncomfortable, and I’m not sure I’m ready for that.",
+        "query": "I think it’s the fear of falling behind. Like, if I stop worrying or planning every little detail, what if I miss something important? What if I can’t pay my bills on time, or worse, lose everything I’ve worked for? I just can’t shake the thought that if I don’t keep a tight grip, everything will crumble. It feels like I’m walking a tightrope.",
         "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet",
-            "budgeting attempts",
-            "unexpected expenses",
-            "considering tracking spending",
-            "facing daily spending numbers"
+            "fear of falling behind",
+            "not worrying or planning",
+            "missing something important",
+            "not paying bills on time",
+            "losing everything"
           ],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up.",
-            "No matter what I do, it feels like I’m just fighting against the tide.",
-            "No matter how carefully I plan, there's always something unexpected that pops up.",
-            "Tracking my spending might help, but I'm scared of what I'll find.",
-            "Maybe tracking my spending would just confirm my fears, like there’s really no hope of getting ahead.",
-            "Facing those numbers every day feels like a reminder of how tight things are, like I'm poking a bear.",
-            "If I look too closely, I’ll realize how bad things really are, and then I’ll spiral into worry.",
-            "What if it’s worse than I fear? Confronting it feels really uncomfortable, and I’m not sure I’m ready for that."
+            "if I stop worrying, I will miss something",
+            "if I can't pay my bills, I will lose everything",
+            "if I don't keep a tight grip, everything will crumble"
           ],
           "emotions": [
-            "fear",
-            "tightness in chest",
-            "frustration",
-            "overwhelm",
-            "stress",
-            "anxiety",
-            "dread",
-            "exhaustion",
-            "relief"
+            "fear"
           ],
           "behaviors": [
-            "avoiding thinking about finances"
+            "planning every little detail",
+            "worrying constantly"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)"
+            "Fear of collapsing (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of going crazy (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Fear of being a burden to others (finding)"
           ],
-          "neutral": [
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anxiety about resuming sexual relations (finding)",
-            "Anxiety about loss of control (finding)"
-          ],
+          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re torn between wanting relief and fearing the unknown—what evidence do you have that the situation is worse than you fear?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you’re carrying a heavy sense of responsibility, feeling like any slip could lead to losing everything, and that’s a common reaction when we’re afraid of falling behind. What does that tightrope feel like for you?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like stepping back could bring a sense of relief, yet the worry that the situation might be even more daunting is making you feel uneasy. What would help you feel more ready to face that possibility?",
+            "response": "It sounds like you’re carrying a heavy sense of responsibility, feeling like any slip could lead to losing everything, and that’s a common reaction when we’re afraid of falling behind. What does that tightrope feel like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
+                  "concept": "Fear of falling behind",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
                   "label": "entailment"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "Fear of losing everything",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "overwhelm",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear of losing emotional control",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "confronting uncomfortable reality",
+                  "concept": "Feeling of tightrope",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you’re torn between wanting relief and fearing the unknown—what evidence do you have that the situation is worse than you fear?",
+            "response": "What evidence do you have that you will miss something important if you stop worrying? Can you recall a time when you let go of some control and things still went well?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of losing emotional control",
+                  "concept": "Fear of collapsing",
                   "label": "entailment"
                 },
                 {
-                  "concept": "anxiety about loss of control",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "fear",
+                  "concept": "Anxiety about making mistakes",
                   "label": "entailment"
                 },
                 {
-                  "concept": "overwhelm",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "avoiding thinking about finances",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "budgeting attempts",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "unexpected expenses",
-                  "label": "triggers"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you’re worried about the worst, but a trusted friend might see that you’ve already managed similar challenges before. What do you think they would say about how you’re handling this uncertainty?",
+            "response": "If a trusted friend watched you, what might they say about your need to plan every detail? It might help to consider that even small slips rarely lead to losing everything.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of losing emotional control",
+                  "concept": "fear of collapsing",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "neutral"
+                  "concept": "anxiety about making mistakes",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "User schema: avoidance of financial thinking, fear of worst-case outcomes",
-                  "label": "emotions"
+                  "concept": "fear of losing everything",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "user schema: triggers, automatic thoughts, emotions, behaviors",
+                  "label": "unknown"
                 }
               ]
             }
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling a mix of relief at the idea of stepping back and fear that confronting the situation might be worse than you think. What evidence do you have that it could be worse?",
-            "reasoning": null
           }
         }
       }
@@ -1166,125 +984,111 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "It’s tough. If I could step back, maybe it would feel like a relief. But then I worry that it could be worse than I fear, and I’m not sure I’m ready to face that. It just feels overwhelming, and I’d hate to confront something so uncomfortable.",
+        "query": "It feels so precarious, like every step I take is a risk. One miscalculation, and I could just fall. I constantly have to remind myself to stay balanced, but it’s exhausting. Sometimes, I wonder if I’m doing this to myself, but then the fear kicks in, and I don’t know how to step down from that tightrope without everything falling apart.",
         "core_issue": "financial concerns",
         "schema": {
           "triggers": [
-            "loss of extra income",
-            "thinking about making ends meet",
-            "budgeting attempts",
-            "unexpected expenses",
-            "considering tracking spending",
-            "facing daily spending numbers"
+            "feeling precarious",
+            "taking a step",
+            "miscalculation",
+            "reminding to stay balanced"
           ],
           "automatic_thoughts": [
-            "I'm too comfortable with the extra income, and now that it's gone, I won't be able to pay for food or rent.",
-            "Losing that income feels like another weight added on, and I can see all the bills piling up.",
-            "No matter what I do, it feels like I’m just fighting against the tide.",
-            "No matter how carefully I plan, there's always something unexpected that pops up.",
-            "Tracking my spending might help, but I'm scared of what I'll find.",
-            "Maybe tracking my spending would just confirm my fears, like there’s really no hope of getting ahead.",
-            "Facing those numbers every day feels like a reminder of how tight things are, like I'm poking a bear.",
-            "If I look too closely, I’ll realize how bad things really are, and then I’ll spiral into worry.",
-            "What if it’s worse than I fear? Confronting it feels really uncomfortable, and I’m not sure I’m ready for that.",
-            "If I could step back, maybe it would feel like a relief, but I'm worried it could be worse than I fear."
+            "I could just fall",
+            "I'm doing this to myself",
+            "everything will fall apart"
           ],
           "emotions": [
             "fear",
-            "tightness in chest",
-            "frustration",
-            "overwhelm",
-            "stress",
-            "anxiety",
-            "dread",
-            "exhaustion",
-            "relief"
+            "exhaustion"
           ],
           "behaviors": [
-            "avoiding thinking about finances"
+            "staying balanced",
+            "avoiding risks"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of falling while mobilizing (finding)",
+            "Fear of collapsing (finding)",
+            "Fear of falling (finding)"
+          ],
           "neutral": [
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about collapsing (finding)",
-            "Fear of losing emotional control (finding)",
-            "Anxiety about resuming sexual relations (finding)",
-            "Fear of not coping with treatment (finding)"
+            "Anxiety about loss of control (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you’re feeling a mix of fear and overwhelm, and you’re worried that stepping back might reveal even more stress. What might a small, manageable way to peek at the numbers feel like for you?",
+        "response": "It sounds exhausting to constantly keep yourself balanced, as if every step could lead to a fall. What does that exhausting feeling look like for you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you’re feeling a mix of fear and overwhelm, and you’re worried that stepping back might reveal even more stress. What might a small, manageable way to peek at the numbers feel like for you?",
+            "response": "It sounds exhausting to constantly keep yourself balanced, as if every step could lead to a fall. What does that exhausting feeling look like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
-                  "label": "neutral"
+                  "concept": "fear of falling",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "overwhelm",
+                  "concept": "exhaustion",
                   "label": "emotions"
                 },
                 {
-                  "concept": "avoidance of finances",
-                  "label": "unknown"
+                  "concept": "feeling precarious",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "anxiety about losing emotional control",
-                  "label": "neutral"
+                  "concept": "reminding to stay balanced",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like stepping back feels like relief but also scary. What would stepping back look like for you, and what might you learn from it?",
+            "response": "It sounds like you’re feeling very anxious about each step. What evidence do you have that you will actually fall if you take a step?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
+                  "concept": "Fear of falling",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about loss of control",
                   "label": "neutral"
                 },
                 {
-                  "concept": "overwhelm",
-                  "label": "emotions"
+                  "concept": "Automatic thought: 'I could just fall'",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "avoidance",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "fear of worse",
+                  "concept": "Emotion: fear",
                   "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like stepping back feels like a relief, but also scary. If a close friend were in your shoes, what might they say about the possibility that things could be worse than you fear?",
-            "reasoning": null
-          },
-          "safety_check": {
-            "response": "It sounds like you’re feeling overwhelmed and unsure about confronting these fears. What might feel like a small step toward feeling a bit more in control right now?",
+            "response": "If a trusted friend were watching you, what might they say about how you’re handling this? You’ve already taken steps to stay balanced, which shows you have the ability to manage the risk.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelm",
-                  "label": "emotions"
+                  "concept": "Fear of falling",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "fear",
+                  "concept": "Anxiety about collapsing",
                   "label": "neutral"
                 },
                 {
-                  "concept": "avoidance of confronting uncomfortable thoughts",
+                  "concept": "Feeling precarious",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Staying balanced",
                   "label": "unknown"
                 }
               ]

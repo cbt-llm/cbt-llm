@@ -21,20 +21,21 @@
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary's crying",
+            "Mary crying",
             "feeling tired",
-            "difficulty getting out of bed"
+            "not getting out of bed"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired"
+            "I need extra help",
+            "I can't manage this alone"
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted"
+            "sadness",
+            "fatigue"
           ],
           "behaviors": [
-            "staying in bed",
-            "seeking help"
+            "crying",
+            "staying in bed"
           ]
         },
         "retrieval": {
@@ -52,15 +53,15 @@
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I understand that you've been feeling overwhelmed with Mary and tired yourself, which makes it hard to get out of bed. It's important for us to work together on managing these feelings so we can find a way forward.\"",
+        "response": "\"It sounds like you're going through a tough time, Mary. You've mentioned feeling tired and needing extra help because of your situation. It's completely normal to feel overwhelmed at times, but let's work together to find ways to manage this better.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I understand that you've been feeling overwhelmed with Mary and tired yourself, which makes it hard to get out of bed. It's important for us to work together on managing these feelings so we can find a way forward.\"",
+            "response": "\"It sounds like you're going through a tough time, Mary. You've mentioned feeling tired and needing extra help because of your situation. It's completely normal to feel overwhelmed at times, but let's work together to find ways to manage this better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Mary's crying",
+                  "concept": "Mary crying",
                   "label": "triggers"
                 },
                 {
@@ -68,18 +69,22 @@
                   "label": "triggers"
                 },
                 {
-                  "concept": "difficulty getting out of bed",
+                  "concept": "not getting out of bed",
                   "label": "triggers"
+                },
+                {
+                  "concept": "I need extra help",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I understand you've been feeling overwhelmed with Mary and your own exhaustion. Can we explore what makes it difficult for you to get out of bed? Let's start by discussing the evidence that supports this challenge.\"",
+            "response": "\"It sounds like you're feeling overwhelmed, Mary. Can we explore together what might be causing these feelings and how they affect your energy levels?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Mary's crying",
+                  "concept": "Mary crying",
                   "label": "triggers"
                 },
                 {
@@ -87,18 +92,22 @@
                   "label": "triggers"
                 },
                 {
-                  "concept": "difficulty getting out of bed",
+                  "concept": "not getting out of bed",
                   "label": "triggers"
+                },
+                {
+                  "concept": "I need extra help",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I wonder if there might be other ways to approach this situation that could make it feel a bit more manageable for you. For instance, what would a trusted friend or family member suggest about helping Mary while you're feeling tired?\"",
+            "response": "\"It sounds like you're going through a tough time, Mary. You mentioned needing extra help because you've been feeling tired and struggling to get out of bed. Have you ever considered what a trusted friend or family member might suggest about managing this situation? It could provide a different perspective that might be helpful.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Mary's crying",
+                  "concept": "Mary crying",
                   "label": "triggers"
                 },
                 {
@@ -106,27 +115,12 @@
                   "label": "triggers"
                 },
                 {
-                  "concept": "difficulty getting out of bed",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you've been feeling overwhelmed and exhausted, especially with Mary. Can I ask if you've had any thoughts about wanting to not be here or hurting yourself? It's important for me to understand how you're feeling right now.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Mary's crying",
+                  "concept": "not getting out of bed",
                   "label": "triggers"
                 },
                 {
-                  "concept": "feeling tired",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "difficulty getting out of bed",
-                  "label": "triggers"
+                  "concept": "I need extra help",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -138,116 +132,81 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just…some days I feel like I'm carrying this heavy weight. It’s not just about getting out of bed, you know? It’s like, I don’t really see the point sometimes, especially when I feel like I’m not good enough, or that I don’t belong. I just end up feeling more exhausted.",
+        "query": "I’ve been feeling pretty overwhelmed lately. Sometimes, I just get this nagging thought that I'm not good enough, and it really brings me down. It’s hard to shake off, you know?",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong"
+            "I'm not good enough"
           ],
           "emotions": [
             "overwhelmed",
-            "exhausted",
-            "hopeless"
+            "down"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling empty (finding)",
-            "Psychogenic fatigue (finding)",
-            "Feeling diffident (finding)"
+            "Feeling agitated (finding)",
+            "Feeling a failure (finding)",
+            "Feeling stressed (finding)"
           ],
           "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Fear of being a burden to others (finding)"
+            "Performance anxiety (finding)",
+            "Feeling nervous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how you might feel overwhelmed sometimes, carrying that heavy weight. It's important to remember that everyone has days like this, and it's okay not to be perfect. Let's explore these thoughts together, one at a time, starting with feeling tired. Can you tell me more about what makes you feel exhausted?",
+        "response": "I'm sorry to hear that you've been feeling this way. It sounds like you're having a tough time with those thoughts about not being good enough. Let's work together to understand where they come from and see if we can find ways to challenge them.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you might feel overwhelmed sometimes, carrying that heavy weight. It's important to remember that everyone has days like this, and it's okay not to be perfect. Let's explore these thoughts together, one at a time, starting with feeling tired. Can you tell me more about what makes you feel exhausted?",
+            "response": "I'm sorry to hear that you've been feeling this way. It sounds like you're having a tough time with those thoughts about not being good enough. Let's work together to understand where they come from and see if we can find ways to challenge them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling tired",
-                  "label": "triggers"
+                  "concept": "Feeling overwhelmed",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "difficulty getting out of bed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying a heavy burden, and it can be exhausting. Can we explore what makes you feel that way? What are some situations or events that trigger these feelings of not belonging or being good enough?\"",
+            "response": "\"It sounds like you've been feeling quite overwhelmed lately. Can you tell me more about when this thought 'I'm not good enough' comes up for you? And how does it make you feel?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling overwhelmed",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy burden sometimes, and it can be exhausting. Have you ever considered what a trusted friend or family member might say about the situation? Sometimes, hearing another perspective can help us see things differently.\"",
+            "response": "\"It sounds like you've been feeling quite overwhelmed lately. Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, getting another perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "feeling hopeless",
+                  "concept": "Feeling overwhelmed",
                   "label": "emotions"
                 },
                 {
                   "concept": "automatic thoughts",
                   "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you're carrying a heavy burden, and it can be exhausting. Can we talk about what thoughts might be contributing to these feelings?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling tired",
-                  "label": "triggers"
                 },
                 {
-                  "concept": "difficulty getting out of bed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
@@ -260,84 +219,62 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it’s…just the constant pressure I put on myself. It’s like I have this voice in my head that says I need to be better, do more, or impress people. And when I don’t meet those expectations, it feels like I’m just failing, like I can’t catch a break. That’s when I get really worn out.",
+        "query": "Yeah, I guess it would help to talk about it. It just feels like those thoughts pop up out of nowhere, especially when I'm trying to do something new or take a risk. I can just feel this weight on my chest, like I'm not allowed to fail or even try.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight",
-            "constant pressure I put on myself"
+            "trying to do something new",
+            "taking a risk"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong",
-            "I need to be better, do more, or impress people"
+            "thoughts pop up out of nowhere",
+            "I'm not allowed to fail",
+            "I'm not allowed to try"
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted",
-            "hopeless",
-            "worn out"
+            "anxiety"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Psychogenic fatigue (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Feeling of discouragement (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Loss of motivation (finding)",
-            "Performance anxiety (finding)"
+            "Unable to resist dangerous thoughts (finding)",
+            "Compulsion to act on dangerous thoughts (finding)",
+            "Compulsion to act on thoughts (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Repressing thoughts (finding)",
+            "Able to resist dangerous thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What thoughts are you having that make you feel like you need to be better and impress people? And how does it feel when those expectations aren't met?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you have some thoughts that come up when you're trying something new or taking a risk. Can we talk about where these thoughts might be coming from and how they make you feel?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I hear you, and it sounds like you're carrying a heavy weight of self-expectations. It can be exhausting to constantly strive for perfection. Let's explore together if there are more manageable ways to approach your goals without feeling overwhelmed.",
+            "response": "It sounds like you have some thoughts that come up when you're trying something new or taking a risk. Can we talk about where these thoughts might be coming from and how they make you feel?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "thoughts pop up out of nowhere",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "I'm not allowed to fail",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not allowed to try",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What thoughts are you having that make you feel like you need to be better and impress people? And how does it feel when those expectations aren't met?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot of self-imposed pressure. Have you ever considered what a trusted friend or family member might say about the situation? Sometimes, hearing an outside perspective can help us see things differently.\"",
+            "response": "\"It sounds like you have some automatic thoughts that are causing you anxiety when you're trying something new. Can we explore those thoughts a bit more to understand where they come from and if they're really true?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -351,12 +288,12 @@
               ]
             }
           },
-          "safety_check": {
-            "response": "I'm here to help you explore those thoughts and feelings a bit more, if that's okay. It seems like there's a lot of pressure you put on yourself. Let's see if we can find ways to ease up on that a bit.",
+          "alternative_perspective": {
+            "response": "\"It sounds like you have some strong feelings about trying new things and taking risks. Can we explore together what might be causing those thoughts to pop up? Let's see if we can find a way to lighten that weight on your chest.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 },
                 {
@@ -373,113 +310,88 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Um, it’s mostly stuff like thinking I should be more successful or more talented than I actually am. I keep comparing myself to others, and it’s like everyone else is doing great, while I’m just…here. When I don’t meet those expectations, I feel this heavy sense of shame, like I’m just not measuring up. It’s really defeating.",
+        "query": "I think they come from a lot of different places. Maybe from my childhood? I remember always feeling like I had to be perfect, like anything less was just... not acceptable. It makes me anxious when I think of stepping out of my comfort zone. It’s like this voice in my head telling me I’ll mess up, and then I just... freeze.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight",
-            "constant pressure I put on myself",
-            "comparing myself to others"
+            "stepping out of my comfort zone"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong",
-            "I need to be better, do more, or impress people",
-            "I should be more successful or talented than I actually am",
-            "Everyone else is doing great while I'm just here"
+            "I have to be perfect",
+            "anything less is not acceptable",
+            "I'll mess up"
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted",
-            "hopeless",
-            "worn out",
-            "shame",
-            "defeated"
+            "anxiety"
           ],
           "behaviors": [
-            "staying in bed",
-            "seeking help"
+            "freeze"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Negative automatic thoughts (finding)",
             "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
-            "Obsessional thoughts of causing harm to self (finding)",
-            "Repressing thoughts (finding)",
-            "Compulsion to act on thoughts (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of collapsing (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Able to resist dangerous thoughts with difficulty (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What are some things you might tell a friend who was feeling this way? And how do those thoughts affect your feelings of self-worth and motivation?",
+        "response": "\"It sounds like you've had a long-standing concern about needing to be perfect. This can certainly contribute to feelings of anxiety when stepping out of your comfort zone. Let's explore together what might happen if things don't go as planned, and how that compares to the reality.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see that you're feeling quite a bit of pressure to meet certain expectations. It's important to remember that everyone has their own unique journey, and it's okay not to compare yourself to others. Let's work together on finding ways to reduce this self-criticism and build more self-compassion.",
+            "response": "I understand that you've been feeling anxious when stepping out of your comfort zone. It seems like there might be some old beliefs about needing to be perfect and the fear of making mistakes playing a role in this. Let's explore these thoughts together, and see if we can find ways to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Negative automatic thoughts (finding)",
+                  "concept": "anxiety about behavior or performance",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "What are some things you might tell a friend who was feeling this way? And how do those thoughts affect your feelings of self-worth and motivation?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Negative automatic thoughts (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "I can see how comparing yourself to others might be causing some distress. It's important to remember that everyone has their own unique journey and strengths. Let's explore what you bring to the table, and how those qualities contribute positively to your life.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Negative automatic thoughts (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Comparing oneself to others (user schema)",
+                  "concept": "fear of making mistakes",
                   "label": "unknown"
                 }
               ]
             }
           },
-          "safety_check": {
-            "response": "I'm sorry to hear that you're feeling this way. It sounds like you have high expectations for yourself, and it can be tough when things don't go as planned. Let's talk more about these thoughts and see if we can find a way to ease some of that pressure you're feeling.",
+          "socratic_questioning": {
+            "response": "\"It sounds like you've had a long-standing concern about needing to be perfect. This can certainly contribute to feelings of anxiety when stepping out of your comfort zone. Let's explore together what might happen if things don't go as planned, and how that compares to the reality.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Negative automatic thoughts (finding)",
+                  "concept": "anxiety about behavior or performance",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
+                  "concept": "fear of making mistakes",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you've been carrying a heavy burden of perfectionism for quite some time. It's understandable that stepping out of your comfort zone can feel daunting when you have such high expectations. Let's explore together if there might be other ways to approach new situations without feeling so overwhelmed.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
                   "label": "entailment"
+                },
+                {
+                  "concept": "perfectionism",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear of failure",
+                  "label": "unknown"
                 }
               ]
             }
@@ -491,115 +403,95 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I mean, if it were a friend, I’d probably tell them that it’s okay to struggle and that they’re not alone in feeling this way. But when I think about what I’d say, it just feels like I’m being a bit of a hypocrite because I can’t really believe that for myself. It's almost like I’m stuck in this cycle where if I don’t feel worthy, I don’t have the motivation to change things, and then that just reinforces the feeling of not being good enough. It’s frustrating.",
+        "query": "I think they come from a lot of different places. Maybe from my childhood? It feels like I always had to be perfect, or else it would be disappointing. When I think about stepping out of my comfort zone, I get really anxious, like there’s this voice telling me I’ll mess up. Then I just freeze, and it’s so frustrating.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight",
-            "constant pressure I put on myself",
-            "comparing myself to others",
-            "thinking about what I would say to a friend"
+            "thinking about stepping out of comfort zone"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong",
-            "I need to be better, do more, or impress people",
-            "I should be more successful or talented than I actually am",
-            "Everyone else is doing great while I'm just here",
-            "I'm a hypocrite for not believing what I would tell a friend"
+            "I have to be perfect",
+            "I'll mess up"
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted",
-            "hopeless",
-            "worn out",
-            "shame",
-            "defeated",
-            "frustrated"
+            "anxiety",
+            "frustration"
           ],
           "behaviors": [
-            "staying in bed",
-            "seeking help"
+            "freeze"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Obsessional thoughts of incompletion (finding)"
+          ],
           "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Fear of being a burden to others (finding)",
-            "Pressured by peers (finding)",
-            "Pressured by others (finding)",
-            "Tends to humiliate others (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about behavior or performance (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're having a hard time believing that it's okay to struggle, and that you're not alone in feeling this way. Can we explore together what evidence do you have that supports these thoughts? And how does it feel when you think about a friend going through something similar?\"",
+        "response": "\"It sounds like you've been carrying a lot of pressure to be perfect, which can make stepping out of your comfort zone feel daunting. Let's explore together what might happen if things don't go perfectly, and how that could be okay.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you might be feeling stuck in a cycle of self-doubt and frustration. It's important to remember that it's okay to struggle sometimes, and I want to help you explore ways to break free from this cycle. Let's start by understanding your thoughts and feelings a bit better. Can we begin by discussing some specific situations where you feel this way?",
+            "response": "I can see how stepping out of your comfort zone might bring up feelings of anxiety and frustration. It's important to remember that everyone has their own pace, and it's okay not to be perfect all the time. Let's explore together what might help you feel more comfortable taking those steps.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "perfectionism",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're having a hard time believing that it's okay to struggle, and that you're not alone in feeling this way. Can we explore together what evidence do you have that supports these thoughts? And how does it feel when you think about a friend going through something similar?\"",
+            "response": "\"It sounds like you've been carrying a lot of pressure to be perfect, which can make stepping out of your comfort zone feel daunting. Let's explore together what might happen if things don't go perfectly, and how that could be okay.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "perfectionism",
                   "label": "unknown"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having a tough time, and it's understandable to feel stuck sometimes. Let's explore if there might be other ways to look at this situation that could help break the cycle. For example, what would happen if you were to give yourself some grace and compassion? How might that change things?\"",
+            "response": "\"It sounds like you've been carrying a lot of pressure to be perfect. When stepping out of your comfort zone, it can feel overwhelming and lead to anxiety. Have you ever considered what might happen if things don't go perfectly? Let's explore that together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "perfectionism",
                   "label": "unknown"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I'm really sorry that you're feeling this way, and it sounds like you're struggling with some difficult thoughts. It can be hard to believe that we're worthy when we're feeling down, but remember that everyone has moments of self-doubt. Let's work together on finding ways to break this cycle and build your self-worth.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
                 }
               ]
             }
@@ -611,134 +503,120 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just… I guess I feel like when I look at others, they make it seem so easy. It’s like they have it all figured out while I’m just left behind. And thinking about a friend in that situation, I would definitely encourage them, but I’m not sure it would make me feel better about myself. Instead, it just highlights how far away I feel from that kind of support. It's like I can't give myself the same compassion I’d give to someone else.",
+        "query": "Yeah, that pressure feels really heavy sometimes. I guess I just worry that if I mess up, people will judge me or think less of me. I mean, I know in my head that everyone makes mistakes, but in the moment, it feels like the end of the world. It’s hard to imagine it being okay.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight",
-            "constant pressure I put on myself",
-            "comparing myself to others",
-            "thinking about what I would say to a friend"
+            "pressure",
+            "worry about messing up"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong",
-            "I need to be better, do more, or impress people",
-            "I should be more successful or talented than I actually am",
-            "Everyone else is doing great while I'm just here",
-            "I'm a hypocrite for not believing what I would tell a friend",
-            "Others make it seem so easy; I feel left behind",
-            "I can't give myself the same compassion I’d give to someone else"
+            "people will judge me",
+            "people will think less of me",
+            "it feels like the end of the world",
+            "hard to imagine it being okay"
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted",
-            "hopeless",
-            "worn out",
-            "shame",
-            "defeated",
-            "frustrated"
+            "anxiety",
+            "fear"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Caring towards others (finding)",
-            "Feeling abandoned (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Feeling nervous (finding)",
+            "Pressured by others (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Social isolation (rejection) (finding)"
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're comparing yourself to others and feeling left behind. Have you ever considered that everyone has their own unique journey, and it might be helpful to focus on your progress rather than comparing yourself to others? What do you think about that?\"",
-        "protocol_used": "alternative_perspective",
+        "response": "What evidence do you have that people would judge or think less of you if you make a mistake? It's natural to feel anxious, but let's explore what might happen instead.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're having a hard time comparing yourself to others and feeling left behind. It's important to remember that everyone has their own journey, and it's okay not to have everything figured out. Let's talk more about how you can practice self-compassion.\"",
+            "response": "I can see how you're feeling overwhelmed by the pressure and fear of making mistakes. It's normal to worry about what others might think, but remember that everyone makes mistakes. Let's work together to find ways to manage this anxiety and help you feel more confident.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "pressure",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
+                  "concept": "worry about messing up",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
+                  "concept": "people will judge me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "people will think less of me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "it feels like the end of the world",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're struggling with feelings of inadequacy compared to others. Have you ever considered that everyone has their own unique challenges and strengths? What if you were to focus on your own progress rather than comparing yourself to others?\"",
+            "response": "What evidence do you have that people would judge or think less of you if you make a mistake? It's natural to feel anxious, but let's explore what might happen instead.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Caring towards others",
+                  "concept": "pressure",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Social isolation (rejection)",
-                  "label": "neutral"
+                  "concept": "worry about messing up",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
+                  "concept": "people will judge me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "people will think less of me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "it feels like the end of the world",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're comparing yourself to others and feeling left behind. Have you ever considered that everyone has their own unique journey, and it might be helpful to focus on your progress rather than comparing yourself to others? What do you think about that?\"",
+            "response": "\"It sounds like you're carrying a heavy burden of worry and fear. Let's explore together if there might be other ways to look at this situation that could help lighten your load.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Caring towards others",
+                  "concept": "pressure",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Social isolation (rejection)",
-                  "label": "neutral"
+                  "concept": "worry about messing up",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how it might feel that way sometimes, but remember, everyone has their own struggles and challenges. It's important to be kind to yourself and acknowledge your efforts, just as you would for a friend. Let's explore more about what makes you feel left behind and how we can work together to help you find the support you need.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "people will judge me",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Caring towards others",
-                  "label": "entailment"
+                  "concept": "people will think less of me",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
+                  "concept": "it feels like the end of the world",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -750,127 +628,92 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I feel like when I look at others, they make it seem so easy. It’s like they have it all figured out while I’m just left behind. I’d want to encourage a friend in that situation, but when I think about it, it just highlights how far away I feel from that kind of support. I can’t seem to give myself the same compassion I’d offer to someone else.",
+        "query": "I know it might not be fair, but it just feels real to me. Like, I remember times when I’ve messed up and the looks people gave me... or even just feeling like I let them down. It sticks with me. I suppose I don’t really give people a chance to show me that they might understand or be supportive. I just kind of assume the worst, you know?",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight",
-            "constant pressure I put on myself",
-            "comparing myself to others",
-            "thinking about what I would say to a friend"
+            "memories of past mistakes",
+            "looks from people",
+            "feeling like I let them down"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong",
-            "I need to be better, do more, or impress people",
-            "I should be more successful or talented than I actually am",
-            "Everyone else is doing great while I'm just here",
-            "I'm a hypocrite for not believing what I would tell a friend",
-            "Others make it seem so easy; I feel left behind",
-            "I can't give myself the same compassion I’d give to someone else",
-            "It highlights how far away I feel from that kind of support"
+            "it might not be fair",
+            "it feels real to me",
+            "I assume the worst"
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted",
-            "hopeless",
-            "worn out",
-            "shame",
-            "defeated",
-            "frustrated"
+            "shame"
           ],
           "behaviors": [
-            "staying in bed",
-            "seeking help"
+            "not giving people a chance",
+            "avoiding support"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)"
-          ],
+          "entailment": [],
           "neutral": [
             "Fear of being a burden to others (finding)",
-            "Difficulty coping with grief responses (finding)",
-            "Anxiety about collapsing (finding)"
+            "Anxiety about appearing ridiculous (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Feeling guilt (finding)",
+            "Difficulty understanding own emotions (finding)"
           ],
-          "contradiction": [
-            "Caring towards others (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're struggling with comparing yourself to others and feeling distant from the support you'd offer a friend. Have you ever thought about what advice you might give them in this situation? It could help us explore alternative perspectives for your own feelings.\"",
-        "protocol_used": "alternative_perspective",
+        "response": "I understand that you've had some difficult experiences in the past, and it can be hard not to feel like you're going to mess up again. It's natural to have these feelings, but let's explore together if there might be other ways to interpret those situations or people's reactions.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you have a hard time being kind to yourself, just as you would be to a friend. Let's explore why that might be and how we can change it.\"",
+            "response": "I understand that you've had some difficult experiences in the past, and it can be hard not to feel like you're going to mess up again. It's natural to have these feelings, but let's explore together if there might be other ways to interpret those situations or people's reactions.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "comparing myself to others",
-                  "label": "triggers"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "thinking about what I would say to a friend",
-                  "label": "triggers"
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "I can't give myself the same compassion I’d give to someone else",
-                  "label": "automatic_thoughts"
+                  "concept": "Difficulty understanding own emotions",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you have a strong sense of empathy for your friends. How might you apply that same compassion towards yourself? What could you tell a friend in this situation, and how can you start practicing those words for yourself?\"",
+            "response": "\"It sounds like you're carrying a heavy burden of past experiences. Can we explore together what evidence supports these feelings and if there might be other ways to interpret them?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "comparing themselves to others",
-                  "label": "unknown"
+                  "concept": "anxiety about appearing ridiculous",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "thinking about what I would say to a friend",
-                  "label": "triggers"
+                  "concept": "difficulty understanding own emotions",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're struggling with comparing yourself to others and feeling distant from the support you'd offer a friend. Have you ever thought about what advice you might give them in this situation? It could help us explore alternative perspectives for your own feelings.\"",
+            "response": "\"I understand that it can feel like past mistakes are always looming over you, and that people's reactions might seem harsh. But let's consider for a moment, what would a trusted friend say about your assumptions? Could they be off base sometimes?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "comparing themselves to others",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "thinking about what I would say to a friend",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"It sounds like you're struggling to find the same compassion for yourself as you would for a friend. Let's explore that a bit more and see if we can find ways to bridge that gap.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "comparing themselves to others",
-                  "label": "unknown"
+                  "concept": "emotions",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "thinking about what I would say to a friend",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "difficulty coping with feelings of inadequacy",
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
@@ -883,124 +726,79 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I mean, I guess I’d tell them that it’s okay to not have everything figured out and that everyone has their own struggles, even if it doesn’t show on the surface. I’d probably say it’s important to celebrate small wins and just take things one step at a time. But it’s hard to take that advice to heart for myself. Instead, I just feel this nagging sense that I should be doing better, you know? It makes it tough to really believe those words apply to me.",
+        "query": "It’s tough to think differently, though. I feel like those experiences shaped my view so much. When I picture myself trying something new, I just can’t shake the idea that I’ll let everyone down again. I guess part of me wants to believe that maybe some people wouldn’t be so harsh, but it’s like... it all gets tangled up in my head.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight",
-            "constant pressure I put on myself",
-            "comparing myself to others",
-            "thinking about what I would say to a friend"
+            "trying something new"
           ],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong",
-            "I need to be better, do more, or impress people",
-            "I should be more successful or talented than I actually am",
-            "Everyone else is doing great while I'm just here",
-            "I'm a hypocrite for not believing what I would tell a friend",
-            "Others make it seem so easy; I feel left behind",
-            "I can't give myself the same compassion I’d give to someone else",
-            "It highlights how far away I feel from that kind of support",
-            "I should be doing better"
+            "I’ll let everyone down again",
+            "some people wouldn’t be so harsh"
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted",
-            "hopeless",
-            "worn out",
-            "shame",
-            "defeated",
-            "frustrated",
-            "nagging sense of inadequacy"
+            "fear"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Incongruent personal expectations (finding)"
+            "Tends to fail to learn from adverse experience (finding)"
           ],
           "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Inadequate personality (finding)",
-            "Feeling a failure (finding)"
+            "Enduring personality change after catastrophic experience (finding)",
+            "Changed perception of people (finding)",
+            "Fear of being a burden to others (finding)",
+            "Unpleasant memories (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What makes you think that you should be doing better? Can we explore what evidence supports this belief and if there might be alternative ways to interpret your situation?",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It's understandable that past experiences can shape our thoughts, but it's also important to remember that not everyone will react the same way. Let's explore what might happen if you took a small step towards trying something new. What do you think could be different this time?\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're really struggling with feeling like you should be doing better. I want to emphasize that it's okay not to have everything figured out and that everyone has their own unique challenges. Let's work together on finding ways to celebrate small wins and take things one step at a time, starting with what feels most manageable for you.",
+            "response": "I understand that it can be difficult to change the way you think, especially when past experiences have left such a strong impact. It's important to remember that everyone makes mistakes and learns from them. Let's focus on what you can do differently this time, rather than dwelling on potential failures.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Incongruent personal expectations (finding)",
+                  "concept": "Tends to fail to learn from adverse experience (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "concept": "Fear of being a burden to others (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes you think that you should be doing better? Can we explore what evidence supports this belief and if there might be alternative ways to interpret your situation?",
+            "response": "\"It sounds like you've had some challenging experiences that have affected your self-perception and fear of letting others down. Let's explore this idea further. When you think about trying something new, what evidence do you have that you will let people down?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Incongruent personal expectations (finding)",
-                  "label": "entailment"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "concept": "Changed perception of people (finding)",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's interesting that you feel like you should be doing better, even though it might not always seem that way for others. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
+            "response": "\"It's understandable that past experiences can shape our thoughts, but it's also important to remember that not everyone will react the same way. Let's explore what might happen if you took a small step towards trying something new. What do you think could be different this time?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Incongruent personal expectations (finding)",
+                  "concept": "Tends to fail to learn from adverse experience (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"I'm wondering if you ever feel like your expectations for yourself are too high? It can be tough to live up to those standards, and it sounds like you might be feeling that way right now. Let's talk about how we can work together to find a more balanced approach.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Incongruent personal expectations (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Complaining of feeling depressed (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "concept": "Fear of being a burden to others (finding)",
                   "label": "neutral"
                 }
               ]
@@ -1013,85 +811,55 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I don’t know, it’s just this feeling I’ve carried for so long. It’s like I was always taught that success and achievement were what mattered, so when I look at where I am compared to others, I just feel lacking. Alternative ways to interpret it? I honestly have a hard time seeing those. It feels more real to focus on the gaps rather than any small victories. It’s just easier to stick with what I know, even if it feels heavy.",
+        "query": "I don’t know... part of me wants to believe it could be different, but then I feel this wave of doubt. Like, what if I try and it turns out just as bad as before? It’s hard to picture anything going well. I guess I just worry that I won’t be able to handle it if it doesn’t.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight",
-            "constant pressure I put on myself",
-            "comparing myself to others",
-            "thinking about what I would say to a friend"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong",
-            "I need to be better, do more, or impress people",
-            "I should be more successful or talented than I actually am",
-            "Everyone else is doing great while I'm just here",
-            "I'm a hypocrite for not believing what I would tell a friend",
-            "Others make it seem so easy; I feel left behind",
-            "I can't give myself the same compassion I’d give to someone else",
-            "It highlights how far away I feel from that kind of support",
-            "I should be doing better",
-            "Success and achievement are what matter, so I feel lacking compared to others",
-            "It's easier to focus on the gaps rather than any small victories"
+            "what if I try and it turns out just as bad as before?",
+            "I just worry that I won’t be able to handle it if it doesn’t."
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted",
-            "hopeless",
-            "worn out",
-            "shame",
-            "defeated",
-            "frustrated",
-            "nagging sense of inadequacy",
-            "heavy feeling"
+            "doubt",
+            "worry"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling empty (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Lack of pride (finding)",
-            "Feeling of discouragement (finding)",
-            "Feeling a failure (finding)",
-            "Low ego strength (finding)"
+            "Anxiety about resuming sexual relations (finding)",
+            "Enduring personality change after catastrophic experience (finding)",
+            "Loss of hope for the future (finding)",
+            "Fear of being left alone during period of dependence (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Hopeful for the future (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It's understandable to feel that way, but let's consider a different perspective. What if we looked at your small victories instead? How might that change how you see yourself?\"",
-        "protocol_used": "alternative_perspective",
+        "response": "\"It sounds like you're feeling quite a bit of doubt and worry about trying again. Can we explore together what evidence you have that things might not go well this time? And what would be the best-case scenario for you?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've been carrying this feeling for a long time, and it can be difficult to see alternative interpretations. It's important to remember that everyone has their own journey, and success isn't always about comparison. Let's explore together if there might be other ways to view your situation that could lighten the load you're carrying.",
+            "response": "I understand your concerns, and it's completely normal to feel doubtful when facing something new. Let's explore together what might make you feel more confident about trying again.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of discouragement",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Lack of pride",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "Have you ever considered that focusing on the gaps might be making things feel heavier? What if we explore some alternative ways to interpret your successes, no matter how small they may seem?",
+            "response": "\"It sounds like you're feeling quite a bit of doubt and worry about trying again. Can we explore together what evidence you have that things might not go well this time? And what would be the best-case scenario for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1106,34 +874,15 @@
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable to feel that way, but let's consider a different perspective. What if we looked at your small victories instead? How might that change how you see yourself?\"",
+            "response": "\"It sounds like you're feeling quite uncertain about trying again, and that's understandable given your past experiences. But let's consider this: what might a trusted friend or family member say about the possibility of things turning out differently this time? It could be helpful to hear another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of discouragement",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Lack of pride",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Low ego strength",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "\"It sounds like you've been carrying a heavy burden for quite some time now. Have you ever considered that there might be other ways to interpret your situation, where focusing on small victories could help lighten the load? Let's explore those together.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling lacking compared to others",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "focusing on the gaps rather than any small victories",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
@@ -1146,85 +895,56 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I don’t know, it’s just this feeling I’ve carried for so long. I was always taught that success and achievement were what mattered, so when I look at where I am compared to others, I just feel lacking. It’s hard for me to see anything different. I tend to focus on the gaps instead of any progress I’ve made. It feels more real that way, even if it weighs me down.",
+        "query": "I suppose the evidence is just all those times in the past when I didn't measure up... But maybe there's also a part of me that hasn’t really given myself a chance to see what could happen if I try. The best-case scenario? I guess it would be actually succeeding and feeling good about myself for once. But that feels so far out of reach sometimes.",
         "core_issue": "self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "Mary's crying",
-            "feeling tired",
-            "difficulty getting out of bed",
-            "feeling like I'm carrying a heavy weight",
-            "constant pressure I put on myself",
-            "comparing myself to others",
-            "thinking about what I would say to a friend"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I need extra help with Mary because I'm too tired",
-            "I don’t really see the point sometimes",
-            "I’m not good enough",
-            "I don’t belong",
-            "I need to be better, do more, or impress people",
-            "I should be more successful or talented than I actually am",
-            "Everyone else is doing great while I'm just here",
-            "I'm a hypocrite for not believing what I would tell a friend",
-            "Others make it seem so easy; I feel left behind",
-            "I can't give myself the same compassion I’d give to someone else",
-            "It highlights how far away I feel from that kind of support",
-            "I should be doing better",
-            "Success and achievement are what matter, so I feel lacking compared to others",
-            "It's easier to focus on the gaps rather than any small victories"
+            "I didn't measure up in the past",
+            "I haven't given myself a chance",
+            "Succeeding feels far out of reach"
           ],
           "emotions": [
-            "overwhelmed",
-            "exhausted",
-            "hopeless",
-            "worn out",
-            "shame",
-            "defeated",
-            "frustrated",
-            "nagging sense of inadequacy",
-            "heavy feeling"
+            "doubt",
+            "hope"
           ],
-          "behaviors": [
-            "staying in bed",
-            "seeking help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling empty (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Feeling of discouragement (finding)",
-            "Lack of pride (finding)",
             "Feeling a failure (finding)",
-            "Depressive delusion of poverty (finding)"
+            "Low ego strength (finding)",
+            "Moderate ego strength (finding)",
+            "Delusion of grandiose ability (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Increased motivation (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What makes you think success is the only measure of worth? Can we explore what small victories you've had recently, and how they might be a part of your journey too?",
+        "response": "\"It sounds like you've had some challenging experiences in the past, but it's also important to remember that everyone has setbacks. Have you considered what might be different this time if you were to give yourself a chance? And how would success feel for you?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you've been feeling this way for a while now, and it must be quite heavy. It seems like you're comparing yourself to others a lot, which can be challenging. Let's take some time to explore these thoughts together and find ways to lighten that load.",
+            "response": "I can see how you might feel that way, given your past experiences. But it's important to remember that everyone has setbacks and failures at times. What's crucial is learning from them and giving yourself a chance to grow. Let's focus on what you can do now, rather than dwelling on the past.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling a failure (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Low ego strength (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes you think success is the only measure of worth? Can we explore what small victories you've had recently, and how they might be a part of your journey too?",
+            "response": "\"It sounds like you've had some challenging experiences in the past, but it's also important to remember that everyone has setbacks. Have you considered what might be different this time if you were to give yourself a chance? And how would success feel for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1239,7 +959,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "Have you ever considered what a friend might say about your progress? Sometimes, it can be helpful to see things from another perspective.",
+            "response": "\"It sounds like you've had some challenging experiences in the past, but it's also important to remember that everyone has setbacks. Have you ever considered what might happen if you gave yourself a chance to succeed this time? What could be the best-case scenario for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1248,21 +968,6 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "safety_check": {
-            "response": "I can see how you might feel that way, but I'd like to explore with you if there are any small victories or improvements you've made that you may be overlooking. Let's focus on those for a moment.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 }
               ]
