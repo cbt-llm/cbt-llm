@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-from matplotlib.colors import Normalize
+from matplotlib.colors import Normalize, LinearSegmentedColormap
 from matplotlib.lines import Line2D
 
 
@@ -16,27 +16,24 @@ OUTPUT_ROOT = PROJECT_ROOT / "output"
 SAVE_ROOT = PROJECT_ROOT / "evaluation" / "user_sentiment_plots"
 SAVE_ROOT.mkdir(parents=True, exist_ok=True)
 
-# Download NRC VAD v2.1 lexicon directory (https://saifmohammad.com/WebPages/nrc-vad.html) and please place the unzipped folder at: project/external_libs/
+# Download NRC VAD v2.1 lexicon directory (https://saifmohammad.com/WebPages/nrc-vad.html)
+# and please place the unzipped folder at: project/external_libs/
 NRC_VAD_DIR = PROJECT_ROOT / "external_libs" / "NRC-VAD-Lexicon-v2.1"
 
 MODE_LABELS = {
-    "baseline": "Baseline",
-    "cot": "CBT-CoT",
     "mcot": "CBT-MCoT",
 }
 
-CIRCUMPLEX_CMAPS = {
-    "baseline": cm.Purples,
-    "cot": cm.Greens,
-    "mcot": cm.Blues,
-}
+# Truncated Purples — skip lightest 35% to match RealCBT's truncated Blues style
+CIRCUMPLEX_CMAP = LinearSegmentedColormap.from_list(
+    "truncated_purples",
+    cm.Purples(np.linspace(0.35, 1.0, 256))
+)
 
-CIRCUMPLEX_LEGEND_COLORS = {
-    "baseline": cm.Purples(0.75),
-    "cot": cm.Greens(0.75),
-    "mcot": cm.Blues(0.75),
-}
 
+# =========================
+# LEXICON
+# =========================
 
 def load_nrc_vad(lexicon_dir: Path) -> dict:
     unigrams_dir = lexicon_dir / "Unigrams"
@@ -60,6 +57,11 @@ def load_nrc_vad(lexicon_dir: Path) -> dict:
     vad_dict = {w: {"valence": valence[w], "arousal": arousal[w]} for w in common}
     print(f"NRC VAD lexicon loaded: {len(vad_dict):,} unigrams\n")
     return vad_dict
+
+
+# =========================
+# HELPERS
+# =========================
 
 def coverage_report(messages, vad_dict):
     total_tokens, matched_tokens = 0, 0
@@ -181,68 +183,57 @@ def summarize_cumulative(df: pd.DataFrame) -> pd.DataFrame:
     out[["sem_valence", "sem_arousal"]] = out[["sem_valence", "sem_arousal"]].fillna(0)
     return out
 
+
+# =========================
+# PLOTTING
+# =========================
+
 def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
+    df = all_summaries.get("mcot")
+    if df is None or df.empty:
+        print("No mcot data found.")
+        return
+
+    x = df["mean_cumulative_valence"].to_numpy()
+    y = df["mean_cumulative_arousal"].to_numpy()
+    turns = df["turn"].to_numpy()
+
+    norm = Normalize(vmin=turns.min(), vmax=turns.max())
+    cmap = CIRCUMPLEX_CMAP
+
     fig, ax = plt.subplots(figsize=(7, 6))
 
-    all_turns = []
-    for mode in ["baseline", "cot", "mcot"]:
-        df = all_summaries.get(mode)
-        if df is not None and not df.empty:
-            all_turns.extend(df["turn"].tolist())
-    turn_min, turn_max = min(all_turns), max(all_turns)
+    for i in range(len(x) - 1):
+        ax.plot(x[i:i+2], y[i:i+2],
+                color=cmap(norm(turns[i])),
+                linewidth=3, solid_capstyle="round")
 
-    for mode in ["baseline", "cot", "mcot"]:
-        df = all_summaries.get(mode)
-        if df is None or df.empty:
-            continue
+    ax.scatter(x[0], y[0], color="white", edgecolors="black",
+               marker="o", s=120, zorder=6, label="Conversation Start")
+    ax.scatter(x[-1], y[-1], color="white", edgecolors="black",
+               marker="*", s=250, zorder=6, label="Conversation End")
 
-        x = df["mean_cumulative_valence"].to_numpy()
-        y = df["mean_cumulative_arousal"].to_numpy()
-        turns = df["turn"].to_numpy()
-        cmap = CIRCUMPLEX_CMAPS[mode]
-        norm = Normalize(vmin=turns.min(), vmax=turns.max())
+    pad = 0.01
+    ax.set_xlim(x.min() - pad, x.max() + pad)
+    ax.set_ylim(y.min() - pad, y.max() + pad)
 
-        for i in range(len(x) - 1):
-            ax.plot(
-                x[i:i+2], y[i:i+2],
-                color=cmap(0.35 + 0.65 * norm(turns[i])),
-                linewidth=3,
-                solid_capstyle="round",
-            )
-
-        mid_color = CIRCUMPLEX_LEGEND_COLORS[mode]
-        ax.scatter(x[0], y[0], color="white", edgecolors=mid_color,
-                   marker="o", s=120, linewidths=2, zorder=6)
-        ax.scatter(x[-1], y[-1], color="white", edgecolors=mid_color,
-                   marker="*", s=250, linewidths=1.5, zorder=6)
-
+    ax.set_title(f"CBT-MCoT: User Valence-Arousal Trajectory")
     ax.set_xlabel("Valence", fontsize=14)
     ax.set_ylabel("Arousal", fontsize=14)
-    ax.set_title("Synthetic Transcript: User Valence-Arousal Trajectory")
+    ax.legend(fontsize=12, frameon=True, loc="upper right")
 
-    legend_elements = [
-        Line2D([0], [0], color=CIRCUMPLEX_LEGEND_COLORS[mode],
-               linewidth=3, label=MODE_LABELS[mode])
-        for mode in ["baseline", "cot", "mcot"]
-    ] + [
-        Line2D([0], [0], marker="o", color="w", markerfacecolor="white",
-               markeredgecolor="gray", markersize=9, label="Start"),
-        Line2D([0], [0], marker="*", color="w", markerfacecolor="white",
-               markeredgecolor="gray", markersize=12, label="End"),
-    ]
-    ax.legend(handles=legend_elements, fontsize=12, frameon=True, loc="best")
-
-    # Shared neutral colorbar for turn reference
-    sm = cm.ScalarMappable(
-        cmap=cm.Greys,
-        norm=Normalize(vmin=turn_min, vmax=turn_max)
-    )
+    sm = cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
-    plt.colorbar(sm, ax=ax, label="User Turn", shrink=0.6, pad=0.02)
+    plt.colorbar(sm, ax=ax, label="User Turn", shrink=0.85)
 
     plt.tight_layout()
     plt.savefig(out_dir / f"{model}_va_circumplex.png", dpi=300, bbox_inches="tight")
     plt.close()
+
+
+# =========================
+# MAIN
+# =========================
 
 def main():
     parser = argparse.ArgumentParser()
@@ -258,26 +249,25 @@ def main():
 
     cumulative_summaries = {}
 
-    for mode in ["baseline", "cot", "mcot"]:
+    for mode in ["mcot"]:
         files = grouped_files[mode]
         raw_df = build_raw_df(files, vad_dict, mode)
         raw_with_cum = add_cumulative_sentiment(raw_df)
         cumulative_summary = summarize_cumulative(raw_with_cum)
-        cumulative_summary.to_csv(out_dir / f"{model}_{mode}_cumulative_summary.csv", index=False)
+        cumulative_summary.to_csv(out_dir / f"{model}_mcot_cumulative_summary.csv", index=False)
         cumulative_summaries[mode] = cumulative_summary
 
     plot_va_circumplex(cumulative_summaries, out_dir, model)
 
     print(f"\nSaved to: {out_dir}")
-    print("  - va_circumplex.png")
-    print("  - {mode}_cumulative_summary.csv  (for each mode)")
+    print(f"  - {model}_va_circumplex.png")
+    print(f"  - {model}_mcot_cumulative_summary.csv")
 
-    for mode in ["baseline", "cot", "mcot"]:
-        files = grouped_files[mode]
-        if files:
-            sample_messages = extract_messages(files[0])
-            print(f"[{mode}] ", end="")
-            coverage_report(sample_messages, vad_dict)
+    files = grouped_files["mcot"]
+    if files:
+        sample_messages = extract_messages(files[0])
+        print("[mcot] ", end="")
+        coverage_report(sample_messages, vad_dict)
 
 
 if __name__ == "__main__":

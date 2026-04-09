@@ -11,9 +11,6 @@ import argparse
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
-import os
-os.environ["TRANSFORMERS_OFFLINE"] = "1"
-os.environ["HF_DATASETS_OFFLINE"] = "1"
 
 import requests
 from openai import OpenAI
@@ -21,7 +18,7 @@ from neo4j import GraphDatabase
 
 from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, ROOT
 from cbt_llm.retrieve_snomed import retrieve_snomed_matches
-from user_schema.user_schema import extract_user_schema, update_user_schema
+from user_schema.user_schema import extract_user_schema
 from cbt_llm.pipelines.findings_pipeline import FindingsPipeline
 from cbt_llm.cbt_mcot import mcot_therapist_reply, CBT_PROTOCOLS
 
@@ -334,14 +331,13 @@ def looks_like_patient_drift(text: str) -> bool:
 def looks_like_therapist_leak(text: str) -> bool:
     return any(x in text.lower() for x in ["snomed", "rag", "embedding"])
 
-def safe_extract_schema(text: str, prior_schema: Optional[Dict] = None) -> Optional[Dict[str, Any]]:
+def safe_extract_schema(text: str) -> Optional[Dict[str, Any]]:
+    if not extract_user_schema:
+        return None
     try:
-        result = extract_user_schema(text)
-        if all(len(v) == 0 for v in result.values()):
-            return prior_schema  # don't check if prior_schema is truthy, just return it
-        return result
+        return extract_user_schema(text)
     except Exception:
-        return prior_schema  # on crash, return prior rather than None
+        return None
 
 def sanitize_rag(raw):
     concepts = []
@@ -518,7 +514,7 @@ def run_session(
                 "CBT mode MUST use user schema, RAG, and CBT protocols."
             )
         
-    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma3:12b", "deepseek-r1:8b"}
+    OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma3:4b", "deepseek-r1:8b"}
 
     therapist_llm = (
         OllamaChat(therapist_model) if therapist_model in OLLAMA_MODELS
@@ -547,28 +543,12 @@ def run_session(
     last_patient = seed
 
     schema_trace = []  # store schema per turn for CBT transcripts
-    cumulative_schema = {"triggers": [], "automatic_thoughts": [], "emotions": [], "behaviors": []}
-
-    last_schema = {"triggers": [], "automatic_thoughts": [], "emotions": [], "behaviors": []}
 
     for turn_idx in range(turns):
 
 
-        if use_schema:
-            turn_schema = safe_extract_schema(last_patient, prior_schema=last_schema)
-            updated = update_user_schema(cumulative_schema, last_patient)
-            
-            # only accept update if it adds something — never regress to empty
-            if any(len(v) > 0 for v in updated.values()):
-                cumulative_schema = updated
-            # else: keep previous cumulative_schema as-is
-            
-            schema = cumulative_schema
-            last_schema = turn_schema
-        else:
-            turn_schema = None
-            schema = None
-        print(cumulative_schema)
+        schema = safe_extract_schema(last_patient) if use_schema else None
+
         rag = None
         reasoning = None
 
@@ -579,8 +559,7 @@ def run_session(
             schema_trace.append({
                 "turn": turn_idx,
                 "patient_text": last_patient,
-                "schema_turn": turn_schema,
-                "schema_cumulative": cumulative_schema,  # full accumulated model
+                "schema": schema,
                 "retrieval": rag,
             })
 
@@ -684,7 +663,7 @@ def run_session(
                 "content": therapist_reply
             }],
             temperature=0.9,
-            max_tokens=200,
+            max_tokens=100,
         )
 
         patient_reply = patient_resp.choices[0].message.content.strip()
@@ -702,7 +681,7 @@ def run_session(
                     )
                 }],
                 temperature=0.9,
-                max_tokens=200,
+                max_tokens=100,
             ).choices[0].message.content.strip()
 
         patient_chat.append({

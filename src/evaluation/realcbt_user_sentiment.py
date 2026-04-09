@@ -5,6 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib.colors import Normalize
+from matplotlib.colors import LinearSegmentedColormap
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = PROJECT_ROOT / "data" / "external" / "RealCBT" / "RealCBT_Dataset"
@@ -19,7 +21,11 @@ NRC_VAD_DIR = PROJECT_ROOT / "external_libs" / "NRC-VAD-Lexicon-v2.1"
 
 CONDITION_LABEL = "RealCBT"
 CONDITION_COLOR = "#4C72B0"
-CIRCUMPLEX_CMAP = cm.plasma
+base_cmap = cm.Blues
+CIRCUMPLEX_CMAP = LinearSegmentedColormap.from_list(
+    "truncated_blues",
+    base_cmap(np.linspace(0.35, 1.0, 256))  # skip lightest 35%
+)
 
 def load_nrc_vad(lexicon_dir: Path) -> dict:
     unigrams_dir = lexicon_dir / "Unigrams"
@@ -216,22 +222,23 @@ def plot_va_circumplex(summary, out_path):
                 linewidth=3, solid_capstyle="round")
 
     ax.scatter(x[0], y[0], color="white", edgecolors="black",
-               marker="o", s=120, zorder=6, label="Start")
+               marker="o", s=120, zorder=6, label="Conversation Start")
     ax.scatter(x[-1], y[-1], color="white", edgecolors="black",
-               marker="*", s=250, zorder=6, label="End")
+               marker="*", s=250, zorder=6, label="Conversation End")
 
     pad = 0.01
-    ax.set_title("RealCBT Dataset: User Valence-Arousal Trajectory")
+    ax.set_title("RealCBT Dataset: Client" \
+    " Valence-Arousal Trajectory")
     ax.set_xlim(x.min() - pad, x.max() + pad)
     ax.set_ylim(y.min() - pad, y.max() + pad)
 
     ax.set_xlabel("Valence", fontsize=14)
     ax.set_ylabel("Arousal", fontsize=14)
-    ax.legend(fontsize=12, frameon=True, loc="upper left")
+    ax.legend(fontsize=12, frameon=True, loc="upper right")
 
     sm = cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
-    plt.colorbar(sm, ax=ax, label="Client Utterance", shrink=0.85)
+    plt.colorbar(sm, ax=ax, label="Client Turn", shrink=0.85)
 
     plt.tight_layout()
     plt.savefig(out_path, dpi=300, bbox_inches="tight")
