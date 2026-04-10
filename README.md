@@ -353,8 +353,13 @@ Evaluation Dimensions using criteria defined in our `cbt-protocols.json`:
 
 Run LaaJ:
 
-`python src/evaluation/summarize_evals.py --laaj-model gpt-5.1 --model all`
-`python src/evaluation/summarize_evals.py --laaj-model qwen3-32b --model all`
+```sh
+python src/evaluation/evaluating_responses.py --model gemma --judge-model gpt-5.1
+```
+
+```sh
+python src/evaluation/evaluating_responses.py --model gemma --judge-model qwen3-32b --judge-banckend ollama
+```
 
 Run Evaluation Plot Generation:
 
@@ -365,6 +370,11 @@ python src/evaluation/plot_cbt_eval.py --models gpt gemma mistral deepseek
 Outputs saved to:
 
 `evaluation/response_eval/`
+
+`python src/evaluation/summarize_evals.py --laaj-model gpt-5.1 --model all`
+
+`python src/evaluation/summarize_evals.py --laaj-model qwen3-32b --model all`
+
 
 ### 2. Human Expert Evaluation
 
