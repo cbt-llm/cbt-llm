@@ -40,8 +40,13 @@ def load_nrc_vad(lexicon_dir: Path) -> dict:
 
     valence = _load_dim("unigrams-valence-NRC-VAD-Lexicon-v2.1.txt")
     arousal = _load_dim("unigrams-arousal-NRC-VAD-Lexicon-v2.1.txt")
-    common = set(valence) & set(arousal)
-    vad_dict = {w: {"valence": valence[w], "arousal": arousal[w]} for w in common}
+    dominance = _load_dim("unigrams-dominance-NRC-VAD-Lexicon-v2.1.txt")
+
+    common = set(valence) & set(arousal) & set(dominance)
+    vad_dict = {
+        w: {"valence": valence[w], "arousal": arousal[w], "dominance": dominance[w]}
+        for w in common
+    }
     print(f"NRC VAD lexicon loaded: {len(vad_dict):,} unigrams\n")
     return vad_dict
 
@@ -122,6 +127,7 @@ def extract_user_turn_sentiments(messages: list, vad_dict: dict) -> list:
             "turn": int(turn_idx) + 1,
             "valence": float(np.mean([m["valence"] for m in matched])),
             "arousal": float(np.mean([m["arousal"] for m in matched])),
+            "dominance": float(np.mean([m["dominance"] for m in matched])),
         })
     return rows
 
@@ -138,6 +144,7 @@ def build_raw_df(files: list, vad_dict: dict, mode: str) -> pd.DataFrame:
                 "turn": row["turn"],
                 "valence": row["valence"],
                 "arousal": row["arousal"],
+                "dominance": row["dominance"]
             })
     return pd.DataFrame(rows)
 
@@ -148,7 +155,7 @@ def add_cumulative_sentiment(df: pd.DataFrame) -> pd.DataFrame:
         df["cumulative_arousal"] = pd.Series(dtype=float)
         return df
     df = df.sort_values(["transcript", "turn"])
-    for dim in ["valence", "arousal"]:
+    for dim in ["valence", "arousal", "dominance"]:
         df[f"cumulative_{dim}"] = (
             df.groupby("transcript")[dim]
             .expanding()
@@ -168,6 +175,8 @@ def summarize_cumulative(df: pd.DataFrame) -> pd.DataFrame:
             sem_valence=("cumulative_valence", "sem"),
             mean_cumulative_arousal=("cumulative_arousal", "mean"),
             sem_arousal=("cumulative_arousal", "sem"),
+            mean_cumulative_dominance=("cumulative_dominance", "mean"),
+            sem_dominance=("cumulative_dominance", "sem")
         )
         .sort_values("turn")
     )

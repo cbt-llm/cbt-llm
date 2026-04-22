@@ -111,15 +111,11 @@ Respond naturally to the next message.
 """.strip()
 
 THERAPIST_BASELINE_PROMPT = """
-You are a thoughtful agent responding to a patient.
-
-Guidelines:
-- Respond naturally and thoughtfully.
-- Do not diagnose or label.
-- If the patient mentions self-harm or imminent danger, encourage immediate local help.
+Respond to the user's message.
 
 Constraints:
-- One paragraph or 2–4 sentences.
+- Respond naturally and thoughtfully.
+- One paragraph or 2-4 sentences.
 """.strip()
 
 THERAPIST_CBT_MCOT_PROMPT = """

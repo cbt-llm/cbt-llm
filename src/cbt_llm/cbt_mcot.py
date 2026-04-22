@@ -87,8 +87,6 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
 
     Return your answer EXACTLY in this structure:
 
-    Return your answer EXACTLY in this structure:
-
     REASONING:
     {{
       "retrieved_concepts_used": ["...", "..."]

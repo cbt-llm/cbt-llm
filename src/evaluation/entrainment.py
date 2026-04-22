@@ -1,309 +1,277 @@
-"""
-compute_nclid.py
-────────────────────────────────────────────────────────────────────────────
-Drop-in script to compute nCLiD (normalized Conversational Linguistic
-Distance) per Nasir et al. (2019), as used in Kian et al. NAACL 2025.
-
-Usage
------
-    python compute_nclid.py --input_dir output/gpt --output results_gpt.csv
-    python compute_nclid.py --input_dir output/gemma --output results_gemma.csv
-
-    # or point at a single file:
-    python compute_nclid.py --input_file output/gpt/cbt_mcot_transcript_1.json
-
-Transcript format expected
---------------------------
-Your JSON files match the structure in the paper's dataset:
-  {
-    "metadata": { "llm_response": ..., ... },
-    "transcript": [
-      {
-        "turn": 0,
-        "patient":      { "query": "<patient utterance>" },
-        "llm_response": { "response": "<LLM/therapist utterance>" }
-      },
-      ...
-    ]
-  }
-
-nCLiD definition (Eq. 1-2 + Appendix C in the paper)
-------------------------------------------------------
-  anchor      A = LLM/therapist turns  [t1, t2, ..., tN]
-  coordinator C = patient turns        [p1, p2, ..., pN]
-
-  Local distance (context window k):
-      d_i^{C→A} = min_{i ≤ j ≤ i+k-1} WMD(a_i, c_j)
-
-  uCLiD = (1/N) * Σ d_i^{C→A}
-
-  α = (2 / N(N-1)) * [
-        Σ_{i<j} WMD(a_i, a_j)    # within-anchor
-      + Σ_{i<j} WMD(c_i, c_j)    # within-coordinator
-      + Σ_{i≤j} WMD(a_i, c_j)    # cross anchor→coordinator
-      ]
-
-  nCLiD = uCLiD / α
-
-Note: stop words are NOT removed (following Nasir et al. 2019).
-      Whitespace tokenization only.
-
-Dependencies
-------------
-    pip install gensim numpy
-    # word2vec model downloaded automatically on first run (~1.5 GB)
-"""
-
-import argparse
-import glob
-import json
-import os
-import sys
+import argparse, csv, glob, json, os, sys
+from collections import defaultdict
 from itertools import combinations
-from pathlib import Path
+import re
 
 import numpy as np
-
-# ── gensim imports ────────────────────────────────────────────────────────────
-try:
-    import gensim.downloader as api
-    from gensim.models import KeyedVectors
-except ImportError:
-    sys.exit("gensim not found. Run: pip install gensim")
+from sentence_transformers import SentenceTransformer
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# 1.  Word Mover's Distance helpers
-# ══════════════════════════════════════════════════════════════════════════════
-
-def _tokenize(text: str) -> list[str]:
-    """Whitespace split; no stop-word removal (per Nasir et al. 2019)."""
-    return text.lower().split()
-
-
-def wmd(model: KeyedVectors, text_a: str, text_b: str) -> float:
-    """
-    Word Mover's Distance between two strings using gensim's WMD.
-    Returns a large fallback value if either string has no in-vocabulary tokens.
-    """
-    tokens_a = [t for t in _tokenize(text_a) if t in model.key_to_index]
-    tokens_b = [t for t in _tokenize(text_b) if t in model.key_to_index]
-    if not tokens_a or not tokens_b:
-        return 1.0          # fallback: maximum distance
-    return model.wmdistance(tokens_a, tokens_b)
-
-
-# ══════════════════════════════════════════════════════════════════════════════
-# 2.  Core nCLiD computation
-# ══════════════════════════════════════════════════════════════════════════════
-
-def compute_nclid(
-    anchor_turns: list[str],
-    coord_turns: list[str],
-    model: KeyedVectors,
-    k: int = 2,
-) -> dict:
-    """
-    Compute nCLiD for one conversation.
-
-    Parameters
-    ----------
-    anchor_turns : list of str
-        Therapist / LLM utterances  [t1 .. tN]
-    coord_turns  : list of str
-        Patient utterances           [p1 .. pN]
-    model        : gensim KeyedVectors (word2vec)
-    k            : context window size (default 2, paper uses unspecified k;
-                   2 is the most common convention in follow-up work)
-
-    Returns
-    -------
-    dict with keys: uCLiD, alpha, nCLiD, N, local_distances
-    """
-    N = min(len(anchor_turns), len(coord_turns))
-    if N < 2:
-        return {"uCLiD": None, "alpha": None, "nCLiD": None, "N": N,
-                "local_distances": []}
-
-    # ── Step 1: local distances d_i (Eq. 1) ──────────────────────────────────
-    local_d = []
-    for i in range(N):
-        # look ahead up to k coordinator turns starting from position i
-        j_max = min(i + k, N)          # exclusive upper bound
-        candidates = [wmd(model, anchor_turns[i], coord_turns[j])
-                      for j in range(i, j_max)]
-        local_d.append(min(candidates))
-
-    uCLiD = float(np.mean(local_d))
-
-    # ── Step 2: normalization factor α (Appendix C, Eq. 4) ───────────────────
-    denom = N * (N - 1)                 # used as 2 / N(N-1) * Σ per term
-
-    # within-anchor: all pairs (a_i, a_j) with i < j
-    within_a = sum(
-        wmd(model, anchor_turns[i], anchor_turns[j])
-        for i, j in combinations(range(N), 2)
-    )
-
-    # within-coordinator: all pairs (c_i, c_j) with i < j
-    within_c = sum(
-        wmd(model, coord_turns[i], coord_turns[j])
-        for i, j in combinations(range(N), 2)
-    )
-
-    # cross anchor→coordinator: all pairs (a_i, c_j) with i ≤ j
-    # Appendix C uses i ≤ j (not strict i < j) for the cross term
-    cross_ac = sum(
-        wmd(model, anchor_turns[i], coord_turns[j])
-        for i in range(N)
-        for j in range(i, N)
-    )
-
-    if denom == 0:
-        alpha = 1.0
-    else:
-        alpha = (2.0 / denom) * (within_a + within_c + cross_ac)
-
-    nCLiD = uCLiD / alpha if alpha > 0 else float("nan")
-
+def extract_protocol(turn):
     return {
-        "uCLiD": uCLiD,
-        "alpha": alpha,
-        "nCLiD": nCLiD,
-        "N": N,
-        "local_distances": local_d,
+        "socratic_questioning":    "socratic",
+        "validate_and_reflect":    "validation",
+        "alternative_perspective": "alternative",
+    }.get(turn.get("llm_response", {}).get("protocol_used"))
+
+
+def compute_nclid(therapist_turns, user_turns, encoder,
+                  context_window=2, protocols=None):
+    n = len(therapist_turns)
+
+    # Encode once, L2-normalize so cosine distance = 1 - dot(a, b)
+    t_emb = encoder.encode(therapist_turns[:n], normalize_embeddings=True,
+                           convert_to_numpy=True, show_progress_bar=False)
+    u_emb = encoder.encode(user_turns[:n], normalize_embeddings=True,
+                           convert_to_numpy=True, show_progress_bar=False)
+
+    def cos_dist(a, b):
+        return 1.0 - float(np.dot(a, b))
+
+    # Step 1: local distances
+    local_distances = [
+        min(cos_dist(t_emb[i], u_emb[j])
+            for j in range(i, min(i + context_window, n)))
+        for i in range(n)
+    ]
+    uCLiD = float(np.mean(local_distances))
+
+    # Step 2: alpha
+    pair_sum = 0.0
+    for i, j in combinations(range(n), 2):
+        pair_sum += cos_dist(t_emb[i], t_emb[j]) + cos_dist(u_emb[i], u_emb[j])
+    for i in range(n):
+        for j in range(i, n):
+            pair_sum += cos_dist(t_emb[i], u_emb[j])
+    alpha = (2.0 / (n * (n - 1))) * pair_sum
+
+    nCLiD = uCLiD / alpha
+
+    # Step 3: per-protocol grouping, normalized by the same alpha.
+    per_protocol = {}
+    if protocols:
+        grouped = defaultdict(list)
+        for p, d in zip(protocols[:n], local_distances):
+            if p:
+                grouped[p].append(d)
+        per_protocol = {
+            p: {"n": len(ds), "nCLiD_local": float(np.mean(ds) / alpha)}
+            for p, ds in grouped.items()
+        }
+
+    return {"N": n, "uCLiD": uCLiD, "alpha": alpha, "nCLiD": nCLiD,
+            "per_protocol": per_protocol}
+
+
+def compute_shift(mcot_path, baseline_path, encoder):
+    """Signed shift at each turn: how much MCOT moved the response relative
+    to the patient query, compared to where baseline would have landed.
+ 
+        shift_i = dist(MCOT_i, patient_i) - dist(baseline_i, patient_i)
+ 
+    Positive: MCOT landed further from patient than baseline would have.
+    Negative: MCOT landed closer to patient than baseline would have.
+    Zero:     MCOT made no difference in patient-closeness.
+    """
+    with open(mcot_path) as f:
+        mcot_data = json.load(f)
+    with open(baseline_path) as f:
+        baseline_data = json.load(f)
+ 
+    baseline_by_turn = {b["turn"]: b["baseline_response"].strip()
+                        for b in baseline_data.get("baseline", [])}
+ 
+    patient_queries, mcot_responses, baseline_responses, protocols = [], [], [], []
+    for turn in sorted(mcot_data.get("transcript", []),
+                       key=lambda t: t.get("turn", 0)):
+        idx = turn.get("turn")
+        if idx not in baseline_by_turn:
+            continue
+        p_text = turn.get("patient", {}).get("query", "").strip()
+        m_text = turn.get("llm_response", {}).get("response", "").strip()
+        b_text = baseline_by_turn[idx]
+        if not (p_text and m_text and b_text):
+            continue
+        patient_queries.append(p_text)
+        mcot_responses.append(m_text)
+        baseline_responses.append(b_text)
+        protocols.append(extract_protocol(turn))
+ 
+    if not mcot_responses:
+        return {"N": 0, "mean_shift": None, "per_protocol": {}}
+ 
+    p_emb = encoder.encode(patient_queries, normalize_embeddings=True,
+                           convert_to_numpy=True, show_progress_bar=False)
+    m_emb = encoder.encode(mcot_responses, normalize_embeddings=True,
+                           convert_to_numpy=True, show_progress_bar=False)
+    b_emb = encoder.encode(baseline_responses, normalize_embeddings=True,
+                           convert_to_numpy=True, show_progress_bar=False)
+ 
+    # Signed shift: positive = MCOT moved response away from patient vs baseline
+    shifts = [
+        (1.0 - float(np.dot(m_emb[i], p_emb[i])))
+        - (1.0 - float(np.dot(b_emb[i], p_emb[i])))
+        for i in range(len(mcot_responses))
+    ]
+ 
+    grouped = defaultdict(list)
+    for p, s in zip(protocols, shifts):
+        if p:
+            grouped[p].append(s)
+ 
+    per_protocol = {
+        p: {"n": len(ss), "mean_shift": float(np.mean(ss))}
+        for p, ss in grouped.items()
     }
-
-
-# ══════════════════════════════════════════════════════════════════════════════
-# 3.  Transcript parsing
-# ══════════════════════════════════════════════════════════════════════════════
-
-def parse_transcript(path: str) -> tuple[list[str], list[str], dict]:
-    """
-    Parse one of your cbt_mcot_transcript_*.json files.
-
-    Returns (anchor_turns, coord_turns, metadata)
-    anchor = llm_response.response  (therapist side)
-    coord  = patient.query          (patient side)
-    """
+ 
+    return {
+        "N": len(shifts),
+        "mean_shift": float(np.mean(shifts)),
+        "per_protocol": per_protocol,
+    }
+ 
+ 
+def process_transcript(path, encoder, k):
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
-
-    metadata = data.get("metadata", {})
-    turns = data.get("transcript", [])
-
-    anchor_turns = []
-    coord_turns  = []
-
-    for turn in sorted(turns, key=lambda t: t["turn"]):
-        patient_text = turn.get("patient", {}).get("query", "").strip()
-        llm_text     = turn.get("llm_response", {}).get("response", "").strip()
-
-        if patient_text:
-            coord_turns.append(patient_text)
-        if llm_text:
-            anchor_turns.append(llm_text)
-
-    return anchor_turns, coord_turns, metadata
-
-
-# ══════════════════════════════════════════════════════════════════════════════
-# 4.  Main entry point
-# ══════════════════════════════════════════════════════════════════════════════
-
-def load_word2vec() -> KeyedVectors:
-    """Download / load the 300-d Google News word2vec model via gensim."""
-    print("Loading word2vec (Google News 300d) — downloads ~1.5 GB on first run …")
-    model = api.load("word2vec-google-news-300")
-    print("Model loaded.")
-    return model
-
-
-def process_file(path: str, model: KeyedVectors, k: int) -> dict:
-    anchor, coord, meta = parse_transcript(path)
-    result = compute_nclid(anchor, coord, model, k=k)
-    result["file"]  = os.path.basename(path)
+ 
+    meta = data.get("metadata", {})
+    therapist, user, protocols = [], [], []
+ 
+    for turn in sorted(data.get("transcript", []), key=lambda t: t.get("turn", 0)):
+        u_text = turn.get("patient", {}).get("query", "").strip()
+        t_text = turn.get("llm_response", {}).get("response", "").strip()
+        if u_text and t_text:
+            user.append(u_text)
+            therapist.append(t_text)
+            protocols.append(extract_protocol(turn))
+ 
+    result = compute_nclid(therapist, user, encoder, k, protocols)
+    result["file"] = os.path.basename(path)
     result["model"] = meta.get("llm_response", "unknown")
-    result["mode"]  = meta.get("mode", "unknown")
-    result["turns"] = meta.get("turns", len(anchor))
+    result["mode"] = meta.get("mode", "unknown")
     return result
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Compute nCLiD for CBT-MCOT transcripts (Nasir et al. 2019)"
-    )
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("--input_dir",  help="Directory of JSON transcript files")
-    group.add_argument("--input_file", help="Single JSON transcript file")
-
-    parser.add_argument(
-        "--output", default="nclid_results.csv",
-        help="Output CSV path (default: nclid_results.csv)"
-    )
-    parser.add_argument(
-        "--k", type=int, default=2,
-        help="Context window size for local distance (default: 2)"
-    )
-    parser.add_argument(
-        "--model_path", default=None,
-        help="Path to a local .bin word2vec file (skips gensim download)"
-    )
-    args = parser.parse_args()
-
-    # ── Load word2vec ──────────────────────────────────────────────────────────
-    if args.model_path:
-        print(f"Loading word2vec from {args.model_path} …")
-        model = KeyedVectors.load_word2vec_format(args.model_path, binary=True)
-    else:
-        model = load_word2vec()
-
-    # ── Gather files ───────────────────────────────────────────────────────────
-    if args.input_file:
-        files = [args.input_file]
-    else:
-        files = sorted(glob.glob(os.path.join(args.input_dir, "*.json")))
-        if not files:
-            sys.exit(f"No JSON files found in {args.input_dir}")
-
-    print(f"Processing {len(files)} file(s) with k={args.k} …\n")
-
-    # ── Process & collect ─────────────────────────────────────────────────────
-    rows = []
-    for fpath in files:
-        try:
-            res = process_file(fpath, model, k=args.k)
-            rows.append(res)
-            print(
-                f"  {res['file']:40s}  "
-                f"N={res['N']:3d}  "
-                f"uCLiD={res['uCLiD']:.4f}  "
-                f"α={res['alpha']:.4f}  "
-                f"nCLiD={res['nCLiD']:.4f}"
-            )
-        except Exception as e:
-            print(f"  ERROR processing {fpath}: {e}")
-
-    # ── Write CSV ─────────────────────────────────────────────────────────────
-    import csv
-    cols = ["file", "model", "mode", "turns", "N", "uCLiD", "alpha", "nCLiD"]
+ 
+ 
+def build_csv_rows(results, protocol_columns):
+    for r in results:
+        row = {k: r.get(k) for k in ("file", "model", "mode", "N",
+                                     "uCLiD", "alpha", "nCLiD")}
+        pp = r.get("per_protocol") or {}
+        for p in protocol_columns:
+            stats = pp.get(p, {})
+            row[f"nCLiD_local_{p}"] = stats.get("nCLiD_local")
+            row[f"n_{p}"] = stats.get("n", 0)
+        yield row
+ 
+ 
+def run_nclid(args, encoder):
+    files = ([args.input_file] if args.input_file
+             else sorted(glob.glob(os.path.join(args.input_dir, "*.json"))))
+    if not files:
+        sys.exit(f"No JSON files found in {args.input_dir}")
+ 
+    print(f"Processing {len(files)} file(s) with k={args.k}\n")
+    results = []
+    for path in files:
+        r = process_transcript(path, encoder, args.k)
+        results.append(r)
+        pp = r.get("per_protocol") or {}
+        summary = ", ".join(f"{p}={s['nCLiD_local']:.3f} (n={s['n']})"
+                            for p, s in pp.items()) or "no protocol labels"
+        print(f"  {r['file']:40s}  N={r['N']:3d}  "
+              f"nCLiD={r['nCLiD']:.4f}  | {summary}")
+ 
+    core = ("socratic", "validation", "alternative")
+    observed = {p for r in results for p in (r.get("per_protocol") or {})}
+    protocol_columns = list(core) + sorted(observed - set(core))
+ 
+    fieldnames = (["file", "model", "mode", "N", "uCLiD", "alpha", "nCLiD"]
+                  + [c for p in protocol_columns
+                       for c in (f"nCLiD_local_{p}", f"n_{p}")])
+ 
     with open(args.output, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
-        writer.writerows(rows)
-
-    print(f"\nResults saved to {args.output}")
-
-    # ── Quick summary stats ───────────────────────────────────────────────────
-    valid = [r["nCLiD"] for r in rows if r["nCLiD"] is not None]
-    if valid:
-        print(f"\nSummary across {len(valid)} transcripts:")
-        print(f"  mean nCLiD = {np.mean(valid):.4f}")
-        print(f"  std  nCLiD = {np.std(valid):.4f}")
-        print(f"  min  nCLiD = {np.min(valid):.4f}")
-        print(f"  max  nCLiD = {np.max(valid):.4f}")
-
-
+        writer.writerows(build_csv_rows(results, protocol_columns))
+ 
+    print(f"\nSaved {args.output}")
+ 
+    nclids = [r["nCLiD"] for r in results]
+    print(f"\nDialogue-level nCLiD: mean={np.mean(nclids):.4f}  "
+          f"std={np.std(nclids):.4f}  n={len(nclids)}")
+    for p in protocol_columns:
+        vals = [r["per_protocol"][p]["nCLiD_local"]
+                for r in results if p in (r.get("per_protocol") or {})]
+        if vals:
+            print(f"  {p:12s} mean={np.mean(vals):.4f}  "
+                  f"std={np.std(vals):.4f}  transcripts={len(vals)}")
+ 
+ 
+def run_shift(args, encoder):
+    mcot_files = sorted(glob.glob(os.path.join(args.mcot_dir, "*.json")))
+    if not mcot_files:
+        sys.exit(f"No transcripts in {args.mcot_dir}")
+ 
+    print(f"Processing {len(mcot_files)} file(s)\n")
+    results = []
+    for mcot_path in mcot_files:
+        fname = os.path.basename(mcot_path)
+        # cbt_mcot_transcript_N.json -> baseline_transcript_N.json
+        match = re.search(r"(\d+)\.json$", fname)
+        baseline_name = (f"baseline_transcript_{match.group(1)}.json"
+                         if match else f"baseline_{fname}")
+        baseline_path = os.path.join(args.baseline_dir, baseline_name)
+        if not os.path.exists(baseline_path):
+            print(f"  skip (no baseline: {baseline_name}): {fname}")
+            continue
+        r = compute_shift(mcot_path, baseline_path, encoder)
+        r["file"] = fname
+        results.append(r)
+        pp = r.get("per_protocol") or {}
+        summary = ", ".join(f"{p}={s['mean_shift']:.3f} (n={s['n']})"
+                            for p, s in pp.items()) or "no protocol labels"
+        print(f"  {fname:40s}  N={r['N']:3d}  "
+              f"shift={r['mean_shift']:.4f}  | {summary}")
+ 
+    shifts = [r["mean_shift"] for r in results if r["mean_shift"] is not None]
+    print(f"\nDialogue-level shift: mean={np.mean(shifts):.4f}  "
+          f"std={np.std(shifts):.4f}  n={len(shifts)}")
+    for p in ("socratic", "validation", "alternative"):
+        vals = [r["per_protocol"][p]["mean_shift"] for r in results
+                if p in (r.get("per_protocol") or {})]
+        if vals:
+            print(f"  {p:12s} mean={np.mean(vals):.4f}  "
+                  f"std={np.std(vals):.4f}  transcripts={len(vals)}")
+ 
+ 
+def main():
+    ap = argparse.ArgumentParser(description="Compute nCLiD or shift with sentence-BERT")
+    sub = ap.add_subparsers(dest="command", required=True)
+ 
+    ncl = sub.add_parser("nclid", help="Compute nCLiD on MCOT transcripts")
+    src = ncl.add_mutually_exclusive_group(required=True)
+    src.add_argument("--input_dir",  help="Directory of transcript JSONs")
+    src.add_argument("--input_file", help="Single transcript JSON")
+    ncl.add_argument("--output", default="nclid_results.csv")
+    ncl.add_argument("--k", type=int, default=2, help="Context window (default 2)")
+ 
+    sh = sub.add_parser("shift", help="Compute MCOT-vs-baseline shift")
+    sh.add_argument("--mcot_dir", required=True, help="MCOT transcript dir")
+    sh.add_argument("--baseline_dir", required=True, help="Baseline transcript dir")
+ 
+    ap.add_argument("--sbert_model", default="all-mpnet-base-v2",
+                    help="sentence-transformers model name (default all-mpnet-base-v2)")
+    args = ap.parse_args()
+ 
+    print(f"Loading sentence-BERT model: {args.sbert_model}")
+    encoder = SentenceTransformer(args.sbert_model)
+ 
+    if args.command == "nclid":
+        run_nclid(args, encoder)
+    else:
+        run_shift(args, encoder)
+ 
+ 
 if __name__ == "__main__":
     main()
