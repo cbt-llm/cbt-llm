@@ -1,7 +1,6 @@
-import argparse, csv, glob, json, os, sys
+import argparse, csv, glob, json, os, re, sys
 from collections import defaultdict
 from itertools import combinations
-import re
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -63,24 +62,46 @@ def compute_nclid(therapist_turns, user_turns, encoder,
             "per_protocol": per_protocol}
 
 
-def compute_shift(mcot_path, baseline_path, encoder):
-    """Signed shift at each turn: how much MCOT moved the response relative
-    to the patient query, compared to where baseline would have landed.
- 
-        shift_i = dist(MCOT_i, patient_i) - dist(baseline_i, patient_i)
- 
+def signed_shift(mcot_embedding, baseline_embedding, patient_embedding):
+    """Signed shift for one turn.
+
+        shift = cos_dist(MCOT, patient) - cos_dist(baseline, patient)
+
+    Expects L2-normalized embeddings (cosine distance = 1 - dot product).
+
     Positive: MCOT landed further from patient than baseline would have.
     Negative: MCOT landed closer to patient than baseline would have.
     Zero:     MCOT made no difference in patient-closeness.
     """
+    d_mcot_patient     = 1.0 - float(np.dot(mcot_embedding,     patient_embedding))
+    d_baseline_patient = 1.0 - float(np.dot(baseline_embedding, patient_embedding))
+    return d_mcot_patient - d_baseline_patient
+
+def compute_shifts(mcot_responses, baseline_responses, patient_queries, encoder):
+    p_emb = encoder.encode(patient_queries, normalize_embeddings=True,
+                           convert_to_numpy=True, show_progress_bar=False)
+    m_emb = encoder.encode(mcot_responses, normalize_embeddings=True,
+                           convert_to_numpy=True, show_progress_bar=False)
+    b_emb = encoder.encode(baseline_responses, normalize_embeddings=True,
+                           convert_to_numpy=True, show_progress_bar=False)
+
+    return [
+        (1.0 - float(np.dot(m_emb[i], p_emb[i])))
+        - (1.0 - float(np.dot(b_emb[i], p_emb[i])))
+        for i in range(len(mcot_responses))
+    ]
+
+
+def compute_shift(mcot_path, baseline_path, encoder):
+    """Per-turn signed shift for a paired MCOT/baseline transcript."""
     with open(mcot_path) as f:
         mcot_data = json.load(f)
     with open(baseline_path) as f:
         baseline_data = json.load(f)
- 
+
     baseline_by_turn = {b["turn"]: b["baseline_response"].strip()
                         for b in baseline_data.get("baseline", [])}
- 
+
     patient_queries, mcot_responses, baseline_responses, protocols = [], [], [], []
     for turn in sorted(mcot_data.get("transcript", []),
                        key=lambda t: t.get("turn", 0)):
@@ -96,48 +117,44 @@ def compute_shift(mcot_path, baseline_path, encoder):
         mcot_responses.append(m_text)
         baseline_responses.append(b_text)
         protocols.append(extract_protocol(turn))
- 
+
     if not mcot_responses:
         return {"N": 0, "mean_shift": None, "per_protocol": {}}
- 
+
     p_emb = encoder.encode(patient_queries, normalize_embeddings=True,
                            convert_to_numpy=True, show_progress_bar=False)
     m_emb = encoder.encode(mcot_responses, normalize_embeddings=True,
                            convert_to_numpy=True, show_progress_bar=False)
     b_emb = encoder.encode(baseline_responses, normalize_embeddings=True,
                            convert_to_numpy=True, show_progress_bar=False)
- 
-    # Signed shift: positive = MCOT moved response away from patient vs baseline
-    shifts = [
-        (1.0 - float(np.dot(m_emb[i], p_emb[i])))
-        - (1.0 - float(np.dot(b_emb[i], p_emb[i])))
-        for i in range(len(mcot_responses))
-    ]
- 
+
+    shifts = [signed_shift(m_emb[i], b_emb[i], p_emb[i])
+              for i in range(len(mcot_responses))]
+
     grouped = defaultdict(list)
     for p, s in zip(protocols, shifts):
         if p:
             grouped[p].append(s)
- 
+
     per_protocol = {
         p: {"n": len(ss), "mean_shift": float(np.mean(ss))}
         for p, ss in grouped.items()
     }
- 
+
     return {
         "N": len(shifts),
         "mean_shift": float(np.mean(shifts)),
         "per_protocol": per_protocol,
     }
- 
- 
+
+
 def process_transcript(path, encoder, k):
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
- 
+
     meta = data.get("metadata", {})
     therapist, user, protocols = [], [], []
- 
+
     for turn in sorted(data.get("transcript", []), key=lambda t: t.get("turn", 0)):
         u_text = turn.get("patient", {}).get("query", "").strip()
         t_text = turn.get("llm_response", {}).get("response", "").strip()
@@ -145,14 +162,14 @@ def process_transcript(path, encoder, k):
             user.append(u_text)
             therapist.append(t_text)
             protocols.append(extract_protocol(turn))
- 
+
     result = compute_nclid(therapist, user, encoder, k, protocols)
     result["file"] = os.path.basename(path)
     result["model"] = meta.get("llm_response", "unknown")
     result["mode"] = meta.get("mode", "unknown")
     return result
- 
- 
+
+
 def build_csv_rows(results, protocol_columns):
     for r in results:
         row = {k: r.get(k) for k in ("file", "model", "mode", "N",
@@ -163,14 +180,14 @@ def build_csv_rows(results, protocol_columns):
             row[f"nCLiD_local_{p}"] = stats.get("nCLiD_local")
             row[f"n_{p}"] = stats.get("n", 0)
         yield row
- 
- 
+
+
 def run_nclid(args, encoder):
     files = ([args.input_file] if args.input_file
              else sorted(glob.glob(os.path.join(args.input_dir, "*.json"))))
     if not files:
         sys.exit(f"No JSON files found in {args.input_dir}")
- 
+
     print(f"Processing {len(files)} file(s) with k={args.k}\n")
     results = []
     for path in files:
@@ -181,22 +198,22 @@ def run_nclid(args, encoder):
                             for p, s in pp.items()) or "no protocol labels"
         print(f"  {r['file']:40s}  N={r['N']:3d}  "
               f"nCLiD={r['nCLiD']:.4f}  | {summary}")
- 
+
     core = ("socratic", "validation", "alternative")
     observed = {p for r in results for p in (r.get("per_protocol") or {})}
     protocol_columns = list(core) + sorted(observed - set(core))
- 
+
     fieldnames = (["file", "model", "mode", "N", "uCLiD", "alpha", "nCLiD"]
                   + [c for p in protocol_columns
                        for c in (f"nCLiD_local_{p}", f"n_{p}")])
- 
+
     with open(args.output, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(build_csv_rows(results, protocol_columns))
- 
+
     print(f"\nSaved {args.output}")
- 
+
     nclids = [r["nCLiD"] for r in results]
     print(f"\nDialogue-level nCLiD: mean={np.mean(nclids):.4f}  "
           f"std={np.std(nclids):.4f}  n={len(nclids)}")
@@ -206,13 +223,13 @@ def run_nclid(args, encoder):
         if vals:
             print(f"  {p:12s} mean={np.mean(vals):.4f}  "
                   f"std={np.std(vals):.4f}  transcripts={len(vals)}")
- 
- 
+
+
 def run_shift(args, encoder):
     mcot_files = sorted(glob.glob(os.path.join(args.mcot_dir, "*.json")))
     if not mcot_files:
         sys.exit(f"No transcripts in {args.mcot_dir}")
- 
+
     print(f"Processing {len(mcot_files)} file(s)\n")
     results = []
     for mcot_path in mcot_files:
@@ -233,7 +250,24 @@ def run_shift(args, encoder):
                             for p, s in pp.items()) or "no protocol labels"
         print(f"  {fname:40s}  N={r['N']:3d}  "
               f"shift={r['mean_shift']:.4f}  | {summary}")
- 
+
+    fieldnames = ["file", "N", "mean_shift",
+                  "mean_shift_socratic", "n_socratic",
+                  "mean_shift_validation", "n_validation",
+                  "mean_shift_alternative", "n_alternative"]
+    with open(args.output, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        for r in results:
+            row = {"file": r["file"], "N": r["N"], "mean_shift": r["mean_shift"]}
+            pp = r.get("per_protocol") or {}
+            for p in ("socratic", "validation", "alternative"):
+                stats = pp.get(p, {})
+                row[f"mean_shift_{p}"] = stats.get("mean_shift")
+                row[f"n_{p}"] = stats.get("n", 0)
+            writer.writerow(row)
+    print(f"\nSaved {args.output}")
+
     shifts = [r["mean_shift"] for r in results if r["mean_shift"] is not None]
     print(f"\nDialogue-level shift: mean={np.mean(shifts):.4f}  "
           f"std={np.std(shifts):.4f}  n={len(shifts)}")
@@ -243,35 +277,36 @@ def run_shift(args, encoder):
         if vals:
             print(f"  {p:12s} mean={np.mean(vals):.4f}  "
                   f"std={np.std(vals):.4f}  transcripts={len(vals)}")
- 
- 
+
+
 def main():
     ap = argparse.ArgumentParser(description="Compute nCLiD or shift with sentence-BERT")
     sub = ap.add_subparsers(dest="command", required=True)
- 
+
     ncl = sub.add_parser("nclid", help="Compute nCLiD on MCOT transcripts")
     src = ncl.add_mutually_exclusive_group(required=True)
     src.add_argument("--input_dir",  help="Directory of transcript JSONs")
     src.add_argument("--input_file", help="Single transcript JSON")
     ncl.add_argument("--output", default="nclid_results.csv")
     ncl.add_argument("--k", type=int, default=2, help="Context window (default 2)")
- 
+
     sh = sub.add_parser("shift", help="Compute MCOT-vs-baseline shift")
     sh.add_argument("--mcot_dir", required=True, help="MCOT transcript dir")
     sh.add_argument("--baseline_dir", required=True, help="Baseline transcript dir")
- 
+    sh.add_argument("--output", default="shift_results.csv")
+
     ap.add_argument("--sbert_model", default="all-mpnet-base-v2",
                     help="sentence-transformers model name (default all-mpnet-base-v2)")
     args = ap.parse_args()
- 
+
     print(f"Loading sentence-BERT model: {args.sbert_model}")
     encoder = SentenceTransformer(args.sbert_model)
- 
+
     if args.command == "nclid":
         run_nclid(args, encoder)
     else:
         run_shift(args, encoder)
- 
- 
+
+
 if __name__ == "__main__":
     main()
