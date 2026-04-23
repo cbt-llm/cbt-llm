@@ -22,6 +22,11 @@ CIRCUMPLEX_CMAP = LinearSegmentedColormap.from_list(
     cm.Purples(np.linspace(0.35, 1.0, 256))
 )
 
+# Fixed axis limits and tick spacing for cross-model comparability
+FIXED_XLIM = (0.105, 0.145)
+FIXED_YLIM = (-0.100, -0.045)
+FIXED_TICK_STEP = 0.01
+
 
 def load_nrc_vad(lexicon_dir: Path) -> dict:
     unigrams_dir = lexicon_dir / "Unigrams"
@@ -209,9 +214,10 @@ def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
     ax.scatter(x[-1], y[-1], color="white", edgecolors="black",
                marker="*", s=250, zorder=6, label="Conversation End")
 
-    pad = 0.01
-    ax.set_xlim(x.min() - pad, x.max() + pad)
-    ax.set_ylim(y.min() - pad, y.max() + pad)
+    ax.set_xlim(*FIXED_XLIM)
+    ax.set_ylim(*FIXED_YLIM)
+    ax.set_xticks(np.arange(FIXED_XLIM[0], FIXED_XLIM[1] + 1e-9, FIXED_TICK_STEP))
+    ax.set_yticks(np.arange(FIXED_YLIM[0], FIXED_YLIM[1] + 1e-9, FIXED_TICK_STEP))
     ax.invert_yaxis()
 
     ax.set_title("CBT-MCoT: User Valence-Arousal Trajectory")

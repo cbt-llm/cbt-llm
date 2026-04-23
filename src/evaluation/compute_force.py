@@ -5,7 +5,7 @@ Compute centrifugal force F per turn. Five variants, same numerator, different r
 
     F_A = numerator / (d(MCOT, baseline_centroid) + perturbation)
     F_B = numerator / (d(MCOT, baseline_centroid) + perturbation + 1)
-    F_C = numerator / (perturbation + 1)
+    F_C = numerator / (d(perturbed_centroid, baseline_centroid) + 1)
     F_D = numerator / (d(protocol_purpose, baseline_centroid) + perturbation)
     F_E = numerator / d(protocol_purpose, baseline_centroid)
 
@@ -24,10 +24,10 @@ Where:
 
 Usage:
   python compute_force.py \
-      --mcot_dir output/gemma \
-      --baseline_dirs output/gemma_baseline output/gemma_baseline_v2 \
-                      output/gemma_baseline_v3 \
-      --output force_gemma.csv
+      --mcot_dir output/mistral \
+      --baseline_dirs output/mistral_baseline output/mistral_baseline_v2 \
+                      output/mistral_baseline_v3 \
+      --output force_mistral.csv
 
 Filename pairing:
   cbt_mcot_transcript_N.json  <->  baseline_transcript_N.json
@@ -104,15 +104,21 @@ def centroid(vectors):
     return c / n if n > 0 else c
 
 
+def _fmt(x, spec=".5f"):
+    """Format float or return 'nan' for None so prints don't crash."""
+    return format(x, spec) if x is not None else "   nan"
+
+
 def compute_transcript_force(mcot_path, baseline_paths, encoder,
                              mass_by_protocol, embedding_by_protocol):
     """Per-turn F for one transcript across N baseline prompt variants.
 
-    Four variants computed per turn:
+    Five variants computed per turn:
       F_A = m * shift^2 / (d(MCOT, centroid) + perturbation)
       F_B = m * shift^2 / (d(MCOT, centroid) + perturbation + 1)
       F_C = m * shift^2 / (perturbation + 1)
       F_D = m * shift^2 / (d(protocol_purpose, centroid) + perturbation)
+      F_E = m * shift^2 / d(protocol_purpose, centroid)
     """
     with open(mcot_path) as f:
         mcot_data = json.load(f)
@@ -175,7 +181,7 @@ def compute_transcript_force(mcot_path, baseline_paths, encoder,
         d_mcot_centroid = cos_dist(m_emb[i], primary_centroid)
         m_mass = mass_by_protocol.get(protocols[i], 1.0) if protocols[i] else 1.0
 
-        # F_D needs distance from protocol's purpose embedding to the baseline centroid
+        # F_D / F_E need distance from protocol's purpose embedding to baseline centroid
         if protocols[i] and protocols[i] in embedding_by_protocol:
             d_protocol_centroid = cos_dist(embedding_by_protocol[protocols[i]],
                                            primary_centroid)
@@ -186,6 +192,8 @@ def compute_transcript_force(mcot_path, baseline_paths, encoder,
 
         denom_A = d_mcot_centroid + perturbation
         denom_B = denom_A + 1.0
+        # F_C: denominator = mean pairwise perturbation + 1
+        # (per-transcript constant; same perturbation used in F_A/F_B/F_D)
         denom_C = perturbation + 1.0
         denom_D = (d_protocol_centroid + perturbation
                    if d_protocol_centroid is not None else None)
@@ -287,12 +295,12 @@ def main():
 
         print(f"  {fname:40s}  N={result['N']:3d}  "
               f"perturbation={result['perturbation']:.4f}  "
-              f"F_A={row['mean_F_A']:.5f}  F_B={row['mean_F_B']:.5f}  "
-              f"F_C={row['mean_F_C']:.5f}  F_D={row['mean_F_D']:.5f}  "
-              f"F_E={row['mean_F_E']:.5f}")
+              f"F_A={_fmt(row['mean_F_A'])}  F_B={_fmt(row['mean_F_B'])}  "
+              f"F_C={_fmt(row['mean_F_C'])}  F_D={_fmt(row['mean_F_D'])}  "
+              f"F_E={_fmt(row['mean_F_E'])}")
 
     fieldnames = ["file", "N", "perturbation",
-                  "mean_F_A", "mean_F_B", "mean_F_C", "mean_F_D"]
+                  "mean_F_A", "mean_F_B", "mean_F_C", "mean_F_D", "mean_F_E"]
     for p in ("socratic", "validation", "alternative"):
         for fk in F_KEYS:
             fieldnames.append(f"mean_{fk}_{p}")
