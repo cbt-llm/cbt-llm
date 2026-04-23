@@ -23,11 +23,11 @@ Where:
                   (one value per transcript)
 
 Usage:
-  python compute_force.py \\
-      --mcot_dir output/mistral \\
-      --baseline_dirs output/mistral_baseline output/mistral_baseline_v2 \\
-                      output/mistral_baseline_v3 \\
-      --output force_mistral.csv
+  python compute_force.py \
+      --mcot_dir output/gemma \
+      --baseline_dirs output/gemma_baseline output/gemma_baseline_v2 \
+                      output/gemma_baseline_v3 \
+      --output force_gemma.csv
 
 Filename pairing:
   cbt_mcot_transcript_N.json  <->  baseline_transcript_N.json
