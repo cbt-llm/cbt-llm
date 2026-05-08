@@ -82,8 +82,6 @@ You are simulating a human patient in an ongoing cognitive behavioral therapy (C
 
 Respond as the patient would in a real therapy session.
 
-You have sought help with: {core_issue}.
-
 Your responses should be internally guided by:
 - your personal history
 - your core and intermediate beliefs
@@ -492,8 +490,9 @@ def run_session(
     use_protocol,
     k,
     seed,
-    core_issue,
-    transcript_json,
+    fixed_seed=None,
+    # core_issue,
+    transcript_json=None,
 ):
 
     if therapist_mode == "baseline":
@@ -535,7 +534,7 @@ def run_session(
         raise ValueError(f"Unknown therapist_mode: {therapist_mode}")
 
     transcript = []
-    patient_chat = [{"role": "system", "content": PATIENT_SYSTEM.format(core_issue=core_issue)}]
+    patient_chat = [{"role": "system", "content": PATIENT_SYSTEM.format()}]
     last_patient = seed
 
     schema_trace = []  # store schema per turn for CBT transcripts
@@ -664,8 +663,11 @@ def run_session(
 
         patient_reply = patient_resp.choices[0].message.content.strip()
 
+        if turn_idx == 0 and fixed_seed is not None:
+            patient_reply = fixed_seed
+
         # Retry if patient drifts into therapist mode
-        if looks_like_patient_drift(patient_reply):
+        elif looks_like_patient_drift(patient_reply):
             patient_reply = patient_llm.chat.completions.create(
                 model=patient_model,
                 messages=patient_chat + [{
@@ -704,7 +706,7 @@ def run_session(
             "patient": {
                 "role": "patient",
                 "query": last_patient,
-                "core_issue": core_issue,
+                # "core_issue": core_issue,
                 "schema": schema,
                 "retrieval": rag,
             },
@@ -725,7 +727,7 @@ def run_session(
             "mode": therapist_mode,
             "turns": turns,
             "seed": seed,
-            "core_issue": core_issue,
+            # "core_issue": core_issue,
             "intervention_flags": {
                 "use_schema": use_schema,
                 "use_rag": use_rag,
@@ -757,7 +759,8 @@ def main():
     ap.add_argument("--turns", type=int, default=10)
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--seed", required=True)
-    ap.add_argument("--core_issue", required=True)
+    ap.add_argument("--fixed_seed")
+    # ap.add_argument("--core_issue", required=True)
     ap.add_argument("--transcript_json", required=True)
 
     ap.add_argument("--use_rag", action="store_true")
