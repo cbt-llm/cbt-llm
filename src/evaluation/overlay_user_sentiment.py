@@ -23,8 +23,8 @@ CIRCUMPLEX_CMAP = LinearSegmentedColormap.from_list(
 )
 
 # Fixed axis limits and tick spacing for cross-model comparability
-FIXED_XLIM = (0.105, 0.145)
-FIXED_YLIM = (-0.100, -0.045)
+FIXED_XLIM = (0.10, 0.21)
+FIXED_YLIM = (-0.15, -0.05)
 FIXED_TICK_STEP = 0.01
 
 
@@ -218,7 +218,6 @@ def plot_va_circumplex(all_summaries: dict, out_dir: Path, model: str):
     ax.set_ylim(*FIXED_YLIM)
     ax.set_xticks(np.arange(FIXED_XLIM[0], FIXED_XLIM[1] + 1e-9, FIXED_TICK_STEP))
     ax.set_yticks(np.arange(FIXED_YLIM[0], FIXED_YLIM[1] + 1e-9, FIXED_TICK_STEP))
-    ax.invert_yaxis()
 
     ax.set_title("CBT-MCoT: User Valence-Arousal Trajectory")
     ax.set_xlabel("Valence", fontsize=14)
