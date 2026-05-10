@@ -176,6 +176,12 @@ MULTIPLE CHAIN OF THOUGHT REASONING
 ━━━━━━━━━━━━━━━━━━━
 
 Before generating the final response, internally simulate three candidate therapist responses — one for each CBT intervention principle.
+
+━━━━━━━━━━━━━━━━━━━
+TOPIC ANCHORING
+━━━━━━━━━━━━━━━━━━━
+
+The patient's FIRST message in the session establishes the SEED TOPIC. From turn 1 onward, the SEED TOPIC and detailed BRIDGE/CONTINUE rules are provided as part of each protocol's instruction block. Follow them strictly. You MUST NOT follow tangents at the expense of the seed topic.
 """.strip()
 
 THERAPIST_CBT_PROMPT= """
@@ -357,6 +363,49 @@ def audit_grounding(reply, schema, rag):
         "rag_used": bool(rag and any(c["term"].split()[0].lower() in t for c in rag.get("concepts", [])))
     }
 
+
+def detect_anchor_decision(seed: str, patient_text: str, therapist_reply: str) -> Dict[str, Any]:
+    """
+    Heuristic post-hoc check for whether the therapist response anchored
+    back to the seed topic. Logs CONTINUE vs BRIDGE behavior.
+    """
+    def content_tokens(s: str):
+        s = s.lower()
+        toks = re.findall(r"[a-z]{4,}", s)
+        stop = {
+            "that", "this", "with", "from", "have", "just", "like",
+            "they", "them", "your", "want", "would", "could", "about",
+            "feel", "feels", "really", "thing", "things", "going",
+            "into", "much", "what", "when", "where", "there", "here",
+            "than", "then", "been", "being", "some", "most", "more",
+            "even", "ever", "also", "still", "again", "back", "make",
+            "makes", "made", "know", "knew", "yeah",
+        }
+        return {t for t in toks if t not in stop}
+
+    seed_toks = content_tokens(seed or "")
+    patient_toks = content_tokens(patient_text or "")
+    reply_toks = content_tokens(therapist_reply or "")
+
+    seed_in_patient = sorted(seed_toks & patient_toks)
+    seed_in_reply = sorted(seed_toks & reply_toks)
+
+    on_seed_patient = len(seed_in_patient) >= 2
+    if on_seed_patient:
+        expected = "CONTINUE"
+        bridged = None
+    else:
+        expected = "BRIDGE"
+        bridged = len(seed_in_reply) >= 1
+
+    return {
+        "expected_mode": expected,
+        "seed_tokens_in_patient": seed_in_patient,
+        "seed_tokens_in_reply": seed_in_reply,
+        "reply_anchored_to_seed": bridged,
+    }
+
+
 import re
 
 def classify_reasoning_concepts(reasoning, rag, schema):
@@ -365,7 +414,6 @@ def classify_reasoning_concepts(reasoning, rag, schema):
 
     for concept in concepts:
 
-        # handle both string and dict formats
         if isinstance(concept, dict):
             concept_text = concept.get("concept", "")
         else:
@@ -375,7 +423,6 @@ def classify_reasoning_concepts(reasoning, rag, schema):
 
         label = "unknown"
 
-        # check rag
         for k in ["entailment", "neutral", "contradiction"]:
             for r in rag.get(k, []):
                 r_clean = re.sub(r"\(.*?\)", "", r).strip().lower()
@@ -385,7 +432,6 @@ def classify_reasoning_concepts(reasoning, rag, schema):
             if label != "unknown":
                 break
 
-        # check schema
         if label == "unknown":
             for k in ["triggers", "automatic_thoughts", "emotions"]:
                 for s in schema.get(k, []):
@@ -417,12 +463,10 @@ def classify_transcript(transcript):
         rag = patient.get("retrieval")
         schema = patient.get("schema")
 
-        # classify main reasoning
         reasoning = llm_response.get("reasoning")
         if reasoning:
             classify_reasoning_concepts(reasoning, rag, schema)
 
-        # classify MCOT candidate reasoning
         candidates = llm_response.get("mcot_candidates", {})
         for _, data in candidates.items():
             r = data.get("reasoning")
@@ -432,15 +476,6 @@ def classify_transcript(transcript):
     return transcript
 
 def parse_gpt_oss_output(raw_reply: str):
-    """
-    Robust parser for gpt-oss:20b CBT outputs.
-
-    Handles:
-    - multiple reasoning/response blocks
-    - reasoning without FINAL RESPONSE
-    - duplicated blocks
-    - plain therapist text
-    """
 
     reasoning = None
     response = raw_reply.strip()
@@ -457,11 +492,9 @@ def parse_gpt_oss_output(raw_reply: str):
         re.DOTALL
     )
 
-    # Prefer FINAL RESPONSE blocks
     if response_matches:
         response = response_matches[-1].strip()
 
-    # Parse last reasoning block if possible
     if reasoning_matches:
         last_reasoning = reasoning_matches[-1].strip()
 
@@ -491,7 +524,6 @@ def run_session(
     k,
     seed,
     fixed_seed=None,
-    # core_issue,
     transcript_json=None,
 ):
 
@@ -537,7 +569,7 @@ def run_session(
     patient_chat = [{"role": "system", "content": PATIENT_SYSTEM.format()}]
     last_patient = seed
 
-    schema_trace = []  # store schema per turn for CBT transcripts
+    schema_trace = []
 
     for turn_idx in range(turns):
 
@@ -560,10 +592,6 @@ def run_session(
 
         hidden_context = build_hidden_context(schema, rag, use_protocol)
 
-        # print("\n================ HIDDEN CONTEXT ================")
-        # print(hidden_context)
-        # print("================================================\n")
-
         therapist_messages = [
             {"role": "system", "content": base_prompt}
         ]
@@ -578,17 +606,31 @@ def run_session(
             "role": "user",
             "content": last_patient
         })
-        
-        # reasoning = None
 
         if therapist_mode == "cbt_mcot":
+            # Inject seed reminder directly into the patient message on
+            # turns >= 1. This puts the seed in the user-role slot (where
+            # the model attends most) without polluting the logged
+            # patient.query field — the original last_patient is what
+            # gets stored in the transcript downstream.
+            if turn_idx > 0:
+                augmented_patient = (
+                    f"[REMINDER — the user came in with this concern at the start of session: \"{seed}\". "
+                    f"Stay anchored to it.]\n\n"
+                    f"Patient's current message: {last_patient}"
+                )
+            else:
+                augmented_patient = last_patient
+
             therapist_reply, protocol_used, candidates, reasoning = mcot_therapist_reply(
                 therapist_llm,
                 base_prompt,
                 hidden_context,
-                last_patient,
+                augmented_patient,
                 rag,
-                schema
+                schema,
+                seed=seed,
+                turn_idx=turn_idx,
             )
             
 
@@ -666,7 +708,6 @@ def run_session(
         if turn_idx == 0 and fixed_seed is not None:
             patient_reply = fixed_seed
 
-        # Retry if patient drifts into therapist mode
         elif looks_like_patient_drift(patient_reply):
             patient_reply = patient_llm.chat.completions.create(
                 model=patient_model,
@@ -699,6 +740,13 @@ def run_session(
             therapist_block["protocol_used"] = protocol_used
             therapist_block["mcot_candidates"] = candidates
 
+            if turn_idx > 0:
+                therapist_block["anchor_decision"] = detect_anchor_decision(
+                    seed=seed,
+                    patient_text=last_patient,
+                    therapist_reply=therapist_reply,
+                )
+
 
         turn_record = {
             "turn": turn_idx,
@@ -706,7 +754,6 @@ def run_session(
             "patient": {
                 "role": "patient",
                 "query": last_patient,
-                # "core_issue": core_issue,
                 "schema": schema,
                 "retrieval": rag,
             },
@@ -727,7 +774,6 @@ def run_session(
             "mode": therapist_mode,
             "turns": turns,
             "seed": seed,
-            # "core_issue": core_issue,
             "intervention_flags": {
                 "use_schema": use_schema,
                 "use_rag": use_rag,
@@ -745,10 +791,6 @@ def run_session(
         json.dumps(output, indent=2, ensure_ascii=False)
     )
 
-    # Path(transcript_json).write_text(
-    #     json.dumps(output, indent=2, ensure_ascii=False)
-    # )
-
 
 def main():
     ap = argparse.ArgumentParser()
@@ -760,7 +802,6 @@ def main():
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--seed", required=True)
     ap.add_argument("--fixed_seed")
-    # ap.add_argument("--core_issue", required=True)
     ap.add_argument("--transcript_json", required=True)
 
     ap.add_argument("--use_rag", action="store_true")

@@ -28,19 +28,36 @@ def load_cbt_protocols():
 
 CBT_PROTOCOLS = load_cbt_protocols()
 
+
+_ANCHOR_STOPWORDS = {
+    "feel", "feels", "most", "time", "sometimes", "when", "things", "like",
+    "nothing", "going", "should", "they", "them", "that", "this", "with",
+    "just", "really", "much", "what", "into", "being", "been", "some",
+    "more", "even", "ever", "also", "still", "again", "make", "makes",
+    "know", "yeah", "about", "have", "your", "want", "would", "could",
+    "from", "here", "there", "where", "than", "then", "back",
+}
+
+
+def _seed_keywords(seed: str, limit: int = 8):
+    """Pull content keywords from the seed for use as anchor targets."""
+    if not seed:
+        return []
+    toks = re.findall(r"[a-z]{4,}", seed.lower())
+    kept = sorted({t for t in toks if t not in _ANCHOR_STOPWORDS})
+    return kept[:limit]
+
+
 def parse_reasoning_block(after_reasoning: str):
     """Try multiple strategies to extract retrieved_concepts_used."""
-    
-    # strategy 1: valid JSON object
+
     match = re.search(r"\{[\s\S]*?\}", after_reasoning)
     if match:
         try:
             return json.loads(match.group(0))
         except Exception:
             pass
-    
-    # strategy 2: bare key-value without braces
-    # handles: "retrieved_concepts_used": ["a", "b"]
+
     match = re.search(
         r'"retrieved_concepts_used"\s*:\s*(\[[\s\S]*?\])',
         after_reasoning
@@ -52,17 +69,77 @@ def parse_reasoning_block(after_reasoning: str):
         except Exception:
             pass
 
-    # strategy 3: just pull quoted strings as concept list
     items = re.findall(r'"([^"]+)"', after_reasoning.split("FINAL RESPONSE:")[0])
     if items:
-        # filter out the key name itself
         items = [i for i in items if i != "retrieved_concepts_used"]
         return {"retrieved_concepts_used": items}
 
     return None
 
 
-def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol):
+def build_anchor_block(seed, turn_idx):
+    """
+    Few-shot anchor block injected into each candidate's principle prompt.
+    Forces every protocol candidate to either CONTINUE-with-reference or
+    BRIDGE back to the seed topic when the patient drifts.
+    """
+    if seed is None or turn_idx is None or turn_idx <= 0:
+        return ""
+
+    seed_words = _seed_keywords(seed)
+    keyword_list = ", ".join(seed_words) if seed_words else "the original concern"
+
+    return f"""
+    ━━━━━━━━━━━━━━━━━━━
+    SEED TOPIC — MANDATORY ANCHOR
+    ━━━━━━━━━━━━━━━━━━━
+
+    The patient's ORIGINAL concern (turn 0) was:
+    "{seed}"
+
+    HARD RULE: Your FINAL RESPONSE must contain at least one of these
+    keywords from the original concern (or a direct paraphrase):
+    {keyword_list}
+
+    If the patient's current message is on the same topic → respond normally
+    AND still reference the original concern using one of those keywords.
+
+    If the patient's current message is a tangent, story, or new worry → you
+    MUST do all three IN ORDER:
+       (1) ONE short clause (≤10 words) acknowledging what they just said.
+       (2) A transition phrase: "I want to come back to what you said earlier about..."
+           or "Going back to what you mentioned at the start..."
+       (3) Apply this protocol's technique to the ORIGINAL concern.
+
+    ━━━━━━━━━━━━━━━━━━━
+    EXAMPLES
+    ━━━━━━━━━━━━━━━━━━━
+
+    EXAMPLE 1 (tangent → BRIDGE):
+    Original: "I get overwhelmed at work and shut down."
+    Patient now: "Oh I watched a really funny movie last night."
+    BAD: "That sounds like a nice break! What did you enjoy about it?"
+    GOOD: "Glad you got a laugh. I want to come back to what you said earlier about getting overwhelmed at work — when did that happen most recently?"
+
+    EXAMPLE 2 (tangent → BRIDGE):
+    Original: "I keep fighting with my partner over small things."
+    Patient now: "Anyway my coworker is so annoying, she chews loudly."
+    BAD: "That sounds frustrating. How do you usually handle her?"
+    GOOD: "That does sound annoying. Going back to what you mentioned at the start about fighting with your partner over small things — does that same irritation show up there too?"
+
+    EXAMPLE 3 (on-topic → CONTINUE but still reference):
+    Original: "I keep fighting with my partner over small things."
+    Patient now: "Yeah we fought again yesterday over the dishes."
+    GOOD: "So the small-things pattern came up again with the dishes. What was going through your mind right before you reacted?"
+
+    Apply the same logic to the actual conversation below.
+    """.strip()
+
+
+def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol,
+                       seed=None, turn_idx=0):
+
+    anchor_block = build_anchor_block(seed, turn_idx)
 
     principle_prompt = f"""
     CBT intervention protocol
@@ -78,6 +155,8 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
 
     Techniques:
     {chr(10).join("- " + t for t in protocol.get("techniques", []))}
+
+    {anchor_block}
 
     Generate ONE therapist response following this protocol.
 
@@ -146,11 +225,9 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
 
             reasoning = parse_reasoning_block(after_reasoning)
 
-            # extract response
             if "FINAL RESPONSE:" in after_reasoning:
                 response = after_reasoning.split("FINAL RESPONSE:", 1)[1].strip()
             elif reasoning:
-                # fallback: everything after the reasoning block
                 match = re.search(r'\][\s\S]*', after_reasoning)
                 if match:
                     response = match.group(0).lstrip(']\n ').strip()
@@ -165,14 +242,43 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol)
         "reasoning": reasoning
     }
 
-def evaluate_candidates(llm, patient_text, candidates, protocols):
 
-    judge_prompt = """
+def evaluate_candidates(llm, patient_text, candidates, protocols,
+                        seed=None, turn_idx=0):
+
+    seed_block = ""
+    if seed is not None and turn_idx > 0:
+        seed_words = _seed_keywords(seed)
+        keyword_list = ", ".join(seed_words) if seed_words else "the original concern"
+
+        seed_block = f"""
+
+    ━━━━━━━━━━━━━━━━━━━
+    HARD ANCHORING FILTER (READ FIRST, OVERRIDES PROTOCOL FIT)
+    ━━━━━━━━━━━━━━━━━━━
+
+    SEED TOPIC: "{seed}"
+    SEED KEYWORDS: {keyword_list}
+
+    Step A — For EACH candidate, check: does its response text contain at
+    least one SEED KEYWORD (or a direct paraphrase)?
+
+    Step B — If ONE OR MORE candidates contain a SEED KEYWORD, you MUST
+    select ONLY from those candidates. Eliminate all others.
+
+    Step C — Only if NO candidate contains a SEED KEYWORD, fall back to
+    protocol fit.
+
+    A protocol-perfect response that ignores the SEED TOPIC is WRONG.
+        """.rstrip()
+
+    judge_prompt = f"""
     You are evaluating therapist responses in a Cognitive Behavioral Therapy (CBT) conversation.
 
     Each response was generated using a different CBT intervention protocol.
 
     Your task: select the response that would most effectively move the therapy forward.
+    {seed_block}
 
     Step 1 — Read the patient message carefully. Identify:
     - Is the patient primarily expressing emotion and needing to feel heard?
@@ -232,7 +338,6 @@ def evaluate_candidates(llm, patient_text, candidates, protocols):
     print(f"\n=== JUDGE REASONING ===\n{result}\n======================\n")
 
     try:
-        # extract ANSWER: N if present, otherwise try raw int
         match = re.search(r'ANSWER:\s*(\d+)', result)
         if match:
             idx = int(match.group(1)) - 1
@@ -249,7 +354,9 @@ def mcot_therapist_reply(
     hidden_context,
     patient_text,
     rag,
-    schema
+    schema,
+    seed=None,
+    turn_idx=0,
 ):
 
     candidate_list = []
@@ -264,7 +371,9 @@ def mcot_therapist_reply(
             base_prompt,
             hidden_context,
             patient_text,
-            protocol
+            protocol,
+            seed=seed,
+            turn_idx=turn_idx,
         )
 
         candidate_list.append(candidate["response"])
@@ -278,7 +387,9 @@ def mcot_therapist_reply(
         llm,
         patient_text,
         candidate_list,
-        protocols
+        protocols,
+        seed=seed,
+        turn_idx=turn_idx,
     )
 
     best_protocol = protocols[best_idx]["name"]
