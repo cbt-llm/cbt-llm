@@ -120,7 +120,7 @@ thoughtful_distractions=(
 
 if [[ "$DATASET" == "realcbt" ]]; then
 
-  REALCBT_DIR="/Users/poojaguttal/Downloads/realcbt-dataset-main/RealCBT_Dataset/Real_cbt_split"
+  REALCBT_DIR="$(dirname "$0")/data/raw/realcbt_split"
   mapfile -t client_files < <(ls "${REALCBT_DIR}"/*_client.txt | sort -V)
 
   for i in "${!client_files[@]}"; do
@@ -151,7 +151,7 @@ if [[ "$DATASET" == "realcbt" ]]; then
 
 elif [[ "$DATASET" == "esconv" ]]; then
 
-  ESCONV_JSON="/Users/poojaguttal/Downloads/ESConv_client.json"
+  ESCONV_JSON="$(dirname "$0")/data/raw/ESConv_client.json"
   ESCONV_COUNT=$(python3 -c "import json; print(len(json.load(open('${ESCONV_JSON}'))))")
 
   for i in $(seq 0 $((ESCONV_COUNT - 1))); do
