@@ -71,19 +71,28 @@ def parse_reasoning_block(after_reasoning: str):
     return None
 
 
-def build_anchor_block(patient_history):
+def build_anchor_block(patient_history, core_issue=None):
     """
-    Dynamic anchor block injected into each candidate's principle prompt.
-    Infers the client's core concern from accumulated session history — no fixed seed required.
-    On turn 0 (empty history), guides the model to read the client's actual message
-    and decide whether it is a greeting or a direct opening of their concern.
+    Anchor block injected into each candidate's principle prompt.
+    Uses the confirmed core issue from metadata when available; otherwise infers
+    from session history. On turn 0 (empty history) guides the model to read
+    the client's actual message and decide whether it is a greeting or a direct
+    opening of their concern.
     """
+    concern_label = f'"{core_issue}"' if core_issue else "the concern they have been discussing"
+    concern_source = "CONFIRMED core issue from dataset metadata" if core_issue else "INFERRED from session history"
+
     if not patient_history:
-        return """
+        core_issue_block = (
+            f'\nThe client\'s confirmed core issue for this session: "{core_issue}".\n'
+            f'Keep this in mind even on the opening turn.\n'
+        ) if core_issue else ""
+
+        return f"""
 ━━━━━━━━━━━━━━━━━━━
 FIRST MESSAGE — READ THE CLIENT CAREFULLY
 ━━━━━━━━━━━━━━━━━━━
-
+{core_issue_block}
 This is the client's very first message. There is no prior session history yet.
 
 Read the client's message and decide:
@@ -110,37 +119,37 @@ Match your response to what the client actually said.
         for i, msg in enumerate(patient_history[-6:])
     )
 
+    core_issue_section = (
+        f'\nCORE ISSUE ({concern_source}): {concern_label}\n'
+        f'This is what the client came to therapy for. Every response must remain anchored to it.\n'
+    )
+
     return f"""
 ━━━━━━━━━━━━━━━━━━━
-SESSION CONTEXT — DYNAMIC TOPIC AWARENESS
+SESSION CONTEXT
 ━━━━━━━━━━━━━━━━━━━
-
+{core_issue_section}
 What the client has shared so far this session:
 {history_lines}
 
-STEP 1 — INFER CORE CONCERN:
-Based on the session history above, determine what the client's primary reason
-for being in therapy appears to be. This is your inferred core concern.
-Do not state it aloud — use it silently to anchor your response.
-
-STEP 2 — CLASSIFY THE CURRENT MESSAGE AND RESPOND ACCORDINGLY:
+STEP 1 — CLASSIFY THE CURRENT MESSAGE AND RESPOND ACCORDINGLY:
 
 A) GREETING / SMALL TALK — client says hello, asks how you are, or makes
    casual conversation unrelated to their concern.
    → Respond warmly and briefly. Naturally transition toward the therapeutic topic.
    → Do NOT immediately ask a clinical question.
 
-B) ON TOPIC — client continues discussing their core concern or a directly
-   related theme.
+B) ON TOPIC — client continues discussing {concern_label} or a directly related theme.
    → Apply this protocol's technique directly and therapeutically.
 
-C) DISTRACTION / TANGENT — client shifts to an unrelated topic, story, or
-   surface-level event that has nothing to do with their core concern.
+C) DISTRACTION / TANGENT — client shifts to something unrelated to {concern_label}.
    → Do all three IN ORDER:
       (1) ONE short clause (≤10 words) acknowledging what they just said.
-      (2) A gentle bridge: "I'd like to come back to what you've been working
-          through..." or "That connects to what you mentioned earlier about..."
-      (3) Apply this protocol's technique toward the inferred core concern.
+      (2) A natural bridge back that references something specific the client
+          said earlier in THIS conversation — not the category label.
+          e.g. "I want to come back to what you were describing earlier about..."
+          or "Going back to what you shared about [specific situation/feeling]..."
+      (3) Apply this protocol's technique to that specific thread.
 
 ━━━━━━━━━━━━━━━━━━━
 EXAMPLES
@@ -148,29 +157,32 @@ EXAMPLES
 
 EXAMPLE 1 (greeting mid-session → warm + transition):
 Client: "Hey, how are you doing today?"
-GOOD: "I'm doing well, thanks for asking. How have things been since we last spoke?"
+GOOD: "I'm doing well, thanks. How have things been since we last spoke?"
 
-EXAMPLE 2 (distraction → BRIDGE):
-Inferred concern: client struggles with anger at work.
+EXAMPLE 2 (distraction → BRIDGE using what client actually said):
+Core issue (internal only): "anxiety and fear"
+Client said earlier: "I get this tight feeling in my chest before I leave the house."
 Client now: "I watched this really funny show last night, completely zoned out."
-BAD: "That sounds like a nice escape! What did you enjoy about it?"
-GOOD: "Glad you got some downtime. I do want to come back to what you've been
-working through — when did that frustration at work last show up for you?"
+BAD: "That sounds like a nice escape!"
+BAD: "Let's return to anxiety and fear." ← never say the label aloud
+GOOD: "Glad you got a break. I want to come back to what you were describing
+earlier — that tight feeling in your chest before leaving the house. When did
+that last show up for you?"
 
 EXAMPLE 3 (on topic → direct response):
-Inferred concern: client struggles with anger at work.
-Client now: "I snapped at my coworker again yesterday."
-GOOD: "That same pattern came up again. What was going through your mind right
-before you reacted?"
+Core issue (internal only): "anxiety and fear"
+Client now: "I've been avoiding going out because I just feel so tense."
+GOOD: "That avoidance is keeping the tension in place. What does it feel like
+in your body right before you decide to stay home?"
 
 Apply the same classification and logic to the actual conversation below.
 """.strip()
 
 
 def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol,
-                       seed=None, turn_idx=0, patient_history=None):
+                       seed=None, turn_idx=0, patient_history=None, core_issue=None):
 
-    anchor_block = build_anchor_block(patient_history)
+    anchor_block = build_anchor_block(patient_history, core_issue=core_issue)
 
     principle_prompt = f"""
     CBT intervention protocol
@@ -275,7 +287,7 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol,
 
 
 def evaluate_candidates(llm, patient_text, candidates, protocols,
-                        seed=None, patient_history=None):  # seed unused — core concern inferred from history
+                        seed=None, patient_history=None, core_issue=None):  # seed unused
 
     greeting_note = ""
     _greeting_signals = {"hello", "hi", "hey", "how are", "good morning", "good afternoon", "good evening"}
@@ -294,6 +306,27 @@ def evaluate_candidates(llm, patient_text, candidates, protocols,
     The right response acknowledges the client and invites them to share or continue.
     """.rstrip()
 
+    core_issue_note = ""
+    if core_issue:
+        core_issue_note = f"""
+
+    ━━━━━━━━━━━━━━━━━━━
+    CORE ISSUE ANCHOR (CONFIRMED — INTERNAL USE ONLY)
+    ━━━━━━━━━━━━━━━━━━━
+
+    The client's confirmed core issue for this session: "{core_issue}"
+    Use this as your internal compass — do NOT evaluate whether a candidate
+    says this label aloud. That would be wrong.
+
+    A good candidate uses this to recognise when the client has drifted and
+    bridges back by referencing something specific the client said earlier in
+    the conversation (a feeling, a situation, a moment they described) — not
+    by naming the category.
+
+    Prefer the candidate that keeps the session anchored to this concern
+    while sounding natural and grounded in the client's own words.
+    """.rstrip()
+
     judge_prompt = f"""
     You are evaluating therapist responses in a Cognitive Behavioral Therapy (CBT) conversation.
 
@@ -301,6 +334,7 @@ def evaluate_candidates(llm, patient_text, candidates, protocols,
 
     Your task: select the response that would most effectively move the therapy forward.
     {greeting_note}
+    {core_issue_note}
 
     Step 1 — Read the client message carefully. Identify:
     - Is this a greeting or social pleasantry? If so, see the GREETING NOTE above.
@@ -386,9 +420,10 @@ def mcot_therapist_reply(
     patient_text,
     rag,
     schema,
-    seed=None,          # kept for backward compat — core concern now inferred from history
+    seed=None,           # kept for backward compat
     turn_idx=0,
     patient_history=None,
+    core_issue=None,     # confirmed core issue from dataset metadata
 ):
     # Safety signals bypass MCOT entirely — mandatory, no candidate voting
     if _is_safety_signal(patient_text):
@@ -423,6 +458,7 @@ def mcot_therapist_reply(
             seed=seed,
             turn_idx=turn_idx,
             patient_history=patient_history,
+            core_issue=core_issue,
         )
 
         candidate_list.append(candidate["response"])
@@ -439,6 +475,7 @@ def mcot_therapist_reply(
         protocols,
         seed=seed,
         patient_history=patient_history,
+        core_issue=core_issue,
     )
 
     best_protocol = protocols[best_idx]["name"]

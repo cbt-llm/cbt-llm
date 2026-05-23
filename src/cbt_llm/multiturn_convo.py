@@ -184,10 +184,15 @@ Read the client’s actual message carefully before deciding how to open:
   therapeutically from the start. Do not waste the turn on pleasantries.
 
 DISTRACTION / TANGENT TURNS:
-If the client shifts away from the concern they have been discussing, gently
-acknowledge what they said and guide them back. Use natural language — not a
-rigid formula. Infer their core concern from what has been said in the session
-so far; do not force a topic that was never established.
+If the client shifts to a topic unrelated to their core concern, do all three IN ORDER:
+(1) ONE short clause (≤10 words) acknowledging what they just said.
+(2) A natural bridge back that references something specific the client said
+    earlier in this conversation — a feeling, a situation, a moment they described.
+    e.g. "I want to come back to what you were saying about..."
+    or "Going back to what you shared earlier about..."
+    Do NOT say the core issue category label aloud. Ground the bridge in their
+    own words and their own experience.
+(3) Apply the selected CBT protocol technique to that specific thread.
 
 ON-TOPIC TURNS:
 Apply the selected CBT protocol technique directly. Let the schema and clinical
@@ -274,9 +279,14 @@ Read the client’s actual message carefully before deciding how to open:
 - If they immediately share a concern → engage therapeutically from the start.
 
 DISTRACTION / TANGENT TURNS:
-If the client shifts away from their core concern, acknowledge briefly and guide
-them back. Infer the concern from what has been said in this session — do not
-force a topic that was never established.
+If the client shifts to a topic unrelated to their core issue, do all three IN ORDER:
+(1) ONE short clause (≤10 words) acknowledging what they just said.
+(2) A direct bridge back — name the core issue explicitly:
+    "I want to come back to [core issue] —"
+    or "Let's return to [core issue] for a moment —"
+(3) Apply the selected protocol technique focused on the core issue.
+The client's confirmed core issue is provided in the SESSION CORE ISSUE block above.
+Use it by name — do not be vague about what you are returning to.
 
 ON-TOPIC TURNS:
 Apply the selected protocol technique directly. Let the schema and clinical
@@ -372,6 +382,36 @@ def get_esconv_meta(path: str, index: int = 0) -> Optional[Dict[str, Any]]:
         return None
 
 
+def get_core_issue(transcript_source: str, transcript_index: int = 0) -> Optional[str]:
+    """
+    Return the ground-truth core issue label from dataset metadata.
+    RealCBT: looks up the file number in data/raw/realcbt_metadata.json.
+    ESConv:  returns problem_type from the conversation entry.
+    """
+    if not transcript_source:
+        return None
+    p = Path(transcript_source)
+    if p.suffix == ".json":
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+            entry = data[transcript_index] if isinstance(data, list) else data
+            return entry.get("problem_type")
+        except Exception:
+            return None
+    else:
+        m = re.search(r"file_(\d+)", p.stem)
+        if not m:
+            return None
+        meta_path = ROOT / "data" / "raw" / "realcbt_metadata.json"
+        if not meta_path.exists():
+            return None
+        try:
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            return meta.get(m.group(1))
+        except Exception:
+            return None
+
+
 def load_distractions(path: str = None) -> List[Dict[str, Any]]:
     """Load distraction entries from distractions.json."""
     if path is None:
@@ -382,39 +422,52 @@ def load_distractions(path: str = None) -> List[Dict[str, Any]]:
     return json.loads(p.read_text(encoding="utf-8"))
 
 
-def build_distraction_schedule(
-    n_turns: int,
+def build_combined_turns(
+    client_turns: List[str],
     distraction_pool: List[Dict[str, Any]],
     ratio: float = 0.30,
-) -> Dict[int, Dict[str, Any]]:
+) -> List[Dict[str, Any]]:
     """
-    Return a dict mapping turn_idx → distraction entry for ~30% of turns.
+    Build the full ordered sequence of turns for the session by INSERTING
+    distraction turns after ~30% of real client turns (not replacing them).
 
-    Positions are spread across the transcript using stratified sampling:
-    the eligible range [1, n_turns-1] is split into equal buckets and one
-    position is chosen randomly from each bucket. This guarantees distractions
-    are distributed throughout the session rather than clustered.
+    The resulting list is longer than client_turns by n_distractions entries.
+    Each entry: {text, is_distraction, distraction_meta}
 
-    Turn 0 is always excluded so the client's opening message is never replaced.
+    Insertion positions are spread using stratified sampling across turns 0..N-2
+    (never after the last real turn). The opening turn is always a real turn.
     """
-    if n_turns < 2 or not distraction_pool:
-        return {}
+    n = len(client_turns)
+    base = [{"text": t, "is_distraction": False, "distraction_meta": None} for t in client_turns]
 
-    n_distractions = max(1, round(n_turns * ratio))
-    eligible = list(range(1, n_turns))           # turns 1..n-1
+    if n < 2 or not distraction_pool:
+        return base
+
+    n_distractions = max(1, round(n * ratio))
+    # Insert after any turn except the last (eligible: indices 0..n-2)
+    eligible = list(range(0, n - 1))
     n_distractions = min(n_distractions, len(eligible), len(distraction_pool))
 
-    # Stratified: split eligible positions into n_distractions buckets
+    # Stratified: split eligible range into buckets, pick one position per bucket
     segment = len(eligible) / n_distractions
-    positions = []
+    insert_after = set()
     for b in range(n_distractions):
         lo = int(b * segment)
         hi = max(lo + 1, int((b + 1) * segment))
         hi = min(hi, len(eligible))
-        positions.append(eligible[random.randint(lo, hi - 1)])
+        insert_after.add(eligible[random.randint(lo, hi - 1)])
 
-    sampled = random.sample(distraction_pool, n_distractions)
-    return {pos: entry for pos, entry in zip(positions, sampled)}
+    sampled = random.sample(distraction_pool, len(insert_after))
+    insertion_map = {pos: entry for pos, entry in zip(sorted(insert_after), sampled)}
+
+    combined = []
+    for i, turn in enumerate(base):
+        combined.append(turn)
+        if i in insertion_map:
+            d = insertion_map[i]
+            combined.append({"text": d["text"], "is_distraction": True, "distraction_meta": d})
+
+    return combined
 
 
 def sanitize_rag(raw):
@@ -657,26 +710,32 @@ def run_session(
     esconv_meta = get_esconv_meta(transcript_source, transcript_index) if transcript_source else None
     max_turns = min(turns, len(client_turns)) if client_turns else turns
 
-    # Build automatic distraction schedule: ~30% of turns, spread across the transcript
+    # Load ground-truth core issue from dataset metadata (overrides any passed-in value)
+    core_issue = get_core_issue(transcript_source, transcript_index) or core_issue
+
+    # Build full turn sequence: real client turns with distraction turns inserted (~30%)
     distraction_pool = load_distractions()
-    auto_distraction_schedule = build_distraction_schedule(max_turns, distraction_pool, ratio=0.30)
+    combined_turns = build_combined_turns(client_turns, distraction_pool, ratio=0.30) if client_turns else []
+    max_turns = min(turns, len(combined_turns)) if combined_turns else max_turns
 
     transcript = []
     # patient_chat = [{"role": "system", "content": PATIENT_SYSTEM.format()}]  # commented out — no LLM patient
-    last_patient = client_turns[0] if client_turns else (seed or "")
+    last_patient = combined_turns[0]["text"] if combined_turns else (seed or "")
     patient_history = []
 
     schema_trace = []
 
     for turn_idx in range(max_turns):
 
-        # Load the client's turn from the real transcript,
-        # substituting a distraction at scheduled positions (~30% of turns)
-        if client_turns:
-            if turn_idx in auto_distraction_schedule:
-                last_patient = auto_distraction_schedule[turn_idx]["text"]
-            else:
-                last_patient = client_turns[turn_idx]
+        # Load the current turn (real or distraction) from the combined sequence
+        if combined_turns:
+            current_turn = combined_turns[turn_idx]
+            last_patient = current_turn["text"]
+            is_distraction = current_turn["is_distraction"]
+            distraction_meta = current_turn["distraction_meta"]
+        else:
+            is_distraction = False
+            distraction_meta = None
 
 
         schema = safe_extract_schema(last_patient) if use_schema else None
@@ -707,6 +766,22 @@ def run_session(
                 "content": "IMPORTANT CONTEXT (DO NOT REVEAL):\n" + hidden_context
             })
 
+        if core_issue:
+            therapist_messages.append({
+                "role": "system",
+                "content": (
+                    f"CLIENT'S CONFIRMED CORE ISSUE FOR THIS SESSION: \"{core_issue}\"\n\n"
+                    f"This is the verified reason this client came to therapy — use it as your "
+                    f"internal compass to understand what belongs in this session and what is a tangent.\n\n"
+                    f"IMPORTANT: Do NOT say this label aloud in your response. "
+                    f"When the client drifts, guide them back by referencing something specific "
+                    f"they actually said earlier in the conversation — a feeling, a situation, "
+                    f"a moment they described — not by naming the category.\n"
+                    f"e.g. 'I want to come back to what you were saying about...' "
+                    f"or 'Going back to what you shared earlier about...'"
+                )
+            })
+
         therapist_messages.append({
             "role": "user",
             "content": last_patient
@@ -735,6 +810,7 @@ def run_session(
                 seed=seed,
                 turn_idx=turn_idx,
                 patient_history=patient_history,
+                core_issue=core_issue,
             )
             
 
@@ -854,8 +930,8 @@ def run_session(
                 "query": last_patient,
                 "schema": schema,
                 "retrieval": rag,
-                "distraction_injected": turn_idx in auto_distraction_schedule,
-                "distraction_meta": auto_distraction_schedule[turn_idx] if turn_idx in auto_distraction_schedule else None,
+                "distraction_injected": is_distraction,
+                "distraction_meta": distraction_meta,
             },
 
             "llm_response": therapist_block
@@ -885,9 +961,14 @@ def run_session(
             # "seed": seed,         # commented out — turns now come from transcript
             # "core_issue": core_issue,  # commented out — now inferred post-session
             "distraction_schedule": {
-                str(k): {"id": v["id"], "valence": v["valence"], "arousal": v["arousal"]}
-                for k, v in auto_distraction_schedule.items()
-            } if auto_distraction_schedule else None,
+                str(i): {
+                    "id": t["distraction_meta"]["id"],
+                    "valence": t["distraction_meta"]["valence"],
+                    "arousal": t["distraction_meta"]["arousal"],
+                }
+                for i, t in enumerate(combined_turns)
+                if t["is_distraction"]
+            } if combined_turns else None,
             "intervention_flags": {
                 "use_schema": use_schema,
                 "use_rag": use_rag,
