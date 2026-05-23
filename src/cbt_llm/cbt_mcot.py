@@ -29,23 +29,17 @@ def load_cbt_protocols():
 CBT_PROTOCOLS = load_cbt_protocols()
 
 
-_ANCHOR_STOPWORDS = {
-    "feel", "feels", "most", "time", "sometimes", "when", "things", "like",
-    "nothing", "going", "should", "they", "them", "that", "this", "with",
-    "just", "really", "much", "what", "into", "being", "been", "some",
-    "more", "even", "ever", "also", "still", "again", "make", "makes",
-    "know", "yeah", "about", "have", "your", "want", "would", "could",
-    "from", "here", "there", "where", "than", "then", "back",
-}
+_SAFETY_SIGNALS = [
+    "not want to wake up", "don't want to wake up", "end my life", "ending my life",
+    "hurt myself", "hurting myself", "kill myself", "killing myself",
+    "not be here", "disappear forever", "die alone", "better off dead",
+    "no reason to live", "can't go on", "want to die", "wish i was dead",
+]
 
 
-def _seed_keywords(seed: str, limit: int = 8):
-    """Pull content keywords from the seed for use as anchor targets."""
-    if not seed:
-        return []
-    toks = re.findall(r"[a-z]{4,}", seed.lower())
-    kept = sorted({t for t in toks if t not in _ANCHOR_STOPWORDS})
-    return kept[:limit]
+def _is_safety_signal(text: str) -> bool:
+    t = text.lower()
+    return any(sig in t for sig in _SAFETY_SIGNALS)
 
 
 def parse_reasoning_block(after_reasoning: str):
@@ -77,69 +71,106 @@ def parse_reasoning_block(after_reasoning: str):
     return None
 
 
-def build_anchor_block(seed, turn_idx):
+def build_anchor_block(patient_history):
     """
-    Few-shot anchor block injected into each candidate's principle prompt.
-    Forces every protocol candidate to either CONTINUE-with-reference or
-    BRIDGE back to the seed topic when the patient drifts.
+    Dynamic anchor block injected into each candidate's principle prompt.
+    Infers the client's core concern from accumulated session history — no fixed seed required.
+    On turn 0 (empty history), guides the model to read the client's actual message
+    and decide whether it is a greeting or a direct opening of their concern.
     """
-    if seed is None or turn_idx is None or turn_idx <= 0:
-        return ""
+    if not patient_history:
+        return """
+━━━━━━━━━━━━━━━━━━━
+FIRST MESSAGE — READ THE CLIENT CAREFULLY
+━━━━━━━━━━━━━━━━━━━
 
-    seed_words = _seed_keywords(seed)
-    keyword_list = ", ".join(seed_words) if seed_words else "the original concern"
+This is the client's very first message. There is no prior session history yet.
+
+Read the client's message and decide:
+
+A) GREETING / SMALL TALK — the client says hello, asks how you are, or opens
+   with pleasantries ("Hi", "Hello", "Good morning", "How are you?").
+   → Respond warmly and briefly. Invite them to share what brought them in today.
+   → Do NOT ask a clinical question yet. Keep it to 1–2 sentences.
+   → Example: "Hello, good to see you. What brings you in today?"
+
+B) DIRECT OPENING — the client immediately shares their concern, a situation,
+   a feeling, or an experience they want to talk about.
+   → Engage therapeutically from the very first response. Apply this protocol's
+     technique directly. Do NOT waste the turn on pleasantries.
+   → Example (client: "I've been really anxious about my job for weeks"):
+     "It sounds like that worry has been sitting with you for a while.
+      What does the anxiety feel like when it shows up most strongly?"
+
+Match your response to what the client actually said.
+""".strip()
+
+    history_lines = "\n".join(
+        f'  Turn {i + 1}: "{msg[:150]}{"..." if len(msg) > 150 else ""}"'
+        for i, msg in enumerate(patient_history[-6:])
+    )
 
     return f"""
-    ━━━━━━━━━━━━━━━━━━━
-    SEED TOPIC — MANDATORY ANCHOR
-    ━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━
+SESSION CONTEXT — DYNAMIC TOPIC AWARENESS
+━━━━━━━━━━━━━━━━━━━
 
-    The patient's ORIGINAL concern (turn 0) was:
-    "{seed}"
+What the client has shared so far this session:
+{history_lines}
 
-    HARD RULE: Your FINAL RESPONSE must contain at least one of these
-    keywords from the original concern (or a direct paraphrase):
-    {keyword_list}
+STEP 1 — INFER CORE CONCERN:
+Based on the session history above, determine what the client's primary reason
+for being in therapy appears to be. This is your inferred core concern.
+Do not state it aloud — use it silently to anchor your response.
 
-    If the patient's current message is on the same topic → respond normally
-    AND still reference the original concern using one of those keywords.
+STEP 2 — CLASSIFY THE CURRENT MESSAGE AND RESPOND ACCORDINGLY:
 
-    If the patient's current message is a tangent, story, or new worry → you
-    MUST do all three IN ORDER:
-       (1) ONE short clause (≤10 words) acknowledging what they just said.
-       (2) A transition phrase: "I want to come back to what you said earlier about..."
-           or "Going back to what you mentioned at the start..."
-       (3) Apply this protocol's technique to the ORIGINAL concern.
+A) GREETING / SMALL TALK — client says hello, asks how you are, or makes
+   casual conversation unrelated to their concern.
+   → Respond warmly and briefly. Naturally transition toward the therapeutic topic.
+   → Do NOT immediately ask a clinical question.
 
-    ━━━━━━━━━━━━━━━━━━━
-    EXAMPLES
-    ━━━━━━━━━━━━━━━━━━━
+B) ON TOPIC — client continues discussing their core concern or a directly
+   related theme.
+   → Apply this protocol's technique directly and therapeutically.
 
-    EXAMPLE 1 (tangent → BRIDGE):
-    Original: "I get overwhelmed at work and shut down."
-    Patient now: "Oh I watched a really funny movie last night."
-    BAD: "That sounds like a nice break! What did you enjoy about it?"
-    GOOD: "Glad you got a laugh. I want to come back to what you said earlier about getting overwhelmed at work — when did that happen most recently?"
+C) DISTRACTION / TANGENT — client shifts to an unrelated topic, story, or
+   surface-level event that has nothing to do with their core concern.
+   → Do all three IN ORDER:
+      (1) ONE short clause (≤10 words) acknowledging what they just said.
+      (2) A gentle bridge: "I'd like to come back to what you've been working
+          through..." or "That connects to what you mentioned earlier about..."
+      (3) Apply this protocol's technique toward the inferred core concern.
 
-    EXAMPLE 2 (tangent → BRIDGE):
-    Original: "I keep fighting with my partner over small things."
-    Patient now: "Anyway my coworker is so annoying, she chews loudly."
-    BAD: "That sounds frustrating. How do you usually handle her?"
-    GOOD: "That does sound annoying. Going back to what you mentioned at the start about fighting with your partner over small things — does that same irritation show up there too?"
+━━━━━━━━━━━━━━━━━━━
+EXAMPLES
+━━━━━━━━━━━━━━━━━━━
 
-    EXAMPLE 3 (on-topic → CONTINUE but still reference):
-    Original: "I keep fighting with my partner over small things."
-    Patient now: "Yeah we fought again yesterday over the dishes."
-    GOOD: "So the small-things pattern came up again with the dishes. What was going through your mind right before you reacted?"
+EXAMPLE 1 (greeting mid-session → warm + transition):
+Client: "Hey, how are you doing today?"
+GOOD: "I'm doing well, thanks for asking. How have things been since we last spoke?"
 
-    Apply the same logic to the actual conversation below.
-    """.strip()
+EXAMPLE 2 (distraction → BRIDGE):
+Inferred concern: client struggles with anger at work.
+Client now: "I watched this really funny show last night, completely zoned out."
+BAD: "That sounds like a nice escape! What did you enjoy about it?"
+GOOD: "Glad you got some downtime. I do want to come back to what you've been
+working through — when did that frustration at work last show up for you?"
+
+EXAMPLE 3 (on topic → direct response):
+Inferred concern: client struggles with anger at work.
+Client now: "I snapped at my coworker again yesterday."
+GOOD: "That same pattern came up again. What was going through your mind right
+before you reacted?"
+
+Apply the same classification and logic to the actual conversation below.
+""".strip()
 
 
 def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol,
-                       seed=None, turn_idx=0):
+                       seed=None, turn_idx=0, patient_history=None):
 
-    anchor_block = build_anchor_block(seed, turn_idx)
+    anchor_block = build_anchor_block(patient_history)
 
     principle_prompt = f"""
     CBT intervention protocol
@@ -244,33 +275,24 @@ def generate_candidate(llm, base_prompt, hidden_context, patient_text, protocol,
 
 
 def evaluate_candidates(llm, patient_text, candidates, protocols,
-                        seed=None, turn_idx=0):
+                        seed=None, patient_history=None):  # seed unused — core concern inferred from history
 
-    seed_block = ""
-    if seed is not None and turn_idx > 0:
-        seed_words = _seed_keywords(seed)
-        keyword_list = ", ".join(seed_words) if seed_words else "the original concern"
-
-        seed_block = f"""
+    greeting_note = ""
+    _greeting_signals = {"hello", "hi", "hey", "how are", "good morning", "good afternoon", "good evening"}
+    if patient_text and len(patient_text.strip()) < 60:
+        lowered = patient_text.lower()
+        if any(g in lowered for g in _greeting_signals):
+            greeting_note = """
 
     ━━━━━━━━━━━━━━━━━━━
-    HARD ANCHORING FILTER (READ FIRST, OVERRIDES PROTOCOL FIT)
+    GREETING / OPENING NOTE
     ━━━━━━━━━━━━━━━━━━━
 
-    SEED TOPIC: "{seed}"
-    SEED KEYWORDS: {keyword_list}
-
-    Step A — For EACH candidate, check: does its response text contain at
-    least one SEED KEYWORD (or a direct paraphrase)?
-
-    Step B — If ONE OR MORE candidates contain a SEED KEYWORD, you MUST
-    select ONLY from those candidates. Eliminate all others.
-
-    Step C — Only if NO candidate contains a SEED KEYWORD, fall back to
-    protocol fit.
-
-    A protocol-perfect response that ignores the SEED TOPIC is WRONG.
-        """.rstrip()
+    The client's message appears to be a greeting or social opening.
+    Prefer the candidate that responds warmly and naturally.
+    A response that immediately launches into clinical questioning is WRONG here.
+    The right response acknowledges the client and invites them to share or continue.
+    """.rstrip()
 
     judge_prompt = f"""
     You are evaluating therapist responses in a Cognitive Behavioral Therapy (CBT) conversation.
@@ -278,19 +300,28 @@ def evaluate_candidates(llm, patient_text, candidates, protocols,
     Each response was generated using a different CBT intervention protocol.
 
     Your task: select the response that would most effectively move the therapy forward.
-    {seed_block}
+    {greeting_note}
 
-    Step 1 — Read the patient message carefully. Identify:
-    - Is the patient primarily expressing emotion and needing to feel heard?
-    - Is the patient articulating a specific belief or thought that could be examined?
-    - Is the patient stuck in a rigid interpretation that a broader view could help shift?
+    Step 1 — Read the client message carefully. Identify:
+    - Is this a greeting or social pleasantry? If so, see the GREETING NOTE above.
+    - Is the client primarily expressing emotion and needing to feel heard?
+    - Is the client articulating a specific belief or thought that could be examined?
+    - Is the client stuck in a rigid interpretation that a broader view could help shift?
 
     Step 2 — Match the clinical need to the protocol:
-    - validate_and_reflect: patient needs emotional acknowledgment BEFORE they can examine beliefs. Use early in rapport-building or when distress is high and the patient is not yet ready to reflect.
-    - socratic_questioning: patient has articulated a specific belief or assumption that can be tested with evidence. Use when the patient is stable enough to reflect and there is a clear belief to examine.
-    - alternative_perspective: patient is locked into one way of seeing a situation and a broader view would reduce distress. Use when the patient already feels heard and is repeating the same interpretation without movement.
+    - validate_and_reflect: client needs emotional acknowledgment BEFORE they can
+      examine beliefs. Use early in rapport-building, when distress is high, or
+      when the client is not yet ready to reflect.
+    - socratic_questioning: client has articulated a specific belief or assumption
+      that can be tested with evidence. Use when the client is stable enough to
+      reflect and there is a clear belief to examine.
+    - alternative_perspective: client is locked into one way of seeing a situation
+      and a broader view would reduce distress. Use when the client already feels
+      heard and is repeating the same interpretation without movement.
 
-    Step 3 — Consider: has the patient already received validation in recent turns? If so, continuing to validate may not move the conversation forward. Prefer socratic_questioning or alternative_perspective if the patient is ready.
+    Step 3 — Has the client already received validation in recent turns? If so,
+    continuing to validate may not move the conversation forward. Prefer
+    socratic_questioning or alternative_perspective if the client is ready.
 
     Step 4 — Output your reasoning in one sentence, then output the number of the best response.
 
@@ -355,14 +386,31 @@ def mcot_therapist_reply(
     patient_text,
     rag,
     schema,
-    seed=None,
+    seed=None,          # kept for backward compat — core concern now inferred from history
     turn_idx=0,
+    patient_history=None,
 ):
+    # Safety signals bypass MCOT entirely — mandatory, no candidate voting
+    if _is_safety_signal(patient_text):
+        safety_protocol = CBT_PROTOCOLS.get("safety_check")
+        if safety_protocol:
+            candidate = generate_candidate(
+                llm, base_prompt, hidden_context, patient_text,
+                safety_protocol, seed=seed, turn_idx=turn_idx,
+                patient_history=patient_history,
+            )
+            return (
+                candidate["response"],
+                "safety_check",
+                {"safety_check": candidate},
+                candidate["reasoning"],
+            )
 
     candidate_list = []
     candidate_map = {}
 
-    protocols = list(CBT_PROTOCOLS.values())
+    # Exclude safety_check from normal MCOT candidates
+    protocols = [p for p in CBT_PROTOCOLS.values() if p["name"] != "safety_check"]
 
     for protocol in protocols:
 
@@ -374,6 +422,7 @@ def mcot_therapist_reply(
             protocol,
             seed=seed,
             turn_idx=turn_idx,
+            patient_history=patient_history,
         )
 
         candidate_list.append(candidate["response"])
@@ -389,7 +438,7 @@ def mcot_therapist_reply(
         candidate_list,
         protocols,
         seed=seed,
-        turn_idx=turn_idx,
+        patient_history=patient_history,
     )
 
     best_protocol = protocols[best_idx]["name"]
@@ -398,3 +447,46 @@ def mcot_therapist_reply(
     best_reasoning = candidate_map[best_protocol]["reasoning"]
 
     return best_response, best_protocol, candidate_map, best_reasoning
+
+
+def generate_session_core_issue(llm, transcript) -> str:
+    """
+    Post-session inference: analyses the full transcript and returns a short
+    label (3–8 words) describing the client's core psychological issue.
+    Called once after the session loop completes.
+    """
+    conversation_text = "\n".join(
+        f"Client: {turn['patient']['query']}\nTherapist: {turn['llm_response']['response']}"
+        for turn in transcript
+        if turn.get("patient") and turn.get("llm_response")
+    )
+
+    if not conversation_text.strip():
+        return "unknown"
+
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are a clinical supervisor reviewing a therapy session transcript.\n"
+                "Based on the full conversation, identify the client's core psychological issue "
+                "in 3–8 words.\n"
+                "Output ONLY the core issue label — no punctuation, no explanation, nothing else.\n"
+                "Examples:\n"
+                "  anger and emotional dysregulation\n"
+                "  anxiety about social situations\n"
+                "  grief and loss of identity\n"
+                "  trauma and hypervigilance in public spaces\n"
+                "  loneliness and unsupportive social relationships"
+            )
+        },
+        {
+            "role": "user",
+            "content": f"Session transcript:\n{conversation_text}\n\nCore issue:"
+        }
+    ]
+
+    try:
+        return llm.chat(messages, temperature=0.0, num_predict=50).strip()
+    except Exception:
+        return "unknown"

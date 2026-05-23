@@ -37,41 +37,6 @@ def _get_mentalbert():
         _models["mentalbert"] = (tokenizer, model)
     return _models["mentalbert"]
 
-_models = {}
-
-
-def _get_mpnet():
-    if "mpnet" not in _models:
-        _models["mpnet"] = SentenceTransformer("all-mpnet-base-v2")
-    return _models["mpnet"]
-
-
-def _get_sapbert():
-    if "sapbert" not in _models:
-        tokenizer = AutoTokenizer.from_pretrained("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
-        model = AutoModel.from_pretrained("cambridgeltl/SapBERT-from-PubMedBERT-fulltext")
-        model.eval()
-        _models["sapbert"] = (tokenizer, model)
-    return _models["sapbert"]
-
-
-def _get_bioreddit():
-    if "bioreddit" not in _models:
-        tokenizer = AutoTokenizer.from_pretrained("cambridgeltl/BioRedditBERT-uncased")
-        model = AutoModel.from_pretrained("cambridgeltl/BioRedditBERT-uncased")
-        model.eval()
-        _models["bioreddit"] = (tokenizer, model)
-    return _models["bioreddit"]
-
-
-def _get_mentalbert():
-    if "mentalbert" not in _models:
-        tokenizer = AutoTokenizer.from_pretrained("mental/mental-bert-base-uncased")
-        model = AutoModel.from_pretrained("mental/mental-bert-base-uncased")
-        model.eval()
-        _models["mentalbert"] = (tokenizer, model)
-    return _models["mentalbert"]
-
 
 def mean_pooling(model_output, attention_mask):
     token_embeddings = model_output.last_hidden_state

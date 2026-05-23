@@ -7,6 +7,7 @@ Run:
 import os
 import re
 import json
+import random
 import argparse
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -20,7 +21,7 @@ from cbt_llm.config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD, ROOT
 from cbt_llm.retrieve_snomed import retrieve_snomed_matches
 from user_schema.user_schema import extract_user_schema
 from cbt_llm.pipelines.findings_pipeline import FindingsPipeline
-from cbt_llm.cbt_mcot import mcot_therapist_reply, CBT_PROTOCOLS
+from cbt_llm.cbt_mcot import mcot_therapist_reply, CBT_PROTOCOLS, generate_session_core_issue
 
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -117,199 +118,188 @@ Constraints:
 """.strip()
 
 THERAPIST_CBT_MCOT_PROMPT = """
-You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
+You are a skilled Cognitive Behavioral Therapy (CBT) therapist in an active therapy session with a real client.
 
-Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
+Your role is to respond in a way that feels natural, warm, and therapeutically grounded — the way an experienced human therapist would in a real session.
 
 You will receive:
 
-1) The PATIENT MESSAGE (Premise)
-2) COGNITIVE MODEL (hidden context): a structured decomposition of the patient's experience
-3) CLINICAL CONTEXT (hidden context): clinical statements related to the patient's language
-4) A CBT protocol guideline describing three intervention strategies
+1) The CLIENT MESSAGE (current turn)
+2) COGNITIVE MODEL (hidden context): a structured decomposition of the client’s experience
+3) CLINICAL CONTEXT (hidden context): clinically relevant statements about the client’s language
+4) A CBT protocol describing the intervention strategy to apply this turn
 
-Use the hidden context to guide your reasoning, but NEVER reveal it.
+Use the hidden context to deepen your reasoning, but NEVER reveal it directly.
 
 ━━━━━━━━━━━━━━━━━━━
 COGNITIVE MODEL (DO NOT REVEAL)
 ━━━━━━━━━━━━━━━━━━━
 
-In Cognitive Behavioral Therapy, emotional distress is understood as emerging from patterns in how situations are interpreted.
+In CBT, emotional distress emerges from how situations are interpreted:
 
-Experiences can often be conceptualized as:
+  Triggers → Automatic Thoughts → Emotions → Behaviors
 
-Triggers → Automatic Thoughts → Emotions → Behaviors
+Triggers: situations or events that activate interpretation.
+Automatic Thoughts: rapid meanings assigned to the situation — often reflecting
+  deeper beliefs about self, others, or the world.
+Emotions: arise from how the situation is interpreted.
+Behaviors: actions or reactions that follow the emotional response.
 
-Triggers are situations or events that activate interpretation.
-
-Automatic thoughts are rapid interpretations or meanings assigned to the situation. These thoughts often reflect deeper beliefs, assumptions, expectations, or rules about the self, other people, or the world.
-
-Emotions arise from how the situation is interpreted.
-
-Behaviors are the actions or reactions that follow the emotional response.
-
-Use this structure silently to interpret what may be driving the patient’s experience.
-Focus on the element most relevant to the patient’s message.
+Silently identify which element is most active in the client’s current message.
+Use this to guide the depth, focus, and tone of your response.
 
 ━━━━━━━━━━━━━━━━━━━
 CLINICAL CONTEXT (DO NOT REVEAL)
 ━━━━━━━━━━━━━━━━━━━
 
-Treat the patient’s message as the Premise.
+Treat the client’s message as the Premise.
 
-The Clinical Context contains statements that may relate to the patient’s underlying psychological state.
+The Clinical Context contains statements labeled:
 
-These refer to an observable or reported clinical state or psychological pattern to help represent clinically meaningful patterns in patient language or behavior.
+ENTAILMENT — Likely relevant to the client’s experience. Use to inform interpretation.
+NEUTRAL — Possibly relevant. Use with caution.
+CONTRADICTION — Conflicts with what the client expressed. Do NOT use, even if tempting.
 
-Each statement is labeled as:
-
-ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.
-
-NEUTRAL — Possibly relevant but uncertain.
-
-CONTRADICTION — Conflicts with the patient’s experience and should NOT be used.
-
-Use the clinical context only as cues when interpreting the patient’s experience.
+These are interpretive cues, not scripts. Use them to understand what may be driving
+the client’s experience — never reference them directly in your response.
 
 ━━━━━━━━━━━━━━━━━━━
-MULTIPLE CHAIN OF THOUGHT REASONING
+MULTIPLE CHAIN-OF-THOUGHT REASONING
 ━━━━━━━━━━━━━━━━━━━
 
-Before generating the final response, internally simulate three candidate therapist responses — one for each CBT intervention principle.
+Before generating the final response, internally simulate three candidate therapist
+responses — one for each CBT intervention principle. These candidates are evaluated
+and the best one is selected based on what the client most needs right now.
 
 ━━━━━━━━━━━━━━━━━━━
-TOPIC ANCHORING
+RESPONSE GUIDANCE
 ━━━━━━━━━━━━━━━━━━━
 
-The patient's FIRST message in the session establishes the SEED TOPIC. From turn 1 onward, the SEED TOPIC and detailed BRIDGE/CONTINUE rules are provided as part of each protocol's instruction block. Follow them strictly. You MUST NOT follow tangents at the expense of the seed topic.
+FIRST MESSAGE / INTRODUCTORY TURN:
+Read the client’s actual message carefully before deciding how to open:
+- If they open with a greeting ("Hello", "Hi", "How are you") → respond warmly
+  and briefly, then invite them to share what brought them in. Do not ask a
+  clinical question yet.
+- If they immediately share a concern, feeling, or situation → engage
+  therapeutically from the start. Do not waste the turn on pleasantries.
+
+DISTRACTION / TANGENT TURNS:
+If the client shifts away from the concern they have been discussing, gently
+acknowledge what they said and guide them back. Use natural language — not a
+rigid formula. Infer their core concern from what has been said in the session
+so far; do not force a topic that was never established.
+
+ON-TOPIC TURNS:
+Apply the selected CBT protocol technique directly. Let the schema and clinical
+context inform the depth of your response.
+
+GENERAL RULES:
+- Do not diagnose.
+- Do not explain CBT concepts or name protocols.
+- Do not reveal hidden context.
+- Do not repeat the client’s words verbatim.
+- Avoid the same intervention style in consecutive turns.
+- 2–4 sentences maximum.
+- One focused question or reflection at a time — never multiple questions.
 """.strip()
 
-THERAPIST_CBT_PROMPT= """
-You are a Cognitive Behavioral Therapy (CBT) agent participating in a live therapy conversation with a patient.
+THERAPIST_CBT_PROMPT = """
+You are a skilled Cognitive Behavioral Therapy (CBT) therapist in an active therapy session with a real client.
 
-Your goal is to help the patient explore and understand patterns in their thoughts, emotions, and behaviors.
+Your role is to respond in a way that feels natural, warm, and therapeutically grounded — the way an experienced human therapist would in a real session.
 
 You will receive:
 
-1) The PATIENT MESSAGE (Premise)
-2) COGNITIVE MODEL (hidden context): a structured decomposition of the patient's experience
-3) CLINICAL CONTEXT (hidden context): clinical statements related to the patient's language
-4) A CBT protocol guideline describing three intervention strategies
+1) The CLIENT MESSAGE (current turn)
+2) COGNITIVE MODEL (hidden context): a structured decomposition of the client’s experience
+3) CLINICAL CONTEXT (hidden context): clinically relevant statements about the client’s language
+4) A CBT protocol guideline describing intervention strategies
 
-Use the hidden context to guide your reasoning, but NEVER reveal it.
+Use the hidden context to deepen your reasoning, but NEVER reveal it directly.
 
 ━━━━━━━━━━━━━━━━━━━
 COGNITIVE MODEL (DO NOT REVEAL)
 ━━━━━━━━━━━━━━━━━━━
 
-In Cognitive Behavioral Therapy, emotional distress is understood as emerging from patterns in how situations are interpreted.
+In CBT, emotional distress emerges from how situations are interpreted:
 
-Experiences can often be conceptualized as:
+  Triggers → Automatic Thoughts → Emotions → Behaviors
 
-Triggers → Automatic Thoughts → Emotions → Behaviors
+Triggers: situations or events that activate interpretation.
+Automatic Thoughts: rapid meanings assigned to the situation — often reflecting
+  deeper beliefs about self, others, or the world.
+Emotions: arise from how the situation is interpreted.
+Behaviors: actions or reactions that follow the emotional response.
 
-Triggers are situations or events that activate interpretation.
-
-Automatic thoughts are rapid interpretations or meanings assigned to the situation. These thoughts often reflect deeper beliefs, assumptions, expectations, or rules about the self, other people, or the world.
-
-Emotions arise from how the situation is interpreted.
-
-Behaviors are the actions or reactions that follow the emotional response.
-
-Use this structure silently to interpret what may be driving the patient’s experience.
-Focus on the element most relevant to the patient’s message.
+Silently identify which element is most active in the client’s current message.
+Use this to guide the depth, focus, and tone of your response.
 
 ━━━━━━━━━━━━━━━━━━━
 CLINICAL CONTEXT (DO NOT REVEAL)
 ━━━━━━━━━━━━━━━━━━━
 
-Treat the patient’s message as the Premise.
+Treat the client’s message as the Premise.
 
-The Clinical Context contains statements that may relate to the patient’s underlying psychological state.
+The Clinical Context contains statements labeled:
 
-These refer to an observable or reported clinical state or psychological pattern to help represent clinically meaningful patterns in patient language or behavior.
+ENTAILMENT — Likely relevant to the client’s experience. Use to inform interpretation.
+NEUTRAL — Possibly relevant. Use with caution.
+CONTRADICTION — Conflicts with what the client expressed. Do NOT use, even if tempting.
 
-Each statement is labeled as:
-
-ENTAILMENT — Likely relevant to the patient’s experience and useful for interpretation.
-
-NEUTRAL — Possibly relevant but uncertain.
-
-CONTRADICTION — Conflicts with the patient’s experience and should NOT be used.
-
-Use the clinical context only as cues when interpreting the patient’s experience.
+These are interpretive cues, not scripts. Use them to understand what may be
+driving the client’s experience — never reference them directly.
 
 ━━━━━━━━━━━━━━━━━━━
 CBT PROTOCOL SELECTION (SELECT ONE)
 ━━━━━━━━━━━━━━━━━━━
 
-Follow this reasoning process internally:
+Before selecting a protocol, consider what the client most needs right now:
+to feel heard → validate_and_reflect
+to examine a belief → socratic_questioning
+to find a broader view → cognitive_restructuring
 
-Step 1 — Identify the likely belief or assumption driving the patient's statement.
+Step 1 — Identify the likely belief, assumption, or emotion driving the client’s message.
+Step 2 — Choose the protocol that best matches the clinical need.
+Step 3 — Apply the techniques associated with that protocol.
 
-Step 2 — Determine which intervention principle would best help the patient examine or shift this belief.
-
-Choose ONE:
-
-1) validate_and_reflect
-2) socratic_questioning
-3) cognitive_restructuring
-
-Step 3 — Apply the techniques associated with the selected protocol to construct the response.
-
-Do NOT reveal the reasoning process or the protocol name.
-
-Guidelines:
-
-validate_and_reflect  
-Use when the patient primarily needs emotional acknowledgment or when trust and safety should be strengthened.
-
-socratic_questioning  
-Use when the patient's belief or assumption should be explored through curiosity and gentle inquiry.
-
-cognitive_restructuring  
-Use when the patient's interpretation appears rigid, overly negative, or limiting, and a new perspective may help.
-
-Use the chosen protocol to guide how you respond.
-
-Do NOT name the protocol in your response.
+Do NOT reveal the protocol name or your reasoning process.
 
 ━━━━━━━━━━━━━━━━━━━
-CONSTRAINTS
+RESPONSE GUIDANCE
 ━━━━━━━━━━━━━━━━━━━
 
-- Do not diagnose.
-- Do not explain therapy concepts.
-- Do not mention CBT principles or reasoning.
-- Do not reveal hidden context.
-- Do not repeat the patient's statement verbatim.
-- Avoid repeating the same intervention style across consecutive turns.
+FIRST MESSAGE / INTRODUCTORY TURN:
+Read the client’s actual message carefully before deciding how to open:
+- If they open with a greeting → respond warmly and briefly, invite them to share.
+- If they immediately share a concern → engage therapeutically from the start.
 
+DISTRACTION / TANGENT TURNS:
+If the client shifts away from their core concern, acknowledge briefly and guide
+them back. Infer the concern from what has been said in this session — do not
+force a topic that was never established.
 
-Before producing the final response, briefly reason about which retrieved clinical concepts AND/OR user schema elements
-may be relevant to the response.
+ON-TOPIC TURNS:
+Apply the selected protocol technique directly. Let the schema and clinical
+context inform the depth of your response.
 
-Return your answer in this structure:
+━━━━━━━━━━━━━━━━━━━
+OUTPUT FORMAT
+━━━━━━━━━━━━━━━━━━━
 
-Your response MUST follow this exact format.
+Before producing the final response, briefly reason about which retrieved clinical
+concepts AND/OR user schema elements are relevant.
 
-Do not output anything before or after this structure.
-
-Rules:
-- REASONING must ALWAYS appear
+Your response MUST follow this exact format. Do not output anything else.
+REASONING must ALWAYS appear.
 
 REASONING:
 "retrieved_concepts_used": ["concept1", "concept2"]
 
-
 FINAL RESPONSE:
 <therapist message>
 
-
-
-Length:
-2–4 sentences maximum.
-
+Length: 2–4 sentences maximum.
+One focused question or reflection at a time — never multiple questions.
 Do not mention reasoning in the final response.
 """.strip()
 
@@ -338,6 +328,94 @@ def safe_extract_schema(text: str) -> Optional[Dict[str, Any]]:
         return extract_user_schema(text)
     except Exception:
         return None
+
+def load_client_transcript(path: str, index: int = 0) -> List[str]:
+    """
+    Load ordered client utterances from a transcript file.
+
+    RealCBT .txt  — lines formatted as "client_turn_N: <text>"
+    ESConv .json  — list of conversation dicts; `index` selects which one.
+                    Each dict has a "dialog" list of {turn, content} entries.
+    """
+    p = Path(path)
+    if p.suffix == ".json":
+        data = json.loads(p.read_text(encoding="utf-8"))
+        entry = data[index] if isinstance(data, list) else data
+        dialog = entry.get("dialog", [])
+        return [e["content"].strip() for e in dialog if e.get("content")]
+    else:
+        turns = []
+        for line in p.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            m = re.match(r"^client_turn_\d+:\s*(.*)", line)
+            if m:
+                turns.append(m.group(1).strip())
+        return turns
+
+
+def get_esconv_meta(path: str, index: int = 0) -> Optional[Dict[str, Any]]:
+    """Return the ESConv conversation-level metadata for a given index, or None."""
+    p = Path(path)
+    if p.suffix != ".json":
+        return None
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+        entry = data[index] if isinstance(data, list) else data
+        return {
+            k: entry[k]
+            for k in ("experience_type", "emotion_type", "problem_type", "situation")
+            if k in entry
+        }
+    except Exception:
+        return None
+
+
+def load_distractions(path: str = None) -> List[Dict[str, Any]]:
+    """Load distraction entries from distractions.json."""
+    if path is None:
+        path = str(ROOT / "data" / "raw" / "distractions.json")
+    p = Path(path)
+    if not p.exists():
+        return []
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def build_distraction_schedule(
+    n_turns: int,
+    distraction_pool: List[Dict[str, Any]],
+    ratio: float = 0.30,
+) -> Dict[int, Dict[str, Any]]:
+    """
+    Return a dict mapping turn_idx → distraction entry for ~30% of turns.
+
+    Positions are spread across the transcript using stratified sampling:
+    the eligible range [1, n_turns-1] is split into equal buckets and one
+    position is chosen randomly from each bucket. This guarantees distractions
+    are distributed throughout the session rather than clustered.
+
+    Turn 0 is always excluded so the client's opening message is never replaced.
+    """
+    if n_turns < 2 or not distraction_pool:
+        return {}
+
+    n_distractions = max(1, round(n_turns * ratio))
+    eligible = list(range(1, n_turns))           # turns 1..n-1
+    n_distractions = min(n_distractions, len(eligible), len(distraction_pool))
+
+    # Stratified: split eligible positions into n_distractions buckets
+    segment = len(eligible) / n_distractions
+    positions = []
+    for b in range(n_distractions):
+        lo = int(b * segment)
+        hi = max(lo + 1, int((b + 1) * segment))
+        hi = min(hi, len(eligible))
+        positions.append(eligible[random.randint(lo, hi - 1)])
+
+    sampled = random.sample(distraction_pool, n_distractions)
+    return {pos: entry for pos, entry in zip(positions, sampled)}
+
 
 def sanitize_rag(raw):
     concepts = []
@@ -522,8 +600,11 @@ def run_session(
     use_schema,
     use_protocol,
     k,
-    seed,
-    fixed_seed=None,
+    transcript_source=None,
+    transcript_index=0,
+    seed=None,        # kept for backward compat — turns now come from transcript
+    core_issue=None,  # kept for backward compat — now inferred post-session
+    distractions=None,
     transcript_json=None,
 ):
 
@@ -548,7 +629,7 @@ def run_session(
         else OpenAIChat(therapist_model)
     )
 
-    patient_llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    # patient_llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))  # commented out — patient turns now come from transcript
 
     driver = GraphDatabase.driver(
         NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)
@@ -565,13 +646,37 @@ def run_session(
     else:
         raise ValueError(f"Unknown therapist_mode: {therapist_mode}")
 
+    # distraction_map was used with the LLM patient path; kept for reference only
+    # distraction_map = {}
+    # if distractions:
+    #     raw = json.loads(distractions) if isinstance(distractions, str) else distractions
+    #     distraction_map = {int(k): v for k, v in raw.items()}
+
+    # Load client turns from the provided transcript file
+    client_turns = load_client_transcript(transcript_source, transcript_index) if transcript_source else []
+    esconv_meta = get_esconv_meta(transcript_source, transcript_index) if transcript_source else None
+    max_turns = min(turns, len(client_turns)) if client_turns else turns
+
+    # Build automatic distraction schedule: ~30% of turns, spread across the transcript
+    distraction_pool = load_distractions()
+    auto_distraction_schedule = build_distraction_schedule(max_turns, distraction_pool, ratio=0.30)
+
     transcript = []
-    patient_chat = [{"role": "system", "content": PATIENT_SYSTEM.format()}]
-    last_patient = seed
+    # patient_chat = [{"role": "system", "content": PATIENT_SYSTEM.format()}]  # commented out — no LLM patient
+    last_patient = client_turns[0] if client_turns else (seed or "")
+    patient_history = []
 
     schema_trace = []
 
-    for turn_idx in range(turns):
+    for turn_idx in range(max_turns):
+
+        # Load the client's turn from the real transcript,
+        # substituting a distraction at scheduled positions (~30% of turns)
+        if client_turns:
+            if turn_idx in auto_distraction_schedule:
+                last_patient = auto_distraction_schedule[turn_idx]["text"]
+            else:
+                last_patient = client_turns[turn_idx]
 
 
         schema = safe_extract_schema(last_patient) if use_schema else None
@@ -608,19 +713,17 @@ def run_session(
         })
 
         if therapist_mode == "cbt_mcot":
-            # Inject seed reminder directly into the patient message on
-            # turns >= 1. This puts the seed in the user-role slot (where
-            # the model attends most) without polluting the logged
-            # patient.query field — the original last_patient is what
-            # gets stored in the transcript downstream.
-            if turn_idx > 0:
-                augmented_patient = (
-                    f"[REMINDER — the user came in with this concern at the start of session: \"{seed}\". "
-                    f"Stay anchored to it.]\n\n"
-                    f"Patient's current message: {last_patient}"
-                )
-            else:
-                augmented_patient = last_patient
+            # Seed reminder removed — core concern is now inferred dynamically from patient_history
+            # by build_anchor_block in cbt_mcot.py. The raw client turn is passed as-is.
+            # if turn_idx > 0:
+            #     augmented_patient = (
+            #         f"[REMINDER — the user came in with this concern at the start of session: \"{seed}\". "
+            #         f"Stay anchored to it.]\n\n"
+            #         f"Patient's current message: {last_patient}"
+            #     )
+            # else:
+            #     augmented_patient = last_patient
+            augmented_patient = last_patient
 
             therapist_reply, protocol_used, candidates, reasoning = mcot_therapist_reply(
                 therapist_llm,
@@ -631,6 +734,7 @@ def run_session(
                 schema,
                 seed=seed,
                 turn_idx=turn_idx,
+                patient_history=patient_history,
             )
             
 
@@ -693,40 +797,33 @@ def run_session(
                 f"from model {therapist_model}. Aborting run."
             )
 
-        patient_resp = patient_llm.chat.completions.create(
-            model=patient_model,
-            messages=patient_chat + [{
-                "role": "user",
-                "content": therapist_reply
-            }],
-            temperature=0.9,
-            max_tokens=100,
-        )
-
-        patient_reply = patient_resp.choices[0].message.content.strip()
-
-        if turn_idx == 0 and fixed_seed is not None:
-            patient_reply = fixed_seed
-
-        elif looks_like_patient_drift(patient_reply):
-            patient_reply = patient_llm.chat.completions.create(
-                model=patient_model,
-                messages=patient_chat + [{
-                    "role": "system",
-                    "content": (
-                        "Rewrite strictly as the patient. "
-                        "No advice."
-                        "Speak only from personal feelings and experience."
-                    )
-                }],
-                temperature=0.9,
-                max_tokens=100,
-            ).choices[0].message.content.strip()
-
-        patient_chat.append({
-            "role": "assistant",
-            "content": patient_reply
-        })
+        # Patient LLM generation commented out — turns come from real transcript
+        # patient_resp = patient_llm.chat.completions.create(
+        #     model=patient_model,
+        #     messages=patient_chat + [{"role": "user", "content": therapist_reply}],
+        #     temperature=0.9,
+        #     max_tokens=100,
+        # )
+        # patient_reply = patient_resp.choices[0].message.content.strip()
+        #
+        # if turn_idx in distraction_map:
+        #     patient_reply = distraction_map[turn_idx]
+        # elif looks_like_patient_drift(patient_reply):
+        #     patient_reply = patient_llm.chat.completions.create(
+        #         model=patient_model,
+        #         messages=patient_chat + [{
+        #             "role": "system",
+        #             "content": (
+        #                 "Rewrite strictly as the patient. "
+        #                 "No advice."
+        #                 "Speak only from personal feelings and experience."
+        #             )
+        #         }],
+        #         temperature=0.9,
+        #         max_tokens=100,
+        #     ).choices[0].message.content.strip()
+        #
+        # patient_chat.append({"role": "assistant", "content": patient_reply})
 
         therapist_block = {
             "role": "cbt_agent" if therapist_mode != "baseline" else "agent",
@@ -750,12 +847,15 @@ def run_session(
 
         turn_record = {
             "turn": turn_idx,
+            "time_tag": f"T{turn_idx}",
 
             "patient": {
                 "role": "patient",
                 "query": last_patient,
                 "schema": schema,
                 "retrieval": rag,
+                "distraction_injected": turn_idx in auto_distraction_schedule,
+                "distraction_meta": auto_distraction_schedule[turn_idx] if turn_idx in auto_distraction_schedule else None,
             },
 
             "llm_response": therapist_block
@@ -763,17 +863,31 @@ def run_session(
 
         transcript.append(turn_record)
 
-        last_patient = patient_reply
+        # last_patient = patient_reply  # commented out — transcript drives turns
+        patient_history.append(last_patient)  # still tracked for anchor reasoning in cbt_mcot
 
     driver.close()
+
+    # Infer the client's core issue from the full session transcript
+    inferred_core_issue = generate_session_core_issue(therapist_llm, transcript)
 
     output = {
         "metadata": {
             "llm_response": therapist_model,
             "patient_model": patient_model,
             "mode": therapist_mode,
-            "turns": turns,
-            "seed": seed,
+            "turns": max_turns,
+            "dataset": "esconv" if (transcript_source and transcript_source.endswith(".json")) else "realcbt",
+            "transcript_source": transcript_source,
+            "transcript_index": transcript_index if transcript_source and transcript_source.endswith(".json") else None,
+            "esconv_meta": esconv_meta,
+            "inferred_core_issue": inferred_core_issue,
+            # "seed": seed,         # commented out — turns now come from transcript
+            # "core_issue": core_issue,  # commented out — now inferred post-session
+            "distraction_schedule": {
+                str(k): {"id": v["id"], "valence": v["valence"], "arousal": v["arousal"]}
+                for k, v in auto_distraction_schedule.items()
+            } if auto_distraction_schedule else None,
             "intervention_flags": {
                 "use_schema": use_schema,
                 "use_rag": use_rag,
@@ -800,8 +914,15 @@ def main():
     ap.add_argument("--therapist_mode", choices=["baseline", "cbt", "cbt_mcot"], required=True)
     ap.add_argument("--turns", type=int, default=10)
     ap.add_argument("--k", type=int, default=5)
-    ap.add_argument("--seed", required=True)
-    ap.add_argument("--fixed_seed")
+    ap.add_argument("--transcript_source", default=None,
+                    help="Path to a RealCBT *_client.txt file or ESConv_client.json")
+    ap.add_argument("--transcript_index", type=int, default=0,
+                    help="Which conversation to use from an ESConv JSON file (0-based)")
+    # ap.add_argument("--seed", required=True)  # commented out — turns now come from transcript
+    ap.add_argument("--seed", default=None, help="(deprecated) seed sentence; replaced by --transcript_source")
+    ap.add_argument("--distractions", help='JSON map of turn index to distraction text, e.g. \'{"3": "text", "5": "text"}\'')
+    # ap.add_argument("--core_issue")  # commented out — now inferred post-session
+    ap.add_argument("--core_issue", default=None, help="(deprecated) core issue label; now inferred post-session")
     ap.add_argument("--transcript_json", required=True)
 
     ap.add_argument("--use_rag", action="store_true")
