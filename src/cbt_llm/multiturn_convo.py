@@ -4,6 +4,7 @@ Generating multi-turn conversations between CBT agent and patient LLMs.
 Run:
 ./run_experiment.sh [baseline|cbt] [gemma|mistral|deepseek|gpt]
 """
+import math
 import os
 import re
 import json
@@ -443,7 +444,7 @@ def build_combined_turns(
     if n < 2 or not distraction_pool:
         return base
 
-    n_distractions = max(1, round(n * ratio))
+    n_distractions = max(1, math.ceil(n * ratio))
     # Insert after any turn except the last (eligible: indices 0..n-2)
     eligible = list(range(0, n - 1))
     n_distractions = min(n_distractions, len(eligible), len(distraction_pool))
@@ -708,15 +709,20 @@ def run_session(
     # Load client turns from the provided transcript file
     client_turns = load_client_transcript(transcript_source, transcript_index) if transcript_source else []
     esconv_meta = get_esconv_meta(transcript_source, transcript_index) if transcript_source else None
-    max_turns = min(turns, len(client_turns)) if client_turns else turns
-
     # Load ground-truth core issue from dataset metadata (overrides any passed-in value)
     core_issue = get_core_issue(transcript_source, transcript_index) or core_issue
 
     # Build full turn sequence: real client turns with distraction turns inserted (~30%)
     distraction_pool = load_distractions()
-    combined_turns = build_combined_turns(client_turns, distraction_pool, ratio=0.30) if client_turns else []
-    max_turns = min(turns, len(combined_turns)) if combined_turns else max_turns
+    combined_turns = build_combined_turns(client_turns, distraction_pool, ratio=0.15) if client_turns else []
+
+    # When a transcript is provided, run the full sequence regardless of --turns
+    if combined_turns:
+        max_turns = len(combined_turns)
+    elif client_turns:
+        max_turns = len(client_turns)
+    else:
+        max_turns = turns
 
     transcript = []
     # patient_chat = [{"role": "system", "content": PATIENT_SYSTEM.format()}]  # commented out — no LLM patient
@@ -957,9 +963,9 @@ def run_session(
             "transcript_source": transcript_source,
             "transcript_index": transcript_index if transcript_source and transcript_source.endswith(".json") else None,
             "esconv_meta": esconv_meta,
+            "core_issue": core_issue,
             "inferred_core_issue": inferred_core_issue,
             # "seed": seed,         # commented out — turns now come from transcript
-            # "core_issue": core_issue,  # commented out — now inferred post-session
             "distraction_schedule": {
                 str(i): {
                     "id": t["distraction_meta"]["id"],

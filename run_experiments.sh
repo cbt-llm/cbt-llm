@@ -45,7 +45,7 @@ esac
 OUTDIR="output/${MODEL_KEY}_${DATASET}${DISTRACTION_TYPE:+_${DISTRACTION_TYPE}}"
 mkdir -p "$OUTDIR"
 
-TURNS=10
+TURNS=999  # fallback only — transcript-driven runs use full transcript length
 K=5
 
 # ---------------------------------------------------------------------------
@@ -121,7 +121,8 @@ thoughtful_distractions=(
 if [[ "$DATASET" == "realcbt" ]]; then
 
   REALCBT_DIR="$(dirname "$0")/data/raw/realcbt_split"
-  mapfile -t client_files < <(ls "${REALCBT_DIR}"/*_client.txt | sort -V)
+  client_files=()
+  while IFS= read -r f; do client_files+=("$f"); done < <(ls "${REALCBT_DIR}"/*_client.txt | sort -V)
 
   for i in "${!client_files[@]}"; do
     run=$((i+1))
