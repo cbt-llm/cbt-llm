@@ -9,6 +9,33 @@ cd cbt-llm
 cp .env.example .env
 ```
 
+## CoreIssue Dataset: User Case Studies
+
+Dataset containing 200 user seed queries that aim to study core issues as case studies. We commit 152 instances (found under `data/processed/user_case_studies.json`) derived from **RealCBT and ESConv**. The remaining 48 come from **SWMH** (gated, request access with an institutional email).
+
+Run `python -m cbt_llm.utils.build_dataset` to build the dataset with **SWMH** . 
+
+#### RealCBT Setup
+ 
+Download RealCBT Dataset zip at ([RealCBT](https://gitlab.com/xiaoyi.wang/realcbt-dataset)), unzip and place under `data/external/RealCBT/`. The curated seed queries are available under `data/processed/realcbt.json` sampling all 76 transcripts.
+
+#### ESConv Setup
+
+76 randomly sampled rom the train split with situation labeled as the seed query and problem_type as core issue.
+
+#### SWMH Setup
+
+Request access with an institutional email. Keeps `depression`/`SuicideWatch` labeled text only, drops `[deleted]`/`[removed]` and `Edit:` footers, using texts that are under 700 chars. Randomly sampled 48 datapoints.
+
+Each record has `id` (`1` to `200`), `source` (RealCBT, ESConv or SWMH), `user_case_seed_query`, and `core_issue`.
+
+| Dataset | n | `source` | seed text | labels used |
+|---|---|---|---|---|
+| [RealCBT](https://gitlab.com/xiaoyi.wang/realcbt-dataset) | 76 | `realcbt_<transcript>_client_<utterance>` | selecting one client utterance from transcript to represent core issue | 8 issues (career, self-esteem, anxiety, relationships, health, financial, academic, other) |
+| [ESConv](https://huggingface.co/datasets/thu-coai/esconv) | 76 | `esconv_<train_row>` | using `situation` from existing dataset | 13 issues (ongoing depression, job crisis, breakup with partner, problems with friends, academic pressure, sleep problems, procrastination, alcohol abuse, appearance anxiety, conflict with parents, issues with children, issues with parents, school bullying) |
+| [SWMH](https://huggingface.co/datasets/AIMH/SWMH) | 48 | `swmh_<train_row>` | Reddit post text body | depression, SuicideWatch |
+
+
 ### Add PyMedTermino-0.3.2
  
 1. Under ```external_libs``` add the PyMedTermino-0.3.2 folder
@@ -19,7 +46,6 @@ import os
 SNOMEDCT_DIR = os.getenv("SNOMEDCT_DIR")
 SNOMEDCT_CORE_FILE = os.getenv("SNOMEDCT_CORE_FILE")
 ```
-
 
 
 ### Add SNOMED CT Data
@@ -414,10 +440,6 @@ User utterances are scored with the NRC VAD Lexicon v2.1 (55k+ English words wit
 #### Lexicon Setup
  
 Download NRC VAD Lexicon v2.1 at ([NRC-VAD](https://saifmohammad.com/WebPages/nrc-vad.html)), unzip and place under `external_libs/`.
-
-#### RealCBT Setup
- 
-Download RealCBT Dataset zip at ([RealCBT](https://gitlab.com/xiaoyi.wang/realcbt-dataset)), unzip and place under `data/external/RealCBT/`.
  
 ### A. Synthetic Transcripts
  
