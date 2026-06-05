@@ -363,6 +363,46 @@ Example:
 ./run_experiments.sh cbt_mcot gpt
 ```
 
+5. Run Ablation Study
+
+To measure the contribution of each component, run the ablation pipeline. It runs the full CBT session three times per case study, removing one component at a time:
+
+| Variant | Removed component |
+|---|---|
+| `no_rag` | SNOMED retrieval + NLI verification |
+| `no_schema` | Cognitive model (schema extraction) |
+| `no_protocol` | CBT principles/protocols |
+
+```sh
+./run_experiments_ablation.sh ${MODEL}
+```
+
+Example:
+
+```sh
+./run_experiments_ablation.sh gemma
+./run_experiments_ablation.sh mistral
+```
+
+Outputs are written to:
+
+```
+output/{model}/ablation/{variant}_transcript_{id}.json
+```
+
+Each transcript includes an `ablation_variant` field in its metadata so results stay self-documenting.
+
+You can also run a single variant manually:
+
+```sh
+python -m cbt_llm.ablation_convo \
+  --therapist_model gemma3:12b \
+  --ablation_variant no_rag \
+  --seed "I keep overthinking everything at work..." \
+  --core_issue "anxiety" \
+  --transcript_json output/gemma/ablation/no_rag_transcript_001.json
+```
+
 #### Generate Evaluation Plots
 
 This section produces evaluation visualizations for both LLM response quality and user trajectory, supporting the analysis presented in the Results section.
