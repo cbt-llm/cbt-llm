@@ -41,7 +41,7 @@ from cbt_llm.multiturn_convo import (
 ABLATION_VARIANTS = {
     "no_rag":      {"use_rag": False, "use_schema": True,  "use_protocol": True},
     "no_schema":   {"use_rag": True,  "use_schema": False, "use_protocol": True},
-    "no_protocol": {"use_rag": True,  "use_schema": True,  "use_protocol": False},
+    # "no_protocol": {"use_rag": True,  "use_schema": True,  "use_protocol": False},
 }
 
 OLLAMA_MODELS = {"gpt-oss:20b", "mistral:7b", "gemma3:12b", "deepseek-r1:8b"}

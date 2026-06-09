@@ -29,7 +29,7 @@ esac
 
 command -v jq >/dev/null || { echo "jq is required (brew install jq / apt-get install jq)"; exit 1; }
 
-DATA="data/processed/user_case_studies.json"
+DATA="data/processed/ablation_case_studies.json"
 [[ -f "$DATA" ]] || { echo "Dataset not found: $DATA"; exit 1; }
 
 OUTDIR="output/${MODEL_KEY}/ablation"
@@ -38,7 +38,9 @@ mkdir -p "$OUTDIR"
 TURNS=10
 K=5
 
-VARIANTS=("no_rag" "no_schema" "no_protocol")
+VARIANTS=("no_rag" "no_schema")
+# VARIANTS=("no_rag" "no_schema" "no_protocol")
+
 
 while IFS=$'\t' read -r id source issue seed; do
   echo "=== Case $id ($source) — core issue: $issue ==="
