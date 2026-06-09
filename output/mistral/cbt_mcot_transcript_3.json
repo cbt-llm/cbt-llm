@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Well, the doctors have said that I have cancer again. Had it a couple of years ago, and I beat it. And now they're saying that it's come back. It's not something I really want to talk about, but I'm still working and just trying to get through the day.",
-    "core_issue": "health-related worries",
+    "seed": "I mean, I'm a photographer, so I kind of. It's been stopping me a bit, my anxiety from being able to get work, and because every time there's an opportunity that is kind of involving me having to interact with people, I just tend to just turn it down. So I was kind of making things hard in that respect and just kind of friends wise and everything, I feel like I'm just kind of increasingly more alone. So it's kind of stopping me from making friends and, you know, like, relationships and stuff.",
+    "core_issue": "Anxiety and fear",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,86 +17,120 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Well, the doctors have said that I have cancer again. Had it a couple of years ago, and I beat it. And now they're saying that it's come back. It's not something I really want to talk about, but I'm still working and just trying to get through the day.",
-        "core_issue": "health-related worries",
+        "query": "I mean, I'm a photographer, so I kind of. It's been stopping me a bit, my anxiety from being able to get work, and because every time there's an opportunity that is kind of involving me having to interact with people, I just tend to just turn it down. So I was kind of making things hard in that respect and just kind of friends wise and everything, I feel like I'm just kind of increasingly more alone. So it's kind of stopping me from making friends and, you know, like, relationships and stuff.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "doctors saying cancer has come back"
+            "opportunity to interact with people"
           ],
           "automatic_thoughts": [
-            "I can't believe this is happening again",
-            "I thought I beat this",
-            "I have to keep working despite this"
+            "I'm not good enough to get work",
+            "I will embarrass myself",
+            "I will be rejected by others"
           ],
           "emotions": [
-            "fear",
             "anxiety",
-            "sadness"
+            "loneliness"
           ],
           "behaviors": [
-            "trying to get through the day",
-            "avoiding talking about it"
+            "turning down opportunities",
+            "avoiding social interactions"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Adjustment to life threatening illness (finding)"
+            "Fear of going out (finding)",
+            "Fear of being in a small group (finding)",
+            "Fear of being a burden to others (finding)",
+            "Fear of social gatherings (finding)"
           ],
           "neutral": [
-            "Denial about illness severity (finding)",
-            "Fear of getting cancer (finding)",
-            "Coming to terms with dying (finding)",
-            "Difficulty coping with grief responses (finding)"
+            "Social isolation (rejection) (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry to hear that you're dealing with this again. It can be overwhelming, but it's important to remember that you've already faced this challenge before and come out stronger. Let's explore how you might feel if things turn out differently than expected. What do you think a trusted friend or family member would say about your situation?",
-        "protocol_used": "alternative_perspective",
+        "response": "\"It sounds like you're feeling anxious about opportunities that involve interacting with people. Can you tell me more about what makes these situations challenging for you?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry to hear that you're going through this again. It sounds like it's a lot to take in, and I can understand why you might not want to talk about it. But remember, we're here to help you navigate this difficult time together. Can you tell me more about what you're feeling right now?",
+            "response": "I can see how that might be difficult for you, feeling anxious about opportunities involving people. It's important to remember that it's okay to feel this way and I'm here to help you navigate through it. Let's explore together what might be causing these feelings and find ways to manage them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Adjustment to life threatening illness (finding)",
+                  "concept": "Fear of going out",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Denial about illness severity (finding)",
-                  "label": "neutral"
+                  "concept": "Fear of being in a small group",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of social gatherings",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I'm really sorry to hear that you're going through this again. It can be difficult to cope when something like cancer comes back, especially after you thought you had beaten it. Can we explore together what thoughts and feelings come up for you when you think about this situation? And how are you managing your work while dealing with this?\"",
+            "response": "\"It sounds like you're feeling anxious about opportunities that involve interacting with people. Can you tell me more about what makes these situations challenging for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Adjustment to life threatening illness (finding)",
+                  "concept": "Fear of going out",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty coping with grief responses (finding)",
-                  "label": "neutral"
+                  "concept": "Fear of being in a small group",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of social gatherings",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I'm really sorry to hear that you're dealing with this again. It can be overwhelming, but it's important to remember that you've already faced this challenge before and come out stronger. Let's explore how you might feel if things turn out differently than expected. What do you think a trusted friend or family member would say about your situation?",
+            "response": "\"It sounds like you're feeling quite anxious about interacting with people, especially when it comes to opportunities for work or making new friends. Have you ever considered what a trusted friend might think about your situation? It could be helpful to get another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Adjustment to life threatening illness (finding)",
+                  "concept": "Fear of going out",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty coping with grief responses (finding)",
-                  "label": "neutral"
+                  "concept": "Fear of being in a small group",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of social gatherings",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're facing some challenges in connecting with others due to your anxiety. Can I ask, have you ever had any thoughts about wanting to be alone or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "opportunity to interact with people",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loneliness",
+                  "label": "emotions"
                 }
               ]
             }
@@ -108,91 +142,118 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Thanks. I guess I just feel really anxious about it all. I often think about how I might react if things don't go as planned. A trusted friend might say that I tend to worry too much... and that things usually end up being okay, but it’s hard to see it that way when I’m in the moment. I just keep imagining the worst-case scenarios.",
-        "core_issue": "health-related worries",
+        "query": "Yeah, I guess it’s just… I get this overwhelming feeling, like I’m not prepared enough or I’ll embarrass myself. When I’m in a group or talking to someone new, my mind races, and I start worrying about what they might think of me. It’s exhausting, really.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "being in a group",
+            "talking to someone new"
+          ],
           "automatic_thoughts": [
-            "I might react if things don't go as planned",
-            "I tend to worry too much",
-            "Things usually end up being okay",
-            "I keep imagining the worst-case scenarios"
+            "I'm not prepared enough",
+            "I'll embarrass myself",
+            "What will they think of me?"
           ],
           "emotions": [
-            "anxiety"
+            "overwhelmed",
+            "anxious",
+            "exhausted"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling nervous (finding)",
-            "Feeling tense (finding)",
-            "Feeling physically tense (finding)"
+            "Fear of being in a small group (finding)",
+            "Fear of social gatherings (finding)",
+            "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of speaking to people in authority (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're feeling quite anxious, and it's understandable to worry about things not going as planned. Your trusted friend might remind us that worrying too much can be a common response, but it's also important to remember that things usually do end up being okay. Let's explore together how we can help you manage your anxiety in the moment.\"",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling quite anxious when you're in social situations. Can you tell me more about what triggers these feelings? For example, are there specific moments or types of interactions that make you feel this way?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're feeling quite anxious, and it's understandable to worry about things not going as planned. Your trusted friend might remind us that worrying too much can be a common response, but it's also important to remember that things usually do end up being okay. Let's explore together how we can help you manage your anxiety in the moment.\"",
+            "response": "\"It sounds like you have some concerns about being in social situations and feeling unprepared. It's common to feel anxious when meeting new people, but it's important to remember that everyone has those feelings sometimes. Let's explore these thoughts a bit more and see if we can find ways to manage them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "being in a group",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "worrying too much",
-                  "label": "unknown"
+                  "concept": "talking to someone new",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "trusted friend's perspective",
-                  "label": "unknown"
+                  "concept": "I'm not prepared enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'll embarrass myself",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "What will they think of me?",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're dealing with a lot of anxiety. Let's explore this together. When you think about the worst-case scenarios, can you also consider what evidence supports these fears and what evidence might suggest otherwise?",
+            "response": "\"It sounds like you're feeling quite anxious when you're in social situations. Can you tell me more about what triggers these feelings? For example, are there specific moments or types of interactions that make you feel this way?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "Fear of being in a small group",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "worrying too much",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "imagining worst-case scenarios",
-                  "label": "unknown"
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot of anxiety. It can be challenging to see things differently when we're in the thick of it, but I wonder if your trusted friend might offer some insight. They often say that you tend to worry too much, and yet things usually end up being okay. Let's explore this idea together.\"",
+            "response": "\"It sounds like you're feeling quite anxious about being in social situations and meeting new people. Have you ever considered what a trusted friend might think about the situation? Or perhaps, what are some positive outcomes that could happen?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "being in a group",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "worrying too much",
+                  "concept": "talking to someone new",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling quite anxious about being in social situations and meeting new people. It's common for thoughts like 'I'm not prepared enough' or 'What will they think of me?' to come up. Let's explore these thoughts together, and see if we can find ways to manage them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "being in a group",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "trusted friend's perspective",
+                  "concept": "talking to someone new",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 }
               ]
@@ -205,88 +266,109 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I really appreciate that. I just feel so anxious all the time about everything related to my health. It’s like I’m always waiting for something bad to happen. Friends say I'm overreacting, but when I’m in those moments, it feels so real and overwhelming. It’s hard to shake off that worry, even when I know things usually turn out fine.",
-        "core_issue": "health-related worries",
+        "query": "Yeah, definitely. It’s like, anytime I have to introduce myself or share anything personal, I just freeze up. I worry that I’ll say something stupid or that people will judge me. It feels so much easier to just stay quiet, but then I end up feeling even more alone, you know?",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "thoughts about health",
-            "waiting for something bad to happen"
+            "introducing myself",
+            "sharing personal information"
           ],
           "automatic_thoughts": [
-            "I'm always waiting for something bad to happen",
-            "friends say I'm overreacting",
-            "it feels so real and overwhelming"
+            "I'll say something stupid",
+            "people will judge me"
           ],
           "emotions": [
-            "anxiety"
+            "fear",
+            "anxiety",
+            "loneliness"
           ],
           "behaviors": [
-            "worrying",
-            "struggling to shake off worry"
+            "freeze up",
+            "stay quiet"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of social gatherings (finding)"
+          ],
           "neutral": [
-            "Anticipatory anxiety (finding)",
-            "Anxiety about body function or health (finding)",
-            "Anticipatory anxiety, moderate (finding)",
-            "Anxiety about treatment (finding)",
-            "Anticipatory anxiety, severe (finding)"
+            "Fear of being in a small group (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of public speaking (finding)",
+            "Fear of speaking on the phone (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand how you're feeling, and it's completely normal to have concerns about your health. It sounds like you've been experiencing a lot of anxiety lately. Let's work together to find ways to manage these feelings and help you feel more at ease.",
+        "response": "I can see how that would be really tough for you. It sounds like you're dealing with a lot of fear and anxiety when it comes to sharing personal information. Let's work together to understand these feelings better and find ways to manage them.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how you're feeling, and it's completely normal to have concerns about your health. It sounds like you've been experiencing a lot of anxiety lately. Let's work together to find ways to manage these feelings and help you feel more at ease.",
+            "response": "I can see how that would be really tough for you. It sounds like you're dealing with a lot of fear and anxiety when it comes to sharing personal information. Let's work together to understand these feelings better and find ways to manage them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "health concerns",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "overreacting",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with a lot of anxiety, especially when it comes to your health. Can we explore together what evidence supports these feelings and what might be alternative explanations?\"",
+            "response": "It sounds like those situations can be really challenging for you. Can you tell me more about what thoughts come up when you have to introduce yourself or share something personal? And how do those thoughts make you feel?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about body function or health",
-                  "label": "neutral"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "anticipatory anxiety",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you're feeling anxious, especially about your health. It can be overwhelming and hard to shake off the worry. Let's explore what a trusted friend might say about this situation. What do you think they would tell you?\"",
+            "response": "\"It sounds like sharing personal information can be a challenging experience for you. You mentioned feeling anxious about saying the wrong thing and fearing judgment, which might contribute to your feelings of loneliness. Let's explore together if there are other ways to approach these situations that could make you feel more comfortable.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about body function or health",
-                  "label": "neutral"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "anticipatory anxiety",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like sharing personal information can be really scary for you. I'm here to help, and it's okay if things feel hard sometimes. Let's work together to find ways to make this a little easier.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -298,96 +380,95 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Thank you for understanding. It does feel like I’m stuck in this cycle of worry, and it’s exhausting. I know I should be able to relax or distract myself, but my thoughts just keep circling back. I guess sometimes I’m scared of what might really be wrong, even if I know it’s probably nothing. It's kind of hard to talk about, honestly.",
-        "core_issue": "health-related worries",
+        "query": "Thanks, I appreciate that. It’s just... sometimes I wish I could just be more open without feeling like I’m about to fall apart. I know it’s probably not as big of a deal as I make it out to be, but that doesn’t really help in the moment. I guess it’s hard to shake off those feelings.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "I'm stuck in this cycle of worry",
-            "I should be able to relax or distract myself",
-            "I'm scared of what might really be wrong",
-            "It's probably nothing"
+            "I wish I could be more open",
+            "I'm about to fall apart",
+            "It's a big deal",
+            "It's hard to shake off those feelings"
           ],
           "emotions": [
-            "exhaustion",
-            "fear"
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Anxiety about treatment (finding)",
-            "Recurrent anxiety (finding)",
-            "Anxiety about loss of control (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about body function or health (finding)"
+            "Emotionally distant (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Mature emotional adjustment (finding)",
+            "Difficulty coping with grief responses (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Emotionally detached (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling stuck in a cycle of worry, and it can be exhausting. It's common to feel anxious when we're dealing with recurring concerns, especially if they relate to treatment or loss of control. Let's work together to explore these feelings more deeply and find ways to manage them.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're struggling with opening up without feeling overwhelmed. Can we explore together what might be causing these feelings and find ways to manage them?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling stuck in a cycle of worry, and it can be exhausting. It's common to feel anxious when we're dealing with recurring concerns, especially if they relate to treatment or loss of control. Let's work together to explore these feelings more deeply and find ways to manage them.",
+            "response": "I understand that you're feeling anxious about opening up, and it can be overwhelming at times. It's important to remember that it's okay to have these feelings, and we can work together to help you manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about treatment (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Recurrent anxiety (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Anxiety about loss of control (finding)",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with a lot of worry and fear, which can be exhausting. Let's explore these feelings together. Can you tell me more about what triggers this cycle of thoughts for you?\"",
+            "response": "\"It sounds like you're struggling with opening up without feeling overwhelmed. Can we explore together what might be causing these feelings and find ways to manage them?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Recurrent anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Fear",
-                  "label": "emotions"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot of worry and anxiety. Let's explore together if there might be other ways to look at this situation that could help reduce some of the distress you're feeling.\"",
+            "response": "\"It sounds like you're struggling with opening up without feeling overwhelmed. Let's explore what might help you feel more at ease in those moments.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "worry",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "distress",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "exhaustion",
-                  "label": "emotions"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're struggling with some intense emotions, and it can feel overwhelming to open up. Let's work together on finding ways to manage those feelings so they don't control you.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -399,100 +480,131 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s definitely tiring. Sometimes, I feel like I’m constantly on high alert, and it makes it hard to enjoy anything. I want to trust that things will be okay, but there’s this nagging voice in my head that keeps telling me to be careful, to prepare for the worst. It’s frustrating to feel that way, especially when I know I should be able to enjoy life more.",
-        "core_issue": "health-related worries",
+        "query": "Yeah, it does feel that way. I just wish I could pinpoint what exactly triggers those feelings. Sometimes it's just being in a crowded room or even making small talk. It’s like my mind goes blank and I can’t find the right words. I just want to feel more comfortable being myself, but it feels so far away.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "constant high alert",
-            "feeling unable to enjoy life"
+            "being in a crowded room",
+            "making small talk"
           ],
           "automatic_thoughts": [
-            "I need to be careful",
-            "prepare for the worst",
-            "I should be able to enjoy life"
+            "my mind goes blank",
+            "I can’t find the right words",
+            "I wish I could pinpoint what triggers those feelings"
           ],
           "emotions": [
-            "frustration"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "wanting to feel more comfortable being myself"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Difficulty managing stress (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about loss of control (finding)",
-            "Anxiety about not coping with parenthood (finding)"
+          "entailment": [
+            "Fear of being in a small group (finding)",
+            "Feeling alienated (finding)",
+            "Feeling unwanted (finding)"
           ],
-          "contradiction": []
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)"
+          ],
+          "contradiction": [
+            "Feeling isolated (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're dealing with a lot right now. Can we explore what evidence supports the idea that you need to be careful and prepare for the worst? Let's start by looking at specific instances where this thought has been helpful or harmful for you.\"",
+        "response": "Have you ever noticed what specific situations or conversations make you feel this way? It might help us understand and work on finding more comfortable ways to navigate those moments.",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're dealing with a lot right now. You mentioned feeling constantly on high alert and struggling to enjoy life. It's understandable that this can feel overwhelming. Let's take some time to explore these feelings together, and I'll be here to help you navigate them.\"",
+            "response": "You're absolutely right. It sounds like social situations can be challenging for you, and it's understandable to feel that way sometimes. I'd like to help you explore this a bit more if you're comfortable with that. Can we start by discussing what exactly makes you feel uncomfortable in these situations?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "constant high alert",
+                  "concept": "being in a crowded room",
                   "label": "triggers"
                 },
                 {
-                  "concept": "feeling unable to enjoy life",
+                  "concept": "making small talk",
                   "label": "triggers"
                 },
                 {
-                  "concept": "I need to be careful",
+                  "concept": "my mind goes blank",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "prepare for the worst",
+                  "concept": "I can’t find the right words",
                   "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with a lot right now. Can we explore what evidence supports the idea that you need to be careful and prepare for the worst? Let's start by looking at specific instances where this thought has been helpful or harmful for you.\"",
+            "response": "Have you ever noticed what specific situations or conversations make you feel this way? It might help us understand and work on finding more comfortable ways to navigate those moments.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about going crazy",
-                  "label": "neutral"
+                  "concept": "being in a crowded room",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "difficulty managing stress",
-                  "label": "neutral"
+                  "concept": "making small talk",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "anxiety about losing emotional control",
-                  "label": "neutral"
+                  "concept": "my mind goes blank",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can’t find the right words",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot right now. You mentioned feeling constantly on high alert and having trouble enjoying life. It's understandable that this can feel frustrating. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things differently.\"",
+            "response": "Have you ever thought about what a trusted friend or family member might say if they were in your shoes? It could help us explore alternative perspectives and find ways to feel more comfortable.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "constant high alert",
+                  "concept": "being in a crowded room",
                   "label": "triggers"
                 },
                 {
-                  "concept": "feeling unable to enjoy life",
+                  "concept": "making small talk",
                   "label": "triggers"
                 },
                 {
-                  "concept": "I need to be careful",
+                  "concept": "my mind goes blank",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "prepare for the worst",
+                  "concept": "I can’t find the right words",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like social situations can be challenging for you. Have you ever thought about what specifically makes you feel this way? Let's explore that together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "being in a crowded room",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "making small talk",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "my mind goes blank",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can’t find the right words",
                   "label": "automatic_thoughts"
                 }
               ]
@@ -505,97 +617,115 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I guess there have been times when being cautious helped me avoid some issues, like when I was really diligent about going to the doctor and it turned out I had something that needed attention. But there are also plenty of times when my worrying kept me from doing things I wanted to do, like travel or just hang out with friends without feeling anxious. It’s like I can't really tell when my cautiousness is useful anymore.",
-        "core_issue": "health-related worries",
+        "query": "I think it’s mostly when I’m in social settings where I don’t know a lot of people... like parties or networking events. Just the pressure of making a good impression is so intense. And sometimes even just casual chats, like at work, can feel overwhelming. It’s like I’m constantly on edge, waiting for something to go wrong.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "going to the doctor",
-            "wanting to travel",
-            "wanting to hang out with friends"
+            "social settings",
+            "parties",
+            "networking events",
+            "casual chats at work"
           ],
           "automatic_thoughts": [
-            "my worrying keeps me from doing things",
-            "I can't tell when my cautiousness is useful"
+            "pressure of making a good impression",
+            "waiting for something to go wrong"
           ],
           "emotions": [
-            "anxiety"
+            "anxiety",
+            "overwhelm"
           ],
-          "behaviors": [
-            "avoiding travel",
-            "avoiding socializing"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Worried (finding)"
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anticipatory anxiety (finding)",
-            "Anticipatory anxiety, moderate (finding)",
-            "Anticipatory anxiety, mild (finding)"
+            "Fear of public speaking (finding)",
+            "Fear of social gatherings (finding)",
+            "Fear of speaking to people in authority (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It seems like being cautious has helped you in some situations, such as going to the doctor. But it can also hold you back from doing things you enjoy, like traveling or spending time with friends. Can we explore when and why you feel your worrying is helpful versus harmful?\"",
+        "response": "\"It sounds like social situations can be quite challenging for you, especially when there's pressure to make a good impression. Can we explore together what triggers this feeling and how it affects your experience?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you've had experiences where being cautious has been helpful, such as going to the doctor when needed. However, it can also be challenging to determine when your caution is useful or not, especially when it comes to activities like traveling and socializing. Let's explore this together and see if we can find a way to help you make decisions that feel more balanced for you.",
+            "response": "\"It sounds like social situations can be quite challenging for you, especially when you're unsure of the people around. It's understandable to feel pressure and anxiety in those moments. Let's explore together how we might manage these feelings more effectively.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "going to the doctor",
+                  "concept": "social settings",
                   "label": "triggers"
                 },
                 {
-                  "concept": "wanting to travel",
-                  "label": "triggers"
+                  "concept": "pressure of making a good impression",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "wanting to hang out with friends",
-                  "label": "triggers"
+                  "concept": "waiting for something to go wrong",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It seems like being cautious has helped you in some situations, such as going to the doctor. But it can also hold you back from doing things you enjoy, like traveling or spending time with friends. Can we explore when and why you feel your worrying is helpful versus harmful?\"",
+            "response": "\"It sounds like social situations can be quite challenging for you, especially when there's pressure to make a good impression. Can we explore together what triggers this feeling and how it affects your experience?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "going to the doctor",
+                  "concept": "social settings",
                   "label": "triggers"
                 },
                 {
-                  "concept": "wanting to travel",
-                  "label": "triggers"
+                  "concept": "pressure of making a good impression",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "wanting to hang out with friends",
-                  "label": "triggers"
+                  "concept": "waiting for something to go wrong",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like being cautious has helped you in some situations, such as going to the doctor. But it can also hold you back from doing things you enjoy, like traveling or spending time with friends. Have you ever considered what a trusted friend might say about finding a balance between caution and enjoying life?\"",
+            "response": "\"It sounds like social situations can be quite challenging for you. Have you ever considered what a trusted friend or colleague might think about these events? They may offer a different perspective that could help reduce some of the pressure.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "going to the doctor",
+                  "concept": "social settings",
                   "label": "triggers"
                 },
                 {
-                  "concept": "traveling",
-                  "label": "unknown"
+                  "concept": "pressure of making a good impression",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "wanting to hang out with friends",
+                  "concept": "waiting for something to go wrong",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like social situations can be quite challenging for you. I'd like to understand more about the pressure you feel when meeting new people or being in a group setting. Can you tell me more about that?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "social settings",
                   "label": "triggers"
+                },
+                {
+                  "concept": "pressure of making a good impression",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "waiting for something to go wrong",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -607,51 +737,53 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I think there have been moments when being cautious helped me, like that time I went to the doctor and found out something needed attention. But then there are times when it just holds me back, like when I avoid traveling or even just hanging out with friends because of my worries. I can't really figure out when my caution is actually helpful anymore. It's frustrating.",
-        "core_issue": "health-related worries",
+        "query": "Yeah, it really does get to me. I mean, I want to connect with people and be part of things, but then that pressure just takes over. I start imagining all these scenarios where I mess up or get rejected. It feels like I’m just stuck in this loop of worrying, and it’s hard to break out of it.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "going to the doctor",
-            "avoiding traveling",
-            "avoiding hanging out with friends"
+            "pressure to connect with people",
+            "social situations"
           ],
           "automatic_thoughts": [
-            "caution is helpful",
-            "caution holds me back",
-            "I can't figure out when caution is helpful"
+            "I will mess up",
+            "I will get rejected",
+            "I'm stuck in a loop of worrying"
           ],
           "emotions": [
-            "frustration"
+            "anxiety"
           ],
           "behaviors": [
-            "avoiding traveling",
-            "avoiding hanging out with friends"
+            "avoiding social situations"
           ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Difficulty comprehending concept of danger (finding)",
-            "Fear of contracting disease (finding)",
-            "Fear of injury (finding)"
+          "entailment": [
+            "Anxiety about making mistakes (finding)"
           ],
-          "contradiction": [
-            "Unable to comprehend concept of danger (finding)",
-            "Able to comprehend concept of danger (finding)"
-          ]
+          "neutral": [
+            "Anxiety about appearing ridiculous (finding)",
+            "Anxiety about having a fit (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about going crazy (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're struggling to determine when caution is helpful and when it might be holding you back. Let's explore some examples together, starting with a time when being cautious helped you. Can you think of any specific instances?\"",
+        "response": "\"It sounds like you're dealing with a lot of pressure and worry about connecting with others. Can you help me understand more about the specific situations that trigger these feelings? And when you imagine messing up or getting rejected, what evidence do you have to support those thoughts?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling frustrated because sometimes being cautious helps, but other times it seems to hold you back. Let's explore together when caution might be helpful and when it may not, so we can find a balance that works for you.",
+            "response": "I can see how that pressure might feel overwhelming, and it's understandable to worry about messing up or getting rejected. Let's work together to explore these thoughts and emotions a bit more, so we can find ways to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "pressure to connect with people",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 },
                 {
@@ -662,35 +794,58 @@
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're struggling to determine when caution is helpful and when it might be holding you back. Let's explore some examples together, starting with a time when being cautious helped you. Can you think of any specific instances?\"",
+            "response": "\"It sounds like you're dealing with a lot of pressure and worry about connecting with others. Can you help me understand more about the specific situations that trigger these feelings? And when you imagine messing up or getting rejected, what evidence do you have to support those thoughts?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "avoiding traveling",
+                  "concept": "pressure to connect with people",
                   "label": "triggers"
                 },
                 {
-                  "concept": "avoiding hanging out with friends",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like caution has been helpful in some situations, such as going to the doctor. But it can also feel restrictive when you're avoiding activities like traveling or spending time with friends. Let's explore together if there are ways we can find a balance between being cautious and enjoying life.\"",
+            "response": "\"It sounds like you're dealing with a lot of pressure and worry about social situations. Let's explore some alternative perspectives together. For instance, what might a trusted friend say about this situation? Or, have there been times when things didn't go as expected but you still managed to handle it well?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "avoiding traveling",
+                  "concept": "pressure to connect with people",
                   "label": "triggers"
                 },
                 {
-                  "concept": "avoiding hanging out with friends",
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how that pressure might feel overwhelming, and it's natural to worry about making mistakes or getting rejected. Let's explore these thoughts together and find ways to manage them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "pressure to connect with people",
                   "label": "triggers"
                 },
                 {
-                  "concept": "caution holds me back",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -702,113 +857,107 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I can think of a time. A few years ago, I had this persistent pain that I just couldn't shake off. I was really worried about it, and I decided to go to the doctor. They did some tests and found out it was something that needed treatment. I felt relieved that I took that step, but now I wonder if I was overreacting to my concerns. It’s like I can’t help but second-guess myself.",
-        "core_issue": "health-related worries",
+        "query": "It’s just... when I think about those situations, I often remember times when I’ve stumbled over my words or felt ignored. It’s like those moments just replay in my head, and I convince myself that it’ll happen again. Even if it’s not always true, that fear feels really real in the moment. I guess I just end up expecting the worst, which makes me hesitant to even try.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "persistent pain",
-            "going to the doctor",
-            "tests results"
+            "thinking about past situations",
+            "remembering stumbling over words",
+            "feeling ignored"
           ],
           "automatic_thoughts": [
-            "I was overreacting to my concerns",
-            "I can't help but second-guess myself"
+            "I’ll stumble over my words again",
+            "I’ll be ignored again",
+            "I expect the worst"
           ],
           "emotions": [
-            "worried",
-            "relieved"
+            "fear"
           ],
           "behaviors": [
-            "decided to go to the doctor"
+            "hesitant to try"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Able to recognize own emotional pain and distress (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about saying the wrong thing (finding)",
             "Fear of saying the wrong thing (finding)",
-            "Feeling guilt (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of speaking to people in authority (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you had a difficult time deciding whether to go to the doctor about your persistent pain. It's understandable to feel uncertain, especially when we worry about overreacting or making mistakes. Have you ever considered what a trusted friend might think about your situation? Sometimes it can be helpful to get another perspective.\"",
-        "protocol_used": "alternative_perspective",
+        "response": "\"It sounds like you've been experiencing a lot of fear, especially when thinking about past situations. Can you help me understand what evidence you have that you might stumble over your words or feel ignored again? Let's explore this together.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It's understandable that you might feel uncertain about your decision to seek medical help. Many people experience self-doubt when dealing with health concerns. Let's explore these feelings together and see if we can find a way to reduce your worries.\"",
+            "response": "\"I can see how those past situations might be difficult for you, and it's understandable to feel fear when they come to mind. It seems like you have a tendency to expect the worst, which could be making you hesitant. Let's explore this pattern together and find ways to manage your fears more effectively.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "persistent pain",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "going to the doctor",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "tests results",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
                   "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It's understandable that you might feel a bit unsure about your decision to go to the doctor. Can we explore together what led you to think you were overreacting? Let's consider the evidence and see if there are any alternative perspectives.\"",
+            "response": "\"It sounds like you've been experiencing a lot of fear, especially when thinking about past situations. Can you help me understand what evidence you have that you might stumble over your words or feel ignored again? Let's explore this together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "persistent pain",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "going to the doctor",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "tests results",
-                  "label": "triggers"
-                },
-                {
                   "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you had a difficult time deciding whether to go to the doctor about your persistent pain. It's understandable to feel uncertain, especially when we worry about overreacting or making mistakes. Have you ever considered what a trusted friend might think about your situation? Sometimes it can be helpful to get another perspective.\"",
+            "response": "\"It sounds like you've been having some difficult experiences, and it's understandable that those moments might feel overwhelming. Let's explore together if there are other ways to interpret these situations. For instance, what would a trusted friend or family member say about the situation? Sometimes, hearing an alternative perspective can help us see things differently.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "persistent pain",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "going to the doctor",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "tests results",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how those past experiences might be difficult for you, and it's understandable that they linger in your mind. Let's explore together if there are ways we can work on managing these fears so they don't hold you back from trying.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "I was overreacting to my concerns",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I can't help but second-guess myself",
-                  "label": "automatic_thoughts"
+                  "concept": "hesitant to try",
+                  "label": "unknown"
                 }
               ]
             }
@@ -820,87 +969,115 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I remember a few years ago when I had this pain that just wouldn’t go away. I was so worried about it that I finally went to the doctor, and they found something that needed treatment. It felt like a relief to get that sorted out, but now I find myself wondering if I was just overreacting. I can’t shake this feeling of second-guessing myself every time something comes up.",
-        "core_issue": "health-related worries",
+        "query": "Yeah, I guess it makes sense that it feels that way. I just… I remember specific instances where things didn’t go well, and they sort of stick with me. It’s like I hold onto those memories and think, “What if that happens again?” I mean, I know not every situation will be like that, but it’s hard to shake off those fears. I wish I could just let go of those past moments and feel more confident moving forward.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "pain that wouldn’t go away",
-            "going to the doctor",
-            "finding something that needed treatment"
+            "specific instances where things didn’t go well"
           ],
           "automatic_thoughts": [
-            "wondering if I was just overreacting",
-            "second-guessing myself"
+            "What if that happens again?",
+            "I wish I could just let go of those past moments"
           ],
           "emotions": [
-            "worry",
-            "relief"
+            "fear",
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "hold onto those memories",
+            "find it hard to shake off fears"
+          ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of losing emotional control (finding)"
+          ],
           "neutral": [
             "Anxiety about making mistakes (finding)",
-            "Denial about illness severity (finding)",
-            "Anxiety about saying the wrong thing (finding)"
+            "Anxiety about going crazy (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about loss of memory (finding)"
           ],
-          "contradiction": [
-            "Able to understand generalized pain (finding)",
-            "Able to recognize own emotional pain and distress (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It's understandable to have concerns when dealing with health issues. Can we explore together what evidence you have that you might be overreacting this time? Let's consider both your thoughts and feelings.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It sounds like you've had some challenging experiences that are still weighing on your mind. It's understandable to feel anxious about them recurring, but it's also important to remember that not every situation will be the same. Have you ever thought about what a trusted friend or family member might say about moving forward? Sometimes, hearing an outside perspective can help us see things differently.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm glad you mentioned your past experience with pain and seeking medical help. It sounds like you might have some concerns about whether you were right to worry or if you overreacted. It's common for people to question themselves in situations like this, especially when it comes to health matters. Let's explore these thoughts together and see if we can find a way to ease your mind.",
+            "response": "I can understand why you might feel that way, holding onto those past moments and fearing they could happen again. It's natural to have fears, but it's also important to remember that not every situation will be the same. Let's work together on finding ways to move forward with more confidence.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "specific instances where things didn't go well",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "denial about illness severity",
-                  "label": "neutral"
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "hold onto memories",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It's understandable to have concerns when dealing with health issues. Can we explore together what evidence you have that you might be overreacting this time? Let's consider both your thoughts and feelings.\"",
+            "response": "\"It sounds like you're carrying some heavy memories with you. Let's explore together how we can work on letting go of those past moments and building confidence for the future.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "neutral"
+                  "concept": "specific instances where things didn't go well",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Denial about illness severity (finding)",
-                  "label": "neutral"
+                  "concept": "What if that happens again?",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable to feel a bit unsure after seeking help, but remember that your initial concern led you to get the issue addressed. Let's explore together if there might be other situations where trusting your instincts could be beneficial.\"",
+            "response": "\"It sounds like you've had some challenging experiences that are still weighing on your mind. It's understandable to feel anxious about them recurring, but it's also important to remember that not every situation will be the same. Have you ever thought about what a trusted friend or family member might say about moving forward? Sometimes, hearing an outside perspective can help us see things differently.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "worry",
-                  "label": "emotions"
+                  "concept": "specific instances where things didn't go well",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "relief",
-                  "label": "emotions"
+                  "concept": "hold onto those memories",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "second-guessing",
-                  "label": "automatic_thoughts"
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wish to be able to let go of those past moments",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can understand why you might feel that way, holding onto those memories and fearing they could happen again. It's natural to have fears about the future based on past experiences. Let's work together to find ways to help you feel more confident moving forward.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "specific instances where things didn't go well",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
                 }
               ]
             }
@@ -912,87 +1089,111 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess I do have some evidence that I might be overreacting, like when I think about how much I’ve worried in the past and things turned out to be fine. But those feelings creep in, and it just feels so real in the moment. Sometimes I wonder if I'm just missing something important if I don’t worry enough. It’s hard to separate those feelings from what I actually know. I just wish I could find some balance.",
-        "core_issue": "health-related worries",
+        "query": "I remember specific instances where things didn’t go well, and they just stick with me. It’s like I hold onto those memories and think, “What if that happens again?” I know not every situation will be like that, but it’s hard to shake off those fears. I just wish I could let go of those past moments and feel more confident moving forward.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "specific instances where things didn’t go well",
+            "memories of past moments"
+          ],
           "automatic_thoughts": [
-            "I might be overreacting",
-            "Things turned out to be fine in the past",
-            "I’m missing something important if I don’t worry enough",
-            "It’s hard to separate feelings from what I actually know"
+            "What if that happens again?",
+            "It’s hard to shake off those fears"
           ],
           "emotions": [
-            "worry",
+            "fear",
             "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "hold onto memories",
+            "wish to let go"
+          ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Repressing painful memories (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
             "Anxiety about making mistakes (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anticipatory anxiety, mild (finding)",
-            "Anticipatory anxiety, severe (finding)"
+            "Anxiety about loss of memory (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you have a lot of evidence that things usually turn out fine, even when you worry. Have you ever considered what a trusted friend might say about your situation? Sometimes it can be helpful to get another perspective.\"",
+        "response": "\"It sounds like those past experiences are weighing heavily on your mind. Let's explore together what evidence supports the idea that everything will always go wrong, and what might be some alternative ways to think about these situations.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"You've shared some important insights about your thoughts and feelings. It can be challenging to balance worry with trusting our own judgment. Let's explore together how we might find that balance.\"",
+            "response": "I understand how difficult it can be to let go of past experiences, especially when they were challenging. It's important to remember that everyone has moments like these, and it's okay to feel scared about them happening again. Let's work together on finding ways to manage those fears and move forward with confidence.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "I might be overreacting",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Things turned out to be fine in the past",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "It's hard to separate feelings from what I actually know",
+                  "concept": "specific instances where things didn't go well",
                   "label": "unknown"
+                },
+                {
+                  "concept": "hold onto memories",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "What if that happens again?",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you have a lot of evidence that things usually turn out fine, even when you worry. Have you ever considered what a trusted friend might say about your situation? Sometimes it can be helpful to get another perspective.\"",
+            "response": "\"It sounds like those past experiences are weighing heavily on your mind. Let's explore together what evidence supports the idea that everything will always go wrong, and what might be some alternative ways to think about these situations.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "evidence",
+                  "concept": "specific instances where things didn't go well",
                   "label": "unknown"
                 },
                 {
-                  "concept": "friend's perspective",
-                  "label": "unknown"
+                  "concept": "What if that happens again?",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you've been struggling with feelings of worry and anxiety, and it can be difficult to separate those feelings from what you actually know. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, getting another perspective can help us find balance.\"",
+            "response": "\"It sounds like those past experiences are weighing heavily on your mind. Let's explore together what a trusted friend or family member might say about this situation, and perhaps we can find some alternative perspectives to help you feel more at ease.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "specific instances where things didn't go well",
                   "label": "unknown"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "hold onto memories",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "What if that happens again?",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can understand how those past moments might be weighing on you. It's natural to worry about them recurring, but it's also important to remember that not every situation will be the same. Let's work together to find ways for you to feel more confident moving forward.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "specific instances where things didn't go well",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wish to let go",
                   "label": "unknown"
                 }
               ]

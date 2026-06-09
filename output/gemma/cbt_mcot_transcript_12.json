@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I thought I should. I've been feeling quite bad for quite a while, so I thought maybe it's time to see someone about it because I don't want to feel like this anymore.",
-    "core_issue": "self-esteem and confidence issues",
+    "seed": "The main problem is these. Well, they tell me that it's a problem to do with musketsophrenia. These voices, they come and they. I heard these people talking about me and talking about how rubbish I am and what a failure I am, and I really just wish they'd leave me alone.",
+    "core_issue": "Anxiety and fear",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,40 +17,226 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I thought I should. I've been feeling quite bad for quite a while, so I thought maybe it's time to see someone about it because I don't want to feel like this anymore.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "The main problem is these. Well, they tell me that it's a problem to do with musketsophrenia. These voices, they come and they. I heard these people talking about me and talking about how rubbish I am and what a failure I am, and I really just wish they'd leave me alone.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing voices",
+            "people talking about me"
+          ],
           "automatic_thoughts": [
-            "I thought I should see someone",
-            "It's time to see someone about it",
-            "I don't want to feel like this anymore"
+            "it's a problem",
+            "I'm rubbish",
+            "I'm a failure",
+            "I wish they'd leave me alone"
           ],
           "emotions": [
-            "bad"
+            "frustration",
+            "sadness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling emotionally hurt (finding)"
+            "Hears mocking voices (finding)",
+            "Loud thoughts (finding)"
           ],
           "neutral": [
-            "Complaining of feeling depressed (finding)",
-            "Thoughts of deliberate self harm (finding)",
-            "Thoughts of self harm (finding)",
-            "Anxiety about treatment (finding)"
+            "Noise phobia (finding)",
+            "Fear of deafness (finding)"
+          ],
+          "contradiction": [
+            "Hears voices laughing at self (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly distressing to be hearing voices saying those things about you, and to feel like they won't leave you alone. That must be really frustrating and upsetting.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly distressing to be hearing voices saying those things about you, and to feel like they won't leave you alone. That must be really frustrating and upsetting.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Hears mocking voices (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loud thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to be hearing these voices and having them say such hurtful things about you – what do you think it means when you hear them calling you \"rubbish\" and a \"failure\"?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Hears mocking voices (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loud thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts: ['I'm rubbish', 'I'm a failure']",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to be hearing these voices and having them say such harsh things about you. Can you imagine what someone who cares about you might say about these voices and the things they're telling you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Hears mocking voices (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loud thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts: ['I'm rubbish', 'I'm a failure']",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing to be hearing voices and having people say such hurtful things. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Hears mocking voices (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loud thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "patient": {
+        "role": "patient",
+        "query": "I've just been feeling really overwhelmed lately. It's like there's this constant weight on my chest, and I can’t shake it off. Every little thing seems to amplify the anxiety, even when it doesn’t feel like it should.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "constant weight on my chest",
+            "every little thing"
+          ],
+          "automatic_thoughts": [
+            "I can’t shake it off",
+            "this shouldn’t feel overwhelming"
+          ],
+          "emotions": [
+            "overwhelmed",
+            "anxiety"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling agitated (finding)",
+            "Anxiety (finding)",
+            "Feeling stressed (finding)"
+          ],
+          "neutral": [
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Okay, it sounds like you've been carrying a lot. It takes courage to recognize when things have been difficult for a while and to consider reaching out for support. You've clearly been feeling quite bad, and the thought of seeking help arose because you're wanting to move away from that feeling. Can you tell me a little more about what \"feeling bad\" looks like for you? What kinds of things have you been experiencing?\n\n\n\n**Reasoning:**\n\nI chose to use the \"validate_and_reflect\" protocol first. The patient is expressing a significant decision to seek therapy, which indicates vulnerability and a need for reassurance. Directly jumping into cognitive restructuring would likely be premature and could create defensiveness.\n\n*   **Validation & Reflection:** I acknowledged the patient's courage and validated their feelings. I paraphrased their statement to ensure I understood their perspective and to show that I was actively listening. I also reflected back the core desire to alleviate their distress.\n*   **Open-ended Question:** I ended with an open-ended question to encourage them to elaborate on their experience, which will help me gain a better understanding of the specific triggers, thoughts, and behaviors contributing to their distress. This also allows me to begin to identify potential patterns.\n*   **Clinical Context:** The \"entailment\" statement about feeling emotionally hurt aligns with the patient's description of feeling \"bad\" for a while. This reinforces the importance of validating their experience.",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like you're going through a really difficult time, carrying this weight and feeling overwhelmed by even small things. I hear that you're finding it hard to shake off this feeling, and that's completely understandable.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you've been carrying a lot, and it takes courage to recognize you need support and reach out – it's understandable you'd want to feel better. Can you tell me a little more about what \"bad\" feels like for you?",
+            "response": "It sounds like you're going through a really difficult time, carrying this weight and feeling overwhelmed by even small things. I hear that you're finding it hard to shake off this feeling, and that's completely understandable.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "constant weight on my chest",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "every little thing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly difficult to be carrying that weight and feeling so overwhelmed by even small things. Can you tell me a little more about what \"every little thing\" looks like for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "constant weight on my chest",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "every little thing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly difficult to be carrying that weight and feeling so overwhelmed by even small things. Can you imagine what a friend might say about you feeling this way, given how much you're handling?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -66,14 +252,1102 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling stressed (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're going through a really difficult time, and it takes courage to share that. When you say you feel overwhelmed and have this weight on your chest, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling stressed (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "patient": {
+        "role": "patient",
+        "query": "I’ve been feeling really overwhelmed lately. There’s just this weight on my chest, and it feels like I can’t escape it. Even small things set off this wave of anxiety, and I don’t know why it hits me so hard.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "small things"
+          ],
+          "automatic_thoughts": [
+            "I can’t escape it",
+            "this weight on my chest",
+            "it hits me so hard"
+          ],
+          "emotions": [
+            "overwhelmed",
+            "anxiety"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Anxiety (finding)"
+          ],
+          "neutral": [
+            "Anxiety about collapsing (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Recurrent anxiety (finding)"
+          ],
+          "contradiction": [
+            "Free-floating anxiety (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "Okay, it sounds like you're going through a really difficult time. That feeling of being overwhelmed, the weight on your chest, and the intense anxiety – it’s a lot to carry. It's completely understandable that you're feeling this way, and it takes courage to talk about it. It sounds like even seemingly minor things can trigger a strong reaction, and you're understandably frustrated that you don’t fully understand why.\n\nLet’s explore this a bit. When you say \"small things\" trigger this anxiety, could you give me an example of something that recently happened that led to you feeling overwhelmed?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're going through a really difficult time, and it's completely understandable that you'd feel overwhelmed with a weight on your chest and experiencing anxiety. It takes courage to share that, and I want you to know I'm here to listen and understand what you're going through.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Recurrent anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you've been carrying a lot, and it takes courage to acknowledge that you need support – what led you to believe that seeing someone would help you feel better?",
+            "response": "It sounds incredibly difficult to be experiencing such intense anxiety, especially when it's triggered by small things. Can you tell me a little more about what goes through your mind when you notice that \"weight on your chest\" and the anxiety starts?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Recurrent anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly difficult to be feeling so overwhelmed and to have these intense reactions to even small things. Can you imagine what a friend might say about you experiencing this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Recurrent anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're going through a really difficult time, and it takes courage to share that. When you say these things hit you so hard, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Recurrent anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I guess I can think of a few moments. Like, just the other day, I was at the grocery store, and I suddenly felt really anxious about making choices. I couldn’t decide what to buy, and it felt like everyone was watching me. I ended up just leaving without getting anything, which made me feel even worse. I don’t know why it spiraled like that.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "grocery store",
+            "making choices",
+            "everyone watching me"
+          ],
+          "automatic_thoughts": [
+            "I can't decide what to buy",
+            "everyone is judging me"
+          ],
+          "emotions": [
+            "anxiety",
+            "worse"
+          ],
+          "behaviors": [
+            "left without getting anything"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about going crazy (finding)",
+            "Depressive delusion of catastrophe (finding)",
+            "Anticipatory anxiety (finding)",
+            "Psychiatric sign or symptom (finding)",
+            "Anticipatory anxiety, severe (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like that experience at the grocery store was really difficult for you. Can you tell me a little more about what went through your mind as you were trying to decide what to buy?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like that was a really difficult experience at the grocery store, and it's understandable that you felt worse after leaving without getting what you needed. It takes courage to share these kinds of moments.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that experience at the grocery store was really difficult for you. Can you tell me a little more about what went through your mind as you were trying to decide what to buy?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "That sounds really distressing – it's tough when a simple task like grocery shopping becomes overwhelming. If a friend were watching, what do you think they might say about your reaction to that situation?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "alternative_perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really distressing, and it's understandable that you felt worse after leaving the store. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "It was just this racing thought that I was going to pick the wrong thing, like I’d embarrass myself or waste money. And then I felt this pressure to be quick about it, but the more I tried to focus, the more my mind just blanked. I started to feel like everyone else was judging me for not knowing what to get, and then I just panicked and left. It felt silly afterward, but in the moment, it was just so intense.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "picking something",
+            "pressure to be quick",
+            "feeling judged by others"
+          ],
+          "automatic_thoughts": [
+            "I will pick the wrong thing",
+            "I will embarrass myself",
+            "I will waste money",
+            "everyone is judging me"
+          ],
+          "emotions": [
+            "pressure",
+            "panic",
+            "intensity"
+          ],
+          "behaviors": [
+            "left the situation"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Difficulty making considered choices (finding)",
+            "Feeling nervous (finding)"
+          ],
+          "neutral": [
+            "Anxiety about loss of control (finding)",
+            "Compulsive buying (finding)"
+          ],
+          "contradiction": [
+            "Feeling a failure (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like that racing thought – the worry about picking the wrong thing – really took over and made the situation feel overwhelming. Can you tell me a little more about what made that thought feel so believable at the time?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you were caught in a really difficult cycle of thoughts and feelings – worrying about making the wrong choice, feeling pressured, and then experiencing that intense panic and ultimately leaving the situation. That must have been quite overwhelming, even though it feels silly looking back.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that racing thought – the worry about picking the wrong thing – really took over and made the situation feel overwhelming. Can you tell me a little more about what made that thought feel so believable at the time?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "difficulty making considered choices",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling nervous",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like that racing thought – the worry about picking the wrong thing – really escalated things quickly. If a friend were watching, what do you think they might notice about how you reacted in that situation?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "difficulty making considered choices",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling nervous",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing – it's understandable that you felt overwhelmed in that moment. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "I think it's just that I've had moments before where I’ve made choices that didn’t turn out well. It’s like that past experience just echoes in my mind. I guess I worry that if I mess up again, I’ll let people down or maybe even make a fool of myself. It feels easier to avoid those moments than to risk having to face it again. But then I end up feeling stuck anyway.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "moments of past choices",
+            "risk of making a mistake"
+          ],
+          "automatic_thoughts": [
+            "past experiences echo in my mind",
+            "I'll let people down",
+            "I'll make a fool of myself"
+          ],
+          "emotions": [
+            "worry",
+            "fear",
+            "frustration"
+          ],
+          "behaviors": [
+            "avoid those moments",
+            "feel stuck"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about making mistakes (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Undoing - mental defense mechanism (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like those past experiences carry a lot of weight with you, and it's understandable that you'd want to avoid situations that might trigger those feelings. Can you tell me more about what goes through your mind when you anticipate potentially making a mistake?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like those past experiences really carry weight with you, and it makes sense that you'd feel worried about repeating them and letting others down. Avoiding those situations can feel like a relief in the moment, but it also leaves you feeling stuck.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "past experiences echo in my mind",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'll let people down",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'll make a fool of myself",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "avoid those moments",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feel stuck",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those past experiences carry a lot of weight with you, and it's understandable that you'd want to avoid situations that might trigger those feelings. Can you tell me more about what goes through your mind when you anticipate potentially making a mistake?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those past experiences carry a lot of weight with you, and it's understandable that you'd want to avoid situations that might trigger those feelings. If a friend were watching you navigate this, what do you think they might say about your concerns?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like those past experiences carry a lot of weight for you, and it's understandable that you'd want to avoid situations that might bring up those feelings. When you mentioned those moments, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, when I think about making a mistake, my mind just races. I start imagining all the worst-case scenarios, like people laughing at me or thinking I’m incompetent. It’s like I can’t stop the thoughts from spiraling. I feel this tightness in my chest, and it makes me want to run away from whatever situation is coming up. It’s exhausting, really.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "thinking about making a mistake"
+          ],
+          "automatic_thoughts": [
+            "imagining worst-case scenarios",
+            "people laughing at me",
+            "thinking I’m incompetent"
+          ],
+          "emotions": [
+            "anxiety",
+            "exhaustion"
+          ],
+          "behaviors": [
+            "wanting to run away"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Unable to resist dangerous thoughts (finding)"
+          ],
+          "contradiction": [
+            "Able to resist dangerous thoughts (finding)",
+            "Able to resist dangerous thoughts with difficulty (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly distressing to have those thoughts and feel that tightness in your chest, and wanting to escape makes sense given how overwhelming it feels. It takes a lot of energy to deal with thoughts spiraling like that.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly distressing to have those thoughts and feel that tightness in your chest, and wanting to escape makes sense given how overwhelming it feels. It takes a lot of energy to deal with thoughts spiraling like that.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to have those thoughts and physical sensations when you anticipate making a mistake – can you tell me a little more about what makes these \"worst-case scenarios\" feel so likely?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to have those thoughts and feel that urge to escape – it's understandable that you'd feel exhausted. If a friend were watching you go through this, what do you think they might say about your worries?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it makes sense you'd feel exhausted when your mind is racing like that. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "When I think about making a mistake, my mind just races. I start imagining all the worst-case scenarios, like people laughing at me or thinking I’m incompetent. I can feel this tightness in my chest, and it makes me want to run away from whatever situation is coming up. It’s exhausting.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "thinking about making a mistake"
+          ],
+          "automatic_thoughts": [
+            "imagining worst-case scenarios",
+            "people laughing at me",
+            "thinking I’m incompetent"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
+          "behaviors": [
+            "wanting to run away"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about behavior or performance (finding)"
+          ],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Able to resist dangerous thoughts with difficulty (finding)"
+          ],
+          "contradiction": [
+            "Able to resist dangerous thoughts (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly distressing to experience that racing mind and physical tightness when you anticipate making a mistake. Can you tell me a little more about what goes through your mind when you imagine people laughing at you?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly distressing to have those thoughts and physical sensations when you anticipate making a mistake—wanting to run away from a situation like that can be really exhausting. I appreciate you sharing how difficult this feels.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "thinking about making a mistake",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "imagining worst-case scenarios",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "people laughing at me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "thinking I’m incompetent",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "wanting to run away",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to experience that racing mind and physical tightness when you anticipate making a mistake. Can you tell me a little more about what goes through your mind when you imagine people laughing at you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to have those thoughts and physical sensations when you're worried about making a mistake. If a friend were watching you go through this, what do you think they might say about your reaction?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "imagining worst-case scenarios",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "people laughing at me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "thinking I’m incompetent",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wanting to run away",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it makes sense you'd feel exhausted when dealing with those thoughts and feelings. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "It’s almost like I can hear their laughter in my head, and it feels so real. I start thinking about how everyone else seems to have it all together, and I’m just standing there, making a fool of myself. I worry that if they laugh, it means I’m not good enough or that I don’t belong. It makes me want to hide away, like I can’t bear to face anyone if that happens. It’s really paralyzing, to be honest.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "hearing laughter",
+            "seeing others together"
+          ],
+          "automatic_thoughts": [
+            "everyone has it all together",
+            "I'm making a fool of myself",
+            "if they laugh, I'm not good enough",
+            "I don't belong"
+          ],
+          "emotions": [
+            "fear",
+            "shame",
+            "anxiety"
+          ],
+          "behaviors": [
+            "wanting to hide away",
+            "avoiding facing others"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of being laughed at (finding)"
+          ],
+          "neutral": [
+            "Hears voices laughing at self (finding)",
+            "Humor - mental defense mechanism (finding)",
+            "Stage fright (finding)",
+            "Anxiety about appearing ridiculous (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "Okay, it sounds incredibly distressing to experience that internal laughter and those thoughts, and to feel so paralyzed by the worry of what others might think. It takes a lot of courage to share something so vulnerable. It seems like you're caught in a really difficult cycle of feeling like you're being judged, and that's understandably leading to a strong desire to withdraw.\n\nLet's explore this a bit more. You mentioned hearing laughter and then having thoughts about not fitting in. Can you tell me a little more about what happens *right before* you start hearing that laughter in your head? What's the situation or trigger that sets this whole sequence off?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly distressing to feel like you're replaying these moments and experiencing such intense emotions—wanting to hide away when you feel like you might be judged. It takes a lot of courage to share this, and I want you to know I hear how painful this is for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds incredibly distressing; it takes a lot of courage to share that. Can you tell me more about what makes the laughter in your head feel so real?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -100,226 +1374,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you've been carrying a lot, and it takes courage to acknowledge that you need support – what do you think might be helpful about talking to someone?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 1,
-      "patient": {
-        "role": "patient",
-        "query": "Thanks, I appreciate that. It’s just... a lot of the time, I feel this heaviness, like a cloud is just hovering over me. I find myself second-guessing everything I do, like whether I said the wrong thing in a conversation or if I’m not good enough at work. It's exhausting, and I can't seem to shake off that thought that I’m just not measuring up.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I said the wrong thing in a conversation",
-            "I'm not good enough at work",
-            "I'm not measuring up"
-          ],
-          "emotions": [
-            "heaviness",
-            "exhaustion"
-          ],
-          "behaviors": [
-            "second-guessing everything I do"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling stressed (finding)",
-            "Anxiety about behavior or performance (finding)"
-          ],
-          "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about losing emotional control (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're carrying a significant burden with these thoughts and feelings – that heaviness you describe must be really difficult to manage. Can you tell me a little more about what makes you feel like you're not measuring up at work?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you're carrying a really heavy emotional load, and it's understandably exhausting to constantly question yourself like that. It takes a lot of energy to second-guess everything you do.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "heaviness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhaustion",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "second-guessing everything I do",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "I'm not measuring up",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're carrying a significant burden with these thoughts and feelings – that heaviness you describe must be really difficult to manage. Can you tell me a little more about what makes you feel like you're not measuring up at work?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "heaviness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhaustion",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "I'm not measuring up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "second-guessing everything I do",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly draining to carry that heaviness and constantly second-guess yourself – it's completely understandable that you're feeling exhausted. Can you think of a time when you felt this way, and perhaps someone you trust offered a different perspective on the situation?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "heaviness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "exhaustion",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "I'm not measuring up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 2,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it really is tough. At work, I always feel like I'm in a competition with my colleagues, even if they're not treating it like that. I see them being so confident in meetings, and then I doubt if I have anything valuable to add. Sometimes, I wonder if I'm just faking it, you know? Like, I don't belong there.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "work environment",
-            "meetings with colleagues"
-          ],
-          "automatic_thoughts": [
-            "I'm in a competition",
-            "I doubt my value",
-            "I'm faking it",
-            "I don't belong"
-          ],
-          "emotions": [
-            "anxiety",
-            "self-doubt"
-          ],
-          "behaviors": [
-            "withholding contributions",
-            "avoiding participation"
-          ]
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Fear of being in a small group (finding)",
-            "Pressured by peers (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Fear of speaking to people in authority (finding)"
-          ],
-          "contradiction": [
-            "Feeling isolated (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like those feelings of competition and self-doubt are really impacting your experience at work – what makes you think you're in a competition with your colleagues?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like those meetings can be really challenging, and it's understandable that you'd feel that way when you're questioning your contributions and feeling like you're in a competition. It takes courage to share that you sometimes wonder if you belong – can you tell me a little more about what makes you feel that way?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like those feelings of competition and self-doubt are really impacting your experience at work – what makes you think you're in a competition with your colleagues?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like those feelings of competition and self-doubt can be really draining, and it's understandable that you'd question if you belong. Imagine a trusted friend were observing this situation – what might they notice about your interactions with your colleagues and how you perceive your contributions?",
+            "response": "That sounds incredibly distressing, and it takes a lot of courage to share that. If you were watching from the outside, what do you think a friend might say about you in that moment, when you're feeling like you're making a fool of yourself?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -339,105 +1394,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 3,
-      "patient": {
-        "role": "patient",
-        "query": "I guess I just feel like everyone around me is, I don’t know, so capable and sure of themselves. I see how they present their ideas and get recognized for their work, and it just makes me feel small. It's like there's this invisible standard I can never seem to reach, which makes me anxious about even trying.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "seeing others present ideas",
-            "recognition of others' work"
-          ],
-          "automatic_thoughts": [
-            "everyone is capable",
-            "I am not good enough",
-            "there's an invisible standard I can't reach"
-          ],
-          "emotions": [
-            "anxiety",
-            "smallness"
-          ],
-          "behaviors": [
-            "avoiding trying new things"
-          ]
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about appearing ridiculous (finding)",
-            "Fear of being in a small group (finding)",
-            "Fear of being a burden to others (finding)",
-            "Pressured by peers (finding)"
-          ],
-          "contradiction": [
-            "Dominated by professionals (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like seeing others share their ideas and receive recognition can trigger feelings of inadequacy and anxiety for you – can you tell me more about what makes you feel like you can’t reach that standard?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like seeing others share their ideas and receive recognition can trigger feelings of inadequacy and anxiety for you. It takes courage to share that, and it's understandable to feel that way when you're comparing yourself to others.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
-          "socratic_questioning": {
-            "response": "It sounds like seeing others share their ideas and receive recognition can trigger feelings of inadequacy and anxiety for you – can you tell me more about what makes you feel like you can’t reach that standard?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like seeing others succeed can be really tough, and it's understandable that you'd feel anxious about trying when you feel like you're not meeting an invisible standard – what do you think might be going through their minds when they're presenting their ideas?",
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it takes a lot of courage to share that. When you said you hear their laughter, were you having any thoughts of hurting yourself or not wanting to be here?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -457,625 +1421,8 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "entailment",
                   "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 4,
-      "patient": {
-        "role": "patient",
-        "query": "I just feel like everyone around me is so capable and sure of themselves. When I see how they present their ideas and get recognized for their work, it makes me feel small. There’s this invisible standard I can never seem to reach, and it makes me anxious about even trying.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "seeing others present ideas",
-            "recognition of others' work"
-          ],
-          "automatic_thoughts": [
-            "everyone is more capable",
-            "I can never reach the standard"
-          ],
-          "emotions": [
-            "anxiety",
-            "smallness"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about appearing ridiculous (finding)",
-            "Pressured by peers (finding)",
-            "Fear of being in a small group (finding)",
-            "Fear of being a burden to others (finding)"
-          ],
-          "contradiction": [
-            "Dominated by professionals (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like seeing others succeed can trigger feelings of inadequacy and anxiety for you – what thoughts go through your mind when you notice them being recognized?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like seeing others succeed and receive recognition can be really tough, and it’s understandable that you’d feel small and anxious when comparing yourself to them. It takes courage to share that, and I appreciate you bringing it up.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like seeing others succeed can trigger feelings of inadequacy and anxiety for you – what thoughts go through your mind when you notice them being recognized?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like seeing others succeed can be really tough, and it's understandable that you'd feel anxious when comparing yourself to them. What's one thing a friend might say to you about these feelings, or about the standard you're noticing?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 5,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it really does trigger something in me. I start thinking, “Why can’t I be like that?” or “What’s wrong with me?” It’s like this inner voice that just makes everything feel heavier. I guess I end up feeling like I'm always going to be stuck on the sidelines, watching everyone else move forward while I'm, you know, just... here.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "seeing others succeed"
-          ],
-          "automatic_thoughts": [
-            "Why can’t I be like that?",
-            "What’s wrong with me?",
-            "I’m always going to be stuck on the sidelines."
-          ],
-          "emotions": [
-            "heaviness",
-            "sadness"
-          ],
-          "behaviors": [
-            "watching others move forward"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Sense of impending doom (finding)",
-            "Emotional adjustment (observable entity)",
-            "Fear of being a burden to others (finding)"
-          ],
-          "neutral": [
-            "Depressive delusion of catastrophe (finding)",
-            "Fear of losing emotional control (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like seeing others succeed brings up some really tough thoughts and feelings – that inner voice can be quite persistent. Can you tell me more about what makes you think something is \"wrong\" with you when you compare yourself to others?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly painful to witness others' successes and feel that inner voice telling you things like, “What’s wrong with me?” That heaviness you're describing must be really difficult to carry.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like seeing others succeed brings up some really tough thoughts and feelings – that inner voice can be quite persistent. Can you tell me more about what makes you think something is \"wrong\" with you when you compare yourself to others?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel like you're watching others progress while you're feeling stuck – what’s one thing you appreciate about yourself that might help balance out those thoughts?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 6,
-      "patient": {
-        "role": "patient",
-        "query": "It’s just that I keep finding evidence in my mind, like moments where I messed up or didn’t speak up when I should have. I think, “If I was better at this, I wouldn’t feel this way.” It’s like I feel broken somehow, like I should have gotten it by now. Those comparisons just amplify that feeling, you know?",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "If I was better at this, I wouldn’t feel this way.",
-            "I should have gotten it by now."
-          ],
-          "emotions": [
-            "broken"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling bad (finding)"
-          ],
-          "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling guilt (finding)",
-            "Anxiety about saying the wrong thing (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to be caught in this cycle of noticing those moments and then feeling so broken – can you tell me more about what \"better\" would look like in this situation?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly frustrating to be caught in a cycle of noticing these moments and feeling like you’re not measuring up, and that feeling of being \"broken\" must be really difficult to experience. Can you tell me more about what \"better\" would look like in this situation?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "emotions: broken",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "automatic_thoughts: If I was better at this, I wouldn’t feel this way.",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I should have gotten it by now.",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to be caught in this cycle of noticing those moments and then feeling so broken – can you tell me more about what \"better\" would look like in this situation?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "socratic_questioning",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to be caught in a cycle of noticing these moments and then feeling so broken – it's understandable why you'd feel that way. What do you think someone who cares about you would say about you focusing so much on these moments?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 7,
-      "patient": {
-        "role": "patient",
-        "query": "\"Better\" feels like being able to share my ideas without that knot in my stomach, you know? It would mean having the confidence to speak up and feel like my voice matters. I imagine standing up in a meeting and not feeling like I have to hide—just feeling... free. But then I think, what if I don’t actually get there? It's hard to shake that thought.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "standing up in a meeting"
-          ],
-          "automatic_thoughts": [
-            "what if I don’t actually get there?"
-          ],
-          "emotions": [
-            "anxiety"
-          ],
-          "behaviors": [
-            "hiding"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Positive thoughts (finding)"
-          ],
-          "neutral": [
-            "Increased thinking (finding)",
-            "Increased motivation (finding)",
-            "General well-being finding (finding)"
-          ],
-          "contradiction": [
-            "Feeling content (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "That sounds like a really appealing vision of what \"better\" could feel like. What makes you think, \"what if I don’t actually get there?\"",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like feeling \"better\" would involve a real sense of freedom and confidence in sharing your ideas, and that thought about not having to hide in meetings is really appealing. That worry about \"what if I don’t actually get there?\" seems to be creating some anxiety for you right now.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "That sounds like a really appealing vision of what \"better\" could feel like. What makes you think, \"what if I don’t actually get there?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "socratic_questioning",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like feeling \"free\" in meetings would be a really positive experience for you – what do you think might be the most realistic outcome if you were to share your ideas?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 8,
-      "patient": {
-        "role": "patient",
-        "query": "I guess it's just this nagging fear that keeps creeping in. Like, I've tried before and ended up feeling embarrassed or like I didn’t measure up. It feels like every time I think I’m making progress, something happens that pulls me back. It’s almost like I've built this wall around myself, and I worry it’s just too high to climb over.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "feeling embarrassed",
-            "not measuring up",
-            "thinking I'm making progress",
-            "something happens that pulls me back"
-          ],
-          "automatic_thoughts": [
-            "nagging fear",
-            "I've tried before",
-            "I've built this wall around myself",
-            "it's just too high to climb over"
-          ],
-          "emotions": [
-            "fear",
-            "embarrassment"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Anxiety about behavior or performance (finding)",
-            "Fear of being a burden to others (finding)",
-            "Performance anxiety (finding)",
-            "Anxiety about making mistakes (finding)"
-          ],
-          "neutral": [
-            "Anxiety about having a fit (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "Okay, it sounds incredibly frustrating to feel like you're making progress and then something pulls you back, especially when you've already experienced that disappointment before. It's understandable that a nagging fear would creep in. It takes a lot of courage to keep trying when you've felt embarrassed or like you haven't measured up in the past. \n\nYou've described this feeling as building a wall, and it sounds daunting to think it's too high to climb over. It seems like these past experiences have really shaped how you view your ability to succeed. \n\nCan you tell me a little more about what that \"something\" is that pulls you back? What does it look like, or what kind of situation is it?",
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a really frustrating cycle of feeling like you're making progress, only to be knocked back down, and that nagging fear is making it feel overwhelming. It takes a lot of courage to acknowledge that, and it sounds exhausting.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling embarrassed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "not measuring up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "thinking I'm making progress",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "something happens that pulls me back",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "nagging fear",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I've tried before",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I've built this wall around myself",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it's just too high to climb over",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like this \"wall\" you've built is really impacting your sense of progress – can you tell me more about what that wall feels like, and what it's protecting you from?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "nagging fear",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "feeling embarrassed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "not measuring up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "built this wall around myself",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel like you're making progress only to be pulled back – what do you think might be contributing to these setbacks?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "feeling embarrassed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "not measuring up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "thinking I'm making progress",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "something happens that pulls me back",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "nagging fear",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I've tried before",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I've built this wall around myself",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it's just too high to climb over",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Anxiety about behavior or performance",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes",
-                  "label": "entailment"
                 }
               ]
             }
@@ -1087,110 +1434,149 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s just this nagging fear that keeps creeping in. I’ve tried before and ended up feeling embarrassed or like I didn’t measure up. It feels like every time I think I'm making progress, something happens that pulls me back. It's almost like I've built this wall around myself, and I worry it’s just too high to climb over.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I think it usually starts with just a simple situation, like entering a new group or even starting a conversation. That initial moment of uncertainty creeps in, and I start to feel self-conscious about how I’m coming across. It’s like I’m suddenly hyper-aware of everything I say or do, and then I just spiral from there. I can't help but think they’re judging me or that I’m not measuring up. It's frustrating because it feels so real, but I know most of it is",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "entering a new group",
+            "starting a conversation"
+          ],
           "automatic_thoughts": [
-            "I didn't measure up",
-            "I'm not making progress",
-            "The wall is too high to climb over"
+            "they're judging me",
+            "I'm not measuring up"
           ],
           "emotions": [
-            "fear",
-            "embarrassment"
+            "uncertainty",
+            "self-consciousness",
+            "frustration"
           ],
           "behaviors": [
-            "building a wall around myself"
+            "becoming hyper-aware",
+            "spiraling"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about behavior or performance (finding)",
-            "Fear of being a burden to others (finding)"
+            "Anxiety about behavior or performance (finding)"
           ],
           "neutral": [
-            "Anxiety about having a fit (finding)",
-            "Fear of lifts (finding)",
-            "Low self-control (finding)"
+            "Fear of being in a small group (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of speaking to people in authority (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Okay, it sounds like you're experiencing a really frustrating cycle. You've described a persistent fear that keeps resurfacing, and it's understandably discouraging when you feel like you're making progress only to be knocked back. You've even used the powerful metaphor of building a wall – it paints a vivid picture of how you're protecting yourself.\n\nIt takes a lot of courage to acknowledge these patterns and to be so honest about feeling like you haven't measured up. Can you tell me a little more about what happens when you feel like you're making progress, and then something pulls you back? What does that \"something\" look like or feel like?",
+        "response": "It sounds like those initial moments can be really difficult, and that feeling of spiraling is incredibly frustrating. Can you tell me more about what makes you think these thoughts about being judged or not measuring up are \"real\"?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a lot of frustration and disappointment with this process, and it's understandable to feel that way when you've had setbacks. It takes courage to keep trying, and it's tough when you feel like you're building a wall around yourself.",
+            "response": "It sounds like entering a new group or starting a conversation can be really challenging for you, and that feeling of self-consciousness and worry can quickly escalate. It takes courage to recognize that these feelings are often more about your internal experience than what others are actually thinking.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
                   "concept": "Anxiety about behavior or performance (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "I didn't measure up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm not making progress",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "The wall is too high to climb over",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like these setbacks are really reinforcing a sense of discouragement – what do you think is contributing to that feeling of not measuring up?",
+            "response": "It sounds like those initial moments can be really difficult, and that feeling of spiraling is incredibly frustrating. Can you tell me more about what makes you think these thoughts about being judged or not measuring up are \"real\"?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
                   "concept": "Anxiety about behavior or performance (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "I didn't measure up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm not making progress",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "The wall is too high to climb over",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're feeling really discouraged by these setbacks, and that wall you've described feels incredibly daunting – what’s one small thing a supportive friend might say to help you see things differently?",
+            "response": "It sounds like those initial moments can be really tough, and it's understandable why you'd feel frustrated when you notice yourself spiraling like that. If you were watching a friend go through this, what do you think they might be telling themselves about the situation?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
                   "concept": "Anxiety about behavior or performance (finding)",
                   "label": "entailment"
-                },
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really difficult, and it takes courage to share that. When you mentioned feeling this way, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
                 {
-                  "concept": "I didn't measure up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm not making progress",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "The wall is too high to climb over",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "building a wall around myself",
+                  "concept": "triggers",
                   "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
                 }
               ]
             }

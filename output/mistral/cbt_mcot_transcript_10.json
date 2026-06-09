@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Recently, I'm just feeling down a lot and I can't really, like, snap out of it. Like, sometimes if it's happened before, I can just, like, get myself back on track, but recently I just find it really difficult to do.",
-    "core_issue": "self-esteem and confidence issues",
+    "seed": "Usually. Because I don't want them to think like, they shouldn't have had me because I'm so worthless to them.",
+    "core_issue": "Self-esteem and confidence issues",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,78 +17,91 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Recently, I'm just feeling down a lot and I can't really, like, snap out of it. Like, sometimes if it's happened before, I can just, like, get myself back on track, but recently I just find it really difficult to do.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Usually. Because I don't want them to think like, they shouldn't have had me because I'm so worthless to them.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "I can't snap out of it",
-            "It's difficult to get back on track"
+            "they shouldn't have had me",
+            "I'm so worthless to them"
           ],
-          "emotions": [
-            "down"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Emotionally subdued (finding)"
+            "Feeling unwanted (finding)",
+            "Attitude towards treatment (observable entity)",
+            "Negative automatic thoughts (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Feeling like wanting to escape (finding)",
-            "Anxiety about collapsing (finding)",
-            "Extremely emotionally deprived (finding)",
-            "Difficulty controlling emotions (finding)"
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm sorry to hear that you've been feeling down lately and finding it hard to get back on track. It's important to acknowledge these feelings, and I want you to know that it's okay not to feel okay all the time. Let's work together to understand what might be making things difficult for you right now.",
+        "response": "\"I can see that you might be feeling like they shouldn't have had you, and that you think you're worthless to them. It's important for me to understand your experience better. Can you help me by telling me more about what makes you feel this way?\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm sorry to hear that you've been feeling down lately and finding it hard to get back on track. It's important to acknowledge these feelings, and I want you to know that it's okay not to feel okay all the time. Let's work together to understand what might be making things difficult for you right now.",
+            "response": "\"I can see that you might be feeling like they shouldn't have had you, and that you think you're worthless to them. It's important for me to understand your experience better. Can you help me by telling me more about what makes you feel this way?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Emotionally subdued",
+                  "concept": "Negative automatic thoughts",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty controlling emotions",
-                  "label": "neutral"
+                  "concept": "Attitude towards treatment",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I'm here to help you navigate through this tough time. Can we explore what might be making it difficult for you to get back on track? Let's start by discussing the evidence that supports your feeling down and see if there are any alternative perspectives.\"",
+            "response": "\"I can see you might be feeling quite low about yourself right now, and it's understandable to have thoughts like 'they shouldn't have had me' or 'I'm so worthless to them'. Let's explore these thoughts together. Can you tell me more about what led you to think this way?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Emotionally subdued",
+                  "concept": "Negative automatic thoughts",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty controlling emotions",
-                  "label": "neutral"
+                  "concept": "Attitude towards treatment",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I'm here to help you navigate through this tough time. Have you ever considered what a trusted friend or family member might suggest for getting back on track? It could be helpful to hear another perspective.\"",
+            "response": "\"I understand that you might be feeling like they shouldn't have had you, and that you feel worthless. It's important to remember that everyone has value and worth. Let's explore other perspectives together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Emotionally subdued",
+                  "concept": "Negative automatic thoughts",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty controlling emotions",
-                  "label": "neutral"
+                  "concept": "Attitude towards treatment",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see that you might be feeling pretty low right now, and it's understandable to have thoughts like 'they shouldn't have had me' or 'I'm so worthless to them'. Let's explore these feelings together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
                 }
               ]
             }
@@ -100,95 +113,109 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Thanks. I guess I just... I don't really know where to start. There are days when I feel like I’m just stuck, like I’m not good enough. It’s like this heaviness that won’t go away, you know? I don’t want to keep feeling like this, but it’s hard to shake off.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I guess it's just... I often feel like I'm just a burden, you know? Like, whenever things get tough, I can't shake the feeling that maybe they would have been better off without me. It’s like I'm always waiting for someone to see that I'm not really worth much, or that I just take more than I give.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "days when I feel stuck"
+            "when things get tough"
           ],
           "automatic_thoughts": [
-            "I'm not good enough",
-            "this heaviness won't go away"
+            "I'm a burden",
+            "they would be better off without me",
+            "I'm not really worth much",
+            "I take more than I give"
           ],
           "emotions": [
-            "sadness",
-            "frustration"
+            "shame",
+            "anxiety"
           ],
-          "behaviors": [
-            "not wanting to feel like this",
-            "difficulty shaking off feelings"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling hopeless (finding)",
-            "Feeling trapped (finding)",
-            "Feeling lost (finding)",
-            "Feeling a failure (finding)"
+            "Fear of being a burden to others (finding)",
+            "Feeling unloved (finding)",
+            "Feeling despair (finding)",
+            "Feels everything is futile (finding)"
           ],
-          "neutral": [],
-          "contradiction": [
-            "Feeling empty (finding)"
-          ]
+          "neutral": [
+            "Feels life is meaningless (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry that you're feeling this way, but I'm glad we can talk about it. It sounds like there are days when you feel stuck and overwhelmed with a heavy feeling. Can you tell me more about what makes you feel this way?",
+        "response": "I'm really sorry that you're feeling this way. It sounds like you've been carrying a heavy burden, and I want you to know that it's okay to feel overwhelmed sometimes. Let's work together to explore these feelings and find ways to lighten your load.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry that you're feeling this way, but I'm glad we can talk about it. It sounds like there are days when you feel stuck and overwhelmed with a heavy feeling. Can you tell me more about what makes you feel this way?",
+            "response": "I'm really sorry that you're feeling this way. It sounds like you've been carrying a heavy burden, and I want you to know that it's okay to feel overwhelmed sometimes. Let's work together to explore these feelings and find ways to lighten your load.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling hopeless",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling trapped",
+                  "concept": "Feeling unloved",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling lost",
+                  "concept": "Feels everything is futile",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're going through a tough time, feeling stuck and overwhelmed. Can we explore what makes you feel this way? Let's start by discussing the evidence that supports these feelings.\"",
+            "response": "\"It sounds like you're struggling with feelings of not being valued or feared as a burden. Let's explore these thoughts together and see if we can find some evidence that might challenge them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling hopeless",
+                  "concept": "Feeling unloved",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling trapped",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling lost",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I'm really sorry that you're feeling this way, but I think there might be a different perspective to consider. Have you ever thought about what a trusted friend or family member might say if they were in your shoes? Sometimes, hearing an outside opinion can help us see things differently.\"",
+            "response": "\"I can see how you might feel that way sometimes, but let's consider this for a moment. If things are tough right now, it doesn't mean they always will be. What about the times when you've helped someone or made a positive impact? How do those moments make you feel?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling hopeless",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling trapped",
+                  "concept": "Feeling unloved",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling lost",
+                  "concept": "Feels everything is futile",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry that you're feeling this way. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feels everything is futile",
                   "label": "entailment"
                 }
               ]
@@ -201,94 +228,115 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I mean, sometimes it’s just little things that pile up. Like, I’ll see someone getting recognized for their work, and it just makes me feel... I don’t know, invisible? Like I try hard, but it never seems to be enough. It just makes me doubt myself more.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I often feel like I'm just a burden. When things get tough, I can't shake the feeling that maybe people would be better off without me. It’s like I'm always waiting for someone to realize that I’m not really worth much, or that I just take more than I give.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "seeing someone getting recognized for their work"
+            "when things get tough"
           ],
           "automatic_thoughts": [
-            "I feel invisible",
-            "I try hard, but it's never enough",
-            "I doubt myself more"
+            "I'm just a burden",
+            "people would be better off without me",
+            "I'm not really worth much",
+            "I just take more than I give"
           ],
           "emotions": [
-            "invisibility",
-            "self-doubt"
+            "shame",
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling of discouragement (finding)",
-            "Feeling unwanted (finding)",
-            "Feeling isolated (finding)"
+            "Fear of being a burden to others (finding)",
+            "Feeling unloved (finding)",
+            "Feeling despair (finding)"
           ],
           "neutral": [
-            "Anxiety about appearing ridiculous (finding)"
+            "Feels life is meaningless (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling empty (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how that might feel really tough. It's important to remember that everyone has their own unique path, and it's okay if things don't always go as planned. Let's talk more about what you mean by feeling invisible and doubting yourself.",
+        "response": "I'm really sorry that you're feeling this way, but it's important for me to understand more about what you're going through. Can you tell me more about when you feel like a burden and why you think people would be better off without you?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how that might feel really tough. It's important to remember that everyone has their own unique path, and it's okay if things don't always go as planned. Let's talk more about what you mean by feeling invisible and doubting yourself.",
+            "response": "I'm really sorry that you're feeling this way, but it's important for me to understand more about what you're going through. Can you tell me more about when you feel like a burden and why you think people would be better off without you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling of discouragement",
+                  "concept": "Feeling unloved",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling unwanted",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling despair",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've been feeling a bit overlooked lately. Can we explore what evidence supports this belief, and if there might be other explanations for why others are getting recognized?\"",
+            "response": "\"I can see that you're feeling quite overwhelmed and like you might be a burden. Let's explore this together. Can you tell me more about what makes you feel this way, especially when things get tough?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of discouragement (finding)",
+                  "concept": "Fear of being a burden to others",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling unwanted (finding)",
+                  "concept": "Feeling unloved",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling isolated (finding)",
+                  "concept": "Feeling despair",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you've been feeling quite invisible lately, and it's understandable that seeing others recognized might stir up those feelings. Have you ever considered what a trusted friend or family member might say about the situation? Sometimes, getting another perspective can help us see things differently.\"",
+            "response": "\"I'm really sorry that you feel this way, but let me ask you something. If a friend was feeling the same way, what might they say about their worth and value? It could be helpful to consider another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling despair",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way. When you said that, were you having any thoughts of hurting yourself or not wanting to be here? It's important for me to understand how you're feeling right now.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling despair",
+                  "label": "entailment"
                 }
               ]
             }
@@ -300,92 +348,123 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "It’s just that, sometimes, I feel like I’m screaming for attention inside, but no one really sees or hears me. I put in the effort, but it’s like I’m never the one who gets noticed. It makes me second-guess everything I do, like I’m not really contributing anything valuable. It’s just exhausting.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "It usually hits me in social situations, like when I'm with friends or family, and I see everyone else having a good time. I just feel out of place, like I’m not contributing anything meaningful. And then I start thinking about all the times I’ve needed help or support, and it feels like I’m just draining everyone around me. It’s hard not to feel like I’m more trouble than I’m worth.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "not being noticed",
-            "putting in effort"
+            "social situations",
+            "being with friends",
+            "being with family"
           ],
           "automatic_thoughts": [
-            "I’m screaming for attention",
-            "no one sees or hears me",
-            "I’m not really contributing anything valuable"
+            "I'm not contributing anything meaningful",
+            "I'm draining everyone around me",
+            "I'm more trouble than I'm worth"
           ],
           "emotions": [
-            "frustration",
-            "exhaustion"
+            "out of place",
+            "shame"
           ],
-          "behaviors": [
-            "second-guessing actions"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
             "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Feeling unwanted (finding)",
-            "Feeling abandoned (finding)",
-            "Minimal outside social stimulation (finding)"
+            "Feeling empty (finding)",
+            "Feeling alienated (finding)"
           ],
-          "neutral": [],
+          "neutral": [
+            "Feeling suicidal (finding)",
+            "Fear of being a burden to others (finding)"
+          ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how you might feel that way, and it's important to acknowledge those feelings. It's not uncommon to feel like we're not being seen or heard sometimes. Let's explore together what might be some steps to help you feel more noticed and valued in your interactions.",
+        "response": "\"I can see how social situations might be challenging for you, and it's understandable to feel out of place sometimes. It seems like you have a strong sense that you're not contributing enough or burdening others. Let's explore these thoughts together and see if we can find a more balanced perspective.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you might feel that way, and it's important to acknowledge those feelings. It's not uncommon to feel like we're not being seen or heard sometimes. Let's explore together what might be some steps to help you feel more noticed and valued in your interactions.",
+            "response": "\"I can see how social situations might be challenging for you, and it's understandable to feel out of place sometimes. It seems like you have a strong sense that you're not contributing enough or burdening others. Let's explore these thoughts together and see if we can find a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "social situations",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Minimal outside social stimulation",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite invisible sometimes, even though you put in a lot of effort. Can we explore together what might be getting in the way of others noticing you? Let's start by discussing some situations where you felt this way.\"",
+            "response": "\"It sounds like you're having a tough time when you're with others, and you've been thinking that you're not contributing much. Can we explore together what evidence supports this thought? And have you noticed any times when it might not be entirely true?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "social situations",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Minimal outside social stimulation",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite invisible sometimes, despite your efforts. Have you ever considered what a trusted friend or family member might think about the situation? They may have a different perspective that could help us understand things better.\"",
+            "response": "\"It sounds like you're having a tough time feeling like you don't fit in during social gatherings. Have you ever considered what a trusted friend might think about the situation? They might see things differently and help you feel more included.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "social situations",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Minimal outside social stimulation",
-                  "label": "entailment"
+                  "concept": "being with friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling out of place",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're having a tough time in social settings. It's common to feel out of place sometimes, but it's important not to forget that your presence matters too. Let's explore these feelings together and see if we can find ways to help you enjoy those moments more.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "social situations",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being with friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being with family",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling out of place",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling shame",
+                  "label": "emotions"
                 }
               ]
             }
@@ -397,93 +476,131 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I guess I just feel like I’m screaming inside, but no one sees or hears me. I put in the effort, but it’s like I’m never the one who gets noticed. I doubt everything I do and wonder if it’s even worth it. It just feels really exhausting sometimes.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "It usually hits me in social situations, like when I’m with friends or family. I see everyone else having a good time, and I just feel so out of place, like I'm not contributing anything meaningful. I think about all the times I've needed help or support, and it just makes me feel like I'm draining everyone around me. It's hard not to feel like I'm more trouble than I'm worth.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "not being noticed",
-            "putting in effort",
-            "feeling exhausted"
+            "social situations",
+            "being with friends",
+            "being with family"
           ],
           "automatic_thoughts": [
-            "I’m screaming inside",
-            "no one sees or hears me",
-            "I doubt everything I do",
-            "it's not worth it"
+            "I'm not contributing anything meaningful",
+            "I'm draining everyone around me",
+            "I'm more trouble than I'm worth"
           ],
           "emotions": [
-            "frustration",
-            "exhaustion"
+            "out of place",
+            "shame"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
             "Feeling isolated (finding)",
-            "Feeling a failure (finding)",
             "Feeling empty (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Loss of motivation (finding)"
+            "Fear of being a burden to others (finding)",
+            "Feeling suicidal (finding)",
+            "Anxiety about collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry to hear that you feel this way, it sounds like you're carrying a heavy burden. It's important for me to understand your experience better. Can you tell me more about what makes you feel like no one notices or hears you?",
+        "response": "\"It sounds like you're having a tough time feeling like you don't fit in during social situations. It's common to feel that way sometimes, but it's important to remember that everyone has their own unique contributions. Let's explore some ways we can help you feel more comfortable and valued.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry to hear that you feel this way, it sounds like you're carrying a heavy burden. It's important for me to understand your experience better. Can you tell me more about what makes you feel like no one notices or hears you?",
+            "response": "\"It sounds like you're having a tough time feeling like you don't fit in during social situations. It's common to feel that way sometimes, but it's important to remember that everyone has their own unique contributions. Let's explore some ways we can help you feel more comfortable and valued.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "social situations",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "entailment"
+                  "concept": "being with friends",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Feeling empty",
-                  "label": "entailment"
+                  "concept": "being with family",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I’m not contributing anything meaningful",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "I’m draining everyone around me",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "I’m more trouble than I’m worth",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite alone and unnoticed, even though you've been putting in effort. Can we explore what evidence supports this belief? And have there been times when you felt noticed or appreciated?\"",
+            "response": "\"It sounds like you have some thoughts about not contributing in social situations that are causing you to feel out of place. Can you help me understand more about what evidence supports these thoughts? Let's explore together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "social situations",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Loss of motivation",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and unnoticed. Let's explore what a trusted friend might say about this situation, or consider if there are small steps you could take to feel more seen and valued.\"",
+            "response": "\"It sounds like you often feel out of place in social situations, even when surrounded by loved ones. Have you ever considered what a trusted friend or family member might think about your presence at these events? They likely value you for who you are and don't see you as a burden.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "frustration",
+                  "concept": "social situations",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being with friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling out of place",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you might feel that way sometimes, especially in social situations. It's important to remember that everyone has their own unique contributions and it's okay not to be perfect. Let's explore some ways we can help you feel more comfortable in these settings.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "social situations",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being with friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being with family",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling out of place",
                   "label": "emotions"
                 },
                 {
-                  "concept": "exhaustion",
+                  "concept": "feeling shame",
                   "label": "emotions"
-                },
-                {
-                  "concept": "I'm never the one who gets noticed",
-                  "label": "unknown"
                 }
               ]
             }
@@ -495,102 +612,94 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I feel like I’m screaming inside, but it’s like no one can hear me. I try so hard, but it feels like I’m always overlooked. It makes me question if what I’m doing even matters at all, and honestly, it’s just so exhausting.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, I get that it's common, but it feels so personal to me. When I'm in those moments, I can't help but think that if I just disappeared, no one would really miss me. It’s hard to see my own value, even when I know people are trying to help. I guess I just feel really stuck in that mindset.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling overlooked",
-            "trying hard"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "no one can hear me",
-            "what I’m doing doesn’t matter",
-            "it's exhausting"
+            "if I just disappeared, no one would really miss me",
+            "I can't see my own value"
           ],
           "emotions": [
-            "frustration",
-            "exhaustion"
+            "sadness",
+            "stuck"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
+          "entailment": [],
+          "neutral": [
             "Feeling abandoned (finding)",
-            "Feeling unwanted (finding)",
-            "Feeling unloved (finding)"
+            "Anxiety about collapsing (finding)",
+            "Feeling like wanting to escape (finding)",
+            "Difficulty coping with grief responses (finding)"
           ],
-          "neutral": [],
-          "contradiction": []
+          "contradiction": [
+            "Feeling isolated (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you feel like your efforts are going unnoticed and it's leaving you feeling frustrated and exhausted. It's important to remember that everyone has unique challenges, and it's okay to need support sometimes. Let's explore some ways we can help you feel more heard and less overwhelmed.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It's understandable to feel that way sometimes, especially when we're going through tough times. But let's think about this for a moment. If you were to disappear, who are the people that would genuinely miss you? Can we explore those relationships together?\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you feel like your efforts are going unnoticed and it's leaving you feeling frustrated and exhausted. It's important to remember that everyone has unique challenges, and it's okay to need support sometimes. Let's explore some ways we can help you feel more heard and less overwhelmed.",
+            "response": "I'm really sorry to hear that you're feeling this way. It can be incredibly difficult when we feel like no one would notice if we were gone, and it's hard to see our own value sometimes. I want you to know that it's okay to have these thoughts, but let's work together to explore them and find ways to shift your perspective.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overlooked",
-                  "label": "triggers"
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "trying hard",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "no one can hear me",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "what I'm doing doesn't matter",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "it's exhausting",
-                  "label": "automatic_thoughts"
+                  "concept": "Difficulty coping with grief responses (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite alone and unheard. Can we explore together what might be causing these feelings? Let's start by discussing the evidence that supports your thoughts, and then consider alternative perspectives.\"",
+            "response": "\"It's understandable to feel that way when you're going through a tough time. Let's explore together what might be making it hard for you to see your own value, and if there are any alternative ways of thinking about this situation.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling unloved",
-                  "label": "entailment"
+                  "concept": "Difficulty coping with grief responses (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I can see how you might feel like no one is listening, but it's important to remember that everyone has their own struggles. Have you ever considered what a trusted friend or family member might think about your situation? It could provide a different perspective.\"",
+            "response": "\"It's understandable to feel that way sometimes, especially when we're going through tough times. But let's think about this for a moment. If you were to disappear, who are the people that would genuinely miss you? Can we explore those relationships together?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "Difficulty coping with grief responses (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear you're feeling this way, but I'm glad we can talk about it. When you said that no one would miss you if you disappeared, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "passive ideation",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling unloved",
-                  "label": "entailment"
+                  "concept": "feeling stuck",
+                  "label": "emotions"
                 }
               ]
             }
@@ -602,43 +711,41 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I feel like I’m screaming inside, but it seems like no one can hear me. I try hard, but it feels like I'm always overlooked. It makes me question if what I’m doing even matters, and honestly, it’s just so exhausting.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I get that it's common, but it feels so personal to me. In those moments, I can't help but think that if I just disappeared, no one would really miss me. It’s hard to see my own value, even when I know people are trying to help. I just feel really stuck in that mindset.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling overlooked",
-            "screaming inside"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "no one can hear me",
-            "what I’m doing doesn’t matter"
+            "if I just disappeared, no one would really miss me",
+            "I can't see my own value"
           ],
           "emotions": [
-            "exhaustion"
+            "sadness",
+            "stuck"
           ],
-          "behaviors": [
-            "trying hard"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling alienated (finding)",
-            "Feeling isolated (finding)",
-            "Feeling abandoned (finding)",
-            "Feeling unloved (finding)",
-            "Feeling unwanted (finding)"
+            "Feeling alienated (finding)"
           ],
-          "neutral": [],
-          "contradiction": []
+          "neutral": [
+            "Feeling abandoned (finding)",
+            "Anxiety about collapsing (finding)",
+            "Fear of being a burden to others (finding)"
+          ],
+          "contradiction": [
+            "Feeling isolated (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry that you feel this way, it sounds like a heavy burden to carry. It's important for me to understand your experience better. Can you tell me more about what makes you feel overlooked and why you think no one can hear you?",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It's understandable to feel like you might be struggling with feelings of isolation and fear. Let's explore together what evidence do you have that people wouldn't miss you? And how can we work on building your self-worth?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry that you feel this way, it sounds like a heavy burden to carry. It's important for me to understand your experience better. Can you tell me more about what makes you feel overlooked and why you think no one can hear you?",
+            "response": "I understand how you're feeling, it can be overwhelming when we feel like we don't belong or that our value isn't recognized. It's important to remember that everyone has unique qualities and worth. Let's explore together why you might think this way and find ways to shift your perspective.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -646,22 +753,14 @@
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling unloved",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling unwanted",
-                  "label": "entailment"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite alone and unheard. Can you help me understand what evidence supports the idea that no one can hear you? And when have you felt heard or understood in the past?\"",
+            "response": "\"It's understandable to feel like you might be struggling with feelings of isolation and fear. Let's explore together what evidence do you have that people wouldn't miss you? And how can we work on building your self-worth?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -669,22 +768,14 @@
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling unloved",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling unwanted",
-                  "label": "entailment"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite isolated and overlooked. Have you ever considered what a trusted friend or family member might think about your situation? Sometimes, getting another perspective can help us see things more clearly.\"",
+            "response": "\"I can understand how you might be feeling this way, but let's consider another perspective. Imagine someone who truly values you is trying to help you. What would they say about your worth and the impact of your absence?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -692,11 +783,22 @@
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling unloved",
-                  "label": "entailment"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm so sorry you're feeling this way, it must be incredibly difficult. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "passive ideation",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Feeling unwanted",
+                  "concept": "feeling alienated",
                   "label": "entailment"
                 }
               ]
@@ -709,81 +811,115 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It feels like I’m screaming inside, but no one hears me. I put in so much effort, and yet it’s like I’m always overlooked. It makes me doubt if what I’m doing even matters, and honestly, I just feel so exhausted by it all.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I don’t know... I guess I just think about how easy it is for people to move on when I’m not around. Like, life goes on, and they all have their own lives to focus on. It feels like I'm just kind of an extra in their story. I wish I could believe that my presence matters more, but it’s hard when I can’t seem to shake that feeling.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling overlooked",
-            "putting in effort"
+            "people moving on",
+            "life going on",
+            "feeling like an extra"
           ],
           "automatic_thoughts": [
-            "no one hears me",
-            "what I'm doing doesn't matter"
+            "my presence doesn't matter",
+            "others have their own lives"
           ],
           "emotions": [
-            "exhaustion"
+            "sadness",
+            "loneliness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling abandoned (finding)",
-            "Feeling a failure (finding)",
-            "Feeling isolated (finding)",
             "Feeling alienated (finding)"
           ],
           "neutral": [
-            "Loss of motivation (finding)"
+            "Feeling abandoned (finding)",
+            "Anticipatory grief (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Emotionally detached (finding)",
+            "Emotionally distant (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry to hear that you're feeling this way, and I appreciate your honesty. It sounds like you've been putting in a lot of effort, but it can be disheartening when we feel unheard or overlooked. Let's explore some ways to help you feel more valued and motivated.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're having a hard time feeling significant when others seem to move on without you. Have you ever considered what a trusted friend might think about your role in their life? It could be helpful to explore that perspective.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry to hear that you're feeling this way, and I appreciate your honesty. It sounds like you've been putting in a lot of effort, but it can be disheartening when we feel unheard or overlooked. Let's explore some ways to help you feel more valued and motivated.",
+            "response": "I understand how you're feeling, it can be difficult to feel like your presence isn't as valued as others. Let's explore these thoughts together and see if we can find a way to help you feel more connected.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "people moving on",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Loss of motivation",
-                  "label": "neutral"
+                  "concept": "life going on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling like an extra",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and disheartened, as if your efforts are going unnoticed. Can we explore together what evidence supports this belief? Let's start by considering a specific instance where you felt overlooked. What happened exactly?\"",
+            "response": "\"It sounds like you're having a hard time feeling significant when others seem to move on without you. Can you help me understand what evidence supports this belief, and what might be some alternative explanations?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "people moving on",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Loss of motivation",
-                  "label": "neutral"
+                  "concept": "life going on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling like an extra",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed and unheard. Let's explore what a trusted friend or family member might say about your situation. How do you think they would view it?\"",
+            "response": "\"It sounds like you're having a hard time feeling significant when others seem to move on without you. Have you ever considered what a trusted friend might think about your role in their life? It could be helpful to explore that perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
-                  "label": "entailment"
+                  "concept": "people moving on",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Loss of motivation",
-                  "label": "neutral"
+                  "concept": "life going on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling like an extra",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear you feel this way, but I'm glad you're here to talk about it. When you said that life goes on and people have their own lives, did you also have thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "people moving on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "life going on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling like an extra",
+                  "label": "triggers"
                 }
               ]
             }
@@ -795,77 +931,111 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that, really. It just feels like no matter what I do, it’s not enough to change how I feel. Sometimes, I wonder if I’m just not cut out for this... I want to feel valued, but it’s hard to see how that can happen when I’m stuck in this mindset.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I don’t know... I just think about how easy it is for people to move on when I’m not around. Life goes on, and they all have their own lives to focus on. It feels like I’m just an extra in their story. I wish I could believe that my presence matters more, but it’s hard when I can’t shake that feeling.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "no matter what I do, it’s not enough",
-            "I’m just not cut out for this",
-            "it’s hard to see how I can feel valued"
+          "triggers": [
+            "people moving on",
+            "life going on",
+            "feeling like an extra"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "my presence doesn't matter",
+            "others have their own lives",
+            "I'm not important"
+          ],
+          "emotions": [
+            "sadness",
+            "loneliness"
+          ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling alienated (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Feeling unloved (finding)",
-            "Feeling isolated (finding)",
+            "Anticipatory grief (finding)",
             "Feeling abandoned (finding)",
-            "Difficulty understanding own emotions (finding)"
+            "Thoughts about dying (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Emotionally detached (finding)",
+            "Emotionally distant (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling like no matter what you do, it's not enough. It can be challenging to feel valued when we're stuck in a certain mindset. Let's work together to explore these feelings and find ways to shift your perspective.",
-        "protocol_used": "validate_and_reflect",
+        "response": "What makes you think your presence doesn't matter? Can we explore the evidence for that belief and consider alternative perspectives?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling like no matter what you do, it's not enough. It can be challenging to feel valued when we're stuck in a certain mindset. Let's work together to explore these feelings and find ways to shift your perspective.",
+            "response": "I understand how you're feeling, it can be difficult to feel like your presence isn't as valued as others. Let's explore these thoughts together and see if we can find a way to shift your perspective.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "people moving on",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "neutral"
+                  "concept": "life going on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling like an extra",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're struggling to find a way out of this mindset. Can we explore together what evidence supports the idea that you're not enough, and what might be some alternative ways to think about your situation?\"",
+            "response": "What makes you think your presence doesn't matter? Can we explore the evidence for that belief and consider alternative perspectives?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "life going on",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "neutral"
+                  "concept": "feeling like an extra",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you're feeling like no matter what you do, it's not enough. It can be challenging to break free from such thoughts. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things differently.\"",
+            "response": "\"It sounds like you're struggling with feelings of being left out and unimportant. Have you ever considered what a close friend might say about your role in their life? It could help to broaden your perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "people moving on",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "neutral"
+                  "concept": "life going on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling like an extra",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear you feel this way, but I'm glad you're here to talk about it. When you said that life goes on and you feel like an extra, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "people moving on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "life going on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling like an extra",
+                  "label": "triggers"
                 }
               ]
             }
@@ -877,82 +1047,99 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess I just get so caught up in these thoughts that it feels overwhelming. It’s like I keep waiting for a breakthrough, but then it’s just the same cycle of feeling inadequate. I want to believe there’s a way out, but I’m not sure how to even start changing these feelings.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I mean, it’s just the little things, you know? Like when I text someone and they don't respond, or when I’m the one left out of plans. It’s like... those moments feel really loud to me, and they reinforce that maybe I’m not important. I get that it might not be the full picture, but it just really sticks with me.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "texting someone and not getting a response",
+            "being left out of plans"
+          ],
           "automatic_thoughts": [
-            "I feel overwhelmed",
-            "I keep waiting for a breakthrough",
-            "It's the same cycle of feeling inadequate",
-            "I'm not sure how to start changing these feelings"
+            "maybe I'm not important"
           ],
           "emotions": [
-            "overwhelm",
-            "inadequacy"
+            "sadness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Obsessional thoughts of incompletion (finding)"
+            "Feeling unwanted (finding)",
+            "Feeling alienated (finding)",
+            "Ability to understand own emotions (observable entity)"
           ],
           "neutral": [
-            "Repressing thoughts (finding)",
-            "Unable to resist obsessional thoughts (finding)",
-            "Positive self thoughts (finding)"
+            "Fear of being a burden to others (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
-          "contradiction": [
-            "Able to resist obsessional thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed and stuck in a cycle of inadequacy. It can be challenging to manage these thoughts, but remember, it's okay to feel this way. Let's work together to find ways to break free from this cycle and explore new paths for change.",
+        "response": "I can see how those moments might feel heavy, and it's important to acknowledge that. It seems like you're sensitive to feeling left out or unimportant. Let's explore together if there are other factors contributing to these feelings as well.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and stuck in a cycle of inadequacy. It can be challenging to manage these thoughts, but remember, it's okay to feel this way. Let's work together to find ways to break free from this cycle and explore new paths for change.",
+            "response": "I can see how those moments might feel heavy, and it's important to acknowledge that. It seems like you're sensitive to feeling left out or unimportant. Let's explore together if there are other factors contributing to these feelings as well.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Obsessional thoughts of incompletion (finding)",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Repressing thoughts (finding)",
-                  "label": "neutral"
+                  "concept": "Ability to understand own emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with a lot, and it can feel overwhelming when thoughts keep repeating. Let's explore together what evidence supports these thoughts and if there might be alternative ways to interpret your situation.\"",
+            "response": "I can see how those moments might feel heavy for you, and it's important to acknowledge that. Can we explore together what evidence do you have that these instances mean you're not important? Let's take a closer look at the situation and your feelings.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Obsessional thoughts of incompletion",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Repressing thoughts",
-                  "label": "neutral"
+                  "concept": "Ability to understand own emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot, and it can feel overwhelming when thoughts keep repeating. Have you ever considered what a trusted friend or family member might suggest as a first step to break this cycle? It could be helpful to hear another perspective.\"",
+            "response": "\"I can see how those moments might feel isolating, but it's important to remember that everyone has times when they feel left out. Let's explore other perspectives together. For instance, what would a trusted friend say about this situation?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Obsessional thoughts of incompletion",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Repressing thoughts",
-                  "label": "neutral"
+                  "concept": "Feeling alienated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm sorry to hear that you've been feeling this way, and I can understand why those moments might feel particularly hard for you. It's important to remember that everyone has times when they feel left out or unimportant, but it doesn't necessarily mean that's how things always are. Let's explore some ways we can help you reframe these situations and find a more balanced perspective.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "entailment"
                 }
               ]
             }

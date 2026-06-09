@@ -50,6 +50,13 @@ K=5
 
 # Read seeds from the combined dataset; skip rows whose seed query is null.
 while IFS=$'\t' read -r id source issue seed; do
+  OUT="${OUTDIR}/${MODE}_transcript_${id}.json"
+
+  if [[ -s "$OUT" ]]; then
+    echo "Seed $id ($source) — already done, skipping"
+    continue
+  fi
+
   echo "Seed $id ($source) — core issue: $issue"
 
   CMD=(
@@ -60,7 +67,7 @@ while IFS=$'\t' read -r id source issue seed; do
     --k "$K"
     --seed "$seed"
     --core_issue "$issue"
-    --transcript_json "${OUTDIR}/${MODE}_transcript_${id}.json"
+    --transcript_json "$OUT"
   )
 
   if [[ "$MODE" == "cbt" || "$MODE" == "cbt_mcot" ]]; then

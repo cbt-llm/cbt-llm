@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I was doing okay, but, I mean, I got comfortable with that extra income, and so now my fear is that I've gotten too comfortable with it, and now that it's not there anymore, it's going to affect the fact I'm not going to be able to pay for food or my rent.",
-    "core_issue": "financial concerns",
+    "seed": "Well, I just get very anxious. I don't want to leave him in the room without me. I want to be right there. I'm not used to leaving him alone with other people at all. And I know I get very anxious in the waiting area, and I pace and back and forth and wonder what's going on in the room and listening for anything that might be going on. So, yeah, I just have a lot of anxiety about being separated from him, even for that short time.",
+    "core_issue": "Anxiety and fear",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,79 +17,108 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I was doing okay, but, I mean, I got comfortable with that extra income, and so now my fear is that I've gotten too comfortable with it, and now that it's not there anymore, it's going to affect the fact I'm not going to be able to pay for food or my rent.",
-        "core_issue": "financial concerns",
+        "query": "Well, I just get very anxious. I don't want to leave him in the room without me. I want to be right there. I'm not used to leaving him alone with other people at all. And I know I get very anxious in the waiting area, and I pace and back and forth and wonder what's going on in the room and listening for anything that might be going on. So, yeah, I just have a lot of anxiety about being separated from him, even for that short time.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "loss of extra income"
+            "being separated from him",
+            "waiting area",
+            "leaving him alone with other people"
           ],
           "automatic_thoughts": [
-            "I'm not going to be able to pay for food",
-            "I'm not going to be able to pay for rent"
+            "I don't want to leave him in the room without me",
+            "I wonder what's going on in the room",
+            "I might miss something happening"
           ],
           "emotions": [
-            "fear"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "pace back and forth",
+            "listen for anything happening"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about loss of control (finding)",
-            "Anxiety about forced dependence (finding)"
+            "Fear of being left alone during period of dependence (finding)"
           ],
           "neutral": [
-            "Anxiety about losing emotional control (finding)",
-            "Fear of losing emotional control (finding)",
-            "Fear of being a burden to others (finding)"
+            "Fear of disconnection from ventilator (finding)",
+            "Fear of problem after anesthetic (finding)",
+            "Anxiety about shaking (finding)",
+            "Fear of not waking from general anesthetic (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're feeling anxious because you've become accustomed to the extra income. Can we explore together what would happen if you had to manage without it for a while? Let's consider some alternatives and evidence.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I understand how difficult it can be to leave someone you care about, especially when you're not used to being apart. It's completely normal to feel anxious in situations like this. Let's talk more about what we can do to help manage your anxiety during these times.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've been managing well, but the loss of extra income has caused some worry. It's natural to feel anxious when we lose something that provides a sense of security. Let's explore these feelings together and see if we can find ways to help alleviate your concerns.",
+            "response": "I understand how difficult it can be to leave someone you care about, especially when you're not used to being apart. It's completely normal to feel anxious in situations like this. Let's talk more about what we can do to help manage your anxiety during these times.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "entailment"
+                  "concept": "being separated from him",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear",
+                  "concept": "anxiety",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling anxious because you've become accustomed to the extra income. Can we explore together what would happen if you had to manage without it for a while? Let's consider some alternatives and evidence.\"",
+            "response": "\"It sounds like you have a lot of anxiety about being separated from your loved one, even for short periods. Can you tell me more about what thoughts come up when you're in the waiting area and feeling anxious?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Fear",
-                  "label": "neutral"
+                  "concept": "being separated from him",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "waiting area",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "leaving him alone with other people",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're worried that losing this extra income might make it difficult to pay for necessities. Have you considered what other sources of support or resources could help you manage during this transition?\"",
+            "response": "\"It's understandable to feel anxious about being apart from someone you care for, especially in an unfamiliar setting. Let's explore some alternative perspectives together. For instance, what might a trusted friend or family member say about this situation? Or, have there been times when you were separated before and things turned out okay?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "entailment"
+                  "concept": "being separated from him",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Fear",
+                  "concept": "anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can understand why you might feel anxious about leaving him alone, especially if it's not something you're used to. Let's talk more about how we can manage this anxiety together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "being separated from him",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "anxiety",
                   "label": "neutral"
                 }
               ]
@@ -102,81 +131,96 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I guess I just feel really overwhelmed at the thought of losing that extra income. I’ve gotten used to it, you know? It feels like every little thing is tied to that money, and if it went away, I... I don't even know how I’d manage. I just worry it would set off a whole chain of problems.",
-        "core_issue": "financial concerns",
+        "query": "Yeah, it’s tough. I just… I feel like when I’m apart from them, my mind starts racing with all these what-if scenarios. I know it sounds silly, but I can’t help but think about the worst possible outcomes. Sometimes it's like I can't turn off that worry switch, you know?",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "thought of losing extra income"
+            "being apart from them"
           ],
           "automatic_thoughts": [
-            "every little thing is tied to that money",
-            "I don't know how I’d manage",
-            "it would set off a whole chain of problems"
+            "what-if scenarios",
+            "worst possible outcomes",
+            "can't turn off worry switch"
           ],
           "emotions": [
-            "overwhelmed",
-            "worry"
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)"
+            "Fear of being left alone during period of dependence (finding)"
           ],
           "neutral": [
-            "Fear of losing emotional control (finding)",
             "Anxiety about going crazy (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about forced dependence (finding)"
+            "Fear of losing emotional control (finding)",
+            "Fear of going crazy (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Able to resist dangerous thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed by the thought of losing your extra income, and it seems like you've grown accustomed to it. It's natural to worry about how this might impact other aspects of your life as well. Let's explore these feelings together and see if we can find ways to manage them better.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like your mind is really working hard when you're apart from them, and it can be overwhelming to think about all those what-if scenarios. Can we explore together what evidence there might be for the worst possible outcomes? Let's see if we can find some alternatives or ways to manage that worry.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed by the thought of losing your extra income, and it seems like you've grown accustomed to it. It's natural to worry about how this might impact other aspects of your life as well. Let's explore these feelings together and see if we can find ways to manage them better.",
+            "response": "\"I understand how difficult it is to feel like your mind is racing with what-if scenarios. It's normal to worry about the worst possible outcomes when you're apart from someone important. Let's work together on finding ways to manage these thoughts and reduce your anxiety.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed by the thought of losing your extra income. Can we explore together what would happen if this income were to disappear? What are some things that might cause you concern, and how could you manage them?\"",
+            "response": "\"It sounds like your mind is really working hard when you're apart from them, and it can be overwhelming to think about all those what-if scenarios. Can we explore together what evidence there might be for the worst possible outcomes? Let's see if we can find some alternatives or ways to manage that worry.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about losing emotional control",
-                  "label": "neutral"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "fear of being a burden to others",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite overwhelmed by the thought of losing that extra income, and it seems like you've connected a lot of things to it. Let's explore this together, one step at a time. What would you say if I asked you what might happen if you were able to find another source of income?\"",
+            "response": "\"It sounds like you have a lot of thoughts about the worst possible outcomes when you're apart from them. Have you ever considered what might be the best or most realistic outcome instead? It could help to broaden your perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
+                  "concept": "what-if scenarios",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "worst possible outcomes",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like your mind is racing with what-if scenarios when you're apart from them. Can we explore these thoughts together and see if we can find a way to manage the anxiety they cause?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
@@ -189,97 +233,94 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I'm just really afraid of what could happen if things change. I guess I’ve always felt like I'm one step away from slipping into something worse. I can’t shake the thought that if I lose that financial cushion, it’ll just spiral out of control. It feels like I’m constantly walking this tightrope.",
-        "core_issue": "financial concerns",
+        "query": "Yeah, I guess my mind does go into overdrive. I know deep down that a lot of those fears are irrational, but when I’m feeling anxious, it’s like all that logic just disappears. It’s hard to focus on anything else, and it just feels so real in the moment.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "things change",
-            "losing financial cushion"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "one step away from slipping into something worse",
-            "it’ll just spiral out of control",
-            "constantly walking this tightrope"
+            "my fears are irrational",
+            "all that logic just disappears",
+            "it feels so real in the moment"
           ],
           "emotions": [
-            "fear"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "hard to focus"
+          ]
         },
         "retrieval": {
-          "entailment": [
-            "Fear of collapsing (finding)",
-            "Anxiety about loss of control (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Fear of losing emotional control (finding)",
+            "Anticipatory anxiety (finding)",
             "Anxiety about going crazy (finding)",
-            "Fear of going out (finding)"
+            "Anticipatory anxiety, mild (finding)",
+            "Anticipatory anxiety, moderate (finding)",
+            "Anticipatory anxiety, severe (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling quite anxious about the possibility of things changing and losing your financial cushion. It's natural to feel this way, especially when we fear losing control. Let's work together to explore these feelings and find ways to manage them more effectively.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're having a hard time focusing when you feel anxious, and your thoughts can become overwhelming. Let's explore together what evidence supports these fears and if there are any alternatives to consider.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling quite anxious about the possibility of things changing and losing your financial cushion. It's natural to feel this way, especially when we fear losing control. Let's work together to explore these feelings and find ways to manage them more effectively.",
+            "response": "\"I can see how your mind might get overwhelmed when you're feeling anxious, and it's understandable that logic seems to disappear in those moments. Let's work together to find ways to manage these feelings so they don't control your thoughts as much.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of collapsing",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that things will spiral out of control if your financial situation changes? Can we explore some alternative perspectives together?",
+            "response": "\"It sounds like you're having a hard time focusing when you feel anxious, and your thoughts can become overwhelming. Let's explore together what evidence supports these fears and if there are any alternatives to consider.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "losing financial cushion",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "one step away from slipping into something worse",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it'll just spiral out of control",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I understand that you're feeling quite anxious about the possibility of things changing and losing your financial cushion. It sounds like you've been worrying about a potential spiral out of control. Let's explore together if there might be other ways to look at this situation, shall we?",
+            "response": "\"It sounds like you're having a hard time when your fears take over, even though you know they might be irrational. Have you ever considered what a trusted friend or family member might say about the situation? Sometimes, hearing another perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "losing financial cushion",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how your mind might feel overwhelmed when you're anxious, and it's hard to keep the rational thoughts in focus. Let's work together on finding ways to manage that anxiety so it doesn't take over.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "one step away from slipping into something worse",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it'll just spiral out of control",
+                  "concept": "irrational fears",
                   "label": "unknown"
                 }
               ]
@@ -292,93 +333,94 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "It’s just so hard to think about it without feeling this heavy weight in my chest. I mean, I want to believe I could handle it, but when I think about losing that stability, it just makes me feel... small, I guess? Like, what if I’m not strong enough to deal with whatever comes next?",
-        "core_issue": "financial concerns",
+        "query": "I just feel overwhelmed sometimes. My mind races with all these worst-case scenarios, and I can’t seem to shake them off. It all feels so real, and I know it doesn’t make sense, but in the moment, it’s hard to find that logic.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "thinking about losing stability"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I want to believe I could handle it",
-            "what if I’m not strong enough to deal with whatever comes next"
+            "worst-case scenarios",
+            "it all feels so real",
+            "it doesn’t make sense"
           ],
           "emotions": [
-            "anxiety",
-            "fear"
+            "overwhelmed"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about altered body image (finding)"
+            "Preoccupation with disaster (finding)"
           ],
           "neutral": [
+            "Anxiety about going crazy (finding)",
+            "Fear of going crazy (finding)",
             "Anxiety about collapsing (finding)",
-            "Anxiety about becoming fat (finding)",
-            "Fear of falling while mobilizing (finding)",
-            "Fear of collapsing (finding)"
+            "Depressive delusion of catastrophe (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling quite anxious and fearful about the possibility of losing your stability. It's completely normal to feel this way, especially when we face uncertain situations. Let's explore these feelings together and see if we can find a way to manage them better.",
+        "response": "\"I can see how overwhelming this might feel, especially when your mind is racing with worst-case scenarios. It's important to remember that it's okay to have these thoughts, even if they don't always make sense in the moment. Let's work together to find ways to manage them better.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling quite anxious and fearful about the possibility of losing your stability. It's completely normal to feel this way, especially when we face uncertain situations. Let's explore these feelings together and see if we can find a way to manage them better.",
+            "response": "\"I can see how overwhelming this might feel, especially when your mind is racing with worst-case scenarios. It's important to remember that it's okay to have these thoughts, even if they don't always make sense in the moment. Let's work together to find ways to manage them better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
+                  "concept": "Preoccupation with disaster",
                   "label": "entailment"
                 },
                 {
-                  "concept": "fear",
+                  "concept": "Anxiety about going crazy",
                   "label": "neutral"
-                },
-                {
-                  "concept": "losing stability",
-                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're facing a challenging situation that brings up feelings of anxiety and fear. Can we explore together what makes you feel small or uncertain about losing your stability? Let's take it one step at a time.\"",
+            "response": "\"It sounds like you're dealing with a lot of worries and it can feel overwhelming. Can we explore these worst-case scenarios together? Let's start by looking at the evidence for and against them, and see if we can find some perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
+                  "concept": "Preoccupation with disaster",
                   "label": "entailment"
                 },
                 {
-                  "concept": "fear",
+                  "concept": "Anxiety about going crazy",
                   "label": "neutral"
-                },
-                {
-                  "concept": "losing stability",
-                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy burden of worry. Let's explore together what might happen if things change, and how you could manage it. What do you think would be the best possible outcome in this situation?\"",
+            "response": "\"It sounds like you're dealing with some overwhelming thoughts right now. Have you ever considered what a trusted friend or family member might say about these worst-case scenarios? Sometimes, hearing another perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "entailment"
+                  "concept": "worst-case scenarios",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "fear",
-                  "label": "neutral"
+                  "concept": "it all feels so real",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're going through a tough time, feeling overwhelmed and consumed by worst-case scenarios. Let's take a moment to explore these thoughts together. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "worst-case scenarios",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "losing stability",
-                  "label": "triggers"
+                  "concept": "overwhelmed",
+                  "label": "emotions"
                 }
               ]
             }
@@ -390,81 +432,103 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Thanks for saying that. I really don’t like feeling this way—it’s exhausting. I want to be more in control, but I just keep getting pulled back into worrying. It’s like my brain won’t stop running through all the “what ifs.” I guess I just don’t want to feel so helpless.",
-        "core_issue": "financial concerns",
+        "query": "Yeah, I guess it's just frustrating. I want to feel more in control, but sometimes it feels like those thoughts just take over. I don’t want to be stuck in this cycle, but it’s hard to see a way out when I’m caught up in it.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "I want to be more in control",
-            "My brain won’t stop running through all the 'what ifs'",
-            "I don’t want to feel so helpless"
+            "I want to feel more in control",
+            "Those thoughts just take over",
+            "I don’t want to be stuck in this cycle",
+            "It's hard to see a way out"
           ],
           "emotions": [
-            "exhaustion",
-            "worry",
-            "helplessness"
+            "frustration"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about loss of control (finding)",
-            "Fear of losing emotional control (finding)"
+            "Fear of losing emotional control (finding)",
+            "Difficulty controlling emotions (finding)"
           ],
           "neutral": [
+            "Anxiety about loss of control (finding)",
             "Anxiety about losing emotional control (finding)",
-            "Anxiety about going crazy (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Able to resist obsessional thoughts (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What are some specific situations that trigger these thoughts for you? And when you imagine the worst-case scenario, what evidence do you have to support it? Let's explore together.",
+        "response": "\"It sounds like you're feeling quite frustrated because it feels like your thoughts are overwhelming and making it hard for you to see a way out. Let's explore this together, one step at a time. Can we start by discussing what evidence you have that these thoughts will continue to control you?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling exhausted and overwhelmed by all the 'what ifs'. It's common to feel this way when we're dealing with uncertainty. Let's work together to find ways to manage these feelings and regain a sense of control.",
+            "response": "\"I can understand how you're feeling, it sounds like a struggle to maintain control. Let's work together to explore these thoughts and feelings more deeply so we can find ways to manage them better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about loss of control",
+                  "concept": "emotions",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of losing emotional control",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What are some specific situations that trigger these thoughts for you? And when you imagine the worst-case scenario, what evidence do you have to support it? Let's explore together.",
+            "response": "\"It sounds like you're feeling quite frustrated because it feels like your thoughts are overwhelming and making it hard for you to see a way out. Let's explore this together, one step at a time. Can we start by discussing what evidence you have that these thoughts will continue to control you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about loss of control",
-                  "label": "entailment"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Fear of losing emotional control",
-                  "label": "entailment"
+                  "concept": "wanting to feel more in control",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "thoughts taking over",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "difficulty seeing a way out",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling overwhelmed by all the 'what ifs'. Let's explore what a trusted friend might say about this situation. What do you think they would tell you?\"",
+            "response": "\"It sounds like you're feeling quite frustrated and overwhelmed by these thoughts that seem to take control. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about loss of control",
+                  "concept": "emotions",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of losing emotional control",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can understand how you're feeling, and it sounds like you're struggling to find a way out. Let's take a moment to explore what you meant by 'feeling more in control'. Can you tell me more about that?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
                   "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -476,99 +540,96 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Well, sometimes it's just the bills piling up, you know? When I see those, my mind races to how I’ll pay them, and I start thinking about how I’ve been living paycheck to paycheck. I just think back to the times when things were really tight, and it didn’t take much for everything to feel like it was crumbling. It’s like I can almost feel that panic again. Maybe the worst-case scenario is just too familiar?",
-        "core_issue": "financial concerns",
+        "query": "It’s really frustrating. I want to feel in control, but those thoughts just seem to take over sometimes. When I’m caught up in that anxiety, it feels like there’s no way out and I just get stuck in my head.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "bills piling up"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "how I’ll pay them",
-            "living paycheck to paycheck",
-            "things were really tight",
-            "everything feels like it’s crumbling",
-            "worst-case scenario is familiar"
+            "I want to feel in control",
+            "those thoughts just seem to take over",
+            "there's no way out",
+            "I just get stuck in my head"
           ],
           "emotions": [
-            "panic"
+            "frustration",
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Preoccupation with disaster (finding)",
-            "Preoccupation with ruin (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about loss of control (finding)",
+            "Difficulty controlling emotions (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Fear of collapsing (finding)",
-            "Sense of impending doom (finding)",
-            "Fear of going crazy (finding)"
+            "Ability to resist obsessional thoughts (observable entity)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how it feels overwhelming when the bills pile up. It's natural to worry about paying them, especially if you've been living paycheck to paycheck. But let's remember that it's okay to feel overwhelmed sometimes. We can work together to find ways to manage this stress and help you feel more in control.",
+        "response": "\"I can see how frustrating it is to feel like you're losing control. It's important for us to work together on understanding these feelings and finding ways to manage them.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how it feels overwhelming when the bills pile up. It's natural to worry about paying them, especially if you've been living paycheck to paycheck. But let's remember that it's okay to feel overwhelmed sometimes. We can work together to find ways to manage this stress and help you feel more in control.",
+            "response": "\"I can see how frustrating it is to feel like you're losing control. It's important for us to work together on understanding these feelings and finding ways to manage them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Preoccupation with disaster (finding)",
+                  "concept": "anxiety about losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of collapsing (finding)",
-                  "label": "neutral"
+                  "concept": "difficulty controlling emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling overwhelmed by the bills piling up. Can we explore together what evidence supports this worst-case scenario, and if there might be other possibilities to consider?\"",
+            "response": "\"It sounds like you're feeling overwhelmed by anxiety and a sense of loss of control. Can we explore together what triggers these feelings and if there are any patterns or thoughts that might be contributing to them?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Preoccupation with disaster (finding)",
+                  "concept": "anxiety about losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of collapsing (finding)",
-                  "label": "neutral"
+                  "concept": "difficulty controlling emotions",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you have a lot on your mind with the bills piling up. Have you ever thought about what a trusted friend or family member might say about this situation? Sometimes, getting another perspective can help us see things more clearly.\"",
+            "response": "\"It sounds like you're struggling with feelings of anxiety and a sense of loss of control. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing another perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "bills piling up",
-                  "label": "triggers"
+                  "concept": "anxiety about losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "how I'll pay them",
-                  "label": "unknown"
+                  "concept": "difficulty controlling emotions",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how frustrating it is to feel like you're losing control. Let's explore this together and find ways to help you regain a sense of control.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety about losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "living paycheck to paycheck",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "things were really tight",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "everything feels like it's crumbling",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "worst-case scenario is familiar",
-                  "label": "automatic_thoughts"
+                  "concept": "difficulty controlling emotions",
+                  "label": "entailment"
                 }
               ]
             }
@@ -580,81 +641,86 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that. It’s just hard to feel like I can manage anything when I’m in this headspace. Sometimes I wish I could just shut it all out, you know? I know I should be thinking positively, but it feels like I’m stuck in this loop. I want to believe things can get better, but there’s always that nagging doubt in the back of my mind.",
-        "core_issue": "financial concerns",
+        "query": "Yeah, I appreciate that. It just feels so heavy sometimes, like I’m carrying this weight around. I want to be able to manage it better, but it’s hard to even talk about it without feeling that anxiety creeping in.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I can't manage anything",
-            "I wish I could shut it all out",
-            "I should be thinking positively",
-            "I'm stuck in this loop",
-            "Things can't get better",
-            "There's always that nagging doubt"
+          "triggers": [
+            "talking about it"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "I’m carrying this weight around",
+            "I want to manage it better"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Repressing thoughts (finding)",
-            "Emotional adjustment (observable entity)",
-            "Positive thoughts (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about going crazy (finding)"
+            "Anxiety about becoming fat (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about treatment (finding)",
+            "Anxiety about body function or health (finding)",
+            "Anxiety about altered body image (finding)"
           ],
-          "contradiction": [
-            "Positive self thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that it can feel overwhelming when you're dealing with so much. It's important to acknowledge those feelings and not judge yourself for having them. Let's explore together what might be causing this anxiety and see if we can find ways to manage it more effectively.",
-        "protocol_used": "socratic_questioning",
+        "response": "I understand how you feel, carrying something heavy can be overwhelming. It's great that you want to manage it better. Let's explore some ways together to help you do just that.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that it can feel overwhelming when you're dealing with so much. It's okay to have difficult thoughts and feelings, and I'm here to help you navigate through them. Let's start by exploring what makes you feel stuck in this loop.",
+            "response": "I understand how you feel, carrying something heavy can be overwhelming. It's great that you want to manage it better. Let's explore some ways together to help you do just that.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Emotional adjustment (observable entity)",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Repressing thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "carrying a weight",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that it can feel overwhelming when you're dealing with so much. It's important to acknowledge those feelings and not judge yourself for having them. Let's explore together what might be causing this anxiety and see if we can find ways to manage it more effectively.",
+            "response": "\"It sounds like you're carrying a heavy burden, and I can understand why talking about it might bring up feelings of anxiety. Let's explore together what makes this weight feel so heavy and if there are any small steps we could take to make it more manageable.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Emotional adjustment (observable entity)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about going crazy (finding)",
+                  "concept": "anxiety",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I understand that it can feel overwhelming, and it's okay to have doubts. It might be helpful to consider what a trusted friend or family member would say about your situation. Sometimes, hearing an outside perspective can provide some relief.",
+            "response": "\"It sounds like you're carrying a heavy burden, and I can understand why that might feel overwhelming. Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Emotional adjustment (observable entity)",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear you're feeling this way, but I'm here for you. It sounds like you're carrying a heavy weight and struggling to manage it. Let's take it one step at a time. Can we start by exploring what makes it feel so heavy?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Repressing thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -666,92 +732,103 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it’s just frustrating to feel like I’m stuck in my own head. Sometimes I think I should just be able to push through it, but it doesn’t always work like that. It’s like I want to break free from this cycle, but the fear just takes over. I want to believe there’s a way out, but it’s hard to see it when I’m like this.",
-        "core_issue": "financial concerns",
+        "query": "Thanks, I really want to try. It's just that every time I think about tackling it, I get this tight feeling in my chest. I guess I worry about not being able to handle it or making things worse. It’s like a cycle that just keeps going.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "feeling stuck",
-            "wanting to break free",
-            "being in my own head"
+            "thinking about tackling it"
           ],
           "automatic_thoughts": [
-            "I should just be able to push through it",
-            "the fear takes over",
-            "it's hard to see a way out"
+            "worry about not being able to handle it",
+            "worry about making things worse"
           ],
           "emotions": [
-            "frustration",
-            "fear"
+            "tightness",
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling trapped (finding)",
-            "Disorientation as to self (finding)",
-            "Feeling like wanting to escape (finding)",
-            "Difficulty in thinking independently (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Repressing thoughts (finding)"
+            "Anxiety about choking (finding)",
+            "Anxiety about swallowing (finding)",
+            "Anxiety about having a heart attack (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about not coping with parenthood (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, getting another perspective can help us see things more clearly.",
-        "protocol_used": "alternative_perspective",
+        "response": "I understand you're feeling anxious when thinking about tackling something, and it triggers a tight feeling in your chest. It sounds like you might be worried about not being able to handle it or making things worse. Let's explore these thoughts together and see if we can find a way to break this cycle.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling stuck and frustrated, like you're trapped in your own thoughts. It can be overwhelming when the fear takes over. But remember, it's okay to feel this way. Let's work together to find a way out, one step at a time.",
+            "response": "I understand you're feeling anxious when thinking about tackling something, and it triggers a tight feeling in your chest. It sounds like you might be worried about not being able to handle it or making things worse. Let's explore these thoughts together and see if we can find a way to break this cycle.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling trapped",
-                  "label": "entailment"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Disorientation as to self",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Difficulty in thinking independently",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling stuck and overwhelmed, which can make it hard to think clearly. Have you ever considered what evidence supports the idea that you should be able to push through this on your own? Or perhaps there are other ways you might approach the situation?\"",
+            "response": "\"It sounds like you're dealing with some anxiety about taking on this task. Can you tell me more about what thoughts come up for you when you think about handling it? And how does that tight feeling in your chest make you feel?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling trapped",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Difficulty in thinking independently",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, getting another perspective can help us see things more clearly.",
+            "response": "\"It sounds like you're feeling quite anxious when you think about tackling it. Can we explore together what might be making things feel overwhelming? Let's start by discussing your thoughts and feelings a bit more.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling stuck",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "wanting to break free",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear you're feeling this way, but I'm here for you. It sounds like thinking about tackling something triggers a tight feeling in your chest and worries about not being able to handle it or making things worse. Let's take it one step at a time, shall we?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "being in my own head",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -763,83 +840,91 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I mean, I’ve thought about it, but I also worry they might not really understand. They might just say things like, \"You'll be fine\" or \"Don’t worry so much,\" and it feels like they wouldn’t really get how heavy this is for me. I guess part of me feels like I can’t burden them with this either, like I should be able to handle it on my own.",
-        "core_issue": "financial concerns",
+        "query": "Yeah, that sounds okay. I think it would help to talk about it, but I can't shake the feeling that I'll just get lost in it all. I want to break the cycle, but there’s always that fear of what could happen if I really try.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "worry about others' understanding",
-            "fear of burdening others"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "they might not really understand",
-            "they might just say things like, 'You'll be fine' or 'Don’t worry so much'",
-            "I should be able to handle it on my own"
+            "I'll just get lost in it all",
+            "What could happen if I really try"
           ],
           "emotions": [
-            "anxiety",
-            "shame"
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "want to break the cycle"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)"
+            "Anxiety about forced dependence (finding)"
           ],
           "neutral": [
+            "Anxiety about resuming sexual relations (finding)",
+            "Fear of being left alone during period of dependence (finding)",
             "Anxiety about not coping with parenthood (finding)",
-            "Pressured by parents (finding)",
-            "Relationship problems with family members due to medical condition (finding)",
-            "Worried about not coping with baby (finding)"
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you might feel like your loved ones don't truly grasp the weight of what you're going through. It can be frustrating when they offer reassurances that seem insufficient. Let's explore more about how this makes you feel and if there are specific ways you'd like them to support you better.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling anxious about taking steps to break the cycle, and there's a fear of what could happen if you really try. Let's explore that fear together. What specific concerns do you have about coping with parenthood?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you might feel like your loved ones don't truly grasp the weight of what you're going through. It can be frustrating when they offer reassurances that seem insufficient. Let's explore more about how this makes you feel and if there are specific ways you'd like them to support you better.",
+            "response": "\"I can see you're feeling quite overwhelmed and scared about trying to break this cycle. It's completely normal to feel that way, but let's explore together what might help you move forward.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "worry about others' understanding",
-                  "label": "triggers"
+                  "concept": "fear",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "fear of burdening others",
-                  "label": "triggers"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "\"It sounds like you have concerns that your loved ones might not fully grasp the weight of what you're going through. Can we explore together why you think they might say things like 'You'll be fine' or 'Don't worry so much?' And, how would you feel if they truly understood?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "worry about others' understanding",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic_thoughts",
+                  "concept": "want to break the cycle",
                   "label": "unknown"
                 }
               ]
             }
           },
-          "alternative_perspective": {
-            "response": "\"It sounds like you have concerns that your loved ones might not fully understand the weight of what you're going through. Have you ever considered asking them directly how they would feel if they were in your shoes? It could help both of you gain a better understanding.\"",
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling anxious about taking steps to break the cycle, and there's a fear of what could happen if you really try. Let's explore that fear together. What specific concerns do you have about coping with parenthood?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "worry about others' understanding",
-                  "label": "triggers"
+                  "concept": "Anxiety about not coping with parenthood (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "fear of burdening others",
-                  "label": "triggers"
+                  "concept": "fear",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It's understandable to feel a bit overwhelmed, but let's explore what might happen if you take that first step towards breaking the cycle. What could be the best possible outcome for you?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "want to break the cycle",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm here for you, and it's okay to feel scared. Let's explore these fears together and see if we can find a way to manage them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "neutral"
                 }
               ]
             }
@@ -851,99 +936,127 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just... I really wish they could see how overwhelming this feels. Sometimes, I feel like I’m carrying this giant weight that nobody else notices. I just want to feel understood, you know? Maybe if I could just express it without feeling like I’m being a burden, it would help. But then I get scared of being vulnerable, like what if they don’t react the way I hope?",
-        "core_issue": "financial concerns",
+        "query": "I guess it’s just that I worry I won’t be good enough. What if I mess something up or don’t know what to do in a tough situation? I keep replaying all the things I think could go wrong, and it makes me panic. I want to be a good parent, but that pressure feels crippling sometimes.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "feeling overwhelmed",
-            "wanting to be understood",
-            "fear of being vulnerable"
+            "tough situation",
+            "pressure to be a good parent"
           ],
           "automatic_thoughts": [
-            "nobody else notices my struggle",
-            "I might be a burden",
-            "they won't react positively"
+            "I won’t be good enough",
+            "What if I mess something up?",
+            "What if I don’t know what to do?",
+            "I keep replaying things that could go wrong"
           ],
           "emotions": [
-            "overwhelm",
-            "fear",
-            "anxiety"
+            "worry",
+            "panic",
+            "pressure"
           ],
-          "behaviors": [
-            "avoiding expressing feelings",
-            "withdrawing from others"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)"
+            "Anxiety about not coping with parenthood (finding)",
+            "Worried about being a bad mother (finding)",
+            "Parental anxiety (finding)"
           ],
           "neutral": [
-            "Pressured by others (finding)",
-            "Pressured by peers (finding)",
-            "Pressured by parents (finding)",
-            "Difficulty understanding own emotions (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about behavior or performance (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand how you're feeling. It can be incredibly challenging when we carry heavy emotional burdens that seem invisible to others. It's important to remember that vulnerability is a strength and not a weakness. Sharing your feelings with trusted individuals can help lighten the load and foster deeper connections.\n\nHere are some steps you might find helpful:\n\n1. Identify safe people: Find someone you trust who has shown empathy and understanding in the past. This could be a friend, family member, or mental health professional.\n\n2. Practice open communication: Be honest about how you're feeling without blaming others for your emotions. Use \"I\" statements to express your feelings instead of \"you\" statements, which can come across as accusatory. For example, \"I feel overwhelmed and burdened by my responsibilities,\" rather than \"You don't care about how much I have to do.\"\n\n3. Set boundaries: If you find that sharing your feelings leads to unwanted advice or criticism, it's essential to set boundaries. Let the person know what you need from them and what you don't. For example, \"I appreciate your concern, but I just need someone to listen right now.\"\n\n4. Prepare for potential reactions: Anticipating possible responses can help you feel more prepared when discussing your feelings. If you're worried about being judged or dismissed, remind yourself that it's okay to have difficult conversations and that the other person may not always react the way you hope, but that doesn't mean they don't care about you.\n\n5. Self-care: Take time for self-care activities to help manage stress and maintain your emotional wellbeing. This could include exercise, meditation, journaling, or spending time in nature.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling quite a bit of pressure and worry about being a good parent. Can we explore together what specific situations or events make you feel this way? Let's start by looking at one instance, and then we can work on finding ways to manage these feelings.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're carrying a heavy load and it can feel isolating. It's important to remember that everyone has their own struggles, and it takes courage to share them. Let's work together on finding ways for you to express your feelings without fearing being a burden.",
+            "response": "\"It sounds like you're feeling a lot of pressure to be a good parent, and that can be overwhelming. It's natural to worry about making mistakes or not knowing what to do in tough situations. Let's work together to find ways to manage this stress and build your confidence.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
+                  "concept": "worry",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "pressure",
                   "label": "triggers"
                 },
                 {
-                  "concept": "wanting to be understood",
+                  "concept": "tough situation",
                   "label": "triggers"
                 },
                 {
-                  "concept": "fear of being a burden",
-                  "label": "entailment"
+                  "concept": "I won't be good enough",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying a heavy burden and long for understanding. I can see why you might feel scared about opening up, but remember that vulnerability is often the key to connection. Let's explore together how we can express your feelings in a way that feels safe for you.\"",
+            "response": "\"It sounds like you're feeling quite a bit of pressure and worry about being a good parent. Can we explore together what specific situations or events make you feel this way? Let's start by looking at one instance, and then we can work on finding ways to manage these feelings.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
+                  "concept": "worry",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "pressure",
                   "label": "triggers"
                 },
                 {
-                  "concept": "wanting to be understood",
+                  "concept": "tough situation",
                   "label": "triggers"
                 },
                 {
-                  "concept": "fear of being vulnerable",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I can see how you might feel like you're carrying a heavy burden. It's important to remember that sharing your feelings doesn't make you a burden, it makes you human. Let's work together on finding ways for you to express yourself without fear of vulnerability.\"",
+            "response": "\"It sounds like you're feeling a lot of pressure to be the best parent you can be. It's natural to worry about making mistakes, but remember that everyone does sometimes. Let's explore some ways you might handle tough situations and find strategies that work for you.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
+                  "concept": "worry",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "pressure",
                   "label": "triggers"
                 },
                 {
-                  "concept": "wanting to be understood",
+                  "concept": "tough situation",
                   "label": "triggers"
                 },
                 {
-                  "concept": "fear of being vulnerable",
+                  "concept": "I won't be good enough",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you might feel overwhelmed with all the things on your mind. Let's take a moment to focus on what you're feeling and work together to find ways to manage this pressure.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "worry",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "panic",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "pressure",
                   "label": "triggers"
                 }
               ]

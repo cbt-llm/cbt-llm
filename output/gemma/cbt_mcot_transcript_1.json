@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently. I mean I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
-    "core_issue": "career and work-related concerns",
+    "seed": "That I'm not the one in the wrong. You know, I. I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently, just. I mean, just ever. I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
+    "core_issue": "Career and work-related concerns",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,14 +17,16 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently. I mean I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
-        "core_issue": "career and work-related concerns",
+        "query": "That I'm not the one in the wrong. You know, I. I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently, just. I mean, just ever. I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "I am the best employee",
+            "I'm not the one in the wrong",
+            "I'm extremely good at my job",
+            "I am the best employee ever",
             "I make no errors",
-            "I can't be wrong"
+            "How can I be wrong?"
           ],
           "emotions": [],
           "behaviors": []
@@ -33,37 +35,25 @@
           "entailment": [],
           "neutral": [
             "Anxiety about saying the wrong thing (finding)",
-            "Negative attitude (finding)",
-            "Fear of speaking to people in authority (finding)",
+            "Incongruent personal expectations (finding)",
             "Fear of saying the wrong thing (finding)",
-            "Incongruent personal expectations (finding)"
+            "Anxiety about appearing ridiculous (finding)",
+            "Negative attitude (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you have a very strong sense of your abilities and how valuable you are to the company. What makes you so confident that you make no errors?",
+        "response": "It sounds like you have a very strong sense of your abilities and contributions at work. Can you think of a time when you've received feedback that suggested there might be room for improvement, even if it was minor?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you have a strong sense of pride in your work and a belief in your abilities, and it's understandable that you're struggling to understand the situation with your coworkers when you feel so confident in your performance. Could you tell me a little more about what's happening with your coworkers?",
+            "response": "It sounds like you're feeling incredibly certain about your performance and your correctness in this situation with your coworkers. It can be frustrating when you feel confident in your actions and believe you're doing things right.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts: \\[",
-                  "label": "unknown"
-                },
-                {
-                  "concept": ", ",
-                  "label": "unknown"
-                },
-                {
-                  "concept": ", ",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "\\]",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
@@ -74,39 +64,46 @@
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you have a very strong sense of your abilities and how valuable you are to the company. What makes you so confident that you make no errors?",
+            "response": "It sounds like you have a very strong sense of your abilities and contributions at work. Can you think of a time when you've received feedback that suggested there might be room for improvement, even if it was minor?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts: [\"I am the best employee\", \"I make no errors\"]",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "socratic_questioning",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you have a very strong sense of your abilities and pride in your work, which is wonderful. Could you imagine what a trusted friend or colleague might say about your perspective on these situations with your coworkers?",
+            "response": "It sounds like you're holding a very strong belief that you're always right, and that's connected to how you're understanding your interactions with your coworkers – can you imagine a situation where someone else might have a different perspective, even if unintentionally?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts: \\[",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": ", ",
+                  "concept": "ENTAILMENT",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're feeling incredibly frustrated and certain about your position in this situation. When you said you're not the one in the wrong, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": ", ",
+                  "concept": "entailment",
                   "label": "unknown"
-                },
-                {
-                  "concept": "\\]",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "ENTAILMENT — Incongruent personal expectations",
-                  "label": "neutral"
                 }
               ]
             }
@@ -118,46 +115,379 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I appreciate the compliment, but to be honest, I’m not sure I always feel that way. Sometimes, I think I bury my mistakes and pretend everything’s fine. It’s like I’m just waiting for someone to point out my flaws, and... when they do, it really shakes me.",
-        "core_issue": "career and work-related concerns",
+        "query": "Yeah, I remember my last performance review. My boss said I did a great job overall, but there were some areas to work on, like being more proactive in team meetings. I felt a bit deflated, honestly. It kind of stuck with me, and I couldn't help but wonder if I was falling short somehow.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "receiving a compliment",
-            "someone pointing out flaws"
+            "last performance review",
+            "feedback from boss"
           ],
           "automatic_thoughts": [
-            "I bury my mistakes",
-            "I pretend everything's fine",
-            "I'm waiting for someone to point out my flaws"
+            "I am falling short",
+            "I need to be more proactive"
           ],
           "emotions": [
-            "uncertainty",
-            "shame",
-            "anxiety"
+            "deflated"
           ],
-          "behaviors": [
-            "pretending everything's fine"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling a failure (finding)",
+            "Feeling of discouragement (finding)",
+            "Feeling of being slowed down (finding)"
+          ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Feeling ashamed (finding)",
-            "Anxiety about blushing (finding)"
+            "Performance anxiety (finding)",
+            "Anxiety about behavior or performance (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like there's a real struggle between accepting a compliment and a deeper feeling that you're waiting for something to go wrong – can you tell me more about what goes through your mind when you feel like you're burying your mistakes?",
+        "response": "It sounds like that feedback really impacted you – can you tell me more about what went through your mind when you heard your boss say there were areas to work on?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like receiving a compliment can bring up a lot of conflicting feelings for you, and that you're often anticipating criticism. It takes courage to acknowledge that you bury your mistakes and pretend everything's fine – can you tell me more about what goes through your mind when you feel like you're waiting for someone to point out your flaws?",
+            "response": "It sounds like even though your boss gave you positive feedback, that comment about being more proactive really hit you hard and left you feeling deflated and questioning yourself. That's understandable; it can be tough when we feel like we're not meeting expectations.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling a failure (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that feedback really impacted you – can you tell me more about what went through your mind when you heard your boss say there were areas to work on?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "deflated",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "falling short",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like that feedback, even though it was mostly positive, left you feeling quite discouraged. Sometimes, even constructive feedback can trigger those thoughts about falling short – what’s one thing a friend might say to help you put that feedback in perspective?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Performance anxiety (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "I am falling short",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really tough, and it's understandable that you'd feel deflated after that. When you say it's stuck with you, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "deflated",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling of being slowed down",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "patient": {
+        "role": "patient",
+        "query": "When I heard that, my mind just kind of raced. I felt this knot in my stomach, like I was being judged. I started thinking, “Am I not good enough for this job?” and “What if I keep messing up?” It’s like all the positive things I’d worked for just faded away in that moment.",
+        "core_issue": "Career and work-related concerns",
+        "schema": {
+          "triggers": [
+            "hearing that"
+          ],
+          "automatic_thoughts": [
+            "Am I not good enough for this job?",
+            "What if I keep messing up?"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
+          "behaviors": [
+            "felt a knot in my stomach"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling a failure (finding)",
+            "Feeling of discouragement (finding)",
+            "Feeling upset (finding)",
+            "Feeling bad (finding)",
+            "Anxiety about saying the wrong thing (finding)"
+          ],
+          "neutral": [],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like hearing that really shook your confidence, and it's understandable that you'd feel anxious and question yourself. That knot in your stomach and those thoughts – “Am I not good enough?” and “What if I keep messing up?” – are a lot to deal with.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like hearing that really shook your confidence, and it's understandable that you'd feel anxious and question yourself. That knot in your stomach and those thoughts – “Am I not good enough?” and “What if I keep messing up?” – are a lot to deal with.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling upset",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling bad",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that experience really shook your confidence. Can you tell me a little more about what specifically made you feel like you were being judged?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like that experience really shook your confidence. If a friend were watching this unfold, what do you think they might say about your reaction and those thoughts?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling upset",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really distressing, and it's understandable that you'd feel that way. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling upset",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling bad",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really does feel like I’m constantly second-guessing myself. It’s exhausting. I want to be the one who steps up in meetings, but then I freeze. I worry people will notice I’m not as confident, and that just makes everything worse. Like, the more I think about it, the harder it is to actually speak up.",
+        "core_issue": "Career and work-related concerns",
+        "schema": {
+          "triggers": [
+            "meetings"
+          ],
+          "automatic_thoughts": [
+            "I’m constantly second-guessing myself",
+            "People will notice I’m not as confident",
+            "The more I think about it, the harder it is to speak up"
+          ],
+          "emotions": [
+            "exhaustion",
+            "worry"
+          ],
+          "behaviors": [
+            "freeze",
+            "avoid speaking up"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling nervous (finding)"
+          ],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Fear of speaking to people in authority (finding)",
+            "Fear of saying the wrong thing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly frustrating to feel like you're constantly second-guessing yourself, especially when you want to step up in meetings. Can you tell me more about what goes through your mind right before you freeze?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly draining to be constantly second-guessing yourself, especially when you want to contribute in meetings. It takes a lot of courage to want to step up, and it's understandable that you'd feel exhausted when you freeze.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly frustrating to feel like you're constantly second-guessing yourself, especially when you want to step up in meetings. Can you tell me more about what goes through your mind right before you freeze?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -179,8 +509,330 @@
               ]
             }
           },
+          "alternative_perspective": {
+            "response": "It sounds incredibly frustrating to feel like you're constantly second-guessing yourself, especially when you want to contribute in meetings. What do you think a supportive friend might say about your concerns regarding how others perceive your confidence?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds incredibly draining to be constantly second-guessing yourself, and I can hear how frustrating that is. When you mentioned feeling this way, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "It’s like this wave of panic comes over me right before I’m supposed to say something. I start thinking about all the things that could go wrong—what if I sound dumb, or what if someone challenges my idea? Then my heart races, and I just want to disappear. It's frustrating because I have thoughts to share, but they just get stuck.",
+        "core_issue": "Career and work-related concerns",
+        "schema": {
+          "triggers": [
+            "before speaking",
+            "sharing ideas"
+          ],
+          "automatic_thoughts": [
+            "what if I sound dumb",
+            "what if someone challenges my idea"
+          ],
+          "emotions": [
+            "panic",
+            "frustration"
+          ],
+          "behaviors": [
+            "want to disappear"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of public speaking (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Fear of writing in public (finding)"
+          ],
+          "neutral": [
+            "Fear of speaking to people in authority (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly frustrating to have those thoughts and then feel that wave of panic holding you back. What's usually going through your mind when you notice that wave of panic starting to build?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly distressing to experience that wave of panic and feel like you're holding back valuable contributions. It takes a lot of courage to share those feelings, and I appreciate you describing what's happening.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of public speaking (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "what if I sound dumb",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "what if someone challenges my idea",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "panic",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "want to disappear",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
           "socratic_questioning": {
-            "response": "It sounds like there's a real struggle between accepting a compliment and a deeper feeling that you're waiting for something to go wrong – can you tell me more about what goes through your mind when you feel like you're burying your mistakes?",
+            "response": "It sounds incredibly frustrating to have those thoughts and then feel that wave of panic holding you back. What's usually going through your mind when you notice that wave of panic starting to build?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of public speaking (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "what if I sound dumb",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "what if someone challenges my idea",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "want to disappear",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to experience that wave of panic and feel like you want to disappear – it's understandable that you'd feel frustrated when your thoughts get stuck. What's one thing that might go through the mind of a friend who sees you struggling with this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of public speaking (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "what if I sound dumb",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "what if someone challenges my idea",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "panic",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "want to disappear",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly frustrating, and it takes a lot of courage to share that. When you mentioned wanting to disappear, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of public speaking (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "I guess when I feel that panic, it’s like my mind just gets flooded with negative thoughts. I start thinking about past mistakes or times I’ve felt embarrassed. It’s almost like I’m on this loop where I just keep replaying those moments and convincing myself this time will be just as bad, if not worse. It feels paralyzing, and I just wish I could turn it off.",
+        "core_issue": "Career and work-related concerns",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "flooded with negative thoughts",
+            "thinking about past mistakes",
+            "times I’ve felt embarrassed",
+            "this time will be just as bad",
+            "this time will be worse"
+          ],
+          "emotions": [
+            "panic",
+            "embarrassment",
+            "fear"
+          ],
+          "behaviors": [
+            "replaying those moments",
+            "wishing I could turn it off"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Complaining of panic attack (finding)",
+            "Panic attack (finding)",
+            "Anxiety about collapsing (finding)",
+            "Situational panic attack (finding)",
+            "Anxiety about losing emotional control (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly distressing to be caught in that loop of negative thoughts and replaying past experiences – what specifically makes you believe this time will be worse than those past situations?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly distressing to feel overwhelmed by those thoughts and memories, especially when you're already experiencing panic. It takes a lot of courage to describe what you're going through.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "flooded with negative thoughts",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "thinking about past mistakes",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "times I’ve felt embarrassed",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "this time will be just as bad",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "this time will be worse",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "panic",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "embarrassment",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "replaying those moments",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "wishing I could turn it off",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to be caught in that loop of negative thoughts and replaying past experiences – what specifically makes you believe this time will be worse than those past situations?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -199,23 +851,54 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're experiencing a lot of uncertainty and anxiety when you receive feedback, even positive feedback. What do you think might be going through your mind when you feel like you're waiting for someone to point out your flaws?",
+            "response": "It sounds incredibly distressing to be caught in that loop of negative thoughts and replaying past experiences. Can you imagine what a supportive friend might say to you when you describe feeling this way?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "flooded with negative thoughts",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "thinking about past mistakes",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "times I’ve felt embarrassed",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "this time will be just as bad",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "this time will be worse",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it makes sense you'd want to turn it off. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "panic",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "negative thoughts",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "embarrassment",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "replaying moments",
                   "label": "unknown"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
+                  "concept": "wishing I could turn it off",
                   "label": "unknown"
                 }
               ]
@@ -225,50 +908,50 @@
       }
     },
     {
-      "turn": 2,
+      "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s tough. I guess when I bury my mistakes, it's like I’m trying to protect myself from feeling embarrassed or inadequate. I keep telling myself that if I just keep my head down and work hard, maybe no one will notice. But then, when something goes wrong, all those mistakes come rushing back, and I feel like I’m drowning in them. It’s exhausting.",
-        "core_issue": "career and work-related concerns",
+        "query": "I don't know, maybe it’s just this fear that I’ve reached a point where everyone expects me to be better. Like, if I mess up again, it’ll confirm all those doubts I have about myself. I think I keep waiting for the other shoe to drop, and that makes it even harder to just... be myself. It feels like there’s this pressure to prove I’m capable, and it’s overwhelming.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "when I bury my mistakes",
-            "when something goes wrong"
+            "expectations from others",
+            "fear of messing up",
+            "pressure to prove capability"
           ],
           "automatic_thoughts": [
-            "I'm trying to protect myself from feeling embarrassed or inadequate",
-            "if I just keep my head down and work hard, maybe no one will notice"
+            "everyone expects me to be better",
+            "messing up will confirm my doubts",
+            "waiting for the other shoe to drop"
           ],
           "emotions": [
-            "embarrassment",
-            "inadequacy",
-            "exhaustion"
+            "fear",
+            "overwhelm"
           ],
           "behaviors": [
-            "keep my head down",
-            "work hard"
+            "struggling to be myself"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling ashamed (finding)",
-            "Anxiety about saying the wrong thing (finding)"
+            "Anxiety about behavior or performance (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "neutral": [
-            "Undoing - mental defense mechanism (finding)",
-            "Repressing painful memories (finding)"
+            "Anxiety about appearing ridiculous (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of being in a small group (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you've identified a pattern of trying to manage difficult feelings – embarrassment and inadequacy – by keeping your head down and working hard. What do you think might happen if you allowed yourself to acknowledge those mistakes, rather than burying them?",
+        "response": "It sounds like you're carrying a lot of pressure, and that feeling of waiting for something bad to happen is really tough. Can you tell me more about where this expectation of needing to be \"better\" comes from?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot, and it takes real effort to manage those feelings of embarrassment and inadequacy. It makes sense that you'd try to protect yourself by keeping your head down and working hard.",
+            "response": "It sounds like you're carrying a lot of pressure, feeling like you need to constantly prove yourself and fearing that any mistake will reinforce negative beliefs about yourself. That’s a really tough place to be, and it makes sense that you're feeling overwhelmed.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -288,20 +971,20 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling ashamed (finding)",
-                  "label": "entailment"
+                  "concept": "entailment",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you've identified a pattern of trying to manage difficult feelings – embarrassment and inadequacy – by keeping your head down and working hard. What do you think might happen if you allowed yourself to acknowledge those mistakes, rather than burying them?",
+            "response": "It sounds like you're carrying a lot of pressure, and that feeling of waiting for something bad to happen is really tough. Can you tell me more about where this expectation of needing to be \"better\" comes from?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -322,7 +1005,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're carrying a lot of weight trying to avoid those feelings of embarrassment and inadequacy. What do you think a supportive friend might say about your efforts to keep your head down and work so hard?",
+            "response": "It sounds incredibly difficult to feel like you're constantly under pressure to meet expectations, and that a mistake would reinforce negative beliefs about yourself. What do you think someone who cares about you would say about this pressure you're feeling?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -342,300 +1025,30 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 3,
-      "patient": {
-        "role": "patient",
-        "query": "Hmm, never really thought about it that way. I guess... if I acknowledged my mistakes, I might feel more vulnerable, which scares me. But maybe it could also feel freeing? I think I worry about people seeing me as less competent or even judging me. It’s just hard to imagine it being anything but a disaster.",
-        "core_issue": "career and work-related concerns",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "acknowledging my mistakes makes me feel vulnerable",
-            "people will see me as less competent",
-            "people will judge me",
-            "it will be a disaster"
-          ],
-          "emotions": [
-            "fear",
-            "anxiety"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling ashamed (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of saying the wrong thing (finding)"
-          ],
-          "contradiction": [
-            "Undoing - mental defense mechanism (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're noticing a conflict between the potential vulnerability of acknowledging mistakes and the possibility of feeling freed by it – that's a really insightful observation. What makes you think it *could* feel freeing?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like acknowledging mistakes brings up a lot of difficult feelings for you – vulnerability, fear, and worry about what others think. It's understandable that you're finding it hard to see beyond the potential for a negative outcome.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're noticing a conflict between the potential vulnerability of acknowledging mistakes and the possibility of feeling freed by it – that's a really insightful observation. What makes you think it *could* feel freeing?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "socratic_questioning",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you're starting to consider a different possibility – that acknowledging mistakes could feel freeing, which is a really interesting thought. What's the most realistic outcome you can imagine if you were to acknowledge a mistake?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 4,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, I mean... when I think about it, it feels like carrying around this heavy backpack filled with all these mistakes. Maybe if I took some of them out and shared them, I wouldn’t feel so weighed down? Like, I could connect more with others, rather than just worrying about what they think of me. But, still... it feels risky. What if they judge me instead?",
-        "core_issue": "career and work-related concerns",
-        "schema": {
-          "triggers": [
-            "thinking about mistakes",
-            "worrying about what others think",
-            "feeling weighed down"
-          ],
-          "automatic_thoughts": [
-            "carrying a heavy backpack of mistakes",
-            "if I share, I might connect more",
-            "it feels risky",
-            "what if they judge me"
-          ],
-          "emotions": [
-            "anxiety"
-          ],
-          "behaviors": [
-            "considering sharing mistakes",
-            "avoiding connection with others"
-          ]
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Fear of saying the wrong thing (finding)",
-            "Fear of writing in public (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of being a burden to others (finding)",
-            "Anxiety about making mistakes (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're noticing a real possibility of connection, but that worry about judgment is holding you back – what's the strongest evidence you have that they *would* judge you?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot, and it takes courage to even consider sharing those burdens with someone. It makes sense that you'd feel anxious about what might happen if you did.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're noticing a real possibility of connection, but that worry about judgment is holding you back – what's the strongest evidence you have that they *would* judge you?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you're thoughtfully considering a way to ease that heavy feeling, and it takes courage to even think about sharing vulnerable parts of yourself. What's one possible positive outcome you imagine if you were to share one of those mistakes?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 5,
-      "patient": {
-        "role": "patient",
-        "query": "That’s a good question. I guess it’s more of a feeling than actual evidence. Maybe it’s just some past experiences that stick with me, where I felt judged or criticized. It’s hard to shake that off. I keep thinking about the times I made mistakes and how people reacted. Those moments replay in my head, and they overshadow any good interactions I’ve had.",
-        "core_issue": "career and work-related concerns",
-        "schema": {
-          "triggers": [
-            "past experiences",
-            "times I made mistakes",
-            "people reacted"
-          ],
-          "automatic_thoughts": [
-            "I felt judged",
-            "I felt criticized",
-            "those moments replay in my head",
-            "they overshadow any good interactions"
-          ],
-          "emotions": [
-            "fear",
-            "shame",
-            "anxiety"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Reappearance of old thoughts (finding)"
-          ],
-          "neutral": [
-            "Delusion of guilt (finding)",
-            "Undoing - mental defense mechanism (finding)",
-            "Feeling guilt (finding)",
-            "Anxiety about making mistakes (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like those past experiences are really impacting how you see things now – what do you think it is about those moments that makes them replay so vividly?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like these past experiences, where you felt judged and criticized, are really impacting how you see things now, and it's understandably difficult to move past those feelings. Can you tell me a little more about what those past experiences were like?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "past experiences",
+                  "concept": "expectations from others",
                   "label": "triggers"
+                },
+                {
+                  "concept": "fear of messing up",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "pressure to prove capability",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "overwhelm",
+                  "label": "emotions"
                 }
               ]
             }
           },
-          "socratic_questioning": {
-            "response": "It sounds like those past experiences are really impacting how you see things now – what do you think it is about those moments that makes them replay so vividly?",
+          "safety_check": {
+            "response": "That sounds incredibly difficult, and it's understandable that you're feeling overwhelmed. When you say you're waiting for the other shoe to drop, were you having any thoughts of hurting yourself or not wanting to be here?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -653,184 +1066,14 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to have those past experiences keep replaying and impacting how you see things now – it's understandable that it's hard to shake off. If you were watching a friend go through this, what might you notice about their situation that they might be missing?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 6,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it’s like they get etched into my brain or something. I think it’s because they felt so intense and painful at the time. It’s almost like I’m scared to forget them, as if doing so would make me vulnerable to making the same mistakes again. I don’t want to feel that embarrassment or shame again. It’s just... hard to let those feelings go.",
-        "core_issue": "career and work-related concerns",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I'm scared to forget them",
-            "Forgetting makes me vulnerable to making the same mistakes again"
-          ],
-          "emotions": [
-            "fear",
-            "embarrassment",
-            "shame"
-          ],
-          "behaviors": [
-            "hard to let those feelings go"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Repressing painful memories (finding)",
-            "Unpleasant memories (finding)"
-          ],
-          "neutral": [
-            "Reliving traumatic memories (finding)",
-            "Amnesia for recent events (finding)",
-            "Undoing - mental defense mechanism (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're really struggling with the intensity of these memories and the fear of repeating past mistakes – can you tell me more about what makes you think forgetting them would leave you vulnerable?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like these memories feel incredibly significant to you, and it makes sense that you'd be hesitant to let them go, especially given the intense pain you experienced. It takes courage to explore these difficult feelings, and I appreciate you sharing them with me.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Repressing painful memories (finding)",
+                  "concept": "Anxiety about behavior or performance (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Unpleasant memories (finding)",
+                  "concept": "Fear of being a burden to others (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "embarrassment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "hard to let those feelings go",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're really struggling with the intensity of these memories and the fear of repeating past mistakes – can you tell me more about what makes you think forgetting them would leave you vulnerable?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Repressing painful memories (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "I'm scared to forget them",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Forgetting makes me vulnerable to making the same mistakes again",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "embarrassment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you're really struggling with the intensity of these memories and the fear of repeating past mistakes – it makes sense that you'd want to hold onto them, even though they're painful. What do you think might be a more balanced way of looking at forgetting versus learning from these experiences?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Repressing painful memories (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "I'm scared to forget them",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "Forgetting makes me vulnerable to making the same mistakes again",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "embarrassment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "shame",
-                  "label": "emotions"
                 }
               ]
             }
@@ -842,47 +1085,52 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s because those memories remind me of my flaws, and if I forget them, I might lose the lesson, right? It feels like if I let go of that pain, I might not take things seriously and end up failing again. I don’t know... there’s this part of me that thinks holding onto them keeps me safe, but it really just weighs me down.",
-        "core_issue": "career and work-related concerns",
+        "query": "I think a lot of it comes from my upbringing. There was always this emphasis on achievement and doing things perfectly. I can remember feeling like I had to excel in school or sports, or else it was like, “What’s wrong with you?” It sticks with me, and it’s hard to shake that feeling that I need to prove myself—especially at work. It’s like I can’t escape this voice telling me I have to be the best all the time.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "memories of flaws",
-            "letting go of pain"
+            "upbringing",
+            "emphasis on achievement",
+            "pressure to excel in school",
+            "pressure to excel in sports",
+            "work environment"
           ],
           "automatic_thoughts": [
-            "forgetting means losing the lesson",
-            "holding onto pain keeps me safe"
+            "I need to prove myself",
+            "I have to be the best all the time",
+            "What's wrong with you?"
           ],
           "emotions": [
-            "fear",
-            "anxiety"
+            "anxiety",
+            "pressure",
+            "shame"
           ],
           "behaviors": [
-            "holding onto memories",
-            "avoiding letting go"
+            "striving for perfection",
+            "avoiding failure",
+            "overworking"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Unpleasant memories (finding)"
+            "Anxiety about behavior or performance (finding)",
+            "Excessively proud character (finding)"
           ],
           "neutral": [
-            "Repressing painful memories (finding)",
-            "Reliving traumatic memories (finding)",
-            "Anxiety about loss of memory (finding)"
+            "Performance anxiety (finding)",
+            "Tends to resent authority (finding)",
+            "Delusion of grandiose ability (finding)"
           ],
-          "contradiction": [
-            "Amnesia for recent events (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're caught between wanting to learn from your experiences and fearing the consequences of letting go – what makes you believe that forgetting a memory means losing the lesson?",
+        "response": "It sounds like those experiences in your upbringing really shaped how you approach things now, and that feeling of needing to prove yourself is quite persistent. Can you tell me more about what that voice saying you \"have to be the best\" actually sounds like?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're caught between wanting to learn from difficult experiences and fearing that letting go of the pain will lead to failure – and that holding onto those memories, despite the burden, feels like a way to stay safe. That's a really difficult place to be.",
+            "response": "It sounds like you experienced a lot of pressure growing up, and it's understandable that you're still feeling the need to prove yourself, especially at work. That feeling of needing to be the best all the time can be really tough to deal with.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -902,34 +1150,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "memories of flaws",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "forgetting means losing the lesson",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "holding onto pain keeps me safe",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "holding onto memories",
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're caught between wanting to learn from your experiences and fearing the consequences of letting go – what makes you believe that forgetting a memory means losing the lesson?",
+            "response": "It sounds like those experiences in your upbringing really shaped how you approach things now, and that feeling of needing to prove yourself is quite persistent. Can you tell me more about what that voice saying you \"have to be the best\" actually sounds like?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -949,160 +1177,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "holding onto memories",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "avoiding letting go",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "forgetting means losing the lesson",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "holding onto pain keeps me safe",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you're caught between wanting to learn from the past and fearing the consequences of letting go – what do you think a close friend might say about this struggle?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "holding onto memories",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "avoiding letting go",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "forgetting means losing the lesson",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "holding onto pain keeps me safe",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 8,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it’s like I almost have this weird sense that if I don’t keep reminding myself of the past, I’ll just repeat the same mistakes. I think I’ve convinced myself that those painful memories are what keep me from slipping up again. Letting them go feels like a huge risk, like suddenly I’d be wandering without a map or something. It’s confusing because I know I can’t move forward if I’m stuck in the past, but it’s so hard to find that balance",
-        "core_issue": "career and work-related concerns",
-        "schema": {
-          "triggers": [
-            "reminding myself of the past",
-            "letting go of painful memories"
-          ],
-          "automatic_thoughts": [
-            "I’ll repeat the same mistakes",
-            "those painful memories keep me from slipping up again",
-            "letting them go feels like a huge risk"
-          ],
-          "emotions": [
-            "confusion"
-          ],
-          "behaviors": [
-            "staying stuck in the past"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Repressing painful memories (finding)",
-            "Reappearance of old thoughts (finding)",
-            "Unpleasant memories (finding)"
-          ],
-          "neutral": [
-            "Anxiety about loss of memory (finding)"
-          ],
-          "contradiction": [
-            "Amnesia for recent events (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're caught in a difficult cycle, believing these memories are protecting you, even though you recognize they're holding you back – what makes you think those memories are keeping you from making mistakes?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you're caught in a difficult cycle, feeling like those memories are both a burden and a safety net, and that's understandably confusing. Could you tell me a little more about what those past mistakes were, and what you're afraid might happen if you were to let go of those memories?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're caught in a difficult cycle, believing these memories are protecting you, even though you recognize they're holding you back – what makes you think those memories are keeping you from making mistakes?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're caught in a difficult cycle, believing these memories are protecting you, even though you recognize they're holding you back – what do you think might be the *worst* thing that could happen if you were to try letting go of some of those memories, even just a little bit?",
+            "response": "It sounds like that upbringing created a really tough standard for you, and it's understandable that you're still feeling that pressure. If a friend were looking at this, what do you think they might say about how you're carrying that old message with you today?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1127,6 +1209,170 @@
                 }
               ]
             }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult, and it makes sense that you're still feeling the pressure from those experiences. When you say you feel like you need to prove yourself, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "It’s pretty harsh, honestly. It’s not just “try your best”; it’s more like, “If you don’t excel, you’re a failure.” It’s this constant nagging, saying I should always be ahead of everyone else, or else I’m not worthy. Just hearing it in my head makes me anxious, like I’m racing against some invisible clock. It feels like there’s no room for mistakes, and that really weighs on me.",
+        "core_issue": "Career and work-related concerns",
+        "schema": {
+          "triggers": [
+            "constant nagging",
+            "hearing it in my head"
+          ],
+          "automatic_thoughts": [
+            "If you don’t excel, you’re a failure",
+            "I should always be ahead of everyone else",
+            "there’s no room for mistakes"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
+          "behaviors": [
+            "racing against some invisible clock",
+            "weighs on me"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Incongruent personal expectations (finding)",
+            "Anxiety about behavior or performance (finding)",
+            "Negative automatic thoughts (finding)",
+            "Feeling a failure (finding)"
+          ],
+          "neutral": [
+            "Pressured by peers (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly difficult to carry that kind of pressure around – can you tell me more about where you think this message, \"If you don’t excel, you’re a failure,\" comes from?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly difficult to carry that kind of pressure and self-criticism around with you. It makes sense that you'd feel anxious when you're constantly hearing those messages, and it's understandable that it weighs on you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly difficult to carry that kind of pressure around – can you tell me more about where you think this message, \"If you don’t excel, you’re a failure,\" comes from?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Incongruent personal expectations",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly draining to carry that kind of pressure – that voice telling you that anything less than excelling means failure. What do you think someone who cares about you would say about that voice and the standards it's setting for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult to deal with, and it's understandable that you're feeling anxious. When you say you're hearing these messages, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about behavior or performance",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                }
+              ]
+            }
           }
         }
       }
@@ -1135,96 +1381,181 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess... it’s just this fear of being judged. It’s like those memories remind me of what I’ve done wrong, so I think, if I keep them in my mind, I’ll be more cautious and prevent myself from failing. But deep down, I know it’s not working the way I want it to. Instead, it just feels like I’m stuck in this loop of worry and dread, and I’m not sure how to break out of it.",
-        "core_issue": "career and work-related concerns",
+        "query": "I think a lot of it goes back to my parents. They had high expectations, and they were always comparing me to others, like my cousins or my friends. It felt like my worth was tied to my grades and accomplishments. I guess I internalized that message, and now it just echoes in my head every time I’m faced with a challenge. It’s hard to shake off, you know?",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "memories of past mistakes"
+            "parents' high expectations",
+            "comparison to others",
+            "facing a challenge"
           ],
           "automatic_thoughts": [
-            "fear of being judged",
-            "if I keep these memories, I'll be more cautious",
-            "I'm stuck in a loop of worry and dread"
+            "my worth is tied to my grades",
+            "I must meet high expectations",
+            "I can't shake off these feelings"
           ],
           "emotions": [
-            "fear",
-            "worry",
-            "dread"
+            "anxiety",
+            "pressure"
           ],
-          "behaviors": [
-            "preventing myself from failing"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Reappearance of old thoughts (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Unpleasant memories (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Repressing painful memories (finding)",
-            "Reliving traumatic memories (finding)"
+            "Fear of being a burden to others (finding)",
+            "Anxiety about behavior or performance (finding)",
+            "Lack of pride (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Performance anxiety (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to feel trapped in this cycle of worry, especially when you're trying to protect yourself from making mistakes. What makes you believe that holding onto these memories will actually help you avoid failing?",
+        "response": "It sounds like those experiences with your parents have had a lasting impact, and it makes sense that you're still feeling the effects. Can you tell me more about what goes through your mind when you notice that \"echo\" happening?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of worry about being judged, and you've been trying to use those memories to keep yourself safe, but it's actually keeping you stuck in a cycle of worry. That must be incredibly frustrating.",
+            "response": "It sounds like you're carrying a lot of pressure from your parents' expectations, and it's understandably difficult to shake off. It makes sense that you'd feel that way, given those experiences.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of being judged",
-                  "label": "automatic_thoughts"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "memories of past mistakes",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "parents' high expectations",
                   "label": "triggers"
                 },
                 {
-                  "concept": "loop of worry and dread",
+                  "concept": "comparison to others",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "my worth is tied to my grades",
                   "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to feel trapped in this cycle of worry, especially when you're trying to protect yourself from making mistakes. What makes you believe that holding onto these memories will actually help you avoid failing?",
+            "response": "It sounds like those experiences with your parents have had a lasting impact, and it makes sense that you're still feeling the effects. Can you tell me more about what goes through your mind when you notice that \"echo\" happening?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of being judged",
-                  "label": "automatic_thoughts"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "memories of past mistakes",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "parents' high expectations",
                   "label": "triggers"
                 },
                 {
-                  "concept": "loop of worry and dread",
-                  "label": "automatic_thoughts"
+                  "concept": "comparison to others",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worth is tied to grades",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel trapped in that cycle of worry, especially when you're trying to protect yourself from making mistakes. What do you think might be a more helpful way to approach those memories and the fear of judgment?",
+            "response": "It sounds like those experiences with your parents have really shaped how you view yourself and your abilities. Imagine a close friend were going through this – what might they say to help you see things differently?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "memories of past mistakes",
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "parents' high expectations",
                   "label": "triggers"
                 },
                 {
-                  "concept": "fear of being judged",
+                  "concept": "comparison to others",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "facing a challenge",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "my worth is tied to my grades",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "I'm stuck in a loop of worry and dread",
+                  "concept": "I must meet high expectations",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "pressure",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you've carried a lot of pressure from your parents' expectations, and it's understandably difficult to deal with. When you say it's hard to shake off, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "parents' high expectations",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "comparison to others",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "my worth is tied to my grades",
                   "label": "automatic_thoughts"
                 }
               ]

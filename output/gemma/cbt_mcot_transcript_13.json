@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Stu and I were talking about it before I came in, and I can't really figure out why I'm so bothered. We have such a great relationship. I mean, I feel lucky as a woman in the 21st century to have a man who cares about her and takes her out and makes her feel appreciative. I've never had that before. And I go home happy. I go home excited to see him. I can't name a single friend or even my sisters who have that. And still all I hear is there are criticisms, there are words, how weird it is, and why would a 58 year old man want to be with you? You're not even 30 yet, you know? And I just don't see that. I don't see age being an issue. But again, like, I'm just, I'm waking up with those thoughts.",
-    "core_issue": "relationships (romantic, family, friendships)",
+    "seed": "Yes. When I try to pull weeds, it just takes me forever in my garden, and then I have to come in and sit down, and then I just don't understand why I can't do it like I used to, and it's frustrating.",
+    "core_issue": "Health-related worries",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,50 +17,47 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Stu and I were talking about it before I came in, and I can't really figure out why I'm so bothered. We have such a great relationship. I mean, I feel lucky as a woman in the 21st century to have a man who cares about her and takes her out and makes her feel appreciative. I've never had that before. And I go home happy. I go home excited to see him. I can't name a single friend or even my sisters who have that. And still all I hear is there are criticisms, there are words, how weird it is, and why would a 58 year old man want to be with you? You're not even 30 yet, you know? And I just don't see that. I don't see age being an issue. But again, like, I'm just, I'm waking up with those thoughts.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yes. When I try to pull weeds, it just takes me forever in my garden, and then I have to come in and sit down, and then I just don't understand why I can't do it like I used to, and it's frustrating.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "talking with Stu",
-            "hearing criticisms",
-            "thoughts about age difference"
+            "pulling weeds",
+            "working in the garden"
           ],
           "automatic_thoughts": [
-            "I can't figure out why I'm so bothered",
-            "there are criticisms about my relationship",
-            "it's weird for a 58 year old man to be with me",
-            "age is an issue for others but not for me"
+            "it takes me forever",
+            "I can't do it like I used to",
+            "it's frustrating"
           ],
           "emotions": [
-            "bothered",
-            "happy",
-            "excited"
+            "frustration"
           ],
           "behaviors": [
-            "going home happy",
-            "waking up with thoughts"
+            "sit down",
+            "avoid gardening"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling of being slowed down (finding)",
+            "Able to remember old motor skills (finding)"
+          ],
           "neutral": [
-            "Anxiety about resuming sexual relations (finding)",
-            "Pressured by partner (finding)",
-            "Fear of reaction regarding family planning choices (finding)",
-            "Sexual relationship details (observable entity)"
+            "Loss of interest in previously enjoyable activity (finding)",
+            "Unable to remember new motor skills (finding)"
           ],
           "contradiction": [
-            "Ability to remember own age (observable entity)"
+            "Unable to remember old motor skills (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're experiencing a real conflict between how you feel about Stu and the criticisms you're hearing – what do you think might be contributing to those critical thoughts when you wake up?",
+        "response": "It sounds like gardening has become quite challenging for you lately. What specifically makes you feel like you \"can't do it like you used to?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a real conflict – feeling incredibly fortunate and happy in your relationship with Stu, while also being bothered by these critical thoughts about the age difference. It makes sense that you're struggling to understand why those thoughts are impacting you so much.",
+            "response": "It sounds like gardening, specifically pulling weeds, has become really challenging and frustrating for you. It's understandable that you'd feel that way when things don't go as easily as they used to.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -77,13 +74,21 @@
                 },
                 {
                   "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "neutral",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're experiencing a real conflict between how you feel about Stu and the criticisms you're hearing – what do you think might be contributing to those critical thoughts when you wake up?",
+            "response": "It sounds like gardening has become quite challenging for you lately. What specifically makes you feel like you \"can't do it like you used to?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -101,12 +106,20 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "feeling of being slowed down",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "able to remember old motor skills",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel so happy and fulfilled in your relationship, and then be pulled down by those critical thoughts about the age difference. What do you think someone who truly cares about you and wants the best for you would say about those criticisms?",
+            "response": "It sounds really frustrating when weeding takes longer than you'd like and you feel like things aren't the same as before – what's one thing you appreciate about your garden, even if the weeding is tough?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -126,7 +139,42 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "entailment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "neutral",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like gardening is bringing up a lot of frustration for you right now. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "neutral",
                   "label": "unknown"
                 }
               ]
@@ -139,43 +187,43 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just… I don't know, it’s hard to shake off those thoughts. Like, part of me really cares about Stu, but then there's this nagging voice saying I should be feeling differently or that I’m not doing enough. It’s frustrating because I don’t even know where that voice comes from. Sometimes I just wake up and feel this heaviness, like I'm already behind before the day even starts.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, it’s just... every time I go outside, I feel this weight on my chest. Like, I used to love digging in the dirt and watching everything grow, but now I just worry about getting sick or something going wrong. I can’t enjoy it like I used to.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "waking up",
-            "thoughts about Stu"
+            "going outside"
           ],
           "automatic_thoughts": [
-            "I should be feeling differently",
-            "I’m not doing enough"
+            "worry about getting sick",
+            "something going wrong"
           ],
           "emotions": [
-            "frustration",
-            "heaviness"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding outdoor activities"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Stupor (finding)",
-            "Intrusive thoughts (finding)",
-            "Persistent thoughts (finding)"
+            "Fear of going out (finding)",
+            "Fear of becoming fat (finding)",
+            "Anxiety about body function or health (finding)"
           ],
           "neutral": [
-            "Negative automatic thoughts (finding)",
-            "Repressing thoughts (finding)"
+            "Heightened global phobia (finding)",
+            "Anxiety about altered body image (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those thoughts about Stu and feeling like you're not doing enough are really weighing on you – what do you think might be contributing to that nagging voice you mentioned?",
+        "response": "It sounds really frustrating to have that enjoyment taken away by these worries – can you tell me more about what specifically goes through your mind when you feel that weight on your chest?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a real conflict between your care for Stu and these critical thoughts, and that heaviness when you wake up is understandably frustrating. It takes courage to acknowledge those conflicting feelings and the uncertainty about where they're coming from.",
+            "response": "It sounds really frustrating to have that enjoyment taken away from you, and to feel that weight on your chest when you try to do something you used to love. It makes sense that you'd feel anxious when you're worrying about getting sick or something going wrong.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -191,14 +239,18 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like those thoughts about Stu and feeling like you're not doing enough are really weighing on you – what do you think might be contributing to that nagging voice you mentioned?",
+            "response": "It sounds really frustrating to have that enjoyment taken away by these worries – can you tell me more about what specifically goes through your mind when you feel that weight on your chest?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -214,14 +266,18 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "Persistent thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're caught between caring for Stu and a critical inner voice, and that heaviness when you wake up can be really draining. If a friend were observing this, what do you think they might notice about the situation or your reaction to it?",
+            "response": "It sounds really frustrating to have that enjoyment taken away by these worries – it's understandable that you'd feel weighed down. If a friend were watching you, what do you think they might say about how you're approaching going outside now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -237,7 +293,38 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really difficult, and it's understandable that you're feeling weighed down by that. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
@@ -250,45 +337,45 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s just... I’ve always had this need to prove myself, you know? Like, if I'm not perfect or meeting expectations, then maybe I’m not worth it. And with Stu, I want to give him my best, but there’s always this fear that I’m gonna fall short. It makes me second-guess everything, and I just end up feeling stuck.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "It’s like this loop of thoughts, you know? I suddenly picture all the things that could happen—getting hurt, something serious with my health—and then I can’t shake it off. It feels like I’m stuck there, and it just makes everything feel so heavy and dark. I don’t want to feel like this, but I can’t help it.",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [
-            "wanting to prove myself",
-            "not meeting expectations",
-            "wanting to give my best"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "if I'm not perfect, I'm not worth it",
-            "I'm gonna fall short",
-            "I second-guess everything"
+            "I could get hurt",
+            "Something serious with my health could happen"
           ],
           "emotions": [
             "fear",
-            "stuck"
+            "anxiety",
+            "sadness"
           ],
-          "behaviors": []
+          "behaviors": [
+            "feeling stuck",
+            "not being able to shake it off"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of saying the wrong thing (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Unable to resist dangerous thoughts (finding)",
+            "Sense of impending doom (finding)"
           ],
-          "neutral": [],
+          "neutral": [
+            "Depressive delusion of catastrophe (finding)",
+            "Anxiety about going crazy (finding)"
+          ],
           "contradiction": [
-            "Stupor (finding)"
+            "Able to resist dangerous thoughts (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like this need to prove yourself creates a lot of pressure, and it's understandable that you'd feel stuck when you're worried about falling short – can you tell me more about what \"giving your best\" looks like in this situation with Stu?",
+        "response": "It sounds incredibly distressing to be caught in that cycle of worrying thoughts—it's understandable that you'd feel stuck and overwhelmed. Can you tell me a little more about what usually triggers these thoughts to start?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of pressure to perform and be \"enough,\" and that fear of falling short with Stu is leaving you feeling really stuck. It takes courage to share that, and I appreciate you opening up about it.",
+            "response": "It sounds incredibly distressing to be caught in that cycle of worrying thoughts and feeling so stuck—it takes a lot of courage to share that. I hear you saying you're experiencing a lot of fear and sadness, and it's understandable that you'd want to find a way to feel differently.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -308,14 +395,162 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like this need to prove yourself creates a lot of pressure, and it's understandable that you'd feel stuck when you're worried about falling short – can you tell me more about what \"giving your best\" looks like in this situation with Stu?",
+            "response": "It sounds incredibly distressing to be caught in that cycle of worrying thoughts—it's understandable that you'd feel stuck and overwhelmed. Can you tell me a little more about what usually triggers these thoughts to start?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to be caught in that loop of worrying thoughts, and it's understandable that you're feeling so stuck. If a friend were watching you go through this, what do you think they might notice about how you're thinking?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it takes a lot of courage to share that. When you mentioned those thoughts about getting hurt or something serious happening with your health, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Well, sometimes it’s just something small, like seeing someone cough or hearing about an illness on the news. It’s like my mind takes off from there, and I can’t stop it. I’ll start imagining all the worst scenarios, and before I know it, I’m completely spiraling. It’s frustrating because I want to feel normal again, but it just feels like I’m always on edge.",
+        "core_issue": "Health-related worries",
+        "schema": {
+          "triggers": [
+            "seeing someone cough",
+            "hearing about an illness on the news"
+          ],
+          "automatic_thoughts": [
+            "imagining all the worst scenarios",
+            "I can't stop it",
+            "I'm completely spiraling"
+          ],
+          "emotions": [
+            "frustration",
+            "anxiety"
+          ],
+          "behaviors": [
+            "feeling on edge"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about going crazy (finding)",
+            "Obsessional thoughts of disease (finding)",
+            "Obsessional thoughts of giving others illness (finding)",
+            "Unable to resist dangerous thoughts (finding)",
+            "Obsessional thoughts of causing harm to self (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly distressing when these triggers lead to such intense spirals – can you tell me a little more about what specifically goes through your mind when you start imagining those worst-case scenarios?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly distressing to have these intense spirals triggered by seemingly small things, and it's understandable that you're feeling frustrated and on edge. It takes a lot of courage to describe what you're experiencing.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing when these triggers lead to such intense spirals – can you tell me a little more about what specifically goes through your mind when you start imagining those worst-case scenarios?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -338,7 +573,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like this need to prove yourself creates a lot of pressure, and it's understandable that you'd feel stuck when you're worried about falling short. What's one thing a friend might say to you about this pressure you're putting on yourself?",
+            "response": "It sounds incredibly distressing to have your thoughts take off like that, even from something small. If a friend were watching this happen, what do you think they might notice about how you're interpreting these situations?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -363,97 +598,15 @@
                 }
               ]
             }
-          }
-        }
-      }
-    },
-    {
-      "turn": 3,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it’s like I think I need to be the perfect partner, always supportive and understanding, never having a bad day or a moment of weakness. I feel like if I don’t have all the right answers or if I’m not always cheerful, then maybe he’ll think I’m not good enough for him. It’s exhausting to keep that up, and sometimes I just freeze because I don’t want to mess things up.",
-        "core_issue": "relationships (romantic, family, friendships)",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I need to be the perfect partner",
-            "I must always be supportive and understanding",
-            "I can't have a bad day or a moment of weakness",
-            "If I don't have all the right answers, I'm not good enough",
-            "If I'm not always cheerful, he won't think I'm good enough"
-          ],
-          "emotions": [
-            "exhaustion"
-          ],
-          "behaviors": [
-            "freeze",
-            "avoid messing things up"
-          ]
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Tends to be intolerant of frustration (finding)",
-            "Able to resist obsessional thoughts (finding)",
-            "Tends to be self-conscious (finding)",
-            "Anxious avoidant attachment (finding)"
-          ],
-          "contradiction": [
-            "Emotionally stable (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly draining to feel like you need to maintain this level of perfection – what makes you believe you need to be the perfect partner?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly draining to feel like you need to maintain this image of being the \"perfect\" partner, and that the pressure of that expectation is leading to feelings of exhaustion and even causing you to freeze. It takes a lot of energy to constantly monitor yourself and worry about what someone else thinks.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
           },
-          "socratic_questioning": {
-            "response": "It sounds incredibly draining to feel like you need to maintain this level of perfection – what makes you believe you need to be the perfect partner?",
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it makes sense that you'd feel frustrated when these spirals happen. When you say you're spiraling, were you having any thoughts of hurting yourself or not wanting to be here?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly draining to feel like you need to maintain this level of perfection – what do you think a close friend would say about you putting so much pressure on yourself?",
-            "reasoning": {
-              "retrieved_concepts_used": [
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -476,120 +629,157 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s just this... feeling I've always had. Like if I’m not perfect, then people will leave or judge me. It’s like I’ve seen relationships fall apart over little things, and I just... I don’t want that to happen to me, to us. There’s this pressure inside, and it feels like if I just keep up this façade, maybe I can make everything okay. But then I just end up feeling more isolated, like I can’t show my real self",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "It’s hard to describe, but it’s like this flood of images and thoughts just crashes over me. I think about being sick and not being able to take care of my family or being a burden to them. I get so caught up in how everything could fall apart, and I just feel so helpless. It’s exhausting, and sometimes I can’t even tell what’s real anymore.",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [
-            "pressure inside",
-            "fear of judgment",
-            "seeing relationships fall apart"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "if I’m not perfect, people will leave",
-            "I must keep up this façade",
-            "I can’t show my real self"
+            "I might be sick and unable to take care of my family",
+            "I could be a burden to them",
+            "Everything could fall apart",
+            "I feel helpless",
+            "I can't tell what's real anymore"
           ],
           "emotions": [
-            "fear",
-            "anxiety",
-            "isolation"
+            "helpless",
+            "exhaustion"
           ],
-          "behaviors": [
-            "avoiding showing real self",
-            "maintaining façade"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Social isolation (rejection) (finding)",
-            "Fear of being in a small group (finding)",
-            "Emotional immaturity (finding)"
+          "entailment": [
+            "Feeling of loss of feeling (finding)"
           ],
-          "contradiction": [
-            "Vulnerable personality (finding)"
-          ]
+          "neutral": [
+            "Depressive delusion of catastrophe (finding)",
+            "Anxiety about collapsing (finding)",
+            "Sense of impending doom (finding)",
+            "Feeling like wanting to escape (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like this feeling has been a significant part of your experience, and it's understandable that you'd want to protect yourself from those painful experiences you've witnessed. What do you notice about the \"little things\" that have led to relationships falling apart?",
-        "protocol_used": "socratic_questioning",
+        "response": "Okay, it sounds incredibly overwhelming to experience a flood of images and thoughts like that. It takes a lot of courage to describe something so difficult to put into words. It sounds like you're carrying a heavy load of worry about your family's well-being and your ability to support them, and that those worries are leading you to feel helpless and exhausted. It's understandable that you'd feel like you can't tell what's real when you're experiencing that much distress.\n\n\n\nLet’s explore this a bit further. When you say these images and thoughts \"crash over\" you, can you tell me a little more about what that feels like?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of worry about what others think and a deep desire to protect yourself and your relationships. That feeling of pressure and the need to maintain a façade can be incredibly exhausting, and it's understandable that you'd feel isolated when you can't be your true self.",
+            "response": "That sounds incredibly overwhelming, and it takes a lot of courage to share something so difficult. It sounds like you're experiencing a really intense rush of distressing thoughts and feelings right now.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
+                  "concept": "Feeling of loss of feeling (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressive delusion of catastrophe (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxious about collapsing (finding)",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Feeling like wanting to escape (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "helpless",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
+                  "concept": "exhaustion",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like this feeling has been a significant part of your experience, and it's understandable that you'd want to protect yourself from those painful experiences you've witnessed. What do you notice about the \"little things\" that have led to relationships falling apart?",
+            "response": "That sounds incredibly overwhelming; it takes a lot of strength to experience and describe that. Can you tell me more about what makes you feel like you might be a burden to your family?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Depressive delusion of catastrophe (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Anxiety about collapsing (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "Feeling like wanting to escape (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "helpless",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly difficult to constantly feel like you're walking on eggshells, and it makes sense that you'd want to protect yourself and your relationships. What do you think someone who cares about you would say about you trying to maintain this façade?",
+            "response": "That sounds incredibly overwhelming, and it makes sense that you'd feel exhausted when you're experiencing a rush of thoughts like that. If a friend were watching you go through this, what do you think they might say about what you're experiencing?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Depressive delusion of catastrophe (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Feeling like wanting to escape (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "helpless",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly overwhelming, and it takes a lot of courage to share that. When you say you feel like things are falling apart, are you having any thoughts of wanting to not be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive delusion of catastrophe (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling like wanting to escape (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "helpless",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
                 }
               ]
             }
@@ -601,45 +791,46 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I mean, it’s always the small stuff that builds up, right? Like the little misunderstandings that turn into bigger arguments if they aren’t addressed. I think I just get so scared of those little things, like if I don’t handle them perfectly, it could spiral out of control. I don’t want to be the reason for something falling apart, but sometimes I don’t even know how to approach those little moments without feeling overwhelmed.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "It’s like... I’m just sitting there and then suddenly it feels like the walls are closing in. My heart starts racing, and I can almost feel the panic creeping in. It’s hard to breathe sometimes, and I just feel this urge to escape, but I can’t really go anywhere. It's like I’m trapped in my own mind, and I just want it to stop, but it keeps coming back.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "small misunderstandings",
-            "little arguments",
-            "not handling things perfectly"
+            "sitting there",
+            "walls closing in"
           ],
           "automatic_thoughts": [
-            "it could spiral out of control",
-            "I don’t want to be the reason for something falling apart",
-            "I don’t know how to approach those moments"
+            "I need to escape",
+            "I'm trapped in my own mind"
           ],
           "emotions": [
-            "scared",
-            "overwhelmed"
+            "panic",
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "urge to escape"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Fear of losing emotional control (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Feeling like wanting to escape (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about going crazy (finding)"
+            "Fear of collapsing (finding)",
+            "Anxiety about collapsing (finding)",
+            "Hysterical trance (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Free-floating anxiety (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're noticing a pattern where small issues feel really significant, and you're worried about how you'll handle them – what makes those little moments feel so overwhelming?",
-        "protocol_used": "socratic_questioning",
+        "response": "Okay, that sounds incredibly distressing. It's really tough when you feel like you're trapped and experiencing that sense of panic and the walls closing in. It sounds like a very overwhelming experience.\n\nIt takes a lot of courage to describe what you're going through. Can you tell me a little more about what's happening right before you feel those walls closing in? I'm curious to understand what might be triggering this feeling.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're noticing how those small moments can feel really significant, and it's understandable that you'd feel scared when you worry about things spiraling out of control. It takes courage to acknowledge that.",
+            "response": "That sounds incredibly distressing – it’s understandable that you’d want it to stop when you feel those walls closing in and experience that overwhelming urge to escape. It takes a lot of courage to describe what you're going through.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -655,14 +846,18 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
+                  "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "feeling like wanting to escape",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're noticing a pattern where small issues feel really significant, and you're worried about how you'll handle them – what makes those little moments feel so overwhelming?",
+            "response": "That sounds incredibly distressing; it’s understandable you’d want it to stop. Can you tell me a little more about what’s going through your mind when you feel those walls closing in?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -682,18 +877,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Fear of losing emotional control (finding)",
-                  "label": "entailment"
+                  "concept": "entailment",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're noticing a pattern where small moments feel really significant, and you're worried about what might happen if you don't handle them just right – what’s the most realistic outcome you imagine when you think about those moments spiraling out of control?",
+            "response": "That sounds incredibly distressing, and it makes sense you'd want it to stop. If a friend were watching this happen, what do you think they might notice about what's going on?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -713,12 +904,43 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "feeling like wanting to escape",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of losing emotional control (finding)",
-                  "label": "entailment"
+                  "concept": "panic",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it makes sense you'd want it to stop. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
                 }
               ]
             }
@@ -730,153 +952,126 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I think... it’s that fear of rejection or disappointment. Like, if I mess up or say the wrong thing, it’ll just confirm all those doubts I have about myself, you know? And then I worry about what that means for my relationships. I feel like I’m constantly walking on eggshells, and I don’t want to ruin anything, but the pressure builds up and makes everything seem so much bigger than it is. It’s like I can't let the real stuff out because I",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Thank you for saying that. It means a lot. Usually, it happens when I’m by myself or when I’m in a situation where I can’t just get up and leave—like at a family gathering or even just sitting at home. I start to notice little things around me, like the ticking of a clock or someone laughing too loud, and it just... builds up. Before I know it, I feel like I can’t breathe, and everything feels too much. It’s like I",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "fear of rejection",
-            "fear of disappointment",
-            "messing up",
-            "saying the wrong thing",
-            "worry about relationships",
-            "pressure builds up"
+            "by myself",
+            "family gathering",
+            "sitting at home",
+            "ticking of a clock",
+            "someone laughing too loud"
           ],
           "automatic_thoughts": [
-            "confirm doubts about myself",
-            "everything seems bigger than it is",
-            "can't let the real stuff out"
+            "I can’t breathe",
+            "everything feels too much"
           ],
           "emotions": [
-            "fear",
             "anxiety"
           ],
-          "behaviors": [
-            "walking on eggshells",
-            "avoiding conflict"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Fear of losing emotional control (finding)",
-            "Fear of being a burden to others (finding)"
+          "entailment": [],
+          "neutral": [
+            "Anxiety about collapsing (finding)",
+            "Free-floating anxiety (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about going crazy (finding)",
+            "Mild anxiety (finding)"
           ],
-          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot of worry about how your actions might impact your relationships – can you tell me more about what goes through your mind when you feel that pressure building up?",
+        "response": "It sounds like these situations create a real sense of overwhelm for you. Can you tell me a little more about what’s going through your mind when you start noticing those little things, like the ticking clock?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of worry about how your actions might affect your relationships, and that fear is making it hard to feel comfortable and genuine. It takes courage to share that, and I appreciate you opening up about it.",
+            "response": "It sounds incredibly distressing to experience that build-up of anxiety, especially when you feel trapped in situations like family gatherings or even just at home. It takes courage to describe what you're going through.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of rejection",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "fear of disappointment",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "messing up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "saying the wrong thing",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worry about relationships",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "walking on eggshells",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "pressure builds up",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "confirm doubts about myself",
-                  "label": "automatic_thoughts"
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're carrying a lot of worry about how your actions might impact your relationships – can you tell me more about what goes through your mind when you feel that pressure building up?",
+            "response": "It sounds like these situations create a real sense of overwhelm for you. Can you tell me a little more about what’s going through your mind when you start noticing those little things, like the ticking clock?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of rejection",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "fear of disappointment",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "messing up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "saying the wrong thing",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worry about relationships",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "pressure builds up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "confirm doubts about myself",
-                  "label": "automatic_thoughts"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're carrying a lot of worry about how your actions might affect your relationships, and that pressure can definitely make things feel overwhelming. What’s one thing a close friend might say to you about how you’re handling this?",
+            "response": "It sounds incredibly distressing to experience that build-up and feel like you can’t breathe. Can you tell me, if you were watching a friend go through this, what might you notice about what's happening for them?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of rejection",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "fear of disappointment",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "messing up",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "saying the wrong thing",
-                  "label": "entailment"
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it takes courage to share that with me. When you say you feel like you can’t breathe and everything feels too much, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "worry about relationships",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "pressure builds up",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "confirm doubts about myself",
-                  "label": "automatic_thoughts"
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
@@ -888,51 +1083,50 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Um, it’s like I start imagining all the worst-case scenarios... like, what if I say something that upsets him? Or what if he thinks I’m not good enough to be with him? My mind just races, and I can feel my heart pounding. It’s exhausting because I know I can’t predict everything, but it feels almost impossible not to spiral into those thoughts. And then I end up feeling so alone with all that pressure, like I can't share it with anyone, even",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, when I hear the clock ticking, it’s like it amplifies everything else. My thoughts start racing, and I get this feeling that time is slipping away or running out. It’s almost like I can feel my heart pounding in sync with those ticks. Then I start to think about everything I haven’t done or all the things that could go wrong, and it just spirals from there. I wish I could silence it, but it’s like the more I try, the louder it",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "hearing the clock ticking"
+          ],
           "automatic_thoughts": [
-            "what if I say something that upsets him?",
-            "what if he thinks I’m not good enough to be with him?",
-            "I can’t predict everything",
-            "it feels almost impossible not to spiral into those thoughts"
+            "time is slipping away",
+            "I haven't done enough",
+            "things could go wrong"
           ],
           "emotions": [
             "anxiety",
-            "exhaustion",
-            "loneliness",
-            "pressure"
+            "fear"
           ],
           "behaviors": [
-            "not sharing feelings with anyone"
+            "trying to silence the clock"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling nervous (finding)"
+            "Sense of impending doom (finding)",
+            "Racing thoughts (finding)",
+            "Time seems to go unnaturally fast (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of losing emotional control (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Changed perception of time (finding)",
+            "Disorientated in time (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Okay, it sounds like you're experiencing a really difficult cycle right now. You're anticipating potential negative reactions from him, and those thoughts – \"what if I upset him?\" or \"what if he doesn't think I'm good enough?\" – are triggering a lot of physical sensations like a pounding heart and leaving you feeling exhausted and alone. It's understandable that you'd feel overwhelmed when you recognize you can't predict everything, and that it feels almost impossible to stop those thoughts from spiraling. \n\nIt takes a lot of courage to describe something like this, and it sounds incredibly draining to carry all of that pressure on your own.\n\n\n\nLet's pause here. It sounds like these \"what if\" thoughts are really impacting you. Could you tell me a little more about what happens *right before* you start imagining these worst-case scenarios?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds incredibly distressing to have that experience with the clock ticking – what do you think might be contributing to that feeling that time is slipping away?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to be caught in those cycles of worrying about what might happen and feeling so much pressure – it makes perfect sense that you'd feel exhausted. It takes a lot of courage to share this, and I appreciate you opening up about it.",
+            "response": "It sounds incredibly distressing to have that experience with the clock ticking, and to feel like time is slipping away and things are spiraling. It takes a lot of courage to share that, and I appreciate you describing what's happening for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
                   "concept": "automatic_thoughts",
@@ -947,16 +1141,28 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
-                  "label": "unknown"
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Racing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Time seems to go unnaturally fast",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to be caught in those cycles of worrying about what might happen. What do you notice about the thoughts themselves – are they based on past experiences, or are they more like predictions about the future?",
+            "response": "It sounds incredibly distressing to have that experience with the clock ticking – what do you think might be contributing to that feeling that time is slipping away?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -970,20 +1176,28 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "sense of impending doom",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "entailment",
-                  "label": "unknown"
+                  "concept": "racing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "time seems to go unnaturally fast",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to be caught in those cycles of worrying about what might happen and feeling so much pressure. What's one thing a close friend might say to you if they noticed you were feeling this way?",
+            "response": "It sounds incredibly distressing to have that clock ticking trigger such a cascade of thoughts and feelings. What's one thing a friend might say to you about how you're interpreting the ticking and what it means?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -997,12 +1211,35 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "sense of impending doom",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "entailment",
-                  "label": "unknown"
+                  "concept": "racing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "time seems to go unnaturally fast",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it makes sense you'd want to silence it. When you mentioned those thoughts, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "racing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "time seems to go unnaturally fast",
+                  "label": "entailment"
                 }
               ]
             }
@@ -1014,46 +1251,47 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Um, I think it usually happens when I feel a bit vulnerable or when something feels off between us. Like, if he seems distracted or if we’ve had a small disagreement, that’s when my mind really starts racing. It’s like I pick apart everything he says or does, trying to figure out if something’s wrong or if I’ve accidentally done something to upset him. And then, when I start thinking about it, I just spiral into these scenarios where everything goes wrong, and I can",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "I guess... it might be that I feel like there’s so much I want to do but never enough time to do it. Or maybe I’m just scared of missing out on things or not being able to enjoy life because I’m so caught up in these worries. It's like, I know I should be enjoying every moment, but instead, I’m just stuck in my head. It’s like I’m watching life pass by without really being a part of it, and that thought just makes everything",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "feeling vulnerable",
-            "something feels off",
-            "he seems distracted",
-            "small disagreement"
+            "feeling overwhelmed with tasks",
+            "worrying about missing out",
+            "thinking about enjoying life"
           ],
           "automatic_thoughts": [
-            "picking apart everything he says or does",
-            "trying to figure out if something's wrong",
-            "wondering if I've upset him",
-            "spiraling into scenarios where everything goes wrong"
+            "never enough time to do everything",
+            "scared of missing out",
+            "stuck in my head",
+            "watching life pass by"
           ],
           "emotions": [
-            "anxiety"
+            "fear",
+            "anxiety",
+            "frustration"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Tends to turn anger against self (finding)"
+            "Fear of going out (finding)",
+            "Fear of going crazy (finding)"
           ],
           "neutral": [
-            "Obsessional thoughts of explosions (finding)",
-            "Compulsion to act on thoughts (finding)",
-            "Unable to resist dangerous thoughts (finding)",
-            "Mood swings (finding)"
+            "Feeling like wanting to escape (finding)",
+            "Feels life is meaningless (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like these racing thoughts and scenarios can be really distressing – what's the most immediate thought that pops into your head when you notice he seems distracted?",
+        "response": "It sounds incredibly frustrating to feel like you're watching life pass by – what thoughts are going through your head when you notice that happening?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like when you sense a shift in the dynamic, or feel vulnerable, your mind goes into overdrive, trying to understand what's happening and anticipate potential problems. That must be really unsettling.",
+            "response": "It sounds incredibly frustrating to feel pulled in so many directions and like you're missing out on truly enjoying life. It takes courage to acknowledge that feeling of being stuck in your head and watching life pass by.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1073,14 +1311,38 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
+                  "concept": "feeling overwhelmed with tasks",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worrying about missing out",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking about enjoying life",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "never enough time to do everything",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "scared of missing out",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "stuck in my head",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "watching life pass by",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like these racing thoughts and scenarios can be really distressing – what's the most immediate thought that pops into your head when you notice he seems distracted?",
+            "response": "It sounds incredibly frustrating to feel like you're watching life pass by – what thoughts are going through your head when you notice that happening?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1103,7 +1365,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to get caught up in those spirals – it makes sense you'd feel anxious when you're picking apart his words and actions. What's one other possible explanation for his distraction or the disagreement, something that might not be about you?",
+            "response": "It sounds incredibly frustrating to feel like you're watching life pass by while worrying about all the things you want to do – what do you think a close friend might say about how you're approaching this?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1124,6 +1386,33 @@
                 },
                 {
                   "concept": "alternative_perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it takes courage to share that. When you say things like \"watching life pass by,\" were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
@@ -1136,106 +1425,152 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just... I feel a wave of panic, like my heart sinks. The first thing that hits me is, “What did I do wrong?” Or sometimes I think, “Is he losing interest in me?” It’s like I can’t help but jump to those conclusions, and then it feels like I’m just drowning in all these fears. It's so hard to just breathe and not let my mind run wild.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "It’s like this sinking feeling, and I start to think about how I should be happy or having fun. Instead, I just feel this heaviness. I think, \"Why can’t I just relax and be present?\" and that makes it even worse. It’s like I’m stuck in this cycle where I’m aware of what I’m missing, but I can't seem to break free from the worry. It just feels so unfair, and I get angry at myself for not being able to enjoy",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "thinking about happiness",
+            "awareness of missing out",
+            "feeling stuck"
+          ],
           "automatic_thoughts": [
-            "What did I do wrong?",
-            "Is he losing interest in me?"
+            "I should be happy",
+            "Why can’t I just relax and be present?",
+            "I can't seem to break free from the worry",
+            "It feels so unfair",
+            "I get angry at myself for not being able to enjoy"
           ],
           "emotions": [
-            "panic",
-            "fear"
+            "sinking feeling",
+            "heaviness",
+            "worry",
+            "anger"
           ],
-          "behaviors": [
-            "struggling to breathe",
-            "letting my mind run wild"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)",
-            "Feeling nervous (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about going crazy (finding)"
+            "Feeling of loss of feeling (finding)",
+            "Feeling empty (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)"
+            "Anxiety about collapsing (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Free-floating anxiety (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Okay, it sounds incredibly distressing to experience that wave of panic and those racing thoughts. It's understandable that you're struggling to breathe and feel overwhelmed when your mind is going wild. You mentioned that when this happens, you immediately think, \"What did I do wrong?\" or \"Is he losing interest in me?\". It takes a lot of courage to share that, and it sounds like these thoughts are really impacting how you feel.\n\nLet's take a moment to acknowledge how difficult it is to deal with these intense feelings. It's completely normal to feel anxious and have these kinds of thoughts, especially in relationships. Many people experience similar patterns. Can you tell me a little more about what it's like when you notice yourself starting to think, \"What did I do wrong?\" – what's happening right before that thought pops up?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds incredibly frustrating to feel stuck in that cycle, especially when you're noticing the gap between how you *think* you should feel and how you actually do. Can you tell me more about what goes through your mind when you notice that \"sinking feeling\"?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to experience that wave of panic and those racing thoughts, especially when it feels like you're struggling to breathe. It takes a lot of courage to share that, and I want you to know I hear you.",
+            "response": "It sounds incredibly frustrating to be experiencing that sinking feeling and then feeling angry with yourself for not being able to enjoy things. It takes courage to describe feeling so stuck in a cycle of worry and missing out.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "panic",
+                  "concept": "sinking feeling",
                   "label": "emotions"
                 },
                 {
-                  "concept": "fear",
-                  "label": "entailment"
+                  "concept": "heaviness",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "feeling stuck",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
+                  "concept": "anger",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "should be happy",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to experience that wave of panic and those immediate thoughts – “What did I do wrong?” or “Is he losing interest?” Can you tell me a little more about what’s happening right before you notice that sinking feeling?",
+            "response": "It sounds incredibly frustrating to feel stuck in that cycle, especially when you're noticing the gap between how you *think* you should feel and how you actually do. Can you tell me more about what goes through your mind when you notice that \"sinking feeling\"?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "panic",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear",
-                  "label": "entailment"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "triggers",
+                  "concept": "emotions",
                   "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling of loss of feeling",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to experience that wave of panic and those racing thoughts – it's understandable that you're struggling to breathe and feel overwhelmed. What's one thing a close friend might say to you if they saw you reacting this way?",
+            "response": "It sounds incredibly frustrating to feel stuck in that cycle, especially when you're wishing you could just relax and enjoy things. Imagine a friend was going through this – what do you think they might say about how you're handling it?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "panic",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear",
-                  "label": "entailment"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "emotions",
                   "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling of loss of feeling",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult, and it's understandable that you're feeling so frustrated. When you described this heaviness and feeling stuck, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling of loss of feeling",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about losing emotional control",
+                  "label": "neutral"
                 }
               ]
             }

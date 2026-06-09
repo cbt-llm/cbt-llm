@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "So I'm in school, and every few weeks we have, like, papers to write, and I know, I know it. I know I can do it. It's just actually sitting down and doing it. Well, I get kind of annoyed with it, and then I'm like, well, you know, I've already, you know, it's already night time. I'll try and try to do it tomorrow. And then, you know, either tomorrow doesn't happen or the same thing happens, and it's just. And then I end up, you know, rushing right at the end of, you know, due tomorrow, and I'm getting all these five pages done. It's really hard for me.",
-    "core_issue": "academic and educational concerns",
+    "seed": "Yeah, I just feel like you're the only one that can help me, you know, I mean, my boyfriend, like, things aren't going well with him. I thought he could help me, but I guess he can't. And I think he's running around on me and all that. So I was just like, well, let me reach out to doctor Grande and see if it can help me, because it seems like my last resort.",
+    "core_issue": "Relationships (romantic, family, friendships)",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,27 +17,26 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "So I'm in school, and every few weeks we have, like, papers to write, and I know, I know it. I know I can do it. It's just actually sitting down and doing it. Well, I get kind of annoyed with it, and then I'm like, well, you know, I've already, you know, it's already night time. I'll try and try to do it tomorrow. And then, you know, either tomorrow doesn't happen or the same thing happens, and it's just. And then I end up, you know, rushing right at the end of, you know, due tomorrow, and I'm getting all these five pages done. It's really hard for me.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, I just feel like you're the only one that can help me, you know, I mean, my boyfriend, like, things aren't going well with him. I thought he could help me, but I guess he can't. And I think he's running around on me and all that. So I was just like, well, let me reach out to doctor Grande and see if it can help me, because it seems like my last resort.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "papers to write",
-            "night time",
-            "due tomorrow"
+            "things aren't going well with boyfriend",
+            "thinking boyfriend is unfaithful",
+            "reaching out to doctor Grande"
           ],
           "automatic_thoughts": [
-            "I know I can do it",
-            "I'll try to do it tomorrow",
-            "tomorrow doesn't happen"
+            "I'm alone in this",
+            "my boyfriend can't help me",
+            "this is my last resort"
           ],
           "emotions": [
-            "annoyance",
             "frustration",
-            "stress"
+            "sadness",
+            "anxiety"
           ],
           "behaviors": [
-            "procrastinating",
-            "rushing to finish"
+            "reaching out for help"
           ]
         },
         "retrieval": {
@@ -45,92 +44,79 @@
             "Feeling agitated (finding)"
           ],
           "neutral": [
-            "Tends to procrastinate (finding)",
-            "Low motivation (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Easily distracted (finding)"
+            "Anxiety about treatment (finding)",
+            "Feeling irritable (finding)",
+            "Preoccupied with emotional problems (finding)",
+            "Emotional problems (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you have a lot on your plate with papers to write, and it can be challenging to find the motivation to start. Have you noticed that when you procrastinate, it tends to lead to increased anxiety? Let's explore some strategies for managing this pattern together.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I understand that you feel like I might be the only one who can help you, given your current situation with your boyfriend. It sounds like you have some concerns about him and his loyalty. Let's explore these thoughts together and see if we can find a way to alleviate some of this distress.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like writing papers is a trigger for you, and it seems that your automatic thought is 'I can do it, but I'll try to do it tomorrow.' This might lead to feelings of annoyance, frustration, and stress. Let's explore why this pattern happens and what we can do to change it.\"",
+            "response": "I understand that you feel like I might be the only one who can help you, given your current situation with your boyfriend. It sounds like you have some concerns about him and his loyalty. Let's explore these thoughts together and see if we can find a way to alleviate some of this distress.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "things aren't going well with boyfriend",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you have a lot on your plate with papers to write, and it can be challenging to find the motivation to start. Have you noticed that when you procrastinate, it tends to lead to increased anxiety? Let's explore some strategies for managing this pattern together.\"",
+            "response": "\"It sounds like you're feeling quite alone and unsure about your relationship. Can you tell me more about what makes you think your boyfriend might be unfaithful? And have you considered talking to him directly about your concerns?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "procrastination",
-                  "label": "unknown"
+                  "concept": "things aren't going well with boyfriend",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "I think he's running around on me",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you have a lot on your plate with papers due. Have you ever considered what might happen if you started working on them earlier in the day? What would a friend or family member suggest?\"",
+            "response": "\"It sounds like you're feeling quite alone right now, and it seems your relationship isn't providing the support you need. Have you ever considered what a trusted friend or family member might suggest about reaching out to doctor Grande? It could provide another perspective on this situation.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "papers to write",
+                  "concept": "things aren't going well with boyfriend",
                   "label": "triggers"
                 },
                 {
-                  "concept": "night time",
+                  "concept": "I'm alone in this",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like things are tough right now, and it can be hard to feel like you have no one to turn to. I want you to know that reaching out for help is a brave step, and I'm here to support you. Let's talk more about what's been going on with your boyfriend and how we might work through this together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "things aren't going well with boyfriend",
                   "label": "triggers"
                 },
                 {
-                  "concept": "due tomorrow",
-                  "label": "triggers"
+                  "concept": "feeling alone",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "I know I can do it",
+                  "concept": "last resort",
                   "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'll try to do it tomorrow",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "tomorrow doesn't happen",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "annoyance",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "frustration",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "stress",
-                  "label": "emotions"
                 }
               ]
             }
@@ -142,102 +128,98 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Okay, I guess I’ve just been feeling really overwhelmed with everything lately, especially with school. It’s like no matter how hard I try, I can't seem to keep up. I keep thinking I should be doing better, and that just makes me feel even worse.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, I guess I just feel really anxious about everything. He’s been acting a bit distant lately, and I can’t help but worry he’s losing interest or maybe even seeing someone else. It’s like this knot in my stomach that just won’t go away. I want to trust him, but… I keep second-guessing everything.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "overwhelmed with everything",
-            "school"
+            "he's been acting distant"
           ],
           "automatic_thoughts": [
-            "I can't seem to keep up",
-            "I should be doing better"
+            "he's losing interest",
+            "he's seeing someone else",
+            "I can't trust him"
           ],
           "emotions": [
-            "overwhelmed",
-            "worse"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "second-guessing everything"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling agitated (finding)",
-            "Feeling stressed (finding)"
+            "Feeling nervous (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Feeling of being slowed down (finding)",
-            "Difficulty managing stress (finding)",
-            "Poor daily routine (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about going crazy (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're really struggling with feeling overwhelmed, especially with school. It's important to remember that everyone has their own pace and it's okay not to be perfect. Let's work together to find ways to manage your stress and help you feel more in control.\"",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling quite anxious about your partner's behavior. Can you tell me more about what makes you think he might be losing interest or seeing someone else? Let's explore these thoughts together.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're really struggling with feeling overwhelmed, especially with school. It's important to remember that everyone has their own pace and it's okay not to be perfect. Let's work together to find ways to manage your stress and help you feel more in control.\"",
+            "response": "I can understand why you might be feeling anxious with him acting distant. It's natural to worry when things seem uncertain. Let's take a moment to explore these feelings together and see if we can find a way to ease your anxiety.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelmed",
-                  "label": "triggers"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "school",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I can't seem to keep up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I should be doing better",
-                  "label": "automatic_thoughts"
+                  "concept": "feeling nervous",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're really struggling with feeling overwhelmed, especially with school. It's common to feel that way when things pile up. Let's explore what makes you think you can't keep up and why you believe you should be doing better.\"",
+            "response": "\"It sounds like you're feeling quite anxious about your partner's behavior. Can you tell me more about what makes you think he might be losing interest or seeing someone else? Let's explore these thoughts together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelmed",
-                  "label": "triggers"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "I can't seem to keep up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I should be doing better",
-                  "label": "automatic_thoughts"
+                  "concept": "second-guessing",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're really struggling with school right now. It's common to feel overwhelmed when we have a lot on our plate, and it's important to remember that everyone has their own pace. Let's explore what might be making things difficult for you, and see if we can find some strategies to help.\"",
+            "response": "\"It sounds like you're feeling quite anxious about your partner's behavior. Have you ever considered what a close friend might think about the situation? Sometimes, getting another perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelmed",
-                  "label": "triggers"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "school",
-                  "label": "triggers"
+                  "concept": "trust issues",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you'd feel anxious with all that's been going on. It's natural to worry when things seem uncertain. Let's explore these feelings together and see if we can find a way to ease your mind.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "I can't seem to keep up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I should be doing better",
-                  "label": "automatic_thoughts"
+                  "concept": "trust issues",
+                  "label": "unknown"
                 }
               ]
             }
@@ -249,95 +231,97 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I know that. It’s just...sometimes it feels like everyone else has it figured out and I’m just falling behind. I hate feeling like I’m not doing enough, and it makes me anxious just thinking about all the things I need to get done. I want to be able to handle it, but instead, I just freeze up.",
-        "core_issue": "academic and educational concerns",
+        "query": "I don't know... I just notice little things, like he doesn’t text me as much, or he seems distracted when we’re together. It makes me think maybe he’s got someone else on his mind. I guess I just have this fear of being abandoned, like if he finds someone better, he won’t want me anymore. It’s exhausting to feel like this.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "feeling like everyone else has it figured out",
-            "thinking about all the things I need to get done"
+            "he doesn’t text me as much",
+            "he seems distracted when we’re together"
           ],
           "automatic_thoughts": [
-            "I’m just falling behind",
-            "I hate feeling like I’m not doing enough",
-            "I want to be able to handle it"
+            "maybe he’s got someone else on his mind",
+            "if he finds someone better, he won’t want me anymore"
           ],
           "emotions": [
-            "anxiety"
+            "fear",
+            "exhaustion"
           ],
-          "behaviors": [
-            "freeze up"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of abandonment (finding)",
+            "Feeling abandoned (finding)",
+            "Feeling unloved (finding)"
+          ],
           "neutral": [
-            "Performance anxiety (finding)",
-            "Tends to procrastinate (finding)",
-            "Difficulty managing stress (finding)",
-            "Anxiety about having a fit (finding)",
-            "Poor daily routine (finding)"
+            "Boyfriend relationship problem (finding)",
+            "Emotionally distant (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed and like everyone else has it all together. It's important to remember that we all have our own unique challenges, and it's okay not to be perfect. Let's work on finding ways to manage your stress and anxiety so you can take things one step at a time.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling a bit anxious about your relationship, and it's understandable to have those fears. Let's explore together what evidence supports these thoughts and if there might be other explanations for his behavior.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and like everyone else has it all together. It's important to remember that we all have our own unique challenges, and it's okay not to be perfect. Let's work on finding ways to manage your stress and anxiety so you can take things one step at a time.",
+            "response": "I can see how that would be really scary and tiring for you. It's important to remember that it's natural to have fears, but let's explore together if these thoughts are based on evidence or if they might be exaggerated by your feelings.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Performance anxiety (finding)",
-                  "label": "neutral"
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty managing stress (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Anxiety about having a fit (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling abandoned",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes you think everyone else has it all figured out? Can we explore what evidence supports that thought and what might be an alternative perspective?",
+            "response": "\"It sounds like you're feeling a bit anxious about your relationship, and it's understandable to have those fears. Let's explore together what evidence supports these thoughts and if there might be other explanations for his behavior.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Performance anxiety",
-                  "label": "neutral"
+                  "concept": "Feeling abandoned",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Tends to procrastinate",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Difficulty managing stress",
-                  "label": "neutral"
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy load of expectations. Have you ever considered what might happen if things don't go as planned? Or, perhaps, what would a trusted friend say about your current situation?\"",
+            "response": "\"I can understand why you might be feeling anxious, but it's also important to consider other possibilities. For instance, what if he's just busy or preoccupied with something else? Could there be other explanations for his behavior that don't involve him having someone else?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Performance anxiety",
-                  "label": "neutral"
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Tends to procrastinate",
+                  "concept": "Emotionally distant",
                   "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry that you're feeling this way, it sounds incredibly tough. Can we talk about what you're experiencing? When you say he seems distracted, have you noticed any other changes in his behavior?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty managing stress",
-                  "label": "neutral"
+                  "concept": "Feeling abandoned",
+                  "label": "entailment"
                 }
               ]
             }
@@ -349,94 +333,97 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that, but it’s hard, you know? I see my classmates thriving and I can’t help but think that maybe I’m just not cut out for this. It makes me feel really isolated, like I’m somehow different or not good enough. I just wish I could shake off this feeling of being stuck.",
-        "core_issue": "academic and educational concerns",
+        "query": "I don’t know... I just notice little things, like he doesn’t text me as much, or he seems distracted when we’re together. It makes me think maybe he’s got someone else on his mind. I guess I just have this fear of being abandoned, like if he finds someone better, he won’t want me anymore. It’s exhausting to feel like this.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "seeing classmates thriving"
+            "he doesn’t text me as much",
+            "he seems distracted when we’re together"
           ],
           "automatic_thoughts": [
-            "maybe I’m just not cut out for this",
-            "I’m somehow different",
-            "I’m not good enough"
+            "maybe he’s got someone else on his mind",
+            "if he finds someone better, he won’t want me anymore"
           ],
           "emotions": [
-            "isolation",
-            "stuck"
+            "fear",
+            "exhaustion"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Social isolation (finding)",
-            "Feeling abandoned (finding)"
+            "Feeling abandoned (finding)",
+            "Fear of abandonment (finding)",
+            "Feeling unloved (finding)"
           ],
           "neutral": [
-            "Social isolation (rejection) (finding)"
+            "Emotionally distant (finding)",
+            "Boyfriend relationship problem (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're finding it challenging, and it's natural to feel a bit overwhelmed when you see your classmates thriving. It's important to remember that everyone has their own pace and journey. Let's work together to explore ways to boost your confidence and reduce feelings of isolation.",
+        "response": "I can see how that would be concerning for you, feeling like he's not as present or responsive. It's important to remember that people have their own lives and distractions, but it's also crucial to communicate openly about your feelings. Let's explore more about what you're experiencing and find ways to address these fears together.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're finding it challenging, and it's natural to feel a bit overwhelmed when you see your classmates thriving. It's important to remember that everyone has their own pace and journey. Let's work together to explore ways to boost your confidence and reduce feelings of isolation.",
+            "response": "I can see how that would be concerning for you, feeling like he's not as present or responsive. It's important to remember that people have their own lives and distractions, but it's also crucial to communicate openly about your feelings. Let's explore more about what you're experiencing and find ways to address these fears together.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling abandoned",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Social isolation",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling alienated",
+                  "concept": "Fear of abandonment",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I understand that it can be challenging to see others thriving while you're feeling this way. Can we explore what evidence supports these thoughts of not being good enough? Let's consider if there might be other factors contributing to their success.\"",
+            "response": "\"It sounds like you're feeling a bit anxious about your relationship. Can we explore together what evidence supports these thoughts and what other possibilities might exist?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling abandoned",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Social isolation",
+                  "concept": "Fear of abandonment",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Automatic thoughts",
-                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that it can feel challenging to see others thriving while you're struggling. It's important to remember that everyone has their own unique journey and pace. Let's explore what a trusted friend or family member might say about your situation, and consider if there are any small steps you could take to help yourself feel more connected.\"",
+            "response": "\"I can see how those changes in your partner's behavior might make you feel anxious, but it's important to remember that people have ups and downs. Have you considered what a trusted friend or family member might think about the situation? It could be helpful to hear another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling abandoned",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Social isolation",
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry that you're feeling this way, it sounds like you've been going through a tough time. Let's take a moment to talk about these feelings and see if we can find some ways to help alleviate them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear of abandonment",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling alienated",
-                  "label": "entailment"
+                  "concept": "emotionally exhausted",
+                  "label": "unknown"
                 }
               ]
             }
@@ -448,105 +435,122 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "It’s just hard for me to see everyone else doing well while I feel like I’m struggling. I feel really isolated, like I'm not measuring up or something. It just makes me anxious and stuck, and I don’t know how to move past it.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, I guess I know that in my head, but it’s hard to shake the feelings. It just feels like I’m always waiting for the other shoe to drop. I wish I could just feel secure, you know? But then I start overthinking everything. What if I’m just being too clingy? It makes me doubt myself.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "seeing others doing well",
-            "feeling isolated"
+            "waiting for the other shoe to drop",
+            "overthinking everything"
           ],
           "automatic_thoughts": [
-            "I'm not measuring up",
-            "I feel stuck"
+            "I wish I could just feel secure",
+            "What if I’m just being too clingy?",
+            "It makes me doubt myself"
           ],
           "emotions": [
-            "anxiety"
+            "anxiety",
+            "doubt"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
             "Feeling isolated (finding)",
-            "Feeling stressed (finding)",
-            "Difficulty managing stress (finding)",
-            "Feeling a failure (finding)"
+            "Feeling unwanted (finding)",
+            "Insecurity (finding)"
           ],
           "neutral": [
-            "Anxiety about collapsing (finding)"
+            "Anxiety about going crazy (finding)",
+            "Insecure avoidant attachment (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're having a tough time seeing others succeed while feeling stuck and isolated. It's important to remember that everyone has their own journey, and it's okay if yours looks different. Let's work together on finding ways to cope with these feelings.\"",
+        "response": "\"I can understand why you might be feeling this way. It's common to worry about the future and question ourselves. Let's explore these thoughts together, and see if we can find a more balanced perspective.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're having a tough time seeing others succeed while feeling stuck and isolated. It's important to remember that everyone has their own journey, and it's okay if yours looks different. Let's work together on finding ways to cope with these feelings.\"",
+            "response": "\"I can understand why you might be feeling this way. It's common to worry about the future and question ourselves. Let's explore these thoughts together, and see if we can find a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "seeing others doing well",
+                  "concept": "waiting for the other shoe to drop",
                   "label": "triggers"
                 },
                 {
-                  "concept": "feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I'm not measuring up",
+                  "concept": "I wish I could just feel secure",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "overthinking everything",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "What if I’m just being too clingy?",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "It makes me doubt myself",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite overwhelmed seeing others succeed while struggling yourself. Can we explore what makes you feel that way and if there are any alternative perspectives to consider?\"",
+            "response": "\"It sounds like you're dealing with a lot of uncertainty and self-doubt. Let's explore these feelings together. When you say 'waiting for the other shoe to drop', can you tell me more about what you mean by that?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "seeing others doing well",
+                  "concept": "waiting for the other shoe to drop",
                   "label": "triggers"
                 },
                 {
-                  "concept": "feeling isolated",
-                  "label": "entailment"
+                  "concept": "overthinking everything",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "I'm not measuring up",
+                  "concept": "I wish I could just feel secure",
                   "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It can be challenging to watch others succeed when we feel stuck. Have you ever considered what a trusted friend or family member might say about your situation? It could provide a different perspective and help ease some of that anxiety.\"",
+            "response": "\"It sounds like you're dealing with a lot of uncertainty and self-doubt. Let's explore what might be causing these feelings and see if we can find some alternative perspectives together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "seeing others doing well",
+                  "concept": "waiting for the other shoe to drop",
                   "label": "triggers"
                 },
                 {
-                  "concept": "feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I'm not measuring up",
+                  "concept": "I wish I could just feel secure",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "overthinking everything",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "It makes me doubt myself",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're carrying a heavy burden of worry and self-doubt. Let's explore these feelings together, one step at a time.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waiting for the other shoe to drop",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "overthinking everything",
+                  "label": "triggers"
                 }
               ]
             }
@@ -558,77 +562,96 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I get that. It’s just really hard in the moment, you know? I keep thinking if I were just a little smarter or more organized, things would be easier. I want to believe it’s okay to be where I am, but it feels like I’m just failing.",
-        "core_issue": "academic and educational concerns",
+        "query": "I appreciate that, but sometimes it just feels heavier than I can handle. I think about all the times I’ve been let down in the past, and it just reinforces that fear. I know I shouldn’t compare this relationship to those, but it’s like a reflex at this point. It makes me feel so vulnerable, and I don’t like it.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "thinking about past letdowns",
+            "comparing relationships"
+          ],
           "automatic_thoughts": [
-            "if I were just a little smarter or more organized, things would be easier",
-            "I’m just failing"
+            "it feels heavier than I can handle",
+            "I shouldn’t compare this relationship to those",
+            "it reinforces that fear"
           ],
           "emotions": [
-            "frustration"
+            "fear",
+            "vulnerability"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling of discouragement (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling lost (finding)",
-            "Anxiety about having a fit (finding)",
-            "Loss of hope for the future (finding)"
+            "Fear of losing emotional control (finding)",
+            "Anxiety about resuming sexual relations (finding)",
+            "Anxious avoidant attachment (finding)",
+            "Anxiety about forced dependence (finding)",
+            "Fear of being left alone during period of dependence (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds challenging to keep going when you're feeling this way. Can we explore together what evidence do you have that you're failing? Let's see if we can find a different perspective on your situation.",
+        "response": "I understand that you're feeling overwhelmed and fearful. Can you help me understand what specific past experiences are causing this heaviness for you? And how does comparing relationships contribute to these feelings of vulnerability?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how you're feeling, it can be tough when things seem overwhelming. It's important to remember that everyone has their own pace and it's okay not to be perfect. Let's work together on finding ways to manage your thoughts and feelings more effectively.",
+            "response": "I understand that you're feeling overwhelmed and fearful, especially when thinking about past letdowns. It's natural to feel this way, but it's important to remember that every relationship is unique. Let's explore together how we can manage these feelings and help you feel more confident in your current relationship.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of discouragement",
-                  "label": "entailment"
+                  "concept": "fear",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "vulnerability",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds challenging to keep going when you're feeling this way. Can we explore together what evidence do you have that you're failing? Let's see if we can find a different perspective on your situation.",
+            "response": "I understand that you're feeling overwhelmed and fearful. Can you help me understand what specific past experiences are causing this heaviness for you? And how does comparing relationships contribute to these feelings of vulnerability?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about making mistakes",
+                  "concept": "fear",
                   "label": "neutral"
                 },
                 {
-                  "concept": "frustration",
+                  "concept": "vulnerability",
                   "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "You're absolutely right that things can feel challenging in the moment. It's important to remember that everyone has their own strengths and weaknesses, and it's okay not to be perfect. Let's explore what a trusted friend or family member might say about your situation. What do you think they would tell you?",
+            "response": "\"It sounds like you're carrying a heavy burden from past experiences. Let's explore if there might be other ways to interpret this current relationship that could help lighten the load for you.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about making mistakes",
+                  "concept": "fear",
                   "label": "neutral"
                 },
                 {
-                  "concept": "frustration",
+                  "concept": "vulnerability",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way, but I'm here for you. Can we talk about what makes you feel like it's too much? Let's take it one step at a time.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "vulnerability",
                   "label": "emotions"
                 }
               ]
@@ -641,80 +664,103 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "It’s just really hard in the moment, you know? I keep thinking if I were just a little smarter or more organized, things would be easier. I want to believe it’s okay to be where I am, but it feels like I’m just failing.",
-        "core_issue": "academic and educational concerns",
+        "query": "I guess it’s just… I’ve had a few relationships where I thought everything was great, and then suddenly, they ended without much explanation. Like, I was blindsided. It makes me feel like I have to be on guard all the time. It’s tough to not think, “What if this is happening again?” I just don’t want to be hurt like that again, and it feels like I’m always walking on eggshells.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "hard moments"
+            "past relationships ending unexpectedly"
           ],
           "automatic_thoughts": [
-            "if I were just a little smarter or more organized, things would be easier",
-            "I’m just failing"
+            "What if this is happening again?",
+            "I have to be on guard all the time",
+            "I don’t want to be hurt like that again"
           ],
           "emotions": [
-            "frustration",
-            "self-doubt"
+            "fear",
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "walking on eggshells"
+          ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of losing emotional control (finding)",
+            "Fear of abandonment (finding)",
+            "Feeling emotionally hurt (finding)",
+            "Fear of going crazy (finding)"
+          ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling a failure (finding)",
-            "Feeling lost (finding)",
-            "Difficulty in thinking independently (finding)",
-            "Low self-control (finding)"
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're dealing with some tough moments right now. Can you help me understand what evidence do you have that you're failing? And how does it feel when things don't go as planned?\"",
-        "protocol_used": "socratic_questioning",
+        "response": "\"I can see how past experiences might make you feel like you have to be careful. It's understandable to worry about being blindsided again. Let's explore together if there are ways we can help you feel more secure in your relationships.\"",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I can see how difficult things might feel right now, and it's understandable to have thoughts like 'if only I were smarter or more organized.' But remember, everyone has moments of struggle. Let's work together to find ways to be kinder to yourself during these hard times.\"",
+            "response": "\"I can see how past experiences might make you feel like you have to be careful. It's understandable to worry about being blindsided again. Let's explore together if there are ways we can help you feel more secure in your relationships.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling a failure",
-                  "label": "neutral"
+                  "concept": "Feeling emotionally hurt",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with some tough moments right now. Can you help me understand what evidence do you have that you're failing? And how does it feel when things don't go as planned?\"",
+            "response": "\"It sounds like you've had some difficult experiences in the past with relationships ending unexpectedly. It's understandable that this might make you feel anxious about being hurt again. Let's explore together what evidence there is for and against this fear, so we can better understand your thoughts and feelings.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Feeling a failure",
-                  "label": "neutral"
+                  "concept": "Feeling emotionally hurt",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're going through a tough time, and it's understandable to feel that way. But remember, everyone has moments of struggle. What would a trusted friend say if they were in your shoes? Let's explore that perspective together.\"",
+            "response": "\"It sounds like you've had some difficult experiences with relationships ending unexpectedly. It's understandable that this might make you feel on edge and worried about the future. Let's explore together if there are any ways to lessen these feelings and help you feel more secure.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about making mistakes",
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of going crazy",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear that you've had some difficult experiences in the past. It sounds like you're feeling anxious and fearful about being hurt again. Let's take a moment to explore these feelings together, and see if we can find ways to help you feel more secure.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety",
                   "label": "neutral"
                 },
                 {
-                  "concept": "feeling a failure",
-                  "label": "neutral"
+                  "concept": "past relationships ending unexpectedly",
+                  "label": "triggers"
                 }
               ]
             }
@@ -726,91 +772,143 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It feels like every time I get a grade back, I’m just disappointed in myself. I tell myself I should’ve studied harder or asked for help sooner. It’s just so frustrating and makes me feel so defeated. I know I’m trying, but it feels like it’s never good enough.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, I mean, I really want to feel secure. It just feels tough to open up that part of me when I’m scared of being hurt again. I guess I want to trust him, but it’s like this wall keeps getting in the way. I don’t want to push him away, but I also don’t want to get hurt. It’s such a confusing space to be in.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "getting a grade back"
+            "wanting to feel secure",
+            "fear of being hurt",
+            "wanting to trust him",
+            "feeling a wall in the way",
+            "not wanting to push him away"
           ],
           "automatic_thoughts": [
-            "I should've studied harder",
-            "I should've asked for help sooner",
-            "it's never good enough"
+            "I might get hurt again",
+            "I can't open up",
+            "I need to protect myself"
           ],
           "emotions": [
-            "disappointment",
-            "frustration",
-            "defeat"
+            "fear",
+            "confusion"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding opening up",
+            "holding back trust"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling of discouragement (finding)",
-            "Loss of motivation (finding)",
-            "Feeling hopeless (finding)"
+            "Fear of losing emotional control (finding)",
+            "Fear of being left alone during period of dependence (finding)",
+            "Feeling safe (finding)",
+            "Fear of abandonment (finding)",
+            "Fear of injury (finding)"
           ],
-          "neutral": [
-            "Fear of school (finding)"
-          ],
+          "neutral": [],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been putting in a lot of effort, and it can be disheartening when things don't go as planned. Let's talk about what you could do differently next time, but for now, let's focus on acknowledging your efforts and the progress you've made so far.",
+        "response": "I can see how you're feeling scared and confused. It's really important to feel secure, especially when opening up to someone new. Let's explore together what might help you feel more at ease.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been putting in a lot of effort, and it can be disheartening when things don't go as planned. Let's talk about what you could do differently next time, but for now, let's focus on acknowledging your efforts and the progress you've made so far.",
+            "response": "I can see how you're feeling scared and confused. It's really important to feel secure, especially when opening up to someone new. Let's explore together what might help you feel more at ease.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
+                  "concept": "Fear of losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Loss of motivation",
+                  "concept": "Fear of being left alone during period of dependence",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling hopeless",
+                  "concept": "Feeling safe",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of abandonment",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're really hard on yourself when grades don't meet your expectations. Let's explore what evidence supports these thoughts and if there might be other ways to interpret the situation.\"",
+            "response": "\"It sounds like you're dealing with a lot of fear right now. Can you tell me more about what makes you feel unsafe or scared to open up?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
+                  "concept": "Fear of losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Loss of motivation",
+                  "concept": "Fear of being left alone during period of dependence",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling safe",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of abandonment",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're really hard on yourself when grades don't meet your expectations. Have you ever considered what a friend or someone outside of the situation might think about your efforts? It could be helpful to get another perspective.\"",
+            "response": "\"It sounds like you're dealing with a lot right now. Let me ask, if a trusted friend were in your shoes, what might they say about this situation? It could help us explore different perspectives together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "disappointment",
-                  "label": "emotions"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "Fear of being left alone during period of dependence",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "defeat",
-                  "label": "emotions"
+                  "concept": "Feeling safe",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of injury",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you're feeling scared and confused. It's important to acknowledge those feelings before we dive deeper. Can I ask, when you said that, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being left alone during period of dependence",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling safe",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of abandonment",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of injury",
+                  "label": "entailment"
                 }
               ]
             }
@@ -822,111 +920,102 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Thank you, I appreciate that. It just feels like no matter how much effort I put in, it’s never reflected in my grades. I guess I’m just really scared that I’ll never catch up or make the progress I want. It’s hard to recognize any progress when I’m so focused on the setbacks.",
-        "core_issue": "academic and educational concerns",
+        "query": "I appreciate that. I really do want to feel at ease, but it’s hard to shake off that fear. Part of me is just so worried that if I let my guard down, it’ll all come crashing down. I keep thinking, “What if he sees my insecurities and doesn’t want to deal with them?” It makes me hold back even more.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
-          "triggers": [
-            "putting in effort",
-            "not seeing grades reflect effort",
-            "focusing on setbacks"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I'll never catch up",
-            "I'll never make progress",
-            "I can't recognize any progress"
+            "What if he sees my insecurities and doesn’t want to deal with them?"
           ],
           "emotions": [
             "fear",
-            "frustration"
+            "worry"
           ],
-          "behaviors": []
+          "behaviors": [
+            "hold back"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of school (finding)"
+            "Feeling nervous (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
           "neutral": [
-            "Feeling a failure (finding)",
-            "Loss of motivation (finding)",
-            "Anxiety about having a fit (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about blushing (finding)",
+            "Anxiety about resuming sexual relations (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "You're putting in a lot of effort, and it's important to acknowledge that. It's understandable to feel frustrated when you don't see immediate results. Let's work together to find ways to celebrate small successes and focus on progress rather than setbacks.",
-        "protocol_used": "validate_and_reflect",
+        "response": "I understand that you're feeling anxious and fearful, but it's important to remember that everyone has insecurities. How might addressing these insecurities help you feel more at ease?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "You're putting in a lot of effort, and it's important to acknowledge that. It's understandable to feel frustrated when you don't see immediate results. Let's work together to find ways to celebrate small successes and focus on progress rather than setbacks.",
+            "response": "I understand that you're feeling anxious and fearful about letting your guard down. It's natural to have concerns, especially when it comes to sharing insecurities with someone else. Let's explore these feelings together and see if we can find a way to manage them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
+                  "concept": "anxiety",
                   "label": "entailment"
                 },
                 {
-                  "concept": "frustration",
+                  "concept": "fear",
                   "label": "emotions"
                 },
                 {
-                  "concept": "I'll never catch up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'll never make progress",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I can't recognize any progress",
+                  "concept": "insecurities",
                   "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that your effort isn't reflected in your grades? It can be difficult to see progress when we focus on setbacks. Let's explore some examples of times when your effort did pay off, even if it wasn't immediately visible in your grades.",
+            "response": "I understand that you're feeling anxious and fearful, but it's important to remember that everyone has insecurities. How might addressing these insecurities help you feel more at ease?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
+                  "concept": "anxiety about losing emotional control (entailment)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "frustration",
+                  "concept": "fear",
                   "label": "emotions"
-                },
-                {
-                  "concept": "I'll never catch up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'll never make progress",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're putting in a lot of effort, and it can be disheartening when the results don't immediately show. Let's talk about what small steps forward might look like, even if they aren't reflected in your grades yet.\"",
+            "response": "\"I understand that you're feeling quite anxious and fearful, but it's important to remember that everyone has insecurities. It might be helpful to consider how a trusted friend or loved one would view the situation. What do you think they would say about your fears?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
+                  "concept": "anxiety about losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "frustration",
+                  "concept": "fear",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that you're feeling anxious and fearful, and it seems like those feelings are making you hold back. It's natural to worry about revealing insecurities, but let's explore together if there might be other ways to approach this situation that could help you feel more at ease.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear",
                   "label": "emotions"
                 },
                 {
-                  "concept": "I'll never catch up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'll never make progress",
+                  "concept": "insecurities",
                   "label": "automatic_thoughts"
                 }
               ]
@@ -939,81 +1028,103 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I can see the point in that, but it just feels so hard to notice any small successes when I’m so caught up in what’s going wrong. I guess part of me worries that if I focus on the small wins, I might end up not pushing myself hard enough. It’s like I’m constantly trying to balance between being kind to myself and holding myself accountable.",
-        "core_issue": "academic and educational concerns",
+        "query": "I get that, but… it feels like if I talk about my insecurities, it could push him away. Like, I don't want to burden him with my worries. I think, “What if he thinks I’m too needy or dramatic?” It’s frustrating because I want to share, but I also want to protect this relationship. It’s like I’m stuck in my head.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "it's hard to notice small successes",
-            "if I focus on small wins, I won't push myself hard enough",
-            "I need to balance being kind to myself and holding myself accountable"
+          "triggers": [
+            "talking about insecurities",
+            "thinking about burdening him",
+            "wanting to protect the relationship"
           ],
-          "emotions": [],
-          "behaviors": []
+          "automatic_thoughts": [
+            "What if he thinks I’m too needy or dramatic?",
+            "I could push him away"
+          ],
+          "emotions": [
+            "frustration"
+          ],
+          "behaviors": [
+            "avoiding sharing insecurities"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling a failure (finding)",
-            "Increased motivation (finding)",
-            "Anxiety about having a fit (finding)"
+          "entailment": [
+            "Tends to be self-conscious (finding)",
+            "Insecurity (finding)",
+            "Fear of losing emotional control (finding)"
           ],
-          "contradiction": [
-            "Positive self thoughts (finding)"
-          ]
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about appearing ridiculous (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It's understandable to feel that way, and it's important to acknowledge your efforts. Let's explore how focusing on small successes might help you push yourself harder without compromising self-compassion. What do you think?",
-        "protocol_used": "alternative_perspective",
+        "response": "\"It sounds like you're worried about burdening your partner and fear that sharing your insecurities might push him away. Can we explore together what evidence supports this thought? And, have you noticed any times when sharing your feelings didn't lead to the outcome you feared?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're dealing with a lot right now, and it can be challenging to find the balance between being kind to yourself and pushing yourself. Let's explore this a bit more - have you noticed any instances where focusing on small successes helped or hindered your progress?",
+            "response": "I understand that you're worried about burdening him and pushing him away with your insecurities. It's natural to feel this way, especially when we care deeply about someone. Let's explore together if these thoughts are accurate or if there might be other ways to share your feelings without causing distress.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "Insecurity",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "increased motivation",
-                  "label": "neutral"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It's understandable that you might feel this way, and it's important to acknowledge your efforts. Let's explore how focusing on small successes can help you push yourself further without compromising self-compassion. What do you think about that?",
+            "response": "\"It sounds like you're worried about burdening your partner and fear that sharing your insecurities might push him away. Can we explore together what evidence supports this thought? And, have you noticed any times when sharing your feelings didn't lead to the outcome you feared?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "Insecurity",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "increased motivation",
-                  "label": "neutral"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It's understandable to feel that way, and it's important to acknowledge your efforts. Let's explore how focusing on small successes might help you push yourself harder without compromising self-compassion. What do you think?",
+            "response": "\"It sounds like you're worried about burdening him and pushing him away by sharing your insecurities. Let's explore together if there might be other ways to express yourself without causing distress. What do you think a trusted friend or outside observer might suggest?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "Insecurity",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling a failure",
-                  "label": "neutral"
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that you're worried about sharing your insecurities and not wanting to burden him. It's natural to feel this way, but it's important to remember that everyone has their own concerns. Let's explore together if there are ways to share your feelings without causing distress or feeling overwhelmed.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "insecurities",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "increased motivation",
-                  "label": "neutral"
+                  "concept": "burdening him",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "fear of losing emotional control",
+                  "label": "entailment"
                 }
               ]
             }

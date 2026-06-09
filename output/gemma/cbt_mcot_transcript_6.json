@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "So I'm in school, and every few weeks we have, like, papers to write, and I know, I know it. I know I can do it. It's just actually sitting down and doing it. Well, I get kind of annoyed with it, and then I'm like, well, you know, I've already, you know, it's already night time. I'll try and try to do it tomorrow. And then, you know, either tomorrow doesn't happen or the same thing happens, and it's just. And then I end up, you know, rushing right at the end of, you know, due tomorrow, and I'm getting all these five pages done. It's really hard for me.",
-    "core_issue": "academic and educational concerns",
+    "seed": "Yeah, I just feel like you're the only one that can help me, you know, I mean, my boyfriend, like, things aren't going well with him. I thought he could help me, but I guess he can't. And I think he's running around on me and all that. So I was just like, well, let me reach out to doctor Grande and see if it can help me, because it seems like my last resort.",
+    "core_issue": "Relationships (romantic, family, friendships)",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,26 +17,24 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "So I'm in school, and every few weeks we have, like, papers to write, and I know, I know it. I know I can do it. It's just actually sitting down and doing it. Well, I get kind of annoyed with it, and then I'm like, well, you know, I've already, you know, it's already night time. I'll try and try to do it tomorrow. And then, you know, either tomorrow doesn't happen or the same thing happens, and it's just. And then I end up, you know, rushing right at the end of, you know, due tomorrow, and I'm getting all these five pages done. It's really hard for me.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, I just feel like you're the only one that can help me, you know, I mean, my boyfriend, like, things aren't going well with him. I thought he could help me, but I guess he can't. And I think he's running around on me and all that. So I was just like, well, let me reach out to doctor Grande and see if it can help me, because it seems like my last resort.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "papers to write",
-            "night time",
-            "due tomorrow"
+            "things aren't going well with boyfriend",
+            "thinking boyfriend is unfaithful",
+            "reaching out to doctor Grande"
           ],
           "automatic_thoughts": [
-            "I know I can do it",
-            "I'll try to do it tomorrow",
-            "tomorrow doesn't happen"
+            "boyfriend can't help me",
+            "this is my last resort"
           ],
           "emotions": [
-            "annoyance",
-            "frustration"
+            "frustration",
+            "helplessness"
           ],
           "behaviors": [
-            "procrastinating",
-            "rushing to finish"
+            "reaching out for help"
           ]
         },
         "retrieval": {
@@ -44,21 +42,21 @@
             "Feeling agitated (finding)"
           ],
           "neutral": [
-            "Tends to procrastinate (finding)",
-            "Low motivation (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Easily distracted (finding)"
+            "Anxiety about treatment (finding)",
+            "Feeling irritable (finding)",
+            "Preoccupied with emotional problems (finding)",
+            "Emotional problems (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're caught in a cycle with these papers – what's going through your mind when you tell yourself, \"I'll try to do it tomorrow?\"",
+        "response": "It sounds like you're feeling really frustrated and helpless right now, and reaching out to Dr. Grande felt like your last option – can you tell me more about what makes you think he might be unfaithful?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a frustrating cycle with these papers – knowing you can do the work, but then feeling annoyed and putting it off, which leads to a last-minute rush. That must be really tough.",
+            "response": "It sounds like you're feeling really frustrated and helpless right now, especially with what's happening with your boyfriend and feeling like you've reached out as a last resort. That must be incredibly difficult to navigate.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -85,7 +83,7 @@
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're caught in a cycle with these papers – what's going through your mind when you tell yourself, \"I'll try to do it tomorrow?\"",
+            "response": "It sounds like you're feeling really frustrated and helpless right now, and reaching out to Dr. Grande felt like your last option – can you tell me more about what makes you think he might be unfaithful?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -105,26 +103,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "procrastinating",
+                  "concept": "entailment",
                   "label": "unknown"
-                },
-                {
-                  "concept": "rushing to finish",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "annoyance",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "frustration",
-                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to get caught in this cycle – knowing you can do the work but feeling stuck and then rushing at the last minute. What do you think a friend might say about your approach to these papers?",
+            "response": "It sounds incredibly frustrating to feel like you've reached a point where you're questioning your relationship and seeking help from someone else. What do you think a close friend might say about the situation, knowing how much you've invested in this relationship?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -145,6 +131,33 @@
                 },
                 {
                   "concept": "alternative_perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're feeling really frustrated and helpless right now, and reaching out to Dr. Grande feels like your last option. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
@@ -157,45 +170,63 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I guess it feels like I’m just... delaying the inevitable, you know? There's this weight that comes over me, and I keep thinking that it’s easier to push it off. But then tomorrow comes, and I feel even more stressed about it. It’s like I'm just stuck.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, I guess I do feel pretty frustrated and helpless. I just have this nagging feeling that something isn't right. He’s been distant lately, and there are these little things—like he’s secretive with his phone, and he goes out more than he used to. It just makes me feel... I don’t know, anxious and like maybe I’m not enough for him.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "delaying the inevitable",
-            "weight that comes over me",
-            "tomorrow comes"
+            "he’s been distant lately",
+            "he’s secretive with his phone",
+            "he goes out more than he used to"
           ],
           "automatic_thoughts": [
-            "it's easier to push it off",
-            "I'm just stuck"
+            "something isn't right",
+            "maybe I’m not enough for him"
           ],
           "emotions": [
-            "stress"
+            "frustration",
+            "helplessness",
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling tense (finding)",
-            "Feeling physically tense (finding)",
-            "Feeling trapped (finding)",
-            "Feeling of discouragement (finding)"
+            "Emotionally distant (finding)",
+            "Feeling abandoned (finding)",
+            "Feeling isolated (finding)",
+            "Feeling frustrated (finding)"
           ],
           "neutral": [
-            "Feeling nervous (finding)"
+            "Boyfriend relationship problem (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like this cycle of delaying and then feeling stressed is really impacting you – can you tell me a little more about what goes through your mind when you think, \"it's easier to push it off?\"",
+        "response": "It sounds like you're experiencing a lot of difficult emotions right now, and it's understandable that you'd feel frustrated and helpless with these changes you've noticed. What makes you think something isn't right?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're caught in a really frustrating cycle, feeling the pressure of something you're avoiding, and then feeling even more stressed when it keeps coming back around. That feeling of being stuck can be really tough.",
+            "response": "It sounds incredibly frustrating and unsettling to feel this way, especially when you're noticing these changes in his behavior. It makes sense that you'd feel anxious and question things when you're picking up on these signals.",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Emotionally distant (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling frustrated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -207,57 +238,57 @@
                 {
                   "concept": "emotions",
                   "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling trapped",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling of discouragement",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like this cycle of delaying and then feeling stressed is really impacting you – can you tell me a little more about what goes through your mind when you think, \"it's easier to push it off?\"",
+            "response": "It sounds like you're experiencing a lot of difficult emotions right now, and it's understandable that you'd feel frustrated and helpless with these changes you've noticed. What makes you think something isn't right?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "helplessness",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "anxiety",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling trapped",
+                  "concept": "feeling abandoned",
                   "label": "entailment"
                 },
                 {
-                  "concept": "feeling of discouragement",
+                  "concept": "feeling isolated",
                   "label": "entailment"
+                },
+                {
+                  "concept": "boyfriend relationship problem",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're caught in a really frustrating cycle, and that feeling of being stuck can be incredibly draining. What do you think might be happening if you were to step back and look at this from a friend's perspective?",
+            "response": "It sounds incredibly frustrating to feel this way, especially when you're noticing these changes in his behavior. What's one thing a close friend might say about the situation, knowing how you're feeling right now?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling frustrated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -269,18 +300,37 @@
                 {
                   "concept": "emotions",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're going through a really difficult time, and it's understandable that you'd feel frustrated and helpless with these changes you've noticed. When you say something isn't right, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling frustrated (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "behaviors",
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "feeling trapped",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "feeling of discouragement",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -292,81 +342,90 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I mean, when I think about pushing things off, there’s this relief, like I get a break from the pressure. But then I feel guilty, like I should be doing something, and that just makes it worse. I guess there’s also this fear of failing or not being good enough, which just... it makes it so hard to start.",
-        "core_issue": "academic and educational concerns",
+        "query": "I feel really frustrated and helpless. There’s this nagging feeling that something isn’t right. He’s been distant lately, and the way he’s secretive with his phone just makes me anxious. He goes out more than he used to, and it’s hard not to think that maybe I’m not enough for him.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "thinking about pushing things off"
+            "he's been distant",
+            "he's secretive with his phone",
+            "he goes out more than he used to"
           ],
           "automatic_thoughts": [
-            "I get a break from the pressure",
-            "I should be doing something",
-            "fear of failing",
-            "not being good enough"
+            "something isn't right",
+            "maybe I'm not enough for him"
           ],
           "emotions": [
-            "relief",
-            "guilt",
-            "fear"
+            "frustration",
+            "helplessness",
+            "anxiety"
           ],
-          "behaviors": [
-            "procrastinating",
-            "avoiding starting tasks"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling of discouragement (finding)"
+            "Emotionally distant (finding)"
           ],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Low motivation (finding)",
-            "Low self-control (finding)"
+            "Boyfriend relationship problem (finding)",
+            "Breakup of romance (finding)",
+            "Feeling abandoned (finding)",
+            "Worried about being a bad father (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like pushing things off brings a temporary sense of relief, but that's quickly followed by guilt and fear – what do you think is driving that guilt?",
+        "response": "It sounds like you're experiencing a lot of difficult emotions right now. What makes you feel like something isn't right?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like putting things off offers a temporary sense of relief, but that's quickly followed by guilt and worry about not being good enough – that must be a difficult cycle to navigate. Can you tell me a little more about what that guilt feels like?",
+            "response": "It sounds like you're going through a really difficult time, and it's completely understandable that you'd feel frustrated, helpless, and anxious given what you're describing. It takes courage to share these feelings, and I want you to know I'm here to listen.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Emotionally distant (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "helplessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
                 },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like pushing things off brings a temporary sense of relief, but that's quickly followed by guilt and fear – what do you think is driving that guilt?",
+            "response": "It sounds like you're experiencing a lot of difficult emotions right now. What makes you feel like something isn't right?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Emotionally distant (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Boyfriend relationship problem (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "neutral"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -378,26 +437,53 @@
                 {
                   "concept": "emotions",
                   "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling of discouragement (finding)",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like pushing things off brings a temporary sense of relief, but then the guilt and fear kick in, making it even harder. What do you think a friend might say about your reaction when you notice that relief?",
+            "response": "It sounds like you're going through a really difficult time, and it's understandable that you'd feel frustrated and helpless when noticing these changes in your relationship. What's one thing a close friend might say about the situation, knowing how much you care about him?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "helplessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "emotionally distant",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling abandoned",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're going through a really difficult time, and it's understandable that you'd feel frustrated and helpless with these changes in your relationship. When you say something isn't right, are you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Emotionally distant (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Boyfriend relationship problem (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "neutral"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -408,14 +494,6 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
                   "label": "unknown"
                 }
               ]
@@ -428,44 +506,57 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I don’t know... maybe it’s just this feeling that I’m not living up to expectations. Like, there’s this idea in my head that I should always be on top of things, and when I’m not, it feels like I’m letting everyone down, including myself. It’s just exhausting, and I don’t want to disappoint anyone.",
-        "core_issue": "academic and educational concerns",
+        "query": "I guess it’s just a gut feeling, you know? Like, he used to share more about his day, and now he keeps things to himself. It’s almost like there’s a wall between us. Sometimes I wonder if he's hiding something or if he’s just losing interest. It makes me feel really insecure.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "he used to share more about his day",
+            "he keeps things to himself",
+            "there's a wall between us"
+          ],
           "automatic_thoughts": [
-            "I’m not living up to expectations",
-            "I should always be on top of things",
-            "I’m letting everyone down",
-            "I don’t want to disappoint anyone"
+            "he's hiding something",
+            "he's losing interest"
           ],
           "emotions": [
-            "exhaustion"
+            "insecure"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling of discouragement (finding)"
+            "Emotionally distant (finding)",
+            "Tends to be self-conscious (finding)",
+            "Feeling alienated (finding)",
+            "Feeling abandoned (finding)"
           ],
           "neutral": [
-            "Feeling a failure (finding)",
-            "Loss of motivation (finding)",
-            "Fear of being a burden to others (finding)"
+            "Boyfriend relationship problem (finding)"
           ],
-          "contradiction": [
-            "Feeling empty (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that feeling of not living up to expectations is really weighing on you – can you tell me more about where that idea of \"always being on top of things\" comes from?",
+        "response": "It sounds like this change in his sharing has really stirred up some insecurity for you. Can you tell me more about what that \"gut feeling\" is telling you?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of pressure to meet expectations, and that feeling of not being \"on top of things\" is really draining you. It takes courage to acknowledge that, and it's understandable that you'd feel exhausted when facing that kind of internal pressure.",
+            "response": "It sounds like you're noticing a shift in your relationship, and it's bringing up feelings of insecurity – that makes sense. It can be unsettling when things change and you feel like there's distance between you.",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Emotionally distant (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -476,42 +567,46 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "ENTAILMENT",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like that feeling of not living up to expectations is really weighing on you – can you tell me more about where that idea of \"always being on top of things\" comes from?",
+            "response": "It sounds like this change in his sharing has really stirred up some insecurity for you. Can you tell me more about what that \"gut feeling\" is telling you?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Emotionally distant (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "triggers",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly draining to feel like you constantly need to be \"on top of things,\" and that disappointing others is a real concern for you. What do you think someone who cares about you would say about this pressure you're putting on yourself?",
+            "response": "It sounds really unsettling when someone you care about seems more distant. What's one thing a close friend might say about what's happening?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -521,7 +616,42 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling abandoned",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really difficult, and it's understandable that you'd feel insecure when you notice a shift in your connection. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Emotionally distant (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
@@ -534,61 +664,66 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Honestly, I think it comes from my past, you know? Growing up, I always felt like I had to prove myself. Like, if I didn’t excel, it meant I wasn’t trying hard enough or that I was lazy. I guess somewhere along the way, I started equating my worth with my achievements, and it just stuck with me.",
-        "core_issue": "academic and educational concerns",
+        "query": "It’s just this gut feeling I have. He used to share more about his day, and now it feels like he keeps things to himself. There’s a wall between us, and I can’t shake the thought that he might be hiding something or losing interest. It makes me feel really insecure.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "growing up",
-            "not excelling"
+            "he used to share more about his day",
+            "now it feels like he keeps things to himself",
+            "there’s a wall between us"
           ],
           "automatic_thoughts": [
-            "I have to prove myself",
-            "if I don’t excel, I’m lazy",
-            "my worth is equated with my achievements"
+            "he might be hiding something",
+            "he is losing interest"
           ],
-          "emotions": [],
+          "emotions": [
+            "insecurity"
+          ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Character trait finding of level of pride (finding)",
-            "Personal motivation (finding)"
+            "Emotionally distant (finding)",
+            "Feeling alienated (finding)",
+            "Feeling isolated (finding)"
           ],
           "neutral": [
-            "Extrinsic motivation (finding)",
-            "Character trait finding of effort at work (finding)"
+            "Boyfriend relationship problem (finding)",
+            "Feeling abandoned (finding)"
           ],
-          "contradiction": [
-            "Lack of pride (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those experiences growing up have had a lasting impact on how you see yourself – can you tell me more about what it was like when you felt you needed to prove yourself?",
+        "response": "That sounds really unsettling, feeling like there's distance and a potential wall between you. Can you tell me more about what specifically makes you think he might be hiding something?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you've carried a significant burden from your childhood, feeling pressure to constantly prove yourself and linking your worth to your accomplishments. That’s a lot to carry, and it makes sense that it’s still impacting you.",
+            "response": "It sounds like you're experiencing a lot of distress because you've noticed a shift in your partner's behavior, and it's bringing up feelings of insecurity and a sense of distance between you. That must be really unsettling.",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like those experiences growing up have had a lasting impact on how you see yourself – can you tell me more about what it was like when you felt you needed to prove yourself?",
+            "response": "That sounds really unsettling, feeling like there's distance and a potential wall between you. Can you tell me more about what specifically makes you think he might be hiding something?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -600,14 +735,18 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "socratic_questioning",
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like those experiences growing up have really shaped how you view yourself and your accomplishments. What do you think someone who cares about you would say about how you measure your worth?",
+            "response": "It sounds really unsettling to feel that distance and insecurity creeping in. Could there be other explanations for his change in sharing, perhaps something going on in his own life that he's not ready to talk about?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -619,7 +758,42 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really painful, feeling like there's distance and a wall between you. When you say you feel this way, are you having any thoughts of wanting to not be here or hurting yourself?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "insecurity",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 }
               ]
@@ -632,47 +806,49 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "It was really intense. There was always this pressure to get good grades, to play sports, to be the best at everything. I remember feeling so anxious before tests or performances, like if I didn’t succeed, it would somehow reflect on my value as a person. It was hard to relax, and I often felt like I was just chasing something I could never quite reach.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, it is unsettling. It’s just little things, you know? Like he gets really defensive when I ask about his plans, and there are times when he seems distracted when we’re together. I notice he spends a lot of time on his phone, and sometimes I catch him smiling at messages. It just... it makes my mind race.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "pressure to get good grades",
-            "pressure to play sports",
-            "pressure to be the best",
-            "tests",
-            "performances"
+            "asking about his plans",
+            "being together",
+            "seeing him on his phone",
+            "catching him smiling at messages"
           ],
           "automatic_thoughts": [
-            "if I didn’t succeed, it would reflect on my value as a person",
-            "I am chasing something I can never reach"
+            "he is hiding something",
+            "he is not interested in me",
+            "he is distracted by someone else"
           ],
           "emotions": [
+            "unsettling",
             "anxiety"
           ],
           "behaviors": [
-            "hard to relax"
+            "overthinking",
+            "observing his phone use"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Anxiety about behavior or performance (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Fear of school (finding)",
-            "School phobia (finding)",
-            "Cannot remember name of school (finding)",
-            "Exerting inappropriate parental pressure (finding)"
+            "Boyfriend relationship problem (finding)",
+            "Believes phones are bugged (finding)",
+            "Anxiety about going crazy (finding)",
+            "Passive aggressive relationship (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Emotionally distant (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that pressure created a really difficult experience for you – can you tell me more about what made you feel like your value as a person was tied to your performance?",
+        "response": "It sounds like these little things are really triggering a lot of anxiety for you – can you tell me more about what goes through your mind when you notice him smiling at messages?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you've been carrying a lot of weight with these expectations, and it's understandable that you'd feel anxious and find it hard to relax. It takes courage to share that, and I appreciate you describing what that experience has been like for you.",
+            "response": "It sounds like you're experiencing a lot of unsettling feelings when you notice these behaviors, and it's understandable that your mind would race when you're picking up on these little things. It takes courage to share what you're going through.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -689,17 +865,13 @@
                 },
                 {
                   "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like that pressure created a really difficult experience for you – can you tell me more about what made you feel like your value as a person was tied to your performance?",
+            "response": "It sounds like these little things are really triggering a lot of anxiety for you – can you tell me more about what goes through your mind when you notice him smiling at messages?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -717,16 +889,12 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
-                },
-                {
-                  "concept": "anxiety about behavior or performance (finding)",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you've carried a lot of weight with these expectations, and it's understandable that you'd feel anxious. What do you think someone who cares about you would say about putting so much pressure on yourself to be \"the best\"?",
+            "response": "It sounds really distressing to feel unsettled by these observations. If a friend were watching this situation, what do you think they might notice about how you're interpreting these little things?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -747,6 +915,29 @@
                 },
                 {
                   "concept": "alternative_perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're experiencing a lot of unsettling feelings right now. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
@@ -759,102 +950,76 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it was like every time I accomplished something, I got this praise, and it felt great, but it also made me think that’s where my worth came from. If I didn’t get that recognition or if I messed up, I just felt... empty. I guess I started equating success with love or acceptance, and when I didn’t achieve, it was like I was letting everyone down, including myself. It’s hard to shake off that feeling.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, it definitely triggers something in me. When I see him smiling at his phone, my mind jumps to all the worst-case scenarios. I start thinking maybe he's talking to someone else, or maybe they're saying things about me. I just feel this wave of panic, and it makes me question everything we've built. It’s like I can't help but wonder if I’m not enough for him or if he’s looking for something better elsewhere.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "accomplishing something",
-            "not getting recognition",
-            "messing up"
+            "seeing him smiling at his phone"
           ],
           "automatic_thoughts": [
-            "my worth comes from praise",
-            "I am letting everyone down",
-            "success equals love or acceptance"
+            "he's talking to someone else",
+            "they're saying things about me",
+            "I'm not enough for him",
+            "he's looking for something better elsewhere"
           ],
           "emotions": [
-            "great",
-            "empty"
+            "panic"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)",
-            "Feeling empty (finding)",
-            "Delusion of being loved (finding)",
-            "Feeling content (finding)"
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Positive self thoughts (finding)"
+            "Anxiety about altered body image (finding)",
+            "Anxiety about resuming sexual relations (finding)",
+            "Anxiety about blushing (finding)",
+            "Fear of speaking on the phone (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you've noticed a pattern where external validation significantly impacts how you feel about yourself – can you tell me more about what goes through your mind when you don’t receive that recognition or when you make a mistake?",
+        "response": "It sounds incredibly distressing to experience that wave of panic when you see him smiling at his phone. Can you tell me more about what makes you think he might be talking to someone else?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like achieving something and receiving praise initially felt wonderful, but it also created a connection between your worth and external validation, and now you're experiencing emptiness when that validation isn't there. That’s a really tough place to be.",
+            "response": "It sounds incredibly distressing to have those thoughts and feelings when you see him smiling at his phone – that wave of panic and questioning everything can be really unsettling. It takes a lot of courage to share that, and I appreciate you describing what's happening for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts\\",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "my worth comes from praise",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I am letting everyone down",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "success equals love or acceptance",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
                   "concept": "emotions",
                   "label": "unknown"
                 },
                 {
-                  "concept": "great",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "triggers",
+                  "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "accomplishing something",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "not getting recognition",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "messing up",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "validate_and_reflect",
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you've noticed a pattern where external validation significantly impacts how you feel about yourself – can you tell me more about what goes through your mind when you don’t receive that recognition or when you make a mistake?",
+            "response": "It sounds incredibly distressing to experience that wave of panic when you see him smiling at his phone. Can you tell me more about what makes you think he might be talking to someone else?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -864,24 +1029,20 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "triggers",
+                  "concept": "behaviors",
                   "label": "unknown"
-                },
-                {
-                  "concept": "ENTAILMENT — Feeling empty",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "ENTAILMENT — Feeling a failure",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you've noticed a pattern where external validation significantly impacts how you feel about yourself – that's a really insightful observation. What do you think someone who cares about you would say about tying your sense of worth to external praise or achievements?",
+            "response": "It sounds incredibly distressing to have those thoughts and feelings when you see him smiling at his phone. What's one thing a close friend might say to you if they saw you reacting this way?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -891,11 +1052,34 @@
                   "label": "unknown"
                 },
                 {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it makes sense that you'd feel panicked when those thoughts come up. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
                   "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
@@ -908,104 +1092,117 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "When I don’t get that recognition, it’s like a wave of doubt crashes over me. I start thinking things like “Maybe I’m not good enough,” or “What if everyone sees me as a failure?” It’s this spiral of self-criticism that just digs deeper. And when I make a mistake, it feels like the worst thing ever. I can’t help but replay it in my mind, wondering how I could’ve done it differently, feeling this tight knot in my stomach.",
-        "core_issue": "academic and educational concerns",
+        "query": "I guess it’s just the timing of everything. He’s been more secretive lately, and it feels like he has this whole part of his life that I’m not included in. When he laughs at his phone or gets super focused on it, I can't help but feel like there’s someone he’s connecting with that I don’t know about. It makes me feel left out, like I’m not in on something important to him. And that just deepens the insecurity I already have.",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
           "triggers": [
-            "not getting recognition",
-            "making a mistake"
+            "timing of everything",
+            "he's been more secretive",
+            "he laughs at his phone",
+            "he gets super focused on his phone"
           ],
           "automatic_thoughts": [
-            "Maybe I’m not good enough",
-            "What if everyone sees me as a failure?",
-            "I could’ve done it differently"
+            "he has a whole part of his life that I’m not included in",
+            "there’s someone he’s connecting with that I don’t know about",
+            "I’m not in on something important to him"
           ],
           "emotions": [
-            "doubt",
-            "anxiety"
+            "insecurity",
+            "left out"
           ],
-          "behaviors": [
-            "replaying mistakes in my mind",
-            "self-criticism"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling a failure (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Feeling isolated (finding)",
+            "Feeling unwanted (finding)",
+            "Feeling alienated (finding)",
+            "Insecurity (finding)"
           ],
-          "neutral": [
-            "Feeling ashamed (finding)",
-            "Anxiety about saying the wrong thing (finding)"
-          ],
+          "neutral": [],
           "contradiction": [
-            "Ready for enhanced self-concept (finding)"
+            "Emotionally distant (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly distressing to experience that wave of doubt and self-criticism when you don't receive recognition, and I can understand how replaying mistakes can be so unsettling – what specifically makes that mistake feel like \"the worst thing ever\"?",
+        "response": "It sounds really distressing to feel like you're being left out and that your insecurities are being triggered by these observations. Can you tell me more about what goes through your mind when you see him laughing at his phone?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing when you don't receive recognition, and that wave of doubt and self-criticism can be really overwhelming. It takes courage to share that, and I appreciate you describing what that experience is like for you.",
+            "response": "It sounds incredibly unsettling to feel like you're being left out and that there's a part of his life you're not privy to—that’s a really difficult feeling to experience. It makes sense that you'd feel insecure given these observations.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "feeling left out",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "insecurity",
+                  "label": "entailment"
+                },
+                {
                   "concept": "triggers",
                   "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling a failure",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "anxiety about making mistakes",
-                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to experience that wave of doubt and self-criticism when you don't receive recognition, and I can understand how replaying mistakes can be so unsettling – what specifically makes that mistake feel like \"the worst thing ever\"?",
+            "response": "It sounds really distressing to feel like you're being left out and that your insecurities are being triggered by these observations. Can you tell me more about what goes through your mind when you see him laughing at his phone?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "feeling left out",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "insecurity",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "entailment",
+                  "concept": "triggers",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to experience those waves of doubt and self-criticism, especially when you don’t receive recognition or make a mistake – what’s one thing a friend might say to you when you're feeling this way?",
+            "response": "It sounds really distressing to feel like you're being left out and that there's a part of his life you're not privy to – that insecurity can be really tough to deal with. What's one thing a close friend might say about your reaction to these situations?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "feeling left out",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "insecurity",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really painful, feeling like you're being left out and that there's a part of his life you're not in on. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling unwanted (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Insecurity (finding)",
+                  "label": "entailment"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -1016,14 +1213,6 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
                   "label": "unknown"
                 }
               ]
@@ -1036,85 +1225,74 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I think it’s because I’m so afraid of what others will think. It just feels like one mistake can erase everything I’ve worked for, and it makes me feel so ashamed. I worry that people will see me as incompetent or that they might not want to be around me anymore. It's like this fear that one slip-up could change how everyone views me, and that feels unbearable.",
-        "core_issue": "academic and educational concerns",
+        "query": "Yeah, it really is distressing. When I see him laughing at his phone, my mind just spirals. I start thinking about all the times he’s been less available, and I wonder if he’s sharing things with someone else that he doesn’t want me to know. It feels like I’m not part of his world anymore, and I start doubting our connection. It’s like this overwhelming fear that I’m not good enough or that he’ll find someone better, and it just eats",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "seeing him laughing at his phone"
+          ],
           "automatic_thoughts": [
-            "I'm afraid of what others will think",
-            "One mistake can erase everything I've worked for",
-            "People will see me as incompetent",
-            "They might not want to be around me anymore",
-            "One slip-up could change how everyone views me"
+            "he's sharing things with someone else",
+            "I'm not part of his world",
+            "I doubt our connection",
+            "I'm not good enough",
+            "he'll find someone better"
           ],
           "emotions": [
-            "fear",
-            "shame",
-            "anxiety"
+            "distress",
+            "fear"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of being a burden to others (finding)"
+            "Feeling abandoned (finding)",
+            "Anxious avoidant attachment (finding)"
           ],
           "neutral": [
-            "Fear of saying the wrong thing (finding)",
-            "Fear of speaking to people in authority (finding)"
+            "Emotionally distant (finding)",
+            "Complaining of feeling depressed (finding)",
+            "Boyfriend relationship problem (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot of worry about how others perceive you, and that fear of making a mistake feels incredibly significant – what makes you believe that one mistake could erase everything you've accomplished?",
+        "response": "It sounds incredibly painful to experience that spiral of thoughts when you see him laughing at his phone. What makes you think he might be sharing things with someone else?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of worry about how others perceive you, and that the possibility of making a mistake feels incredibly significant. That kind of pressure can certainly feel unbearable.",
+            "response": "It sounds incredibly painful to experience that spiral of thoughts and feelings when you see him laughing at his phone. It makes sense that you'd feel distressed and fearful when you're questioning the connection you have.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "distress",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling abandoned",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "concept": "anxious avoidant attachment",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I'm afraid of what others will think",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "One mistake can erase everything I've worked for",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "People will see me as incompetent",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "They might not want to be around me anymore",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "One slip-up could change how everyone views me",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're carrying a lot of worry about how others perceive you, and that fear of making a mistake feels incredibly significant – what makes you believe that one mistake could erase everything you've accomplished?",
+            "response": "It sounds incredibly painful to experience that spiral of thoughts when you see him laughing at his phone. What makes you think he might be sharing things with someone else?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -1124,47 +1302,70 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
-                  "label": "unknown"
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "doubt",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "abandoned",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxious avoidant attachment",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're carrying a lot of worry about how others perceive you, and that fear of making a mistake feels incredibly heavy. What's one thing a close friend might say to you about this worry?",
+            "response": "It sounds incredibly painful to experience that spiral of thoughts and feelings when you see him laughing at his phone. What's one thing a close friend might say to you about these thoughts?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes (finding)",
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxious avoidant attachment (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly painful, and it makes sense that you're feeling so distressed. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "distress",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "abandoned (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "concept": "Anxious avoidant attachment (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I'm afraid of what others will think",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "One mistake can erase everything I've worked for",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "People will see me as incompetent",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "They might not want to be around me anymore",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "One slip-up could change how everyone views me",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -1176,16 +1377,17 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I don’t know... I guess it’s just this deep-rooted fear that if I slip up, it’ll confirm all those doubts I have about myself. It’s like I’ve built this image of who I should be, and if I falter, then everything crumbles. I have this nagging feeling that people are just waiting for me to fail, just watching and judging. It’s hard to shake that off when it feels so real.",
-        "core_issue": "academic and educational concerns",
+        "query": "I don’t know... it just feels like a gut instinct. There are moments when he seems so happy and engaged with that phone, and I can’t help but wonder if he feels that way with someone else too. It’s like I see the contrast between how he is with me and how he is when he’s on his own. I start thinking about all the times I felt ignored or pushed aside, and it just makes that fear even stronger. It’s hard not to feel like I’m",
+        "core_issue": "Relationships (romantic, family, friendships)",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "seeing him happy with his phone",
+            "contrast between his behavior with me and alone",
+            "memories of feeling ignored"
+          ],
           "automatic_thoughts": [
-            "if I slip up, it’ll confirm all those doubts I have about myself",
-            "I’ve built this image of who I should be",
-            "if I falter, then everything crumbles",
-            "people are just waiting for me to fail",
-            "people are watching and judging"
+            "he might be happier with someone else",
+            "I am being pushed aside"
           ],
           "emotions": [
             "fear"
@@ -1194,51 +1396,76 @@
         },
         "retrieval": {
           "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Fear of collapsing (finding)",
-            "Fear of being watched (finding)"
+            "Feeling unwanted (finding)"
           ],
           "neutral": [
-            "Fear of saying the wrong thing (finding)"
+            "Believes phones are bugged (finding)",
+            "Jealousy (finding)",
+            "Boyfriend relationship problem (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Emotionally distant (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot of pressure to maintain this image of who you should be, and the fear of not meeting that standard is really distressing. That feeling of being watched and judged must be incredibly difficult to deal with.",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds incredibly painful to feel like you're being pushed aside, and those memories of feeling ignored are certainly adding to that fear. Could you imagine what a friend might say about your observations, and whether there might be other explanations for his behavior?",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of pressure to maintain this image of who you should be, and the fear of not meeting that standard is really distressing. That feeling of being watched and judged must be incredibly difficult to deal with.",
+            "response": "It sounds like you're experiencing a lot of difficult emotions right now, and it's understandable that you're feeling this way given those memories of feeling ignored. It takes courage to share these feelings, and I want you to know I'm here to listen.",
             "reasoning": {
               "retrieved_concepts_used": [
-                {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
                 },
                 {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
                   "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "feeling unwanted",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "jealousy",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "boyfriend relationship problem",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like this fear of slipping up carries a lot of weight, and it's connected to a sense of who you *should* be – what makes that image so important to you?",
+            "response": "That sounds really distressing, and it takes courage to share that. Can you tell me more about what specifically makes you feel like he's happier with his phone than with you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
                   "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
@@ -1249,16 +1476,47 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to feel like one slip-up could shatter this image you've created and confirm those doubts about yourself – what do you think might be some evidence that contradicts this belief that people are waiting for you to fail?",
+            "response": "It sounds incredibly painful to feel like you're being pushed aside, and those memories of feeling ignored are certainly adding to that fear. Could you imagine what a friend might say about your observations, and whether there might be other explanations for his behavior?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
                   "concept": "entailment",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly painful, and it's understandable that you're feeling so distressed. When you say you're having these thoughts, are you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling unwanted",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "jealousy",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "boyfriend relationship problem",
+                  "label": "neutral"
                 }
               ]
             }

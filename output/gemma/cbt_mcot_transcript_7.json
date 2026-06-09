@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Yeah, last week I was on my way to class and my girlfriend actually called me up saying that I forgot to take out the trash. And I kind of started thinking, wow, like, I forgot to take out the trash. Something so simple, a simple chore. All I had to do was take out the trash today and I forgot to do it. And then I started to think, well, I can't do something as simple as that. Why is she still with me? Or, and why, why can't I do that? Why can't I do a simple task? Am I good enough for anyone? Am I good enough for her? Kind of starting to feel a little fearful that she would just up and leave me.",
-    "core_issue": "relationships (romantic, family, friendships)",
+    "seed": "Dunno. I guess it's just like I spend so much time by myself that it's kind of like I'm nothing even worth being friends with.",
+    "core_issue": "Self-esteem and confidence issues",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,68 +17,40 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Yeah, last week I was on my way to class and my girlfriend actually called me up saying that I forgot to take out the trash. And I kind of started thinking, wow, like, I forgot to take out the trash. Something so simple, a simple chore. All I had to do was take out the trash today and I forgot to do it. And then I started to think, well, I can't do something as simple as that. Why is she still with me? Or, and why, why can't I do that? Why can't I do a simple task? Am I good enough for anyone? Am I good enough for her? Kind of starting to feel a little fearful that she would just up and leave me.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Dunno. I guess it's just like I spend so much time by myself that it's kind of like I'm nothing even worth being friends with.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "girlfriend's call",
-            "forgot to take out the trash"
+            "spending time alone"
           ],
           "automatic_thoughts": [
-            "I forgot to take out the trash",
-            "I can't do something as simple as that",
-            "Why is she still with me?",
-            "Am I good enough for anyone?",
-            "Am I good enough for her?"
+            "I'm nothing worth being friends with"
           ],
           "emotions": [
-            "fear"
+            "sadness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)"
+            "Feeling isolated (finding)",
+            "Social isolation (finding)",
+            "Feeling alienated (finding)"
           ],
           "neutral": [
-            "Girlfriend relationship problem (finding)",
-            "Forgets what was going to do (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Forgets what has just done (finding)"
+            "Social isolation (rejection) (finding)",
+            "Fear of being in a small group (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that phone call triggered a lot of thoughts and feelings for you – especially that fear of losing her. Can you tell me more about what makes you think she might leave?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds like spending time alone has led you to feel like you're not worthy of friendship, and that must be really painful. I hear the sadness in what you're saying.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like that phone call really triggered a lot of self-doubt and worry for you, and it's understandable that you'd feel fearful when those kinds of thoughts pop up. It seems like forgetting the trash felt like a bigger deal than just a missed chore.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like that phone call triggered a lot of thoughts and feelings for you – especially that fear of losing her. Can you tell me more about what makes you think she might leave?",
+            "response": "It sounds like spending time alone has led you to feel like you're not worthy of friendship, and that must be really painful. I hear the sadness in what you're saying.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -100,8 +72,8 @@
               ]
             }
           },
-          "alternative_perspective": {
-            "response": "It sounds like that phone call really triggered a lot of self-doubt and worry for you. If a friend were in your shoes, what might they say about you overreacting to forgetting a simple chore?",
+          "socratic_questioning": {
+            "response": "That sounds really painful. Can you tell me more about what makes you feel like you're not worth being friends with?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -117,11 +89,65 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "behaviors",
+                  "concept": "social isolation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like spending time alone has led you to question your worthiness of friendship, and that must be really painful. Can you imagine what a friend might say to you about this thought?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "social isolation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really painful, and it takes courage to share that. When you said you spend so much time alone, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "neutral",
                   "label": "unknown"
                 }
               ]
@@ -134,65 +160,208 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it just feels like things have been rocky lately. Sometimes I worry that I’m not good enough for her, you know? Like, what if she finds someone who makes her happier than I do? It’s scary to think about.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, I guess it is painful. I mean, I find myself thinking that maybe it’s just easier to be alone because... well, who would really want to be friends with me, right? I just feel like I'm never enough for anyone, and sometimes it’s hard to shake that feeling off.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "things have been rocky lately"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I’m not good enough for her",
-            "what if she finds someone who makes her happier than I do"
+            "maybe it’s just easier to be alone",
+            "who would really want to be friends with me",
+            "I'm never enough for anyone"
           ],
           "emotions": [
-            "scary"
+            "pain",
+            "sadness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling unhappy (finding)"
+            "Feeling isolated (finding)",
+            "Feeling lonely (finding)",
+            "Feeling abandoned (finding)",
+            "Feeling unloved (finding)",
+            "Feeling alienated (finding)"
           ],
-          "neutral": [
-            "Girlfriend relationship problem (finding)",
-            "Mood swings (finding)",
-            "Emotionally distant (finding)"
-          ],
-          "contradiction": [
-            "Feeling unloved (finding)"
-          ]
+          "neutral": [],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those worries are really unsettling for you – can you tell me more about what makes you feel like you might not be good enough for her?",
+        "response": "It sounds like you're carrying a lot of pain right now, and those thoughts are really contributing to that. Can you tell me more about what makes you feel like you're \"never enough\" for anyone?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're going through a tough time, and it's understandable that you'd feel scared when you're worrying about not being good enough and what might happen in your relationship. Can you tell me a little more about what \"rocky\" feels like for you?",
+            "response": "It sounds like you're experiencing a lot of pain right now, and it makes sense that you'd be thinking about being alone when you feel like you're not enough for anyone. That’s a really tough feeling to carry.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
+                  "concept": "Feeling unloved (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts: ['maybe it’s just easier to be alone', 'who would really want to be friends with me', 'I'm never enough for anyone']",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like those worries are really unsettling for you – can you tell me more about what makes you feel like you might not be good enough for her?",
+            "response": "It sounds like you're carrying a lot of pain right now, and those thoughts are really contributing to that. Can you tell me more about what makes you feel like you're \"never enough\" for anyone?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts: ['maybe it’s just easier to be alone', 'who would really want to be friends with me', 'I'm never enough for anyone']",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly painful to feel that way, and it takes courage to share that. If a friend were looking at this situation, what do you think they might notice that you aren't seeing right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts: ['maybe it’s just easier to be alone', 'who would really want to be friends with me', 'I'm never enough for anyone']",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're experiencing a lot of pain right now. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling abandoned (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts: ['maybe it’s just easier to be alone', 'who would really want to be friends with me', 'I'm never enough for anyone']",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "patient": {
+        "role": "patient",
+        "query": "It’s just... I don’t know, I’ve always felt like I’m on the outside looking in. Like, when I see people connecting or having fun, I can’t help but think they all have something special that I lack. Sometimes I feel like I’m just failing at being a friend, or even at just being myself. It’s exhausting.",
+        "core_issue": "Self-esteem and confidence issues",
+        "schema": {
+          "triggers": [
+            "seeing people connecting",
+            "witnessing fun activities"
+          ],
+          "automatic_thoughts": [
+            "they have something special that I lack",
+            "I'm failing at being a friend",
+            "I'm failing at being myself"
+          ],
+          "emotions": [
+            "sadness",
+            "exhaustion"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)",
+            "Feeling unwanted (finding)"
+          ],
+          "neutral": [
+            "Social isolation (rejection) (finding)"
+          ],
+          "contradiction": [
+            "Social isolation (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really painful to feel like you're constantly on the outside, and it makes sense that you'd feel exhausted when you're seeing others connect and feeling like you're missing out. It takes a lot of energy to carry those feelings.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really painful to feel like you're constantly on the outside, and it makes sense that you'd feel exhausted when you're seeing others connect and feeling like you're missing out. It takes a lot of energy to carry those feelings.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -210,103 +379,24 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you're experiencing some really unsettling thoughts and feelings right now. If a friend were in your shoes, what might they say about these worries and whether they're entirely accurate?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "feeling isolated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "feeling alienated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 2,
-      "patient": {
-        "role": "patient",
-        "query": "I don't know, maybe it’s just how I see myself sometimes? I think I have this idea that I should be more successful or charming, but I feel like I fall short. And when I see other couples, they seem so perfect together. It makes me question if I’m doing something wrong.",
-        "core_issue": "relationships (romantic, family, friendships)",
-        "schema": {
-          "triggers": [
-            "seeing other couples",
-            "thinking about success",
-            "self-perception"
-          ],
-          "automatic_thoughts": [
-            "I should be more successful",
-            "I should be more charming",
-            "I fall short",
-            "I’m doing something wrong"
-          ],
-          "emotions": [
-            "doubt",
-            "inadequacy"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Incongruent personal expectations (finding)",
-            "Preoccupation with appearance (finding)"
-          ],
-          "neutral": [
-            "Inadequate personality (finding)",
-            "Difficulty understanding own emotions (finding)",
-            "Delusion of being loved (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're noticing a gap between how you see yourself and how you *think* you should be – that feeling of falling short can be really tough. Can you tell me more about where that \"should\" comes from?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a lot of doubt and inadequacy when you compare yourself to others, and you're questioning whether you're measuring up to your own expectations. That can be really tough to navigate.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "ENTAILMENT — Incongruent personal expectations",
+                  "concept": "feeling unwanted",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're noticing a gap between how you see yourself and how you *think* you should be – that feeling of falling short can be really tough. Can you tell me more about where that \"should\" comes from?",
+            "response": "It sounds incredibly painful to feel like you're constantly on the outside. Can you tell me more about what makes you think they have something special that you lack?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -319,17 +409,25 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "neutral"
+                  "label": "unknown"
                 },
                 {
-                  "concept": "socratic_questioning",
+                  "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling unwanted",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're noticing a pattern of comparing yourself to others and feeling like you're not measuring up – that can be really tough. What do you think a close friend might say about your self-perception right now?",
+            "response": "It sounds really painful to feel like you're missing out and constantly questioning your ability to connect with others. What do you think a close friend might say about why you might be interpreting these situations the way you are?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -342,10 +440,41 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "neutral"
+                  "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly painful, and it's understandable that you'd feel exhausted. When you mentioned feeling this way, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
@@ -358,68 +487,45 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it’s just this pressure I feel from everywhere, like family expectations or what I see on social media. It’s like there’s this standard of what a relationship should look like, and when I compare mine to that, I feel inadequate. It’s hard to ignore it, you know?",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "I don’t know. I always feel like I’m on the outside looking in. When I see people connecting or having fun, it hits me hard. I just think they have something special that I don’t, and it makes me feel like I’m failing at being a friend, or even just being myself. It’s really exhausting.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "family expectations",
-            "social media standards"
+            "seeing people connecting",
+            "seeing people having fun"
           ],
           "automatic_thoughts": [
-            "I feel inadequate when I compare my relationship to others"
+            "they have something special that I don’t",
+            "I’m failing at being a friend",
+            "I’m failing at being myself"
           ],
           "emotions": [
-            "pressure",
-            "inadequacy"
+            "sadness",
+            "exhaustion"
           ],
-          "behaviors": [
-            "comparing my relationship to others"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Incongruent personal expectations (finding)",
-            "Feeling unwanted (finding)",
-            "Pressured by others (finding)"
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)",
+            "Impaired social interaction (finding)"
           ],
           "neutral": [
-            "Difficulty maintaining relationships (finding)"
+            "Social isolation (rejection) (finding)"
           ],
           "contradiction": [
-            "Feeling isolated (finding)"
+            "Social isolation (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot of weight trying to measure up to these external expectations – can you tell me more about what specifically makes you feel inadequate when you compare your relationship?",
+        "response": "It sounds incredibly painful to feel like you're constantly on the outside. Can you tell me more about what makes you think they have something special that you don’t?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of pressure from external sources, and it's making you question your relationship – that must be really difficult to deal with. Can you tell me a little more about what those family expectations are like?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're carrying a lot of weight trying to measure up to these external expectations – can you tell me more about what specifically makes you feel inadequate when you compare your relationship?",
+            "response": "It sounds incredibly painful to feel like you're on the outside looking in, and it's understandable that you'd feel exhausted by those thoughts and feelings. It takes courage to share that, and I want you to know I hear you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -439,14 +545,57 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "ENTAILMENT — Pressured by others (finding)",
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "impaired social interaction",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly painful to feel like you're constantly on the outside. Can you tell me more about what makes you think they have something special that you don’t?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "impaired social interaction",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're carrying a lot of pressure trying to measure up to those expectations, and it's understandable that you'd feel inadequate when comparing your relationship to what you see online or what your family expects. What do you think someone who cares about you would say about you putting so much weight on those external standards?",
+            "response": "It sounds incredibly painful to feel like you're always on the outside. What do you think a close friend might say about why you might be interpreting these situations the way you are?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -466,8 +615,47 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly painful, and it's understandable that you'd feel exhausted. When you say it \"hits you hard,\" were you having any thoughts of wanting to not be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
                   "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling alienated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "impaired social interaction",
+                  "label": "entailment"
                 }
               ]
             }
@@ -479,44 +667,46 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I think it’s mostly about how I see us not being as happy or adventurous as those couples. I mean, we have good moments, but I sometimes feel like we’re stuck in routine, and I worry she might get bored or frustrated. I can’t help but feel like I should be doing more to keep things exciting. It's just... overwhelming sometimes.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "I guess it’s just little things, like how easily they laugh and joke together or how they seem to really enjoy each other’s company. I feel like I can’t quite fit into those moments, and it makes me question why I can't just be that relaxed and open. Sometimes I think maybe it’s because I don't have anything interesting to offer, like I’m just... boring.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "seeing other couples",
-            "routine"
+            "seeing others laugh and joke",
+            "observing enjoyment in social interactions"
           ],
           "automatic_thoughts": [
-            "we're not as happy as others",
-            "she might get bored",
-            "I should be doing more"
+            "I can't fit into those moments",
+            "I can't be relaxed and open",
+            "I don't have anything interesting to offer",
+            "I'm boring"
           ],
           "emotions": [
-            "overwhelmed",
-            "frustration"
+            "insecurity",
+            "sadness"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Incongruent personal expectations (finding)"
+            "Sociable mood (finding)"
           ],
           "neutral": [
-            "Pressured by partner (finding)",
-            "Anxiety about resuming sexual relations (finding)",
-            "Tends to be intolerant of frustration (finding)",
-            "Tends to lack curiosity (finding)"
+            "Tends not to be sociable (finding)",
+            "Feeling alienated (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Tends to avoid group social interactions (finding)",
+            "Tends to avoid one to one social interactions (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like seeing other couples triggers thoughts about your own relationship and creates a sense of overwhelm – what specifically makes you feel like you *should* be doing more?",
+        "response": "It sounds like those moments can be really tough for you, and it's understandable to wonder why you can't feel as relaxed as others do – what makes you think you don't have anything interesting to offer?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like seeing other couples has been bringing up feelings of being overwhelmed, and you're concerned about your relationship falling into a routine and potentially disappointing your partner. That’s a lot to carry, and it makes sense that you'd feel overwhelmed.",
+            "response": "It sounds like seeing others connect and enjoy themselves brings up feelings of insecurity and sadness for you, and you're wondering why it's so hard to feel relaxed and open in those situations. That’s a really tough feeling to experience.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -539,7 +729,7 @@
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like seeing other couples triggers thoughts about your own relationship and creates a sense of overwhelm – what specifically makes you feel like you *should* be doing more?",
+            "response": "It sounds like those moments can be really tough for you, and it's understandable to wonder why you can't feel as relaxed as others do – what makes you think you don't have anything interesting to offer?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -555,14 +745,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "ENTAILMENT",
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like seeing other couples really triggers those feelings of worry and inadequacy, and it's understandable that you'd feel overwhelmed by that. What do you think a close friend might say about your concerns, knowing you and your partner as well as you do?",
+            "response": "It sounds like seeing others connect so easily can be really tough, and it's understandable that you'd question why you can't feel the same way. If a friend were watching this, what do you think they might say about why you're interpreting these moments the way you are?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -583,6 +773,33 @@
                 }
               ]
             }
+          },
+          "safety_check": {
+            "response": "That sounds really tough, and it's understandable that you'd feel that way when you see others enjoying themselves. When you mentioned feeling this way, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Sociable mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling alienated (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
           }
         }
       }
@@ -591,66 +808,78 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, exactly. I think it’s like this voice in my head that says I need to plan more dates or be more spontaneous. I see friends doing all these fun activities, and I just feel like I should be doing those things too. But then I get anxious about planning things, and I end up doing nothing. It’s frustrating!",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "I don’t know, I just... I look at what others bring to the table, like their stories or their confidence. And I feel like I don’t have those things. Sometimes I think I can be kind of awkward and it just makes me want to hide away. It’s like I can’t shake this feeling that I’d just be a burden if I tried to engage.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "seeing friends doing fun activities"
+            "looking at what others bring",
+            "seeing others' stories",
+            "observing others' confidence"
           ],
           "automatic_thoughts": [
-            "I need to plan more dates",
-            "I should be doing those things too"
+            "I don’t have those things",
+            "I can be kind of awkward",
+            "I’d just be a burden if I tried to engage"
           ],
           "emotions": [
-            "anxiety",
-            "frustration"
+            "shame",
+            "anxiety"
           ],
           "behaviors": [
-            "doing nothing"
+            "want to hide away"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Introvert (finding)",
+            "Fear of social gatherings (finding)",
+            "Fear of being in a small group (finding)",
+            "Fear of being a burden to others (finding)"
+          ],
           "neutral": [
-            "Fear of social group activities (finding)",
-            "Fear of going out (finding)",
-            "Anxiety about going crazy (finding)",
-            "Incongruent personal schedules (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Social isolation (rejection) (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that voice is putting a lot of pressure on you – what do you think it’s trying to achieve by telling you to plan more dates or be more spontaneous?",
+        "response": "It sounds like comparing yourself to others can really bring up some difficult feelings. What makes you feel like you'd be a burden if you were to engage?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like seeing your friends having fun triggers a sense of frustration and anxiety, and that leads to feeling stuck and doing nothing. That's a really tough spot to be in.",
+            "response": "It sounds like you're noticing qualities in others that you admire, and then feeling down on yourself because you don't feel you measure up – and that leads to wanting to withdraw. That takes a lot of courage to share.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Introvert (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Fear of social gatherings (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "behaviors",
+                  "concept": "shame",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "want to hide away",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like that voice is putting a lot of pressure on you – what do you think it’s trying to achieve by telling you to plan more dates or be more spontaneous?",
+            "response": "It sounds like comparing yourself to others can really bring up some difficult feelings. What makes you feel like you'd be a burden if you were to engage?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -668,12 +897,16 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're noticing a real conflict between wanting to have fun and feeling stuck when you try to plan it – that frustration is understandable. What do you think a close friend might say about you feeling pressured to do what others are doing?",
+            "response": "It sounds like you're noticing qualities in others that make you feel inadequate, and that's leading to a desire to withdraw. What do you think a close friend might say about your concerns about being a burden?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -690,6 +923,45 @@
                 },
                 {
                   "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really difficult, and it takes courage to share that. When you say you feel like a burden, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Introvert (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of social gatherings (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (rejection) (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "shame",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "want to hide away",
                   "label": "unknown"
                 }
               ]
@@ -702,98 +974,153 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I don’t know, maybe it just wants me to feel like I’m enough? Like if I do more fun stuff, then I’ll be a better partner, and she’ll be happy. It’s like I’m trying to prove something to myself, but it just ends up making me feel worse when I can’t follow through.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, it really does. I guess it’s just this fear that I’ll say the wrong thing or that people will roll their eyes or, I don’t know, think I'm annoying. I always feel like I'm under some kind of spotlight, and I worry that I’ll just disappoint them. It’s like I’m not even sure how to be myself without feeling like it’ll end badly.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "fear of saying the wrong thing",
+            "people rolling their eyes",
+            "thinking I'm annoying",
+            "feeling under a spotlight",
+            "worrying about disappointing others"
+          ],
           "automatic_thoughts": [
-            "I need to do more fun stuff to be a better partner",
-            "If I do more, she’ll be happy",
-            "I’m trying to prove something to myself"
+            "I might say the wrong thing",
+            "people will think I'm annoying",
+            "I have to be perfect",
+            "I can't be myself"
           ],
           "emotions": [
-            "anxiety",
-            "frustration"
+            "fear",
+            "anxiety"
           ],
-          "behaviors": [
-            "trying to do more fun activities",
-            "feeling worse when unable to follow through"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Loss of interest in previously enjoyable activity (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about appearing ridiculous (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Fear of public speaking (finding)"
           ],
           "neutral": [
-            "Heightened erotic interest (finding)",
-            "Tends to turn anger against self (finding)",
-            "Inability to resist compulsive behaviors (finding)",
-            "Anxiety about resuming sexual relations (finding)"
+            "Fear of being in a small group (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're connecting a need to feel \"enough\" with doing more fun things and pleasing your partner – what makes you think that's the case?",
+        "response": "It sounds incredibly distressing to feel like you're constantly under scrutiny and worried about disappointing others – what's the strongest evidence you have that you'll say the wrong thing?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of pressure to be a \"better\" partner, and that feeling of needing to prove something to yourself is creating anxiety and frustration. It takes courage to recognize that, and it's understandable that you'd feel worse when things don't go as planned.",
+            "response": "It sounds incredibly distressing to feel like you're constantly under scrutiny and worried about disappointing others. That fear of saying the wrong thing can be really paralyzing.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "fear of saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "people rolling their eyes",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
+                  "concept": "thinking I'm annoying",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling under a spotlight",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worrying about disappointing others",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're connecting a need to feel \"enough\" with doing more fun things and pleasing your partner – what makes you think that's the case?",
+            "response": "It sounds incredibly distressing to feel like you're constantly under scrutiny and worried about disappointing others – what's the strongest evidence you have that you'll say the wrong thing?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "fear of saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "people rolling their eyes",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "neutral"
+                  "concept": "thinking I'm annoying",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling under a spotlight",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worrying about disappointing others",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're putting a lot of pressure on yourself to be a \"better\" partner by doing more fun things – what do you think might happen if you took a step back and considered if there's another way to feel enough, or to show your partner you care?",
+            "response": "It sounds incredibly distressing to feel like you're constantly under scrutiny and worried about disappointing others – what do you think a close friend might say about you in this moment?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "fear of saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "people rolling their eyes",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking I'm annoying",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling under a spotlight",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worrying about disappointing others",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it takes a lot of courage to share that. When you mentioned feeling like you might disappoint people, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about appearing ridiculous (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "alternative_perspective",
                   "label": "unknown"
                 }
               ]
@@ -806,120 +1133,146 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s just how I’ve always thought about relationships. I feel like if I'm not making her happy or creating these amazing memories together, then I’m failing somehow. It’s like this belief that my worth is tied to our experiences. And when things feel flat, I can’t help but question if I’m good enough for her at all.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, it really does. I guess it’s just this fear that I’ll say the wrong thing or that people will roll their eyes or think I'm annoying. I always feel like I'm under some kind of spotlight, and I worry I’ll just disappoint them. It’s like I’m not even sure how to be myself without feeling like it’ll end badly.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "not making her happy",
-            "creating amazing memories",
-            "things feel flat"
+            "fear of saying the wrong thing",
+            "people rolling their eyes",
+            "thinking I'm annoying",
+            "feeling under a spotlight",
+            "worrying about disappointing others"
           ],
           "automatic_thoughts": [
-            "I'm failing somehow",
-            "my worth is tied to our experiences",
-            "I'm not good enough for her"
+            "I'll say the wrong thing",
+            "people will roll their eyes",
+            "I'll disappoint them",
+            "I can't be myself"
           ],
           "emotions": [
+            "fear",
             "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Delusion of being loved (finding)",
-            "Incongruent personal expectations (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about appearing ridiculous (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Fear of public speaking (finding)"
           ],
           "neutral": [
-            "Difficulty maintaining relationships (finding)",
-            "Anxiety about resuming sexual relations (finding)"
+            "Fear of being in a small group (finding)"
           ],
-          "contradiction": [
-            "Feeling unloved (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're carrying a lot of pressure to create a perfect relationship, and it's understandable that you'd feel anxious when things don't match that expectation – what makes you feel like things need to be \"amazing\" to be worthwhile?",
-        "protocol_used": "socratic_questioning",
+        "response": "It sounds incredibly distressing to feel like you're constantly under scrutiny and worried about disappointing others. That fear of saying the wrong thing can be really paralyzing.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of pressure to make things perfect and that you're really worried about whether you're meeting her expectations – can you tell me more about how long you've felt this way?",
+            "response": "It sounds incredibly distressing to feel like you're constantly under scrutiny and worried about disappointing others. That fear of saying the wrong thing can be really paralyzing.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Incongruent personal expectations (finding)",
+                  "concept": "fear of saying the wrong thing",
                   "label": "entailment"
+                },
+                {
+                  "concept": "people rolling their eyes",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking I'm annoying",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling under a spotlight",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worrying about disappointing others",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're carrying a lot of pressure to create a perfect relationship, and it's understandable that you'd feel anxious when things don't match that expectation – what makes you feel like things need to be \"amazing\" to be worthwhile?",
+            "response": "It sounds incredibly distressing to feel like you're constantly performing and worried about disappointing others – what makes you think you might say the wrong thing?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Incongruent personal expectations (finding)",
+                  "concept": "fear of saying the wrong thing",
                   "label": "entailment"
+                },
+                {
+                  "concept": "people rolling their eyes",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling under a spotlight",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worrying about disappointing others",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're putting a lot of pressure on yourselves to create a perfect relationship, and it's understandable why you'd feel anxious when things don't feel as exciting. What do you think your partner might say about this pressure you're putting on yourself?",
+            "response": "It sounds incredibly distressing to feel like you're constantly being evaluated and worried about disappointing others. What do you think a close friend might say about you in this moment, knowing how hard you're trying?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "fear of saying the wrong thing",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "people rolling their eyes",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "feeling under a spotlight",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "worrying about disappointing others",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it takes a lot of courage to share that. When you mentioned feeling like you might disappoint people, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
+                  "concept": "Anxiety about appearing ridiculous (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: fear of saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: people rolling their eyes",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "triggers: thinking I'm annoying",
+                  "label": "triggers"
                 }
               ]
             }
@@ -931,154 +1284,45 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I think... it comes from seeing how everyone else portrays their relationships. It’s like there’s this constant highlight reel of happiness and excitement, and I feel this need to keep up. I guess I just don’t want to be seen as someone who can't make their partner happy or let them down. It’s hard not to compare.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "It really is. Like, every time I’m in a group, my mind races about what I might say. I just wish I could be more at ease, but instead, I feel like I’m just waiting for that moment where someone says something that proves I don’t belong. It's like I can't find a way to just relax and enjoy the moment. It’s frustrating.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "seeing others' relationships",
-            "constant highlight reel of happiness"
+            "being in a group",
+            "someone says something"
           ],
           "automatic_thoughts": [
-            "need to keep up",
-            "don't want to be seen as unable to make partner happy",
-            "fear of letting partner down",
-            "comparison to others"
+            "what I might say",
+            "I don’t belong",
+            "I can't relax"
           ],
           "emotions": [
-            "anxiety"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Preoccupation with appearance (finding)"
-          ],
-          "neutral": [
-            "Delusion of being loved (finding)",
-            "Fear of losing emotional control (finding)",
-            "Character trait finding of affective stability (finding)",
-            "Able to resist obsessional thoughts (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like seeing these portrayals of relationships really triggers a lot of worry for you – what specifically makes you feel the need to \"keep up\"?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like seeing others' seemingly perfect relationships is triggering feelings of anxiety and a pressure to measure up. It takes courage to acknowledge that comparison is happening, and it's understandable why you'd want to avoid letting your partner down.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like seeing these portrayals of relationships really triggers a lot of worry for you – what specifically makes you feel the need to \"keep up\"?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "comparison to others",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "fear of letting partner down",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like seeing these portrayals of relationships really triggers a lot of pressure for you – what do you think a close friend might say about you putting so much weight on these external portrayals?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 9,
-      "patient": {
-        "role": "patient",
-        "query": "I think it’s that fear of being judged, maybe? Like if people see us not doing anything exciting, they might think something’s wrong with us or with me. And I know deep down it shouldn’t matter what others think, but it feels so real in the moment. I just want to feel accepted and like I’m doing a good job in this relationship.",
-        "core_issue": "relationships (romantic, family, friendships)",
-        "schema": {
-          "triggers": [
-            "fear of being judged",
-            "people seeing us not doing anything exciting"
-          ],
-          "automatic_thoughts": [
-            "they might think something's wrong with us",
-            "it shouldn't matter what others think"
-          ],
-          "emotions": [
-            "fear",
-            "anxiety"
+            "frustration"
           ],
           "behaviors": [
-            "wanting to feel accepted",
-            "wanting to do a good job in this relationship"
+            "waiting for validation"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)",
-            "Fear of social group activities (finding)",
-            "Fear of being watched (finding)"
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "neutral": [
-            "Fear of saying the wrong thing (finding)",
-            "Fear of being in a small group (finding)"
+            "Fear of being in a small group (finding)",
+            "Fear of social gatherings (finding)",
+            "Fear of social group activities (finding)",
+            "Fear of speaking to people in authority (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're experiencing a real conflict between what you believe and how you feel – wanting to feel accepted and doing well in the relationship, but also worrying about what others might think. Can you tell me more about what specifically makes you think people might judge you?",
+        "response": "It sounds incredibly frustrating to feel like you're constantly anticipating something negative happening. What specifically goes through your mind when you notice yourself waiting for that moment?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a lot of anxiety around what others might think, and that desire for acceptance and to feel like you're doing well in the relationship is really important to you. It takes courage to acknowledge that conflict between what you *know* and what you *feel* in those moments.",
+            "response": "It sounds incredibly frustrating to feel like you're constantly on edge, anticipating something negative happening in a group setting. It takes a lot of energy to be in that state of waiting and worrying.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1105,7 +1349,152 @@
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're experiencing a real conflict between what you believe and how you feel – wanting to feel accepted and doing well in the relationship, but also worrying about what others might think. Can you tell me more about what specifically makes you think people might judge you?",
+            "response": "It sounds incredibly frustrating to feel like you're constantly anticipating something negative happening. What specifically goes through your mind when you notice yourself waiting for that moment?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly frustrating to feel like you're constantly anticipating something negative happening in a group setting. What do you think a close friend might say about how you're approaching these situations?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really frustrating, and it takes a lot of energy to be in that state of anticipation. When you mentioned feeling this way, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "It’s almost like this loop of thoughts, you know? I start thinking about all the times I've felt awkward or out of place, and then I wonder if this time will be the same. There’s this voice in my head that says things like, “You don’t belong here” or “They’ll see how weird you are.” It just makes my stomach twist, and I can feel the tension building.",
+        "core_issue": "Self-esteem and confidence issues",
+        "schema": {
+          "triggers": [
+            "thinking about past awkward moments",
+            "wondering about current situation"
+          ],
+          "automatic_thoughts": [
+            "You don’t belong here",
+            "They’ll see how weird you are"
+          ],
+          "emotions": [
+            "anxiety",
+            "tension"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Fear of being in a small group (finding)",
+            "Fear of social gatherings (finding)",
+            "Stage fright (finding)",
+            "Anxiety about having a fit (finding)",
+            "Anxiety about saying the wrong thing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really distressing to get caught in that loop of thoughts and feel like those things are true. Imagine a friend was experiencing this – what do you think they might say to reassure you about whether you truly don’t belong?",
+        "protocol_used": "alternative_perspective",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like those thoughts and memories are really creating a lot of anxiety for you right now. It takes courage to share that, and I appreciate you describing what's happening.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those thoughts are really creating a difficult experience for you – can you tell me more about what makes you think \"They’ll see how weird you are\"?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1128,7 +1517,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're really caught between knowing it *shouldn't* matter what others think, and feeling very anxious about their judgment – what do you imagine a close friend might say about you worrying so much about what others think?",
+            "response": "It sounds really distressing to get caught in that loop of thoughts and feel like those things are true. Imagine a friend was experiencing this – what do you think they might say to reassure you about whether you truly don’t belong?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1149,6 +1538,29 @@
                 },
                 {
                   "concept": "alternative_perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really distressing, and it takes courage to share that. When you mentioned those thoughts, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]

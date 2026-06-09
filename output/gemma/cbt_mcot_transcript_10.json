@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Recently, I'm just feeling down a lot and I can't really, like, snap out of it. Like, sometimes if it's happened before, I can just, like, get myself back on track, but recently I just find it really difficult to do.",
-    "core_issue": "self-esteem and confidence issues",
+    "seed": "Usually. Because I don't want them to think like, they shouldn't have had me because I'm so worthless to them.",
+    "core_issue": "Self-esteem and confidence issues",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,86 +17,107 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Recently, I'm just feeling down a lot and I can't really, like, snap out of it. Like, sometimes if it's happened before, I can just, like, get myself back on track, but recently I just find it really difficult to do.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Usually. Because I don't want them to think like, they shouldn't have had me because I'm so worthless to them.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "I can't snap out of it",
-            "It's difficult to get back on track"
+            "they shouldn't have had me",
+            "I'm so worthless to them"
           ],
-          "emotions": [
-            "down"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Emotionally subdued (finding)"
+            "Feeling unwanted (finding)",
+            "Attitude towards treatment (observable entity)",
+            "Negative automatic thoughts (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Feeling like wanting to escape (finding)",
-            "Anxiety about collapsing (finding)",
-            "Extremely emotionally deprived (finding)",
-            "Difficulty controlling emotions (finding)"
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're noticing a shift in how you typically cope with feeling down, and that's understandably frustrating. Can you tell me a little more about what makes it feel so difficult to get back on track now, compared to before?",
+        "response": "It sounds like those thoughts – that they shouldn't have had you and that you're worthless to them – are causing you distress; can you tell me more about what makes you think they feel that way?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a persistent feeling of being down, and it's frustrating when you can't get back on track as you usually do. That can be really disheartening.",
+            "response": "It sounds like you're carrying a lot of pain, feeling like you're a burden and worrying about what others think of you. That must be incredibly difficult to deal with.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions: down",
-                  "label": "emotions"
+                  "concept": "Feeling unwanted (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts: I can't snap out of it",
-                  "label": "automatic_thoughts"
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts: It's difficult to get back on track",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "entailment: Emotionally subdued (finding)",
+                  "concept": "Attitude towards treatment (observable entity)",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like you're noticing a shift in how you typically cope with feeling down, and that's understandably frustrating. Can you tell me a little more about what makes it feel so difficult to get back on track now, compared to before?",
+            "response": "It sounds like those thoughts – that they shouldn't have had you and that you're worthless to them – are causing you distress; can you tell me more about what makes you think they feel that way?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts\": [\"I can't snap out of it",
-                  "label": "automatic_thoughts"
+                  "concept": "Negative automatic thoughts",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "It's difficult to get back on track",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Attitude towards treatment",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're noticing a shift in how you're managing these down periods, and it's frustrating when strategies that used to work aren't as effective. What do you think might be contributing to this increased difficulty in getting back on track?",
+            "response": "It sounds like you're really worried about what others think of you, and that these thoughts are causing you distress. Could you imagine what a friend might say about this situation, or what a more balanced perspective might be?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts\": [\"I can't snap out of it",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling unwanted (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "It's difficult to get back on track",
-                  "label": "automatic_thoughts"
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Attitude towards treatment (observable entity)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're carrying a lot of pain and worry about what others think. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling unwanted (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Attitude towards treatment (observable entity)",
+                  "label": "entailment"
                 }
               ]
             }
@@ -108,82 +129,67 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it does feel different this time. Lately, when I start feeling down, it’s like this heavy weight just settles in, and I can’t shake it off as easily. I used to have things I could do to lift my mood, but now it feels like those things just don’t work anymore, or maybe I’ve lost interest in them. It's almost like I’m stuck in this loop, and I don’t know how to break free.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, I guess it’s just this feeling I’ve had for a long time. Sometimes I catch myself thinking about how they seem to always be disappointed or how they’ll mention how hard things are for them. I wonder if they see me as a burden. It just makes me feel really small, like I'm not enough or something.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling down",
-            "heavy weight settling in"
+            "feeling of being a burden",
+            "others' disappointment",
+            "mention of others' struggles"
           ],
           "automatic_thoughts": [
-            "things I used to do don't work anymore",
-            "I've lost interest in things",
-            "I'm stuck in this loop"
+            "they see me as a burden",
+            "I'm not enough"
           ],
           "emotions": [
-            "sadness",
-            "frustration"
+            "small",
+            "inadequacy"
           ],
-          "behaviors": [
-            "unable to lift my mood",
-            "feeling stuck"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Emotionally subdued (finding)",
-            "Rebound mood swings (finding)",
-            "Mood swings (finding)"
+            "Feeling isolated (finding)",
+            "Feeling unloved (finding)",
+            "Feeling unwanted (finding)",
+            "Feeling abandoned (finding)"
           ],
           "neutral": [
-            "Depressed mood (finding)",
-            "Depressed mood with postpartum onset (finding)"
+            "Fear of being a burden to others (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to feel like your usual coping strategies aren't working, and that loop can be really difficult to navigate – what do you think might be contributing to why those things aren't lifting your mood like they used to?",
+        "response": "It sounds like these thoughts and feelings have been impacting you for a while, and it's understandable that you'd feel small when you worry about being a burden. Can you tell me more about what specifically makes you think they're disappointed?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly frustrating to feel like your usual coping strategies aren't working, and that heavy weight you describe really paints a picture of how difficult this feels right now. Can you tell me a little more about what those \"things\" were that used to lift your mood?",
+            "response": "It sounds like you've been carrying this worry for a while, and it's understandably making you feel small and inadequate. It takes courage to share these kinds of thoughts, and I appreciate you bringing it up.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "feeling of being a burden",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "others' disappointment",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "feeling small",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotionally subdued",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "rebound mood swings",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "mood swings",
-                  "label": "entailment"
+                  "concept": "inadequacy",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to feel like your usual coping strategies aren't working, and that loop can be really difficult to navigate – what do you think might be contributing to why those things aren't lifting your mood like they used to?",
+            "response": "It sounds like these thoughts and feelings have been impacting you for a while, and it's understandable that you'd feel small when you worry about being a burden. Can you tell me more about what specifically makes you think they're disappointed?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -199,22 +205,30 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "feeling of being a burden",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotionally subdued",
-                  "label": "entailment"
+                  "concept": "others' disappointment",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "rebound mood swings",
-                  "label": "entailment"
+                  "concept": "they see me as a burden",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "inadequacy",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel like your usual coping strategies aren't working, and that loop can be really tough to navigate – what’s one thing a friend might suggest to help you see this situation differently?",
+            "response": "It sounds like you're carrying a heavy weight of worry about how others perceive you, and that’s understandably making you feel quite small. If a friend were in your shoes, what might they say about your concerns?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -230,12 +244,59 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "behaviors",
+                  "concept": "feeling of being a burden",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "others' disappointment",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "they see me as a burden",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling small",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "inadequacy",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly painful, and it takes courage to share that. When you mentioned those thoughts, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "rebound mood swings (finding)",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling of being a burden",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "others' disappointment",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling of inadequacy",
+                  "label": "emotions"
                 }
               ]
             }
@@ -247,46 +308,44 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I don't know, it just feels heavier lately. When I start feeling down, it’s like this weight just sits on me, and nothing seems to help. I used to have things I liked to do to lift my mood, but I don't find joy in them anymore. It’s like I’m stuck in this loop, and I just can’t get out.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I’ve been feeling really small lately. Like, no matter what I do, it’s never enough. I see others who seem to have it all together, and it just makes me doubt myself even more. I can’t shake this feeling that I’m a burden, especially when people around me express their own struggles. It gets heavy, you know?",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "feeling down",
-            "not finding joy in activities"
+            "seeing others who seem to have it all together",
+            "people around me express their own struggles"
           ],
           "automatic_thoughts": [
-            "nothing seems to help",
-            "I'm stuck in this loop"
+            "I'm a burden",
+            "it's never enough",
+            "I doubt myself"
           ],
           "emotions": [
-            "sadness",
-            "heaviness"
+            "small",
+            "heavy"
           ],
-          "behaviors": [
-            "not engaging in activities"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Mood swings (finding)",
-            "Rebound mood swings (finding)",
-            "Complaining of feeling depressed (finding)"
+            "Feeling empty (finding)",
+            "Feeling isolated (finding)",
+            "Feeling despair (finding)"
           ],
           "neutral": [
-            "Depressed mood (finding)"
+            "Fear of being a burden to others (finding)",
+            "Complaining of feeling depressed (finding)"
           ],
-          "contradiction": [
-            "Elevated mood (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Okay, it sounds incredibly frustrating to feel like you're stuck in this loop, especially when things you used to enjoy aren't bringing you any joy anymore. That \"weight\" you describe – it sounds really burdensome and draining. It takes a lot of courage to acknowledge that nothing seems to be helping, and it's understandable that you'd feel overwhelmed. \n\nIt sounds like when you're feeling down, this weight settles in, and it's impacting your ability to engage in activities that previously brought you pleasure. Can you tell me a little more about what that \"weight\" feels like specifically? What thoughts or sensations come up when you notice it?",
+        "response": "It sounds like you're carrying a lot right now, and it's understandable that you'd feel small and heavy when comparing yourself to others and worrying about being a burden. I hear that you're feeling quite overwhelmed by these thoughts and feelings.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly frustrating to feel like you're carrying this weight and that things you used to enjoy aren't bringing you any joy anymore. It takes courage to acknowledge feeling stuck like that.",
+            "response": "It sounds like you're carrying a lot right now, and it's understandable that you'd feel small and heavy when comparing yourself to others and worrying about being a burden. I hear that you're feeling quite overwhelmed by these thoughts and feelings.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -306,34 +365,26 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "feeling down",
-                  "label": "triggers"
+                  "concept": "feeling empty",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "not finding joy in activities",
-                  "label": "triggers"
+                  "concept": "feeling isolated",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "nothing seems to help",
-                  "label": "automatic_thoughts"
+                  "concept": "feeling despair",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I'm stuck in this loop",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "sadness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "heaviness",
-                  "label": "emotions"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to feel like you're stuck in a loop and that things you used to enjoy aren't bringing you joy anymore – can you tell me a little more about what that \"weight\" feels like?",
+            "response": "It sounds like you're carrying a lot right now, and that feeling of being small and not measuring up can be really tough. Can you tell me more about what makes you feel like a burden when others share their struggles?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -353,14 +404,26 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "Complaining of feeling depressed (finding)",
+                  "concept": "feeling empty",
                   "label": "entailment"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling despair",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel like you're stuck in a loop and that things you used to enjoy aren't bringing you joy anymore. If a friend were watching you go through this, what do you think they might notice or suggest?",
+            "response": "It sounds like you're carrying a lot right now, and it's understandable that you'd feel small and heavy when comparing yourself to others. If a friend were in your shoes, what might they say about your tendency to compare yourself and question your worth?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -380,8 +443,55 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling despair",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're carrying a lot right now, and it's understandable that you'd feel small and heavy with all of that on your mind. When you mentioned feeling this way, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling small",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling like a burden",
                   "label": "unknown"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling despair",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: seeing others who seem to have it all together",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts: I'm a burden",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: heavy",
+                  "label": "emotions"
                 }
               ]
             }
@@ -393,130 +503,193 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just... really heavy, you know? It makes me feel like I’m moving through mud. I start to think things like, “What’s the point?” or “I can’t do anything right anyway.” It’s not just my mind, though; my body feels tired, like I just want to curl up and hide away. I guess it’s like everything around me dims, and I can't see any way out of it. It's hard to fight against that feeling, like",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I’ve been feeling so small lately. I see others who seem to have it all figured out, and it just makes me doubt myself more. When people around me talk about their own struggles, it feels like I’m just adding to their burden, you know? It gets really heavy sometimes.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "seeing others succeed",
+            "people talking about their struggles"
+          ],
           "automatic_thoughts": [
-            "What’s the point?",
-            "I can’t do anything right anyway."
+            "I doubt myself",
+            "I'm adding to their burden"
           ],
           "emotions": [
-            "heavy",
-            "tired"
+            "small",
+            "heavy"
           ],
-          "behaviors": [
-            "curl up",
-            "hide away"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Psychogenic fatigue (finding)",
-            "Gets drowsiness (finding)",
-            "Feeling physically tense (finding)"
+            "Feeling isolated (finding)",
+            "Feeling empty (finding)"
           ],
           "neutral": [
-            "Free-floating anxiety (finding)",
-            "Anxiety about collapsing (finding)"
+            "Complaining of feeling depressed (finding)",
+            "Fear of being a burden to others (finding)",
+            "Feeling a failure (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly draining to feel like you're moving through mud, and those thoughts – “What’s the point?” and “I can’t do anything right” – seem to be adding to that weight. Can you tell me a little more about what makes you think you can’t do anything right?",
+        "response": "It sounds like seeing others' successes and hearing about their struggles is bringing up a lot for you – that feeling of being small and carrying a heavy weight. Can you tell me more about what makes you feel like you're adding to their burden when they share their struggles?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly draining to feel like you're moving through mud, and it makes sense that you'd want to curl up and hide away when you're feeling that heavy. Can you tell me a little more about what makes you feel like you can’t do anything right?",
+            "response": "It sounds like you're carrying a lot right now, and it's tough to feel small when comparing yourself to others, especially when you're also trying to be supportive of those around you. It makes sense that you'd feel heavy with all of that on your mind.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "tired",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "curl up",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "hide away",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Psychogenic fatigue (finding)",
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling isolated",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling physically tense (finding)",
+                  "concept": "feeling empty",
                   "label": "entailment"
+                },
+                {
+                  "concept": "fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling a failure",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly draining to feel like you're moving through mud, and those thoughts – “What’s the point?” and “I can’t do anything right” – seem to be adding to that weight. Can you tell me a little more about what makes you think you can’t do anything right?",
+            "response": "It sounds like seeing others' successes and hearing about their struggles is bringing up a lot for you – that feeling of being small and carrying a heavy weight. Can you tell me more about what makes you feel like you're adding to their burden when they share their struggles?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "tired",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "What’s the point?",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I can’t do anything right anyway.",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "curl up",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "hide away",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling a failure",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly draining to feel like you're moving through mud, and those thoughts – “What’s the point?” and “I can’t do anything right” – can certainly contribute to that feeling of heaviness. If a friend were seeing you go through this, what do you think they might say about how you're describing this experience?",
+            "response": "It sounds like you're carrying a lot right now, and it's understandable that you'd feel small and heavy when comparing yourself to others. What do you think a close friend might say about your tendency to worry about adding to other people’s burdens?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "heavy",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "tired",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "What’s the point?",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I can’t do anything right anyway.",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "curl up",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "hide away",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling a failure",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really difficult, and it's understandable that you'd feel that way. When you mentioned feeling this way, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling a failure",
+                  "label": "neutral"
                 }
               ]
             }
@@ -528,51 +701,51 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it really is draining. I think those thoughts come from moments when I’ve tried really hard at something and it just didn’t go well. Like at work, I’ll put in a lot of effort on a project, but then when I get feedback, it feels like it’s never good enough. I start to wonder if I’m just not cut out for this, or if everyone else is doing better than me. Those moments stick with me, and then it’s like I carry that",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, it’s like… when I see them dealing with tough stuff, I can’t help but think that they don’t need another problem, especially not mine. I guess I just feel like I’m not strong enough to handle my own issues, let alone add to theirs. It makes me feel even worse about myself, like I’m just in the way.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "moments when I’ve tried really hard",
-            "feedback on a project"
+            "seeing them dealing with tough stuff"
           ],
           "automatic_thoughts": [
-            "it’s never good enough",
-            "I’m just not cut out for this",
-            "everyone else is doing better than me"
+            "they don’t need another problem",
+            "I’m not strong enough to handle my own issues",
+            "I’m just in the way"
           ],
           "emotions": [
-            "drained"
+            "worse"
           ],
-          "behaviors": [
-            "carry those moments with me"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling of discouragement (finding)"
+            "Fear of being a burden to others (finding)",
+            "Feeling isolated (finding)"
           ],
           "neutral": [
-            "Negative automatic thoughts (finding)",
-            "Repressing thoughts (finding)"
+            "Fear of being in a small group (finding)",
+            "Pressured by others (finding)",
+            "Fear of losing emotional control (finding)"
           ],
-          "contradiction": [
-            "Positive self thoughts (finding)",
-            "Feeling empty (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those experiences with feedback really leave a mark – what specifically makes you feel like it’s “never good enough” in those situations?",
+        "response": "It sounds like you're carrying a lot of worry about how your struggles might affect them – can you tell me more about what makes you think they don’t need another problem right now?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like those experiences with projects and feedback leave you feeling really drained, and it's understandable why you'd carry those moments with you. It takes a lot of energy to deal with those kinds of thoughts.",
+            "response": "It sounds incredibly difficult to witness their struggles and then feel responsible for adding to their burden. It's understandable that you'd feel worse about yourself and like you're in the way.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
                 },
                 {
                   "concept": "triggers",
@@ -583,43 +756,51 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "behaviors",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like those experiences with feedback really leave a mark – what specifically makes you feel like it’s “never good enough” in those situations?",
+            "response": "It sounds like you're carrying a lot of worry about how your struggles might affect them – can you tell me more about what makes you think they don’t need another problem right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "automatic_thoughts: they don’t need another problem",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "automatic_thoughts: I’m not strong enough to handle my own issues",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "entailment",
-                  "label": "unknown"
+                  "concept": "automatic_thoughts: I’m just in the way",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly draining to carry those moments with you – it makes sense you'd feel that way. Can you imagine what a supportive friend might say to you when you're feeling like you're not \"cut out\" for something?",
+            "response": "It sounds incredibly difficult to feel like you're adding to someone else's burden, and that you're not strong enough to cope. What do you think someone who cares about you would say about you feeling this way?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -635,9 +816,32 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult, and it's understandable that you'd feel worse when you see them struggling. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "entailment",
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
@@ -650,73 +854,84 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I think it’s how the feedback is delivered, maybe? Sometimes it feels more like criticism than anything else, and I can't help but take it personally. I start to think... if they see things wrong with my work, then maybe they see me that way, too. Like it just confirms what I worry about: that I’m not really good at anything, or that I don’t belong there. It kind of spirals from there, and I feel small.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I just see how much they’re dealing with, and it feels like my problems are so… trivial in comparison. It's like I’m just making a difficult situation harder for them. I worry that if I share what I'm going through, they’ll feel overwhelmed, and that’s the last thing I want. But then I just end up feeling even more isolated.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "how the feedback is delivered"
+            "seeing others' problems",
+            "thinking about sharing my issues"
           ],
           "automatic_thoughts": [
-            "it feels more like criticism",
-            "I take it personally",
-            "they see things wrong with my work",
-            "they see me that way too",
-            "it confirms what I worry about",
-            "I’m not really good at anything",
-            "I don’t belong there"
+            "my problems are trivial",
+            "I'm making a difficult situation harder",
+            "they'll feel overwhelmed if I share"
           ],
           "emotions": [
-            "small"
+            "guilt",
+            "anxiety",
+            "isolation"
           ],
-          "behaviors": []
+          "behaviors": [
+            "withholding my feelings",
+            "avoiding sharing my problems"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Tends to be sensitive to criticism (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Complaining of feeling unhappy (finding)"
+            "Fear of being a burden to others (finding)",
+            "Feeling isolated (finding)",
+            "Social isolation (finding)"
           ],
           "neutral": [
-            "Fear of being in a small group (finding)",
-            "Fear of speaking to people in authority (finding)"
+            "Social isolation (rejection) (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Patient aware of carer's feelings about dying (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like when you receive feedback, it triggers a lot of thoughts and feelings – and it’s understandable that you’d feel small when those thoughts start spiraling. Can you tell me more about what specifically about the way the feedback is delivered makes it feel like criticism?",
+        "response": "It sounds like you're caught between wanting to share and worrying about adding to their burden – what makes you feel your problems are trivial compared to what they're dealing with?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like when you receive feedback, it triggers a lot of difficult thoughts and feelings, and it's understandable that you'd feel small when that happens. It takes courage to share that, and I want to make sure I understand what you're experiencing.",
+            "response": "It sounds like you're carrying a lot, trying to be considerate of what others are going through while also feeling quite alone. It takes strength to notice and care about the burdens of others, and it's understandable that you'd worry about adding to them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Social isolation (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
+                  "concept": "triggers: seeing others' problems",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "entailment",
+                  "concept": "automatic_thoughts: my problems are trivial",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: guilt, anxiety, isolation",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: withholding my feelings",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like when you receive feedback, it triggers a lot of thoughts and feelings – and it’s understandable that you’d feel small when those thoughts start spiraling. Can you tell me more about what specifically about the way the feedback is delivered makes it feel like criticism?",
+            "response": "It sounds like you're caught between wanting to share and worrying about adding to their burden – what makes you feel your problems are trivial compared to what they're dealing with?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -732,16 +947,71 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
+                  "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like that kind of feedback can really trigger a lot of difficult thoughts and feelings for you. What do you think someone who cares about you might say about how you're interpreting this feedback?",
+            "response": "It sounds like you're really compassionate and considerate of what they're going through, and it's understandable that you'd worry about adding to their burden. What do you think they might say if they knew you were holding back because of this concern?",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: seeing others' problems",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts: my problems are trivial",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: guilt, anxiety, isolation",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: withholding my feelings",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're carrying a lot, and it's tough feeling like your struggles are insignificant compared to what others are facing. When you mentioned feeling isolated, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (finding)",
+                  "label": "entailment"
+                },
                 {
                   "concept": "triggers",
                   "label": "unknown"
@@ -755,7 +1025,7 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "entailment",
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
@@ -768,46 +1038,48 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just the tone or the way they say things. Sometimes it feels so blunt, like they’re just pointing out what’s wrong without recognizing any effort I put in. I guess it makes me feel invisible, like all my hard work just doesn’t matter at all. It’s hard to keep my head up when it feels like I’m just a list of mistakes. I wish I could see it differently, but it’s tough when it happens, you know?",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I guess it’s just that their struggles seem so big and real, and mine feel so… I don’t know, maybe selfish? I mean, I think about how they’re facing real challenges, while I’m just stuck in my head, feeling like I'm not worth their time or energy. It’s like I’m afraid they’ll see me as just whiny or dramatic if I open up.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "tone of voice",
-            "blunt comments"
+            "seeing others' struggles",
+            "thinking about my own challenges"
           ],
           "automatic_thoughts": [
-            "they're pointing out what's wrong",
-            "my hard work doesn't matter",
-            "I'm just a list of mistakes"
+            "my struggles are selfish",
+            "I'm not worth their time",
+            "they'll see me as whiny or dramatic"
           ],
           "emotions": [
-            "invisibility",
-            "frustration",
-            "sadness"
+            "shame",
+            "fear",
+            "anxiety"
           ],
           "behaviors": [
-            "struggling to keep my head up"
+            "avoiding opening up",
+            "staying stuck in my head"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Difficulty understanding own emotions (finding)",
+            "Feeling isolated (finding)",
+            "Fear of being a burden to others (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
           "neutral": [
-            "Tends to be sensitive to criticism (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Tends to be critical of others (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Fear of saying the wrong thing (finding)"
+            "Unable to understand own emotions (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly disheartening to feel like your efforts aren't being recognized, and that you're being seen as a list of mistakes – what do you think someone who cares about you might say about this situation?",
-        "protocol_used": "alternative_perspective",
+        "response": "It sounds like you're noticing a real contrast between what others are going through and what you're experiencing, and that's leading you to question the validity of your own feelings – can you tell me more about what makes you feel like your struggles are \"selfish\" in comparison?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly disheartening when you feel like your efforts aren't being acknowledged, and that it leaves you feeling invisible and like a list of mistakes – I can understand why it's hard to keep your head up. Can you tell me a little more about what specifically they say or do that leads you to feel this way?",
+            "response": "It sounds like you're carrying a lot of weight, comparing your experiences to others and feeling like your own struggles aren't valid. That takes courage to share, and it's understandable that you'd feel hesitant to open up.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -820,17 +1092,25 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
+                  "label": "entailment"
                 },
                 {
                   "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly disheartening to feel like your efforts are overlooked and that you're being defined by your mistakes – what specifically goes through your mind when you experience that bluntness?",
+            "response": "It sounds like you're noticing a real contrast between what others are going through and what you're experiencing, and that's leading you to question the validity of your own feelings – can you tell me more about what makes you feel like your struggles are \"selfish\" in comparison?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -843,17 +1123,25 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
+                  "label": "entailment"
                 },
                 {
                   "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly disheartening to feel like your efforts aren't being recognized, and that you're being seen as a list of mistakes – what do you think someone who cares about you might say about this situation?",
+            "response": "It sounds like you're really compassionate and aware of what others are going through, and it's understandable to feel hesitant about sharing your own struggles when they seem so significant. Imagine a friend was feeling this way – what might you tell them about their concerns?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -866,11 +1154,50 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
+                  "label": "entailment"
                 },
                 {
                   "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds incredibly difficult to feel like your struggles are insignificant compared to others, and that you're a burden. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 }
               ]
             }
@@ -882,77 +1209,53 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I don’t really know... Maybe they'd say I’m too hard on myself or that I should celebrate the small wins? But it’s hard to hear that when I’m in the moment. I feel like I should just be able to handle it, you know? I guess part of me wishes they could see how much I’m trying, but it's like I can’t even convince myself of that sometimes. Sometimes I just feel so alone with it all.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, I guess it’s just this voice in my head that tells me I should be tougher or that my issues aren’t as valid. I see friends or family dealing with loss or serious health issues, and then here I am feeling anxious or insecure about everyday things. It’s like I’m just being dramatic, and that thought makes me want to retreat even more. I don’t want to bother anyone with what feels like… such small stuff in comparison.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "seeing friends or family dealing with loss",
+            "seeing friends or family with serious health issues"
+          ],
           "automatic_thoughts": [
-            "I should just be able to handle it",
-            "I can’t even convince myself of that",
-            "I wish they could see how much I’m trying"
+            "I should be tougher",
+            "my issues aren’t as valid",
+            "I’m just being dramatic",
+            "I don’t want to bother anyone"
           ],
           "emotions": [
             "anxiety",
-            "loneliness"
+            "insecurity"
           ],
-          "behaviors": []
+          "behaviors": [
+            "want to retreat"
+          ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear of losing emotional control (finding)"
+          ],
           "neutral": [
-            "Anxiety about behavior or performance (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Feeling a failure (finding)",
-            "Anxiety about having a fit (finding)",
-            "Fear of not coping with treatment (finding)"
+            "Fear of being a burden to others (finding)",
+            "Anxiety about collapsing (finding)",
+            "Fear of not coping with treatment (finding)",
+            "Fear of collapsing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you're really struggling with a sense of isolation and self-criticism right now. What makes it particularly difficult to hear that advice about celebrating small wins when you're feeling overwhelmed?",
+        "response": "It sounds like that voice is really putting pressure on you to measure your struggles against others—what makes you think that’s happening?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a lot of pressure and feeling quite isolated right now, and it's tough when you can't even offer yourself the reassurance you're seeking. It takes courage to acknowledge those feelings, and I hear how much effort you're putting in.",
+            "response": "It sounds incredibly difficult to feel like your struggles aren't as important when you're seeing others go through so much – it's understandable that you'd feel anxious and want to retreat. It takes courage to acknowledge those thoughts and feelings.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts\\",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
-                {
-                  "concept": "I should just be able to handle it\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I can’t even convince myself of that\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I wish they could see how much I’m trying\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "anxiety\\",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "loneliness\\",
-                  "label": "emotions"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're really struggling with a sense of isolation and self-criticism right now. What makes it particularly difficult to hear that advice about celebrating small wins when you're feeling overwhelmed?",
-            "reasoning": {
-              "retrieved_concepts_used": [
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
@@ -962,46 +1265,100 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "loneliness",
-                  "label": "emotions"
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of losing emotional control",
+                  "label": "entailment"
                 }
               ]
             }
           },
-          "alternative_perspective": {
-            "response": "It sounds like you're already recognizing some helpful perspectives, like celebrating small wins – that's a really insightful observation. What makes it hard to hear that advice when you're feeling overwhelmed?",
+          "socratic_questioning": {
+            "response": "It sounds like that voice is really putting pressure on you to measure your struggles against others—what makes you think that’s happening?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts\\",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "I should just be able to handle it\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I can’t even convince myself of that\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I wish they could see how much I’m trying\\",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
                   "concept": "emotions",
                   "label": "unknown"
                 },
                 {
-                  "concept": "anxiety\\",
-                  "label": "emotions"
+                  "concept": "behaviors",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "loneliness\\",
-                  "label": "emotions"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly difficult to feel like your struggles are somehow less significant when you're seeing others go through so much – what do you think a supportive friend might say to you about that comparison?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear of being a burden to others",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of losing emotional control",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult, and it makes sense that you'd want to retreat when you're feeling that way. When you mentioned those thoughts, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
@@ -1014,143 +1371,117 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it does feel isolating. When I'm overwhelmed, everything just feels magnified and I can't see the little victories. It’s like my brain automatically skips over anything that feels positive and jumps to the negatives. I think I just end up feeling like I don’t deserve to celebrate at all, like I'm just pretending everything’s okay when it really isn't. It’s frustrating, because part of me wants to see the good, but the other part just drags me back down.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I think it’s just this feeling I’ve had for so long. Like, if I’m feeling down or anxious, it feels so trivial compared to what others go through. I guess I learned to believe that I shouldn’t complain or ask for help unless it’s something really serious. It makes me feel like I have to keep everything bottled up, which just makes it harder to deal with.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling overwhelmed"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "everything feels magnified",
-            "my brain skips over positives",
-            "I don’t deserve to celebrate",
-            "I'm pretending everything's okay"
+            "my feelings are trivial compared to others",
+            "I shouldn't complain or ask for help",
+            "I have to keep everything bottled up"
           ],
           "emotions": [
-            "isolation",
-            "frustration"
+            "down",
+            "anxious"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)",
-            "Feels everything is futile (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Extremely emotionally deprived (finding)"
+            "Anxiety about collapsing (finding)",
+            "Anxiety about appearing ridiculous (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of being a burden to others (finding)",
+            "Complaining of feeling depressed (finding)"
           ],
-          "contradiction": [
-            "Emotionally detached (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to feel pulled in different directions like that – wanting to see the good but feeling like you're being pulled back down. Can you tell me more about what makes you feel like you don’t deserve to celebrate?",
+        "response": "It sounds like you've developed a way of managing difficult feelings, but it's also creating a cycle of keeping things in. What makes you feel like your feelings aren't \"serious\" enough to share?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly difficult to feel like you're fighting against your own brain, especially when you're trying to acknowledge the good things. It takes a lot of strength to recognize that you're pretending everything's okay when it isn't.",
+            "response": "It sounds like you're carrying a lot, and it takes courage to acknowledge these feelings and how they've impacted you. It's understandable that you'd feel like keeping things bottled up when you feel your struggles aren't as significant as others'.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "my feelings are trivial compared to others",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "I shouldn't complain or ask for help",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feels everything is futile",
-                  "label": "entailment"
+                  "concept": "I have to keep everything bottled up",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to feel pulled in different directions like that – wanting to see the good but feeling like you're being pulled back down. Can you tell me more about what makes you feel like you don’t deserve to celebrate?",
+            "response": "It sounds like you've developed a way of managing difficult feelings, but it's also creating a cycle of keeping things in. What makes you feel like your feelings aren't \"serious\" enough to share?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "my feelings are trivial compared to others",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "I shouldn't complain or ask for help",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "feeling isolated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling alienated",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feels everything is futile",
-                  "label": "entailment"
+                  "concept": "I have to keep everything bottled up",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel pulled in two different directions like that, wanting to acknowledge the good but feeling like your brain is working against you. What do you think might be going through the mind of a friend who sees you navigating this?",
+            "response": "It sounds like you're carrying a lot, and it takes courage to acknowledge these feelings. Sometimes, when we minimize our own experiences, it can make them feel even heavier – what do you think might be going through the mind of a friend who was hearing you describe this?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "my feelings are trivial compared to others",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "I shouldn't complain or ask for help",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "I have to keep everything bottled up",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're carrying a lot, and it takes courage to share this. When you say you've been feeling down and anxious, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts: my feelings are trivial compared to others",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "automatic_thoughts: I shouldn't complain or ask for help",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "feeling overwhelmed",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts: I have to keep everything bottled up",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "isolation",
+                  "concept": "emotions: down",
                   "label": "emotions"
                 },
                 {
-                  "concept": "frustration",
+                  "concept": "emotions: anxious",
                   "label": "emotions"
                 }
               ]
@@ -1163,114 +1494,141 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it feels really isolating. When I get overwhelmed, everything just seems so much worse, and I struggle to see any little wins. My brain just skips over anything positive and goes straight to the negatives. I end up feeling like I don’t deserve to celebrate at all, like I’m just pretending everything’s okay when it’s not. It's frustrating because part of me wants to see the good, but the other part just pulls me back down.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "It’s hard to explain. I guess I just always felt like there are bigger problems out there—things that really deserve attention. I’ve seen people struggle, and I think I just learned that my worries aren’t worth bringing up. I don’t want to take away from someone else who needs support more than I do, you know? But then it just builds up inside me, and I feel stuck.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling overwhelmed"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "everything seems worse",
-            "I don’t deserve to celebrate",
-            "I’m just pretending everything’s okay"
+            "my worries aren’t worth bringing up",
+            "I don’t want to take away from someone else who needs support more than I do"
           ],
           "emotions": [
-            "isolation",
-            "frustration"
+            "stuck"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feels everything is futile (finding)",
-            "Feeling alienated (finding)"
+            "Preoccupied with emotional problems (finding)"
           ],
           "neutral": [
-            "Extremely emotionally deprived (finding)",
-            "Emotionally deprived (finding)"
+            "Fear of being a burden to others (finding)",
+            "Fear of not coping with treatment (finding)",
+            "Anxiety about collapsing (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to have that internal tug-of-war, wanting to see the good but feeling pulled back down – what do you think might be contributing to that pull?",
+        "response": "It sounds like you're carrying a lot, and it's admirable that you're so concerned about others. Can you tell me more about how you learned that your worries aren’t worth bringing up?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly difficult to feel so isolated and like your mind is working against you, especially when you're already feeling overwhelmed. It takes a lot of strength to acknowledge that you're pretending everything is okay when it's not.",
+            "response": "It sounds like you're carrying a lot, feeling like your concerns aren't important enough compared to what others are going through, and that can definitely leave you feeling stuck. It takes courage to acknowledge that, and I appreciate you sharing it.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
-                  "label": "triggers"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "isolation",
-                  "label": "emotions"
+                  "concept": "Preoccupied with emotional problems (finding)",
+                  "label": "entailment"
                 },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "my worries aren’t worth bringing up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I don’t want to take away from someone else who needs support more than I do",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to have that internal tug-of-war, wanting to see the good but feeling pulled back down – what do you think might be contributing to that pull?",
+            "response": "It sounds like you're carrying a lot, and it's admirable that you're so concerned about others. Can you tell me more about how you learned that your worries aren’t worth bringing up?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
-                  "label": "triggers"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
                 },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
+                },
+                {
+                  "concept": "my worries aren’t worth bringing up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I don’t want to take away from someone else who needs support more than I do",
+                  "label": "automatic_thoughts"
                 },
                 {
                   "concept": "emotions",
                   "label": "unknown"
                 },
                 {
-                  "concept": "isolation",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "frustration",
+                  "concept": "stuck",
                   "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to be pulled between wanting to acknowledge the good and feeling like you're just pretending everything is okay – what do you think might be helping you to notice those positive things, even just for a moment?",
+            "response": "It sounds like you're carrying a lot of responsibility, feeling like your concerns aren't important enough compared to others' struggles—what makes you think that's necessarily true?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
-                  "label": "triggers"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
                 },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "isolation",
-                  "label": "emotions"
+                  "concept": "my worries aren’t worth bringing up",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "I don’t want to take away from someone else who needs support more than I do",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "feeling alienated",
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "stuck",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're carrying a lot, and it's tough feeling like your concerns aren't important enough to share. When you said you felt \"stuck,\" were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Preoccupied with emotional problems (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts: ['my worries aren’t worth bringing up', 'I don’t want to take away from someone else who needs support more than I do']",
+                  "label": "automatic_thoughts"
                 }
               ]
             }

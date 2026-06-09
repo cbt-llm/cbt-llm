@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I was doing okay, but, I mean, I got comfortable with that extra income, and so now my fear is that I've gotten too comfortable with it, and now that it's not there anymore, it's going to affect the fact I'm not going to be able to pay for food or my rent.",
-    "core_issue": "financial concerns",
+    "seed": "Well, I just get very anxious. I don't want to leave him in the room without me. I want to be right there. I'm not used to leaving him alone with other people at all. And I know I get very anxious in the waiting area, and I pace and back and forth and wonder what's going on in the room and listening for anything that might be going on. So, yeah, I just have a lot of anxiety about being separated from him, even for that short time.",
+    "core_issue": "Anxiety and fear",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,406 +17,46 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I was doing okay, but, I mean, I got comfortable with that extra income, and so now my fear is that I've gotten too comfortable with it, and now that it's not there anymore, it's going to affect the fact I'm not going to be able to pay for food or my rent.",
-        "core_issue": "financial concerns",
+        "query": "Well, I just get very anxious. I don't want to leave him in the room without me. I want to be right there. I'm not used to leaving him alone with other people at all. And I know I get very anxious in the waiting area, and I pace and back and forth and wonder what's going on in the room and listening for anything that might be going on. So, yeah, I just have a lot of anxiety about being separated from him, even for that short time.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "loss of extra income"
+            "leaving him in the room",
+            "waiting area"
           ],
           "automatic_thoughts": [
-            "I won't be able to pay for food",
-            "I won't be able to pay my rent"
+            "I don't want to leave him alone",
+            "I wonder what's going on in the room",
+            "I have a lot of anxiety about being separated"
           ],
           "emotions": [
-            "fear"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Anxiety about loss of control (finding)",
-            "Anxiety about forced dependence (finding)"
-          ],
-          "neutral": [
-            "Anxiety about losing emotional control (finding)",
-            "Fear of losing emotional control (finding)",
-            "Fear of being a burden to others (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like the loss of that extra income has brought up some real worries about your ability to manage basic needs like food and rent – what thoughts are going through your mind as you imagine those scenarios?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like losing that extra income has really shaken things up, and now you're worried about the basics like food and rent – that’s understandable to feel fear in this situation. Can you tell me a little more about what goes through your mind when you think about not being able to pay for those things?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like the loss of that extra income has brought up some real worries about your ability to manage basic needs like food and rent – what thoughts are going through your mind as you imagine those scenarios?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "anxiety about loss of control",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "anxiety about forced dependence",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like losing that extra income has brought up some real worries about your ability to cover your basic needs, and it's understandable to feel anxious when your routine changes. What's one thing you're confident you *can* do to ensure you can still pay for food and rent?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "anxiety about loss of control",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "anxiety about forced dependence",
-                  "label": "entailment"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 1,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it’s really unsettling. I keep imagining myself struggling to pay rent and just not having enough for groceries. It feels like I’m on this tightrope, and I’m just waiting for something to go wrong. There’s this nagging fear that if I slip, I might lose everything I’ve worked for, and it just makes me feel so anxious.",
-        "core_issue": "financial concerns",
-        "schema": {
-          "triggers": [
-            "struggling to pay rent",
-            "not having enough for groceries"
-          ],
-          "automatic_thoughts": [
-            "imagining struggling",
-            "waiting for something to go wrong",
-            "fear of losing everything"
-          ],
-          "emotions": [
-            "unsettling",
-            "anxious"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Anxiety about loss of control (finding)",
-            "Sense of impending doom (finding)",
-            "Fear of collapsing (finding)"
-          ],
-          "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about collapsing (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like you're experiencing a lot of anxiety around your financial situation, and that feeling of being on a tightrope is really unsettling. What thoughts are going through your mind as you imagine yourself struggling to pay rent?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a lot of anxiety and worry about your financial stability, and it's understandable that you'd feel unsettled when imagining those possibilities. It takes courage to share these feelings, and I want you to know I'm here to listen.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about loss of control (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Sense of impending doom (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like you're experiencing a lot of anxiety around your financial situation, and that feeling of being on a tightrope is really unsettling. What thoughts are going through your mind as you imagine yourself struggling to pay rent?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about loss of control (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Sense of impending doom (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like you're carrying a lot of worry about your financial stability, and that feeling of being on a tightrope is understandably unsettling. What's one thing a friend might say to help you feel a little more grounded right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about loss of control (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Sense of impending doom (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 2,
-      "patient": {
-        "role": "patient",
-        "query": "I guess I keep thinking about how embarrassed I would be if I couldn’t pay. Like, what would people think of me? I’ve always tried to seem responsible and put-together, and the idea of failing at something so basic is just terrifying. It’s like this voice in my head constantly reminding me that I should be doing better.",
-        "core_issue": "financial concerns",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I would be embarrassed if I couldn’t pay",
-            "What would people think of me?",
-            "I should be doing better"
-          ],
-          "emotions": [
-            "embarrassment",
-            "fear",
             "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "pace back and forth",
+            "listen for anything going on"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Negative automatic thoughts (finding)",
-            "Anxiety about behavior or performance (finding)"
+            "Fear of being left alone during period of dependence (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Examination phobia (finding)"
+            "Fear of disconnection from ventilator (finding)",
+            "Fear of problem after anesthetic (finding)",
+            "Anxiety about shaking (finding)",
+            "Fear of not waking from general anesthetic (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like the thought of not being able to pay is bringing up a lot of worry about what others think and how it reflects on your image of responsibility – can you tell me more about what \"doing better\" means to you in this situation?",
+        "response": "It sounds like being separated from him brings up a lot of anxiety for you, and you're describing some of the ways that shows up – the pacing, the listening, the worry. What goes through your mind as you're pacing and wondering what's happening in the room?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're experiencing a lot of distress and worry about this situation, and it's understandable that you'd feel embarrassed and scared about what others might think. It takes courage to share these feelings, and it seems like you're putting a lot of pressure on yourself to appear responsible.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Negative automatic thoughts (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "embarrassment",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like the thought of not being able to pay is bringing up a lot of worry about what others think and how it reflects on your image of responsibility – can you tell me more about what \"doing better\" means to you in this situation?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Negative automatic thoughts (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I would be embarrassed if I couldn’t pay",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "What would people think of me?",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I should be doing better",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like the thought of not being able to pay is bringing up a lot of worry about what others think and how it might reflect on your image of responsibility. What's one thing a close friend might say to you about this situation, knowing you so well?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Negative automatic thoughts (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I would be embarrassed if I couldn’t pay",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "What would people think of me?",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I should be doing better",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 3,
-      "patient": {
-        "role": "patient",
-        "query": "“Doing better” feels like having everything under control, you know? Like, being able to manage my money without constantly stressing over every little expense. It’s not just about the money; it’s about feeling secure and capable. I want to feel proud of myself, like I’m not just getting by but actually thriving. But when I think about it, it just feels overwhelming.",
-        "core_issue": "financial concerns",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I need to have everything under control",
-            "I should manage my money without stress",
-            "I want to feel proud of myself",
-            "I feel overwhelmed"
-          ],
-          "emotions": [
-            "stress",
-            "overwhelm"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Ready for enhanced individual coping (finding)",
-            "Positive self thoughts (finding)"
-          ],
-          "neutral": [
-            "Increased motivation (finding)"
-          ],
-          "contradiction": [
-            "General well-being finding (finding)",
-            "Feeling content (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like \"doing better\" is closely tied to feeling in control and capable, and that feeling can be quite demanding. What makes you feel like you're *not* in control right now?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like \"doing better\" is really tied to a sense of control and security, and that feeling overwhelmed is connected to the pressure of trying to achieve that. It makes sense that you'd want to feel proud and like you're thriving – that's a really natural desire.",
+            "response": "It sounds like you're experiencing a lot of anxiety about leaving him, and it's understandable that you'd want to be there with him, especially since you're not used to being apart. It seems like being separated brings up a lot of worry and uncertainty for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -436,262 +76,14 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like \"doing better\" is closely tied to feeling in control and capable, and that feeling can be quite demanding. What makes you feel like you're *not* in control right now?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like \"doing better\" is closely tied to feeling in control and capable, and that's a really understandable desire. What do you think a supportive friend might say about your efforts, even when things feel overwhelming?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 4,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it does feel demanding, like there’s this pressure to always have it all sorted out. I think part of it comes from my job being so unstable lately. One moment, I feel okay, and the next, I’m stressed about whether I’ll get enough hours or if my paychecks will even cover my bills. It just leaves me in this constant state of worry, like I can’t catch a break.",
-        "core_issue": "financial concerns",
-        "schema": {
-          "triggers": [
-            "job instability",
-            "pressure to have it sorted out",
-            "uncertainty about hours",
-            "concern about paychecks"
-          ],
-          "automatic_thoughts": [
-            "I won't get enough hours",
-            "I can't cover my bills",
-            "I can't catch a break"
-          ],
-          "emotions": [
-            "stress",
-            "worry"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Stress overload (finding)"
-          ],
-          "neutral": [
-            "Difficulty managing stress (finding)",
-            "Incongruent personal schedules (finding)",
-            "Anxiety about going crazy (finding)",
-            "Pressured by others (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to feel that pressure and uncertainty, especially with your job situation being unstable. What thoughts go through your mind when you start to worry about getting enough hours?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly frustrating to feel this pressure and uncertainty, especially with your job situation being unstable. It makes sense that you'd be feeling worried and like you can’t catch a break.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to feel that pressure and uncertainty, especially with your job situation being unstable. What thoughts go through your mind when you start to worry about getting enough hours?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "job instability",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "pressure to have it sorted out",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "uncertainty about hours",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "concern about paychecks",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "stress",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel that pressure and uncertainty, especially with your job situation being unstable. What's one thing a friend might say to you about this worry, knowing how hard you're working?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 5,
-      "patient": {
-        "role": "patient",
-        "query": "Honestly, my mind just spirals sometimes. I start thinking about all the worst-case scenarios, like what if I can’t pay rent or what if I have to ask someone for help? It’s hard to shake off those thoughts, and they just keep piling up, making me feel more trapped. I wish I could just focus on the present, but the “what ifs” are so loud.",
-        "core_issue": "financial concerns",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "what if I can’t pay rent",
-            "what if I have to ask someone for help",
-            "the 'what ifs' are so loud"
-          ],
-          "emotions": [
-            "anxiety",
-            "trapped"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Feeling trapped (finding)"
-          ],
-          "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about collapsing (finding)",
-            "Repressing thoughts (finding)"
-          ],
-          "contradiction": [
-            "Feeling like wanting to escape (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly distressing to have those \"what if\" thoughts taking over and leaving you feeling trapped. Can you tell me, when you're caught in that spiral, what's the very first \"what if\" that pops into your head?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to be caught in that cycle of \"what ifs,\" and it makes sense that you'd feel trapped when your mind is racing like that. It takes a lot of energy to manage those kinds of thoughts.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds incredibly distressing to have those \"what if\" thoughts taking over and leaving you feeling trapped. Can you tell me, when you're caught in that spiral, what's the very first \"what if\" that pops into your head?",
+            "response": "It sounds like being separated from him brings up a lot of anxiety for you, and you're describing some of the ways that shows up – the pacing, the listening, the worry. What goes through your mind as you're pacing and wondering what's happening in the room?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -718,7 +110,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to feel overwhelmed by those \"what if\" thoughts and to feel so trapped. What's one small, realistic possibility that might help you feel a little less anxious about these situations?",
+            "response": "It sounds like you're experiencing a lot of distress when you have to leave him, and it's understandable that you'd feel anxious given how accustomed you are to being there. What do you think someone else might say about your worry, knowing how much you care for him?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -738,7 +130,822 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're experiencing a lot of distress about leaving him, and it's understandable that you'd feel anxious given how much you want to be there for him. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it does. When I'm pacing, it’s like this loop in my head just keeps going. I start imagining all sorts of scenarios, like what if something’s wrong or what if he’s upset with me? It just spirals, you know? And then I can’t help but feel this tight knot in my stomach. I get so wrapped up in those thoughts that it’s hard to focus on anything else.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "pacing"
+          ],
+          "automatic_thoughts": [
+            "what if something’s wrong",
+            "what if he’s upset with me"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
+          "behaviors": [
+            "difficulty focusing"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling physically tense (finding)",
+            "Racing thoughts (finding)"
+          ],
+          "neutral": [
+            "Anticipatory anxiety (finding)",
+            "Anticipatory anxiety, mild (finding)",
+            "Anxiety about loss of control (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really distressing to be caught in that loop of \"what ifs\" and feel that tightness in your stomach. Can you tell me, what's the first thing that pops into your mind when you notice yourself starting to pace?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really distressing to be caught in that loop of worrying thoughts, especially when it leads to physical sensations like a knot in your stomach and makes it hard to focus. It takes a lot of energy to manage those spiraling thoughts and feelings.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "racing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling physically tense",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds really distressing to be caught in that loop of \"what ifs\" and feel that tightness in your stomach. Can you tell me, what's the first thing that pops into your mind when you notice yourself starting to pace?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "racing thoughts",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds really distressing to be caught in that loop of \"what ifs\" and feel that physical tightness – it's understandable that it makes it hard to focus. If a friend were watching you go through this, what do you think they might notice about the situation?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "racing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds really distressing to be caught in that loop of worrying thoughts and feel that physical tension. When you mentioned those scenarios, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "racing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling physically tense",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "patient": {
+        "role": "patient",
+        "query": "Honestly, it’s usually something like, \"Oh no, not again.\" It’s frustrating because I know I shouldn’t let it get to me, but I just... can’t help it. Then I feel this wave of panic, like I have to control the situation or something bad will happen. It’s like my mind just takes over.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "Oh no, not again.",
+            "I shouldn’t let it get to me.",
+            "I have to control the situation or something bad will happen."
+          ],
+          "emotions": [
+            "frustration",
+            "panic"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of losing emotional control (finding)",
+            "Mental defense mechanisms (observable entity)",
+            "Anxiety about losing emotional control (finding)"
+          ],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Acting out - mental defense mechanism (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly distressing to feel like you're losing control and experiencing that wave of panic. Can you tell me a little more about what happens right before you notice that thought, \"Oh no, not again?\"",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly frustrating to feel like this is happening again, and to feel powerless to stop the panic. It takes courage to describe what it's like when you feel your mind taking over.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "panic",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "I shouldn’t let it get to me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I have to control the situation or something bad will happen",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to feel like you're losing control and experiencing that wave of panic. Can you tell me a little more about what happens right before you notice that thought, \"Oh no, not again?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Mental defense mechanisms",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to feel like you're losing control and experiencing that wave of panic – it's understandable why you'd feel frustrated. Can you imagine what a friend might say about you feeling this way, knowing how hard you're trying?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "panic",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "I have to control the situation or something bad will happen",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Mental defense mechanisms",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it's understandable that you're feeling frustrated. When you say \"Oh no, not again,\" were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Mental defense mechanisms",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I guess it usually starts with this feeling of unease, like a pit in my stomach. Then something small will happen—maybe a missed text or a strange silence—and my mind jumps to the worst conclusion. It’s weird because I know it’s probably nothing, but my heart races, and I just feel trapped in that moment.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "missed text",
+            "strange silence"
+          ],
+          "automatic_thoughts": [
+            "my mind jumps to the worst conclusion",
+            "it's probably nothing"
+          ],
+          "emotions": [
+            "unease",
+            "fear",
+            "anxiety"
+          ],
+          "behaviors": [
+            "feel trapped"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Sense of impending doom (finding)",
+            "Feeling physically tense (finding)",
+            "Anticipatory anxiety (finding)",
+            "Feeling tense (finding)",
+            "Anticipatory anxiety, mild (finding)"
+          ],
+          "neutral": [],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like that feeling of unease can really set off a cascade of thoughts and feelings – can you tell me more about what the \"worst conclusion\" your mind jumps to usually is?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like that feeling of unease can be really unsettling, and it's understandable that you'd feel trapped when your mind jumps to those worst-case scenarios. It takes courage to describe what you're experiencing.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling tense",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that feeling of unease can really set off a cascade of thoughts and feelings – can you tell me more about what the \"worst conclusion\" your mind jumps to usually is?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling tense",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds really distressing to feel trapped like that when your mind jumps to the worst conclusion – what's one other possible explanation for the missed text or silence that might be going through your mind?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling tense",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really distressing, and it makes sense you'd feel trapped when your mind is racing like that. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "unease",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling tense (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "I guess it’s that I’m being abandoned or that I’ve messed up somehow. Like, if someone doesn’t reply right away, I start thinking they must be upset with me or that I’ve done something wrong. It’s like I can’t shake off that fear, and I just spiral into thinking that I'm not good enough. It’s exhausting.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "not receiving a reply"
+          ],
+          "automatic_thoughts": [
+            "I'm being abandoned",
+            "I've messed up",
+            "they must be upset with me",
+            "I've done something wrong",
+            "I'm not good enough"
+          ],
+          "emotions": [
+            "fear",
+            "exhaustion"
+          ],
+          "behaviors": [
+            "spiral into negative thoughts"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Anxiety about behavior or performance (finding)",
+            "Fear of being a burden to others (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
+          "neutral": [
+            "Fear of being in a small group (finding)",
+            "Anxiety about saying the wrong thing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly distressing to feel that way when someone doesn't reply immediately – what makes you think they might be upset with you?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're experiencing a lot of distress when you don't receive an immediate reply, and it's understandable that you'd feel exhausted by those thoughts. It takes courage to share that, and I want you to know I'm here to help you explore these feelings.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to feel that way when someone doesn't reply immediately – what makes you think they might be upset with you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to feel that way when someone doesn't reply immediately – it's understandable that you'd feel exhausted. Can you imagine what a friend might say about you thinking that you've messed up?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really distressing, and it makes sense that you'd feel exhausted. When you said you were thinking about being abandoned or having messed up, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about behavior or performance (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "I don’t know, maybe because I’ve had experiences before where communication just fell apart, and I felt left out or ignored. It’s like those moments replay in my head, and then I think, \"What if this is happening again?\" I guess I worry that I’m just not worth their time or that I've said the wrong thing. It feels so heavy.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "experiences of communication falling apart",
+            "feeling left out",
+            "feeling ignored"
+          ],
+          "automatic_thoughts": [
+            "What if this is happening again?",
+            "I'm not worth their time",
+            "I've said the wrong thing"
+          ],
+          "emotions": [
+            "worry",
+            "heaviness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of being a burden to others (finding)"
+          ],
+          "neutral": [
+            "Fear of speaking to people in authority (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like those past experiences are really impacting how you're feeling right now – can you tell me a little more about what those past situations were like?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like those past experiences really stick with you, and it's understandable that you'd feel worried and heavy when you start to anticipate something similar happening again. It takes courage to share that, and I appreciate you bringing it up.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those past experiences are really impacting how you're feeling right now – can you tell me a little more about what those past situations were like?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "experiences of communication falling apart",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling left out",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling ignored",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worry",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those past experiences are really impacting how you're interpreting things now, and it's understandable that you'd feel worried and heavy. Can you imagine what a friend might say about your concerns, knowing your history?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Fear of saying the wrong thing",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really difficult, and it's understandable that you'd feel heavy with those kinds of thoughts and memories. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
                   "label": "unknown"
                 }
               ]
@@ -751,45 +958,46 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I think the first one usually is, “What if I can’t pay my bills?” That one hits hard and just spirals from there. It makes me picture all the things that could go wrong, like evictions or not having enough for necessities. It’s like my mind jumps to the worst possible outcome before I even process what’s actually happening.",
-        "core_issue": "financial concerns",
+        "query": "Yeah, I guess one that really sticks out is when a close friend just... stopped talking to me without any explanation. I didn’t know what I did wrong, and it felt like I was left in the dark. I remember waiting for them to reach out, but they never did, and it hurt so much. Ever since then, I’ve had this fear of being cut off or ignored, and I just can’t shake it. It lingers in the back of my mind, you know",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "thinking about bills",
-            "financial concerns"
+            "close friend stopped talking",
+            "waiting for them to reach out"
           ],
           "automatic_thoughts": [
-            "What if I can’t pay my bills?",
-            "I might face eviction.",
-            "I won't have enough for necessities.",
-            "My mind jumps to the worst possible outcome."
+            "I must have done something wrong",
+            "I fear being cut off or ignored"
           ],
           "emotions": [
-            "fear",
-            "anxiety"
+            "hurt",
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "waiting for contact",
+            "avoiding reaching out"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Sense of impending doom (finding)",
-            "Preoccupation with disaster (finding)",
-            "Negative automatic thoughts (finding)"
+            "Fear of being a burden to others (finding)",
+            "Social fear (finding)"
           ],
           "neutral": [
-            "Fear of collapsing (finding)",
-            "Depressive delusion of catastrophe (finding)"
+            "Difficulty coping with grief responses (finding)",
+            "Unpleasant memories (finding)",
+            "Social isolation (rejection) (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that thought, \"What if I can’t pay my bills?\", really sets off a chain of worrying for you – can you tell me a little more about what goes through your mind immediately after that thought arises?",
+        "response": "That sounds incredibly painful and disorienting – it's understandable that you're feeling this way. What thoughts went through your mind when your friend stopped talking to you?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like that thought, \"What if I can’t pay my bills?\" really sets off a chain of worrying for you, and it’s understandable that you’d feel anxious when your mind jumps to those possibilities. It takes a lot of courage to recognize that pattern.",
+            "response": "It sounds incredibly painful to have a close friend suddenly stop communicating, especially without any explanation. It's understandable that you'd feel hurt and have a lingering fear of being cut off or ignored after that experience.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -809,18 +1017,22 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "negative automatic thoughts",
+                  "concept": "Fear of being a burden to others (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "preoccupation with disaster",
+                  "concept": "Social fear (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (rejection) (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like that thought, \"What if I can’t pay my bills?\", really sets off a chain of worrying for you – can you tell me a little more about what goes through your mind immediately after that thought arises?",
+            "response": "That sounds incredibly painful and disorienting – it's understandable that you're feeling this way. What thoughts went through your mind when your friend stopped talking to you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -836,14 +1048,26 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "negative automatic thoughts",
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Social fear (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (rejection) (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like that thought, \"What if I can’t pay my bills?\", really sets off a chain of worrying for you – it’s understandable that it feels so impactful. What's one thing that might be happening *right now* that would make it less likely that you wouldn't be able to pay your bills?",
+            "response": "That sounds incredibly painful, and it's understandable that you'd be feeling hurt and fearful after experiencing that. It’s tough when a friendship ends without any explanation – what do you think a close, trusted friend might say about your reaction to this situation?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -859,8 +1083,55 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social isolation (rejection)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly painful and disorienting – it's understandable that you're feeling hurt and fearful. When you say you felt left in the dark, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social fear (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (rejection) (finding)",
+                  "label": "neutral"
                 }
               ]
             }
@@ -872,112 +1143,135 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, once that thought pops up, it’s like a wave of panic hits me. I start imagining how I’d feel if I had to move back in with my parents or ask friends for help. It feels humiliating. Then, I worry about how I’d make it through each day without that stability. It’s like I’m stuck in this loop, and I can’t find a way out.",
-        "core_issue": "financial concerns",
+        "query": "It was just a whirlwind of thoughts, honestly. I kept replaying our last conversations, trying to figure out what I might have said or done. I thought, \"Maybe they don't care about me anymore,\" or \"I must have been too much for them.\" It felt like I was just stuck in this loop of self-doubt and confusion. I remember feeling so alone and just wishing for some kind of closure.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "last conversations"
+          ],
           "automatic_thoughts": [
-            "I might have to move back in with my parents",
-            "I would have to ask friends for help",
-            "It feels humiliating",
-            "I won't make it through each day without stability"
+            "Maybe they don't care about me anymore",
+            "I must have been too much for them"
           ],
           "emotions": [
-            "panic",
-            "humiliation"
+            "self-doubt",
+            "confusion",
+            "alone"
           ],
           "behaviors": [
-            "imagining worst-case scenarios",
-            "feeling stuck"
+            "replaying conversations",
+            "wishing for closure"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Feeling like wanting to escape (finding)",
-            "Fear of being left alone during period of dependence (finding)",
-            "Anxiety about forced dependence (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about collapsing (finding)"
+            "Normal grief reaction to life event (finding)",
+            "Thoughts about dying (finding)",
+            "Reflecting stage of grief (finding)",
+            "Conflicting stages of grief (finding)",
+            "Difficulty coping with grief responses (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "Okay, it sounds incredibly distressing to experience that wave of panic when those thoughts arise. It's understandable that you'd feel stuck in a loop when you're imagining difficult scenarios like moving back in with your parents or needing to ask friends for help, and then worrying about your ability to cope day-to-day. That feeling of humiliation is really powerful, and it's clear this is causing you a lot of anxiety. \n\nIt takes courage to describe this, and it sounds like you're carrying a heavy burden right now. Can you tell me a little more about what makes the thought of needing to move back in with your parents or asking friends for help feel so humiliating?",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds incredibly distressing to be caught in that loop of replaying conversations and questioning yourself – what makes you think those thoughts are accurate reflections of what happened?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to experience that wave of panic and feel stuck in this loop of worrying about difficult scenarios. It takes a lot of courage to share these feelings, and I want you to know I hear how overwhelming this is for you.",
+            "response": "It sounds incredibly distressing to be caught in that loop of replaying conversations and questioning yourself like that. It takes a lot of courage to share what you're experiencing, and I want you to know I hear how alone and confused you feel right now.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "panic",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "humiliation",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "feeling stuck",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to experience that wave of panic and feel so stuck in this loop – what specifically makes the thought of moving back in with your parents or asking for help feel so humiliating?",
+            "response": "It sounds incredibly distressing to be caught in that loop of replaying conversations and questioning yourself – what makes you think those thoughts are accurate reflections of what happened?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "panic",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "humiliation",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "feeling stuck",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about forced dependence",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing to be caught in that loop of imagining difficult scenarios and feeling overwhelmed – what's one small, realistic aspect of those situations that might not be as bad as you initially think?",
+            "response": "It sounds incredibly distressing to be caught in that loop of replaying conversations and questioning yourself – it's understandable that you'd feel alone. Sometimes, when we're really struggling, our minds can jump to conclusions; is it possible there might be other explanations for their behavior besides what you're telling yourself?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "panic",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "humiliation",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "imagining worst-case scenarios",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "feeling stuck",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "Anxiety about forced dependence",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "alternative_perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, replaying those conversations and feeling so alone. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
                 }
               ]
             }
@@ -989,112 +1283,109 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s just this feeling that I should have my life together by now, you know? I’ve always wanted to be independent and show that I can handle things on my own. Moving back in with my parents feels like a huge step backward, and I’d be letting them down, too. Plus, it just feels like I’d be admitting defeat, and I really hate that idea. It makes me feel so small and unworthy.",
-        "core_issue": "financial concerns",
+        "query": "I guess it’s hard not to believe them when they just keep repeating. It feels like... if I’m thinking it, there must be some truth to it, right? Plus, I have this nagging feeling that I must be the problem if things fall apart. It’s like I’ve internalized that I’m responsible for how other people feel about me. So, when I start doubting myself, it just makes so much sense to me in that moment.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "moving back in with parents"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I should have my life together by now",
-            "I’d be letting them down",
-            "I’d be admitting defeat"
+            "if I’m thinking it, there must be some truth to it",
+            "I must be the problem if things fall apart",
+            "I’m responsible for how other people feel about me",
+            "doubting myself makes sense in that moment"
           ],
-          "emotions": [
-            "fear",
-            "shame",
-            "anxiety",
-            "unworthiness"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling like wanting to escape (finding)",
-            "Feeling isolated (finding)"
+            "Negative automatic thoughts (finding)",
+            "Delusion of unworthiness (finding)",
+            "Fear of saying the wrong thing (finding)"
           ],
           "neutral": [
-            "Fear of being left alone during period of dependence (finding)",
-            "Pressured by parents (finding)",
-            "Empty nest syndrome (finding)"
+            "Delusional projection - mental defense mechanism (finding)",
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like this situation is bringing up some really strong feelings related to your sense of independence and what it means to be successful. What does \"having your life together\" look like to you?",
+        "response": "Okay, it sounds like you're in a really difficult place right now, feeling like your thoughts are constantly being reinforced and that you're carrying a heavy burden of responsibility. It takes a lot of courage to share this.\n\nYou mentioned, \"It feels like... if I’m thinking it, there must be some truth to it, right?\" It's understandable why you'd feel that way, especially when you're experiencing these persistent thoughts. It's almost as if the sheer repetition of these thoughts makes them feel undeniable. Can you tell me a little more about what it's like when you notice yourself thinking these things? What happens *in that moment*?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like moving back in with your parents has brought up some really difficult feelings about independence and what it means to be successful – and it's understandable that you'd feel unworthy and disappointed given those expectations. Can you tell me more about what \"having it all together\" looks like to you?",
+            "response": "It sounds like you're carrying a heavy burden, feeling responsible for others' feelings and questioning your own judgment when things get tough. It takes courage to acknowledge these patterns, and it’s understandable why you’d feel that way.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Delusion of unworthiness (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
+                  "concept": "Delusional projection - mental defense mechanism (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like this situation is bringing up some really strong feelings related to your sense of independence and what it means to be successful. What does \"having your life together\" look like to you?",
+            "response": "It sounds like you're noticing a pattern of thoughts that are quite distressing – and it takes courage to recognize that. Can you tell me more about what makes you feel like there *must* be truth to these thoughts when they repeat?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Delusion of unworthiness (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "Delusional projection - mental defense mechanism (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're carrying a lot of pressure to be independent and successful, and moving back in with your parents challenges that image – what do you think a close friend might say about you feeling this way, given the circumstances?",
+            "response": "It sounds like you're caught in a cycle where repeated statements and your own self-criticism reinforce these thoughts, making them feel undeniably true – what do you think might be going through the mind of someone who cares about you and is observing this pattern?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Delusion of unworthiness (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Delusional projection - mental defense mechanism (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're experiencing a lot of distress and feeling quite responsible for difficult situations and other people's feelings. When you said you feel like if you're thinking something, there must be some truth to it, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "Delusion of unworthiness (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
+                  "concept": "Delusional projection - mental defense mechanism (finding)",
+                  "label": "neutral"
                 }
               ]
             }
@@ -1106,95 +1397,101 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Having my life together... I guess it means being able to pay my bills on time and not worrying about money all the time. It’s like I picture having a steady job, enough savings, and maybe even just being able to treat myself every once in a while without feeling guilty. I want to feel secure and confident, like I’m in control of my life. But each time I think about it, it feels so far away.",
-        "core_issue": "financial concerns",
+        "query": "In that moment, it feels like everything just freezes, you know? I can almost feel my heart racing and this wave of heat washing over me. My mind gets so loud, and I can’t concentrate on anything else. I just start imagining all the worst-case scenarios, like someone’s angry or thinks I’m a burden. It’s like I go into this survival mode where I feel like I need to fix it, but I can’t even figure out what’s wrong, and then that just",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "thinking about having my life together",
-            "not paying bills on time",
-            "worrying about money",
-            "picturing a steady job",
-            "not having enough savings",
-            "feeling guilty about treating myself"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "it feels so far away",
-            "I want to feel secure and confident",
-            "I’m not in control of my life"
+            "someone’s angry",
+            "I’m a burden",
+            "I need to fix it",
+            "I can’t figure out what’s wrong"
           ],
           "emotions": [
-            "anxiety",
-            "frustration"
+            "fear",
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Enjoyment of life (observable entity)"
+            "Situational panic attack (finding)",
+            "Sense of impending doom (finding)",
+            "Feeling physically tense (finding)"
           ],
           "neutral": [
-            "Hopeful for the future (finding)"
+            "Fear of collapsing (finding)"
           ],
           "contradiction": [
-            "Feeling content (finding)",
-            "Finding of enjoyment of life (finding)",
-            "General well-being finding (finding)"
+            "Emotionally cold (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like having your life together represents a sense of security and control, and it's understandable that it feels distant right now. What makes it feel so far away when you think about those things?",
-        "protocol_used": "socratic_questioning",
+        "response": "Okay, it sounds incredibly distressing to experience that freeze, the racing heart, the heat, and the overwhelming mental noise. It's understandable that you'd feel like you're going into survival mode when you're experiencing all of that. You mentioned imagining worst-case scenarios, like someone being angry or feeling like a burden – those are really difficult thoughts to grapple with. \n\nIt takes a lot of courage to describe what you're going through. Can you tell me a little more about what it's like when you feel that \"freeze\" happening? What's the first thing that pops into your mind, or what's the strongest feeling you notice right before it happens?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like having your life together means a lot to you – feeling secure, confident, and in control, with things like financial stability and the freedom to enjoy yourself. It makes sense that when you picture that, it can feel distant right now.",
+            "response": "It sounds incredibly overwhelming to experience that freeze, the racing heart, and the rush of worrying thoughts – it's understandable that you'd feel anxious when that happens. It takes a lot of courage to describe what you're going through.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Situational panic attack (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
                 },
                 {
                   "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like having your life together represents a sense of security and control, and it's understandable that it feels distant right now. What makes it feel so far away when you think about those things?",
+            "response": "It sounds incredibly distressing to experience that freeze and have your mind racing with those worries. Can you tell me a little more about what makes you think someone might be angry or that you’re a burden?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Situational panic attack (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Fear",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "Automatic thoughts: I’m a burden",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Automatic thoughts: I need to fix it",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like having your life together represents a lot of important things to you, and it's understandable that it feels distant when you're experiencing anxiety and frustration. What's one small step, even if it feels insignificant, that might move you a little closer to that feeling of control?",
+            "response": "That sounds incredibly overwhelming, and it's understandable that you'd feel frozen in those moments. If a friend were watching this happen, what do you think they might notice about how you're reacting?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1214,7 +1511,42 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "ENTAILMENT — Situational panic attack (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "ENTAILMENT — Sense of impending doom (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it takes a lot of courage to describe what you're experiencing. When you say you feel like everything freezes, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Situational panic attack (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 }
               ]

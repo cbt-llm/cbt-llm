@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "it's been good, you know, just trying to keep busy, I guess, you know, trying to stay away from using. I mean, it's not easy at times because, you know, just the pain I'm in and I just think about things, but, yeah, no, I mean, I'm doing okay. Hanging in there, I guess you could say.",
-    "core_issue": "health-related worries",
+    "seed": "Well, the doctors have said that I have cancer again. Had it a couple of years ago, and I beat it. And now they're saying that it's come back. It's not something I really want to talk about, but I'm still working and just trying to get through the day.",
+    "core_issue": "Health-related worries",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,43 +17,49 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "it's been good, you know, just trying to keep busy, I guess, you know, trying to stay away from using. I mean, it's not easy at times because, you know, just the pain I'm in and I just think about things, but, yeah, no, I mean, I'm doing okay. Hanging in there, I guess you could say.",
-        "core_issue": "health-related worries",
+        "query": "Well, the doctors have said that I have cancer again. Had it a couple of years ago, and I beat it. And now they're saying that it's come back. It's not something I really want to talk about, but I'm still working and just trying to get through the day.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "trying to keep busy",
-            "pain"
+            "doctors saying cancer has returned",
+            "working",
+            "trying to get through the day"
           ],
           "automatic_thoughts": [
-            "thinking about things",
-            "it's not easy at times"
+            "I can't believe it's back",
+            "I thought I beat this",
+            "I don't want to deal with this again"
           ],
-          "emotions": [],
+          "emotions": [
+            "fear",
+            "anxiety",
+            "sadness"
+          ],
           "behaviors": [
-            "trying to stay away from using",
-            "hanging in there"
+            "avoiding conversations about cancer",
+            "continuing to work"
           ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Adjustment to life threatening illness (finding)",
-            "Working through the pain of grief (finding)",
-            "Anxiety about treatment (finding)"
+          "entailment": [
+            "Adjustment to life threatening illness (finding)"
           ],
-          "contradiction": [
-            "Ready for enhanced individual coping (finding)",
-            "Ready for enhanced community coping (finding)"
-          ]
+          "neutral": [
+            "Denial about illness severity (finding)",
+            "Fear of getting cancer (finding)",
+            "Coming to terms with dying (finding)",
+            "Difficulty coping with grief responses (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like keeping busy and avoiding use are important strategies for you right now, and it takes a lot of effort. What kinds of things do you find yourself thinking about when the pain and discomfort get intense?",
-        "protocol_used": "socratic_questioning",
+        "response": "That sounds incredibly difficult, and it's completely understandable that you'd want to avoid talking about it right now. It's a lot to process, especially after having faced this before.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're putting in a lot of effort to manage things, and it takes courage to keep going when you're dealing with pain and difficult thoughts. It's understandable that it's not easy.",
+            "response": "That sounds incredibly difficult, and it's completely understandable that you'd want to avoid talking about it right now. It's a lot to process, especially after having faced this before.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -65,18 +71,26 @@
                   "label": "unknown"
                 },
                 {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
                   "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
+                  "concept": "Adjustment to life threatening illness (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Denial about illness severity (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like keeping busy and avoiding use are important strategies for you right now, and it takes a lot of effort. What kinds of things do you find yourself thinking about when the pain and discomfort get intense?",
+            "response": "That sounds incredibly difficult to process – it’s understandable that you’d want to avoid talking about it. Can you tell me a little more about what went through your mind when you heard the news?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -88,14 +102,22 @@
                   "label": "unknown"
                 },
                 {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
                   "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "Adjustment to life threatening illness (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're putting in a lot of effort to manage things, and it takes courage to keep going when you're dealing with pain and difficult thoughts – what do you think might help you feel a little less overwhelmed right now?",
+            "response": "It sounds incredibly difficult to hear that the cancer has returned, especially after you had already faced it and overcome it before. What's going through your mind as you try to get through each day?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -107,11 +129,42 @@
                   "label": "unknown"
                 },
                 {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
                   "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
+                  "concept": "Adjustment to life threatening illness (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Denial about illness severity (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult to process, and it's understandable that you'd want to avoid talking about it. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Adjustment to life threatening illness (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
                 }
               ]
@@ -124,43 +177,43 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "When the pain really hits, my mind just spirals. I think about all the what-ifs, like what if this is something serious? Or what if I can't do the things I used to love? It feels overwhelming, and I just want to escape from those thoughts, but they keep creeping back in.",
-        "core_issue": "health-related worries",
+        "query": "Yeah, it really is tough. I mean, sometimes it just feels overwhelming to even think about it. I keep wanting to push it away, but it always seems to creep back in when I least expect it.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "when the pain really hits"
+            "thinking about it",
+            "unexpected moments"
           ],
           "automatic_thoughts": [
-            "what if this is something serious?",
-            "what if I can't do the things I used to love?"
+            "it feels overwhelming",
+            "I want to push it away"
           ],
           "emotions": [
-            "overwhelmed"
+            "overwhelm"
           ],
           "behaviors": [
-            "want to escape from those thoughts"
+            "pushing it away"
           ]
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Working through the pain of grief (finding)",
-            "Anxiety about having a heart attack (finding)",
-            "Adjustment to life threatening illness (finding)"
+            "Able to resist obsessional thoughts (finding)",
+            "Ability to resist obsessional thoughts (observable entity)",
+            "Repressing thoughts (finding)",
+            "Difficulty controlling emotions (finding)",
+            "Anxiety about forced dependence (finding)"
           ],
-          "contradiction": [
-            "Coming to terms with dying (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like those \"what-if\" thoughts can be really distressing when the pain hits – what do you notice yourself doing or thinking *right before* those thoughts start spiraling?",
+        "response": "It sounds like you're experiencing a real struggle with this, and pushing it away isn't quite working. Can you tell me a little more about what happens when it \"creeps back in\"?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing when the pain hits and those \"what-if\" thoughts start – it's understandable that you'd want to escape from them. It takes a lot of courage to talk about feeling so overwhelmed.",
+            "response": "It sounds like you're experiencing a lot right now, and it takes courage to acknowledge how overwhelming it feels. Pushing it away is a natural response, but it's understandable that it keeps coming back.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -173,7 +226,7 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
+                  "label": "neutral"
                 },
                 {
                   "concept": "behaviors",
@@ -183,7 +236,7 @@
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like those \"what-if\" thoughts can be really distressing when the pain hits – what do you notice yourself doing or thinking *right before* those thoughts start spiraling?",
+            "response": "It sounds like you're experiencing a real struggle with this, and pushing it away isn't quite working. Can you tell me a little more about what happens when it \"creeps back in\"?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -196,7 +249,7 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "unknown"
+                  "label": "neutral"
                 },
                 {
                   "concept": "behaviors",
@@ -206,7 +259,7 @@
             }
           },
           "alternative_perspective": {
-            "response": "It sounds incredibly distressing when those thoughts start spiraling – it's understandable that you'd want to escape from them. What's one thing a close friend might say to you when you're caught up in those \"what-if\" thoughts?",
+            "response": "It sounds like you're experiencing a lot of distress when these thoughts come up, and pushing them away isn't quite working. What do you think might be happening when you try to push it away?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -219,7 +272,30 @@
                 },
                 {
                   "concept": "emotions",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're going through a really difficult time, and it takes courage to talk about it. When you say you want to push it away, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
                 },
                 {
                   "concept": "behaviors",
@@ -235,56 +311,374 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, right before it spirals, I usually feel this tightness in my chest, like a wave of panic. My mind jumps straight to the worst-case scenarios, and I start focusing on every little ache or twinge. It’s like I can’t help but go down that rabbit hole, even if I know deep down it’s probably just anxiety messing with me.",
-        "core_issue": "health-related worries",
+        "query": "Sure, I guess it’s when I’m trying to focus on something else, and then suddenly, I start worrying about my health—like what if something's really wrong? It’s like a switch flips, and my mind goes into overdrive. I feel anxious, and it just spirals from there.",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "trying to focus on something else",
+            "worrying about health"
+          ],
           "automatic_thoughts": [
-            "worst-case scenarios",
-            "focusing on every little ache or twinge",
-            "anxiety messing with me"
+            "what if something's really wrong?",
+            "my mind goes into overdrive"
           ],
           "emotions": [
-            "panic",
             "anxiety"
           ],
-          "behaviors": [
-            "going down the rabbit hole"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anticipatory anxiety, severe (finding)",
-            "Anticipatory anxiety (finding)"
+            "Anticipatory anxiety (finding)",
+            "Anxiety about body function or health (finding)"
           ],
           "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Fear of collapsing (finding)",
-            "Anticipatory anxiety, mild (finding)"
+            "Obsessional thoughts of disease (finding)",
+            "Anxiety hysteria (finding)",
+            "Anxiety neurosis (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds incredibly distressing to experience that tightness in your chest and then get caught up in those worst-case scenarios – what do you think might be contributing to that initial tightness?",
+        "response": "It sounds like a really unsettling experience when that shift happens – can you tell me a little more about what goes through your mind when you first notice yourself worrying about your health?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds incredibly distressing to experience that tightness in your chest and feel your mind racing with worst-case scenarios – it takes a lot of courage to describe what you're going through. It's understandable that you feel like you're going down a rabbit hole, especially when you recognize it might be anxiety at play.",
+            "response": "It sounds incredibly frustrating when you're trying to concentrate and then suddenly find yourself caught up in worries about your health, and your mind starts racing. That feeling of things spiraling can be really unsettling.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "panic",
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about body function or health (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like a really unsettling experience when that shift happens – can you tell me a little more about what goes through your mind when you first notice yourself worrying about your health?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about body function or health (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds really distressing when your mind shifts to health worries, especially when you're trying to focus on something else. What's typically going through your mind when you notice that switch flipping?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about body function or health (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really distressing when your mind shifts to worrying about your health. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Anxiety about body function or health (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it’s really unsettling. At first, it’s just a little thought, like, \"What if I’m getting sick?\" Then, all these worst-case scenarios flood in. I start thinking about all the things that could be wrong, and I feel this tightness in my chest. It’s like I can’t breathe, and my mind races through all the things I should be doing to stay healthy, but then I feel so trapped in the worry.",
+        "core_issue": "Health-related worries",
+        "schema": {
+          "triggers": [
+            "thought of getting sick"
+          ],
+          "automatic_thoughts": [
+            "what if I’m getting sick?",
+            "worst-case scenarios",
+            "things that could be wrong",
+            "things I should be doing to stay healthy"
+          ],
+          "emotions": [
+            "unsettling",
+            "anxiety"
+          ],
+          "behaviors": [
+            "worrying",
+            "feeling trapped"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear associated with illness and body function (finding)",
+            "Anxiety about breathlessness (finding)"
+          ],
+          "neutral": [
+            "Anxiety about having a heart attack (finding)",
+            "Fear of having a heart attack (finding)",
+            "Anxiety about dying (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like that initial thought – \"What if I’m getting sick?\" – really sets off a cascade of worries for you; can you tell me more about what makes that thought so unsettling?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're experiencing a really distressing cycle of worry, and it's understandable that you'd feel unsettled when those thoughts and physical sensations arise. It takes a lot of courage to describe what you're going through.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like that initial thought – \"What if I’m getting sick?\" – really sets off a cascade of worries for you; can you tell me more about what makes that thought so unsettling?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like that initial thought can really spiral into a lot of worry and physical sensations. If a friend were watching this happen, what do you think they might notice about how you're interpreting these early signs?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're going through a really distressing experience, and it's understandable that you'd feel unsettled when these thoughts and physical sensations arise. When you mentioned feeling this way, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "I think it’s the fear of the unknown, you know? I’ve always had this worry about not being in control of my health. And, honestly, I’ve seen family members deal with serious illnesses, which just makes it harder to shake off those thoughts. I don’t want to end up in that situation, feeling helpless and scared. It feels like if I don’t constantly monitor myself, something bad could just sneak up on me.",
+        "core_issue": "Health-related worries",
+        "schema": {
+          "triggers": [
+            "seeing family members deal with serious illnesses"
+          ],
+          "automatic_thoughts": [
+            "fear of the unknown",
+            "worry about not being in control of my health",
+            "if I don’t constantly monitor myself, something bad could sneak up on me"
+          ],
+          "emotions": [
+            "fear",
+            "helplessness",
+            "anxiety"
+          ],
+          "behaviors": [
+            "constantly monitor myself"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear associated with illness and body function (finding)",
+            "Fear associated with healthcare (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
+          "neutral": [
+            "Fear of contracting disease (finding)",
+            "Fear of medical treatment (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like those experiences with your family have really amplified your worries about your own health – can you tell me more about what goes through your mind when you feel the need to constantly monitor yourself?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot of worry and fear, especially given what you've witnessed with your family. It makes sense that you'd feel a need to monitor yourself when you're feeling so vulnerable.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "helplessness",
                   "label": "emotions"
                 },
                 {
-                  "concept": "worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "anxiety messing with me",
-                  "label": "automatic_thoughts"
+                  "concept": "anxiety",
+                  "label": "emotions"
                 },
                 {
                   "concept": "validate_and_reflect",
@@ -294,7 +688,651 @@
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly distressing to experience that tightness in your chest and then get caught up in those worst-case scenarios – what do you think might be contributing to that initial tightness?",
+            "response": "It sounds like those experiences with your family have really amplified your worries about your own health – can you tell me more about what goes through your mind when you feel the need to constantly monitor yourself?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear associated with illness and body function (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear associated with healthcare (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of losing emotional control (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those experiences with your family have really amplified your worries about your own health, and it's understandable that you'd want to feel in control. What's one thing a close friend might say about your tendency to constantly monitor yourself?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear associated with illness and body function",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear associated with healthcare",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of losing emotional control",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're carrying a lot of worry and fear, especially given what you've witnessed with your family. When you say you're constantly monitoring yourself, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it definitely feels like I’m on high alert all the time. When I notice a little ache or something unusual, my mind races to conclusions. I start thinking, \"What if it means something serious?\" I feel like if I don’t keep an eye on things, I’m just waiting for something bad to happen, like I'm setting myself up for disaster. It’s exhausting, really.",
+        "core_issue": "Health-related worries",
+        "schema": {
+          "triggers": [
+            "noticing a little ache",
+            "something unusual"
+          ],
+          "automatic_thoughts": [
+            "What if it means something serious?",
+            "I'm just waiting for something bad to happen",
+            "I'm setting myself up for disaster"
+          ],
+          "emotions": [
+            "anxiety",
+            "exhaustion"
+          ],
+          "behaviors": [
+            "keeping an eye on things"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Mental alertness (observable entity)",
+            "Sense of impending doom (finding)",
+            "Excessively focused attention (finding)",
+            "Feeling physically tense (finding)"
+          ],
+          "neutral": [
+            "Anxiety about going crazy (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly draining to be in that state of constant vigilance. Can you tell me more about what goes through your mind when you notice that ache or something unusual?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly draining to be in a state of constant high alert, especially when a small ache can trigger such intense worry. It makes sense that you'd feel exhausted when your mind is racing like that.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Mental alertness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Excessively focused attention",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly draining to be in that state of constant vigilance. Can you tell me more about what goes through your mind when you notice that ache or something unusual?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Mental alertness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Excessively focused attention",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly draining to be in that state of constant vigilance. Imagine a friend were watching you go through this – what might they notice about your thinking, and perhaps offer as a different perspective?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Mental alertness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Excessively focused attention",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds incredibly draining to be in that state of constant high alert. When you mentioned feeling like you're waiting for something bad to happen, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Mental alertness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Excessively focused attention",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling physically tense",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "Well, when I notice something, I instantly start thinking about all the worst things it could mean. Like, I might convince myself it’s a serious condition or that I should have done something differently to prevent it. Then, I spiral into panic—feeling like I’m failing in some way, like I should be taking better care of myself. It just makes everything feel heavy and overwhelming.",
+        "core_issue": "Health-related worries",
+        "schema": {
+          "triggers": [
+            "noticing something"
+          ],
+          "automatic_thoughts": [
+            "all the worst things it could mean",
+            "it’s a serious condition",
+            "I should have done something differently"
+          ],
+          "emotions": [
+            "panic",
+            "failure",
+            "overwhelmed"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Sense of impending doom (finding)",
+            "Anticipatory anxiety (finding)"
+          ],
+          "neutral": [
+            "Anxiety about body function or health (finding)",
+            "Anxiety about going crazy (finding)",
+            "Mild anxiety (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like those initial thoughts can really take you down a difficult path. Can you tell me more about what makes you believe it’s a serious condition when you notice something?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like when you notice something, it quickly triggers a lot of distressing thoughts and feelings, leaving you feeling overwhelmed and like you've failed. That must be incredibly difficult to experience.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "panic",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "failure",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelmed",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anticipatory anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those initial thoughts can really take you down a difficult path. Can you tell me more about what makes you believe it’s a serious condition when you notice something?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about body function or health",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to jump to those conclusions and feel so overwhelmed by what you notice. What's one thing a close friend might say to you if they saw you reacting this way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "anticipatory anxiety",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it's understandable that you'd feel overwhelmed when those thoughts start. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I guess it’s hard to shake that feeling. I think a lot of it comes from those experiences I’ve had with family and their health issues. I’ve seen how quickly things can change, and it just sticks with me. Sometimes it feels like if I let my guard down, I’m just waiting for something to go wrong. It feels like, if I don’t worry, I’m being careless, and that scares me.",
+        "core_issue": "Health-related worries",
+        "schema": {
+          "triggers": [
+            "experiences with family health issues",
+            "seeing how quickly things can change"
+          ],
+          "automatic_thoughts": [
+            "if I let my guard down, something will go wrong",
+            "if I don’t worry, I’m being careless"
+          ],
+          "emotions": [
+            "fear",
+            "anxiety"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of losing emotional control (finding)",
+            "Fear associated with illness and body function (finding)"
+          ],
+          "neutral": [
+            "Anxiety about going crazy (finding)",
+            "Fear of contracting disease (finding)",
+            "Anxiety about loss of control (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like those experiences with your family have really left a mark, and it makes sense you'd feel that way. Can you tell me more about what goes through your mind when you think about letting your guard down?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like those experiences with your family have really left a mark, and it makes sense that you'd feel that way. It takes a lot of courage to acknowledge those fears and how they impact you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "experiences with family health issues",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing how quickly things can change",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those experiences with your family have really left a mark, and it makes sense you'd feel that way. Can you tell me more about what goes through your mind when you think about letting your guard down?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those experiences with your family have really left a mark, and it's understandable that you'd feel that way. If you were to step back and imagine a friend was feeling this way, what might you say to them about whether worrying constantly is truly the best way to protect yourself?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "experiences with family health issues",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing how quickly things can change",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like those experiences with your family have left a lasting impact, and it makes sense that you'd be feeling this way. When you say you're having these thoughts, are you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "When I think about letting my guard down, I feel this wave of anxiety. It’s like the moment I stop worrying, I’m opening the door to something bad happening. I start imagining all the “what ifs”—like what if I miss a sign or don’t take action when I should? It’s hard to trust that everything will be okay. It feels almost like I’m in a battle with myself, trying to find a balance between being cautious and just living my life.",
+        "core_issue": "Health-related worries",
+        "schema": {
+          "triggers": [
+            "thinking about letting my guard down"
+          ],
+          "automatic_thoughts": [
+            "opening the door to something bad happening",
+            "what if I miss a sign",
+            "what if I don’t take action when I should",
+            "hard to trust that everything will be okay"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
+          "behaviors": [
+            "imagining all the 'what ifs'",
+            "trying to find a balance between being cautious and living my life"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Anticipatory anxiety (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
+          "neutral": [
+            "Fear of collapsing (finding)",
+            "Anxiety about going crazy (finding)",
+            "Anxiety about collapsing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like that anxiety is really intense when you consider letting your guard down – can you tell me more about what goes through your mind when you imagine those \"what ifs\"?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly difficult to navigate that internal struggle, and it makes sense that you'd feel anxious when considering letting your guard down—it’s understandable to want to protect yourself. Could you tell me a little more about what \"letting your guard down\" looks like for you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -316,221 +1354,16 @@
                 {
                   "concept": "anticipatory anxiety",
                   "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly distressing to experience that tightness in your chest and feel your mind racing towards worst-case scenarios – it takes a lot of courage to recognize that anxiety is playing a role. What's one thing that might reassure you, even just a little, when you notice that tightness starting?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "panic",
-                  "label": "emotions"
                 },
                 {
-                  "concept": "worst-case scenarios",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "anxiety messing with me",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 3,
-      "patient": {
-        "role": "patient",
-        "query": "I don't know... maybe it's just the way my mind works? I guess I've always been a bit of a worrier. There are days when I feel fine, but then something triggers it, like hearing about someone else's health problems or even just a bad news story. It just opens the floodgates, and suddenly I'm right back in that anxious place.",
-        "core_issue": "health-related worries",
-        "schema": {
-          "triggers": [
-            "hearing about someone else's health problems",
-            "bad news story"
-          ],
-          "automatic_thoughts": [
-            "it's just the way my mind works",
-            "I've always been a bit of a worrier"
-          ],
-          "emotions": [
-            "anxiety"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Recurrent anxiety (finding)"
-          ],
-          "neutral": [
-            "Anticipatory anxiety (finding)",
-            "Anticipatory anxiety, mild (finding)",
-            "Anticipatory anxiety, moderate (finding)",
-            "Anxiety about making mistakes (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to feel like these triggers can unexpectedly pull you back into that anxious place. Can you tell me more about what goes through your mind when you notice yourself starting to feel anxious after something like hearing about someone else's health problems?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like you're noticing a pattern where certain things, like hearing about health concerns or bad news, can really trigger a wave of anxiety for you. It takes courage to recognize and name these patterns, and it’s understandable to feel frustrated when you’re doing okay and then suddenly feel pulled back into that anxious place.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "fear of losing emotional control",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to feel like these triggers can unexpectedly pull you back into that anxious place. Can you tell me more about what goes through your mind when you notice yourself starting to feel anxious after something like hearing about someone else's health problems?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel like these triggers can unexpectedly pull you back into anxiety, and it's understandable to wonder if this is just \"the way your mind works.\" What do you think might be going through your mind when you notice yourself feeling anxious after hearing these kinds of stories?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Recurrent anxiety (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 4,
-      "patient": {
-        "role": "patient",
-        "query": "I don’t know… maybe it’s just how my mind works? I’ve always been a bit of a worrier, so it feels like it’s just in me. Some days I can handle it, but then something happens, like hearing about someone else’s health problems, and it just takes me back to that anxious place all over again. It’s like the worries flood back in, and I'm just stuck.",
-        "core_issue": "health-related worries",
-        "schema": {
-          "triggers": [
-            "hearing about someone else’s health problems"
-          ],
-          "automatic_thoughts": [
-            "it’s just how my mind works",
-            "I’ve always been a bit of a worrier",
-            "the worries flood back in",
-            "I'm just stuck"
-          ],
-          "emotions": [
-            "anxiety"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Recurrent anxiety (finding)",
-            "Fear of losing emotional control (finding)"
-          ],
-          "neutral": [
-            "Anxiety about body function or health (finding)",
-            "Anxiety about having a heart attack (finding)",
-            "Anxiety about making mistakes (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to feel like these worries are just a part of who you are, especially when something seemingly small can trigger them. What makes you think it's \"just how your mind works\"?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly frustrating to feel like these worries are just part of who you are, especially when something like hearing about someone else's health brings them back so strongly. It takes a lot of strength to acknowledge that these feelings are surfacing again.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to feel like these worries are just a part of who you are, especially when something seemingly small can trigger them. What makes you think it's \"just how your mind works\"?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Recurrent anxiety (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel like these worries are just a part of who you are, especially when something like hearing about someone else's health brings them back so strongly. What do you think might be going through your mind when you notice those worries flooding back?",
+            "response": "It sounds like that anxiety is really intense when you consider letting your guard down – can you tell me more about what goes through your mind when you imagine those \"what ifs\"?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -550,7 +1383,34 @@
                   "label": "unknown"
                 },
                 {
-                  "concept": "validate_and_reflect",
+                  "concept": "anticipatory anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear of losing emotional control",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're caught between wanting to relax and feeling responsible for preventing potential problems – that’s a tough spot to be in. If a friend were watching you navigate this, what do you think they might notice about your approach?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
@@ -559,288 +1419,9 @@
                 }
               ]
             }
-          }
-        }
-      }
-    },
-    {
-      "turn": 5,
-      "patient": {
-        "role": "patient",
-        "query": "I guess it’s just that I've always been like this. I remember my parents worrying a lot, so maybe it's something I picked up from them? It sometimes feels like I’m wired this way, and I just can’t shake it off, no matter how hard I try. It’s like I’m trapped in this loop of worrying, and I don’t know how to break free from it.",
-        "core_issue": "health-related worries",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I've always been like this",
-            "maybe it's something I picked up from them",
-            "I’m wired this way",
-            "I just can’t shake it off",
-            "I’m trapped in this loop of worrying",
-            "I don’t know how to break free from it"
-          ],
-          "emotions": [],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about going crazy (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Free-floating anxiety (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to feel like you're stuck in this cycle of worry, and that it's something you've always experienced – what makes you believe you've \"always\" been this way?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly frustrating to feel like you're stuck in a cycle of worry, especially when you're connecting it to patterns you've observed in your family. Can you tell me more about what it's like to feel \"wired this way\"?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts: ['I've always been like this', 'maybe it's something I picked up from them', 'I’m wired this way', 'I just can’t shake it off', 'I’m trapped in this loop of worrying', 'I don’t know how to break free from it']",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
           },
-          "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to feel like you're stuck in this cycle of worry, and that it's something you've always experienced – what makes you believe you've \"always\" been this way?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts: I've always been like this",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: maybe it's something I picked up from them",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I’m wired this way",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I just can’t shake it off",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I’m trapped in this loop of worrying",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I don’t know how to break free from it",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel like you're stuck in this pattern, especially when you connect it to your family's experiences – what makes you think that this worry might be different from what your parents experienced?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts: I've always been like this",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: maybe it's something I picked up from them",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I’m wired this way",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I just can’t shake it off",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I’m trapped in this loop of worrying",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "automatic_thoughts: I don’t know how to break free from it",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 6,
-      "patient": {
-        "role": "patient",
-        "query": "I think back to when I was a kid and I would get so anxious over little things, like tests or something happening to my family. It felt like I was always waiting for the other shoe to drop. And now, those feelings just seem to have followed me into adulthood. It’s like I can’t remember a time when I didn’t have this constant nagging fear in the back of my mind.",
-        "core_issue": "health-related worries",
-        "schema": {
-          "triggers": [
-            "tests",
-            "something happening to my family"
-          ],
-          "automatic_thoughts": [
-            "waiting for the other shoe to drop",
-            "constant nagging fear"
-          ],
-          "emotions": [
-            "anxiety",
-            "fear"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Recurrent anxiety (finding)",
-            "Anxiety (finding)"
-          ],
-          "neutral": [
-            "Anticipatory anxiety (finding)",
-            "Anticipatory anxiety, mild (finding)",
-            "Anticipatory anxiety, moderate (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds like these feelings have been a significant part of your life for a long time, and it must be tiring to carry that constant worry. Can you tell me more about what that feeling of \"waiting for the other shoe to drop\" is like for you?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds like those childhood anxieties around tests and your family’s well-being have left a lasting impact, and it’s understandably distressing to feel like you’re constantly waiting for something bad to happen. It takes courage to recognize and share these long-standing patterns.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds like these feelings have been a significant part of your life for a long time, and it must be tiring to carry that constant worry. Can you tell me more about what that feeling of \"waiting for the other shoe to drop\" is like for you?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Recurrent anxiety (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds like these feelings have been a significant part of your life for a long time, and it makes sense you'd feel weary from constantly anticipating something bad happening. Can you think of a time when that feeling of waiting for the other shoe to drop didn't quite match what actually happened?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Recurrent anxiety (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 7,
-      "patient": {
-        "role": "patient",
-        "query": "It’s just… exhausting, honestly. It’s like I can’t fully enjoy anything because I’m always bracing for something bad to happen. Sometimes I even feel guilty for being happy, like I’m tempting fate or something. I’ll be having a good day, and then a thought hits me about what could go wrong, and suddenly I’m just waiting for that moment when everything falls apart.",
-        "core_issue": "health-related worries",
-        "schema": {
-          "triggers": [
-            "having a good day",
-            "thinking about what could go wrong"
-          ],
-          "automatic_thoughts": [
-            "I can't fully enjoy anything",
-            "I'm always bracing for something bad to happen",
-            "I feel guilty for being happy",
-            "I'm tempting fate",
-            "everything will fall apart"
-          ],
-          "emotions": [
-            "exhaustion",
-            "guilt",
-            "anxiety"
-          ],
-          "behaviors": [
-            "waiting for something bad to happen"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of losing emotional control (finding)",
-            "Fear of collapsing (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Fear of going crazy (finding)"
-          ],
-          "neutral": [
-            "Anxiety about going crazy (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly draining to constantly be anticipating something negative, and it makes sense that you'd feel guilty when you're actually experiencing joy. It takes a lot of energy to live in that state of bracing for the worst.",
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly draining to constantly be anticipating something negative, and it makes sense that you'd feel guilty when you're actually experiencing joy. It takes a lot of energy to live in that state of bracing for the worst.",
+          "safety_check": {
+            "response": "That sounds incredibly difficult, and it makes sense that you'd feel anxious when you're caught between wanting to let go and worrying about what might happen. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -858,207 +1439,14 @@
                 {
                   "concept": "behaviors",
                   "label": "unknown"
+                },
+                {
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "entailment"
                 },
                 {
                   "concept": "Fear of losing emotional control (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "Fear of collapsing (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds incredibly draining to constantly be anticipating something negative – what do you think is fueling that expectation that things will fall apart?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "Fear of losing emotional control (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Anxiety about making mistakes (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly draining to constantly be anticipating something negative – it makes sense you'd feel exhausted. What do you think a friend would say about you feeling guilty for enjoying a good day?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 8,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, it really is draining. And then I feel stuck in this cycle where I’m pushing away good feelings because I can't help but think they won’t last. It’s like I’m just waiting for the other shoe to drop, and I sometimes wonder if I even deserve to feel good. I don’t know, it’s complicated.",
-        "core_issue": "health-related worries",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "good feelings won't last",
-            "waiting for the other shoe to drop",
-            "I don't deserve to feel good"
-          ],
-          "emotions": [
-            "drained"
-          ],
-          "behaviors": [
-            "pushing away good feelings"
-          ]
-        },
-        "retrieval": {
-          "entailment": [
-            "Feels everything is futile (finding)"
-          ],
-          "neutral": [
-            "Emotionally deprived (finding)",
-            "Feels life is meaningless (finding)",
-            "Feeling bitter (finding)"
-          ],
-          "contradiction": [
-            "Feeling empty (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "It sounds incredibly frustrating to be pushing away good feelings and anticipating something negative – what makes you think these good feelings won't last?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "It sounds incredibly frustrating to be pushing away good feelings and feeling like they won't last – that sense of waiting for something bad to happen must be exhausting. It takes a lot of courage to acknowledge that cycle, and it sounds like you're really trying to understand what's going on.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts\\",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "good feelings won't last\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "waiting for the other shoe to drop\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I don't deserve to feel good\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "drained\\",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "It sounds incredibly frustrating to be pushing away good feelings and anticipating something negative – what makes you think these good feelings won't last?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts: ['good feelings won't last', 'waiting for the other shoe to drop', 'I don't deserve to feel good'], ",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": ": [",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "], ",
-                  "label": "unknown"
-                },
-                {
-                  "concept": ": [",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "It sounds incredibly frustrating to feel like you're actively pushing away something positive because of these worries—what do you think might be the most realistic outcome in this situation, even if it's not the best-case scenario?",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts\\",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "good feelings won't last\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "waiting for the other shoe to drop\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I don't deserve to feel good\\",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "drained\\",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
                 }
               ]
             }
@@ -1070,46 +1458,43 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess it’s just that I’ve seen things change so quickly before, like when I thought everything was okay and then something happened out of nowhere. It's hard to shake that nagging feeling that happiness is just temporary, like it's just waiting for a reason to fade away. Sometimes I catch myself thinking that maybe if I don’t let myself enjoy it too much, I can avoid that sudden drop.",
-        "core_issue": "health-related worries",
+        "query": "Sure, when I start thinking about those “what ifs,” my mind goes in a million directions. I imagine the worst possible scenario, like being diagnosed with something serious or ending up in the hospital. I think about how it would affect my loved ones, how I wouldn’t be able to take care of them or even myself. Sometimes I even start to picture the chaos that would follow, and it just fills me with dread. It’s like I can’t escape the images or feelings, and",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [
-            "seeing things change quickly",
-            "feeling happiness is temporary"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "happiness is just waiting to fade away",
-            "if I don’t enjoy it too much, I can avoid a sudden drop"
+            "what ifs",
+            "being diagnosed with something serious",
+            "ending up in the hospital",
+            "how it would affect my loved ones",
+            "how I wouldn’t be able to take care of them or myself",
+            "the chaos that would follow"
           ],
           "emotions": [
-            "anxiety",
-            "fear"
+            "dread"
           ],
-          "behaviors": [
-            "avoiding enjoyment"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Loss of affect (finding)",
-            "Feeling mixed emotions (finding)"
+            "Sense of impending doom (finding)"
           ],
           "neutral": [
-            "Unable to understand own emotions (finding)",
-            "Rebound mood swings (finding)"
+            "Anxiety about having a heart attack (finding)",
+            "Anxiety about dying (finding)",
+            "Depressive delusion of catastrophe (finding)",
+            "Anxiety about going crazy (finding)"
           ],
-          "contradiction": [
-            "Tends to be stable in affect (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like that past experience has really shaped how you approach feeling happy now. What makes you think that if you limit your enjoyment, you can prevent that \"sudden drop\" you're worried about?",
+        "response": "It sounds incredibly distressing to be caught in those spiraling \"what if\" thoughts and feel overwhelmed by dread. Can you tell me, what's the first image that pops into your mind when you start down that path of \"what ifs\"?",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're carrying a lot of worry about things changing unexpectedly, and that’s understandably making it difficult to fully enjoy the good times. It takes courage to acknowledge that feeling, and I want you to know I hear you.",
+            "response": "It sounds incredibly distressing to get caught up in those \"what if\" thoughts and feel overwhelmed by such intense images and dread. It takes a lot of strength to share that, and I appreciate you describing what's happening for you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1122,21 +1507,21 @@
                 },
                 {
                   "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "dread",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
                   "label": "entailment"
-                },
-                {
-                  "concept": "behaviors",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "validate_and_reflect",
-                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "It sounds like that past experience has really shaped how you approach feeling happy now. What makes you think that if you limit your enjoyment, you can prevent that \"sudden drop\" you're worried about?",
+            "response": "It sounds incredibly distressing to be caught in those spiraling \"what if\" thoughts and feel overwhelmed by dread. Can you tell me, what's the first image that pops into your mind when you start down that path of \"what ifs\"?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1149,21 +1534,21 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "feeling mixed emotions (finding)",
+                  "concept": "dread",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Sense of impending doom (finding)",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're trying to protect yourself from disappointment, which makes sense given your past experiences. What do you think a friend might say about your approach of holding back from fully enjoying things?",
+            "response": "It sounds incredibly distressing to be caught in those intense \"what if\" scenarios and feel overwhelmed by the potential consequences. Imagine a close friend were experiencing this – what might they say to offer some perspective?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -1176,15 +1561,54 @@
                 },
                 {
                   "concept": "emotions",
-                  "label": "entailment"
+                  "label": "unknown"
                 },
                 {
                   "concept": "behaviors",
                   "label": "unknown"
                 },
                 {
-                  "concept": "alternative_perspective",
-                  "label": "unknown"
+                  "concept": "sense of impending doom",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety about dying",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "depressive delusion of catastrophe",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "anxiety about going crazy",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly distressing, and it makes sense that you'd feel dread when those images and feelings are so overwhelming. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "dread",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "what ifs",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "being diagnosed with something serious",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "ending up in the hospital",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "sense of impending doom",
+                  "label": "entailment"
                 }
               ]
             }

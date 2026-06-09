@@ -424,7 +424,7 @@ python src/evaluation/evaluating_responses.py --model gemma --judge-model gpt-5.
 ```
 
 ```sh
-python src/evaluation/evaluating_responses.py --model gemma --judge-model qwen3-32b --judge-banckend ollama
+python src/evaluation/evaluating_responses.py --model gemma --judge-model qwen3-32b --judge-backend ollama
 ```
 
 Run Evaluation Plot Generation:

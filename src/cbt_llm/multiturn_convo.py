@@ -471,7 +471,7 @@ def classify_reasoning_concepts(reasoning, rag, schema):
 
         # check rag
         for k in ["entailment", "neutral", "contradiction"]:
-            for r in rag.get(k, []):
+            for r in (rag or {}).get(k, []):
                 r_clean = re.sub(r"\(.*?\)", "", r).strip().lower()
                 if concept_clean in r_clean or r_clean in concept_clean:
                     label = k
@@ -482,7 +482,7 @@ def classify_reasoning_concepts(reasoning, rag, schema):
         # check schema
         if label == "unknown":
             for k in ["triggers", "automatic_thoughts", "emotions"]:
-                for s in schema.get(k, []):
+                for s in (schema or {}).get(k, []):
                     s_clean = s.strip().lower()
                     if concept_clean in s_clean or s_clean in concept_clean:
                         label = k

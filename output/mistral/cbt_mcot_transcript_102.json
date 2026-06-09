@@ -1,0 +1,1112 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 10,
+    "seed": "covid stress",
+    "core_issue": "ongoing depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "covid stress",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "covid"
+          ],
+          "automatic_thoughts": [
+            "stress about health",
+            "worry about the future"
+          ],
+          "emotions": [
+            "anxiety",
+            "fear"
+          ],
+          "behaviors": [
+            "avoid social gatherings",
+            "check news frequently"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Symptoms of stress (finding)",
+            "Increased stress (finding)"
+          ],
+          "neutral": [
+            "Stress overload (finding)",
+            "Fear associated with illness and body function (finding)"
+          ],
+          "contradiction": [
+            "Emotional stress (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I can see that the current situation with COVID-19 has been causing you a lot of stress. It's completely understandable to feel this way, and I want you to know that we're here to help you navigate through these challenging times.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I can see that the current situation with COVID-19 has been causing you a lot of stress. It's completely understandable to feel this way, and I want you to know that we're here to help you navigate through these challenging times.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Symptoms of stress",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Increased stress",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"I can see that the current situation with COVID-19 is causing you a lot of stress and fear. Can you help me understand what specific aspects about this situation are making you feel anxious?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "stress",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I understand you're feeling anxious about COVID. Have you ever considered what a trusted friend might say about this situation? It could help us explore alternative perspectives.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "stress over illness and body function",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear associated with illness and body function",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear that you're feeling this way, but I need to ask you something. When you mentioned the stress about COVID-19, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "passive ideation",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "suicidal ideation",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it’s just... everything feels really overwhelming. I didn’t expect to feel this heaviness in my chest, you know? It’s like, every day just blends into the next, and I can't really shake off this fog. I'm trying to cope, but it just feels like I’m stuck.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "feeling overwhelmed",
+            "every day blending into the next"
+          ],
+          "automatic_thoughts": [
+            "I can't shake off this fog",
+            "I’m stuck"
+          ],
+          "emotions": [
+            "overwhelm",
+            "heaviness"
+          ],
+          "behaviors": [
+            "trying to cope"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling like wanting to escape (finding)",
+            "Feeling trapped (finding)"
+          ],
+          "neutral": [
+            "Extremely emotionally deprived (finding)",
+            "Coming to terms with dying (finding)",
+            "Anxiety about collapsing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I can see that you're feeling quite overwhelmed and heavy-hearted. It sounds like each day is blurring together for you, and it's hard to shake off this fog. You're doing your best to cope, but it feels like you're stuck. Let's take a moment to explore these feelings together.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I can see that you're feeling quite overwhelmed and heavy-hearted. It sounds like each day is blurring together for you, and it's hard to shake off this fog. You're doing your best to cope, but it feels like you're stuck. Let's take a moment to explore these feelings together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "heaviness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "every day blending into the next",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're going through a tough time, feeling overwhelmed and stuck. Can you help me understand more about what makes each day feel the same? And how does this fog affect your daily activities?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "every day blending into the next",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're going through a tough time, feeling overwhelmed and stuck. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "every day blending into the next",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you're feeling overwhelmed and stuck. It sounds like a heavy burden to carry. Can we talk about what thoughts or feelings might be contributing to this heaviness?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling overwhelmed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "heaviness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "every day blending into the next",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, stuck is the right word. I keep thinking about how I used to feel so much lighter, like I actually enjoyed things. Now, it’s just... hard to even get out of bed some days. I don’t know, I feel like I'm disappointing everyone around me, and that just adds to it all.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "hard to get out of bed",
+            "feeling disappointing to others"
+          ],
+          "automatic_thoughts": [
+            "I used to feel lighter",
+            "I don't enjoy things anymore"
+          ],
+          "emotions": [
+            "sadness",
+            "disappointment"
+          ],
+          "behaviors": [
+            "staying in bed"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling trapped (finding)",
+            "Feeling hopeless (finding)",
+            "Feeling lost (finding)"
+          ],
+          "neutral": [
+            "Loss of motivation (finding)",
+            "Feeling like wanting to escape (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I can see how you're feeling stuck right now. It sounds like things aren't as enjoyable for you as they used to be, and that's really tough. I want you to know that it's okay to feel this way, and we'll work together to understand what might be contributing to these feelings. Let's start by exploring some of the things that make getting out of bed difficult for you.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I can see how you're feeling stuck right now. It sounds like things aren't as enjoyable for you as they used to be, and that's really tough. I want you to know that it's okay to feel this way, and we'll work together to understand what might be contributing to these feelings. Let's start by exploring some of the things that make getting out of bed difficult for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling hopeless",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "I can see how you might feel stuck right now. It's understandable that you miss the lighter feelings you used to have. Let's explore together what might be making it hard for you to enjoy things as much anymore, and if there are any small steps we could take to help you get back on track.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loss of motivation",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I can see how you might feel stuck right now, but let's think about this for a moment. When you were feeling lighter and enjoying things, what do you think was different? And if a friend were here, what might they say about your current situation?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loss of motivation",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear you're feeling this way, but I'm glad we can talk about it. When you said that you feel like you're disappointing everyone around you, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "hard to get out of bed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling disappointing to others",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Thanks, I appreciate that. I guess it’s just... getting up feels like this huge task. Everything just feels so heavy, and I don’t always see the point. Sometimes I think about what I need to do, and it just feels... impossible. Like I’m already tired before I even start the day.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "getting up",
+            "thinking about tasks"
+          ],
+          "automatic_thoughts": [
+            "everything feels heavy",
+            "I don’t see the point",
+            "it feels impossible",
+            "I’m already tired before I start"
+          ],
+          "emotions": [
+            "overwhelm",
+            "fatigue"
+          ],
+          "behaviors": [
+            "avoiding tasks",
+            "staying in bed"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Intermittent drowsiness (finding)"
+          ],
+          "neutral": [
+            "Poor daily routine (finding)",
+            "Depression worse in morning (finding)",
+            "Depression worse later in day (finding)",
+            "Psychogenic fatigue (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I can see how getting up and thinking about tasks might feel overwhelming for you right now. It's understandable to have those feelings, especially when everything feels heavy and it seems like an impossible task. Let's work together to find ways to make things a bit easier.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I can see how getting up and thinking about tasks might feel overwhelming for you right now. It's understandable to have those feelings, especially when everything feels heavy and it seems like an impossible task. Let's work together to find ways to make things a bit easier.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling overwhelmed and fatigued, especially when it comes to getting started on tasks. Can we explore together what makes these tasks feel so heavy and unmanageable? Let's start by discussing your thoughts about them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're feeling overwhelmed and fatigued, especially when it comes to getting started on tasks. Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, hearing another perspective can help us see things differently.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling overwhelmed and tired, especially when it comes to getting up and starting your day. Can I ask if you've ever had any thoughts about not wanting to be here or hurting yourself?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I get that. It’s just that when I think about making things easier, I worry it won’t be enough. I’ve tried so many things before, and nothing really sticks. It’s like I’m just going through the motions but not really... living, you know? It’s frustrating.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "worry it won't be enough",
+            "nothing really sticks",
+            "just going through the motions"
+          ],
+          "emotions": [
+            "frustration"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feels everything is futile (finding)"
+          ],
+          "neutral": [
+            "Difficulty controlling emotions (finding)",
+            "Anxiety about having a fit (finding)",
+            "Poor daily routine (finding)",
+            "Anxiety about making mistakes (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"It sounds like you have concerns about making changes and feeling frustrated when things don't seem to stick. Let's explore these thoughts a bit more, shall we?\"",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I can understand why you might feel that way, but remember, change takes time and effort. It's okay to feel frustrated when things don't go as planned, but let's focus on the progress we make, not just the end goal.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "worry it won't be enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "nothing really sticks",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you have concerns about making changes and feeling frustrated when things don't seem to stick. Let's explore these thoughts a bit more, shall we?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "worry it won't be enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "nothing really sticks",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I can understand why you might feel that way, but have you ever considered what a friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things differently.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "worry it won't be enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "nothing really sticks",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you might feel that way, but remember, every small step counts. Let's focus on what we can do today to make things a little easier for you.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "worry it won't be enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "nothing really sticks",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it’s just... I feel like I keep hitting a wall. I want to try something new, but there's this voice in my head that says it won’t work anyway. I guess I’m scared to put myself out there and fail again. It's just exhausting to think about.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "wanting to try something new",
+            "thinking about failure"
+          ],
+          "automatic_thoughts": [
+            "it won’t work anyway",
+            "I’m scared to put myself out there"
+          ],
+          "emotions": [
+            "fear",
+            "exhaustion"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling a failure (finding)",
+            "Feeling of discouragement (finding)"
+          ],
+          "neutral": [
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about going crazy (finding)",
+            "Feeling like wanting to escape (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that you're feeling quite overwhelmed and scared about trying something new, especially with the fear of failure. It's completely normal to feel this way, and I'm here to help you navigate through these feelings together. Let's start by exploring what success might look like for you in this situation.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that you're feeling quite overwhelmed and scared about trying something new, especially with the fear of failure. It's completely normal to feel this way, and I'm here to help you navigate through these feelings together. Let's start by exploring what success might look like for you in this situation.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling quite discouraged and anxious about trying something new. Can you tell me more about what makes you think it won't work? And have you considered any alternative ways to approach this situation?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I can understand why you might feel that way, but let's consider what a trusted friend or family member might say about trying something new. What do you think they would encourage you to do?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling quite overwhelmed with fear and exhaustion. It's natural to have doubts when trying something new, but let's explore together if there might be other ways to approach this situation that could help alleviate some of your concerns.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "wanting to try something new",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking about failure",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "I appreciate that. It’s just hard to picture success when everything feels so bleak. I guess success would mean feeling, I don’t know, a bit more hopeful or motivated? But then I start thinking about all the times I thought I could change and nothing really happened. It feels like I’m just setting myself up for disappointment.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "everything feels bleak",
+            "thinking about past failures"
+          ],
+          "automatic_thoughts": [
+            "I can't picture success",
+            "I'm setting myself up for disappointment"
+          ],
+          "emotions": [
+            "hopelessness",
+            "disappointment"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling a failure (finding)"
+          ],
+          "neutral": [
+            "Loss of hope for the future (finding)"
+          ],
+          "contradiction": [
+            "Hopeful for the future (finding)",
+            "Positive self thoughts (finding)",
+            "Optimistic thoughts (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "What makes you think that past failures mean there won't be success in the future? Can we explore some examples of times when things didn't go as planned, but still had positive outcomes for you?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"It sounds like you're struggling to see a path forward, and that past experiences have left you feeling discouraged. Let's work together to explore what might help you feel more hopeful and motivated. One step at a time.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "everything feels bleak",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking about past failures",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I can't picture success",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I’m setting myself up for disappointment",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What makes you think that past failures mean there won't be success in the future? Can we explore some examples of times when things didn't go as planned, but still had positive outcomes for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "disappointment",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "past failures",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you've had some tough experiences in the past that have made it difficult to imagine a brighter future. Let's explore what might make you feel more hopeful or motivated, even if it seems small at first. Sometimes, focusing on these smaller steps can help us avoid feeling overwhelmed and set up for disappointment.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "everything feels bleak",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking about past failures",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I can't picture success",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm setting myself up for disappointment",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It can be tough when we feel like we're setting ourselves up for disappointment. Let's take a moment to explore what might make you feel more hopeful or motivated, even if it seems small at first. Would that be okay with you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "disappointment",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "past failures",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "I don’t know... I guess I just focus on the failures more than the positives. Like, I remember trying to connect with friends, but it always felt forced, and I ended up feeling more alone. I can’t really recall any of those moments turning out well. It’s just... easier to remember the bad stuff.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "trying to connect with friends"
+          ],
+          "automatic_thoughts": [
+            "focus on the failures",
+            "moments turning out well are rare",
+            "easier to remember the bad stuff"
+          ],
+          "emotions": [
+            "loneliness"
+          ],
+          "behaviors": [
+            "feeling more alone"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Unpleasant memories (finding)"
+          ],
+          "neutral": [
+            "Repressing painful memories (finding)",
+            "Amnesia for recent events (finding)",
+            "Reliving traumatic memories (finding)",
+            "Amnesia for day to day facts (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I can see how it might feel that way, focusing on the failures and forgetting the positives. It's common to remember negative experiences more vividly than positive ones. Let's work together to explore ways you can shift your focus and find more balance.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I can see how it might feel that way, focusing on the failures and forgetting the positives. It's common to remember negative experiences more vividly than positive ones. Let's work together to explore ways you can shift your focus and find more balance.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're focusing more on the negative experiences when it comes to connecting with friends. Can we explore together what might be causing this pattern and if there are any alternative ways to approach these situations?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're focusing on the negative experiences when it comes to connecting with friends. Have you ever considered what a trusted friend might say about these situations? Or perhaps, what could be some positive outcomes if things went well?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry that you're feeling this way, but I'm glad you reached out. It can be hard to focus on the positives when we tend to remember the negatives more easily. Let's work together to find a way to shift your perspective and appreciate those moments of connection with friends.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "I see what you mean, and I get that it makes sense, but it’s hard to actually feel that shift. It just feels like the negative stuff is so much louder in my mind. Sometimes I wish I could just erase those memories, you know? But then I wonder if that would change anything or if I’d just end up back in the same place.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "the negative stuff is so much louder in my mind",
+            "I wish I could just erase those memories",
+            "I wonder if that would change anything",
+            "I’d just end up back in the same place"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Reappearance of old thoughts (finding)",
+            "Emotional adjustment (observable entity)"
+          ],
+          "neutral": [
+            "Changed perception of things (finding)",
+            "Repressing painful memories (finding)",
+            "Enduring personality change after catastrophic experience (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that it's difficult to feel a shift right now, and the negative thoughts can be overwhelming. It's common for old thoughts to resurface after a challenging experience. Let's work together on finding ways to manage these thoughts and explore if there are any patterns we can identify.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that it's difficult to feel a shift right now, and the negative thoughts can be overwhelming. It's common for old thoughts to resurface after a challenging experience. Let's work together on finding ways to manage these thoughts and explore if there are any patterns we can identify.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Emotional adjustment (observable entity)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Reappearance of old thoughts (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're dealing with some persistent thoughts that are difficult to shake. Have you noticed any patterns or triggers that seem to make these thoughts more prominent? Let's explore them together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Reappearance of old thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Emotional adjustment (observable entity)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It's understandable to feel overwhelmed by negative thoughts, but let's explore if there might be other ways to approach this. What would you think a trusted friend or family member might say about the situation? Sometimes hearing an outside perspective can help us see things differently.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand how difficult it can be to feel that shift, and I appreciate your honesty about the negative thoughts. It's common for those thoughts to feel loud, but let's explore together if there might be a way to make them feel a bit quieter. Have you ever considered what would happen if you could erase those memories? What do you think would change or stay the same?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "I don’t know... I just focus on the failures more than the positives. I remember trying to connect with friends, but it always felt forced, and I ended up feeling more alone. It’s just easier to remember the bad stuff.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "trying to connect with friends"
+          ],
+          "automatic_thoughts": [
+            "focus on failures",
+            "it always felt forced",
+            "I ended up feeling more alone",
+            "easier to remember the bad stuff"
+          ],
+          "emotions": [
+            "loneliness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Limited social contact (finding)",
+            "Minimal outside social stimulation (finding)",
+            "Social isolation (rejection) (finding)"
+          ],
+          "neutral": [
+            "Difficulty coping with grief responses (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I can see how it might feel that way, but let's focus on the times when you were able to connect with friends. Can you tell me more about those moments?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I can see how it might feel that way, but let's focus on the times when you were able to connect with friends. Can you tell me more about those moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Limited social contact",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"I can see how you might feel that way, but have you ever considered what evidence supports the idea that connecting with friends is always forced and leaves you feeling more alone? Let's explore that a bit further.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Limited social contact",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I'm here for you, and I understand that it can be hard to focus on the positives. Let's explore what a trusted friend might say about trying to connect with others. What do you think they would suggest?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Limited social contact",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation (rejection)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way, but I'm glad you reached out. It can be hard to remember the positive moments when we focus on our failures. Have you ever found it easier to connect with friends in certain situations? Let's explore those together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Limited social contact",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Social isolation",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

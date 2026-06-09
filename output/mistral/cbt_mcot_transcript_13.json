@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Stu and I were talking about it before I came in, and I can't really figure out why I'm so bothered. We have such a great relationship. I mean, I feel lucky as a woman in the 21st century to have a man who cares about her and takes her out and makes her feel appreciative. I've never had that before. And I go home happy. I go home excited to see him. I can't name a single friend or even my sisters who have that. And still all I hear is there are criticisms, there are words, how weird it is, and why would a 58 year old man want to be with you? You're not even 30 yet, you know? And I just don't see that. I don't see age being an issue. But again, like, I'm just, I'm waking up with those thoughts.",
-    "core_issue": "relationships (romantic, family, friendships)",
+    "seed": "Yes. When I try to pull weeds, it just takes me forever in my garden, and then I have to come in and sit down, and then I just don't understand why I can't do it like I used to, and it's frustrating.",
+    "core_issue": "Health-related worries",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,97 +17,129 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Stu and I were talking about it before I came in, and I can't really figure out why I'm so bothered. We have such a great relationship. I mean, I feel lucky as a woman in the 21st century to have a man who cares about her and takes her out and makes her feel appreciative. I've never had that before. And I go home happy. I go home excited to see him. I can't name a single friend or even my sisters who have that. And still all I hear is there are criticisms, there are words, how weird it is, and why would a 58 year old man want to be with you? You're not even 30 yet, you know? And I just don't see that. I don't see age being an issue. But again, like, I'm just, I'm waking up with those thoughts.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yes. When I try to pull weeds, it just takes me forever in my garden, and then I have to come in and sit down, and then I just don't understand why I can't do it like I used to, and it's frustrating.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "talking with Stu",
-            "criticisms from others"
+            "pulling weeds",
+            "working in the garden"
           ],
           "automatic_thoughts": [
-            "I can't figure out why I'm so bothered",
-            "there are criticisms about my relationship",
-            "it's weird for a 58 year old man to be with me",
-            "age is an issue for others but not for me",
-            "I'm waking up with negative thoughts"
+            "it takes me forever",
+            "I can't do it like I used to",
+            "it's frustrating"
           ],
           "emotions": [
-            "bothered",
-            "happy",
-            "excited"
+            "frustration"
           ],
           "behaviors": [
-            "going home happy",
-            "going home excited to see him"
+            "sit down",
+            "avoid gardening"
           ]
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling of being slowed down (finding)",
+            "Able to remember old motor skills (finding)"
+          ],
           "neutral": [
-            "Anxiety about resuming sexual relations (finding)",
-            "Pressured by partner (finding)",
-            "Fear of reaction regarding family planning choices (finding)",
-            "Sexual relationship details (observable entity)"
+            "Loss of interest in previously enjoyable activity (finding)",
+            "Unable to remember new motor skills (finding)"
           ],
           "contradiction": [
-            "Ability to remember own age (observable entity)"
+            "Unable to remember old motor skills (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you have a strong relationship with Stu, and yet you're still troubled by some negative thoughts. Can we explore these thoughts further? What evidence do you have that age is not an issue in your relationship?\"",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It sounds like gardening has become a bit challenging for you lately. You mentioned that it takes longer than before and you feel frustrated. Let's explore those feelings together, and see if we can find ways to make gardening more enjoyable again.\"",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see that you have a lot of positive feelings about your relationship with Stu, but it seems like there are also some negative thoughts and criticisms that bother you. Let's explore these thoughts together and try to understand why they might be arising.",
+            "response": "\"It sounds like gardening has become a bit challenging for you lately. You mentioned that it takes longer than before and you feel frustrated. Let's explore those feelings together, and see if we can find ways to make gardening more enjoyable again.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "pulling weeds",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "working in the garden",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "it takes me forever",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can't do it like I used to",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you have a strong relationship with Stu, and yet you're still troubled by some negative thoughts. Can we explore these thoughts further? What evidence do you have that age is not an issue in your relationship?\"",
+            "response": "\"I can see that gardening has become more challenging for you lately. Can you tell me more about what makes it difficult? Have you noticed any changes in your strength or endurance?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling of being slowed down",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Able to remember old motor skills",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot of conflicting thoughts about your relationship. Let's explore these thoughts together and see if we can find some clarity.\"",
+            "response": "\"It sounds like gardening has become a bit challenging for you lately. Have you ever thought about what might be different now compared to when you used to enjoy it more? Perhaps there's something we can explore together that could help make it more enjoyable again.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "working in the garden",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "unable to do it like before",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like gardening has been a bit challenging for you lately. Have you noticed any changes in your energy levels or physical abilities that might be affecting your work in the garden?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "pulling weeds",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "working in the garden",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "it takes me forever",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can't do it like I used to",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
                 }
               ]
             }
@@ -119,87 +151,97 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I mean, yeah, I do care about Stu a lot. We have a really good connection. But sometimes I just... I can’t help but think about how much older he is. It feels like there’s this shadow looming over us, you know? Like, what if he’s just with me now because it’s easy, or because he’s bored? I guess I just worry about what the future holds.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, it’s been tough. I used to find so much joy in it, but now it just feels like a chore. I get so frustrated when I can't keep up, and I worry that maybe I'm not cut out for it anymore.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "thinking about age difference",
-            "concerns about relationship future"
+            "feeling overwhelmed",
+            "not keeping up"
           ],
           "automatic_thoughts": [
-            "he's with me because it's easy",
-            "he's bored with me",
-            "what if he leaves me"
+            "it feels like a chore",
+            "I'm not cut out for it anymore"
           ],
           "emotions": [
-            "worry",
-            "anxiety"
+            "frustration",
+            "worry"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Ability to remember own age (observable entity)",
-            "Reappearance of old thoughts (finding)",
-            "Memory: own age known (finding)",
-            "Able to remember own age (finding)"
+            "Loss of interest in previously enjoyable activity (finding)",
+            "Loss of motivation (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
-          "neutral": [],
-          "contradiction": [
-            "Stupor (finding)"
-          ]
+          "neutral": [
+            "Poor daily routine (finding)",
+            "Anxiety about loss of control (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're concerned about the age difference between you and Stu, and you've been wondering if he might be with you for reasons other than genuine connection. Let's explore these thoughts a bit more.\"",
+        "response": "\"I can see how you might feel overwhelmed and frustrated when something that used to bring you joy now feels like a chore. Can we explore together what's changed and why it's causing you stress?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're concerned about the age difference between you and Stu, and it's natural to have worries about the future. Let's explore these feelings together and see if we can find a way to alleviate some of your concerns.",
+            "response": "I can see how you might be feeling overwhelmed and frustrated, especially when something that used to bring you joy now feels like a chore. It's important to remember that everyone has moments of struggle, and it's okay not to be perfect all the time. Let's work together to find ways to make this more enjoyable for you again.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Loss of interest in previously enjoyable activity",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're concerned about the age difference between you and Stu, and you've been wondering if he might be with you for reasons other than genuine connection. Let's explore these thoughts a bit more.\"",
+            "response": "\"I can see how you might feel overwhelmed and frustrated when something that used to bring you joy now feels like a chore. Can we explore together what's changed and why it's causing you stress?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Loss of interest in previously enjoyable activity",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you're concerned about the age difference between you two, and it's natural to worry about the future. But let's also consider the positive aspects of your relationship. What do you think a trusted friend might say about your concerns?\"",
+            "response": "\"I can see how you might feel overwhelmed and frustrated, but let's consider this for a moment. When you were enjoying it before, what made it enjoyable? And if a friend was in your situation, what would they say?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "Loss of interest in previously enjoyable activity",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see how you might be feeling overwhelmed and frustrated, but remember that everyone has moments like this. Let's explore these feelings together to find a way forward.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling overwhelmed",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "not keeping up",
+                  "label": "triggers"
                 }
               ]
             }
@@ -211,79 +253,117 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it's just hard to shake those thoughts. I mean, it’s not like he’s ever given me a reason to doubt him, but sometimes I find myself overthinking things. I just can’t help but feel like I might not be enough for him. What if he wakes up one day and realizes he wants something different?",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "I think… I used to enjoy the challenge, but now it just feels like I’m constantly battling this fear that something bad will happen. Like, every little ache or pain just spirals into this huge worry. It’s exhausting, you know?",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "constant fear",
+            "little ache or pain"
+          ],
           "automatic_thoughts": [
-            "I might not be enough for him",
-            "What if he wakes up one day and realizes he wants something different?"
+            "something bad will happen",
+            "every little ache or pain spirals into huge worry"
           ],
           "emotions": [
-            "doubt",
-            "anxiety"
+            "fear",
+            "worry",
+            "exhaustion"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about forced dependence (finding)",
-            "Negative automatic thoughts (finding)",
-            "Obsessional doubts (finding)"
+            "Anxiety about going crazy (finding)",
+            "Fear of losing emotional control (finding)",
+            "Fear of injury (finding)",
+            "Anxiety about loss of control (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
-          "contradiction": [
-            "Able to resist obsessional thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're having some doubts about your relationship. It's common to have these thoughts, especially when we care deeply about someone. Let's explore them together and see if we can find a way to ease your anxiety.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're dealing with a lot of worry and fear, even when it comes to small things. Can we explore together what triggers this intense response? Let's start by discussing the last time you felt this way. What was going on then?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're having some doubts about your relationship. It's common to have these thoughts, especially when we care deeply about someone. Let's explore them together and see if we can find a way to ease your anxiety.",
+            "response": "I can see how that fear and worry might be taking a toll on you. It's important to acknowledge these feelings, and together we can work on managing them more effectively. Let's start by discussing what triggers this fear for you. Can you tell me about a specific situation or event that recently caused you concern?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Negative automatic thoughts",
+                  "concept": "fear",
                   "label": "neutral"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "worry",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're having some doubts and fears. Let's explore these together. Can we start by looking at the evidence that supports your thoughts? For example, what are some instances where he has shown you that you are enough for him?\"",
+            "response": "\"It sounds like you're dealing with a lot of worry and fear, even when it comes to small things. Can we explore together what triggers this intense response? Let's start by discussing the last time you felt this way. What was going on then?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Negative automatic thoughts",
+                  "concept": "fear",
                   "label": "neutral"
                 },
                 {
-                  "concept": "Anxiety about making mistakes",
-                  "label": "neutral"
+                  "concept": "worry",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "every little ache or pain",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable to have doubts sometimes, especially when we care deeply about someone. Let's explore these feelings a bit more and see if there might be other perspectives to consider.\"",
+            "response": "\"I can understand how that fear might feel overwhelming. Let's explore together if there are other ways to interpret these small pains, and perhaps find some relief from this constant worry.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "fear",
                   "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "something bad will happen",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "every little ache or pain",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how that fear might be overwhelming. Let's explore these worries together, one step at a time. When you said 'every little ache or pain just spirals into this huge worry,' were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "little ache or pain",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "something bad will happen",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -295,79 +375,133 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "It’s tough to shake those thoughts. He’s never done anything to make me doubt him, but I overthink everything. Sometimes I worry that I’m not enough for him. What if he wakes up one day and wants something different? It just hangs over me.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, I remember it clearly. I had this headache for a couple of days, and instead of just brushing it off, I started thinking about all the worst-case scenarios. I was home alone, and it just felt like it was spiraling out of control. I couldn't focus on anything else. It’s like I was stuck in that moment, just worrying.",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "headache",
+            "being home alone"
+          ],
           "automatic_thoughts": [
-            "I overthink everything",
-            "I'm not enough for him",
-            "What if he wants something different?"
+            "thinking about worst-case scenarios",
+            "it felt like it was spiraling out of control",
+            "I couldn't focus on anything else"
           ],
           "emotions": [
-            "anxiety"
+            "worry"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Negative automatic thoughts (finding)",
-            "Obsessional doubts (finding)",
-            "Ability to resist obsessional thoughts (observable entity)",
-            "Unable to resist obsessional thoughts (finding)"
+            "Psychogenic headache (finding)",
+            "Transient global amnesia (finding)",
+            "Anxiety about loss of memory (finding)",
+            "Memory lapses (finding)"
           ],
           "contradiction": [
-            "Able to resist obsessional thoughts (finding)"
+            "Amnesia for recent events (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I understand that you're having a hard time shaking those thoughts, and it's not uncommon to overthink things. It seems like you're worried about whether you're enough for him. Let's explore these feelings together and see if we can find some ways to alleviate your anxiety.\"",
+        "response": "I'm really sorry to hear that you've been feeling this way. It sounds like you've had a headache for a few days now, and it's understandable that you might start worrying about the worst-case scenarios when you're home alone. Let's take some time to explore these thoughts together and see if we can find a way to manage them better.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I understand that you're having a hard time shaking those thoughts, and it's not uncommon to overthink things. It seems like you're worried about whether you're enough for him. Let's explore these feelings together and see if we can find some ways to alleviate your anxiety.\"",
+            "response": "I'm really sorry to hear that you've been feeling this way. It sounds like you've had a headache for a few days now, and it's understandable that you might start worrying about the worst-case scenarios when you're home alone. Let's take some time to explore these thoughts together and see if we can find a way to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "headache",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "worst-case scenarios",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "being home alone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "worry",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with some worries about your relationship. Can we explore together what evidence supports these thoughts and what might be alternative explanations?\"",
+            "response": "Have you noticed that your thoughts tend to spiral when you're feeling unwell and alone? Let's explore these thoughts together, one step at a time. What specific worries are coming up for you right now?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "headache",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "worst-case scenarios",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "being home alone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "spiraling out of control",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having some worries about your relationship. It's common to have thoughts that we might question or doubt ourselves, but it's important to remember that these thoughts don't always reflect reality. Let's explore together if there are any specific instances where you feel this way and see if we can find a more balanced perspective.\"",
+            "response": "Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, getting another perspective can help us see things more clearly.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "headache",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "worst-case scenarios",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "being home alone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "spiraling out of control",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you've been going through a tough time lately. You mentioned the headache and being home alone, which might have triggered some thoughts about worst-case scenarios. It can be overwhelming when we feel stuck in our worries. Let's see if we can find a way to help you manage these feelings better.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "headache",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "being home alone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking about worst-case scenarios",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "it felt like it was spiraling out of control",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I couldn't focus on anything else",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -379,95 +513,96 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Thanks, I appreciate that. It’s just... I feel like if I dig too deep, I might uncover something I’m not ready to face. I want to be open with him, but then I worry that my concerns might drive him away. It’s kind of a mess in my head.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Thanks for saying that. It helps to know I’m not alone in this. But honestly, even just thinking about the idea of trying to manage it feels overwhelming. Like, what if I can't? What if it just gets worse? It's like this constant cycle of worry that I can't seem to break.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "digging too deep",
-            "wanting to be open",
-            "worrying about concerns"
+            "thinking about managing it"
           ],
           "automatic_thoughts": [
-            "might uncover something I'm not ready to face",
-            "my concerns might drive him away"
+            "what if I can't?",
+            "what if it just gets worse?",
+            "constant cycle of worry"
           ],
           "emotions": [
-            "fear",
-            "anxiety"
+            "overwhelmed",
+            "worry"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Difficulty understanding own emotions (finding)",
-            "Fear of saying the wrong thing (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Boyfriend relationship problem (finding)",
-            "Emotionally distant (finding)"
+            "Difficulty managing stress (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about treatment (finding)",
+            "Recurrent anxiety (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling anxious about digging too deep and worried that your concerns might drive him away. It's natural to feel this way, especially when dealing with complex emotions. Let's take it one step at a time and explore these feelings together.",
+        "response": "I understand how you feel, and it's completely normal to have those thoughts when dealing with stress. Let's focus on finding ways to manage your worries together, one step at a time.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling anxious about digging too deep and worried that your concerns might drive him away. It's natural to feel this way, especially when dealing with complex emotions. Let's take it one step at a time and explore these feelings together.",
+            "response": "I understand how you feel, and it's completely normal to have those thoughts when dealing with stress. Let's focus on finding ways to manage your worries together, one step at a time.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
-                  "label": "entailment"
+                  "concept": "anxiety about losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "entailment"
+                  "concept": "difficulty managing stress",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with some complex feelings about opening up to your boyfriend. Can we explore together what might happen if you do dig a little deeper? What could be the best and worst outcomes?\"",
+            "response": "\"It sounds like you're dealing with a lot of worry and uncertainty. Let's explore that a bit more. When you think about managing your situation, what specific thoughts come up for you? For example, what evidence do you have that you won't be able to handle it?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "digging too deep",
-                  "label": "triggers"
+                  "concept": "anxiety about losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "emotions",
-                  "label": "entailment"
+                  "concept": "recurrent anxiety",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you have some valid concerns about opening up. Let's explore together what a trusted friend or outside observer might think about sharing your feelings with him, and how that could impact your relationship.\"",
+            "response": "\"It sounds like you're dealing with a lot right now, and it's understandable to feel overwhelmed. Let's explore some ways we might be able to break this cycle of worry together. What if we consider what the best possible outcome could look like? Or perhaps, what would need to happen for things to get worse?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "digging too deep",
-                  "label": "triggers"
+                  "concept": "anxiety about losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "might uncover something I'm not ready to face",
-                  "label": "automatic_thoughts"
+                  "concept": "difficulty managing stress",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand how overwhelming it feels when you think about managing your worries. Let's explore some ways to break this cycle together, shall we?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety about losing emotional control",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "worry",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "my concerns might drive him away",
-                  "label": "automatic_thoughts"
+                  "concept": "difficulty managing stress",
+                  "label": "neutral"
                 }
               ]
             }
@@ -479,85 +614,95 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that. It’s just... digging deeper feels scary. I want to be open with him, but I’m afraid my concerns might push him away. It’s a mess in my head, and I don’t know how to sort it all out.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "I appreciate that. It’s just… sometimes it feels like even the smallest steps are out of reach. I want to believe I can do it, but then that inner voice just keeps telling me I won’t be able to handle it. It's frustrating because I really do want to change, but I feel so stuck.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "digging deeper",
-            "being open with him",
-            "concerns pushing him away"
+            "smallest steps"
           ],
           "automatic_thoughts": [
-            "it's scary",
-            "my concerns might push him away",
-            "it's a mess in my head",
-            "I don’t know how to sort it all out"
+            "I won’t be able to handle it",
+            "I feel so stuck"
           ],
           "emotions": [
-            "fear",
-            "anxiety"
+            "frustration"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Difficulty understanding own emotions (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Breakup of romance (finding)",
-            "Conflicting stages of grief (finding)",
-            "Emotionally distant (finding)",
-            "Working through the pain of grief (finding)"
+            "Deficient knowledge of behavior change process (finding)",
+            "Enduring personality change after psychiatric illness (finding)",
+            "Enduring personality change after catastrophic experience (finding)",
+            "Personality change (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Non-organic enduring personality change (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that exploring your feelings can feel daunting, but remember I'm here to help. Let's take it one step at a time and focus on understanding your thoughts and emotions better. It's okay if things seem messy right now, we can work through this together.",
-        "protocol_used": "validate_and_reflect",
+        "response": "I understand that you're feeling frustrated because even the smallest steps seem out of reach. It's important to acknowledge those feelings, but let's also explore what might be causing this inner voice that tells you you won't be able to handle it. Can we start by discussing some examples where you have managed to take small steps towards change in the past?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that exploring your feelings can feel daunting, but remember I'm here to help. Let's take it one step at a time and focus on understanding your thoughts and emotions better. It's okay if things seem messy right now, we can work through this together.",
+            "response": "I understand that you're feeling frustrated because even the smallest steps seem out of reach. It's important to acknowledge those feelings, and I want you to know that it's okay to have doubts. Let's work together to explore what might be holding you back and find ways to move forward.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "difficulty understanding own emotions",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "emotions: fear, anxiety",
-                  "label": "emotions"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It's understandable that you might feel scared about digging deeper, especially when there are so many thoughts and feelings swirling around. Let's explore together what evidence supports your concerns and what alternative perspectives might be worth considering.\"",
+            "response": "I understand that you're feeling frustrated because even the smallest steps seem out of reach. It's important to acknowledge those feelings, but let's also explore what might be causing this inner voice that tells you you won't be able to handle it. Can we start by discussing some examples where you have managed to take small steps towards change in the past?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "difficulty understanding own emotions",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "conflicting stages of grief",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot right now, and it can be scary to dig deeper. Let's explore what might happen if you share your concerns with him. What do you think he might say or do?\"",
+            "response": "\"It sounds like you're facing some challenges and feeling quite frustrated. You mentioned that even the smallest steps seem out of reach, and there's this voice inside telling you that you won't be able to handle it. Let's explore together if we can find a way to challenge that thought and make those small steps feel more achievable.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "difficulty understanding own emotions",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "concerns pushing him away",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that you're feeling frustrated and stuck. It can be tough when we have thoughts like \"I won't be able to handle it.\" Let's explore these thoughts together, and see if we can find a way forward.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -569,96 +714,119 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Thanks, that really does help to hear. I just... sometimes I feel like I’m on this tightrope, trying not to fall into my worries. It’s like I don't want to ruin the good we have by bringing up my insecurities. It feels vulnerable, and I’m not sure how to manage that without feeling like I'm going to break.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "It’s kind of hard to think of examples, you know? I mean, there have been times when I've pushed through and done things that scared me a bit, like going to social events or trying new activities. But afterward, I still feel like I’m just waiting for the next anxiety wave to hit. Sometimes, it feels like those moments of bravery are just followed by a crash, and that makes it hard to see them as real progress.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "feeling vulnerable",
-            "trying not to fall into worries",
-            "not wanting to ruin the good"
+            "going to social events",
+            "trying new activities"
           ],
           "automatic_thoughts": [
-            "I might ruin the good we have",
-            "I can't manage my insecurities",
-            "I'm going to break"
+            "waiting for the next anxiety wave",
+            "moments of bravery followed by a crash",
+            "hard to see them as real progress"
           ],
           "emotions": [
-            "anxiety",
-            "vulnerability"
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "pushed through and done things"
+          ]
         },
         "retrieval": {
           "entailment": [
+            "Fear of going out (finding)",
+            "Anxiety about behavior or performance (finding)",
             "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about collapsing (finding)"
+            "Fear of collapsing (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling like you're walking a tightrope, trying to balance your insecurities with maintaining the good things in your life. It's important to remember that vulnerability is a part of being human and it's okay to share your feelings without fearing they will break something. Let's work together on finding ways to manage these feelings and maintain the positive aspects of your relationships.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you've made some brave efforts, but the anxiety can make it hard to appreciate your progress. Let's explore what makes those moments feel like a 'crash.' What do you think triggers this feeling?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling like you're walking a tightrope, trying to balance your insecurities with maintaining the good things in your life. It's important to remember that vulnerability is a part of being human and it's okay to share your feelings without fearing they will break something. Let's work together on finding ways to manage these feelings and maintain the positive aspects of your relationships.",
+            "response": "\"I can understand how pushing through and doing things that scare you might feel like a bit of a rollercoaster. It's important to acknowledge those feelings, but also remember the times when you were able to do something despite your anxiety. Let's explore together if there are any patterns or thoughts that might be contributing to this cycle.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling vulnerable",
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "going to social events",
                   "label": "triggers"
                 },
                 {
-                  "concept": "trying not to fall into worries",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "not wanting to ruin the good",
+                  "concept": "trying new activities",
                   "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're walking a tightrope, balancing your worries with the good things in your life. It's understandable to feel vulnerable and anxious about sharing your insecurities. Let's explore together how we can manage these feelings without feeling like you might break.\"",
+            "response": "\"It sounds like you've made some brave efforts, but the anxiety can make it hard to appreciate your progress. Let's explore what makes those moments feel like a 'crash.' What do you think triggers this feeling?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
                   "concept": "anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "vulnerability",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "fear of losing emotional control",
                   "label": "entailment"
+                },
+                {
+                  "concept": "moments of bravery followed by a crash",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "hard to see them as real progress",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're walking a tightrope, balancing your insecurities with maintaining the good things in your life. It's understandable to feel vulnerable when sharing these feelings. Let's explore together if there are ways to manage this without feeling like you might break.\"",
+            "response": "\"It sounds like you've been making some brave efforts, but it can be tough not to feel anxious afterward. Have you ever considered what a trusted friend might say about your progress? It could help to get another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling vulnerable",
+                  "concept": "going to social events",
                   "label": "triggers"
                 },
                 {
-                  "concept": "trying not to fall into worries",
+                  "concept": "trying new activities",
                   "label": "triggers"
                 },
                 {
-                  "concept": "not wanting to ruin the good",
+                  "concept": "moments of bravery followed by a crash",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "hard to see them as real progress",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you've been pushing yourself to do things that scare you, which is a big step. I can understand why it might feel overwhelming sometimes, especially when you're waiting for the next anxiety wave. Let's talk about how we can manage those feelings together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "going to social events",
                   "label": "triggers"
+                },
+                {
+                  "concept": "trying new activities",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
                 }
               ]
             }
@@ -670,98 +838,107 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that. I just feel like I’m on this tightrope, trying not to fall into my worries. I don’t want to ruin the good we have by bringing up my insecurities. It feels so vulnerable, and I don’t know how to handle that without feeling like I'm going to break.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, I guess it’s when the dust settles after those moments. I start replaying things in my head, thinking about what I said or did, and then it’s like, suddenly, all the joy from doing something positive just disappears. I feel like I’m just waiting for something to go wrong, and that triggers this overwhelming fear. It kind of zaps all the confidence I felt before.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "feeling vulnerable",
-            "worries",
-            "insecurities"
+            "moments after positive experiences"
           ],
           "automatic_thoughts": [
-            "I might ruin the good we have",
-            "I don't know how to handle this",
-            "I'm going to break"
+            "replaying things in my head",
+            "thinking about what I said or did",
+            "waiting for something to go wrong"
           ],
           "emotions": [
             "fear",
             "anxiety"
           ],
           "behaviors": [
-            "avoiding bringing up insecurities"
+            "losing confidence"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)"
+            "Fear of losing emotional control (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
           "neutral": [
             "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Fear of collapsing (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand how you feel. It's important to remember that vulnerability is a sign of strength, not weakness. Sharing your feelings with someone you trust can help lighten the burden and bring you closer together. Here are some steps you might find helpful:\n\n1. Choose the right time and place: Find a quiet, comfortable setting where you both feel relaxed and open to conversation.\n\n2. Prepare what you want to say: Write down your thoughts and feelings beforehand so you can express them clearly and concisely.\n\n3. Start with positive affirmations: Begin by acknowledging the good things in your relationship and expressing gratitude for them. This helps set a positive tone for the conversation.\n\n4. Share your concerns: Be honest about your worries, but try to focus on specific instances rather than generalizations. For example, instead of saying \"I always feel like you don't care about my feelings,\" say something like \"I felt really hurt when you didn't respond to my text last night.\"\n\n5. Use \"I\" statements: Instead of blaming or accusing your partner, use \"I\" statements to express how you feel. This helps avoid putting them on the defensive and encourages empathy.\n\n6. Listen actively: Give your partner the opportunity to respond and listen carefully to what they have to say. Try to understand their perspective and validate their feelings as well.\n\n7. Find solutions together: Work collaboratively to find ways to address your concerns and strengthen your relationship. This shows that you're both committed to making things better.\n\n8. Practice self-care: After the conversation, take time for yourself to process your emotions and recharge. It's important to take care of your mental health during this vulnerable period.",
+        "response": "\"I can see how those positive moments might leave you feeling a bit anxious as they pass. It's common to replay things in your mind and worry about what could go wrong. Let's work together to find ways to manage that fear and hold onto the confidence you felt before.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you feel like you're walking a tightrope, trying to balance your worries without causing any harm. It's natural to feel vulnerable when discussing insecurities, and it takes courage. Let's explore together how we can manage this feeling so you don't have to carry the burden alone.",
+            "response": "\"I can see how those positive moments might leave you feeling a bit anxious as they pass. It's common to replay things in your mind and worry about what could go wrong. Let's work together to find ways to manage that fear and hold onto the confidence you felt before.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling vulnerable",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "worries",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "insecurities",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're walking a tightrope, balancing your worries and the desire to maintain the good we have. Can you help me understand what evidence do you have that bringing up your insecurities would ruin things? Let's explore this together.\"",
+            "response": "\"It sounds like you're having a hard time holding onto positive feelings after good moments. Can we explore together what thoughts might be coming up for you that make you feel anxious and fearful?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling vulnerable",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "worries",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "insecurities",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're walking a tightrope, and it can feel scary to bring up your insecurities. Let's explore together if there might be other ways to express your feelings without fearing they'll break what you have.\"",
+            "response": "\"It sounds like you're quite hard on yourself after positive experiences, and that fear can be overwhelming. Have you ever considered what a trusted friend might say about your reactions? It could help to see things from another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling vulnerable",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "worries",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how those positive moments might leave you feeling a bit anxious as they pass. It's common to replay events in our minds, but it seems like you're also waiting for something to go wrong. Let's explore that fear together and find ways to manage it.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "insecurities",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
@@ -773,91 +950,118 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Thank you for the suggestions. I know it comes from a good place, but honestly, I’m just feeling really overwhelmed right now. It’s like there’s this voice in my head telling me I shouldn’t even bring it up, or that it’ll just make things worse. I wish I could just shake those thoughts off, but they linger and make me hesitant to open up.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Thanks for saying that. It feels like I’m always waiting for the other shoe to drop. I’d love to hold onto that confidence, but it’s just so fleeting. I feel like I really want to break free from this pattern, but I’m scared of what that might look like. What if it doesn’t work? What if I end up feeling worse?",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "feeling overwhelmed"
+            "waiting for the other shoe to drop",
+            "wanting to break free from this pattern"
           ],
           "automatic_thoughts": [
-            "I shouldn’t even bring it up",
-            "it’ll just make things worse"
+            "confidence is fleeting",
+            "what if it doesn’t work?",
+            "what if I end up feeling worse?"
           ],
           "emotions": [
-            "overwhelmed",
-            "hesitant"
+            "fear",
+            "anxiety"
           ],
-          "behaviors": [
-            "hesitant to open up"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Preoccupied with emotional problems (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about not coping with parenthood (finding)",
+            "Anxiety about forced dependence (finding)",
             "Anxiety about losing emotional control (finding)",
-            "Immature emotional adjustment (finding)",
-            "Feeling emotionally hurt (finding)"
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about having a fit (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Enduring personality change after catastrophic experience (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed and have been struggling to shake off those thoughts. It's important to acknowledge these feelings, as they are a part of being human. Let's work together to explore where these thoughts come from and find ways to manage them more effectively.",
+        "response": "I can understand why you might feel that way. It's common to worry about what might happen next, especially when we're trying to make changes. Let's explore these feelings together and see if we can find a way to move forward with more confidence.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and have been struggling to shake off those thoughts. It's important to acknowledge these feelings, as they are a part of being human. Let's work together to explore where these thoughts come from and find ways to manage them more effectively.",
+            "response": "I can understand why you might feel that way. It's common to worry about what might happen next, especially when we're trying to make changes. Let's explore these feelings together and see if we can find a way to move forward with more confidence.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Preoccupied with emotional problems",
-                  "label": "entailment"
+                  "concept": "waiting for the other shoe to drop",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Anxiety about not coping with parenthood",
-                  "label": "neutral"
+                  "concept": "confidence is fleeting",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Immature emotional adjustment",
-                  "label": "neutral"
+                  "concept": "wanting to break free from this pattern",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that you're feeling overwhelmed and have been struggling to cope. It's common for people to experience self-doubt, especially when dealing with new challenges like parenthood. Let's explore these thoughts together and see if we can find a way to manage them better.",
+            "response": "It sounds like you're dealing with a lot of uncertainty and fear. Let's explore those feelings together. Can you tell me more about what makes you think things might not work out or that you could feel worse?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Preoccupied with emotional problems",
-                  "label": "entailment"
+                  "concept": "waiting for the other shoe to drop",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Anxiety about not coping with parenthood",
-                  "label": "neutral"
+                  "concept": "confidence is fleeting",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Immature emotional adjustment",
-                  "label": "neutral"
+                  "concept": "what if it doesn't work?",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "what if I end up feeling worse?",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I understand that you're feeling overwhelmed, and it's natural for you to have thoughts telling you not to bring things up or fearing they might make things worse. Let's explore together if there are other perspectives we can consider, so you don't feel as hesitant to open up.",
+            "response": "\"It sounds like you're feeling quite anxious about making a change and unsure if it will work out. Let's explore what might happen if things go well, too. What do you think could be the best possible outcome of breaking free from this pattern?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
+                  "concept": "waiting for the other shoe to drop",
                   "label": "triggers"
                 },
                 {
-                  "concept": "hesitant to open up",
-                  "label": "emotions"
+                  "concept": "confidence is fleeting",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "wanting to break free from this pattern",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can understand why you might feel that way. It's important to acknowledge these fears, but let's also explore what would happen if things did work out differently. What do you think could be some positive outcomes if you were able to break free from this pattern?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waiting for the other shoe to drop",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "confidence is fleeting",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "wanting to break free from this pattern",
+                  "label": "triggers"
                 }
               ]
             }
@@ -869,98 +1073,108 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess you're right. It’s just... it feels like a lot to unpack, and I’m scared of what that might look like. What if I dig into it and find out things I don’t want to face? I mean, I want to be honest with him, but I don’t want to end up creating even more issues. It’s this constant tug-of-war in my mind.",
-        "core_issue": "relationships (romantic, family, friendships)",
+        "query": "Yeah, it feels like I’m always waiting for the other shoe to drop. I’d love to hold onto that confidence, but it’s just so fleeting. I want to break free from this pattern, but I’m scared of what that might look like. What if it doesn’t work? What if I end up feeling worse?",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [
-            "feeling overwhelmed",
-            "thinking about honesty",
-            "concerns about issues"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "scared of what I might find",
-            "worry about facing difficult truths",
-            "fear of creating more issues"
+            "I'm always waiting for the other shoe to drop",
+            "Confidence is fleeting",
+            "What if it doesn't work?",
+            "What if I end up feeling worse?"
           ],
           "emotions": [
             "fear",
             "anxiety"
           ],
           "behaviors": [
-            "avoiding deep conversations",
-            "hesitating to be honest"
+            "want to break free from this pattern"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Pressured by partner (finding)",
-            "Fear of losing emotional control (finding)",
-            "Difficulty understanding own emotions (finding)",
-            "Fear of saying the wrong thing (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Worried about being a bad father (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about going crazy (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Anxiety about having a fit (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling a bit overwhelmed and scared about digging into things. It's completely normal to feel this way, especially when facing difficult truths. Let's take it one step at a time, and I'll be here to support you every step of the way.",
+        "response": "\"It sounds like you're dealing with a lot of uncertainty and fear. Let's take it one step at a time. Can we explore together what might be causing these thoughts and feelings?\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling a bit overwhelmed and scared about digging into things. It's completely normal to feel this way, especially when facing difficult truths. Let's take it one step at a time, and I'll be here to support you every step of the way.",
+            "response": "\"It sounds like you're dealing with a lot of uncertainty and fear. Let's take it one step at a time. Can we explore together what might be causing these thoughts and feelings?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "thinking about honesty",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "concerns about issues",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with a lot right now. Let's take it one step at a time. What are some of the specific concerns that come to mind when you think about being honest?\"",
+            "response": "What makes you think that things might not work out as planned? Can we explore some evidence or alternatives to help you feel more confident about breaking free from this pattern?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling overwhelmed",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "thinking about honesty",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "concerns about issues",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I understand that you're feeling a bit overwhelmed and unsure about digging deeper. It's natural to feel apprehensive when we face challenges, but remember, it's okay not to have all the answers right away. Let's take it one step at a time, and I'll be here to support you every step of the way.",
+            "response": "Have you ever considered what a trusted friend might say about your thoughts and feelings? It could provide a different perspective.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear of what I might find",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "worry about facing difficult truths",
+                  "concept": "I'm always waiting for the other shoe to drop",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "fear of creating more issues",
+                  "concept": "Confidence is fleeting",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "What if it doesn't work?",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "What if I end up feeling worse?",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see that you're feeling quite anxious and fearful about maintaining your confidence. Let's explore these feelings together, one step at a time.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "confidence is fleeting",
                   "label": "automatic_thoughts"
                 }
               ]

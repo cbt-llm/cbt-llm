@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Well, I. I've been doing heroin for a few months now, and I didn't think my parents knew, but I guess they. They found a needle in my room and, I mean, they knew what I was doing, and they. They told me that I have to start shaping up and I need to stop doing any kind of drugs because they said. They said the next time that they find any kind of drugs, then that's it, they're going to kick me out of the house.",
-    "core_issue": "other miscellaneous concerns",
+    "seed": "I just keep thinking, like, what if somebody finds out? And now I told you so, obviously people are gonna find out.",
+    "core_issue": "Anxiety and fear",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,87 +17,91 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Well, I. I've been doing heroin for a few months now, and I didn't think my parents knew, but I guess they. They found a needle in my room and, I mean, they knew what I was doing, and they. They told me that I have to start shaping up and I need to stop doing any kind of drugs because they said. They said the next time that they find any kind of drugs, then that's it, they're going to kick me out of the house.",
-        "core_issue": "other miscellaneous concerns",
+        "query": "I just keep thinking, like, what if somebody finds out? And now I told you so, obviously people are gonna find out.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "parents found a needle",
-            "parents told me to stop drugs"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "they know what I'm doing",
-            "I'll be kicked out of the house"
+            "what if somebody finds out?",
+            "people are gonna find out"
           ],
-          "emotions": [
-            "fear",
-            "shame",
-            "anxiety"
-          ],
-          "behaviors": [
-            "using heroin",
-            "hiding drugs"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Addiction (finding)",
-            "Pressured by parents (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Compulsive drug taking (finding)",
-            "Physical addiction (finding)"
+            "Feeling ashamed (finding)",
+            "Fear of saying the wrong thing (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of being watched (finding)"
           ],
           "contradiction": [
-            "Compulsive uncontrollable drug taking (finding)"
+            "Feeling safe (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you've been using heroin for some time now, and it seems your parents have discovered this. They've expressed their concern and asked you to stop. It must be difficult to hear, but I'm here to help you navigate through this. Let's start by discussing how you feel about their request.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling anxious about sharing your thoughts. Can we explore together what might happen if someone finds out, and how that compares to the reality?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've been using heroin for some time now, and it seems your parents have discovered this. They've expressed their concern and asked you to stop. It must be difficult to hear, but I'm here to help you navigate through this. Let's start by discussing how you feel about their request.",
+            "response": "\"I understand that you're feeling anxious about sharing your thoughts, and it seems like there's a fear of being watched. Let's work together to explore these feelings in a safe space.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "parents found a needle",
-                  "label": "triggers"
+                  "concept": "anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "parents told me to stop drugs",
-                  "label": "triggers"
+                  "concept": "Fear of being watched (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I can understand how you might feel scared and anxious about your parents finding out about your drug use. Let's explore what would happen if you did take that step towards stopping. What do you think could be the best outcome?\"",
+            "response": "\"It sounds like you're feeling anxious about sharing your thoughts. Can we explore together what might happen if someone finds out, and how that compares to the reality?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "parents found a needle",
-                  "label": "triggers"
+                  "concept": "anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "parents told me to stop drugs",
-                  "label": "triggers"
+                  "concept": "Fear of being watched (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite anxious about your parents finding out about your drug use and the threat of being kicked out. Have you ever considered how a trusted friend or family member might react if they were in your shoes? It could be helpful to explore different perspectives on this situation.\"",
+            "response": "\"It sounds like you're worried about what others might think. Have you ever considered how a trusted friend or family member might view this situation differently?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "parents found a needle",
-                  "label": "triggers"
+                  "concept": "Fear of saying the wrong thing (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "parents told me to stop drugs",
-                  "label": "triggers"
+                  "concept": "Anxiety about saying the wrong thing (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how that thought might be heavy on your mind. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "passive ideation",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "fear of being watched",
+                  "label": "neutral"
                 }
               ]
             }
@@ -109,82 +113,109 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s... it’s definitely tough to hear. I mean, I get where they’re coming from, but it makes me feel so ashamed. I don’t know, it feels like they’re disappointed in me, and that just makes everything harder. Sometimes, I feel like they don’t really understand what I’m going through. It’s frustrating.",
-        "core_issue": "other miscellaneous concerns",
+        "query": "Yeah, I guess I do feel pretty anxious about that. I always worry that if I share what I'm really thinking, people will judge me or think I'm weak. It’s like I can picture it happening, and it just makes my stomach drop. But then I wonder… is it really as bad as I imagine?",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "hearing feedback",
-            "perceived disappointment from others"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "they're disappointed in me",
-            "they don't understand what I'm going through"
+            "if I share what I'm really thinking, people will judge me",
+            "people will think I'm weak",
+            "is it really as bad as I imagine?"
           ],
           "emotions": [
-            "shame",
-            "frustration"
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling ashamed (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Pressured by others (finding)",
-            "Pressured by peers (finding)",
-            "Complaining of feeling depressed (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about collapsing (finding)",
+            "Fear of writing in public (finding)",
+            "Anxiety about dying (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I can see how you might feel that way, and it's completely understandable to feel ashamed when we perceive disappointment from others. Let's work together to explore these feelings more deeply.\"",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're dealing with some anxiety about sharing your thoughts. Can we explore together what might happen if you do share them, and how that compares to your fears?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I can see how you might feel that way, and it's completely understandable to feel ashamed when we perceive disappointment from others. Let's work together to explore these feelings more deeply.\"",
+            "response": "\"I can see why you might feel anxious about sharing your thoughts. It's natural to worry about how others perceive us, but remember that everyone has their own struggles. Let's explore together if these fears are based on reality or not.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling ashamed",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "perceived disappointment from others",
-                  "label": "triggers"
+                  "concept": "sharing what I'm really thinking",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "people will judge me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "people will think I'm weak",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I can see how you might feel that way, but let's explore what evidence supports this thought. Can we consider other possibilities as well?\"",
+            "response": "\"It sounds like you're dealing with some anxiety about sharing your thoughts. Can we explore together what might happen if you do share them, and how that compares to your fears?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling ashamed",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "perceived disappointment from others",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I can see how you might feel that way, but let's consider another perspective. How about we think about what a trusted friend or family member might say about the situation? It could help us see things differently.\"",
+            "response": "\"It sounds like you're dealing with some anxiety about sharing your thoughts. Have you ever considered what a trusted friend might think if they were in your shoes? Sometimes, it can help to get another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling ashamed",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "Perceived disappointment from others",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling quite anxious about sharing your true thoughts. It can be scary to worry about being judged or perceived as weak. Let's explore these feelings together and see if we can find a way to make it easier for you.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "sharing thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "judgment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "weakness",
+                  "label": "unknown"
                 }
               ]
             }
@@ -196,92 +227,127 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I guess... I just wish I could express what I’m feeling without it coming off as whining or something. It’s like, I don’t want to burden anyone, but at the same time, I feel so alone in all this. It’s exhausting trying to keep it all together when I can’t even figure things out myself.",
-        "core_issue": "other miscellaneous concerns",
+        "query": "I feel really anxious about sharing my thoughts. It's like this fear that people will judge me or see me as weak. When I start to think about opening up, my stomach just drops. I guess I wonder if it's really as bad as I imagine it to be.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "wanting to express feelings",
-            "fear of burdening others",
-            "feeling alone",
-            "trying to keep it together"
+            "thinking about sharing thoughts"
           ],
           "automatic_thoughts": [
-            "I don't want to burden anyone",
-            "I feel so alone",
-            "I can't figure things out"
+            "people will judge me",
+            "I will be seen as weak",
+            "it's worse than I imagine"
           ],
           "emotions": [
-            "exhaustion"
+            "anxiety",
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding sharing thoughts"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)",
-            "Feeling diffident (finding)",
-            "Difficulty understanding own emotions (finding)",
-            "Feeling abandoned (finding)"
+            "Fear of public speaking (finding)"
           ],
           "neutral": [
-            "Complaining of feeling depressed (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of writing in public (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about losing emotional control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry that you feel this way, it must be incredibly difficult for you. It's important to remember that expressing your feelings is a normal part of life and not something to be ashamed of. Let's work together on finding ways to communicate more effectively without worrying about burdening others or feeling alone.",
+        "response": "\"It sounds like you're feeling quite anxious about sharing your thoughts. It's understandable to have fears of being judged or perceived as weak, but remember that everyone has their own insecurities and it's important not to let them hold us back. Let's explore these feelings together and find ways to manage them.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry that you feel this way, it must be incredibly difficult for you. It's important to remember that expressing your feelings is a normal part of life and not something to be ashamed of. Let's work together on finding ways to communicate more effectively without worrying about burdening others or feeling alone.",
+            "response": "\"It sounds like you're feeling quite anxious about sharing your thoughts. It's understandable to have fears of being judged or perceived as weak, but remember that everyone has their own insecurities and it's important not to let them hold us back. Let's explore these feelings together and find ways to manage them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "entailment"
+                  "concept": "people will judge me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I will be seen as weak",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying a heavy burden and feeling alone in doing so. Can we explore together what might be some alternative ways to express your feelings without fear of being perceived as whining?\"",
+            "response": "\"It sounds like you have some concerns about sharing your thoughts, and I can understand why that might feel scary. Can you tell me more about what you imagine people will think or how you think they'll react?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling diffident",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're struggling with finding the right balance between sharing your feelings and not wanting to burden others. Let's explore together if there might be other ways to communicate that feel less burdensome for both of us.\"",
+            "response": "\"It sounds like you're feeling quite anxious about sharing your thoughts. Have you ever considered what a trusted friend might think about this situation? Sometimes, getting another perspective can help us feel more at ease.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "wanting to express feelings",
-                  "label": "triggers"
+                  "concept": "anxiety",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "fear of burdening others",
-                  "label": "triggers"
+                  "concept": "fear",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling alone",
-                  "label": "triggers"
+                  "concept": "people will judge me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I will be seen as weak",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling quite anxious about sharing your thoughts. I want to assure you that it's okay to feel this way, and I'm here to help. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "people will judge me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I will be seen as weak",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -293,80 +359,133 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Thanks, I appreciate that. I know I should probably just say what I feel, but it’s hard to shake off the thought that I’ll just be dismissed or that it won’t matter. I start to second-guess myself, like, “Is this really important?” or “Am I just overreacting?” And then I just... hold it all in.",
-        "core_issue": "other miscellaneous concerns",
+        "query": "Yeah, I get that it makes sense to feel that way, but it’s still really tough. Sometimes, I just freeze up, and then I regret not saying anything at all. I guess I just worry people won’t understand where I’m coming from. It’s hard to think about what I really want to say when I’m so caught up in my fears.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "I'll just be dismissed",
-            "It won't matter",
-            "Is this really important?",
-            "Am I just overreacting?"
+          "triggers": [
+            "freezing up",
+            "worrying about being misunderstood"
           ],
-          "emotions": [],
+          "automatic_thoughts": [
+            "regret not saying anything",
+            "people won’t understand me",
+            "hard to think clearly"
+          ],
+          "emotions": [
+            "fear",
+            "regret"
+          ],
           "behaviors": [
-            "hold it all in"
+            "freezing up",
+            "not speaking up"
           ]
         },
         "retrieval": {
           "entailment": [
             "Anxiety about saying the wrong thing (finding)",
-            "Difficulty understanding own emotions (finding)"
+            "Fear of saying the wrong thing (finding)",
+            "Fear of public speaking (finding)"
           ],
           "neutral": [
-            "Feeling emotionally hurt (finding)",
-            "Difficulty coping with grief responses (finding)",
-            "Immature emotional adjustment (finding)"
+            "Fear of writing in public (finding)",
+            "Fear of speaking on the phone (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I appreciate your honesty and I want you to know that it's okay to feel anxious. It's common for people to worry about being dismissed or overreacting, especially when sharing feelings. Let's work together on finding ways to express yourself more comfortably.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you have a lot of fear and regret about speaking up. Can you tell me more about what makes it hard for you to express yourself? And when you do speak, how do you feel people respond?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I appreciate your honesty and I want you to know that it's okay to feel anxious. It's common for people to worry about being dismissed or overreacting, especially when sharing feelings. Let's work together on finding ways to express yourself more comfortably.",
+            "response": "I can see how you might feel that way, and it's completely normal to have fears and regrets. It's important to remember that everyone has a unique perspective, and it's okay if people don't always understand us right away. Let's work together on finding ways to express yourself more clearly when these feelings arise.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about saying the wrong thing",
+                  "concept": "fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "entailment"
+                  "concept": "regret",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "worry",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "people won't understand me",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It's understandable to feel anxious about expressing yourself, but remember that it's okay not to have all the answers. Let's explore together why you think your feelings might be important and if they are truly indicative of overreacting.\"",
+            "response": "\"It sounds like you have a lot of fear and regret about speaking up. Can you tell me more about what makes it hard for you to express yourself? And when you do speak, how do you feel people respond?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about saying the wrong thing",
+                  "concept": "fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "entailment"
+                  "concept": "regret",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "worry",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "people won't understand me",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable to feel anxious about expressing yourself, but remember that it's okay not to have all the answers. Let's explore together what might happen if you do share your feelings and also consider alternative perspectives on their importance.\"",
+            "response": "\"It sounds like you have a lot of fear and regret about speaking up. Have you ever considered what a trusted friend might think about the situation? Sometimes, it can help to see things from another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about saying the wrong thing",
+                  "concept": "fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
+                  "concept": "regret",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "worry",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "people won't understand me",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you might feel that way, and it's okay to have those fears. Let's work together on finding ways to express yourself more comfortably.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
                   "label": "entailment"
+                },
+                {
+                  "concept": "regret",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "worry",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "people won't understand",
+                  "label": "unknown"
                 }
               ]
             }
@@ -378,85 +497,112 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Thanks for saying that. I guess... it’s just that every time I open up, I feel this knot in my stomach. Like, what if my feelings aren’t valid or if they’re too much? It’s like I’m trying to convince myself to be okay with being vulnerable, but I just keep pulling back. I know it’s not healthy, but it’s so hard to let that guard down.",
-        "core_issue": "other miscellaneous concerns",
+        "query": "It's just... there's this tightness in my chest whenever I think about speaking up. I feel like I could say something, but then all those 'what if' thoughts come rushing in, like what if I say the wrong thing? When I do finally say something, I always catch myself watching their faces, expecting a negative reaction, which just makes everything feel more intense. It feels like I'm walking on eggshells.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "opening up",
-            "being vulnerable"
+            "thinking about speaking up",
+            "watching their faces"
           ],
           "automatic_thoughts": [
-            "my feelings aren’t valid",
-            "my feelings are too much",
-            "I need to convince myself to be okay"
+            "what if I say the wrong thing?",
+            "expecting a negative reaction"
           ],
           "emotions": [
-            "anxiety"
+            "anxiety",
+            "intensity"
           ],
           "behaviors": [
-            "pulling back",
-            "keeping guard up"
+            "holding back",
+            "walking on eggshells"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Difficulty understanding own emotions (finding)",
-            "Vulnerable personality (finding)",
-            "Fear of losing emotional control (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of public speaking (finding)",
+            "Difficulty controlling emotions (finding)"
           ],
           "neutral": [
-            "Unable to understand own emotions (finding)",
-            "Anxiety about saying the wrong thing (finding)"
+            "Fear of speaking to people in authority (finding)",
+            "Fear of speaking on the phone (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I appreciate you sharing that with me. It sounds like you're struggling to trust your feelings and being vulnerable can be challenging for you. Let's work together on understanding these feelings better, so we can find ways to make it easier for you to let your guard down when needed.",
+        "response": "I understand that you feel anxious when thinking about speaking up, and it's normal to have those 'what if' thoughts. It seems like you might be worried about saying the wrong thing or expecting a negative reaction. Let's explore these feelings together and find ways to manage them.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I appreciate you sharing that with me. It sounds like you're struggling to trust your feelings and being vulnerable can be challenging for you. Let's work together on understanding these feelings better, so we can find ways to make it easier for you to let your guard down when needed.",
+            "response": "I understand that you feel anxious when thinking about speaking up, and it's normal to have those 'what if' thoughts. It seems like you might be worried about saying the wrong thing or expecting a negative reaction. Let's explore these feelings together and find ways to manage them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Difficulty understanding own emotions (finding)",
+                  "concept": "anxiety",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Vulnerable personality (finding)",
+                  "concept": "fear of public speaking",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "difficulty controlling emotions",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I appreciate you sharing your feelings with me. It sounds like there's a part of you that doubts the validity of your emotions, and it makes you feel anxious about being vulnerable. Let's explore together what might be causing this doubt and see if we can find a way to help you feel more comfortable with your feelings.",
+            "response": "\"It sounds like you're dealing with a lot of anxiety when it comes to speaking up. Can you tell me more about what thoughts come up for you and how they make you feel?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Difficulty understanding own emotions (finding)",
+                  "concept": "anxiety",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Vulnerable personality (finding)",
+                  "concept": "fear of public speaking",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "difficulty controlling emotions",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "I understand how difficult it can be to trust your feelings, especially when you're feeling vulnerable. Let's explore together what a trusted friend or outside observer might think about opening up and being vulnerable. This could help us gain some perspective on the situation.",
+            "response": "\"It sounds like you have some concerns about speaking up and the potential for negative reactions. Have you ever considered what a trusted friend or family member might think if they were in your shoes? Sometimes, getting another perspective can help us feel more confident.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Difficulty understanding own emotions (finding)",
+                  "concept": "anxiety",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Vulnerable personality (finding)",
+                  "concept": "expecting a negative reaction",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how speaking up might feel daunting, especially when you're worried about making a mistake. It's important to remember that it's okay to make mistakes sometimes. Let's work together on finding ways to manage those anxious thoughts and build your confidence.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
                   "label": "entailment"
+                },
+                {
+                  "concept": "fear of saying the wrong thing",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "expecting a negative reaction",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -468,247 +614,61 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that. It’s just that every time I try to open up, I get this knot in my stomach. What if my feelings aren’t valid or if they’re too much? I keep trying to convince myself to be okay with being vulnerable, but I just end up pulling back. I know it’s not good for me, but it’s really hard to let my guard down.",
-        "core_issue": "other miscellaneous concerns",
+        "query": "Thanks for understanding. It’s just... every time I think about it, I feel this wave of panic. I know it sounds a bit silly, but it feels like I’m just waiting for something bad to happen. I guess I just want to feel more at ease in those moments, but it often feels so overwhelming.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "trying to open up",
-            "being vulnerable"
+            "thinking about it"
           ],
           "automatic_thoughts": [
-            "my feelings aren’t valid",
-            "my feelings are too much",
-            "I need to convince myself to be okay"
+            "waiting for something bad to happen"
           ],
           "emotions": [
-            "anxiety",
-            "fear"
+            "panic",
+            "overwhelmed"
           ],
-          "behaviors": [
-            "pulling back",
-            "not letting my guard down"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Difficulty understanding own emotions (finding)",
-            "Feeling emotionally hurt (finding)",
-            "Difficulty controlling emotions (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Vulnerable personality (finding)",
-            "Unable to understand own emotions (finding)"
+            "Anxiety about going crazy (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about having a heart attack (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about loss of control (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I appreciate your honesty and openness. It can be challenging to navigate feelings of uncertainty about the validity of our emotions, especially when we're trying to be vulnerable. Let's explore together what might be causing this knot in your stomach and see if we can find a way to make it easier for you to let your guard down.",
+        "response": "\"I understand that you're feeling quite anxious and overwhelmed when you think about it. It's not silly at all, and I'm here to help you navigate these feelings. Can we explore together what triggers this wave of panic for you?\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I appreciate your honesty and openness. It can be challenging to navigate feelings of uncertainty about the validity of our emotions, especially when we're trying to be vulnerable. Let's explore together what might be causing this knot in your stomach and see if we can find a way to make it easier for you to let your guard down.",
+            "response": "\"I understand that you're feeling quite anxious and overwhelmed when you think about it. It's not silly at all, and I'm here to help you navigate these feelings. Can we explore together what triggers this wave of panic for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
-                {
-                  "concept": "Difficulty understanding own emotions (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling emotionally hurt (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "I appreciate your honesty and openness. It's understandable to feel uncertain about sharing your feelings, especially when you question their validity. Let's explore together what evidence supports these thoughts and if there might be alternative perspectives to consider.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Difficulty understanding own emotions (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Feeling emotionally hurt (finding)",
-                  "label": "entailment"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"It sounds like you're struggling with validating your feelings and being vulnerable. Let's explore what a trusted friend or family member might say about this situation. What do you think they would tell you?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "difficulty understanding own emotions",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling emotionally hurt",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "difficulty controlling emotions",
-                  "label": "entailment"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 6,
-      "patient": {
-        "role": "patient",
-        "query": "Thanks for understanding. It’s just... I think a part of me worries that if I really show how I feel, it’ll just push people away. Like, what if they can’t handle it? And sometimes, I even wonder if I should just deal with things myself instead of risking that discomfort. It’s confusing, because I want to connect, but I also feel so scared of getting hurt.",
-        "core_issue": "other miscellaneous concerns",
-        "schema": {
-          "triggers": [],
-          "automatic_thoughts": [
-            "If I show how I feel, it’ll push people away",
-            "What if they can’t handle it?",
-            "I should just deal with things myself instead of risking discomfort"
-          ],
-          "emotions": [
-            "worry",
-            "confusion",
-            "fear"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of losing emotional control (finding)"
-          ],
-          "neutral": [
-            "Difficulty understanding own emotions (finding)",
-            "Social isolation (rejection) (finding)",
-            "Unable to understand own emotions (finding)",
-            "Difficulty controlling emotions (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "\"It sounds like you're dealing with some complex feelings about sharing your emotions. Can we explore together what might happen if you did share them, and what evidence do you have that people wouldn't be able to handle it?\"",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "I understand that you're feeling a bit confused and scared about showing your feelings to others. It's important to remember that everyone has their own way of coping, and it's okay if yours is different from others. Let's work together to help you feel more comfortable expressing yourself without fear of being judged or rejected.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of losing emotional control (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Difficulty understanding own emotions (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with some complex feelings about sharing your emotions. Can we explore together what might happen if you did share them, and what evidence do you have that people wouldn't be able to handle it?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of losing emotional control (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Difficulty understanding own emotions (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "I understand that you're feeling a bit overwhelmed and scared about showing your feelings, fearing it might push people away. Let's explore together if there are other ways to connect without putting too much pressure on yourself or others.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of losing emotional control (finding)",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "Social isolation (rejection) (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Difficulty controlling emotions (finding)",
-                  "label": "neutral"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 7,
-      "patient": {
-        "role": "patient",
-        "query": "Yeah, I guess exploring that sounds... okay. I mean, when I think about sharing, I get this mix of hope and fear, like maybe they’d actually understand me, but then there's this voice in my head saying it’ll just turn into a big mess. I’ve had experiences where I felt pushed away before, so it’s hard to shake that off. But maybe I’m just holding onto those past moments too tightly?",
-        "core_issue": "other miscellaneous concerns",
-        "schema": {
-          "triggers": [
-            "thinking about sharing",
-            "past experiences of being pushed away"
-          ],
-          "automatic_thoughts": [
-            "they’d actually understand me",
-            "it’ll just turn into a big mess",
-            "maybe I’m just holding onto those past moments too tightly"
-          ],
-          "emotions": [
-            "hope",
-            "fear"
-          ],
-          "behaviors": []
-        },
-        "retrieval": {
-          "entailment": [
-            "Fear of saying the wrong thing (finding)"
-          ],
-          "neutral": [
-            "Fear of writing in public (finding)",
-            "Fear of being in a small group (finding)",
-            "Fear of social group activities (finding)"
-          ],
-          "contradiction": [
-            "Social isolation (rejection) (finding)"
-          ]
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "What makes you think it might turn into a big mess? Can we explore that thought together and see if there's another perspective to consider?",
-        "protocol_used": "socratic_questioning",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "I can see how that might be a challenge. It sounds like you have some concerns about sharing and the potential outcomes. Let's take it one step at a time, shall we? Perhaps we could start by exploring those thoughts and feelings a bit more.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
-                },
                 {
                   "concept": "emotions",
                   "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes you think it might turn into a big mess? Can we explore that thought together and see if there's another perspective to consider?",
+            "response": "\"I understand that you're feeling anxious and overwhelmed, as if something bad might happen. Can we explore together what evidence supports this thought? Let's consider other possibilities too.\"",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
                 {
                   "concept": "automatic thoughts",
                   "label": "unknown"
@@ -721,15 +681,257 @@
             }
           },
           "alternative_perspective": {
-            "response": "Have you ever considered what a trusted friend might think about sharing your thoughts with us? It could provide a different perspective and help ease some of that fear.",
+            "response": "\"It's understandable to feel anxious when you're waiting for something bad to happen. Let's explore what might be the best, worst, and most realistic outcomes in this situation. This could help us find a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "waiting for something bad to happen",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear that you're feeling this way. It sounds like you've been experiencing a lot of anxiety and panic. Let's try to understand these feelings better together. Can you tell me more about what triggers these feelings for you?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I appreciate that. I guess it’s mostly when I’m in a group or even just talking to someone I don’t know well. I start thinking about all the ways things could go wrong, like messing up or not being interesting enough. And then my mind just spirals, and I feel like I can't catch my breath. It’s like I want to escape the moment before it even starts.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "being in a group",
+            "talking to someone I don't know well"
+          ],
+          "automatic_thoughts": [
+            "all the ways things could go wrong",
+            "messing up",
+            "not being interesting enough"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
+          "behaviors": [
+            "wanting to escape the moment"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about saying the wrong thing (finding)",
+            "Anxiety about collapsing (finding)",
+            "Anxiety about going crazy (finding)"
+          ],
+          "contradiction": [
+            "Free-floating anxiety (finding)",
+            "Feeling calm (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that being in a group or talking to someone you don't know well can trigger feelings of anxiety. It seems like your mind starts racing with thoughts about potential mistakes and not being interesting enough, which makes you feel out of breath and want to escape the situation. Let's explore these thoughts together and see if we can find ways to manage them better.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that being in a group or talking to someone you don't know well can trigger feelings of anxiety. It seems like your mind starts racing with thoughts about potential mistakes and not being interesting enough, which makes you feel out of breath and want to escape the situation. Let's explore these thoughts together and see if we can find ways to manage them better.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "I can see how being in a group or talking to someone new might make you feel anxious. It's common to have thoughts about things going wrong or worrying about what others think. Let's explore these thoughts together and find ways to manage them.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're feeling anxious in social situations, especially when you don't know people well. Let's explore some alternative perspectives together. What do you think a friend or someone who knows you well might say about these feelings?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
                 {
                   "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
                   "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling quite anxious when you're in social situations, especially with people you don't know well. Let's explore these feelings together and see if we can find ways to manage them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "being in a group",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "talking to someone I don't know well",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "That sounds good, but I still feel this knot in my stomach just thinking about it. It's like, part of me wants to push through and get better, but another part is just scared of what might happen. I keep thinking about those times when I felt embarrassed or ignored, and it’s hard to shake that feeling. I want to be more comfortable, but it feels so far away sometimes.",
+        "core_issue": "Anxiety and fear",
+        "schema": {
+          "triggers": [
+            "thinking about it",
+            "times when I felt embarrassed",
+            "times when I felt ignored"
+          ],
+          "automatic_thoughts": [
+            "part of me wants to push through and get better",
+            "another part is just scared of what might happen",
+            "hard to shake that feeling"
+          ],
+          "emotions": [
+            "fear",
+            "anxiety",
+            "embarrassment"
+          ],
+          "behaviors": [
+            "want to be more comfortable"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling ashamed (finding)"
+          ],
+          "neutral": [
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about collapsing (finding)",
+            "Repressing painful memories (finding)",
+            "Anxiety about saying the wrong thing (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "You're absolutely right that those feelings can be tough to shake, and it's important we understand them better. It sounds like you have a mix of emotions about pushing through and getting better, but also some fear about what might happen. Let's explore these thoughts and feelings together, so we can find ways to help you feel more comfortable.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "You're absolutely right that those feelings can be tough to shake, and it's important we understand them better. It sounds like you have a mix of emotions about pushing through and getting better, but also some fear about what might happen. Let's explore these thoughts and feelings together, so we can find ways to help you feel more comfortable.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're dealing with a mix of emotions, especially anxiety and embarrassment. Can you tell me more about those times when you felt ignored? I'm curious if there's a connection between those experiences and the current feelings you're having.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "embarrassment",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "ignored",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're dealing with a mix of emotions, and it's understandable to feel that way. You mentioned fear, anxiety, and embarrassment. Let's explore these feelings a bit more. When you think about those times when you felt embarrassed or ignored, what comes to mind? And how do you usually cope with these feelings?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're carrying a heavy load of fear and anxiety, especially when you think about past experiences that left you feeling embarrassed or ignored. I want to acknowledge how difficult it can be to push through those feelings. Let's work together to explore them further and find ways to help you feel more comfortable.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 }
               ]
@@ -742,95 +944,106 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I guess... it’s just the memories of times I tried to share and ended up feeling judged or misunderstood. It felt like I was putting myself out there, and then it just... backfired. I don’t want to feel that hurt again. But deep down, I also know that not every situation will be like that. It’s just hard to break free from those old patterns in my mind.",
-        "core_issue": "other miscellaneous concerns",
+        "query": "It’s hard to shake this knot in my stomach just thinking about it. Part of me wants to push through and get better, but another part is scared of what might happen. I keep remembering those times when I felt embarrassed or ignored, and I don’t know how to let go of that. I want to be more comfortable, but it feels so far away sometimes.",
+        "core_issue": "Anxiety and fear",
         "schema": {
           "triggers": [
-            "memories of sharing",
-            "feeling judged",
-            "feeling misunderstood"
+            "thinking about it",
+            "remembering times of embarrassment",
+            "feeling ignored"
           ],
           "automatic_thoughts": [
-            "I will be judged again",
-            "I will be misunderstood again",
-            "not every situation will be like that"
+            "part of me wants to push through",
+            "another part is scared of what might happen",
+            "I don’t know how to let go"
           ],
           "emotions": [
-            "hurt",
-            "fear"
+            "fear",
+            "anxiety",
+            "embarrassment"
           ],
           "behaviors": [
-            "avoiding sharing",
-            "holding back"
+            "wanting to be more comfortable"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Reappearance of old thoughts (finding)"
+            "Anxiety about losing emotional control (finding)",
+            "Feeling ashamed (finding)",
+            "Repressing painful memories (finding)"
           ],
           "neutral": [
-            "Repressing painful memories (finding)",
-            "Fear of saying the wrong thing (finding)",
-            "Feeling ashamed (finding)",
-            "Fear of being a burden to others (finding)"
+            "Anxiety about collapsing (finding)",
+            "Anxiety about saying the wrong thing (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I can understand how those past experiences might make you hesitant to share again. But remember, not every situation needs to be the same. Let's explore together if there are ways to approach sharing differently this time.\"",
-        "protocol_used": "alternative_perspective",
+        "response": "I can see how difficult this is for you, and it's important to acknowledge that feeling scared or embarrassed is a normal part of the healing process. Let's work together to find ways to manage these feelings so you can move forward with more comfort.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how those past experiences might make you hesitant to share again. It's understandable to feel that way, but remember, not every situation will be like that. Let's work together to find ways to manage your fears and build confidence in sharing.",
+            "response": "I can see how difficult this is for you, and it's important to acknowledge that feeling scared or embarrassed is a normal part of the healing process. Let's work together to find ways to manage these feelings so you can move forward with more comfort.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Reappearance of old thoughts (finding)",
+                  "concept": "Anxiety about losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of saying the wrong thing (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling ashamed",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've had some difficult experiences in the past when sharing. It's understandable to feel hesitant about opening up again, but it's also important to remember that not every situation will be the same. Let's explore together what might make this time different.\"",
+            "response": "\"It sounds like you're carrying a heavy burden of past experiences that make you feel uncomfortable. Can we explore together what might be keeping those feelings alive and how we could work towards finding some relief?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Reappearance of old thoughts (finding)",
+                  "concept": "Anxiety about losing emotional control",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of saying the wrong thing (finding)",
-                  "label": "neutral"
+                  "concept": "Feeling ashamed",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I can understand how those past experiences might make you hesitant to share again. But remember, not every situation needs to be the same. Let's explore together if there are ways to approach sharing differently this time.\"",
+            "response": "\"It sounds like you're carrying a heavy burden with those past experiences. Let's explore what might help you feel more comfortable and less overwhelmed. What do you think a trusted friend or family member would suggest about moving forward?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "memories of sharing",
-                  "label": "triggers"
+                  "concept": "anxiety about losing emotional control",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "feeling judged",
-                  "label": "triggers"
+                  "concept": "feeling ashamed",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like there are some difficult emotions coming up for you, and it can be hard to know how to move forward. Let's take a moment to focus on what's happening right now. Can you tell me more about what you mean when you say you don't know how to let go of those feelings of embarrassment or fear?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "feeling misunderstood",
-                  "label": "triggers"
+                  "concept": "anxiety",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "not every situation will be like that",
-                  "label": "automatic_thoughts"
+                  "concept": "embarrassment",
+                  "label": "triggers"
                 }
               ]
             }
@@ -842,95 +1055,112 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "It's just the memories of times I tried to share and felt judged or misunderstood. I was vulnerable, and then it just... backfired. I don’t want to feel that hurt again. But deep down, I also know that not every situation will be like that. It’s just hard to break free from those old patterns in my mind.",
-        "core_issue": "other miscellaneous concerns",
+        "query": "Thanks for saying that. It helps to hear I'm not alone in feeling this way, but it’s still hard to imagine feeling comfortable. Sometimes I think, what if I never get to that point? It’s like a constant battle in my head, and I’m just tired of feeling this way. I want to believe there’s a way through, but it just feels so heavy right now.",
+        "core_issue": "Anxiety and fear",
         "schema": {
-          "triggers": [
-            "memories of sharing",
-            "feeling judged",
-            "feeling misunderstood"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I will be judged again",
-            "I will be misunderstood again",
-            "not every situation will be like that"
+            "what if I never get to that point?",
+            "it's like a constant battle in my head",
+            "I want to believe there's a way through"
           ],
           "emotions": [
-            "hurt",
-            "fear"
+            "anxiety",
+            "tired",
+            "heavy"
           ],
-          "behaviors": [
-            "avoiding sharing",
-            "withdrawing"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Reappearance of old thoughts (finding)",
-            "Unpleasant memories (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Repressing painful memories (finding)",
-            "Reliving traumatic memories (finding)",
-            "Repressing thoughts (finding)"
+            "Feeling trapped (finding)",
+            "Feeling like wanting to escape (finding)",
+            "Feeling abandoned (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Feeling isolated (finding)",
+            "Feeling empty (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I can see how those past experiences have left a mark on you. It's understandable to feel hesitant about sharing again, but it's also important to remember that not every situation will be the same. Let's explore together what might make this time different.\"",
+        "response": "\"It sounds like you're carrying a heavy burden, and it can be exhausting. Let's explore together what might help lighten that load for you.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've had some difficult experiences when sharing in the past, and it's natural to feel hesitant. It's important to remember that not every situation will be like those in the past. Let's work together to find ways to approach sharing that feel safer for you.",
+            "response": "I'm really sorry to hear that you're feeling this way, but I'm glad you reached out. It sounds like you're carrying a heavy burden and it can be exhausting. Let's take things one step at a time, and we can work together to find a way through this.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Reappearance of old thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Unpleasant memories (finding)",
-                  "label": "entailment"
+                  "concept": "tired",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "heavy",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I can see how those past experiences have left a mark on you. It's understandable to feel hesitant about sharing again, but it's also important to remember that not every situation will be the same. Let's explore together what might make this time different.\"",
+            "response": "\"It sounds like you're carrying a heavy burden, and it can be exhausting. Let's explore together what might help lighten that load for you.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Reappearance of old thoughts (finding)",
-                  "label": "entailment"
+                  "concept": "anxiety",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Unpleasant memories (finding)",
-                  "label": "entailment"
+                  "concept": "tired",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "heavy",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand how difficult it can be to break free from old patterns, especially when they're rooted in past experiences. But remember, not every situation needs to be the same as those memories. Let's explore together what a more positive outcome might look like.\"",
+            "response": "\"I can understand how you're feeling, and it's okay to feel overwhelmed sometimes. Let's explore together if there might be other ways to look at this situation that could make it feel a bit lighter for you.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "memories of sharing",
-                  "label": "triggers"
+                  "concept": "anxiety",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "feeling judged",
-                  "label": "triggers"
+                  "concept": "tired",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "feeling misunderstood",
-                  "label": "triggers"
+                  "concept": "heavy",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear you're feeling this way, but I'm glad you reached out. It sounds like you're carrying a heavy burden. Let's take it one step at a time and explore some ways we can lighten that load together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "not every situation will be like that",
-                  "label": "automatic_thoughts"
+                  "concept": "tired",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "heavy",
+                  "label": "emotions"
                 }
               ]
             }

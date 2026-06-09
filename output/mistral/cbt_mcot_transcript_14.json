@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "Mary's been crying a lot and I'm really tired, so I've needed extra help, you know, with her because I'm so tired and I just can't get out of bed.",
-    "core_issue": "self-esteem and confidence issues",
+    "seed": "Yeah, no, it's been good, you know, just trying to keep busy, I guess, you know, trying to stay away from using. I mean, it's not easy at times because, you know, just the pain I'm in and I just think about things, but, yeah, no, I mean, I'm doing okay. Hanging in there, I guess you could say.",
+    "core_issue": "Health-related worries",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,110 +17,97 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "Mary's been crying a lot and I'm really tired, so I've needed extra help, you know, with her because I'm so tired and I just can't get out of bed.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, no, it's been good, you know, just trying to keep busy, I guess, you know, trying to stay away from using. I mean, it's not easy at times because, you know, just the pain I'm in and I just think about things, but, yeah, no, I mean, I'm doing okay. Hanging in there, I guess you could say.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "Mary crying",
-            "feeling tired",
-            "not getting out of bed"
+            "pain",
+            "thinking about things"
           ],
           "automatic_thoughts": [
-            "I need extra help",
-            "I can't manage this alone"
+            "trying to stay away from using",
+            "it's not easy at times"
           ],
-          "emotions": [
-            "sadness",
-            "fatigue"
-          ],
+          "emotions": [],
           "behaviors": [
-            "crying",
-            "staying in bed"
+            "keeping busy",
+            "hanging in there"
           ]
         },
         "retrieval": {
-          "entailment": [
-            "Drowsy (finding)"
+          "entailment": [],
+          "neutral": [
+            "Adjustment to life threatening illness (finding)",
+            "Anxiety about treatment (finding)",
+            "Working through the pain of grief (finding)"
           ],
-          "neutral": [],
           "contradiction": [
-            "Extremely emotionally deprived (finding)",
-            "Gets drowsiness (finding)",
-            "On examination - drowsy (finding)",
-            "Asleep (finding)"
+            "Ready for enhanced individual coping (finding)",
+            "Addiction (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're going through a tough time, Mary. You've mentioned feeling tired and needing extra help because of your situation. It's completely normal to feel overwhelmed at times, but let's work together to find ways to manage this better.\"",
+        "response": "\"I can see that it's not easy for you right now, with the pain and all the thoughts you have. You're doing a great job staying busy and hanging in there. Let's talk more about those thoughts when you're ready.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're going through a tough time, Mary. You've mentioned feeling tired and needing extra help because of your situation. It's completely normal to feel overwhelmed at times, but let's work together to find ways to manage this better.\"",
+            "response": "\"I can see that it's not easy for you right now, with the pain and all the thoughts you have. You're doing a great job staying busy and hanging in there. Let's talk more about those thoughts when you're ready.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Mary crying",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "feeling tired",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "not getting out of bed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I need extra help",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling overwhelmed, Mary. Can we explore together what might be causing these feelings and how they affect your energy levels?\"",
+            "response": "\"You mentioned that the pain and thinking about things can make it difficult for you to stay away from using. Can we explore more about what thoughts come up when you think about these things? It might help us understand better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Mary crying",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "feeling tired",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "not getting out of bed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I need extra help",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're going through a tough time, Mary. You mentioned needing extra help because you've been feeling tired and struggling to get out of bed. Have you ever considered what a trusted friend or family member might suggest about managing this situation? It could provide a different perspective that might be helpful.\"",
+            "response": "\"I can see that it's not easy for you to keep your mind off things, especially with the pain you're experiencing. Have you ever considered what a trusted friend or family member might think about your situation? Sometimes, hearing another perspective can help us feel less overwhelmed.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Mary crying",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "feeling tired",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see that it's not easy for you right now, with the pain and all the thoughts you're having. Can we talk about what triggers these thoughts? And how do they make you feel?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "not getting out of bed",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I need extra help",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -132,74 +119,55 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I’ve been feeling pretty overwhelmed lately. Sometimes, I just get this nagging thought that I'm not good enough, and it really brings me down. It’s hard to shake off, you know?",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I'm really feeling overwhelmed lately with all these health worries. Sometimes, I just lie awake at night, thinking about every little ache or pain, and it spirals into something much bigger in my mind. It’s like I can’t escape that nagging fear that something is seriously wrong with me.",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "health worries",
+            "lying awake at night",
+            "aches or pains"
+          ],
           "automatic_thoughts": [
-            "I'm not good enough"
+            "something is seriously wrong with me",
+            "it spirals into something much bigger"
           ],
           "emotions": [
             "overwhelmed",
-            "down"
+            "fear"
           ],
-          "behaviors": []
+          "behaviors": [
+            "lying awake at night"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling agitated (finding)",
-            "Feeling a failure (finding)",
-            "Feeling stressed (finding)"
+            "Anxiety about body function or health (finding)"
           ],
           "neutral": [
-            "Performance anxiety (finding)",
-            "Feeling nervous (finding)"
+            "Obsessional thoughts of disease (finding)",
+            "Anxiety about having a heart attack (finding)",
+            "Fear of medical treatment (finding)",
+            "Chronic anxiety (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm sorry to hear that you've been feeling this way. It sounds like you're having a tough time with those thoughts about not being good enough. Let's work together to understand where they come from and see if we can find ways to challenge them.",
+        "response": "I'm really sorry to hear that you've been feeling this way. It sounds like you're dealing with a lot of health concerns and it can be overwhelming when they keep you up at night. Let's take some time to explore these thoughts together, so we can better understand them and find ways to manage them.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm sorry to hear that you've been feeling this way. It sounds like you're having a tough time with those thoughts about not being good enough. Let's work together to understand where they come from and see if we can find ways to challenge them.",
+            "response": "I'm really sorry to hear that you've been feeling this way. It sounds like you're dealing with a lot of health concerns and it can be overwhelming when they keep you up at night. Let's take some time to explore these thoughts together, so we can better understand them and find ways to manage them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "health worries",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "\"It sounds like you've been feeling quite overwhelmed lately. Can you tell me more about when this thought 'I'm not good enough' comes up for you? And how does it make you feel?\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"It sounds like you've been feeling quite overwhelmed lately. Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, getting another perspective can help us see things more clearly.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Feeling overwhelmed",
-                  "label": "emotions"
+                  "concept": "lying awake at night",
+                  "label": "triggers"
                 },
                 {
                   "concept": "automatic thoughts",
@@ -208,6 +176,63 @@
                 {
                   "concept": "emotions",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"I'm really sorry to hear that you're feeling overwhelmed by your health worries. It sounds like you might be having some obsessive thoughts about your health. Let's explore these thoughts together and see if we can find a way to manage them better.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Obsessional thoughts of disease",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I'm really sorry to hear you've been feeling this way, but it sounds like your mind is working overtime. Let's explore together if there might be other ways to interpret these health worries and the aches and pains you're experiencing. What do you think a trusted friend or family member might say about your situation?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "health worries",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling so overwhelmed. It sounds like your health worries are causing a lot of distress for you. Let's take it one step at a time. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "health worries",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "lying awake at night",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "fear",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "something is seriously wrong with me",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -219,66 +244,59 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it would help to talk about it. It just feels like those thoughts pop up out of nowhere, especially when I'm trying to do something new or take a risk. I can just feel this weight on my chest, like I'm not allowed to fail or even try.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Thanks, I appreciate that. It’s just... I feel like I’m always on high alert. I’ll notice a small pain and suddenly it’s like my mind goes to the worst-case scenario. It’s exhausting trying to keep those thoughts in check, but I don’t know how to stop them from taking over.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "trying to do something new",
-            "taking a risk"
+            "noticing a small pain"
           ],
           "automatic_thoughts": [
-            "thoughts pop up out of nowhere",
-            "I'm not allowed to fail",
-            "I'm not allowed to try"
+            "my mind goes to the worst-case scenario",
+            "I can't stop these thoughts from taking over"
           ],
           "emotions": [
-            "anxiety"
+            "exhaustion"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Unable to resist dangerous thoughts (finding)",
-            "Compulsion to act on dangerous thoughts (finding)",
-            "Compulsion to act on thoughts (finding)"
+            "Anxiety about going crazy (finding)",
+            "Anxiety about having a heart attack (finding)",
+            "Anticipatory anxiety, moderate (finding)",
+            "Anticipatory anxiety (finding)",
+            "Anticipatory anxiety, severe (finding)"
           ],
-          "contradiction": [
-            "Repressing thoughts (finding)",
-            "Able to resist dangerous thoughts (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "It sounds like you have some thoughts that come up when you're trying something new or taking a risk. Can we talk about where these thoughts might be coming from and how they make you feel?",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're dealing with a lot, and it's understandable to feel overwhelmed when your thoughts race ahead. Let's explore these thoughts together. Can you tell me more about what triggers this pattern of thinking for you?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you have some thoughts that come up when you're trying something new or taking a risk. Can we talk about where these thoughts might be coming from and how they make you feel?",
+            "response": "I understand that you're feeling overwhelmed by these thoughts, and it can be exhausting. Let's work together to explore where these thoughts come from and find ways to manage them more effectively.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "thoughts pop up out of nowhere",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "I'm not allowed to fail",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm not allowed to try",
-                  "label": "automatic_thoughts"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you have some automatic thoughts that are causing you anxiety when you're trying something new. Can we explore those thoughts a bit more to understand where they come from and if they're really true?\"",
+            "response": "\"It sounds like you're dealing with a lot, and it's understandable to feel overwhelmed when your thoughts race ahead. Let's explore these thoughts together. Can you tell me more about what triggers this pattern of thinking for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
@@ -289,11 +307,26 @@
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you have some strong feelings about trying new things and taking risks. Can we explore together what might be causing those thoughts to pop up? Let's see if we can find a way to lighten that weight on your chest.\"",
+            "response": "\"It sounds like you're dealing with a lot, and it's understandable to feel overwhelmed when your thoughts race ahead. Let's explore together if there might be other ways to interpret these situations that could help reduce some of this exhaustion.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way, but I'm glad you reached out. It sounds like your mind often goes to the worst-case scenario when you notice a small pain. This can be exhausting. Let's explore these thoughts together and see if we can find a way to manage them better.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
@@ -310,87 +343,98 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I think they come from a lot of different places. Maybe from my childhood? I remember always feeling like I had to be perfect, like anything less was just... not acceptable. It makes me anxious when I think of stepping out of my comfort zone. It’s like this voice in my head telling me I’ll mess up, and then I just... freeze.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, it really does feel like my mind just takes off sometimes. It can be anything, like hearing about someone else's health issues or even just seeing something online. I’ll be fine one moment, and then I start thinking, “What if that happens to me?” It’s frustrating because I know it’s not always rational, but it feels so real in the moment.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "stepping out of my comfort zone"
+            "hearing about someone else's health issues",
+            "seeing something online"
           ],
           "automatic_thoughts": [
-            "I have to be perfect",
-            "anything less is not acceptable",
-            "I'll mess up"
+            "What if that happens to me?"
           ],
           "emotions": [
-            "anxiety"
+            "frustration"
           ],
-          "behaviors": [
-            "freeze"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about behavior or performance (finding)"
+            "Momentary confabulation (finding)",
+            "Racing thoughts (finding)",
+            "Mental alertness (observable entity)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Fear of collapsing (finding)"
+            "Anxiety about going crazy (finding)",
+            "Mood-incongruent hallucination (finding)"
           ],
-          "contradiction": [
-            "Able to resist dangerous thoughts with difficulty (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you've had a long-standing concern about needing to be perfect. This can certainly contribute to feelings of anxiety when stepping out of your comfort zone. Let's explore together what might happen if things don't go as planned, and how that compares to the reality.\"",
+        "response": "\"It sounds like your mind can race with thoughts, especially when you hear about others' health issues or see things online. Can we explore together what triggers these thoughts and how they make you feel? Let's start by discussing the first time this happened to you.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've been feeling anxious when stepping out of your comfort zone. It seems like there might be some old beliefs about needing to be perfect and the fear of making mistakes playing a role in this. Let's explore these thoughts together, and see if we can find ways to manage them better.",
+            "response": "I can see how you might feel overwhelmed sometimes, especially when your mind races like that. It's important to remember that it's okay not to have all the answers right away. Let's take things one step at a time and explore these thoughts together when you're ready.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about behavior or performance",
+                  "concept": "Momentary confabulation (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "fear of making mistakes",
-                  "label": "unknown"
+                  "concept": "Racing thoughts (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've had a long-standing concern about needing to be perfect. This can certainly contribute to feelings of anxiety when stepping out of your comfort zone. Let's explore together what might happen if things don't go as planned, and how that compares to the reality.\"",
+            "response": "\"It sounds like your mind can race with thoughts, especially when you hear about others' health issues or see things online. Can we explore together what triggers these thoughts and how they make you feel? Let's start by discussing the first time this happened to you.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about behavior or performance",
-                  "label": "entailment"
+                  "concept": "hearing about someone else's health issues",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "fear of making mistakes",
+                  "concept": "seeing something online",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you've been carrying a heavy burden of perfectionism for quite some time. It's understandable that stepping out of your comfort zone can feel daunting when you have such high expectations. Let's explore together if there might be other ways to approach new situations without feeling so overwhelmed.\"",
+            "response": "\"It sounds like you have a tendency to worry about things that might happen, even when they're not directly related to your own situation. Let's explore some alternative perspectives together and see if we can find ways to manage these thoughts more effectively.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "perfectionism",
+                  "concept": "triggers",
                   "label": "unknown"
                 },
                 {
-                  "concept": "fear of failure",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you have a lot on your mind, and it can feel overwhelming when thoughts like 'What if that happens to me?' pop up. Let's explore these thoughts together and see if we can find ways to manage them better.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "hearing about someone else's health issues",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 }
               ]
@@ -403,95 +447,135 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I think they come from a lot of different places. Maybe from my childhood? It feels like I always had to be perfect, or else it would be disappointing. When I think about stepping out of my comfort zone, I get really anxious, like there’s this voice telling me I’ll mess up. Then I just freeze, and it’s so frustrating.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Honestly, I think it started when I was younger. I had a family member who got really sick, and it just shook me. I remember being terrified about their diagnosis and how quickly things changed for them. Ever since then, I’ve had this underlying anxiety about health, like it’s always lurking in the background. It makes me feel helpless, like I can’t control what happens to me or my loved ones.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "thinking about stepping out of comfort zone"
+            "family member getting sick",
+            "diagnosis",
+            "changes in health"
           ],
           "automatic_thoughts": [
-            "I have to be perfect",
-            "I'll mess up"
+            "underlying anxiety about health",
+            "can't control what happens"
           ],
           "emotions": [
+            "fear",
             "anxiety",
-            "frustration"
+            "helplessness"
           ],
-          "behaviors": [
-            "freeze"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Obsessional thoughts of incompletion (finding)"
+            "Fear associated with illness and body function (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Anxiety about appearing ridiculous (finding)"
+            "Fear of contracting disease (finding)",
+            "Anxiety about body function or health (finding)",
+            "Obsessional thoughts of disease (finding)",
+            "Anxiety about having a heart attack (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you've been carrying a lot of pressure to be perfect, which can make stepping out of your comfort zone feel daunting. Let's explore together what might happen if things don't go perfectly, and how that could be okay.\"",
+        "response": "\"It sounds like you've had a difficult experience with a family member's illness. It's understandable that this might have triggered feelings of fear and helplessness. Let's explore together how these feelings might be affecting your current life, and what we can do to help manage them.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how stepping out of your comfort zone might bring up feelings of anxiety and frustration. It's important to remember that everyone has their own pace, and it's okay not to be perfect all the time. Let's explore together what might help you feel more comfortable taking those steps.",
+            "response": "I can see how that experience might have left a lasting impact on you. It's understandable to feel anxious about health after going through something like that. Let's explore together if there are any specific situations or thoughts that trigger this anxiety for you, and we can work on ways to manage it better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "family member getting sick",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "diagnosis",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "perfectionism",
-                  "label": "unknown"
+                  "concept": "underlying anxiety about health",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "can't control what happens",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've been carrying a lot of pressure to be perfect, which can make stepping out of your comfort zone feel daunting. Let's explore together what might happen if things don't go perfectly, and how that could be okay.\"",
+            "response": "\"It sounds like you've had a difficult experience with a family member's illness. It's understandable that this might have triggered feelings of fear and helplessness. Let's explore together how these feelings might be affecting your current life, and what we can do to help manage them.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "family member getting sick",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "perfectionism",
-                  "label": "unknown"
+                  "concept": "diagnosis",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "underlying anxiety about health",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "can't control what happens",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you've been carrying a lot of pressure to be perfect. When stepping out of your comfort zone, it can feel overwhelming and lead to anxiety. Have you ever considered what might happen if things don't go perfectly? Let's explore that together.\"",
+            "response": "\"It sounds like you've had quite a challenging experience with a family member's illness. It's understandable to feel anxious about health as a result. Have you ever considered how others close to you might interpret the situation? Sometimes, hearing another perspective can help us feel less helpless.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "family member getting sick",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "perfectionism",
-                  "label": "unknown"
+                  "concept": "diagnosis",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "underlying anxiety about health",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "can't control what happens",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see how that experience might have left a lasting impact on you. It's understandable to feel anxious about health after going through something like that. Let's work together to explore ways we can manage this anxiety and help you regain a sense of control.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "family member getting sick",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "diagnosis",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "changes in health",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "underlying anxiety about health",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "can't control what happens",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -503,120 +587,100 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, that pressure feels really heavy sometimes. I guess I just worry that if I mess up, people will judge me or think less of me. I mean, I know in my head that everyone makes mistakes, but in the moment, it feels like the end of the world. It’s hard to imagine it being okay.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, it really was tough... and I guess I can see how it still affects me. I mean, even small things that I used to brush off now feel so significant. It's like I’m constantly waiting for the other shoe to drop, you know? Sometimes, I avoid going to the doctor because I'm scared of what they might say. It just feels like a lot to handle.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "pressure",
-            "worry about messing up"
+            "small things",
+            "going to the doctor"
           ],
           "automatic_thoughts": [
-            "people will judge me",
-            "people will think less of me",
-            "it feels like the end of the world",
-            "hard to imagine it being okay"
+            "waiting for the other shoe to drop",
+            "scared of what they might say",
+            "a lot to handle"
           ],
           "emotions": [
-            "anxiety",
-            "fear"
+            "fear",
+            "anxiety"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoid going to the doctor"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling nervous (finding)",
-            "Pressured by others (finding)",
-            "Fear of being a burden to others (finding)"
+            "Adapting to loss following bereavement (finding)"
           ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)"
+            "Difficulty coping with grief responses (finding)",
+            "Anxiety about not coping with parenthood (finding)",
+            "Enduring personality change after catastrophic experience (finding)",
+            "Conflicting stages of grief among family members (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that people would judge or think less of you if you make a mistake? It's natural to feel anxious, but let's explore what might happen instead.",
+        "response": "\"It sounds like you're carrying a heavy burden with those small things and going to the doctor. Can you tell me more about what makes you feel scared or anxious in these situations?\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you're feeling overwhelmed by the pressure and fear of making mistakes. It's normal to worry about what others might think, but remember that everyone makes mistakes. Let's work together to find ways to manage this anxiety and help you feel more confident.",
+            "response": "I can understand why you're feeling this way, it sounds like you've been through a lot. It's not uncommon for small things to feel significant after a difficult experience. And I can see how going to the doctor might be scary when you're already feeling overwhelmed. Let's work together on managing these feelings and finding ways to cope.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worry about messing up",
+                  "concept": "small things",
                   "label": "triggers"
                 },
                 {
-                  "concept": "people will judge me",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "people will think less of me",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it feels like the end of the world",
-                  "label": "automatic_thoughts"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that people would judge or think less of you if you make a mistake? It's natural to feel anxious, but let's explore what might happen instead.",
+            "response": "\"It sounds like you're carrying a heavy burden with those small things and going to the doctor. Can you tell me more about what makes you feel scared or anxious in these situations?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worry about messing up",
+                  "concept": "small things",
                   "label": "triggers"
                 },
                 {
-                  "concept": "people will judge me",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "people will think less of me",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it feels like the end of the world",
-                  "label": "automatic_thoughts"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy burden of worry and fear. Let's explore together if there might be other ways to look at this situation that could help lighten your load.\"",
+            "response": "\"It sounds like you've been through a lot, and it's understandable that small things might feel significant now. Have you ever thought about what a trusted friend or family member might say if they were in your shoes? It could help us explore other perspectives on these situations.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "worry about messing up",
+                  "concept": "small things",
                   "label": "triggers"
                 },
                 {
-                  "concept": "people will judge me",
-                  "label": "automatic_thoughts"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how those small things and going to the doctor might still be challenging for you. It's understandable to feel that way after such a tough experience.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "small things",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "people will think less of me",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it feels like the end of the world",
-                  "label": "automatic_thoughts"
+                  "concept": "going to the doctor",
+                  "label": "triggers"
                 }
               ]
             }
@@ -628,93 +692,123 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "I know it might not be fair, but it just feels real to me. Like, I remember times when I’ve messed up and the looks people gave me... or even just feeling like I let them down. It sticks with me. I suppose I don’t really give people a chance to show me that they might understand or be supportive. I just kind of assume the worst, you know?",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Um, yeah, it’s just... when I think about going to the doctor, my heart starts racing. It’s like a mix of fear and dread. I worry about getting bad news, or what if they find something that’s been there all along but I didn’t notice? Plus, there's always that fear that they’ll dismiss my concerns, which feels... frustrating and even more isolating.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "memories of past mistakes",
-            "looks from people",
-            "feeling like I let them down"
+            "thinking about going to the doctor"
           ],
           "automatic_thoughts": [
-            "it might not be fair",
-            "it feels real to me",
-            "I assume the worst"
+            "worry about getting bad news",
+            "what if they find something that’s been there all along",
+            "fear that they’ll dismiss my concerns"
           ],
           "emotions": [
-            "shame"
+            "fear",
+            "dread",
+            "frustration",
+            "isolation"
           ],
-          "behaviors": [
-            "not giving people a chance",
-            "avoiding support"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Fear associated with healthcare (finding)",
+            "Fear of medical treatment (finding)",
+            "Fear of hospitals (finding)"
+          ],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Anxiety about appearing ridiculous (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Feeling guilt (finding)",
-            "Difficulty understanding own emotions (finding)"
+            "Anxiety about having a heart attack (finding)",
+            "Anxiety about body function or health (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you've had some difficult experiences in the past, and it can be hard not to feel like you're going to mess up again. It's natural to have these feelings, but let's explore together if there might be other ways to interpret those situations or people's reactions.",
+        "response": "I can see how going to the doctor might feel overwhelming for you, with all those emotions. It's important that we work together to understand and manage these feelings before diving into any medical concerns. Let's start by exploring your thoughts and feelings a bit more. Can you tell me what specifically makes you worry about getting bad news or being dismissed?",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've had some difficult experiences in the past, and it can be hard not to feel like you're going to mess up again. It's natural to have these feelings, but let's explore together if there might be other ways to interpret those situations or people's reactions.",
+            "response": "I can see how going to the doctor might feel overwhelming for you, with all those emotions. It's important that we work together to understand and manage these feelings before diving into any medical concerns. Let's start by exploring your thoughts and feelings a bit more. Can you tell me what specifically makes you worry about getting bad news or being dismissed?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others",
-                  "label": "neutral"
+                  "concept": "fear",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Anxiety about appearing ridiculous",
-                  "label": "neutral"
+                  "concept": "dread",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "Difficulty understanding own emotions",
-                  "label": "neutral"
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "isolation",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying a heavy burden of past experiences. Can we explore together what evidence supports these feelings and if there might be other ways to interpret them?\"",
+            "response": "\"It sounds like going to the doctor brings up a lot of anxiety for you. Can we explore together what specific concerns you have and how they might be addressed?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about appearing ridiculous",
-                  "label": "neutral"
+                  "concept": "Fear associated with healthcare (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "difficulty understanding own emotions",
+                  "concept": "Anxiety about body function or health (neutral)",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that it can feel like past mistakes are always looming over you, and that people's reactions might seem harsh. But let's consider for a moment, what would a trusted friend say about your assumptions? Could they be off base sometimes?\"",
+            "response": "\"I can see how going to the doctor might feel overwhelming for you. It's common to have fears and worries about medical appointments, especially when it comes to potential bad news or feeling dismissed. Let's explore some alternative perspectives together. For instance, what if the doctors are there to help you? Or, what would a trusted friend say about your concerns?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "fear",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "neutral"
+                  "concept": "dread",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "behaviors",
-                  "label": "unknown"
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "isolation",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see how going to the doctor might feel overwhelming for you, with all those emotions. It's important to remember that healthcare professionals are there to help and support you. Let's talk more about your concerns and find ways to manage them together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "dread",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "isolation",
+                  "label": "emotions"
                 }
               ]
             }
@@ -726,80 +820,127 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "It’s tough to think differently, though. I feel like those experiences shaped my view so much. When I picture myself trying something new, I just can’t shake the idea that I’ll let everyone down again. I guess part of me wants to believe that maybe some people wouldn’t be so harsh, but it’s like... it all gets tangled up in my head.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, it feels like there's this weight on my chest when I think about it. I guess I’m scared of what it would mean if they found something serious. Like, would I be able to handle the changes in my life? And being dismissed just makes me feel small and unimportant, like my worries don’t matter. It’s like, if I’m feeling this way, there has to be a reason, and I just want someone to take me seriously.",
+        "core_issue": "Health-related worries",
         "schema": {
           "triggers": [
-            "trying something new"
+            "thinking about it",
+            "being dismissed"
           ],
           "automatic_thoughts": [
-            "I’ll let everyone down again",
-            "some people wouldn’t be so harsh"
+            "scared of what it would mean if they found something serious",
+            "would I be able to handle the changes in my life?",
+            "my worries don’t matter",
+            "there has to be a reason for feeling this way"
           ],
           "emotions": [
-            "fear"
+            "fear",
+            "anxiety",
+            "small",
+            "unimportant"
           ],
-          "behaviors": []
+          "behaviors": [
+            "want someone to take me seriously"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Tends to fail to learn from adverse experience (finding)"
+            "Anxiety about altered body image (finding)",
+            "Fear of being a burden to others (finding)",
+            "Anxiety about appearing ridiculous (finding)"
           ],
           "neutral": [
-            "Enduring personality change after catastrophic experience (finding)",
-            "Changed perception of people (finding)",
-            "Fear of being a burden to others (finding)",
-            "Unpleasant memories (finding)"
+            "Anxiety about going crazy (finding)",
+            "Anxiety about treatment (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It's understandable that past experiences can shape our thoughts, but it's also important to remember that not everyone will react the same way. Let's explore what might happen if you took a small step towards trying something new. What do you think could be different this time?\"",
-        "protocol_used": "alternative_perspective",
+        "response": "\"It sounds like you're dealing with some heavy emotions. Let's explore these feelings together. When you say 'something serious', what exactly are you thinking of? And how do you think others might perceive the changes in your life?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that it can be difficult to change the way you think, especially when past experiences have left such a strong impact. It's important to remember that everyone makes mistakes and learns from them. Let's focus on what you can do differently this time, rather than dwelling on potential failures.",
+            "response": "I can see how you might feel that way, and it's important to acknowledge those feelings. It's natural to worry about changes in our lives and to feel unimportant when our concerns aren't taken seriously. Let's explore these thoughts together and find ways to manage them more effectively.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Tends to fail to learn from adverse experience (finding)",
+                  "concept": "fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "neutral"
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "being dismissed",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've had some challenging experiences that have affected your self-perception and fear of letting others down. Let's explore this idea further. When you think about trying something new, what evidence do you have that you will let people down?\"",
+            "response": "\"It sounds like you're dealing with some heavy emotions. Let's explore these feelings together. When you say 'something serious', what exactly are you thinking of? And how do you think others might perceive the changes in your life?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "neutral"
+                  "concept": "Anxiety about altered body image (finding)",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Changed perception of people (finding)",
-                  "label": "neutral"
+                  "concept": "Fear of being a burden to others (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about appearing ridiculous (finding)",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable that past experiences can shape our thoughts, but it's also important to remember that not everyone will react the same way. Let's explore what might happen if you took a small step towards trying something new. What do you think could be different this time?\"",
+            "response": "\"It sounds like you're dealing with a lot right now. It's natural to feel scared and anxious when we face changes, especially if we fear they might overwhelm us. And it can be hurtful when our worries don't seem to matter to others. Let's explore together how you might handle these changes and find ways to make your voice heard.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Tends to fail to learn from adverse experience (finding)",
+                  "concept": "fear",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of being a burden to others (finding)",
-                  "label": "neutral"
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "being dismissed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "would I be able to handle the changes in my life?",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way, but I'm glad you've reached out. It sounds like there are a lot of changes happening in your life and it can be scary to think about what they might mean for you. Let's take some time to explore these feelings together and see if we can find ways to help you feel more supported and less overwhelmed.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "worry",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "being dismissed",
+                  "label": "triggers"
                 }
               ]
             }
@@ -811,79 +952,106 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I don’t know... part of me wants to believe it could be different, but then I feel this wave of doubt. Like, what if I try and it turns out just as bad as before? It’s hard to picture anything going well. I guess I just worry that I won’t be able to handle it if it doesn’t.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, it does feel heavy. When I think of \"something serious,\" I'm mostly worried about things like cancer or heart disease. You know, the big things that can suddenly change everything. As for others, I guess I worry they’d see me as weak or fragile. I don't want to be a burden or have people tiptoe around me. It’s hard to think about how they might react to me being sick or needing help. I just want to feel normal, I guess.",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "thinking of something serious",
+            "worrying about cancer",
+            "worrying about heart disease",
+            "concern about others' perceptions",
+            "thinking about needing help"
+          ],
           "automatic_thoughts": [
-            "what if I try and it turns out just as bad as before?",
-            "I just worry that I won’t be able to handle it if it doesn’t."
+            "worried about being seen as weak",
+            "fear of being a burden",
+            "concern about others tiptoeing around me",
+            "thinking about how others might react"
           ],
           "emotions": [
-            "doubt",
+            "fear",
+            "anxiety",
             "worry"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding discussing health",
+            "withdrawing from social situations"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Anxiety about resuming sexual relations (finding)",
-            "Enduring personality change after catastrophic experience (finding)",
-            "Loss of hope for the future (finding)",
-            "Fear of being left alone during period of dependence (finding)"
+          "entailment": [
+            "Fear of being a burden to others (finding)",
+            "Fear associated with illness and body function (finding)",
+            "Anxiety about body function or health (finding)"
           ],
-          "contradiction": [
-            "Hopeful for the future (finding)"
-          ]
+          "neutral": [
+            "Anxiety about collapsing (finding)",
+            "Anxiety about dying (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're feeling quite a bit of doubt and worry about trying again. Can we explore together what evidence you have that things might not go well this time? And what would be the best-case scenario for you?\"",
+        "response": "\"It sounds like you're carrying quite a load of worry. Let's explore together what makes you feel that way, and if there are any alternative thoughts we can consider.\"",
         "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand your concerns, and it's completely normal to feel doubtful when facing something new. Let's explore together what might make you feel more confident about trying again.",
+            "response": "I can see why you might feel that way, and it's important to acknowledge those fears. It's natural to worry about how others perceive us, especially when we're going through something difficult. Let's work together to explore these feelings more deeply and find ways to manage them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite a bit of doubt and worry about trying again. Can we explore together what evidence you have that things might not go well this time? And what would be the best-case scenario for you?\"",
+            "response": "\"It sounds like you're carrying quite a load of worry. Let's explore together what makes you feel that way, and if there are any alternative thoughts we can consider.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite uncertain about trying again, and that's understandable given your past experiences. But let's consider this: what might a trusted friend or family member say about the possibility of things turning out differently this time? It could be helpful to hear another perspective.\"",
+            "response": "\"It sounds like you're carrying quite a load. Let's explore together if there might be other ways to think about your situation. For instance, what would a trusted friend say about your concerns? Or, how do you imagine others might react if they knew you were seeking help?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see why you might be feeling anxious and worried. It's understandable to have concerns about your health, especially when it comes to serious conditions like cancer or heart disease. And I know that worrying about how others perceive you can add to the stress. Let's work together to find ways to manage these feelings and help you feel more at ease.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
                 }
               ]
             }
@@ -895,80 +1063,106 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I suppose the evidence is just all those times in the past when I didn't measure up... But maybe there's also a part of me that hasn’t really given myself a chance to see what could happen if I try. The best-case scenario? I guess it would be actually succeeding and feeling good about myself for once. But that feels so far out of reach sometimes.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "It really does feel heavy. When I think of \"something serious,\" I mostly worry about things like cancer or heart disease. Those big things that can suddenly change everything. As for others, I guess I worry they’d see me as weak or fragile. I don't want to be a burden or have people tiptoe around me. It’s hard to think about how they might react to me being sick or needing help. I just want to feel normal, I guess.",
+        "core_issue": "Health-related worries",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "thinking of something serious",
+            "worrying about cancer",
+            "worrying about heart disease",
+            "concern about others' perceptions"
+          ],
           "automatic_thoughts": [
-            "I didn't measure up in the past",
-            "I haven't given myself a chance",
-            "Succeeding feels far out of reach"
+            "I might have something serious",
+            "people will see me as weak",
+            "I don't want to be a burden",
+            "they might tiptoe around me",
+            "I want to feel normal"
           ],
           "emotions": [
-            "doubt",
-            "hope"
+            "fear",
+            "anxiety",
+            "worry"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoiding discussing health",
+            "withdrawing from social situations"
+          ]
         },
         "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Feeling a failure (finding)",
-            "Low ego strength (finding)",
-            "Moderate ego strength (finding)",
-            "Delusion of grandiose ability (finding)"
+          "entailment": [
+            "Fear of being a burden to others (finding)",
+            "Fear associated with illness and body function (finding)",
+            "Anxiety about body function or health (finding)"
           ],
-          "contradiction": [
-            "Increased motivation (finding)"
-          ]
+          "neutral": [
+            "Anxiety about collapsing (finding)",
+            "Anxiety about dying (finding)"
+          ],
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you've had some challenging experiences in the past, but it's also important to remember that everyone has setbacks. Have you considered what might be different this time if you were to give yourself a chance? And how would success feel for you?\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I can understand why you might feel that way, it's natural to worry when we think about serious health issues. It's important to remember that asking for help is a sign of strength, not weakness. Let's talk more about how you're feeling and work together on managing these concerns.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how you might feel that way, given your past experiences. But it's important to remember that everyone has setbacks and failures at times. What's crucial is learning from them and giving yourself a chance to grow. Let's focus on what you can do now, rather than dwelling on the past.",
+            "response": "I can understand why you might feel that way, it's natural to worry when we think about serious health issues. It's important to remember that asking for help is a sign of strength, not weakness. Let's talk more about how you're feeling and work together on managing these concerns.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure (finding)",
-                  "label": "neutral"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "Low ego strength (finding)",
-                  "label": "neutral"
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've had some challenging experiences in the past, but it's also important to remember that everyone has setbacks. Have you considered what might be different this time if you were to give yourself a chance? And how would success feel for you?\"",
+            "response": "\"It sounds like you're carrying quite a heavy load. Can we explore together what makes you worry that others might see you as weak, and how this fear affects your thoughts and feelings?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you've had some challenging experiences in the past, but it's also important to remember that everyone has setbacks. Have you ever considered what might happen if you gave yourself a chance to succeed this time? What could be the best-case scenario for you?\"",
+            "response": "\"It sounds like you're carrying quite a heavy load. I can understand why you might worry about things like cancer and heart disease, as they can be scary. But it's important to remember that everyone has their own struggles, and it doesn't make you weak to ask for help when needed. Let's explore how others in your life might react if you did need support.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see that you're carrying quite a heavy load. It's understandable to worry about your health and how others might perceive you. Let's take it one step at a time, shall we? When you said \"something serious,\" were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being a burden to others",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about body function or health",
+                  "label": "entailment"
                 }
               ]
             }

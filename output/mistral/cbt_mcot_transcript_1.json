@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently. I mean I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
-    "core_issue": "career and work-related concerns",
+    "seed": "That I'm not the one in the wrong. You know, I. I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently, just. I mean, just ever. I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
+    "core_issue": "Career and work-related concerns",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,16 +17,16 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently. I mean I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
-        "core_issue": "career and work-related concerns",
+        "query": "That I'm not the one in the wrong. You know, I. I'm extremely good at my job. I mean, I am the best employee that they have ever had. Not just currently, just. I mean, just ever. I make no errors. So how can I be wrong when it comes to these circumstances with my coworkers?",
+        "core_issue": "Career and work-related concerns",
         "schema": {
-          "triggers": [
-            "circumstances with coworkers"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
+            "I'm not the one in the wrong",
+            "I'm extremely good at my job",
             "I am the best employee",
             "I make no errors",
-            "I can't be wrong"
+            "How can I be wrong?"
           ],
           "emotions": [],
           "behaviors": []
@@ -35,36 +35,58 @@
           "entailment": [],
           "neutral": [
             "Anxiety about saying the wrong thing (finding)",
-            "Negative attitude (finding)",
-            "Fear of speaking to people in authority (finding)",
+            "Incongruent personal expectations (finding)",
             "Fear of saying the wrong thing (finding)",
-            "Incongruent personal expectations (finding)"
+            "Anxiety about appearing ridiculous (finding)",
+            "Negative attitude (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "You've expressed a strong sense of self-confidence, and that's great. However, it might be helpful to consider what others might think about your situation with coworkers as well. Sometimes, getting another perspective can provide valuable insights.",
+        "response": "\"I understand that you feel very confident in your abilities and believe that you're the best employee. However, it's important to consider other perspectives as well. Let's explore how a trusted friend or colleague might view this situation.\"",
         "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "You seem very confident in your abilities, and it's understandable to feel that way given your track record. However, it's also important to remember that everyone makes mistakes sometimes. Let's talk more about how you handle situations when things don't go as planned.",
+            "response": "\"It sounds like you have a strong belief in your abilities and competence. I'd like to understand more about the situation with your coworkers that has led you to feel this way.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety about saying the wrong thing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "negative attitude",
-                  "label": "neutral"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that others might perceive your actions differently than you do? It's important to consider other perspectives as well.",
+            "response": "You seem very confident in your abilities and the quality of your work. Can you help me understand why you feel that way, especially given the current situation with your coworkers?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I understand that you feel very confident in your abilities and believe that you're the best employee. However, it's important to consider other perspectives as well. Let's explore how a trusted friend or colleague might view this situation.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see that you feel very confident in your abilities and rightness. It's understandable to feel anxious or self-conscious when expressing strong opinions, especially if they differ from others. Let's explore together how we might approach this situation with more confidence and less anxiety.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -72,23 +94,8 @@
                   "label": "neutral"
                 },
                 {
-                  "concept": "negative attitude",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "You've expressed a strong sense of self-confidence, and that's great. However, it might be helpful to consider what others might think about your situation with coworkers as well. Sometimes, getting another perspective can provide valuable insights.",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "Fear of saying the wrong thing (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Incongruent personal expectations (finding)",
-                  "label": "neutral"
+                  "concept": "fear of appearing ridiculous",
+                  "label": "unknown"
                 }
               ]
             }
@@ -100,93 +107,98 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I guess I do come off as confident, but honestly, I worry a lot about what people think. It feels like I’m always second-guessing myself at work, especially when I see my coworkers doing really well. I just can't shake this feeling that I'm not measuring up.",
-        "core_issue": "career and work-related concerns",
+        "query": "I mean, I guess I can see how someone else might have a different take on things. But it’s just frustrating because I really put in the effort, you know? Sometimes I feel like no one really sees that or appreciates it. It makes me question if I’m really doing as well as I think I am.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "seeing coworkers doing well",
-            "work environment"
+            "someone else has a different take",
+            "putting in effort",
+            "feeling unappreciated"
           ],
           "automatic_thoughts": [
-            "I worry about what people think",
-            "I'm not measuring up",
-            "I'm always second-guessing myself"
+            "no one sees my effort",
+            "I might not be doing as well as I think"
           ],
           "emotions": [
-            "anxiety"
+            "frustration",
+            "doubt"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling alienated (finding)",
+            "Feeling of discouragement (finding)"
+          ],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
+            "Fear of being a burden to others (finding)",
             "Anxiety about appearing ridiculous (finding)",
-            "Feeling nervous (finding)",
-            "Fear of speaking to people in authority (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Pressured by others (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you have high standards for yourself, and it can be challenging when you see others excelling. Have you ever considered how your coworkers might perceive you? They may admire your dedication and hard work.\"",
-        "protocol_used": "alternative_perspective",
+        "response": "\"It sounds like you've been putting a lot of effort into things, and it can be disheartening when it doesn't seem to be noticed. Have you considered exploring what evidence supports your thoughts about not being appreciated? It might help us understand better.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I can see how you might feel that way, it's natural to compare ourselves to others. But remember, everyone has their own unique strengths and challenges. Let's focus on what you bring to the table instead.\"",
+            "response": "I can understand why you might feel that way, putting in a lot of effort and not feeling appreciated can be really disheartening. Let's talk more about how you're feeling and see if we can find a way to address this together.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "Feeling unappreciated",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "second-guessing oneself",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "seeing coworkers doing well",
+                  "concept": "Putting in effort",
                   "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you have a lot on your plate at work. Can we explore together what evidence supports the thought that you're not measuring up? Let's start by looking at specific instances where you felt this way.\"",
+            "response": "\"It sounds like you've been putting a lot of effort into things, and it can be disheartening when it doesn't seem to be noticed. Have you considered exploring what evidence supports your thoughts about not being appreciated? It might help us understand better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "Feeling unappreciated",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "second-guessing oneself",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "work environment",
+                  "concept": "Putting in effort",
                   "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you have high standards for yourself, and it can be challenging when you see others excelling. Have you ever considered how your coworkers might perceive you? They may admire your dedication and hard work.\"",
+            "response": "\"It sounds like you've been putting a lot of effort into things, and it can be disheartening when it doesn't seem to be noticed. Have you ever considered what a trusted friend or family member might say about your efforts? It could provide a different perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "seeing coworkers doing well",
+                  "concept": "Feeling unappreciated",
                   "label": "triggers"
                 },
                 {
-                  "concept": "I worry about what people think",
-                  "label": "automatic_thoughts"
+                  "concept": "Putting in effort",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can understand how you might feel that way, it's frustrating when our efforts don't seem to be recognized. Let's talk more about this feeling of doubt and see if we can find a way to address it together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
                 },
                 {
-                  "concept": "I'm not measuring up",
-                  "label": "automatic_thoughts"
+                  "concept": "doubt",
+                  "label": "emotions"
                 }
               ]
             }
@@ -198,84 +210,99 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that thought, but sometimes I just feel invisible, like no one really notices what I do. I try hard, but it’s hard not to compare myself to them. I guess I just... want to feel like I’m enough, you know?",
-        "core_issue": "career and work-related concerns",
+        "query": "Yeah, I guess I have thought about it. I mean, I hear positive things sometimes, but then there are moments where it just feels like I'm invisible. Like, I might get a compliment, but then I also notice when people overlook my contributions. I don't know... it makes me feel like I'm doing something wrong.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "feeling invisible",
-            "comparing myself to others"
+            "hearing positive things",
+            "getting a compliment",
+            "people overlooking contributions"
           ],
           "automatic_thoughts": [
-            "no one notices what I do",
-            "I want to feel like I'm enough"
+            "I am invisible",
+            "I am doing something wrong"
           ],
           "emotions": [
-            "invisibility",
-            "inadequacy"
+            "sadness",
+            "frustration"
           ],
-          "behaviors": [
-            "trying hard"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
+            "Positive self thoughts (finding)",
             "Feeling unwanted (finding)",
-            "Feeling isolated (finding)",
-            "Feeling alienated (finding)"
+            "Positive thoughts (finding)"
           ],
           "neutral": [
-            "Fear of being a burden to others (finding)",
-            "Feeling abandoned (finding)"
+            "Fear of being a burden to others (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Negative automatic thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling a bit overlooked and it can be challenging not to compare yourself with others. It's important to remember that everyone has their own unique strengths, and your efforts are valuable too. Let's explore ways to help you feel more seen and valued.",
+        "response": "\"It sounds like you have a mix of experiences, and it's understandable that sometimes you might feel invisible or like you're doing something wrong. Let's explore these feelings together and see if we can find ways to help you feel more seen and valued.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling a bit overlooked and it can be challenging not to compare yourself with others. It's important to remember that everyone has their own unique strengths, and your efforts are valuable too. Let's explore ways to help you feel more seen and valued.",
+            "response": "\"It sounds like you have a mix of experiences, and it's understandable that sometimes you might feel invisible or like you're doing something wrong. Let's explore these feelings together and see if we can find ways to help you feel more seen and valued.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling invisible",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "comparing myself to others",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling a bit overlooked and that comparing yourself to others is adding to those feelings. Let's explore what makes you feel 'enough'. What are some things you do well or enjoy about yourself?\"",
+            "response": "\"It sounds like you have a mix of positive experiences and feelings of invisibility or doing something wrong. Let's explore these thoughts a bit more. Can you tell me about a specific situation where you felt invisible, even though others might have complimented you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling invisible",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "comparing myself to others",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're putting a lot of effort into your work and it can be disheartening when you don't feel noticed. It's natural to compare ourselves to others, but remember that everyone has their own unique strengths. Let's explore ways to help you appreciate those qualities in yourself.\"",
+            "response": "\"It sounds like you have a complex relationship with compliments and recognition. Have you ever considered what a trusted friend might think about your contributions? It could be helpful to explore their perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "feeling invisible",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "comparing myself to others",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you might be feeling a bit invisible and like you're doing something wrong. Let's talk more about that, but first, I want to check in with you. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -287,87 +314,117 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that thought, but sometimes I feel really invisible. It’s like no one notices the efforts I put in. I try hard, but I can’t help but compare myself to my coworkers, and it leaves me feeling like I’m just not enough.",
-        "core_issue": "career and work-related concerns",
+        "query": "I appreciate that. It’s just... I really want to feel like I belong and that my work matters. Sometimes, when I don’t get the recognition I hope for, it stings a lot more than I want to admit. I don’t know if it’s just me being too sensitive or if there’s something more to it.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "not being noticed",
-            "comparing to coworkers"
+            "not getting recognition"
           ],
           "automatic_thoughts": [
-            "I feel invisible",
-            "no one notices my efforts",
-            "I'm not enough"
+            "I don't belong",
+            "My work doesn't matter",
+            "I'm too sensitive"
           ],
           "emotions": [
-            "invisibility",
-            "inadequacy"
+            "hurt",
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Character trait finding of effort at work (finding)",
-            "Feeling isolated (finding)"
+            "Feeling unwanted (finding)",
+            "Feeling a failure (finding)",
+            "Feeling unloved (finding)",
+            "Feeling alienated (finding)"
           ],
           "neutral": [
-            "Positive self thoughts (finding)",
-            "Fear of being a burden to others (finding)",
-            "Low ego strength (finding)"
+            "Anxiety about appearing ridiculous (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you've been feeling invisible and like your efforts aren't noticed. It can be challenging to compare ourselves to others, but it's important to remember everyone has their own unique strengths and contributions. Let's explore together if there are any specific instances where you felt particularly unnoticed or undervalued at work.",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you're struggling with feelings of belonging and self-worth. When recognition isn't forthcoming, it can be difficult not to feel that your work doesn't matter. Let's explore together what might be contributing to these feelings and how we can help you build resilience against them.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you've been feeling invisible and like your efforts aren't noticed. It can be challenging to compare ourselves to others, but it's important to remember everyone has their own unique strengths and contributions. Let's explore together if there are any specific instances where you felt particularly unnoticed or undervalued at work.",
+            "response": "I understand that you're feeling like you don't quite belong and your work isn't getting the recognition you desire. It can be tough when we feel this way, but it's important to remember that everyone has unique strengths and contributions. Let's explore together if there might be other factors contributing to these feelings.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Character trait finding of effort at work",
+                  "concept": "Feeling unloved",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're putting a lot of effort into your work, but sometimes feel unnoticed. Have you ever considered what evidence supports this feeling? Or perhaps, how might a coworker or friend view your contributions?\"",
+            "response": "It sounds like you're struggling with feelings of belonging and self-worth. When recognition isn't forthcoming, it can be difficult not to feel that your work doesn't matter. Let's explore together what might be contributing to these feelings and how we can help you build resilience against them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling isolated",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Character trait finding of effort at work",
+                  "concept": "Feeling unloved",
                   "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're putting a lot of effort into your work, and it can be disheartening when you don't feel recognized. Have you ever considered what a trusted friend or colleague might say about your contributions? It could provide a different perspective on your value.\"",
+            "response": "It sounds like you're struggling with feelings of belonging and self-worth. It's common to feel sensitive when we don't receive the recognition we hope for, but it might be helpful to consider what a trusted friend or family member would say about your work. Sometimes, an outside perspective can provide valuable insights.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "not being noticed",
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're dealing with some difficult feelings about not receiving the recognition you desire. Let's explore these emotions together and see if we can find ways to help you feel more valued and appreciated.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "not getting recognition",
                   "label": "triggers"
                 },
                 {
-                  "concept": "comparing to coworkers",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I'm not enough",
+                  "concept": "I don't belong",
                   "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "My work doesn't matter",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "hurt",
+                  "label": "emotions"
                 }
               ]
             }
@@ -379,85 +436,113 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, there have been a few times. Like, I worked really hard on a project that I thought was going to stand out, but when we presented the results, it felt like everyone was focused on the other team’s success. I just sat there, feeling small and wondering if anyone even cared about what I contributed. It hurts, you know?",
-        "core_issue": "career and work-related concerns",
+        "query": "I appreciate that. It’s just... I really want to feel like I belong and that my work matters. Sometimes, when I don’t get the recognition I hope for, it stings a lot more than I want to admit. I don’t know if I’m being too sensitive or if there’s something more to it.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "presenting project results",
-            "other team's success"
+            "not getting recognition"
           ],
           "automatic_thoughts": [
-            "everyone is focused on the other team",
-            "no one cares about my contribution"
+            "I don't belong",
+            "My work doesn't matter",
+            "I'm being too sensitive"
           ],
           "emotions": [
             "hurt",
-            "small"
+            "anxiety"
           ],
-          "behaviors": [
-            "sat there"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
+            "Feeling unwanted (finding)",
+            "Feeling unloved (finding)",
             "Feeling a failure (finding)",
-            "Feeling unwanted (finding)"
+            "Feeling alienated (finding)"
           ],
           "neutral": [
-            "Fear of being in a small group (finding)",
-            "Lack of pride (finding)"
+            "Anxiety about appearing ridiculous (finding)"
           ],
-          "contradiction": [
-            "Feeling isolated (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I can see how that would feel really tough. It's natural to feel like your hard work might not be recognized, but remember, everyone has their own strengths and contributions. Let's talk more about what you can do next time to make sure your efforts are noticed.",
-        "protocol_used": "validate_and_reflect",
+        "response": "It sounds like you're seeking a sense of belonging and recognition for your work. It's natural to feel hurt when we don't receive the acknowledgement we desire. Let's explore together what evidence supports these feelings, and if there might be other factors at play as well.",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how that would feel really tough. It's natural to feel like your hard work might not be recognized, but remember, everyone has their own strengths and contributions. Let's talk more about what you can do next time to make sure your efforts are noticed.",
+            "response": "I understand that you're feeling like you don't belong and your work doesn't matter. It can be really tough when we don't get the recognition we hope for. Let's explore these feelings together, and I'll help you find ways to cope with them.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of being in a small group",
-                  "label": "neutral"
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've put a lot of effort into your work, and it can be disheartening when it doesn't seem to get the recognition you hoped for. Have you considered what evidence there is that your contribution wasn't valued? Or perhaps we could explore how others might have perceived your efforts?\"",
+            "response": "It sounds like you're seeking a sense of belonging and recognition for your work. It's natural to feel hurt when we don't receive the acknowledgement we desire. Let's explore together what evidence supports these feelings, and if there might be other factors at play as well.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of being in a small group",
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about appearing ridiculous",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I can understand how it feels to work hard and not receive the recognition you were hoping for. It's important to remember that everyone has their own strengths, and success isn't always about being the center of attention. Let's explore what a trusted friend or family member might say about your contribution. This could help us gain a different perspective.\"",
+            "response": "I understand that you're feeling like your work isn't valued and it's causing you distress. It's important to remember that everyone has different ways of showing appreciation, and sometimes we might miss those signs. Let's explore what a trusted friend or colleague might say about the situation. What do you think they would tell you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling a failure",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Fear of being in a small group",
-                  "label": "neutral"
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way. It sounds like you're struggling with feelings of not belonging and wondering if your work matters. Let's explore these thoughts together, and see if we can find some ways to help you feel more valued and appreciated.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 }
               ]
             }
@@ -469,92 +554,114 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I remember a time when I put so much effort into a project, thinking it would really shine. But when we presented, it felt like everyone just focused on the other team’s success. I was sitting there, feeling so small and wondering if anyone even cared about what I did. It really stung.",
-        "core_issue": "career and work-related concerns",
+        "query": "It just really gets to me sometimes. I want to feel like I belong and that my work matters. When I don’t get the recognition I hope for, it hurts more than I want to admit. I’m not sure if it’s just me being too sensitive or if there’s something else going on.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
           "triggers": [
-            "presenting a project",
-            "other team's success"
+            "not getting recognition"
           ],
           "automatic_thoughts": [
-            "everyone focused on the other team",
-            "no one cared about my work",
-            "I feel small"
+            "I want to feel like I belong",
+            "my work matters",
+            "it hurts more than I want to admit",
+            "I might be too sensitive"
           ],
           "emotions": [
             "hurt",
-            "disappointment"
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling of discouragement (finding)"
+            "Feeling unwanted (finding)"
           ],
           "neutral": [
+            "Anxiety about appearing ridiculous (finding)",
             "Lack of pride (finding)",
-            "Fear of being in a small group (finding)",
-            "Performance anxiety (finding)"
+            "Fear of being a burden to others (finding)",
+            "Pressured by peers (finding)"
           ],
-          "contradiction": [
-            "Feeling a failure (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm sorry to hear that you had such an experience. It can be disheartening when our efforts don't seem to get the recognition they deserve. However, it's important to remember that everyone has their own unique strengths and contributions, and just because they may not have been acknowledged in a particular moment doesn't mean they aren't valued.\n\nHere are a few things you might find helpful:\n\n1. **Self-reflection**: Take some time to reflect on what you learned from the project, regardless of the outcome. What went well? What could be improved? This can help you grow and prepare for future endeavors.\n\n2. **Communication**: If possible, have a conversation with your team or supervisor about your feelings. Constructive feedback can help everyone involved understand each other's perspectives better.\n\n3. **Self-care**: It's essential to take care of yourself after such an experience. Engage in activities that you enjoy and that help you relax and recharge.\n\n4. **Perspective**: Try to maintain a positive perspective. Remember that everyone has their own journey, and success isn't always about being the center of attention. It's often more about personal growth and learning.\n\n5. **Resilience**: Developing resilience is key in situations like these. Learn from the experience, dust yourself off, and keep moving forward.",
+        "response": "\"It sounds like you're really struggling with feelings of not belonging and wanting your work to matter. It can be painful when we don't get the recognition we hope for. Let's explore these feelings together, and I'll help you find ways to cope.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I can see how that would feel discouraging, and it's understandable to feel hurt and disappointed when your hard work seems overlooked. Let's explore this a bit more and find ways to help you cope with these feelings in the future.",
+            "response": "\"It sounds like you're really struggling with feelings of not belonging and wanting your work to matter. It can be painful when we don't get the recognition we hope for. Let's explore these feelings together, and I'll help you find ways to cope.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "not getting recognition",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "I want to feel like I belong",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "my work matters",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "hurt",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've put a lot of effort into your project, and it can be disheartening when it feels like others aren't noticing. Can we explore what evidence supports this belief? And have you noticed any times when your work was appreciated?\"",
+            "response": "\"It sounds like you're feeling hurt and anxious when you don't receive the recognition you hope for. Have you ever considered what evidence there is that your work doesn't matter, or if it could be something else causing these feelings?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Feeling of discouragement",
-                  "label": "entailment"
+                  "concept": "hurt",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "Lack of pride",
+                  "concept": "anxiety",
                   "label": "neutral"
+                },
+                {
+                  "concept": "I might be too sensitive",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It can be disheartening when it seems like all the attention is on someone else. But remember, everyone has their own strengths and weaknesses. Let's explore what you could have done differently to make your project stand out even more.\"",
+            "response": "\"It sounds like you're feeling a bit overlooked and sensitive to criticism. Have you ever considered what a trusted friend might think about the situation? It could provide a different perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "presenting a project",
-                  "label": "triggers"
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "other team's success",
-                  "label": "triggers"
+                  "concept": "Anxiety about appearing ridiculous",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear that you're feeling this way. It sounds like you've been dealing with a lot of hurt and anxiety lately, especially when you don't get the recognition you hope for. Let's take some time to explore these feelings together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "hurt",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "feeling small",
-                  "label": "unknown"
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "not getting recognition",
+                  "label": "triggers"
                 }
               ]
             }
@@ -566,80 +673,97 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Thanks, I get where you’re coming from. I guess sometimes it’s just hard to remember those things in the moment. I really want to be more resilient, but it feels like a lot to handle when I’m already feeling down. It's like I can see the logic, but my emotions just take over.",
-        "core_issue": "career and work-related concerns",
+        "query": "It just really gets to me sometimes. I really want to feel like I belong and that what I do matters. When I don’t get the recognition I hope for, it hurts more than I want to admit. I’m not sure if I’m being too sensitive or if there’s something else going on.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
-          "triggers": [],
+          "triggers": [
+            "not getting recognition"
+          ],
           "automatic_thoughts": [
-            "it's hard to remember those things in the moment",
-            "I really want to be more resilient",
-            "it feels like a lot to handle",
-            "my emotions just take over"
+            "I don't belong",
+            "What I do doesn't matter",
+            "I'm being too sensitive"
           ],
           "emotions": [
-            "down"
+            "hurt",
+            "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Emotional adjustment (observable entity)"
+            "Feeling unwanted (finding)",
+            "Feeling alienated (finding)",
+            "Feeling isolated (finding)"
           ],
           "neutral": [
-            "Difficulty controlling emotions (finding)",
-            "Anxiety about losing emotional control (finding)",
-            "Fear of losing emotional control (finding)",
-            "Difficulty coping with grief responses (finding)"
+            "Lack of pride (finding)",
+            "Fear of being a burden to others (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds challenging to remember things in the heat of the moment and maintain a sense of resilience. Have you noticed any patterns or triggers that might be contributing to these feelings? Let's explore some strategies together to help manage your emotions more effectively.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It sounds like you're really struggling with feelings of not belonging and feeling that your efforts aren't recognized. Have you ever considered what a trusted friend or family member might think about the situation? Sometimes, getting an outside perspective can help us see things more clearly.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're going through a tough time, and it can be challenging to remember things when we're feeling emotional. It's okay to feel overwhelmed sometimes. Let's work together on finding ways to build resilience and manage your emotions more effectively.",
+            "response": "I'm really sorry to hear that you're feeling this way. It can be tough when we don't feel like our efforts are recognized. Let's talk about what makes you feel valued and how we might work together to help you find more of those moments.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Emotional adjustment (observable entity)",
+                  "concept": "Feeling unwanted",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Difficulty coping with grief responses (finding)",
+                  "concept": "Lack of pride",
                   "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds challenging to remember things in the heat of the moment and maintain a sense of resilience. Have you noticed any patterns or triggers that might be contributing to these feelings? Let's explore some strategies together to help manage your emotions more effectively.\"",
+            "response": "\"It sounds like you're feeling a bit unnoticed and undervalued when you don't receive the recognition you hope for. Have you ever considered what evidence there might be that your contributions are valuable, even if they aren't always acknowledged?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "Lack of pride",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're struggling to keep your emotions in check, especially when things feel overwhelming. Have you ever considered what a trusted friend or family member might suggest for managing these feelings? It could be helpful to hear another perspective.\"",
+            "response": "\"It sounds like you're really struggling with feelings of not belonging and feeling that your efforts aren't recognized. Have you ever considered what a trusted friend or family member might think about the situation? Sometimes, getting an outside perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "emotions",
-                  "label": "neutral"
+                  "concept": "Feeling unwanted",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Lack of pride",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been carrying a heavy burden. When you said that, were you having any thoughts of hurting yourself or not wanting to be here? I want to make sure we address anything that might be causing you distress.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "hurt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
                 }
               ]
             }
@@ -651,48 +775,39 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it is tough. I think sometimes it’s when I’m stressed or when I feel like I’m not doing enough. Those moments just seem to amplify everything, and it’s like all the doubts flood in at once. I guess I’m just not sure how to fight those feelings when they hit me out of nowhere.",
-        "core_issue": "career and work-related concerns",
+        "query": "Yeah, I guess I have considered that. It’s just hard to shake the feeling that maybe I’m just not cut out for this. Friends tell me I’m doing great, but then I start to doubt what they say. It's like I'm stuck in my own head, and their opinions don't always feel real or valid.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
-          "triggers": [
-            "when I'm stressed",
-            "when I feel like I'm not doing enough"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "all the doubts flood in at once",
-            "I'm not sure how to fight those feelings"
+            "maybe I’m just not cut out for this",
+            "I start to doubt what they say",
+            "their opinions don't always feel real or valid"
           ],
-          "emotions": [
-            "stress",
-            "doubt"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
+            "Fear of being a burden to others (finding)",
+            "Complaining of feeling depressed (finding)",
             "Anxiety about making mistakes (finding)",
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about going crazy (finding)",
-            "Anxiety about having a fit (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Mature emotional adjustment (finding)",
+            "Feeling stressed (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that you're feeling overwhelmed by doubts when you're stressed or feel like you're not doing enough. It can be challenging to manage those feelings, but we can work together to find ways to cope with them more effectively. Let's start by exploring what triggers these moments and how they make you feel.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're having some doubts about yourself, and it can be challenging to trust others' opinions when they contradict your own thoughts. Have you ever considered exploring the evidence that supports both your doubts and the compliments from friends? This might help you gain a more balanced perspective.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed by doubts when you're stressed or feel like you're not doing enough. It can be challenging to manage those feelings, but we can work together to find ways to cope with them more effectively. Let's start by exploring what triggers these moments and how they make you feel.",
+            "response": "\"I can understand how you might be feeling that way, but it's important to remember that everyone has self-doubts from time to time. Let's explore these feelings a bit more and see if we can find some ways to help you feel more confident in your abilities.\"",
             "reasoning": {
               "retrieved_concepts_used": [
-                {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
                 {
                   "concept": "automatic thoughts",
                   "label": "unknown"
@@ -705,28 +820,39 @@
             }
           },
           "socratic_questioning": {
-            "response": "What triggers these moments for you? And what are some of the specific doubts that come to mind when you feel stressed or unsure about doing enough?",
+            "response": "\"It sounds like you're having some doubts about yourself, and it can be challenging to trust others' opinions when they contradict your own thoughts. Have you ever considered exploring the evidence that supports both your doubts and the compliments from friends? This might help you gain a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot right now, and it can be overwhelming when those doubts come rushing in. Have you ever considered what a trusted friend or family member might say about the situation? Sometimes, hearing another perspective can help us see things more clearly.\"",
+            "response": "\"It sounds like you might be struggling with self-doubt and questioning the opinions of others. Have you ever considered what a trusted friend or outside observer might think about your situation? It could help to broaden your perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're having a tough time trusting your own abilities and the support of others. Let's explore these feelings together, so we can work on building more confidence in yourself.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
                 {
                   "concept": "automatic thoughts",
                   "label": "unknown"
@@ -745,107 +871,87 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that. I think the pressure to perform well is a big trigger for me. When deadlines are looming, or I see others excelling, it feels like I’m constantly racing against something. I get anxious, and then that just spirals into feeling like I’m failing, even if I’m trying my best. It’s frustrating.",
-        "core_issue": "career and work-related concerns",
+        "query": "I guess I can see where you're coming from. It’s just... when I think about it, my doubts feel so much louder than any compliments. It's like I can't help but cling to the negative thoughts more. I want to trust my friends, but it feels easier to believe what I fear than the good stuff they say.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
-          "triggers": [
-            "pressure to perform well",
-            "deadlines looming",
-            "seeing others excelling"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "constantly racing against something",
-            "feeling like I’m failing",
-            "trying my best"
+            "my doubts feel louder than compliments",
+            "I can't help but cling to negative thoughts",
+            "it feels easier to believe what I fear"
           ],
-          "emotions": [
-            "anxiety",
-            "frustration"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Performance anxiety (finding)",
-            "Anxiety about behavior or performance (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Increased motivation (finding)",
-            "Anxiety about having a fit (finding)",
-            "Difficulty managing stress (finding)"
+            "Anxiety about saying the wrong thing (finding)",
+            "Negative automatic thoughts (finding)",
+            "Fear of saying the wrong thing (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Positive self thoughts (finding)",
+            "Positive thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "What evidence do you have that you're failing, even when you're trying your best? Let's explore this thought together.",
-        "protocol_used": "socratic_questioning",
+        "response": "I understand that you're struggling with doubts and negative thoughts, even when faced with compliments from your friends. It's important to acknowledge these feelings and work together to find ways to manage them. Let's start by exploring where these thoughts come from and how they affect you.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I appreciate you sharing that with me. It sounds like the pressure to perform well is a significant trigger for your anxiety, especially when deadlines are approaching or you see others excelling. It's common to feel anxious and frustrated in such situations, but it's important to remember that everyone has their own pace and path. Let's work together on finding ways to manage this pressure more effectively.",
+            "response": "I understand that you're struggling with doubts and negative thoughts, even when faced with compliments from your friends. It's important to acknowledge these feelings and work together to find ways to manage them. Let's start by exploring where these thoughts come from and how they affect you.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure to perform well",
-                  "label": "triggers"
+                  "concept": "negative automatic thoughts",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "deadlines looming",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "seeing others excelling",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What evidence do you have that you're failing, even when you're trying your best? Let's explore this thought together.",
+            "response": "It sounds like you're having a hard time trusting positive feedback from others. Can we explore together what evidence supports these negative thoughts and if there might be other perspectives to consider?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure to perform well",
-                  "label": "triggers"
+                  "concept": "negative automatic thoughts",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "deadlines looming",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "seeing others excelling",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "frustration",
-                  "label": "emotions"
+                  "concept": "fear of saying the wrong thing",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, it can be helpful to get another perspective.",
+            "response": "What if a trusted friend were here? What might they say about your doubts and compliments?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "negative automatic thoughts",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "trusted friend's perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're having a tough time trusting positive thoughts and feelings, even when they come from your friends. Let's explore this together and see if we can find ways to help you feel more confident in the good things people say about you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
@@ -862,94 +968,88 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I guess when I think about it, it’s more about how I feel rather than actual evidence. It’s like, I might hit my deadlines, but I still fixate on the little mistakes or how I didn’t get as much praise as someone else. I tend to focus on what I didn’t do right, overlooking the things I did accomplish.",
-        "core_issue": "career and work-related concerns",
+        "query": "Yeah, I’d like that. Sometimes, I'm just caught off guard by how strong those doubts are. I don't even know if they come from something specific, or if it's just how I’ve always felt about myself. It’s like they play on a loop in my head, and I can’t find a way to turn it off.",
+        "core_issue": "Career and work-related concerns",
         "schema": {
-          "triggers": [
-            "hitting deadlines",
-            "seeing little mistakes",
-            "not receiving praise"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I fixate on mistakes",
-            "I didn't do as well as others",
-            "I overlook my accomplishments"
+            "doubts are strong",
+            "don't know if they come from something specific",
+            "how I’ve always felt about myself",
+            "play on a loop in my head"
           ],
-          "emotions": [
-            "frustration",
-            "disappointment"
-          ],
-          "behaviors": [
-            "focusing on mistakes",
-            "avoiding self-praise"
-          ]
+          "emotions": [],
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling a failure (finding)",
-            "Character trait finding of task completion (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Character trait finding of effort at work (finding)",
-            "Anxiety about behavior or performance (finding)",
-            "Anxiety about making mistakes (finding)"
+            "Positive self thoughts (finding)",
+            "Obsessional doubts (finding)",
+            "Negative automatic thoughts (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Able to resist dangerous thoughts (finding)",
+            "Ready for enhanced self-concept (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're focusing more on your mistakes and not getting as much praise as others, rather than acknowledging what you have accomplished. Let's explore how this pattern of thinking might be affecting your emotions.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It sounds like you're dealing with some strong and persistent doubts. It's understandable to feel that way sometimes, but let's work together to find ways to manage them better.\"",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "It sounds like you're quite hard on yourself, focusing more on your mistakes than your achievements. Let's explore this pattern together and see if we can find a way to shift your focus towards the positive aspects of your work.",
+            "response": "\"It sounds like you're dealing with some strong and persistent doubts. It's understandable to feel that way sometimes, but let's work together to find ways to manage them better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "hitting deadlines",
-                  "label": "triggers"
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "seeing little mistakes",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "not receiving praise",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I fixate on mistakes",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I overlook my accomplishments",
-                  "label": "automatic_thoughts"
+                  "concept": "Obsessional doubts (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're focusing more on your mistakes and not getting as much praise as others, rather than acknowledging what you have accomplished. Let's explore how this pattern of thinking might be affecting your emotions.\"",
+            "response": "\"It sounds like you're dealing with some strong and persistent doubts. Let's explore these together. Can you tell me more about what triggers these thoughts for you? And have you noticed any patterns or common themes in the thoughts themselves?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "Obsessional doubts (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "It sounds like you're quite hard on yourself when it comes to your work, focusing more on mistakes and less on accomplishments. Have you ever considered what a trusted friend might say about this? They might remind you of all the times you've succeeded despite small errors or oversights.",
+            "response": "\"It sounds like you're dealing with some strong and persistent doubts. Have you ever considered what a trusted friend or family member might say about these thoughts? Sometimes, getting another perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Obsessional doubts (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're dealing with some strong doubts that feel overwhelming and hard to shake. Let's explore these thoughts together, and see if we can find a way to manage them better.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {

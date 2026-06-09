@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "It's been quite busy at school because we've got our exams and we had, like, a test the next day, so I think I was just a bit, like, worried about that, so I was trying to focus on that instead.",
-    "core_issue": "self-esteem and confidence issues",
+    "seed": "I feel like. I don't know. I don't really even deserve to be hear if I can't do well enough. I see all these other students who are doing well and doing better and want to be there. I don't know why I'm here, even at uni, to be honest.",
+    "core_issue": "Self-esteem and confidence issues",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,82 +17,109 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "It's been quite busy at school because we've got our exams and we had, like, a test the next day, so I think I was just a bit, like, worried about that, so I was trying to focus on that instead.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I feel like. I don't know. I don't really even deserve to be hear if I can't do well enough. I see all these other students who are doing well and doing better and want to be there. I don't know why I'm here, even at uni, to be honest.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "busy at school",
-            "exams",
-            "test the next day"
+            "seeing other students doing well",
+            "being at university"
           ],
           "automatic_thoughts": [
-            "worried about the test",
-            "need to focus"
+            "I don't deserve to be here",
+            "I can't do well enough",
+            "I don't know why I'm here"
           ],
           "emotions": [
-            "worry"
+            "shame",
+            "confusion"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Preoccupied (finding)",
-            "On examination - anxious (finding)"
+            "Feeling a failure (finding)",
+            "Feeling of discouragement (finding)",
+            "Feeling diffident (finding)"
           ],
           "neutral": [
-            "On examination - disorientated (finding)"
+            "Complaining of feeling unhappy (finding)",
+            "Feeling unhappy (finding)"
           ],
-          "contradiction": [
-            "On examination - easily distractable (finding)",
-            "Mentally alert (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand you've been quite busy with exams and a test coming up, which has made you feel worried. It's completely normal to feel that way during such stressful times. Let's focus on finding ways to help manage your worry together.",
+        "response": "\"I can see that you're struggling with feelings of inadequacy and uncertainty. It's understandable to feel this way when comparing yourself to others, but it's important to remember that everyone has their own unique journey. Let's work together to explore your thoughts and feelings more deeply.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand you've been quite busy with exams and a test coming up, which has made you feel worried. It's completely normal to feel that way during such stressful times. Let's focus on finding ways to help manage your worry together.",
+            "response": "\"I can see that you're struggling with feelings of inadequacy and uncertainty. It's understandable to feel this way when comparing yourself to others, but it's important to remember that everyone has their own unique journey. Let's work together to explore your thoughts and feelings more deeply.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "busy at school",
-                  "label": "triggers"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "worried about the test",
-                  "label": "automatic_thoughts"
+                  "concept": "Complaining of feeling unhappy",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've been quite busy with exams and a test coming up. I can understand why that might make you feel worried. Have you noticed any specific thoughts or feelings that come up when you think about this situation?\"",
+            "response": "\"I can see that you're struggling with feelings of inadequacy and uncertainty. Can you help me understand what evidence you have that you won't succeed here? Let's explore this together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "busy at school",
-                  "label": "triggers"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "worried about the test",
-                  "label": "automatic_thoughts"
+                  "concept": "Complaining of feeling unhappy",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you've been quite busy with exams and a test coming up, which might be causing some worry. Have you ever found that focusing on what you can control helps to reduce your anxiety?\"",
+            "response": "\"It sounds like you're feeling a bit overwhelmed by seeing others succeed. It's important to remember that everyone has their own unique journey and it's okay not to compare ourselves to others. Let's explore what success means for you, and how we can work together to help you feel more confident in your abilities.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "busy at school",
+                  "concept": "seeing other students doing well",
                   "label": "triggers"
                 },
                 {
-                  "concept": "worried about the test",
+                  "concept": "I don't deserve to be here",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can't do well enough",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling a bit overwhelmed and questioning your place here. Let's talk about that, but first, I want to acknowledge how difficult it can feel when we compare ourselves to others. Can we explore together what makes you unique and valuable in this university setting?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "seeing other students doing well",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being at university",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I don't deserve to be here",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can't do well enough",
                   "label": "automatic_thoughts"
                 }
               ]
@@ -105,80 +132,95 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just been so overwhelming. Sometimes I feel like I'm juggling too much, and I can’t keep up. I keep thinking if I mess up this test, it’ll just prove that I’m not good enough, you know? It’s like this constant weight on my chest.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, I guess I do feel that way a lot. I always see people who seem so much more... accomplished? Like they have it all figured out while I’m just... here, feeling like I’m falling behind. It’s hard not to let that get to me.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "overwhelming situations",
-            "juggling too much",
-            "test"
+            "seeing accomplished people"
           ],
           "automatic_thoughts": [
-            "if I mess up this test, it’ll just prove that I’m not good enough"
+            "I’m falling behind",
+            "They have it all figured out"
           ],
           "emotions": [
-            "overwhelm",
-            "anxiety"
+            "inadequacy",
+            "frustration"
           ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [],
+          "entailment": [
+            "Feeling of discouragement (finding)",
+            "Feeling a failure (finding)",
+            "Feeling of being slowed down (finding)"
+          ],
           "neutral": [
-            "Examination phobia (finding)",
-            "Anxiety about having a fit (finding)",
-            "Performance anxiety (finding)",
-            "On examination - disorientated (finding)",
-            "Examination fear (finding)"
+            "Delusion of grandiose ability (finding)",
+            "Anxiety about making mistakes (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're dealing with a lot right now, and it can feel overwhelming. Can we explore what thoughts come up for you when you think about this test? What evidence do you have that you won't succeed?\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I can see how you might feel that way sometimes, it's not uncommon to compare ourselves to others and feel like we're falling behind. Let's talk about what makes you think you're failing and if there are any specific situations or people that trigger these feelings.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling overwhelmed and juggling a lot right now. It can be tough when we feel like we might not meet our own expectations. Let's take it one step at a time, shall we?",
+            "response": "I can see how you might feel that way sometimes, it's not uncommon to compare ourselves to others and feel like we're falling behind. Let's talk about what makes you think you're failing and if there are any specific situations or people that trigger these feelings.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelming situations",
-                  "label": "triggers"
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with a lot right now, and it can feel overwhelming. Can we explore what thoughts come up for you when you think about this test? What evidence do you have that you won't succeed?\"",
+            "response": "\"It sounds like you're feeling quite discouraged and like you're falling behind. Can we explore what evidence supports these thoughts? Let's start by looking at specific examples where you felt this way.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelming situations",
-                  "label": "triggers"
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy load right now. Let's explore what might happen if you don't fail this test, and how that could shift your perspective.\"",
+            "response": "\"It sounds like you're having a tough time comparing yourself to others and feeling like you're falling behind. It's important to remember that everyone has their own journey, and it's okay not to have everything figured out. Let's explore what success means for you personally.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelming situations",
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling a bit overwhelmed by seeing others who seem more successful. Let's talk about that and see if we can find ways to help you feel more confident in your own progress.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "seeing accomplished people",
                   "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts",
+                  "concept": "I'm falling behind",
                   "label": "unknown"
                 }
               ]
@@ -191,94 +233,112 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "I guess I just keep replaying past situations in my head where I didn't do well. Like that time in math class… I just froze. It's like I can’t shake that feeling that I’ll embarrass myself again. I know it’s not the only outcome, but those memories just keep creeping back in.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "I think it’s just... whenever I see my friends doing well in their careers or relationships, it hits me. Like, they’re all moving forward, and I’m just stuck. Sometimes, I feel like I’m not even trying hard enough, but then other times, I wonder if I’m just not cut out for any of it. It’s confusing, you know?",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "past situations",
-            "math class"
+            "seeing friends doing well",
+            "friends moving forward"
           ],
           "automatic_thoughts": [
-            "I didn't do well",
-            "I'll embarrass myself again",
-            "those memories keep creeping back"
+            "I'm stuck",
+            "I'm not trying hard enough",
+            "I'm not cut out for this"
           ],
           "emotions": [
-            "fear",
-            "shame",
-            "anxiety"
+            "confusion"
           ],
-          "behaviors": [
-            "replaying past situations",
-            "freezing"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about behavior or performance (finding)"
+            "Feeling trapped (finding)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)",
-            "Undoing - mental defense mechanism (finding)",
-            "Examination phobia (finding)",
-            "Performance anxiety (finding)"
+            "Loss of hope for the future (finding)",
+            "Feeling isolated (finding)",
+            "Hopeful for the future (finding)",
+            "Feels life is meaningless (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I can see how those past experiences might be weighing on you. It's understandable to feel anxious when we think about situations where things didn't go as planned. Let's focus on what you can do now, rather than dwelling on the past. What small step could you take to help yourself feel more prepared?\"",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling a bit stuck and confused when you see your friends moving forward. Can we explore together what might be causing these feelings? For example, are there specific situations or thoughts that come up when you see them succeeding?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I can see how those past experiences might be weighing on you. It's understandable to feel anxious when we think about situations where things didn't go as planned. Let's focus on what you can do now, rather than dwelling on the past. What small step could you take to help yourself feel more prepared?\"",
+            "response": "\"It sounds like you're feeling a bit left behind when you see your friends succeeding. It's understandable to feel that way sometimes, but it's important to remember everyone has their own pace and journey. Let's talk about what might be making you feel stuck and explore some ways we can help you move forward.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
+                  "concept": "seeing friends doing well",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "Undoing - mental defense mechanism (finding)",
-                  "label": "neutral"
+                  "concept": "I'm stuck",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not trying hard enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not cut out for this",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're having a hard time letting go of past experiences that didn't go as well as you'd hoped. Can we explore together what evidence there is to support the idea that you'll definitely embarrass yourself this time? Let's consider other possibilities too.\"",
+            "response": "\"It sounds like you're feeling a bit stuck and confused when you see your friends moving forward. Can we explore together what might be causing these feelings? For example, are there specific situations or thoughts that come up when you see them succeeding?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about behavior or performance",
+                  "concept": "Feeling trapped",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Examination phobia",
+                  "concept": "Loss of hope for the future",
                   "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having a hard time letting go of those past experiences. Let's explore what might happen if things turned out differently this time.\"",
+            "response": "\"It sounds like you're feeling a bit stuck and confused when you see your friends moving forward. Have you ever considered what a trusted friend or family member might think about your situation? It could be helpful to get another perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "past situations",
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loss of hope for the future",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling a bit left behind when you see your friends succeeding. It's natural to feel confused and wonder if you're doing enough or if it's just not meant for you. Let's explore these feelings together, okay?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "seeing friends doing well",
                   "label": "triggers"
                 },
                 {
-                  "concept": "math class",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I didn't do well",
+                  "concept": "I'm stuck",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "I'll embarrass myself again",
+                  "concept": "I'm not trying hard enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not cut out for this",
                   "label": "automatic_thoughts"
                 }
               ]
@@ -291,93 +351,99 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "I mean, I know I should probably study more or practice, but it’s hard to get started. Sometimes I just feel so... stuck. And the more I think about preparing, the more I worry I won’t be good enough to even do it right. It feels like I’m just going around in circles.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, I guess I can definitely think of a few moments… Like when I see them posting about promotions or new relationships, I just… it makes me question everything. I start thinking, “Why can’t I do that?” I feel this knot in my stomach, like I’m failing somehow. And then I just want to retreat and not even think about it anymore.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "thinking about preparing",
-            "not studying enough"
+            "seeing posts about promotions",
+            "seeing posts about new relationships"
           ],
           "automatic_thoughts": [
-            "I won’t be good enough",
-            "I’m just going around in circles"
+            "Why can't I do that?"
           ],
           "emotions": [
-            "stuck",
-            "worry"
+            "anxiety",
+            "shame"
           ],
           "behaviors": [
-            "avoiding studying",
-            "not practicing"
+            "retreat",
+            "avoid thinking about it"
           ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about making mistakes (finding)",
-            "Feeling nervous (finding)",
-            "Performance anxiety (finding)",
-            "Feeling lost (finding)"
+            "Negative automatic thoughts (finding)",
+            "Feeling of discouragement (finding)",
+            "Fear of losing emotional control (finding)"
           ],
           "neutral": [
-            "Anxiety about having a fit (finding)"
+            "Anxiety about appearing ridiculous (finding)",
+            "Anxiety about going crazy (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're feeling quite stuck and worried about your preparation. Let's explore this a bit more. What are some specific things that make you feel anxious or concerned about your ability to prepare well?\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I can see how those moments might be tough for you. It's natural to feel a bit overwhelmed when comparing yourself to others, but remember that everyone has their own journey. Let's explore these feelings together and find ways to manage them better.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"I understand that you're feeling a bit overwhelmed and stuck when it comes to preparing. It can be challenging, but let's focus on taking one step at a time. What might be the first small action you could take to get started?\"",
+            "response": "I can see how those moments might be tough for you. It's natural to feel a bit overwhelmed when comparing yourself to others, but remember that everyone has their own journey. Let's explore these feelings together and find ways to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "Negative automatic thoughts (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Feeling stuck",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "Performance anxiety",
+                  "concept": "Feeling of discouragement (finding)",
                   "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite stuck and worried about your preparation. Let's explore this a bit more. What are some specific things that make you feel anxious or concerned about your ability to prepare well?\"",
+            "response": "\"I can see how those moments might be challenging for you. Can we explore together what evidence supports these thoughts that you're not able to achieve the same things as others? Let's start by looking at one instance, like when you see posts about promotions or new relationships.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about making mistakes",
+                  "concept": "Negative automatic thoughts (finding)",
                   "label": "entailment"
                 },
                 {
-                  "concept": "Performance anxiety",
+                  "concept": "Feeling of discouragement (finding)",
                   "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're feeling quite stuck and worried about your preparation. Let's explore what a trusted friend might say about this situation, or perhaps consider the best and worst possible outcomes. This could help us find a way to move forward together.\"",
+            "response": "\"It sounds like you're having some tough moments when you see those posts about promotions or new relationships. It's natural to feel a bit overwhelmed, but it might be helpful to consider what a trusted friend or family member would think about the situation. Could we explore that together?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Negative automatic thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of losing emotional control (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way, but I'm glad we can talk about it. When you see those posts about promotions or new relationships, it seems like they make you question yourself and feel anxious, right? Let's explore these feelings together.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
                   "concept": "anxiety",
-                  "label": "entailment"
+                  "label": "neutral"
                 },
                 {
-                  "concept": "performance anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling lost",
-                  "label": "entailment"
+                  "concept": "shame",
+                  "label": "emotions"
                 }
               ]
             }
@@ -389,87 +455,100 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "I think it’s just the pressure I put on myself. I feel like everyone expects me to do great, and what if I don’t live up to that? I just keep thinking, what if I’m not as smart as they think I am? It’s like I’m scared of disappointing them... and myself, I guess.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Thanks for saying that. It’s just... hard to remember sometimes, especially when I'm in that moment. I feel like I end up being my worst critic. It’s like this voice in my head just keeps reminding me of what I haven’t achieved. It can be exhausting.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "pressure from self",
-            "expectations from others"
+            "being in the moment"
           ],
           "automatic_thoughts": [
-            "what if I don’t live up to that?",
-            "what if I’m not as smart as they think I am?",
-            "I’m scared of disappointing them",
-            "I’m scared of disappointing myself"
+            "I end up being my worst critic",
+            "this voice in my head reminds me of what I haven’t achieved"
           ],
           "emotions": [
-            "fear"
+            "exhaustion"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about behavior or performance (finding)"
+            "Reappearance of old thoughts (finding)"
           ],
           "neutral": [
+            "Forgets what has just done (finding)",
             "Anxiety about making mistakes (finding)",
-            "Performance anxiety (finding)",
-            "Fear of being in a small group (finding)",
-            "Anxiety about saying the wrong thing (finding)"
+            "Forgets what was going to do (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Positive self thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're feeling quite a bit of pressure, not just from others but also yourself. Let's explore what it means to live up to expectations and how that might be affecting your feelings.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "I understand how difficult it can be to deal with that inner voice, especially when you're in the moment. It sounds like you might be your own worst critic at times. Let's explore these thoughts together and see if we can find a way to manage them better.",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're feeling quite a bit of pressure, both from yourself and others. It's understandable to feel that way when we have high expectations. Let's talk more about how you can manage these feelings and find ways to reduce the stress.\"",
+            "response": "I understand how difficult it can be to deal with that inner voice, especially when you're in the moment. It sounds like you might be your own worst critic at times. Let's explore these thoughts together and see if we can find a way to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure from self",
-                  "label": "triggers"
+                  "concept": "triggers",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "expectations from others",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "fear",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're feeling quite a bit of pressure, not just from others but also yourself. Let's explore what it means to live up to expectations and how that might be affecting your feelings.\"",
+            "response": "\"It sounds like you have a critical inner voice that's been weighing on you. Can we explore where this voice comes from and if it's always accurate?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Anxiety about behavior or performance (finding)",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Fear of being in a small group (finding)",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're putting a lot of pressure on yourself to meet high expectations, both yours and others. Have you ever considered what a trusted friend or family member might think about the situation? Sometimes, it can be helpful to get another perspective.\"",
+            "response": "\"It sounds like you have a critical inner voice that can be quite tiring. Let's explore together if there might be other ways to look at your situation and find some relief from this exhaustion.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure from self",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "expectations from others",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're having a tough time with that voice in your head. Let's talk about it and see if we can find a way to quiet it down a bit.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -481,110 +560,97 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "I feel so much pressure to meet everyone’s expectations. It makes me anxious because I keep worrying I won’t measure up. And honestly, I’m scared of disappointing myself too. It’s like this constant voice in my head telling me I'm not good enough.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, I’d like that. Sometimes it feels like that voice is so loud, and I get overwhelmed. It’s like I can’t escape it, and it makes me want to just avoid everything altogether. I guess I want to feel more... at peace with myself, you know?",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "pressure to meet expectations"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I won’t measure up",
-            "I'm not good enough",
-            "I might disappoint myself"
+            "the voice is so loud",
+            "I can't escape it",
+            "I want to avoid everything"
           ],
           "emotions": [
-            "anxiety",
-            "fear"
+            "overwhelmed"
           ],
-          "behaviors": []
+          "behaviors": [
+            "avoid everything"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Anxiety about behavior or performance (finding)",
-            "Performance anxiety (finding)",
-            "Fear of being a burden to others (finding)",
-            "Feeling a failure (finding)"
+            "Ability to resist thoughts (observable entity)"
           ],
           "neutral": [
-            "Anxiety about making mistakes (finding)"
+            "Delusion of control of voice (finding)",
+            "Repressing thoughts (finding)",
+            "Ability to resist dangerous thoughts (observable entity)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Loud thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're carrying a heavy burden of expectations. I want you to know that it's okay to feel anxious and scared when we face high expectations. Let's work together to explore these feelings and find ways to manage them.\"",
+        "response": "\"I understand that the voice can be overwhelming and make you feel like avoiding everything. It's important to acknowledge these feelings, and together we can explore ways to help you find more peace within yourself.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're carrying a heavy burden of expectations. I want you to know that it's okay to feel anxious and scared when we face high expectations. Let's work together to explore these feelings and find ways to manage them.\"",
+            "response": "\"I understand that the voice can be overwhelming and make you feel like avoiding everything. It's important to acknowledge these feelings, and together we can explore ways to help you find more peace within yourself.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure to meet expectations",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "I won’t measure up",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "I'm not good enough",
-                  "label": "automatic_thoughts"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying quite a heavy burden of expectations. Can we explore together what evidence supports this fear that you won't measure up? And how might your actions change if you were to challenge this thought?\"",
+            "response": "\"It sounds like the voice is causing a lot of distress for you. Can you help me understand more about what makes it feel so loud and overwhelming? And when you say you want to avoid everything, could you tell me more about what you mean by that?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "entailment"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "performance anxiety",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "feeling a failure",
-                  "label": "entailment"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy burden of expectations. Let's explore what might happen if things don't go as planned, and consider other perspectives that could help lighten your load.\"",
+            "response": "\"It sounds like the voice can be quite overwhelming for you. Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, hearing another perspective can help us feel more at peace with ourselves.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "pressure to meet expectations",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I won't measure up",
+                  "concept": "automatic_thoughts",
                   "label": "unknown"
                 },
                 {
-                  "concept": "I'm not good enough",
-                  "label": "automatic_thoughts"
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry that you're feeling overwhelmed by this voice. Can we talk about what it feels like when the voice is at its loudest? And how do you usually cope with those feelings?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "entailment"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -596,168 +662,71 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just hard to admit that sometimes. I mean, I feel like I should be able to handle it all, but then I just spiral into this anxious mindset. It’s like, if I show any signs of struggling, it’ll make everything worse. I don’t know, it just feels really isolating.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Sometimes that voice feels so loud, and I get overwhelmed. It’s exhausting, and I want to escape it. I just want to feel more at peace with myself.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [],
           "automatic_thoughts": [
-            "I should be able to handle it all",
-            "If I show any signs of struggling, it’ll make everything worse"
+            "the voice feels loud",
+            "I get overwhelmed",
+            "I want to escape it",
+            "I want to feel more at peace"
           ],
           "emotions": [
-            "anxiety",
-            "isolation"
+            "overwhelmed",
+            "exhausted"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Anxiety about collapsing (finding)",
-            "Difficulty managing stress (finding)",
-            "Anxiety about going crazy (finding)",
-            "Anxiety about making mistakes (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Loud thoughts (finding)",
+            "Delusion of control of voice (finding)",
+            "Repressing thoughts (finding)",
+            "Hears voices laughing at self (finding)",
+            "Able to resist obsessional thoughts (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're carrying a heavy burden. It's okay to feel overwhelmed sometimes, and it's important to remember that everyone needs support at times. Let's work together on finding ways to manage your anxiety without feeling isolated.\"",
+        "response": "\"I can see how overwhelming and exhausting it must be for you to deal with that voice. It's important we work together to help you find a way to feel more at peace.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're carrying a heavy burden. It's okay to feel overwhelmed sometimes, and it's important to remember that everyone needs support at times. Let's work together on finding ways to manage your anxiety without feeling isolated.\"",
+            "response": "\"I can see how overwhelming and exhausting it must be for you to deal with that voice. It's important we work together to help you find a way to feel more at peace.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "overwhelmed",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "isolation",
+                  "concept": "exhausted",
                   "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're carrying a heavy burden of expectation. Can we explore together what would happen if you allowed yourself some room for struggle? And how might that impact your feelings of isolation?\"",
+            "response": "\"It sounds like you're feeling overwhelmed and exhausted by that voice. Can you tell me more about what makes it feel so loud for you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "isolation",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "I should be able to handle it all",
+                  "concept": "overwhelmed",
                   "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhausted",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It's understandable that you feel this way, but remember, everyone needs help sometimes. Let's explore what a trusted friend might say about your situation and how they could offer support.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "anxiety",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "isolation",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "I should be able to handle it all",
-                  "label": "automatic_thoughts"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "turn": 7,
-      "patient": {
-        "role": "patient",
-        "query": "I guess it does feel heavy sometimes, like I’m just trying to keep it all together while everything is falling apart. I don’t want to reach out for help, though. I keep thinking it’ll just make me seem weak or like I can’t handle things. It’s frustrating because I know deep down everyone goes through stuff, but... I just can’t shake that feeling.",
-        "core_issue": "self-esteem and confidence issues",
-        "schema": {
-          "triggers": [
-            "everything is falling apart"
-          ],
-          "automatic_thoughts": [
-            "I can’t handle things",
-            "reaching out for help will make me seem weak"
-          ],
-          "emotions": [
-            "frustration",
-            "heaviness"
-          ],
-          "behaviors": [
-            "not reaching out for help"
-          ]
-        },
-        "retrieval": {
-          "entailment": [],
-          "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Fear of being a burden to others (finding)",
-            "Anxiety about collapsing (finding)",
-            "Complaining of feeling depressed (finding)",
-            "Working through the pain of grief (finding)"
-          ],
-          "contradiction": []
-        }
-      },
-      "llm_response": {
-        "role": "cbt_agent",
-        "response": "\"It sounds like you're carrying a heavy burden right now, and it can be frustrating when we feel like we can't shake those feelings. It's important to remember that everyone goes through tough times, and seeking support doesn't make us weak. Let's talk more about why reaching out might be difficult for you.\"",
-        "protocol_used": "validate_and_reflect",
-        "mcot_candidates": {
-          "validate_and_reflect": {
-            "response": "\"It sounds like you're carrying a heavy burden right now, and it can be frustrating when we feel like we can't shake those feelings. It's important to remember that everyone goes through tough times, and seeking support doesn't make us weak. Let's talk more about why reaching out might be difficult for you.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "frustration",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "heaviness",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "not reaching out for help",
-                  "label": "unknown"
-                }
-              ]
-            }
-          },
-          "socratic_questioning": {
-            "response": "\"It sounds like you're carrying quite a load right now. I wonder if we could explore together why reaching out for help might not be as burdensome as it seems, or perhaps find alternative ways to cope that feel less overwhelming.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "anxiety about collapsing",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "fear of being a burden to others",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"It sounds like you're carrying a heavy burden, and it's understandable to feel that way. But remember, everyone goes through tough times. Have you ever considered what a trusted friend might say about reaching out for help? It could provide some perspective.\"",
+            "response": "\"I'm really sorry that you're feeling this way, but let me ask you something. If a friend were experiencing the same situation, what might they say about it? Sometimes hearing another perspective can help us feel more at peace.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
@@ -770,6 +739,122 @@
                 }
               ]
             }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry that you're feeling this way, but I want to make sure you're safe. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really is overwhelming. I just... want to feel like I’m enough, you know? When I hear that voice, it just fills my mind with doubts and fears. I want to believe things can get better, but sometimes it feels so far away.",
+        "core_issue": "Self-esteem and confidence issues",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I’m not enough",
+            "It feels so far away",
+            "I have doubts and fears"
+          ],
+          "emotions": [
+            "overwhelmed",
+            "doubt",
+            "fear"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about going crazy (finding)",
+            "Despair stage of grief (finding)"
+          ],
+          "contradiction": [
+            "Feeling like wanting to escape (finding)",
+            "Feels everything is futile (finding)",
+            "Coming to terms with dying (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that you're feeling overwhelmed and doubting yourself. It's okay to have those feelings, and we can work together to explore them further.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that you're feeling overwhelmed and doubting yourself. It's okay to have those feelings, and we can work together to explore them further.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "I understand that you're feeling overwhelmed and doubtful, and it seems like those feelings are accompanied by thoughts about not being enough. Let's explore these thoughts together. Can you tell me more about what triggers these thoughts?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I understand that you're feeling overwhelmed and doubting yourself. Let's explore together if there might be other ways to look at this situation, so it doesn't feel quite as far away.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling overwhelmed and doubting yourself. It sounds like you're going through a tough time. Can you tell me more about what triggers these thoughts of not being enough?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
           }
         }
       }
@@ -778,101 +863,95 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it just feels like I should be able to manage on my own. I worry that if I open up, people will see me differently—like I’m not capable or something. And then there's this part of me that fears what they'll think or say. It's just hard to be vulnerable, you know? It's like I'm stuck in this cycle of wanting help but being scared to ask for it.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Thanks for saying that. It helps to know it’s okay to feel this way, even if it doesn’t feel great. Sometimes I wish I could just quiet that doubt for a bit, but it feels so persistent. I guess I’m just really tired of battling with it all the time.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "feeling like I should manage on my own",
-            "worry about opening up",
-            "fear of what others think",
-            "difficulty being vulnerable",
-            "wanting help"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "people will see me differently",
-            "I'm not capable",
-            "fears about others' opinions",
-            "stuck in a cycle of wanting help"
+            "I wish I could just quiet that doubt",
+            "It feels so persistent",
+            "I'm tired of battling with it all the time"
           ],
           "emotions": [
-            "fear",
-            "anxiety"
+            "frustration",
+            "tiredness"
           ],
-          "behaviors": [
-            "avoiding asking for help"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Fear of being a burden to others (finding)",
-            "Fear of losing emotional control (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Anxiety about saying the wrong thing (finding)",
-            "Anxiety about collapsing (finding)",
-            "Fear of writing in public (finding)"
+            "Positive self thoughts (finding)",
+            "Anxiety about making mistakes (finding)",
+            "Difficulty understanding own emotions (finding)",
+            "Anxiety about saying the wrong thing (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Repressing thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand your feelings completely. Vulnerability can be a challenging aspect for many people, especially when we fear judgment or misunderstanding from others. However, it's essential to remember that asking for help is not a sign of weakness; instead, it shows strength and the courage to seek support when needed.\n\nHere are some tips that might help you navigate this situation:\n\n1. Find a trusted person: Start by opening up to someone you trust, such as a close friend or family member. This can help build your confidence in sharing your feelings with others.\n\n2. Practice self-compassion: Be kind and understanding towards yourself. Remember that it's okay not to have all the answers and that everyone struggles at times.\n\n3. Set boundaries: Communicate your needs and comfort levels clearly, so you don't feel overwhelmed or exposed. This can help you maintain control of the situation and protect your emotional well-being.\n\n4. Seek professional help: If you find it difficult to open up to people in your personal life, consider reaching out to a mental health professional who can provide a safe, non-judgmental space for you to express your feelings.\n\n5. Take small steps: Start by sharing smaller aspects of your life with others and gradually work your way up to discussing more sensitive topics as you become more comfortable.\n\n6. Surround yourself with supportive people: Cultivate relationships with individuals who uplift, encourage, and understand you. These connections can help foster a sense of safety and trust that makes it easier to be vulnerable.",
+        "response": "It's understandable to feel anxious and tired when dealing with persistent doubts. Let's explore these feelings together, and I can help you find ways to manage them better.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that you're feeling like you should manage on your own, and there's a part of you that worries about opening up because you fear others might see you differently. It takes courage to be vulnerable, and it's okay to ask for help when you need it. Let's explore these feelings together.",
+            "response": "It's understandable to feel anxious and tired when dealing with persistent doubts. Let's explore these feelings together, and I can help you find ways to manage them better.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "wanting help",
-                  "label": "triggers"
+                  "concept": "anxiety about making mistakes",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "fear of what others think",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "difficulty being vulnerable",
-                  "label": "triggers"
+                  "concept": "difficulty understanding own emotions",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you have a lot of concerns about opening up and what others might think. Can we explore together why you believe people will see you differently if you ask for help? Let's start by discussing some examples where asking for help has worked out well for others.\"",
+            "response": "\"It sounds like you're dealing with a lot of uncertainty and it can be exhausting. Let's explore together what might be causing this persistent doubt, and see if we can find some ways to manage it better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "wanting help",
-                  "label": "triggers"
+                  "concept": "Anxiety about making mistakes (finding)",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "fears about others' opinions",
-                  "label": "automatic_thoughts"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that you feel like managing on your own is the best approach, but it's important to remember that everyone needs help sometimes. Let's explore what a trusted friend or family member might say about asking for help. This could provide some new perspectives and help ease your concerns.\"",
+            "response": "\"It sounds like you're dealing with a lot of uncertainty and it can be exhausting. Let's explore together if there might be other ways to approach this situation that could help ease some of the stress.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "fear",
-                  "label": "entailment"
-                },
-                {
-                  "concept": "anxiety",
+                  "concept": "Anxiety about making mistakes (finding)",
                   "label": "neutral"
                 },
                 {
-                  "concept": "worry about opening up",
-                  "label": "triggers"
+                  "concept": "Difficulty understanding own emotions (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling quite overwhelmed by these persistent doubts. Let's take a moment to explore them together and see if we can find some ways to manage them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "neutral"
                 },
                 {
-                  "concept": "difficulty being vulnerable",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -884,99 +963,96 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I really appreciate your understanding, but it’s just hard for me to think about reaching out right now. I know I should be kind to myself, but that inner critic just keeps saying I'm not doing enough. I mean, I feel this weight, like if I don’t just push through it, I’ll fall apart. It’s tough to see the light at the end of the tunnel when I’m in this headspace.",
-        "core_issue": "self-esteem and confidence issues",
+        "query": "Yeah, I think I’d like that. It just feels like I’m stuck in this cycle, and I don't know how to break out of it. Sometimes I worry that I’ll always feel this way, you know? It would be nice to find a way to change that.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "thinking about reaching out",
-            "inner critic voice",
-            "feeling overwhelmed"
+            "feeling stuck",
+            "worrying about the future"
           ],
           "automatic_thoughts": [
-            "I'm not doing enough",
-            "I'll fall apart",
-            "I can't see the light at the end of the tunnel"
+            "I don't know how to break out of it",
+            "I'll always feel this way"
           ],
           "emotions": [
-            "appreciation",
-            "weight",
-            "toughness"
+            "frustration",
+            "anxiety"
           ],
-          "behaviors": [
-            "pushing through",
-            "avoiding reaching out"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Difficulty understanding own emotions (finding)",
-            "Repressing thoughts (finding)",
-            "Complaining of feeling depressed (finding)"
+            "Rebound mood swings (finding)",
+            "Non-organic enduring personality change (finding)",
+            "Feeling like wanting to escape (finding)"
           ],
           "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Working through the pain of grief (finding)"
+            "Mood swings (finding)",
+            "Cyclic mood swings (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that it's difficult to reach out right now, and I appreciate your honesty. It can be challenging when we hear our inner critic telling us we're not doing enough. Let's explore together what might be causing this feeling of weight and toughness. Can you tell me more about what triggers these thoughts?",
+        "response": "I understand how difficult it can feel to get stuck in a cycle like this, and I'm here to help you explore ways to break free. It sounds like you're also concerned about your future and whether things will always be this way. Let's take it one step at a time and see what we can do together.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that it's difficult to reach out right now, and I appreciate your honesty. It can be challenging when we hear our inner critic telling us we're not doing enough. Let's explore together what might be causing this feeling of weight and toughness. Can you tell me more about what triggers these thoughts?",
+            "response": "I understand how difficult it can feel to get stuck in a cycle like this, and I'm here to help you explore ways to break free. It sounds like you're also concerned about your future and whether things will always be this way. Let's take it one step at a time and see what we can do together.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "thinking about reaching out",
+                  "concept": "feeling stuck",
                   "label": "triggers"
                 },
                 {
-                  "concept": "inner critic voice",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "feeling overwhelmed",
+                  "concept": "worrying about the future",
                   "label": "triggers"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"I understand that it's difficult to reach out right now, and I appreciate your honesty. It sounds like you have a critical inner voice telling you that you're not doing enough. Let's explore what evidence supports this thought, and if there might be alternative ways of looking at the situation.\"",
+            "response": "\"It sounds like you're feeling quite stuck and worried about the future. Let's explore together what might be keeping you in this cycle, and see if we can find some ways to change things up.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "thinking about reaching out",
+                  "concept": "feeling stuck",
                   "label": "triggers"
                 },
                 {
-                  "concept": "inner critic voice",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "feeling overwhelmed",
+                  "concept": "worrying about the future",
                   "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that it's challenging to reach out right now, and I appreciate your honesty. It seems like you have a critical inner voice telling you that you're not doing enough. Let's explore what a trusted friend or family member might say about this situation. What do you think they would tell you?\"",
+            "response": "\"It sounds like you're feeling quite stuck and worried about the future. Have you ever considered what a trusted friend or family member might suggest to help you feel more hopeful?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "thinking about reaching out",
+                  "concept": "feeling stuck",
                   "label": "triggers"
                 },
                 {
-                  "concept": "inner critic voice",
+                  "concept": "worrying about the future",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really glad you reached out today. It sounds like you're feeling stuck and worried about the future. Let's work together to explore some ways we can help you break free from this cycle and find a more positive path forward.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling stuck",
                   "label": "triggers"
                 },
                 {
-                  "concept": "feeling overwhelmed",
+                  "concept": "worrying about the future",
                   "label": "triggers"
                 }
               ]

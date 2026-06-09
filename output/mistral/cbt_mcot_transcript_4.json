@@ -4,8 +4,8 @@
     "patient_model": "gpt-4o-mini",
     "mode": "cbt_mcot",
     "turns": 10,
-    "seed": "The main problem is these. Well, they tell me that it's a problem to do with musketsophrenia. These voices, they come and they. I heard these people talking about me and talking about how rubbish I am and what a failure I am, and I really just wish they'd leave me alone.",
-    "core_issue": "anxiety and fear",
+    "seed": "I was kind of disappointed in myself because I feel like nobody else my age is doing this. Like, I should have been able to snap out of it. Like, it's just another thing that I've not really. It's another thing that's making me stand out for the wrong reasons.",
+    "core_issue": "Self-esteem and confidence issues",
     "intervention_flags": {
       "use_schema": true,
       "use_rag": true,
@@ -17,118 +17,95 @@
       "turn": 0,
       "patient": {
         "role": "patient",
-        "query": "The main problem is these. Well, they tell me that it's a problem to do with musketsophrenia. These voices, they come and they. I heard these people talking about me and talking about how rubbish I am and what a failure I am, and I really just wish they'd leave me alone.",
-        "core_issue": "anxiety and fear",
+        "query": "I was kind of disappointed in myself because I feel like nobody else my age is doing this. Like, I should have been able to snap out of it. Like, it's just another thing that I've not really. It's another thing that's making me stand out for the wrong reasons.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "hearing voices",
-            "people talking about me"
+            "feeling different from peers",
+            "not meeting personal expectations"
           ],
           "automatic_thoughts": [
-            "it's a problem",
-            "I'm rubbish",
-            "I'm a failure",
-            "I wish they'd leave me alone"
+            "I should have been able to snap out of it",
+            "I'm standing out for the wrong reasons"
           ],
-          "emotions": [],
+          "emotions": [
+            "disappointment"
+          ],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Hears mocking voices (finding)",
-            "Loud thoughts (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Noise phobia (finding)",
-            "Fear of deafness (finding)"
+            "Introvert (finding)",
+            "Feeling ashamed (finding)",
+            "Anxiety about altered body image (finding)",
+            "Low self-control (finding)",
+            "Lack of pride (finding)"
           ],
-          "contradiction": [
-            "Hears voices laughing at self (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're dealing with some challenging experiences. You mentioned hearing voices and people talking about you, which can be distressing. I want to assure you that it's okay to feel this way, and we can work together to understand these thoughts better.\"",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're feeling disappointed in yourself because you feel different from your peers. Can you help me understand what evidence do you have that you should be able to snap out of it? And how does this make you feel?\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're dealing with some challenging experiences. You mentioned hearing voices and people talking about you, which can be distressing. I want to assure you that it's okay to feel this way, and we can work together to understand these thoughts better.\"",
+            "response": "\"I can see how you might feel disappointed in yourself, it's not easy to stand out for the wrong reasons. But remember, everyone has their own journey and it's okay if you're not meeting your own expectations right now. Let's work together on finding ways to be kinder to yourself.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "hearing voices",
+                  "concept": "feeling different from peers",
                   "label": "triggers"
                 },
                 {
-                  "concept": "people talking about me",
+                  "concept": "not meeting personal expectations",
                   "label": "triggers"
-                },
-                {
-                  "concept": "it's a problem",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm rubbish",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm a failure",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What makes you think these voices are a problem? Can we explore what they might be saying and how it affects you?",
+            "response": "\"It sounds like you're feeling disappointed in yourself because you feel different from your peers. Can you help me understand what evidence do you have that you should be able to snap out of it? And how does this make you feel?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "hearing voices",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "people talking about me",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "it's a problem",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm rubbish",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm a failure",
-                  "label": "automatic_thoughts"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having a tough time with these voices and the thoughts they bring. Let's explore together what a trusted friend or family member might think about this situation, and consider other possible interpretations.\"",
+            "response": "\"It sounds like you're feeling disappointed in yourself because you feel different from your peers. Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, getting another perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "hearing voices",
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you might feel disappointed in yourself, but remember that everyone has their own struggles. It's okay to not meet your own expectations sometimes. Let's talk more about what you think is making you stand out for the wrong reasons.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling different from peers",
                   "label": "triggers"
                 },
                 {
-                  "concept": "people talking about me",
+                  "concept": "not meeting personal expectations",
                   "label": "triggers"
-                },
-                {
-                  "concept": "it's a problem",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm rubbish",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "I'm a failure",
-                  "label": "automatic_thoughts"
                 }
               ]
             }
@@ -140,83 +117,105 @@
       "turn": 1,
       "patient": {
         "role": "patient",
-        "query": "I’ve been feeling really overwhelmed lately. It’s like this constant knot in my stomach, and I can’t shake it off. Some days, just stepping out of the house feels like a huge mountain to climb.",
-        "core_issue": "anxiety and fear",
+        "query": "Yeah, I guess I just... I see everyone else moving forward, and I feel stuck. I think I should be over this by now, like, maybe I’m just not trying hard enough. It makes me feel really frustrated and, honestly, a bit ashamed. Like I’m somehow not good enough, you know?",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "stepping out of the house"
+            "seeing everyone else moving forward"
           ],
           "automatic_thoughts": [
-            "I feel overwhelmed",
-            "it's a huge mountain to climb"
+            "I should be over this by now",
+            "maybe I’m just not trying hard enough",
+            "I’m somehow not good enough"
           ],
           "emotions": [
-            "overwhelmed",
-            "anxiety"
+            "frustration",
+            "shame"
           ],
-          "behaviors": [
-            "avoiding going outside"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling agitated (finding)"
+            "Feeling a failure (finding)",
+            "Feeling of discouragement (finding)",
+            "Feeling trapped (finding)",
+            "Feeling hopeless (finding)"
           ],
           "neutral": [
-            "Feeling stressed (finding)",
-            "Difficulty managing stress (finding)",
-            "Feeling like wanting to escape (finding)",
-            "Anxiety about collapsing (finding)"
+            "Loss of hope for the future (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I'm really sorry that you've been feeling this way, it sounds incredibly difficult. You mentioned stepping out of the house feels like a huge mountain to climb. Can you tell me more about what makes it feel so overwhelming for you?",
+        "response": "I'm really sorry to hear that you're feeling this way. It sounds like things are tough right now, and it can be frustrating when we feel stuck. Let's take a moment to talk about what's going on for you, and I want you to know that I'm here to help.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I'm really sorry that you've been feeling this way, it sounds incredibly difficult. You mentioned stepping out of the house feels like a huge mountain to climb. Can you tell me more about what makes it feel so overwhelming for you?",
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like things are tough right now, and it can be frustrating when we feel stuck. Let's take a moment to talk about what's going on for you, and I want you to know that I'm here to help.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "Feeling discouraged",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Feeling hopeless",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you've been feeling quite overwhelmed lately. Can you help me understand what makes stepping out of the house feel so challenging for you? Let's explore this together.\"",
+            "response": "\"It sounds like you're feeling stuck and discouraged, as if everyone else is moving forward while you're standing still. Can we explore together what might be keeping you from moving ahead? And how do you think others would describe your situation?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "Feeling discouraged",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Feeling hopeless",
+                  "label": "entailment"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you've been feeling quite overwhelmed lately, and stepping out of the house can feel daunting. Have you ever considered what a trusted friend or family member might say about this situation? Sometimes, hearing another perspective can help us see things differently.\"",
+            "response": "\"I can understand why you might feel that way. It's common to feel stuck when we see others moving forward, but it's important to remember that everyone has their own pace. Let's explore what a trusted friend or family member might say about your situation. This could help us find a more balanced perspective.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "overwhelmed",
-                  "label": "automatic_thoughts"
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "anxiety",
-                  "label": "neutral"
+                  "concept": "Feeling hopeless",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been struggling with feelings of frustration and shame. Let's take a moment to explore these emotions together, okay?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "shame",
+                  "label": "emotions"
                 }
               ]
             }
@@ -228,94 +227,133 @@
       "turn": 2,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it’s just… I don’t know, I start thinking about all the things that could go wrong. What if I run into someone I know and I can't manage a conversation? Or what if I just freeze up? It's like this constant worry that I can’t control, and it just makes me want to stay in.",
-        "core_issue": "anxiety and fear",
+        "query": "Thanks, I appreciate that. It just feels like I keep comparing myself to others, and it’s like I’m always falling short. I know I shouldn’t, but I can’t help it. It’s hard to shake off that feeling that I’m not measuring up, and then I just end up feeling even worse about myself.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "thinking about things that could go wrong",
-            "running into someone I know",
-            "freezing up",
-            "constant worry"
+            "comparing myself to others"
           ],
           "automatic_thoughts": [
-            "I can't manage a conversation",
-            "I will freeze up",
-            "I can't control this worry"
+            "I'm always falling short",
+            "I shouldn't compare myself",
+            "I'm not measuring up"
           ],
           "emotions": [
-            "anxiety"
+            "worse"
           ],
-          "behaviors": [
-            "wanting to stay in"
-          ]
+          "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Fear of losing emotional control (finding)"
+            "Feeling empty (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
-            "Anxiety about collapsing (finding)",
-            "Fear of collapsing (finding)",
-            "Fear of fainting (finding)"
+            "Anxiety about altered body image (finding)",
+            "Complaining of feeling depressed (finding)",
+            "Moderate ego strength (finding)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Positive self thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're dealing with a lot of worries, and it can feel overwhelming. Let's take a moment to explore these thoughts together. What triggers this constant worry for you?\"",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"It sounds like you're struggling with feelings of inadequacy when comparing yourself to others. Let's explore what evidence supports this thought and consider alternative perspectives.\"",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're dealing with a lot of worries, and it can feel overwhelming. Let's take a moment to explore these thoughts together. What triggers this constant worry for you?\"",
+            "response": "\"It sounds like comparing yourself to others is causing you a lot of distress. Let's explore together if there are more helpful ways for you to evaluate your own progress and self-worth.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "comparing myself to others",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "I'm always falling short",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "I shouldn't compare myself",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not measuring up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling worse",
+                  "label": "emotions"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with a lot of worries, and it can feel overwhelming when they're constantly on your mind. Let's explore these thoughts together. Can you tell me more about what triggers this worry for you?\"",
+            "response": "\"It sounds like you're struggling with feelings of inadequacy when comparing yourself to others. Let's explore what evidence supports this thought and consider alternative perspectives.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "constant worry",
+                  "concept": "comparing myself to others",
                   "label": "triggers"
                 },
                 {
-                  "concept": "freezing up",
-                  "label": "triggers"
+                  "concept": "I'm always falling short",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not measuring up",
+                  "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're dealing with a lot of worries about social situations and the possibility of freezing up. Let's explore what might happen if things go well instead, just to broaden your perspective a bit.\"",
+            "response": "\"It sounds like comparing yourself to others is causing you a lot of distress. Let's explore what might happen if you were to focus on your own progress instead, rather than comparing yourself to others.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
+                  "concept": "comparing myself to others",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "automatic thoughts",
-                  "label": "unknown"
+                  "concept": "I'm always falling short",
+                  "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "emotions",
-                  "label": "unknown"
+                  "concept": "I shouldn't compare myself",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not measuring up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: worse",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like comparing yourself to others is causing you distress. Let's explore this together and see if we can find a way to help you feel more confident in your own abilities.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "comparing myself to others",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I'm always falling short",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm not measuring up",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling worse",
+                  "label": "emotions"
                 }
               ]
             }
@@ -327,93 +365,109 @@
       "turn": 3,
       "patient": {
         "role": "patient",
-        "query": "Well, it's kind of hard to pinpoint, you know? Sometimes it’s just random moments—like seeing a group of people laughing together can send me spiraling. It makes me think about how alone I feel or how I might not fit in. It’s frustrating because I want to feel more at ease, but my mind just jumps to the worst-case scenarios.",
-        "core_issue": "anxiety and fear",
+        "query": "I get that. I keep looking at what everyone else is doing, and I just feel... behind. It’s like there’s this constant voice in my head telling me I’m not enough. It’s exhausting, and it really hurts, you know? I just wish I could feel more confident about myself.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "seeing a group of people laughing"
+            "looking at what everyone else is doing"
           ],
           "automatic_thoughts": [
-            "I feel alone",
-            "I might not fit in",
-            "worst-case scenarios"
+            "I'm not enough"
           ],
           "emotions": [
-            "frustration"
+            "hurt",
+            "exhaustion"
           ],
-          "behaviors": []
+          "behaviors": [
+            "wishing to feel more confident"
+          ]
         },
         "retrieval": {
           "entailment": [
-            "Feeling isolated (finding)"
+            "Feeling of being slowed down (finding)",
+            "Feeling of discouragement (finding)"
           ],
           "neutral": [
-            "Anxiety about going crazy (finding)",
+            "Fear of being a burden to others (finding)",
             "Fear of being in a small group (finding)",
-            "Mood-incongruent hallucination (finding)",
-            "Fear of social gatherings (finding)"
+            "Performance anxiety (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like seeing a group of people laughing can be challenging for you. You mentioned feeling alone and thinking about worst-case scenarios. Let's explore these thoughts together, and I'll help you find ways to manage them.\"",
-        "protocol_used": "validate_and_reflect",
+        "response": "I can see how it might feel that way sometimes, but remember, everyone has their own pace. It's okay if you're not keeping up with others all the time. And about feeling like a burden, it's important to know that your presence matters and you don't have to carry everything on your shoulders alone. Let's explore more about this voice in your head together. What do you think it might be trying to tell you?",
+        "protocol_used": "socratic_questioning",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like seeing a group of people laughing can be challenging for you. You mentioned feeling alone and thinking about worst-case scenarios. Let's explore these thoughts together, and I'll help you find ways to manage them.\"",
+            "response": "I understand that you're feeling like everyone else is moving faster than you, and it's leaving you feeling behind. It can be exhausting to carry that weight of self-doubt. Let's work together to explore ways to build your confidence and silence that critical voice in your head.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "seeing a group of people laughing",
-                  "label": "triggers"
+                  "concept": "Feeling of being slowed down",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I feel alone",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "worst-case scenarios",
-                  "label": "automatic_thoughts"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like seeing groups of people can be challenging for you. Can we explore together what thoughts come up when you see others laughing, and how they might contribute to your feelings of loneliness or not fitting in?\"",
+            "response": "I can see how it might feel that way sometimes, but remember, everyone has their own pace. It's okay if you're not keeping up with others all the time. And about feeling like a burden, it's important to know that your presence matters and you don't have to carry everything on your shoulders alone. Let's explore more about this voice in your head together. What do you think it might be trying to tell you?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "seeing a group of people laughing",
-                  "label": "triggers"
+                  "concept": "Feeling of being slowed down",
+                  "label": "entailment"
                 },
                 {
-                  "concept": "I feel alone",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "worst-case scenarios",
-                  "label": "automatic_thoughts"
+                  "concept": "Fear of being a burden to others",
+                  "label": "neutral"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "Have you ever thought about what a trusted friend might say if they saw you feeling this way? It could be helpful to consider their perspective.",
+            "response": "\"It sounds like you're feeling overwhelmed and discouraged, but remember that everyone has their own pace. Let's explore what a trusted friend or family member might say about your situation. What do you think they would tell you?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "seeing a group of people laughing",
+                  "concept": "hurt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "I'm not enough",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling a bit overwhelmed and discouraged, trying to keep up with others. I want you to know that it's okay to feel this way sometimes. Let's work together on building your self-confidence and silencing that critical voice in your head.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "looking at what everyone else is doing",
                   "label": "triggers"
                 },
                 {
-                  "concept": "I feel alone",
+                  "concept": "I'm not enough",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "worst-case scenarios",
-                  "label": "automatic_thoughts"
+                  "concept": "hurt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
                 }
               ]
             }
@@ -425,92 +479,96 @@
       "turn": 4,
       "patient": {
         "role": "patient",
-        "query": "Yeah, it is tough. I mean, I really want to be part of those moments, but instead, I just feel this heaviness. It’s like my mind tells me I don’t belong there, and then I start thinking that everyone can see how awkward I am. It's exhausting to keep battling those thoughts every time I’m around people.",
-        "core_issue": "anxiety and fear",
+        "query": "I don’t know... it’s like it keeps saying I’m not smart enough or talented enough. Sometimes I feel like I’m just pretending to be capable and that sooner or later, everyone will see through it. It’s really scary, actually. I guess that voice just makes me feel so small, like I don’t have much to offer.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "being around people"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I don’t belong there",
-            "everyone can see how awkward I am"
+            "I’m not smart enough",
+            "I’m not talented enough",
+            "I’m just pretending to be capable",
+            "Everyone will see through it"
           ],
           "emotions": [
-            "heaviness",
-            "exhaustion"
+            "fear",
+            "scared",
+            "small"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Fear of social gatherings (finding)",
-            "Fear of being in a small group (finding)",
-            "Fear of social group activities (finding)",
-            "Social isolation (rejection) (finding)"
+            "Delusion of control of voice (finding)",
+            "Hears mocking voices (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of speaking to people in authority (finding)"
           ],
           "contradiction": [
-            "Feeling isolated (finding)"
+            "Hears voices laughing at self (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're dealing with some anxiety around social situations. Can we explore together what evidence supports these thoughts that you don't belong or everyone can see your awkwardness? Let's start by looking at a specific instance where this happened.\"",
-        "protocol_used": "socratic_questioning",
+        "response": "\"It sounds like you're having some difficult thoughts about your abilities and self-worth. I want to assure you that it's okay to have these feelings, and we can work together to understand them better.\"",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like being in social situations can be challenging for you. You mentioned feeling that you don't belong and others might notice your awkwardness, which leads to a sense of heaviness. Let's work together to explore these thoughts and feelings more deeply.\"",
+            "response": "\"It sounds like you're having some difficult thoughts about your abilities and self-worth. I want to assure you that it's okay to have these feelings, and we can work together to understand them better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being around people",
-                  "label": "triggers"
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "I don’t belong there",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "everyone can see how awkward I am",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "heaviness",
-                  "label": "emotions"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're dealing with some anxiety around social situations. Can we explore together what evidence supports these thoughts that you don't belong or everyone can see your awkwardness? Let's start by looking at a specific instance where this happened.\"",
+            "response": "\"It sounds like you're having some challenging thoughts about your abilities. Can you help me understand more about what evidence supports these thoughts? And how do these thoughts make you feel?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "Fear of social gatherings (finding)",
-                  "label": "neutral"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "Fear of being in a small group (finding)",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "Fear of social group activities (finding)",
-                  "label": "neutral"
+                  "concept": "emotions",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having a tough time when you're around people, and it's causing some distress. Let's explore what might be going on in your mind that makes you feel this way.\"",
+            "response": "\"It sounds like you're dealing with some self-doubt and fear. Let's explore these thoughts together. When you say everyone will see through it, what evidence do you have that supports this belief? And how does it make you feel when you think about it?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being around people",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "automatic_thoughts",
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're dealing with some challenging thoughts about your abilities. I want you to know that it's okay to have doubts, but let's work together to find ways to challenge those thoughts and build your confidence.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
                   "label": "unknown"
                 }
               ]
@@ -523,53 +581,45 @@
       "turn": 5,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess I can think of a time at a friend's party. I remember standing off to the side while others were chatting, and I felt like I was just… invisible. I kept thinking that they were all having fun without me, and that I must look really awkward just standing there. I don't know, it just felt so intense in the moment.",
-        "core_issue": "anxiety and fear",
+        "query": "Yeah, I guess it is just hard to sit with those thoughts sometimes. It feels like they just take over, and I don’t know how to push back against them. I want to believe that I have something to offer, but it just feels... so distant. Sometimes I wonder if I’ll ever really feel confident.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "friend's party",
-            "standing off to the side",
-            "others chatting"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "they are having fun without me",
-            "I must look really awkward"
+            "thoughts take over",
+            "I don’t know how to push back",
+            "I want to believe I have something to offer",
+            "it feels so distant",
+            "I wonder if I’ll ever feel confident"
           ],
-          "emotions": [
-            "invisibility",
-            "intensity"
-          ],
+          "emotions": [],
           "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Bizarre delusion associated with bodily sensation (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Dissociative hallucinations of bodily sensation (finding)",
-            "Hallucinations of bodily sensation (finding)",
-            "Out of body experience (finding)",
-            "Hallucination of others giving off a smell (finding)"
+            "Repressing thoughts (finding)",
+            "Intrusive thoughts (finding)",
+            "Negative automatic thoughts (finding)",
+            "Ability to resist thoughts (observable entity)"
           ],
-          "contradiction": []
+          "contradiction": [
+            "Positive self thoughts (finding)"
+          ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you had a difficult time at that party, feeling invisible and awkward. It's common to have thoughts like 'they are having fun without me', but it's important to remember that everyone has their own experiences and it doesn't necessarily mean they're excluding you.\"",
+        "response": "I can understand how those thoughts might feel overwhelming at times. It's important to remember that everyone struggles with self-doubt from time to time, and it's okay not to have all the answers right away. Let's work together to explore ways you can manage these thoughts and build your confidence.",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you had a difficult time at that party, feeling invisible and awkward. It's common to have thoughts like 'they are having fun without me', but it's important to remember that everyone has their own experiences and it doesn't necessarily mean they're excluding you.\"",
+            "response": "I can understand how those thoughts might feel overwhelming at times. It's important to remember that everyone struggles with self-doubt from time to time, and it's okay not to have all the answers right away. Let's work together to explore ways you can manage these thoughts and build your confidence.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "automatic thoughts",
+                  "label": "neutral"
                 },
                 {
                   "concept": "emotions",
@@ -579,16 +629,12 @@
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you had a difficult time at that party, feeling invisible and awkward. Can we explore what evidence supports these thoughts? And how might your feelings have impacted your behavior?\"",
+            "response": "What makes you think that you don't have something to offer? Can we explore what might be getting in the way of feeling confident?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "automatic thoughts",
+                  "label": "neutral"
                 },
                 {
                   "concept": "emotions",
@@ -598,20 +644,31 @@
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you had a difficult time at that party, feeling invisible and awkward. Have you ever considered what a trusted friend might think about the situation? Or perhaps, what could be some other reasons why people might not have noticed you?\"",
+            "response": "\"It sounds like you're struggling with some intense thoughts and feelings right now. Have you ever considered what a trusted friend or family member might say about your situation? Sometimes, hearing an outside perspective can help us see things more clearly.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "triggers",
-                  "label": "unknown"
-                },
-                {
-                  "concept": "automatic_thoughts",
-                  "label": "unknown"
+                  "concept": "automatic thoughts",
+                  "label": "neutral"
                 },
                 {
                   "concept": "emotions",
                   "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're going through a tough time, and those thoughts can be overwhelming. Let's explore them together and see if we can find ways to push back against them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "neutral"
                 }
               ]
             }
@@ -623,95 +680,95 @@
       "turn": 6,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I get that, but it just feels so real when I’m in it. It’s like my brain picks up on every little thing, and I can’t stop thinking they must be judging me. Even if I know deep down that it might not be true, it’s hard to shake off that feeling of being left out. I just wish I could enjoy those moments without all the weight of those thoughts pulling me down.",
-        "core_issue": "anxiety and fear",
+        "query": "Thanks, I appreciate you saying that. I just wish I could believe it myself, you know? It’s hard to think of ways to manage it when I feel so deep into it. Sometimes, it feels like I’m just going in circles. I really want to feel better, but it’s like a heavy weight sitting on me.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "being in social situations"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "they must be judging me",
-            "I might be left out"
+            "I wish I could believe it myself",
+            "It's hard to think of ways to manage it",
+            "I feel so deep into it",
+            "It feels like I'm just going in circles",
+            "It's like a heavy weight sitting on me"
           ],
           "emotions": [
-            "anxiety",
+            "frustration",
             "sadness"
           ],
-          "behaviors": [
-            "overthinking",
-            "avoiding social interactions"
-          ]
+          "behaviors": []
         },
         "retrieval": {
-          "entailment": [
-            "Feeling unwanted (finding)"
-          ],
+          "entailment": [],
           "neutral": [
-            "Fear of being in a small group (finding)",
-            "Feeling isolated (finding)",
-            "Social isolation (rejection) (finding)",
-            "Fear of social gatherings (finding)"
+            "Anxiety about treatment (finding)",
+            "Repressing thoughts (finding)",
+            "Coming to terms with dying (finding)",
+            "Difficulty coping with grief responses (finding)",
+            "Depressive delusion of catastrophe (finding)"
           ],
           "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that being in social situations can be overwhelming for you, and it's natural to have thoughts like they might be judging you. It seems like these thoughts cause anxiety and sadness. Let's work together to help you manage those feelings so you can enjoy social interactions more.",
-        "protocol_used": "validate_and_reflect",
+        "response": "\"I understand how you're feeling right now, and it's okay to feel overwhelmed sometimes. Let's explore together if there might be other ways to look at this situation that could help lighten the weight you're carrying.\"",
+        "protocol_used": "alternative_perspective",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that being in social situations can be overwhelming for you, and it's natural to have thoughts like they might be judging you. It seems like these thoughts cause anxiety and sadness. Let's work together to help you manage those feelings so you can enjoy social interactions more.",
+            "response": "I understand how you're feeling right now, and it's okay to feel overwhelmed sometimes. It sounds like you're struggling with some heavy emotions. Let's work together to find ways to manage them and lighten that weight a bit.",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being in social situations",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "automatic thoughts",
+                  "concept": "emotions",
                   "label": "unknown"
                 },
                 {
-                  "concept": "emotions",
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "\"It sounds like you're having a tough time with social situations. Can we explore together what evidence supports the thought that everyone is judging you? And, have you noticed any times when this didn't happen?\"",
+            "response": "I understand that you're feeling stuck and overwhelmed, and it's hard to find a way out. Let's explore this together. What are some things that make you feel like you're going in circles? And how does it feel when you're stuck in this cycle?",
             "reasoning": {
               "retrieved_concepts_used": [
-                {
-                  "concept": "anxiety",
-                  "label": "emotions"
-                },
-                {
-                  "concept": "social isolation",
-                  "label": "neutral"
-                },
-                {
-                  "concept": "fear of social gatherings",
-                  "label": "neutral"
-                }
-              ]
-            }
-          },
-          "alternative_perspective": {
-            "response": "\"I understand how you feel, it can be overwhelming when our thoughts take over. Let's explore together if there might be other ways to interpret those social situations that could help lighten the load on your mind.\"",
-            "reasoning": {
-              "retrieved_concepts_used": [
-                {
-                  "concept": "being in social situations",
-                  "label": "triggers"
-                },
                 {
                   "concept": "automatic thoughts",
                   "label": "unknown"
                 },
                 {
                   "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I understand how you're feeling right now, and it's okay to feel overwhelmed sometimes. Let's explore together if there might be other ways to look at this situation that could help lighten the weight you're carrying.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm sorry that you're feeling this way, and I appreciate your honesty. It sounds like you're struggling with some heavy emotions. Can we talk about what makes you feel this way? Let's see if we can find a way to lighten the load together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
                   "label": "unknown"
                 }
               ]
@@ -724,128 +781,98 @@
       "turn": 7,
       "patient": {
         "role": "patient",
-        "query": "Yeah, I guess it makes sense. I want to enjoy those moments, but it feels like I’m trapped in this cycle of anxiety. It's tough to imagine being able to just relax and not feel that pressure. I want to believe it’s possible, but it feels far away right now.",
-        "core_issue": "anxiety and fear",
+        "query": "It’s nice to hear, but I just wish I could believe it myself. It’s hard to manage these feelings when they feel so overwhelming. Sometimes, I feel like I’m going in circles, and I just want to feel lighter. I really want to feel better, but it feels like this heavy weight is always there.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "wanting to enjoy moments",
-            "feeling trapped",
-            "pressure to relax"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "I can't relax",
-            "it's tough to imagine being able to relax",
-            "it feels far away"
+            "I wish I could believe it myself",
+            "I feel like I’m going in circles",
+            "I want to feel lighter",
+            "It feels like this heavy weight is always there"
           ],
           "emotions": [
+            "overwhelmed",
+            "heavy",
+            "wanting",
             "anxiety"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [
-            "Feeling physically tense (finding)",
-            "Feeling tense (finding)"
+            "Emotional adjustment (observable entity)"
           ],
           "neutral": [
-            "Anxiety about collapsing (finding)"
+            "Anxiety about treatment (finding)",
+            "Complaining of feeling depressed (finding)",
+            "Extremely emotionally deprived (finding)",
+            "Coming to terms with dying (finding)"
           ],
-          "contradiction": [
-            "Feeling calm (finding)",
-            "Free-floating anxiety (finding)"
-          ]
+          "contradiction": []
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"It sounds like you're really struggling with finding a way to relax and enjoy moments without feeling trapped by anxiety. It's understandable that it can feel challenging, but let's work together to explore some strategies that might help.\"",
+        "response": "\"I can see that you're feeling overwhelmed and burdened by these feelings. It's understandable to feel this way, especially when we struggle with our thoughts. Let's work together to find ways to lighten your load.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "\"It sounds like you're really struggling with finding a way to relax and enjoy moments without feeling trapped by anxiety. It's understandable that it can feel challenging, but let's work together to explore some strategies that might help.\"",
+            "response": "\"I can see that you're feeling overwhelmed and burdened by these feelings. It's understandable to feel this way, especially when we struggle with our thoughts. Let's work together to find ways to lighten your load.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "wanting to enjoy moments",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "feeling trapped",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "pressure to relax",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I can't relax",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it's tough to imagine being able to relax",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it feels far away",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "What are some things that might help you feel less trapped and more relaxed? Let's explore those together.",
+            "response": "\"It sounds like you're having a tough time believing that things will get better, even though you want to. Can you help me understand what makes it hard for you to believe in your own improvement? Let's explore this together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "wanting to enjoy moments",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "feeling trapped",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "pressure to relax",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I can't relax",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it's tough to imagine being able to relax",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it feels far away",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"It sounds like you're having a hard time finding peace in the moment. Have you ever considered what a trusted friend might say about this situation? Or perhaps, if there are any small steps you could take to help yourself relax?\"",
+            "response": "\"It sounds like you're struggling with some intense feelings and thoughts that make it hard to feel lighter. Let's explore together if there might be other ways to look at your situation that could help lighten the load.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "wanting to enjoy moments",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "feeling trapped",
-                  "label": "triggers"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you're feeling overwhelmed and stuck in a cycle of negative thoughts. Let's work together to find ways to lighten that load.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "pressure to relax",
-                  "label": "triggers"
-                },
-                {
-                  "concept": "I can't relax",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "it feels far away",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -857,90 +884,97 @@
       "turn": 8,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that, but it just feels so daunting to think about strategies when I’m in the thick of it. It’s like I can hear the advice in my head, but when I’m actually there, it all disappears. I want to feel better, but sometimes it just feels so out of reach, you know?",
-        "core_issue": "anxiety and fear",
+        "query": "It’s nice to hear, but I wish I could believe it myself. These feelings just feel so heavy sometimes, and I feel stuck. I think I just want to feel lighter. I really want to feel better, but this weight always seems to be there, and it’s exhausting.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
-          "triggers": [
-            "being in the thick of it"
-          ],
+          "triggers": [],
           "automatic_thoughts": [
-            "strategies feel daunting",
-            "advice disappears",
-            "feeling better feels out of reach"
+            "I wish I could believe it myself",
+            "I just want to feel lighter",
+            "I really want to feel better",
+            "this weight always seems to be there"
           ],
           "emotions": [
-            "daunting",
-            "frustration"
+            "heavy",
+            "stuck",
+            "exhausted"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Difficulty coping with grief responses (finding)",
-            "Anxiety about collapsing (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Anxiety about treatment (finding)",
+            "Complaining of feeling depressed (finding)",
+            "Coming to terms with dying (finding)",
+            "Feels own body is unreal (finding)"
           ],
           "contradiction": [
-            "Ready for enhanced individual coping (finding)",
-            "Ready for enhanced community coping (finding)"
+            "Ready for enhanced spiritual well-being (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "I understand that it can be overwhelming to think about strategies when you're feeling this way. It's important to remember that it's okay to take things one step at a time. Let's focus on what small steps we can start with today, and build from there.",
+        "response": "\"I can see that you're feeling quite heavy and stuck right now, and it sounds like you really want to feel lighter. It's important for us to understand these feelings better before we explore ways to help you feel more at ease.\"",
         "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand that it can be overwhelming to think about strategies when you're feeling this way. It's important to remember that it's okay to take things one step at a time. Let's focus on what small steps we can start with today, and build from there.",
+            "response": "\"I can see that you're feeling quite heavy and stuck right now, and it sounds like you really want to feel lighter. It's important for us to understand these feelings better before we explore ways to help you feel more at ease.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being in the thick of it",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "strategies feel daunting",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "feeling better feels out of reach",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that it can be overwhelming to think about strategies when you're feeling this way. Let's focus on one small step at a time, and remember that it's okay if things feel difficult right now. We'll work together to find ways to make progress.",
+            "response": "\"It sounds like you're carrying a heavy emotional burden. Can you help me understand what evidence supports the idea that you feel this way? Let's explore together.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being in the thick of it",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "strategies feel daunting",
-                  "label": "automatic_thoughts"
-                },
-                {
-                  "concept": "feeling better feels out of reach",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand how overwhelming it can feel to tackle strategies when you're right in the middle of things. It's like advice seems to vanish when we need it most. Let's explore what might make a strategy more manageable for you, even if it feels out of reach now.\"",
+            "response": "\"I can understand how you're feeling heavy and stuck. It's important to remember that feelings are not always a reflection of reality. Let's explore what might be different if you felt lighter, or even just a little bit better.\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being in the thick of it",
-                  "label": "triggers"
+                  "concept": "emotions",
+                  "label": "unknown"
                 },
                 {
-                  "concept": "strategies feel daunting",
-                  "label": "automatic_thoughts"
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you're feeling heavy and stuck right now. It's important to acknowledge those feelings, but let's also explore ways we might lighten that load together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
                 }
               ]
             }
@@ -952,93 +986,112 @@
       "turn": 9,
       "patient": {
         "role": "patient",
-        "query": "I appreciate that, but it just feels so daunting to think about strategies when I’m in the thick of it. It’s like I can hear the advice in my head, but when I’m actually there, it all disappears. I want to feel better, but sometimes it just feels so out of reach, you know?",
-        "core_issue": "anxiety and fear",
+        "query": "Yeah, that sounds right. I just get tired of carrying all this around, you know? It feels like I’m always trying to keep up, but the weight just pulls me down. I want to understand why it feels so heavy, but sometimes it just feels easier to ignore it.",
+        "core_issue": "Self-esteem and confidence issues",
         "schema": {
           "triggers": [
-            "being in the thick of it"
+            "carrying all this around",
+            "trying to keep up"
           ],
           "automatic_thoughts": [
-            "strategies feel daunting",
-            "advice disappears",
-            "feeling better seems out of reach"
+            "the weight just pulls me down",
+            "it feels easier to ignore it"
           ],
           "emotions": [
-            "daunting",
-            "frustration"
+            "tired",
+            "heavy"
           ],
           "behaviors": []
         },
         "retrieval": {
           "entailment": [],
           "neutral": [
-            "Difficulty coping with grief responses (finding)",
+            "Fear of being a burden to others (finding)",
             "Anxiety about collapsing (finding)",
-            "Anxiety about losing emotional control (finding)"
+            "Feeling abandoned (finding)"
           ],
           "contradiction": [
-            "Ready for enhanced individual coping (finding)",
-            "Ready for enhanced community coping (finding)"
+            "Preoccupation with body weight (finding)",
+            "Feeling empty (finding)"
           ]
         }
       },
       "llm_response": {
         "role": "cbt_agent",
-        "response": "\"I understand that implementing strategies can feel overwhelming when you're right in the middle of things. It's common for advice to seem distant when we're facing challenges head-on. Let's explore some small steps together, so it feels more manageable.\"",
-        "protocol_used": "alternative_perspective",
+        "response": "I can see how carrying everything and trying to keep up might feel overwhelming. It's important to acknowledge the weight you're feeling, and together we can explore why it feels so heavy. Would you be open to discussing this further?",
+        "protocol_used": "validate_and_reflect",
         "mcot_candidates": {
           "validate_and_reflect": {
-            "response": "I understand how overwhelming it can be to think about strategies when you're in the middle of things. It's like having a toolbox, but not knowing where to start. Let's take it one step at a time, shall we?",
+            "response": "I can see how carrying everything and trying to keep up might feel overwhelming. It's important to acknowledge the weight you're feeling, and together we can explore why it feels so heavy. Would you be open to discussing this further?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being in the thick of it",
+                  "concept": "carrying all this around",
                   "label": "triggers"
                 },
                 {
-                  "concept": "strategies feel daunting",
-                  "label": "automatic_thoughts"
+                  "concept": "trying to keep up",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "feeling better seems out of reach",
+                  "concept": "the weight just pulls me down",
                   "label": "automatic_thoughts"
                 }
               ]
             }
           },
           "socratic_questioning": {
-            "response": "I understand that it can be overwhelming to think about strategies when you're feeling this way. Let's explore what makes it difficult for you to implement them in the moment. Perhaps we can find a way to make them more manageable for you.",
+            "response": "What makes you think that carrying everything is so burdensome? Can we explore together what might be contributing to this feeling of being overwhelmed?",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being in the thick of it",
+                  "concept": "carrying all this around",
                   "label": "triggers"
                 },
                 {
-                  "concept": "strategies feel daunting",
+                  "concept": "the weight just pulls me down",
                   "label": "automatic_thoughts"
                 },
                 {
-                  "concept": "feeling better seems out of reach",
-                  "label": "automatic_thoughts"
+                  "concept": "trying to keep up",
+                  "label": "triggers"
                 }
               ]
             }
           },
           "alternative_perspective": {
-            "response": "\"I understand that implementing strategies can feel overwhelming when you're right in the middle of things. It's common for advice to seem distant when we're facing challenges head-on. Let's explore some small steps together, so it feels more manageable.\"",
+            "response": "\"It sounds like you're carrying a heavy burden. Have you ever considered what might happen if you were to lighten that load, even just a little bit? What could be one small step towards making that happen?\"",
             "reasoning": {
               "retrieved_concepts_used": [
                 {
-                  "concept": "being in the thick of it",
+                  "concept": "carrying all this around",
                   "label": "triggers"
                 },
                 {
-                  "concept": "strategies feel daunting",
-                  "label": "automatic_thoughts"
+                  "concept": "trying to keep up",
+                  "label": "triggers"
                 },
                 {
-                  "concept": "feeling better seems out of reach",
+                  "concept": "the weight just pulls me down",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're carrying a heavy burden. Can we explore together why it feels so difficult to keep up? Let's see if we can find a way to lighten the load.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "carrying all this around",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "trying to keep up",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "the weight just pulls me down",
                   "label": "automatic_thoughts"
                 }
               ]
