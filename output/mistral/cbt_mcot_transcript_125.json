@@ -1,0 +1,1162 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 10,
+    "seed": "I inherited some money, because both of my parents died last year. I moved to a new state, bought a house I love... but I just feel empty, and alone.",
+    "core_issue": "ongoing depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I inherited some money, because both of my parents died last year. I moved to a new state, bought a house I love... but I just feel empty, and alone.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "inherited money",
+            "parents died",
+            "moved to a new state",
+            "bought a house"
+          ],
+          "automatic_thoughts": [
+            "I feel empty",
+            "I feel alone"
+          ],
+          "emotions": [
+            "emptiness",
+            "loneliness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling empty (finding)",
+            "Feeling isolated (finding)",
+            "Feeling abandoned (finding)",
+            "Feeling lonely (finding)"
+          ],
+          "neutral": [
+            "Feels life is meaningless (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"It's understandable that moving to a new place can feel isolating, even with the positive change of owning your dream house. Can you tell me more about what makes you feel empty?\"",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like inheriting the money and moving to a new state were significant changes, but it's understandable that they might not have filled the void left by your parents' passing. Let's take some time to explore these feelings together, so we can better understand them and find ways to cope.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It's understandable that moving to a new place can feel isolating, even with the positive change of owning your dream house. Can you tell me more about what makes you feel empty?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "moved to a new state",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you've been through quite a bit of change recently, and it can be hard to adjust. Have you ever considered what a close friend or family member might say about how you're feeling? Sometimes, hearing another perspective can help us see things differently.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "inherited money",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "parents died",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "moved to a new state",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "bought a house",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling alone",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been through quite a lot recently, and it's understandable to feel overwhelmed. Can we talk about how you're feeling? When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "inherited money",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "parents died",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "moved to a new state",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "bought a house",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling alone",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I guess it’s just that everything feels a bit off, you know? I thought moving would make me feel excited or something, but instead, I just feel... alone. It's like the house is beautiful, but it doesn't feel like home yet.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "moving to a new house"
+          ],
+          "automatic_thoughts": [
+            "moving should make me feel excited",
+            "the house is beautiful but not a home"
+          ],
+          "emotions": [
+            "alone"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling empty (finding)",
+            "Feeling alienated (finding)"
+          ],
+          "neutral": [
+            "Feeling like wanting to escape (finding)",
+            "Feeling abandoned (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I can see how moving to a new place might be overwhelming and make you feel a bit lonely. It's completely normal to have those feelings, especially when adjusting to a new environment. Let's take some time to explore what might help you feel more at home in your new house.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I can see how moving to a new place might be overwhelming and make you feel a bit lonely. It's completely normal to have those feelings, especially when adjusting to a new environment. Let's take some time to explore what might help you feel more at home in your new house.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "I can see why you might be feeling a bit disconnected right now. It's common to feel that way when we move to a new place. Have you noticed any specific things that make you feel this way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I can understand why you might be feeling a bit disconnected right now, it's common to feel that way when we move to a new place. Have you thought about what a friend or family member might say about your feelings? Sometimes hearing an outside perspective can help us see things differently.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see that moving has been a big change for you, and it's normal to feel a bit disconnected at first. It might take some time to adjust and start feeling more at home. Let's talk about how we can help make this transition easier for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, maybe. I just... I thought I’d feel more energized or something. Instead, it's like I’m stuck in my head all the time, and it’s hard to enjoy any of it. I feel like I should be happy, but I just... I don’t know.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I thought I’d feel more energized",
+            "I’m stuck in my head",
+            "I should be happy"
+          ],
+          "emotions": [
+            "frustration",
+            "confusion"
+          ],
+          "behaviors": [
+            "hard to enjoy activities"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling empty (finding)",
+            "Feeling agitated (finding)",
+            "Disorientation as to self (finding)"
+          ],
+          "neutral": [
+            "Feeling like wanting to escape (finding)"
+          ],
+          "contradiction": [
+            "Feeling unhappy (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I can see that you're feeling frustrated and confused. It's okay to feel this way, and I'm here to help you work through it. Let's start by understanding what's been going on for you lately. Can you tell me more about how you've been feeling?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I can see that you're feeling frustrated and confused. It's okay to feel this way, and I'm here to help you work through it. Let's start by understanding what's been going on for you lately. Can you tell me more about how you've been feeling?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "confusion",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling frustrated and confused about not feeling more energized, even though you expected to. Let's explore what might be causing this discrepancy.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "confusion",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're feeling frustrated and confused, even though you thought you'd feel more energized. Have you ever considered what a trusted friend or family member might think about your situation? It could provide a different perspective.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear that you're feeling this way, but I'm glad we can talk about it. It sounds like things aren't going as you expected and you're struggling to find enjoyment in activities. Can you tell me more about what's been on your mind lately?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "I guess I’ve been feeling pretty heavy. Some days it’s just this weight on my chest, like I can't breathe right. Other days, I can distract myself for a bit, but it always comes back. I just don't know why I can't shake this feeling.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I can't breathe right",
+            "I can't shake this feeling"
+          ],
+          "emotions": [
+            "heavy"
+          ],
+          "behaviors": [
+            "distract myself"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling physically tense (finding)"
+          ],
+          "neutral": [
+            "Anxiety about breathlessness (finding)",
+            "Anxiety about body function or health (finding)",
+            "Anxiety about becoming fat (finding)"
+          ],
+          "contradiction": [
+            "Free-floating anxiety (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I'm really sorry to hear that you've been feeling so heavy lately, and it sounds like there's this persistent feeling of not being able to breathe right. Can we explore more about what triggers these feelings for you? It might help us understand better.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I'm really sorry to hear that you've been feeling so heavy lately, and it sounds like there's this persistent feeling of not being able to breathe right. Can we explore more about what triggers these feelings for you? It might help us understand better.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you've been experiencing some heavy emotions, and it feels like there's a weight on your chest that makes it hard to breathe. Can you tell me more about what thoughts come up when you feel this way?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you've been experiencing some heavy emotions, and it feels like there's this weight on your chest that makes it hard to breathe. Have you ever thought about what a trusted friend or family member might say if they were in your shoes? Sometimes, hearing another perspective can help us see things differently.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear that you've been feeling so heavy lately, and it sounds like there's this persistent weight on your chest. Can we talk about what thoughts might be contributing to these feelings? It could help us understand more about what's going on for you.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "Thanks, I appreciate that. Um, I think certain things—like being in crowded places or even just seeing people get along—make it worse. It kind of reminds me of how isolated I feel sometimes. It's like everyone else is moving on while I’m just... stuck.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "being in crowded places",
+            "seeing people get along"
+          ],
+          "automatic_thoughts": [
+            "I feel isolated",
+            "everyone else is moving on",
+            "I’m just stuck"
+          ],
+          "emotions": [
+            "isolation"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Social isolation (finding)",
+            "Feeling alienated (finding)"
+          ],
+          "neutral": [
+            "Social isolation (rejection) (finding)",
+            "Fear of being in a small group (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that being around large groups or seeing others interact can feel overwhelming and remind you of feelings of isolation. It's important to acknowledge those feelings, and we can work together to explore ways to manage them better.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that being around large groups or seeing others interact can feel overwhelming and remind you of feelings of isolation. It's important to acknowledge those feelings, and we can work together to explore ways to manage them better.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "being in crowded places",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing people get along",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like being around large groups or seeing others connect can be challenging for you. Can you help me understand more about what thoughts come up when you're in those situations?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "being in crowded places",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing people get along",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like being around large groups of people can be challenging for you. Have you ever considered what a trusted friend or family member might think about those situations? It could help to gain a different perspective.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "being in crowded places",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing people get along",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see how that might be difficult for you. It's important to remember that everyone has their own pace, and it's okay not to feel like you're moving as fast as others. Let's explore some ways we can help you feel less isolated in these situations.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "being in crowded places",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing people get along",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "I appreciate that. I think certain things, like being in crowded places or seeing people get along, make it worse. It reminds me of how isolated I feel sometimes. It’s like everyone else is moving on while I’m just... stuck.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "crowded places",
+            "seeing people get along"
+          ],
+          "automatic_thoughts": [
+            "reminds me of how isolated I feel",
+            "everyone else is moving on while I’m just stuck"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)",
+            "Social isolation (finding)"
+          ],
+          "neutral": [
+            "Social isolation (rejection) (finding)",
+            "Emotionally distant (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "What makes you think that everyone else is moving on, and you're the one left behind? Can we explore what evidence supports this thought?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that being in crowded places or seeing others get along can be difficult for you, and it might bring up feelings of isolation. It's important to remember that everyone has their own journey, and it's okay to feel stuck sometimes. Let's explore these feelings together and find ways to cope.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "crowded places",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing people get along",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "reminds me of how isolated I feel",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "everyone else is moving on while I’m just stuck",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What makes you think that everyone else is moving on, and you're the one left behind? Can we explore what evidence supports this thought?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "crowded places",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing people get along",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "reminds me of how isolated I feel",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "everyone else is moving on while I'm just stuck",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like being in crowded places and seeing others socialize can be challenging for you. Have you ever considered what a trusted friend or family member might think about these situations? It could help to gain a different perspective.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "crowded places",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing people get along",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "reminds me of how isolated I feel",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I can see why those situations might be difficult for you. It's important to remember that everyone experiences feelings of isolation at times, and it's okay to ask for help when things feel overwhelming. Let's explore some ways we could work together to manage these feelings.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "crowded places",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeing people get along",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "reminds me of how isolated I feel",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "I don’t know, it’s just a feeling I have. Like I see my friends posting about their lives, going out and having fun, and here I am, just... not doing much. It’s almost like I’m watching everyone else live while I’m just waiting for something to change for me.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "seeing friends' posts",
+            "friends going out",
+            "feeling inactive"
+          ],
+          "automatic_thoughts": [
+            "I'm missing out",
+            "I'm not living my life",
+            "things won't change for me"
+          ],
+          "emotions": [
+            "sadness",
+            "frustration"
+          ],
+          "behaviors": [
+            "withdrawing from social activities",
+            "waiting for change"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling empty (finding)",
+            "Minimal outside social stimulation (finding)"
+          ],
+          "neutral": [
+            "Feels life is meaningless (finding)"
+          ],
+          "contradiction": [
+            "Feeling isolated (finding)",
+            "Feeling abandoned (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that it can feel like everyone else is living their lives while you're waiting for something to change. It's important to remember that everyone experiences life differently, and it's okay if things aren't moving as fast as you'd like. Let's explore these feelings together and see what we can do to help you feel more fulfilled.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that it can feel like everyone else is living their lives while you're waiting for something to change. It's important to remember that everyone experiences life differently, and it's okay if things aren't moving as fast as you'd like. Let's explore these feelings together and see what we can do to help you feel more fulfilled.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "seeing friends' posts",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "friends going out",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling inactive",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling left out, as if your friends are living their lives while you're stuck in a rut. Can you help me understand what makes you feel this way? What would it take for things to change for you?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "minimal outside social stimulation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "feeling empty",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you might be feeling left out or that your life isn't as exciting as theirs. Have you ever considered what a trusted friend might think about the situation? Or perhaps, what they would say if they were in your shoes?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "seeing friends' posts",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "friends going out",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling inactive",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling left out and stagnant. Can I ask, have you ever had thoughts about wanting to be part of those activities or feeling like things might never change for you?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "seeing friends' posts",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "friends going out",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling inactive",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, I get that. It just feels like I’m missing out, you know? Sometimes I think maybe I should just push myself to go out more, but then I get this wave of dread. It’s like I want to feel connected, but the thought of it is really overwhelming.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "missing out",
+            "thought of going out"
+          ],
+          "automatic_thoughts": [
+            "I should push myself to go out more",
+            "the thought of it is really overwhelming"
+          ],
+          "emotions": [
+            "dread",
+            "overwhelmed"
+          ],
+          "behaviors": [
+            "avoid going out"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling alienated (finding)",
+            "Feeling abandoned (finding)",
+            "Fear of going out (finding)"
+          ],
+          "neutral": [
+            "Limited social contact (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that you're feeling like you might be missing out, and it can feel overwhelming to think about going out. It's important to remember that it's okay to take things at your own pace. Let's explore together why the thought of socializing feels so daunting for you.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that you're feeling like you might be missing out, and it can feel overwhelming to think about going out. It's important to remember that it's okay to take things at your own pace. Let's explore together why the thought of socializing feels so daunting for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of going out",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling a bit overwhelmed by the thought of going out. Can we explore together what makes it so daunting for you? Let's start with one small step, what could that be?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of going out",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Limited social contact",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're feeling a bit overwhelmed by the thought of going out. Have you ever considered what a friend or someone close to you might think about this situation? Sometimes, getting another perspective can help us see things more clearly.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of going out",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Limited social contact",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can understand how you're feeling. It sounds like the thought of going out is causing some anxiety for you. Let's explore that a bit more and see if we can find ways to make it feel less overwhelming.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of going out",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "dread",
+                  "label": "emotions"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "I appreciate you saying that. I guess part of me feels like I should be able to handle it, but then there's this fear of not fitting in or being judged. I can just picture it, walking into a room and feeling completely out of place. It makes me want to avoid it altogether, so I don’t have to feel that way.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "walking into a room"
+          ],
+          "automatic_thoughts": [
+            "I should be able to handle it",
+            "fear of not fitting in",
+            "fear of being judged",
+            "I will feel completely out of place"
+          ],
+          "emotions": [
+            "fear"
+          ],
+          "behaviors": [
+            "want to avoid it"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of being a burden to others (finding)"
+          ],
+          "neutral": [
+            "Fear of social gatherings (finding)",
+            "Fear of being in a small group (finding)",
+            "Fear of social group activities (finding)",
+            "Social isolation (rejection) (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I can see how you might be feeling a bit anxious about social situations. It's common to worry about fitting in and being judged, but remember that everyone has those feelings at times. Let's explore some ways we can help you manage these feelings so they don't hold you back.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I can see how you might be feeling a bit anxious about social situations. It's common to worry about fitting in and being judged, but remember that everyone has those feelings at times. Let's explore some ways we can help you manage these feelings so they don't hold you back.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social gatherings",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of being judged",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling quite anxious about social situations, and that fear of not fitting in or being judged is a big part of it. Can you tell me more about what makes you feel this way? And have you noticed any times when things didn't go as badly as you expected?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social gatherings",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of being judged",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're feeling quite anxious about social situations, and that fear of not fitting in or being judged is a big part of it. Have you ever considered what a trusted friend might think about the situation? It could be helpful to get another perspective.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social gatherings",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of being judged",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you might be feeling anxious about social situations, and it's understandable to have fears about not fitting in or being judged. Let's explore these feelings together and find ways to help you feel more comfortable.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social gatherings",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "fear of being judged",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "I appreciate that you understand. I feel like I should be able to handle it, but there's this fear of not fitting in or being judged. I can picture myself walking into a room and just feeling completely out of place. It makes me want to avoid it altogether so I don’t have to face that feeling.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "walking into a room"
+          ],
+          "automatic_thoughts": [
+            "I should be able to handle it",
+            "I might not fit in",
+            "I will be judged",
+            "I feel completely out of place"
+          ],
+          "emotions": [
+            "fear"
+          ],
+          "behaviors": [
+            "avoid the situation"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of being a burden to others (finding)"
+          ],
+          "neutral": [
+            "Fear of being in a small group (finding)",
+            "Fear of social gatherings (finding)",
+            "Social isolation (rejection) (finding)",
+            "Fear of social group activities (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I can see how you might feel that way, and it's important to acknowledge those feelings. It's common to fear not fitting in or being judged in social situations. Let's explore together if there are any specific triggers or thoughts that make these feelings more intense for you.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I can see how you might feel that way, and it's important to acknowledge those feelings. It's common to fear not fitting in or being judged in social situations. Let's explore together if there are any specific triggers or thoughts that make these feelings more intense for you.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social isolation",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "avoidance",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you have some concerns about fitting in and being judged. Can you tell me more about what evidence you have that might support those fears? And how do you think others would perceive the situation differently?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of being in a small group",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Social isolation (rejection)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're dealing with some fears about fitting in and being judged. Have you ever considered what a friend or someone who knows you well might think if they were in your shoes? It could help broaden your perspective.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social isolation",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "judgment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I can see how you might feel that way, and it's understandable to have fears about fitting in. Let's explore some strategies together to help manage these feelings and make social situations less overwhelming.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "fear",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "social anxiety",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "avoidance behavior",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}
