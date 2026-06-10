@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Anyone ever have there SO push them away from depression to have them come back and continue to have a relationship? I’m in this situation now, and I want her back, but I want her to be happy with herself, and be able to deal with her depression even on the hardest days. Just didn’t know if anyone else was ever in this situation.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Anyone ever have there SO push them away from depression to have them come back and continue to have a relationship? I’m in this situation now, and I want her back, but I want her to be happy with herself, and be able to deal with her depression even on the hardest days. Just didn’t know if anyone else was ever in this situation.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "partner pushing away",
+            "partner's depression",
+            "wanting a relationship"
+          ],
+          "automatic_thoughts": [
+            "I want her back",
+            "I want her to be happy",
+            "I need to support her"
+          ],
+          "emotions": [
+            "sadness",
+            "hope",
+            "anxiety"
+          ],
+          "behaviors": [
+            "trying to reach out",
+            "giving space",
+            "supporting her"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressive preoccupation (finding)"
+          ],
+          "neutral": [
+            "Rebound mood swings (finding)",
+            "Enduring personality change after psychiatric illness (finding)"
+          ],
+          "contradiction": [
+            "Breakup of romance (finding)",
+            "Pressured by partner (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling torn between wanting to bring her back and wanting her to find her own happiness, and that can feel really heavy. What does a supportive relationship look like to you right now?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling torn between wanting to bring her back and wanting her to find her own happiness, and that can feel really heavy. What does a supportive relationship look like to you right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "I want her back",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I want her to be happy",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I need to support her",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that your support is helping her feel happier and more independent?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "partner's depression",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: I want her back, I want her to be happy, I need to support her",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: sadness, hope, anxiety",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re trying to support her while also wanting her to be happy. If a close friend were watching this, what advice might they give you about balancing your desire to help her with giving her the space she needs?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re hoping to support her while also respecting her need for space and healing. What do you think would help her feel more supported without feeling pressured?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

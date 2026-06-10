@@ -1,0 +1,1139 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 10,
+    "seed": "I made a mistake at work by not calling a placement for a resident and now they are unable to leave in time and my boss is upset.",
+    "core_issue": "job crisis",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I made a mistake at work by not calling a placement for a resident and now they are unable to leave in time and my boss is upset.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [
+            "making a mistake at work",
+            "not calling a placement",
+            "resident unable to leave",
+            "boss upset"
+          ],
+          "automatic_thoughts": [
+            "I messed up",
+            "I'm going to get in trouble",
+            "My boss is disappointed in me"
+          ],
+          "emotions": [
+            "guilt",
+            "anxiety",
+            "shame"
+          ],
+          "behaviors": [
+            "avoiding my boss",
+            "overthinking the mistake"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Delayed healthcare provision resulting in neglect (finding)"
+          ],
+          "neutral": [
+            "Forgets to complete personal care (finding)",
+            "Patient misunderstood treatment instructions (finding)"
+          ],
+          "contradiction": [
+            "Does not adopt sick role (finding)",
+            "Unable to adopt sick role (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like your boss's reaction is really weighing on you, especially with the guilt around the resident not being able to leave in time. It makes sense that you're feeling anxious about this situation.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like your boss's reaction is really weighing on you, especially with the guilt around the resident not being able to leave in time. It makes sense that you're feeling anxious about this situation.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "making a mistake at work",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "boss upset",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "How did you feel when this happened?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "That sounds really stressful. What might a trusted friend say about how you handled the situation?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Delayed healthcare provision resulting in neglect (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "making a mistake at work (trigger)",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really concerned about how stressed and worried you're feeling right now. Can you tell me more about what's going through your mind as a result of this situation?",
+            "reasoning": null
+          }
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it just feels like everything is piling on. I keep thinking about what I could have done differently. I can't shake off that feeling of letting everyone down, and it's exhausting.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [
+            "everything piling on"
+          ],
+          "automatic_thoughts": [
+            "what I could have done differently",
+            "feeling of letting everyone down"
+          ],
+          "emotions": [
+            "exhaustion"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling unhappy (finding)",
+            "Feeling wound up (finding)",
+            "Feeling despair (finding)"
+          ],
+          "neutral": [
+            "Feeling a failure (finding)"
+          ],
+          "contradiction": [
+            "Feeling abandoned (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really tough right now, carrying that weight of everything piling on and those thoughts about what could have been different. That exhaustion must be incredibly draining.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really tough right now, carrying that weight of everything piling on and those thoughts about what could have been different. That exhaustion must be incredibly draining.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really draining, and I can see how thinking about what you could have done differently might be contributing to that exhaustion. Can you tell me more about how that thought feels in your body?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "everything piling on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "what I could have done differently",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling of letting everyone down",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those thoughts are really weighing on you. What might a trusted friend say about how you're feeling right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling unhappy (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling wound up (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling despair (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "everything piling on",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "what I could have done differently",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "letting everyone down",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly draining, and it's completely understandable why you'd feel that way. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling of letting everyone down",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "everything piling on",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really is. I wake up some mornings and just feel this heaviness. It's like I can't escape this loop of overthinking. I want to move forward, but I keep getting stuck in regrets.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [
+            "waking up in the morning"
+          ],
+          "automatic_thoughts": [
+            "can't escape this loop of overthinking",
+            "keep getting stuck in regrets"
+          ],
+          "emotions": [
+            "heaviness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about making mistakes (finding)",
+            "Feels everything is futile (finding)",
+            "Anxiety about going crazy (finding)",
+            "Loss of hope for the future (finding)"
+          ],
+          "contradiction": [
+            "Feeling like wanting to escape (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like waking up brings a real sense of heaviness, and the overthinking feels like a difficult loop you're caught in. I want to make sure I understand—you're feeling stuck in regrets even when you want to move forward.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like waking up brings a real sense of heaviness, and the overthinking feels like a difficult loop you're caught in. I want to make sure I understand—you're feeling stuck in regrets even when you want to move forward.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult to experience. When you say you feel this heaviness, what does that heaviness feel like to you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waking up in the morning",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "heaviness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loop of overthinking",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "stuck in regrets",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds really difficult to wake up feeling that way and caught in that cycle of thoughts. Have you ever thought about what a close friend might notice about your progress or strengths, even when you're feeling stuck?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds really difficult to wake up feeling that kind of heaviness, especially when you're caught in that cycle of overthinking and regrets. Can you tell me more about what's running through your mind during those moments?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waking up in the morning",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "heaviness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loop of overthinking",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "stuck in regrets",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Exactly, it’s like I’m stuck between wanting to let go and being pulled back by all those \"what ifs.\" It’s so frustrating. Sometimes I just feel paralyzed by the whole situation, like I can’t breathe.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [
+            "wanting to let go",
+            "being pulled back by 'what ifs'"
+          ],
+          "automatic_thoughts": [
+            "I'm stuck",
+            "I can't breathe"
+          ],
+          "emotions": [
+            "frustration",
+            "paralysis"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear of losing emotional control (finding)",
+            "Fear of being left alone during period of dependence (finding)"
+          ],
+          "neutral": [
+            "Anxiety about forced dependence (finding)",
+            "Anxiety about losing emotional control (finding)",
+            "Anxiety about going crazy (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really tough to be caught between those two feelings, especially when it leaves you feeling so stuck and overwhelmed. Can you tell me more about what it feels like to be pulled back by those worries?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really tough to be caught between those two feelings, especially when it leaves you feeling so stuck and overwhelmed. Can you tell me more about what it feels like to be pulled back by those worries?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being left alone during period of dependence",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wanting to let go",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being pulled back by 'what ifs'",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "paralysis",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like those \"what ifs\" are really weighing on you. Can you tell me more about what specific worries are keeping you stuck?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "wanting to let go",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being pulled back by 'what ifs'",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I'm stuck",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I can't breathe",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like the uncertainty is really weighing on you. When you feel stuck like that, how does it affect your sense of control over your own life?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being left alone during period of dependence",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds really tough to feel caught between wanting to let go and being pulled back by those worries. When you say you feel paralyzed and can't breathe, what's making it hardest to move forward?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of losing emotional control",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Fear of being left alone during period of dependence",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wanting to let go",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being pulled back by 'what ifs'",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "paralysis",
+                  "label": "emotions"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "It’s heavy, you know? Like a weight on my chest. I replay everything in my mind—the conversations, the decisions. I just keep thinking, “If I had only done this differently…” It’s like I can’t stop beating myself up over it.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "If I had only done this differently",
+            "I keep thinking about the conversations",
+            "I keep thinking about the decisions"
+          ],
+          "emotions": [
+            "heavy",
+            "anxiety"
+          ],
+          "behaviors": [
+            "replay everything in my mind",
+            "beat myself up"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Repressing painful memories (finding)",
+            "Feeling guilt (finding)"
+          ],
+          "neutral": [
+            "Undoing - mental defense mechanism (finding)",
+            "Depressive delusion of catastrophe (finding)",
+            "Anxiety about making mistakes (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like carrying a heavy weight, replaying conversations and decisions, and feeling intense guilt about what might have been. That must be incredibly difficult to process.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like carrying a heavy weight, replaying conversations and decisions, and feeling intense guilt about what might have been. That must be incredibly difficult to process.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Repressing painful memories",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling guilt",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "<therapist message>\nThat sounds really difficult. When you say you replay everything, what makes you think that changing anything would have made things better?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Repressing painful memories",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Guilt",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Undoing - mental defense mechanism",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Depressive delusion of catastrophe",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds like the weight of these thoughts is really hard to carry. What might a trusted friend say if they saw how you're replaying these moments?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult to carry around—like a weight that’s crushing you. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Repressing painful memories",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Guilt",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressive delusion of catastrophe",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about making mistakes",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "It’s heavy, you know? Like a weight on my chest. I replay everything in my mind—the conversations, the decisions. I just keep thinking, “If I had only done this differently…” I can’t stop beating myself up over it.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "If I had only done this differently",
+            "I keep thinking about the conversations",
+            "I keep thinking about the decisions"
+          ],
+          "emotions": [
+            "anxiety",
+            "shame"
+          ],
+          "behaviors": [
+            "replaying everything in my mind",
+            "beating myself up"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Repressing painful memories (finding)",
+            "Feeling guilt (finding)",
+            "Feeling bad (finding)"
+          ],
+          "neutral": [
+            "Undoing - mental defense mechanism (finding)",
+            "Anxiety about making mistakes (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really heavy to carry that weight of replaying conversations and decisions, especially when you're focused on what might have been different. That feeling of self-criticism can make it hard to move forward.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really heavy to carry that weight of replaying conversations and decisions, especially when you're focused on what might have been different. That feeling of self-criticism can make it hard to move forward.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "shame",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "replaying everything in my mind",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "beating myself up",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult. When you replay those moments, what impact does it have on your feelings?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "replaying everything in my mind",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "undoing - mental defense mechanism",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds like replaying those moments is really weighing on you. Have you ever thought about how a close friend might view this replaying?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you're carrying a lot of weight right now, especially with all the replaying and self-criticism. Can you tell me more about what's running through your mind when you say things like, \"If I had only done this differently\"?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "shame",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "It’s just so heavy, like a weight on my chest. I keep replaying everything—the conversations, the decisions. I can’t help but think, “If I had only done this differently…” It's hard to stop beating myself up over it.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "If I had only done this differently"
+          ],
+          "emotions": [
+            "heavy",
+            "shame"
+          ],
+          "behaviors": [
+            "replaying conversations",
+            "beating myself up"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling guilt (finding)",
+            "Feeling bad (finding)",
+            "Feeling ashamed (finding)"
+          ],
+          "neutral": [
+            "Repressing painful memories (finding)",
+            "Undoing - mental defense mechanism (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're carrying a lot of weight right now, especially with replaying those moments and feeling intense shame about how things turned out. Can you tell me more about what it feels like to be overwhelmed by these thoughts?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot of weight right now, especially with replaying those moments and feeling intense shame about how things turned out. Can you tell me more about what it feels like to be overwhelmed by these thoughts?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "heavy",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "shame",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "beating myself up",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "How does replaying these moments affect your sense of relief or progress now?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're carrying a lot of weight right now. When you're replaying these moments and thinking about what might have been, what would a trusted friend say about your feelings and thoughts?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like what you're carrying feels incredibly heavy, and I hear a lot of self-criticism underneath that. Can you tell me more about what's making you feel this way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "heavy",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "shame",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "It’s just... suffocating, you know? I feel like I can’t think straight when those thoughts start swirling. It’s like I’m stuck in this fog, and I can’t see a way out. I want to focus on the future, but these memories just keep dragging me back.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [
+            "thoughts swirling",
+            "memories dragging back"
+          ],
+          "automatic_thoughts": [
+            "I can’t think straight",
+            "I’m stuck in this fog",
+            "I can’t see a way out"
+          ],
+          "emotions": [
+            "suffocation"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Intrusive thoughts (finding)",
+            "Persistent thoughts (finding)",
+            "Rumination - thoughts (finding)"
+          ],
+          "neutral": [
+            "Reappearance of old thoughts (finding)",
+            "Repressing thoughts (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're feeling overwhelmed by these thoughts and memories, making it hard to focus on anything else. That must be incredibly difficult to navigate.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're feeling overwhelmed by these thoughts and memories, making it hard to focus on anything else. That must be incredibly difficult to navigate.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "intrusive thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "persistent thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "rumination - thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "thoughts swirling",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "memories dragging back",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult. Can you tell me more about what those thoughts are like?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "intrusive thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "persistent thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "rumination - thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "thoughts swirling",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like those thoughts are really overwhelming right now. Can you imagine what a close friend might say if they saw you struggling with this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "intrusive thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "rumination",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I hear how overwhelming that feels, like you're trapped in a fog where memories pull you under. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "intrusive thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "persistent thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "rumination - thoughts",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "It’s just... suffocating, you know? I feel like I can’t think straight when those thoughts start swirling. I’m stuck in this fog, and I can’t see a way out. I really want to focus on the future, but these memories keep dragging me back.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [
+            "thoughts swirling",
+            "memories dragging back"
+          ],
+          "automatic_thoughts": [
+            "I can’t think straight",
+            "I’m stuck in this fog",
+            "I can’t see a way out"
+          ],
+          "emotions": [
+            "suffocation"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Intrusive thoughts (finding)"
+          ],
+          "neutral": [
+            "Reappearance of old thoughts (finding)",
+            "Repressing thoughts (finding)"
+          ],
+          "contradiction": [
+            "Flashbacks have stopped (finding)",
+            "Persistent thoughts (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really overwhelming when those thoughts start to swirl, doesn't it? That feeling of being stuck in a fog and unable to see a way forward must be incredibly difficult, especially when memories keep pulling you back.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really overwhelming when those thoughts start to swirl, doesn't it? That feeling of being stuck in a fog and unable to see a way forward must be incredibly difficult, especially when memories keep pulling you back.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "intrusive thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "persistent thoughts",
+                  "label": "contradiction"
+                },
+                {
+                  "concept": "thoughts swirling",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "memories dragging back",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult. Can you tell me more about what these thoughts are like and how they affect your ability to focus on the future?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "intrusive thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "That sounds incredibly overwhelming. Sometimes when we're caught in a fog, it's hard to see the path forward. Have you ever thought about what a trusted friend might say if they saw you like this?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds really overwhelming to feel like you're stuck in a fog, especially when memories keep pulling you back. Can you tell me more about how those memories are affecting your ability to focus on the future right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "suffocation",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "thoughts swirling",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "memories dragging back",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really is. It feels like I'm in this constant tug-of-war between wanting to let go and being held back by all those memories. Sometimes I just wish I could hit a reset button or something. It’s frustrating to feel so trapped.",
+        "core_issue": "job crisis",
+        "schema": {
+          "triggers": [
+            "memories",
+            "feeling trapped"
+          ],
+          "automatic_thoughts": [
+            "wanting to let go",
+            "wish I could hit a reset button"
+          ],
+          "emotions": [
+            "frustration"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling like wanting to escape (finding)",
+            "Feeling trapped (finding)"
+          ],
+          "neutral": [
+            "Repressing painful memories (finding)",
+            "Reliving traumatic memories (finding)",
+            "Reappearance of old thoughts (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're caught in a struggle between your desire to move forward and the pull of past experiences. That frustration makes sense when you're feeling stuck like that.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're caught in a struggle between your desire to move forward and the pull of past experiences. That frustration makes sense when you're feeling stuck like that.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling trapped",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wanting to let go",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult. Can you tell me more about what makes you feel so trapped right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling trapped",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds like those memories are really weighing on you right now. Have you ever thought about what a close friend might notice or suggest when they see you feeling stuck like this?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "I hear how overwhelming that sense of being stuck must feel, like you're caught between wanting relief and the weight of those memories. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "safety_check",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "feeling trapped",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wanting to let go",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

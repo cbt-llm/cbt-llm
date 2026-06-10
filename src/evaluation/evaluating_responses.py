@@ -236,6 +236,17 @@ def normalize(v):
     return v / 5
 
 
+def _eval_complete(out_path, n_turns):
+    """True only if a prior eval exists AND covers every turn. A crashed run
+    leaves a stub with fewer turn_evals; bare exists() would wrongly skip it."""
+    if not out_path.exists():
+        return False
+    try:
+        return len(read_json(out_path).get("turn_evals", [])) == n_turns
+    except Exception:
+        return False  # corrupt/partial -> re-run
+
+
 class Judge:
 
     def __init__(self, cfg, protocol_defs, best_practices):
@@ -287,11 +298,20 @@ class Judge:
                     lambda: ollama.chat(
                         model=self.cfg.judge_model,
                         messages=[{"role": "user", "content": prompt}],
-                        format="json",
-                        options={"temperature": 0.0, "num_ctx": 2048},
+                        think=True,                              # reasoner judge: lets qwen3 reason before scoring
+                        format=JudgeOutput.model_json_schema(),  # grammar-constrains the JSON (content only); thinking is separate
+                        options={
+                            "temperature": 0.6,                  # not 0.0 — greedy decode causes qwen3 thinking repetition loops
+                            "top_p": 0.95,
+                            "top_k": 20,
+                            "num_ctx": 8192,                     # 2048 truncated the prompt; 8192 fits protocol defs + transcript + template
+                            # no num_predict cap — thinking tokens would eat it and truncate the JSON
+                        },
+                        keep_alive="30m",                        # keep the 32B resident across files
                     ),
                 )
 
+                # think=True => reasoning lives in message.thinking; schema JSON stays in message.content
                 text = result["message"]["content"]
 
                 try:
@@ -397,9 +417,14 @@ async def run_model(model, cfg):
 
     for f in files:
 
-        print("Evaluating:", f)
-
         out = cfg.output_root / model / f"{f.stem}_eval.json"
+
+        n_turns = len(read_json(f)["transcript"])
+        if _eval_complete(out, n_turns):
+            print("Skipping (already evaluated):", f)
+            continue
+
+        print("Evaluating:", f)
 
         await evaluate_file(judge, f, out)
 

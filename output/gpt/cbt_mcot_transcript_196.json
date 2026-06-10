@@ -1,0 +1,154 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Mood I was feeling okay half an hour ago but now I'm back to being empty and sad. Also, I was really really angry yesterday. I was sobbing and punching the wall, but 10 minutes later I was the calmest I've been in the whole week. What the fuck?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Mood I was feeling okay half an hour ago but now I'm back to being empty and sad. Also, I was really really angry yesterday. I was sobbing and punching the wall, but 10 minutes later I was the calmest I've been in the whole week. What the fuck?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "feeling okay",
+            "being empty",
+            "being sad",
+            "anger yesterday",
+            "sobbing",
+            "punching the wall"
+          ],
+          "automatic_thoughts": [
+            "what the fuck?"
+          ],
+          "emotions": [
+            "empty",
+            "sad",
+            "angry",
+            "calm"
+          ],
+          "behaviors": [
+            "sobbing",
+            "punching the wall"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Disturbance in mood (finding)"
+          ],
+          "neutral": [
+            "Mood swings (finding)",
+            "Depressed mood (finding)",
+            "Extremely emotionally deprived (finding)"
+          ],
+          "contradiction": [
+            "Normal mood symptoms (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re noticing a shift from feeling okay to feeling empty and sad, and that intense anger and physical expression of frustration, followed by a sudden calm. That roller‑coaster of emotions can feel confusing—what do you think might be behind that sudden calm after the outburst?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re noticing a shift from feeling okay to feeling empty and sad, and that intense anger and physical expression of frustration, followed by a sudden calm. That roller‑coaster of emotions can feel confusing—what do you think might be behind that sudden calm after the outburst?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Disturbance in mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Mood swings (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Extremely emotionally deprived (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling okay",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being empty",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "being sad",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "anger yesterday",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "sobbing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "punching the wall",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What do you think might have contributed to the calm you felt after all that anger and sobbing? Can you identify any patterns that might explain why you feel empty again now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Disturbance in mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Mood swings",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Extremely emotionally deprived",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Triggers: feeling okay, being empty, being sad, anger yesterday, sobbing, punching the wall",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Automatic thoughts: what the fuck?",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I hear you noticing a lot of mood swings and intense emotions—what might a close friend notice about how you’re coping with these shifts?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling really empty and sad, and that intense anger led to sobbing and punching the wall. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

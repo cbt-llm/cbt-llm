@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Feeling nothing is awful too I haven't taken anxiety meds in 8 months and now I remember why I hated them. Sure, they help stop constant panic attacks over stupid things, but I really end up feeling like some kind of emotionless robot. It's just nothingness constantly and I don't even know which path of suffering to take anymore.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Feeling nothing is awful too I haven't taken anxiety meds in 8 months and now I remember why I hated them. Sure, they help stop constant panic attacks over stupid things, but I really end up feeling like some kind of emotionless robot. It's just nothingness constantly and I don't even know which path of suffering to take anymore.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "Feeling nothing is awful",
+            "I remember why I hated anxiety meds",
+            "They help stop panic attacks over stupid things",
+            "I feel like an emotionless robot",
+            "It's just nothingness constantly",
+            "I don't know which path of suffering to take anymore"
+          ],
+          "emotions": [
+            "awfulness",
+            "nothingness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anticipatory anxiety, severe (finding)",
+            "Anxiety about treatment (finding)",
+            "Anticipatory anxiety (finding)"
+          ],
+          "contradiction": [
+            "Recurrent anxiety (finding)",
+            "Chronic anxiety (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling a kind of emptiness and uncertainty after stopping your meds, and that this emptiness feels awful. What does that emptiness feel like for you?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling a kind of emptiness and uncertainty after stopping your meds, and that this emptiness feels awful. What does that emptiness feel like for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling nothing is awful",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I feel like an emotionless robot",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "It's just nothingness constantly",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I don't even know which path of suffering to take anymore",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re noticing a lot of discomfort. What evidence do you have that feeling nothing is awful?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling nothing is awful",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I feel like an emotionless robot",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Anxiety about treatment",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It might help to think of feeling “nothing” as a pause rather than a loss. If a close friend were watching you, what might they say about feeling like an emotionless robot?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling stuck and empty after stopping your meds, and that’s really hard. What do you think might help you feel a little more connected or purposeful right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about treatment",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling nothing is awful",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Emotionless robot",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

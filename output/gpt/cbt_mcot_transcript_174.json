@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Permanent Sleep I’ve had enough of this happy mask I put on daily for people. I couldn’t feel any hollow and worthless if I tried I just want to go. Now. Soon as death comes for me I’ll shake his hand not fight him.",
+    "core_issue": "Safety: Suicidal thoughts",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Permanent Sleep I’ve had enough of this happy mask I put on daily for people. I couldn’t feel any hollow and worthless if I tried I just want to go. Now. Soon as death comes for me I’ll shake his hand not fight him.",
+        "core_issue": "Safety: Suicidal thoughts",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I’ve had enough of this happy mask",
+            "I couldn’t feel any hollow and worthless if I tried",
+            "I just want to go",
+            "I’ll shake death's hand not fight him"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Asleep (finding)",
+            "Wanting to die (finding)",
+            "Wakefulness (observable entity)"
+          ],
+          "neutral": [
+            "Fear of not waking from general anesthetic (finding)"
+          ],
+          "contradiction": [
+            "Wakefulness finding (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling overwhelmed and hopeless. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+        "protocol_used": "safety_check",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling overwhelmed and thinking about ending your life. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Wanting to die",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I hear how distressed you feel. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling overwhelmed and hopeless. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

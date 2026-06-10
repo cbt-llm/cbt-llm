@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Everytime I try to hang myself I stop... I want to die. Why do I keep stopping myself right before... why... why",
+    "core_issue": "Safety: Suicidal thoughts",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Everytime I try to hang myself I stop... I want to die. Why do I keep stopping myself right before... why... why",
+        "core_issue": "Safety: Suicidal thoughts",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I want to die",
+            "Why do I keep stopping myself"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "stop before hanging myself"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling suicidal (finding)",
+            "Wanting to die (finding)",
+            "Thoughts of self harm (finding)",
+            "Suicidal (finding)",
+            "Suicidal thoughts (finding)"
+          ],
+          "neutral": [],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling overwhelmed and in a lot of pain right now. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+        "protocol_used": "safety_check",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re in a lot of pain right now. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling suicidal",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Wanting to die",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Thoughts of self harm",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "I’m really sorry you’re feeling this way—when you said you want to die, were you also having thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling suicidal",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Wanting to die",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Thoughts of self harm",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I’m really sorry you’re feeling this way. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling overwhelmed and in a lot of pain right now. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling suicidal",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Wanting to die",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Thoughts of self harm",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Suicidal thoughts",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

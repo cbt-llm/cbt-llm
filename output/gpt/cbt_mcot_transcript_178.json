@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "My company has a holiday party and I just can't... go... I don't want to socialize and parties annoy me to no end. All the small talk, all the people... I don't want to go. At times I feel like I'm allergic to people.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "My company has a holiday party and I just can't... go... I don't want to socialize and parties annoy me to no end. All the small talk, all the people... I don't want to go. At times I feel like I'm allergic to people.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "holiday party",
+            "socializing",
+            "small talk",
+            "crowded places"
+          ],
+          "automatic_thoughts": [
+            "I can't go",
+            "parties annoy me",
+            "I don't want to socialize",
+            "I'm allergic to people"
+          ],
+          "emotions": [
+            "frustration",
+            "anxiety"
+          ],
+          "behaviors": [
+            "avoid going to the party"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Fear of social gatherings (finding)",
+            "Fear of social group activities (finding)",
+            "Fear of being in a small group (finding)",
+            "Anxiety about vomiting in public (finding)",
+            "Social isolation (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling really overwhelmed and anxious about the holiday party, and you’re worried about how much you’ll enjoy it. What’s the most stressful part of the idea of going to the party for you?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling really overwhelmed and anxious about the holiday party, and you’re worried about how much you’ll enjoy it. What’s the most stressful part of the idea of going to the party for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of social gatherings",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about vomiting in public",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Social isolation",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that going to the party would be a bad experience for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of social gatherings",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about small talk",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Social isolation",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "If a close friend were watching you, what might they say about your hesitation to go to the holiday party? It might help to hear how someone you trust would view the situation.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear of social gatherings",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Social isolation",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about vomiting in public",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like the holiday party feels overwhelming and you’re worried about how you’ll handle the social aspects. What would make you feel more comfortable if you were to attend, or what would help you decide whether to go or not?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

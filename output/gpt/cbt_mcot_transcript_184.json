@@ -1,0 +1,113 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I got my IQ tested and I feel bad about myself I took the wechsler IQ test my mom even paid 300 dollars nearly and now I found out my IQ is 99 psychiatrist said 100 is the top 50percent and i'm not even average i'm below average I cried after I went home after finding out do I even have a chance at life with this low iq? can I even finish college? I am still young but I already think I cant make it here in this lifetime I don't want to compare but my brother well he got 145 that's top 0.2 percent I think it seems so unfair",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I got my IQ tested and I feel bad about myself I took the wechsler IQ test my mom even paid 300 dollars nearly and now I found out my IQ is 99 psychiatrist said 100 is the top 50percent and i'm not even average i'm below average I cried after I went home after finding out do I even have a chance at life with this low iq? can I even finish college? I am still young but I already think I cant make it here in this lifetime I don't want to compare but my brother well he got 145 that's top 0.2 percent I think it seems so unfair",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "getting IQ tested",
+            "finding out IQ is 99",
+            "comparing with brother's IQ"
+          ],
+          "automatic_thoughts": [
+            "I'm below average",
+            "I can't make it in life",
+            "I won't finish college",
+            "It's unfair compared to my brother"
+          ],
+          "emotions": [
+            "bad",
+            "sad",
+            "anxiety",
+            "frustration"
+          ],
+          "behaviors": [
+            "cried after going home"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Impairment of psychological status (finding)"
+          ],
+          "neutral": [
+            "Low ego strength (finding)",
+            "Mental health impairment (finding)",
+            "Emotional immaturity (finding)"
+          ],
+          "contradiction": [
+            "On examination - senility - no psychosis (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling upset and uncertain about your future after learning your IQ score. What are some strengths or achievements you’ve had that you’re proud of?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling upset and uncertain about your future after learning your IQ score. What are some strengths or achievements you’ve had that you’re proud of?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Impairment of psychological status (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Low ego strength (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Mental health impairment (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Emotional immaturity (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "user schema triggers, thoughts, emotions, behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re feeling upset and uncertain. What evidence do you have that your IQ score will determine whether you can finish college or succeed in life?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Impairment of psychological status (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I hear how upset you are about the score and how it feels unfair compared to your brother. If a trusted friend heard about your results, what might they say about your abilities and future possibilities?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling upset and worried about your future after learning your IQ score. What are some strengths or skills you’ve noticed in yourself that could help you succeed?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

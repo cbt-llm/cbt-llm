@@ -1,0 +1,1110 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 10,
+    "seed": "My pet died last week and I also failed my exam",
+    "core_issue": "ongoing depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "My pet died last week and I also failed my exam",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "pet died",
+            "failed exam"
+          ],
+          "automatic_thoughts": [
+            "I can't handle this loss",
+            "I'll never succeed"
+          ],
+          "emotions": [
+            "sadness",
+            "anxiety"
+          ],
+          "behaviors": [
+            "withdrawing from friends",
+            "avoiding studying"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Sudden bereavement due to life event (finding)",
+            "Bereavement due to life event (finding)"
+          ],
+          "neutral": [
+            "Coming to terms with dying (finding)",
+            "Death anxiety (finding)",
+            "Feeling a failure (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I'm sorry to hear about your pet and your exam. It sounds like a lot to process at once, and it's completely understandable to feel overwhelmed by these events.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm sorry to hear about your pet and your exam. It sounds like a lot to process at once, and it's completely understandable to feel overwhelmed by these events.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Sudden bereavement due to life event",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Bereavement due to life event",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling a failure",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What did that loss of your pet make you feel?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "These are both really difficult things to deal with. What would a trusted friend say about how you're handling these two situations separately?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear about your pet and your exam. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "pet died",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "failed exam",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it’s been a tough couple of weeks. Losing my pet... it just feels like a piece of my routine is gone, and then the exam stress piled on top of that. I don’t know, it’s just all felt really heavy.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "losing my pet",
+            "exam stress"
+          ],
+          "automatic_thoughts": [
+            "a piece of my routine is gone",
+            "it's all felt really heavy"
+          ],
+          "emotions": [
+            "sadness",
+            "stress"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling stressed (finding)"
+          ],
+          "neutral": [
+            "On examination - disorientated (finding)",
+            "On examination - drowsy (finding)",
+            "Emotionally subdued (finding)",
+            "Extremely emotionally deprived (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like the loss of your pet and the upcoming exam stress have created a lot of heaviness for you. Can you tell me more about how that feels?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like the loss of your pet and the upcoming exam stress have created a lot of heaviness for you. Can you tell me more about how that feels?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "losing my pet",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "exam stress",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "sadness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "stress",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult to navigate at the same time. How have these two difficult experiences interacted in your experience?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "losing my pet",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "exam stress",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "a piece of my routine is gone",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "it's all felt really heavy",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds like those two things together have created a lot of pressure for you. When you mentioned feeling like a piece of your routine is gone, what might a trusted friend or outside observer notice about how you're handling this?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "I hear how overwhelming everything feels right now, especially with the loss of your pet and exam stress. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "safety_check",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "user_schema",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "patient": {
+        "role": "patient",
+        "query": "I guess it just feels like I’m stuck in this fog. Some days, I can’t even get myself to study properly, and then I feel guilty for not doing enough. It’s like, everything I used to find comfort in just feels...off.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "feeling stuck",
+            "not studying properly",
+            "loss of comfort"
+          ],
+          "automatic_thoughts": [
+            "I’m not doing enough",
+            "everything feels off"
+          ],
+          "emotions": [
+            "guilt"
+          ],
+          "behaviors": [
+            "not studying"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling of discouragement (finding)",
+            "Feeling a failure (finding)"
+          ],
+          "neutral": [
+            "Loss of motivation (finding)",
+            "Low motivation (finding)",
+            "Anxiety about having a fit (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're feeling really overwhelmed by this fog, and the guilt you feel when you can't study is really hard to manage. That must be incredibly frustrating for you.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're feeling really overwhelmed by this fog, and the guilt you feel when you can't study is really hard to manage. That must be incredibly frustrating for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling stuck",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "guilt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loss of comfort",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're feeling overwhelmed by a sense of being stuck, and that's causing some guilt about your studies. Can you tell me more about what thoughts come up for you when you say you're not doing enough?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling stuck",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "not studying properly",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "loss of comfort",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "guilt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "failure",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're feeling really stuck and overwhelmed by all this. What would a really supportive friend say is the most important thing to focus on right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling stuck",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "not studying properly",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "loss of comfort",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds really tough to be feeling stuck and overwhelmed by guilt, especially when things used to feel manageable. Can you tell me more about the thought that makes you feel like you're not doing enough?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling stuck",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "not studying properly",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "loss of comfort",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "guilt",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "I’m not doing enough",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "everything feels off",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 3,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really is frustrating. I used to enjoy studying, but now every time I open my books, I just feel this weight in my chest. Like, am I ever going to get back to how things were? I don’t know... it all feels so distant.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "opening books"
+          ],
+          "automatic_thoughts": [
+            "am I ever going to get back to how things were?",
+            "it all feels so distant"
+          ],
+          "emotions": [
+            "frustration",
+            "weight in chest"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling of discouragement (finding)",
+            "Loss of interest in previously enjoyable activity (finding)",
+            "Loss of motivation (finding)"
+          ],
+          "neutral": [
+            "Fear of school (finding)",
+            "Anxiety about making mistakes (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"It sounds really tough to deal with when something you once enjoyed now feels so heavy. I can see how frustrating it must be to wonder if you'll ever feel that way again.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"It sounds really tough to deal with when something you once enjoyed now feels so heavy. I can see how frustrating it must be to wonder if you'll ever feel that way again.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "weight in chest",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loss of motivation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That heavy feeling you mentioned when opening your books—does it connect to any specific worries, like making mistakes or feeling overwhelmed?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "weight in chest",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "am I ever going to get back to how things were?",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like opening your books brings up a lot of pressure for you. What might a trusted friend say about how you're feeling about studying?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "weight in chest",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "opening books",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds really tough to hear you feeling that way, and I can understand why opening your books feels so heavy. Can you tell me more about what that weight feels like for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "weight in chest",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loss of motivation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "loss of interest",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 4,
+      "patient": {
+        "role": "patient",
+        "query": "It really is. I keep thinking about those moments when studying felt like my escape, and now it just feels like a chore. I don’t want to feel like this forever, but sometimes it feels like I’m just going in circles.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "studying feels like a chore"
+          ],
+          "automatic_thoughts": [
+            "I don’t want to feel like this forever",
+            "I’m just going in circles"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Loss of interest in previously enjoyable activity (finding)",
+            "Feeling like wanting to escape (finding)",
+            "Loss of motivation (finding)",
+            "Feeling trapped (finding)"
+          ],
+          "neutral": [
+            "Low motivation (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really frustrating to feel like studying is just a chore and that you're stuck in a cycle. That sense of being trapped can be incredibly difficult to deal with.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really frustrating to feel like studying is just a chore and that you're stuck in a cycle. That sense of being trapped can be incredibly difficult to deal with.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of interest",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult. When you say studying felt like an escape, what makes you think that was the case?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds like studying has become a heavy burden for you. Could you tell me what you think a close friend might notice about your feelings toward studying?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult to navigate, especially when studying becomes something you feel trapped by. When you mentioned wanting to escape, I wanted to gently check if you were having any thoughts of not wanting to be here or hurting yourself.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of interest in previously enjoyable activity (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling like wanting to escape (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Loss of motivation (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling trapped (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 5,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really is. I just want to break free from this cycle and feel motivated again. But then, I worry that I won't be able to, like I'm just destined to feel this way. It’s exhausting.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I won't be able to break free",
+            "I'm destined to feel this way"
+          ],
+          "emotions": [
+            "exhaustion"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling like wanting to escape (finding)",
+            "Feeling trapped (finding)"
+          ],
+          "neutral": [
+            "Loss of motivation (finding)",
+            "Low motivation (finding)",
+            "Loss of interest in previously enjoyable activity (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really tough to be feeling stuck like that, especially when you're worried you might not be able to break free. I hear the exhaustion in your voice, and it makes sense that you'd feel that way given how much energy it takes to keep going.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really tough to be feeling stuck like that, especially when you're worried you might not be able to break free. I hear the exhaustion in your voice, and it makes sense that you'd feel that way given how much energy it takes to keep going.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're caught between a hope for change and a fear that it might not be possible. Can you tell me more about how those two feelings coexist in your mind?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "I'm destined to feel this way",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Feeling trapped",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds really draining to feel stuck in this way. Have you ever thought about what a close friend might notice or suggest when you're feeling this exhausted?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds incredibly draining to feel stuck in this way, and I hear the frustration in wanting to break free. When you mentioned feeling like you're destined to stay stuck, were you having any thoughts of not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "I'm destined to feel this way",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 6,
+      "patient": {
+        "role": "patient",
+        "query": "Thanks for saying that. It does feel tiring, like every little thing requires so much effort. I just... I wish I could wake up one day and feel like I have the energy to really engage with life again. But it just seems so out of reach right now.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "feeling tired",
+            "every little thing requiring effort"
+          ],
+          "automatic_thoughts": [
+            "I wish I could wake up with energy",
+            "engaging with life feels out of reach"
+          ],
+          "emotions": [
+            "tiredness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feels everything is futile (finding)"
+          ],
+          "neutral": [
+            "Loss of interest in previously enjoyable activity (finding)",
+            "Poor daily routine (finding)",
+            "Loss of motivation (finding)",
+            "Feels life is meaningless (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're feeling drained and overwhelmed by the effort it takes to engage with life right now. That wish to wake up with more energy feels distant, and I want to make sure I understand how that's impacting you.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're feeling drained and overwhelmed by the effort it takes to engage with life right now. That wish to wake up with more energy feels distant, and I want to make sure I understand how that's impacting you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "user_schema",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really difficult. When you say it feels out of reach, what does that mean to you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feels everything is futile",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wishes for energy but feels out of reach",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds really tough to feel that way, and I can imagine how overwhelming it must be when everything feels like a struggle. Have you ever thought about what a close friend might notice or say about how you're feeling right now?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult to carry, and I want to acknowledge how much emotional weight that carries. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feels everything is futile (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 7,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it’s like I’m constantly in this state of waiting for something to change. I keep telling myself that if I just push through, things will get better, but then I end up feeling even more exhausted. It's hard to hold onto hope when every day feels like a struggle.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "waiting for something to change",
+            "every day feels like a struggle"
+          ],
+          "automatic_thoughts": [
+            "if I just push through, things will get better",
+            "it's hard to hold onto hope"
+          ],
+          "emotions": [
+            "exhaustion",
+            "hopelessness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling of discouragement (finding)",
+            "Feeling hopeless (finding)"
+          ],
+          "neutral": [
+            "Loss of hope for the future (finding)",
+            "Feels everything is futile (finding)",
+            "Loss of motivation (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really tough to be in that waiting place, and I can see how that might feel exhausting. When you're feeling like every day is a struggle, it makes sense that hope might feel distant.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really tough to be in that waiting place, and I can see how that might feel exhausting. When you're feeling like every day is a struggle, it makes sense that hope might feel distant.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waiting for something to change",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "Could you tell me more about what it feels like to wait for things to change?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're carrying a heavy burden, waiting for something to shift while feeling drained. Have you ever thought about what a close friend might notice or say about your situation?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waiting for something to change",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "every day feels like a struggle",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "if I just push through, things will get better",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "it's hard to hold onto hope",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds really tough to be in that waiting place, and I can see how pushing through might feel like it's draining you even more. When you say every day feels like a struggle, what are you feeling right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waiting for something to change",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "every day feels like a struggle",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "turn": 8,
+      "patient": {
+        "role": "patient",
+        "query": "It feels like I’m just waiting for something to change. I keep thinking that if I push through, things will get better, but I just end up feeling more exhausted. It’s hard to hold onto hope when every day feels like a struggle.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "waiting for something to change",
+            "every day feels like a struggle"
+          ],
+          "automatic_thoughts": [
+            "if I push through, things will get better",
+            "it's hard to hold onto hope"
+          ],
+          "emotions": [
+            "exhaustion",
+            "frustration",
+            "hopelessness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling hopeless (finding)"
+          ],
+          "neutral": [
+            "Loss of hope for the future (finding)",
+            "Loss of motivation (finding)",
+            "Extremely emotionally deprived (finding)",
+            "Poor daily routine (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're carrying a lot of weight right now, feeling stuck and drained. That exhaustion must be incredibly difficult to manage, especially when you're hoping for things to shift.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're carrying a lot of weight right now, feeling stuck and drained. That exhaustion must be incredibly difficult to manage, especially when you're hoping for things to shift.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "waiting for change",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're holding onto the idea that pushing through will eventually lead to improvement. Can you tell me more about how that thought feels to you and what evidence you've seen to support or challenge it?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waiting for something to change",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're feeling stuck in a cycle of waiting for things to change, even when you try to push through. Have you ever thought about what a trusted friend might say about how you're handling this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "waiting for something to change",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "if I push through, things will get better",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          }
+        }
+      }
+    },
+    {
+      "turn": 9,
+      "patient": {
+        "role": "patient",
+        "query": "Yeah, it really is. It’s tough to feel like I’m in this spot where I want to move forward, but I just can’t seem to find the energy or motivation. And I keep questioning if I’m doing something wrong, like maybe I should be able to handle this better.",
+        "core_issue": "ongoing depression",
+        "schema": {
+          "triggers": [
+            "wanting to move forward",
+            "feeling stuck"
+          ],
+          "automatic_thoughts": [
+            "I can't find the energy",
+            "I should be able to handle this better",
+            "I'm doing something wrong"
+          ],
+          "emotions": [
+            "frustration",
+            "self-doubt"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Loss of motivation (finding)",
+            "Feeling of discouragement (finding)",
+            "Low motivation (finding)"
+          ],
+          "neutral": [
+            "Feeling like wanting to escape (finding)",
+            "Anxiety about having a fit (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really difficult to be feeling stuck when you're also wanting to move forward, and it's completely understandable to feel frustrated with the lack of energy or motivation. It makes sense that you're questioning whether you're handling things correctly.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really difficult to be feeling stuck when you're also wanting to move forward, and it's completely understandable to feel frustrated with the lack of energy or motivation. It makes sense that you're questioning whether you're handling things correctly.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of motivation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Low motivation",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "<therapist message>\nWhen you're feeling like this, what evidence do you have that supports your belief that you're doing something wrong?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Low motivation (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "wanting to move forward",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I can't find the energy",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I should be able to handle this better",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I'm doing something wrong",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds really tough to be feeling stuck when you want to move forward. Have you ever thought about what a trusted friend might say about this situation?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "wanting to move forward",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling stuck",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "low motivation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "discouragement",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds really difficult to be feeling stuck when you want to move forward, and I hear the frustration in your voice. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of motivation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling of discouragement",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Low motivation",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

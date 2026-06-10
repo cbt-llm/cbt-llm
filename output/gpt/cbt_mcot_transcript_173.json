@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Zoloft I started on Zoloft about 2 months ago. First 100mg, and after about 4 weeks I increased to 200mg (per doctor instructions). A little while after I started taking it, and still now, alcohol is gross. I’m not a huge drinker, but I do love wine and beer. I’ve been on SSRIs for years. I just switched to zoloft as my depression got pretty bad. I can’t even fathom beer anymore, and wine, I can have MAYBE one glass and then I feel sick. Anyone else have this problem? Or with any similar meds? I’ve been on Paxil, pristiq, Effexor... never had this issue.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Zoloft I started on Zoloft about 2 months ago. First 100mg, and after about 4 weeks I increased to 200mg (per doctor instructions). A little while after I started taking it, and still now, alcohol is gross. I’m not a huge drinker, but I do love wine and beer. I’ve been on SSRIs for years. I just switched to zoloft as my depression got pretty bad. I can’t even fathom beer anymore, and wine, I can have MAYBE one glass and then I feel sick. Anyone else have this problem? Or with any similar meds? I’ve been on Paxil, pristiq, Effexor... never had this issue.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "starting Zoloft",
+            "increasing dosage",
+            "taking SSRIs",
+            "switching medications"
+          ],
+          "automatic_thoughts": [
+            "alcohol is gross",
+            "I can't fathom beer",
+            "I can only have one glass of wine"
+          ],
+          "emotions": [
+            "disgust",
+            "frustration",
+            "confusion"
+          ],
+          "behaviors": [
+            "avoiding alcohol",
+            "limiting wine intake"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Perceptual disturbance due to alcohol withdrawal (finding)",
+            "Fear about medication side effects (finding)"
+          ],
+          "contradiction": [
+            "Alcohol induced hallucinations (finding)",
+            "Husband alcoholic (finding)",
+            "Feeling intoxicated (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like starting Zoloft has made alcohol feel unappealing and even sickening, which must be frustrating and confusing. How has this shift impacted your daily routine or social activities?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like starting Zoloft has made alcohol feel unappealing and even sickening, which must be frustrating and confusing. How has this shift impacted your daily routine or social activities?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Perceptual disturbance due to alcohol withdrawal",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear about medication side effects",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic_thoughts: alcohol is gross",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: disgust, frustration, confusion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: avoiding alcohol",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What specific experiences or sensations make you feel that alcohol is gross now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "starting Zoloft",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "increasing dosage",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: alcohol is gross",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: disgust, frustration, confusion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "neutral: fear about medication side effects",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like the switch to Zoloft has changed how you feel about alcohol; a trusted friend might wonder if this is a normal side effect or a new sensitivity—what evidence do you have that it’s just a side effect?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like the medication change has made alcohol feel unappealing and even nauseating. Have you noticed any other changes in how you feel or behave since starting Zoloft?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Perceptual disturbance due to alcohol withdrawal",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear about medication side effects",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "starting Zoloft",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "increasing dosage",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "taking SSRIs",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "switching medications",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

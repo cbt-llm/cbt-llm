@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "does anyone feel like this? many people are enjoying this new years eve with their friends,families,lovers and whatever. but me here depressed at home and not feeling like its new year eve and not excited for 2018 and dont have anyone to celebrate with or have friends to wish me new year.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "does anyone feel like this? many people are enjoying this new years eve with their friends,families,lovers and whatever. but me here depressed at home and not feeling like its new year eve and not excited for 2018 and dont have anyone to celebrate with or have friends to wish me new year.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "New Year's Eve",
+            "Seeing others celebrate"
+          ],
+          "automatic_thoughts": [
+            "I'm alone",
+            "No one cares about me",
+            "I should be happy like others",
+            "This is a bad year"
+          ],
+          "emotions": [
+            "depression",
+            "sadness",
+            "loneliness"
+          ],
+          "behaviors": [
+            "staying at home",
+            "not celebrating",
+            "avoiding social interactions"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling empty (finding)",
+            "Feeling lonely (finding)",
+            "Feeling unhappy (finding)"
+          ],
+          "neutral": [
+            "Feeling hopeless (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling very alone and sad right now, especially seeing everyone else enjoying the holiday. What would it feel like if you could share even a small part of this evening with someone?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling very alone and sad right now, especially seeing everyone else enjoying the holiday. What would it feel like if you could share even a small part of this evening with someone?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling depressed",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re feeling very alone right now. What evidence do you have that no one cares about you or that you must be happy like everyone else?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "What might a close friend say about how you’re feeling right now? Even on big holidays, many people feel alone, and that doesn’t mean the year is bad.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling isolated and sad on New Year’s Eve while others are celebrating. Can you tell me more about what it’s like for you right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling depressed",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

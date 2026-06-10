@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "It's my birthday today And I didn't think I'd have made it this far without this sub. Thank you.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "It's my birthday today And I didn't think I'd have made it this far without this sub. Thank you.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "birthday"
+          ],
+          "automatic_thoughts": [
+            "didn't think I'd make it this far"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "expressing gratitude"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Able to remember own date of birth (finding)",
+            "Memory: own date of birth known (finding)"
+          ],
+          "neutral": [
+            "Finding related to ability to remember own date of birth (finding)",
+            "Finding of memory for own date of birth (finding)"
+          ],
+          "contradiction": [
+            "Cannot remember wedding anniversary (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling grateful and surprised at how far you’ve come. What does that gratitude feel like for you?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling grateful and surprised at how far you’ve come. What does that gratitude feel like for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "birthday",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "expressing gratitude",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you had some doubts—what was going through your mind when you felt you might not make it this far?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "birthday",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts: didn't think I'd make it this far",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "expressing gratitude",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling grateful and surprised at how far you’ve come. If a close friend were watching you celebrate this birthday, what might they say about your resilience and the journey you’ve taken?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Able to remember own date of birth (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Memory: own date of birth known (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling grateful and surprised at how far you’ve come. What has been most helpful for you in getting to this point?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "gratitude",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "surprise at progress",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

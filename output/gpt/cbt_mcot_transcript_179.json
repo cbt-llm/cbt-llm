@@ -1,0 +1,185 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Wtf do non-depressed people do all day? A lot of the trouble I have is I've been down so bad for so long I don't even know what to do with myself and I start ruminating and feeling shitty. I can't keep myself frantically busy all day obviously, but the moment I stop my brain takes off into bad territory and digs up bad stuff. Help?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Wtf do non-depressed people do all day? A lot of the trouble I have is I've been down so bad for so long I don't even know what to do with myself and I start ruminating and feeling shitty. I can't keep myself frantically busy all day obviously, but the moment I stop my brain takes off into bad territory and digs up bad stuff. Help?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "stopping activities",
+            "feeling down",
+            "ruminating"
+          ],
+          "automatic_thoughts": [
+            "I don't know what to do with myself",
+            "my brain takes off into bad territory",
+            "I dig up bad stuff"
+          ],
+          "emotions": [
+            "shame",
+            "anxiety",
+            "sadness"
+          ],
+          "behaviors": [
+            "ruminate",
+            "feel shitty"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressive preoccupation (finding)",
+            "Depressed mood (finding)",
+            "Repressing thoughts (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
+          "neutral": [
+            "Depression worse later in day (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like when you try to pause, your mind starts spiraling into negative thoughts and you’re left feeling stuck and upset. What small thing might help you feel a bit more grounded when that happens?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like when you try to pause, your mind starts spiraling into negative thoughts and you’re left feeling stuck and upset. What small thing might help you feel a bit more grounded when that happens?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Repressing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: stopping activities, feeling down, ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: I don't know what to do with myself, brain takes off into bad territory, dig up bad stuff",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: shame, anxiety, sadness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "behaviors: ruminate, feel shitty",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What do you think might happen if you gave yourself a brief pause instead of immediately filling the silence?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Repressing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "If you could ask a close friend what they think about how you’re handling this, what might they say? That perspective might reveal some ways you’re already coping that you’re overlooking.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling shitty",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling stuck and overwhelmed by rumination when you’re not busy, and that can be exhausting. What’s one small thing you might try that could give you a sense of purpose without feeling like you’re forcing yourself to stay busy?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "rumination",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "shame",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "sadness",
+                  "label": "emotions"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

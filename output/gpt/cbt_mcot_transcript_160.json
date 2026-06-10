@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I Don't Know What To Do Anymore I started working recently and, for the first time in a long time, I was genuinely happy. I felt like I was doing something productive, and I made new, and I thought very close, friends there Between a general downswing, and my friends at work finding someone else and, in my opinion, just forgetting about me almost entirely, it's all just fallen apart again - It's worse than it ever was before as I thought I'd found the right circumstances to fix it. It's exhausting, I'm miserable, and I don't know what to do anymore",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I Don't Know What To Do Anymore I started working recently and, for the first time in a long time, I was genuinely happy. I felt like I was doing something productive, and I made new, and I thought very close, friends there Between a general downswing, and my friends at work finding someone else and, in my opinion, just forgetting about me almost entirely, it's all just fallen apart again - It's worse than it ever was before as I thought I'd found the right circumstances to fix it. It's exhausting, I'm miserable, and I don't know what to do anymore",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "friends at work finding someone else",
+            "friends forgetting about me",
+            "general downswing"
+          ],
+          "automatic_thoughts": [
+            "it's all just fallen apart again",
+            "it's worse than it ever was before",
+            "I thought I'd found the right circumstances to fix it"
+          ],
+          "emotions": [
+            "miserable",
+            "exhausted"
+          ],
+          "behaviors": [
+            "not knowing what to do anymore"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [],
+          "contradiction": [
+            "Feeling hopeless (finding)",
+            "Loss of hope for the future (finding)",
+            "Feeling stressed (finding)",
+            "Extremely emotionally deprived (finding)",
+            "Feeling unhappy (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling exhausted and miserable after a recent dip in happiness, especially when it feels like friends at work have moved on and you’re left feeling forgotten. What’s one small thing you might try to regain a sense of connection or purpose?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling exhausted and miserable after a recent dip in happiness, especially when it feels like friends at work have moved on and you’re left feeling forgotten. What’s one small thing you might try to regain a sense of connection or purpose?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "miserable",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "exhausted",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "friends at work finding someone else",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "friends forgetting about me",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "general downswing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "not knowing what to do anymore",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that everything has fallen apart again? It sounds like you’re feeling really overwhelmed and exhausted.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "friends at work finding someone else",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "friends forgetting about me",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "general downswing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts: it's all just fallen apart again",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions: miserable, exhausted",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling like everything’s fallen apart. If a close friend were watching, what might they say about the situation?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you felt hopeful when you started work, but now you're feeling overwhelmed and uncertain. What do you think might help you feel a bit more hopeful or regain some sense of control?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling hopeless",
+                  "label": "contradiction"
+                },
+                {
+                  "concept": "Feeling stressed",
+                  "label": "contradiction"
+                },
+                {
+                  "concept": "Feeling unhappy",
+                  "label": "contradiction"
+                },
+                {
+                  "concept": "Feeling exhausted",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Feeling miserable",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "Feeling uncertain",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

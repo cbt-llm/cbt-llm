@@ -1,0 +1,148 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Life is just difficult I'm not happy, not sad. I'm just \"meh\". Everything is so stressful, too many aspects are just fucking difficult and need so much effort. Like is it even worth it? No interest in anything anymore. The moment I get home I jump in bed and play my Switch. Is this really what I'm doing it for?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Life is just difficult I'm not happy, not sad. I'm just \"meh\". Everything is so stressful, too many aspects are just fucking difficult and need so much effort. Like is it even worth it? No interest in anything anymore. The moment I get home I jump in bed and play my Switch. Is this really what I'm doing it for?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "stressful situations",
+            "difficult aspects of life",
+            "getting home"
+          ],
+          "automatic_thoughts": [
+            "life is difficult",
+            "everything requires too much effort",
+            "is it even worth it?",
+            "no interest in anything"
+          ],
+          "emotions": [
+            "meh"
+          ],
+          "behaviors": [
+            "jump in bed",
+            "play my Switch"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Feels life is meaningless (finding)",
+            "Feels everything is futile (finding)",
+            "Complaining of feeling depressed (finding)",
+            "Extremely emotionally deprived (finding)",
+            "Feeling hopeless (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling overwhelmed and disconnected, and that coming home feels like a relief but also a bit empty. What’s one small thing that might bring a bit of interest or relief when you’re at home?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling overwhelmed and disconnected, and that coming home feels like a relief but also a bit empty. What’s one small thing that might bring a bit of interest or relief when you’re at home?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feels life is meaningless",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feels everything is futile",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "complaining of feeling depressed",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "extremely emotionally deprived",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling hopeless",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts: life is difficult, everything requires too much effort, is it even worth it, no interest",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "behaviors: jump in bed, play Switch",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that this feeling of “meh” is accurate?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feels everything is futile",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling hopeless",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Complaining of feeling depressed",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Extremely emotionally deprived",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling overwhelmed and stuck in a cycle of stress and disengagement. If a close friend heard you say this, what might they suggest you do to find a bit of relief or meaning?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling stuck and unmotivated, and that can be exhausting. What small thing might bring a bit of interest or relief when you get home?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feels life is meaningless",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling hopeless",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling depressed",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "feeling emotionally deprived",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

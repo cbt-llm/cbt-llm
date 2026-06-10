@@ -1,0 +1,123 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I am awake I'm wide awake. I'm lying in bed but I'm wide awake. I could get out of bed because I'm wide awake. But why would I do that to myself?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I am awake I'm wide awake. I'm lying in bed but I'm wide awake. I could get out of bed because I'm wide awake. But why would I do that to myself?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "lying in bed"
+          ],
+          "automatic_thoughts": [
+            "I'm wide awake",
+            "why would I do that to myself?"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "could get out of bed"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Awake (finding)",
+            "Wakefulness (observable entity)"
+          ],
+          "neutral": [
+            "Wakefulness finding (finding)",
+            "Drowsy (finding)"
+          ],
+          "contradiction": [
+            "Asleep (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling very alert and a bit unsettled lying in bed, and you’re wondering why you might want to get up. What’s going through your mind when you think about staying in bed versus getting out?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling very alert and a bit unsettled lying in bed, and you’re wondering why you might want to get up. What’s going through your mind when you think about staying in bed versus getting out?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Awake (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Wakefulness (observable entity)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "lying in bed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "wide awake",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "why would I do that to myself?",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "What evidence do you have that getting out of bed would be doing something harmful to yourself?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Awake (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Wakefulness (observable entity)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re noticing you’re awake but still lying in bed, and you’re questioning why you might stay there. If a close friend saw you in that situation, what might they say about staying in bed?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling unsettled and questioning your own actions. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "awake",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "lying in bed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "why would I do that to myself?",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

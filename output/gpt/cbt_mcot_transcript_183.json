@@ -1,0 +1,138 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "experience/help from therapy? thinking about making an appointment. my depression is consuming me and i figure its a last shot. just wondering if anyone has found actual help from this",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "experience/help from therapy? thinking about making an appointment. my depression is consuming me and i figure its a last shot. just wondering if anyone has found actual help from this",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "thinking about making an appointment",
+            "considering therapy"
+          ],
+          "automatic_thoughts": [
+            "my depression is consuming me",
+            "this is a last shot"
+          ],
+          "emotions": [
+            "despair",
+            "hope"
+          ],
+          "behaviors": [
+            "thinking about seeking help",
+            "considering therapy options"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about treatment (finding)",
+            "Depressive hypochondriacal delusion (finding)",
+            "Psychalgia (finding)"
+          ],
+          "contradiction": [
+            "Chronic anxiety (finding)",
+            "Ready for enhanced spiritual well-being (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling overwhelmed by depression and seeing therapy as a possible last resort, and you’re wondering if it can truly help. What would it look like if therapy made a difference for you?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling overwhelmed by depression and seeing therapy as a possible last resort, and you’re wondering if it can truly help. What would it look like if therapy made a difference for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "my depression is consuming me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "this is a last shot",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "thinking about making an appointment",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "considering therapy",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "When you think of therapy as a “last shot,” what specific changes or relief are you hoping it could bring?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "my depression is consuming me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "this is a last shot",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "hope",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "considering therapy",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling both despair and a glimmer of hope about therapy. What might a trusted friend say about taking that step?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "user schema: triggers, automatic thoughts, emotions, behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "clinical context: neutral anxiety about treatment, depressive hypochondriacal delusion, psychalgia",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling overwhelmed and hopeless. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive hypochondriacal delusion",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Psychalgia",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "What are your experiences with antidepressants? I'm planning to see a therapist soon if I qualify for financial aid, and I'm fairly sure I'll be prescribed some kind of antidepressant (or some anti-anxiety medication, seeing as how depression and anxiety are both taking turns curb stomping me). I've heard some pretty bad things about anti-depressants (worsened depression, a LOT of bad physical side effects, etc) and I'm pretty concerned. What are your experiences? What do you take and how has it affected you?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "What are your experiences with antidepressants? I'm planning to see a therapist soon if I qualify for financial aid, and I'm fairly sure I'll be prescribed some kind of antidepressant (or some anti-anxiety medication, seeing as how depression and anxiety are both taking turns curb stomping me). I've heard some pretty bad things about anti-depressants (worsened depression, a LOT of bad physical side effects, etc) and I'm pretty concerned. What are your experiences? What do you take and how has it affected you?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "planning to see a therapist",
+            "concern about antidepressants",
+            "hearing bad things about antidepressants"
+          ],
+          "automatic_thoughts": [
+            "I'll be prescribed antidepressants",
+            "antidepressants might worsen my depression",
+            "antidepressants have bad side effects"
+          ],
+          "emotions": [
+            "concern",
+            "anxiety"
+          ],
+          "behaviors": [
+            "seeking financial aid",
+            "asking about experiences with antidepressants"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear about medication side effects (finding)"
+          ],
+          "neutral": [
+            "Anticipatory anxiety, severe (finding)",
+            "Anxiety about treatment (finding)",
+            "Anticipatory anxiety, moderate (finding)",
+            "Depression worse in morning (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling pretty anxious about the possibility of medication and the stories you’ve heard, and that’s a very understandable reaction. What particular side effects or outcomes are you most concerned about?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling pretty anxious about the possibility of medication and the stories you’ve heard, and that’s a very understandable reaction. What particular side effects or outcomes are you most concerned about?",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're worried about how antidepressants might affect you. What evidence do you have that they will worsen your depression or cause severe side effects?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear about medication side effects",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about treatment",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re worried that an antidepressant could make things worse; what do you think a close friend would say about your concerns?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear about medication side effects",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about treatment",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling worried about how medication might affect you, especially after hearing negative stories. What specific side effects or outcomes are you most concerned about?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear about medication side effects",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "concern about antidepressants",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

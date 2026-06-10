@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Why do I get so down (depressed?) at the beginning of every semester? It may not be real depression but I do get down and gloomy during the beginning of every semester. I’m in college and have a full time job, so I’m keeping pretty busy. But when I do have a little time to myself, I just want to sit and stare at a wall. It’s not just me; my family has noticed that I act this way too. Why do I do this and is there anything I can do to help? I’m taking 100mg of sertraline already!",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Why do I get so down (depressed?) at the beginning of every semester? It may not be real depression but I do get down and gloomy during the beginning of every semester. I’m in college and have a full time job, so I’m keeping pretty busy. But when I do have a little time to myself, I just want to sit and stare at a wall. It’s not just me; my family has noticed that I act this way too. Why do I do this and is there anything I can do to help? I’m taking 100mg of sertraline already!",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "beginning of every semester",
+            "having a little time to myself"
+          ],
+          "automatic_thoughts": [
+            "I get down and gloomy",
+            "I just want to sit and stare at a wall"
+          ],
+          "emotions": [
+            "down",
+            "gloomy"
+          ],
+          "behaviors": [
+            "sitting and staring at a wall"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressed mood (finding)"
+          ],
+          "neutral": [
+            "Depression worse later in day (finding)",
+            "Depression worse in morning (finding)",
+            "Depressive preoccupation (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like the start of each semester brings a wave of gloom and a desire to withdraw, and that your family has noticed this pattern. What thoughts or feelings come up for you when you notice this shift?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like the start of each semester brings a wave of gloom and a desire to withdraw, and that your family has noticed this pattern. What thoughts or feelings come up for you when you notice this shift?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "beginning of every semester",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "having a little time to myself",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I get down and gloomy",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I just want to sit and stare at a wall",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "down",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "gloomy",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "sitting and staring at a wall",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re noticing a pattern of feeling down at the start of each semester. What thoughts or expectations come up for you when you notice that feeling?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressive preoccupation (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like the start of each semester feels heavy and you’re noticing a pattern of feeling down and wanting to withdraw. If a close friend saw you in that place, what might they say about what’s happening?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressive preoccupation (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like the start of each semester brings a sense of gloom and a desire to withdraw, even when you’re otherwise busy. What thoughts or feelings come up for you when you notice that shift?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

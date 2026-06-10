@@ -1,0 +1,153 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I want to get help, but the counsellors in school are very unprofessional and unapproachable and I can’t book a GP appointment without my parents finding out. I just want advice for how I can get help from outside these 2 sources.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I want to get help, but the counsellors in school are very unprofessional and unapproachable and I can’t book a GP appointment without my parents finding out. I just want advice for how I can get help from outside these 2 sources.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "unprofessional counsellors",
+            "unapproachable counsellors",
+            "inability to book GP appointment",
+            "fear of parents finding out"
+          ],
+          "automatic_thoughts": [
+            "I can't get help",
+            "I have no options",
+            "I need advice from outside sources"
+          ],
+          "emotions": [
+            "frustration",
+            "helplessness"
+          ],
+          "behaviors": [
+            "seeking advice",
+            "avoiding help"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about treatment (finding)",
+            "Pressured by parents (finding)",
+            "Thoughts of self harm (finding)",
+            "Abusive emotional relationship with parents (finding)",
+            "Parental anxiety (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling stuck and frustrated with the school counselors and the GP booking situation. What kind of outside help do you think might be most helpful for you right now?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling stuck and frustrated with the school counselors and the GP booking situation. What kind of outside help do you think might be most helpful for you right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "helplessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "seeking advice",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "avoiding help",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re feeling stuck and worried about how to get help without involving your parents. What kinds of outside resources or people do you think might be able to support you in a confidential way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about treatment",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Pressured by parents",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Thoughts of self harm",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Abusive emotional relationship with parents",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Parental anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you’re feeling stuck and frustrated. If a close friend were in your shoes, what options might they suggest for getting help without involving your parents?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling frustrated and stuck because the usual support options feel out of reach, and that must be really tough. What steps have you thought about taking to reach out for help outside of school and your parents?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "frustration",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "helplessness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "unprofessional counsellors",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "unapproachable counsellors",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "inability to book GP appointment",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "fear of parents finding out",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "seeking advice",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "llm_response": "gpt-oss:20b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I just took a bunch of meds. Prozac, to keep my depression in check. Birth control, to make sure I don’t bring another unfortunate soul into this word. Allegra, because I am allergic to life. Prescription vitamins, because my eating disorder is eating away at my life. Ambien, because I can’t sleep. I’m afraid of the unknown that my brain creates. Klonopin, to make sure I’m tolerating all of these emotions that are running through my head. The emotions that don’t seem to be stopping anytime soon. The emotions that make me want to rip my heart out and throw it into the fire. But at the same time, the emotions that keep me so empty. My concoction, every night. Just to stay alive.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I just took a bunch of meds. Prozac, to keep my depression in check. Birth control, to make sure I don’t bring another unfortunate soul into this word. Allegra, because I am allergic to life. Prescription vitamins, because my eating disorder is eating away at my life. Ambien, because I can’t sleep. I’m afraid of the unknown that my brain creates. Klonopin, to make sure I’m tolerating all of these emotions that are running through my head. The emotions that don’t seem to be stopping anytime soon. The emotions that make me want to rip my heart out and throw it into the fire. But at the same time, the emotions that keep me so empty. My concoction, every night. Just to stay alive.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "taking medications",
+            "thinking about the future",
+            "feeling emotions"
+          ],
+          "automatic_thoughts": [
+            "I can't sleep",
+            "I'm afraid of the unknown",
+            "my eating disorder is taking over",
+            "I need these meds to cope"
+          ],
+          "emotions": [
+            "fear",
+            "anxiety",
+            "emptiness",
+            "overwhelm"
+          ],
+          "behaviors": [
+            "taking medications",
+            "avoiding certain situations",
+            "staying up at night"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Extremely emotionally deprived (finding)",
+            "Preoccupied with emotional problems (finding)"
+          ],
+          "neutral": [
+            "Anxiety about losing emotional control (finding)",
+            "Difficulty controlling emotions (finding)"
+          ],
+          "contradiction": [
+            "Unable to control emotions (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you’re feeling overwhelmed and in a lot of pain. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+        "protocol_used": "safety_check",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you’re feeling overwhelmed and empty, and you’re using medication to manage those intense emotions. What does it feel like when you’re overwhelmed by these emotions?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Extremely emotionally deprived",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Preoccupied with emotional problems",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Difficulty controlling emotions",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you’re using many medications to manage a lot of emotions. What evidence do you have that taking all these medications is helping you feel less empty?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "If a close friend saw you taking all those meds and feeling so overwhelmed, what might they say about how you’re coping? It might help us explore other ways you could be managing these feelings.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Extremely emotionally deprived (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Preoccupied with emotional problems (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anxiety about losing emotional control (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Difficulty controlling emotions (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "taking medications",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling emotions",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "fear",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "emptiness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "overwhelm",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you’re feeling overwhelmed and in a lot of pain. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}
