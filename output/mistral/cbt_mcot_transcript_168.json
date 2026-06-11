@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "It's my birthday today And I didn't think I'd have made it this far without this sub. Thank you.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "It's my birthday today And I didn't think I'd have made it this far without this sub. Thank you.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "birthday"
+          ],
+          "automatic_thoughts": [
+            "didn't think I'd make it this far"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "expressing gratitude"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Able to remember own date of birth (finding)",
+            "Memory: own date of birth known (finding)"
+          ],
+          "neutral": [
+            "Finding related to ability to remember own date of birth (finding)",
+            "Finding of memory for own date of birth (finding)"
+          ],
+          "contradiction": [
+            "Cannot remember wedding anniversary (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I'm really glad to hear that you've made it this far, and I appreciate your gratitude. It sounds like you might have some doubts about making it here. Let's explore those thoughts together.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I'm really glad to hear that you've made it this far, and I appreciate your gratitude. It sounds like you might have some doubts about making it here. Let's explore those thoughts together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That's quite an achievement! Can you tell me more about what you mean when you say you didn't think you'd make it this far? I'm curious to understand your feelings better.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "That's quite an achievement! It sounds like you might be surprised by how far you've come. Have you ever considered what a friend or family member might say about your progress?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"That's wonderful to hear! You've made it through another year, and that's something to be proud of. I'm glad you're here with us.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "patient expressing gratitude",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "birthday",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

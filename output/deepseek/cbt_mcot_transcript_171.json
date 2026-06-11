@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "How do you start over when you’re so depressed to begin with Lost my business. Totally collapsed. It will take 5 months to a year to rebuild. There’s no guarantee it’d be a success. I’m (40) worried about the future. Right now, instead of working, I just lie in bed feeling hopeless. I cried for the first time in years. Life hurts.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "How do you start over when you’re so depressed to begin with Lost my business. Totally collapsed. It will take 5 months to a year to rebuild. There’s no guarantee it’d be a success. I’m (40) worried about the future. Right now, instead of working, I just lie in bed feeling hopeless. I cried for the first time in years. Life hurts.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "losing my business",
+            "thinking about rebuilding",
+            "worrying about the future"
+          ],
+          "automatic_thoughts": [
+            "it will take 5 months to a year to rebuild",
+            "there's no guarantee it’d be a success",
+            "I feel hopeless"
+          ],
+          "emotions": [
+            "depression",
+            "worry",
+            "hopelessness",
+            "sadness"
+          ],
+          "behaviors": [
+            "lying in bed",
+            "crying"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Loss of hope for the future (finding)",
+            "Feeling hopeless (finding)",
+            "Depressive delusion of catastrophe (finding)",
+            "Feeling despair (finding)",
+            "Despair stage of grief (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+        "protocol_used": "safety_check",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly difficult to navigate this right now, and I want you to know that it's completely understandable to feel overwhelmed by these emotions. You're experiencing a lot of pain, and it's okay to feel stuck in this moment.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Loss of hope for the future",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Feeling hopeless",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Depressive delusion of catastrophe",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're carrying a heavy burden right now. When you said that, what would you tell a close friend who was going through something similar?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\n<therapist message> It sounds like you're carrying a huge weight right now, and it's completely understandable that your thoughts are focused on the challenges ahead. Could you imagine how a close friend might approach this situation—what might they notice that feels different or more hopeful than what you're seeing?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

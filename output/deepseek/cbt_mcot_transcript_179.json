@@ -1,0 +1,181 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Wtf do non-depressed people do all day? A lot of the trouble I have is I've been down so bad for so long I don't even know what to do with myself and I start ruminating and feeling shitty. I can't keep myself frantically busy all day obviously, but the moment I stop my brain takes off into bad territory and digs up bad stuff. Help?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Wtf do non-depressed people do all day? A lot of the trouble I have is I've been down so bad for so long I don't even know what to do with myself and I start ruminating and feeling shitty. I can't keep myself frantically busy all day obviously, but the moment I stop my brain takes off into bad territory and digs up bad stuff. Help?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "stopping activities",
+            "feeling down",
+            "ruminating"
+          ],
+          "automatic_thoughts": [
+            "I don't know what to do with myself",
+            "my brain takes off into bad territory",
+            "I dig up bad stuff"
+          ],
+          "emotions": [
+            "shame",
+            "anxiety",
+            "frustration"
+          ],
+          "behaviors": [
+            "ruminate",
+            "feel shitty"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressive preoccupation (finding)",
+            "Depressed mood (finding)",
+            "Repressing thoughts (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
+          "neutral": [
+            "Depression worse later in day (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds really tough when you're stuck in that cycle of feeling down and not knowing how to break out of it. I hear how overwhelming it can feel when your mind starts to spiral.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds really tough when you're stuck in that cycle of feeling down and not knowing how to break out of it. I hear how overwhelming it can feel when your mind starts to spiral.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "stopping activities",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "ruminate",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That's understandable - it can feel really isolating when you're stuck in that cycle. Can you tell me more about what it feels like when your mind starts racing like that?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Repressing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "stopping activities",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "That sounds really tough—what would a trusted friend say might help you find something to focus on?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds really tough when you're stuck in that cycle of feeling down and not knowing how to break out of it. When you stop, it feels like your brain just goes straight to the negative stuff, right?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

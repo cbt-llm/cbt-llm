@@ -61,6 +61,8 @@ class EvalConfig:
     max_concurrent: int = 4
     retries: int = 3
 
+    max_index: int = 152
+
 
 class Score(BaseModel):
     score: float = Field(..., ge=0, le=5)
@@ -100,6 +102,11 @@ def clamp(x):
         return max(0, min(5, x))
     except:
         return 0
+
+
+def transcript_index(path):
+    m = re.search(r"transcript[_-]?(\d+)", path.stem)
+    return int(m.group(1)) if m else None
 
 
 def safe_json_load(text):
@@ -304,8 +311,7 @@ class Judge:
                             "temperature": 0.6,                  # not 0.0 — greedy decode causes qwen3 thinking repetition loops
                             "top_p": 0.95,
                             "top_k": 20,
-                            "num_ctx": 8192,                     # 2048 truncated the prompt; 8192 fits protocol defs + transcript + template
-                            # no num_predict cap — thinking tokens would eat it and truncate the JSON
+                            "num_ctx": 32768,                     # 2048 truncated the prompt; 8192 fits protocol defs + transcript + template
                         },
                         keep_alive="30m",                        # keep the 32B resident across files
                     ),
@@ -413,7 +419,13 @@ async def run_model(model, cfg):
 
     judge = Judge(cfg, protocol_defs, best_practices)
 
-    files = sorted((cfg.input_root / model).glob("*transcript*.json"))
+    # numeric sort + cap at max_index (inclusive). lexicographic sort would put
+    # transcript_152 before transcript_2, so filter by value, not list position.
+    indexed = [(transcript_index(f), f)
+               for f in (cfg.input_root / model).glob("*transcript*.json")]
+    files = [f for _, f in sorted(
+        (i, f) for i, f in indexed if i is not None and i <= cfg.max_index
+    )]
 
     for f in files:
 
@@ -440,12 +452,14 @@ def main():
     parser.add_argument("--model", required=True)
     parser.add_argument("--judge-backend", default="openai")
     parser.add_argument("--judge-model", default="gpt-5.1")
+    parser.add_argument("--max-index", type=int, default=152)
 
     args = parser.parse_args()
 
     cfg = EvalConfig(
         judge_backend=args.judge_backend,
         judge_model=args.judge_model,
+        max_index=args.max_index,
     )
 
     asyncio.run(run_model(args.model, cfg))

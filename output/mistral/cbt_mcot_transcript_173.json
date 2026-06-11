@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Zoloft I started on Zoloft about 2 months ago. First 100mg, and after about 4 weeks I increased to 200mg (per doctor instructions). A little while after I started taking it, and still now, alcohol is gross. I’m not a huge drinker, but I do love wine and beer. I’ve been on SSRIs for years. I just switched to zoloft as my depression got pretty bad. I can’t even fathom beer anymore, and wine, I can have MAYBE one glass and then I feel sick. Anyone else have this problem? Or with any similar meds? I’ve been on Paxil, pristiq, Effexor... never had this issue.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Zoloft I started on Zoloft about 2 months ago. First 100mg, and after about 4 weeks I increased to 200mg (per doctor instructions). A little while after I started taking it, and still now, alcohol is gross. I’m not a huge drinker, but I do love wine and beer. I’ve been on SSRIs for years. I just switched to zoloft as my depression got pretty bad. I can’t even fathom beer anymore, and wine, I can have MAYBE one glass and then I feel sick. Anyone else have this problem? Or with any similar meds? I’ve been on Paxil, pristiq, Effexor... never had this issue.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "starting Zoloft",
+            "increasing dosage",
+            "thinking about alcohol"
+          ],
+          "automatic_thoughts": [
+            "alcohol is gross",
+            "I can't fathom beer",
+            "I feel sick after one glass of wine"
+          ],
+          "emotions": [
+            "disgust",
+            "frustration"
+          ],
+          "behaviors": [
+            "avoiding alcohol",
+            "limiting wine consumption"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Perceptual disturbance due to alcohol withdrawal (finding)",
+            "Fear about medication side effects (finding)"
+          ],
+          "contradiction": [
+            "Alcohol induced hallucinations (finding)",
+            "Husband alcoholic (finding)",
+            "Feeling intoxicated (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "Have you noticed any other changes in your emotions or behaviors since starting Zoloft? It's common for medications to affect people differently, and it might be helpful to discuss these changes with your doctor.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry to hear that you're having a tough time with the new medication. It can take some time for our bodies to adjust, and it sounds like this might be affecting your relationship with alcohol. Have you noticed any other changes since starting Zoloft? It's important to discuss these feelings with your doctor so they can help find the best treatment for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "starting Zoloft",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "increasing dosage",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking about alcohol",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "Have you noticed any other changes in your emotions or behaviors since starting Zoloft? It's common for medications to affect people differently, and it might be helpful to discuss these changes with your doctor.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "Have you ever considered that the increased dosage of Zoloft might be affecting your taste for alcohol? Some people report changes in their sense of taste while on certain medications. It's worth discussing with your doctor if this is a concern for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "increasing dosage",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "alcohol is gross",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "feeling sick after one glass of wine",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm sorry to hear that you're having a difficult time with your new medication. It's not uncommon for people to experience side effects when starting or adjusting their dose of antidepressants. Have you noticed any other changes since increasing the dosage of Zoloft?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "starting Zoloft",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "increasing dosage",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thinking about alcohol",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

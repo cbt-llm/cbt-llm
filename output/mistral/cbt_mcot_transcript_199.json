@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "does anyone feel like this? many people are enjoying this new years eve with their friends,families,lovers and whatever. but me here depressed at home and not feeling like its new year eve and not excited for 2018 and dont have anyone to celebrate with or have friends to wish me new year.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "does anyone feel like this? many people are enjoying this new years eve with their friends,families,lovers and whatever. but me here depressed at home and not feeling like its new year eve and not excited for 2018 and dont have anyone to celebrate with or have friends to wish me new year.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "New Year's Eve",
+            "seeing others celebrate"
+          ],
+          "automatic_thoughts": [
+            "I'm alone",
+            "No one cares about me",
+            "I should be happy like others",
+            "This is not a special time for me"
+          ],
+          "emotions": [
+            "depression",
+            "sadness",
+            "loneliness"
+          ],
+          "behaviors": [
+            "staying at home",
+            "not celebrating",
+            "avoiding social interactions"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling empty (finding)",
+            "Feeling lonely (finding)",
+            "Feeling unhappy (finding)"
+          ],
+          "neutral": [
+            "Feeling hopeless (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I'm really sorry that you're feeling this way, but it's important to remember that everyone experiences emotions differently. It can be hard when we see others celebrating and feel like we're missing out. Can we talk about what makes this time of year difficult for you?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry that you're feeling this way, but it's important to remember that everyone experiences emotions differently. It can be hard when we see others celebrating and feel like we're missing out. Can we talk about what makes this time of year difficult for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling quite alone and disconnected from the festivities this New Year's Eve. Can you help me understand more about what makes you feel this way? Are there any specific thoughts or feelings that come up for you when you think about celebrating without friends or loved ones?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I'm really sorry that you're feeling this way, but it's important to remember that everyone experiences emotions differently. While many people might be celebrating New Year's Eve with others, it doesn't mean that your feelings are any less valid. Let's explore some ways we can help you feel more connected and hopeful for the new year.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way, but it sounds like you're having a tough time. It can be hard to feel left out when others are celebrating. Let's talk about how we might help you find some ways to connect with people or make the most of your New Year's Eve at home.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

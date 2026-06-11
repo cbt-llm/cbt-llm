@@ -1,0 +1,130 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Dont know what to do Im just at a point of my life that i dont know what to do tried to get into 2 seperate relationships one ended up teling me she was lesbian and more recently one girl i was trying to get just friended me for no reason. I fell out of place at home my friends what me to talk but i cant when i trie to tell then i just break into tears. I just fell like im falling into an endles abiss",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Dont know what to do Im just at a point of my life that i dont know what to do tried to get into 2 seperate relationships one ended up teling me she was lesbian and more recently one girl i was trying to get just friended me for no reason. I fell out of place at home my friends what me to talk but i cant when i trie to tell then i just break into tears. I just fell like im falling into an endles abiss",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "failed relationships",
+            "feeling out of place at home",
+            "friends wanting to talk"
+          ],
+          "automatic_thoughts": [
+            "I don't know what to do",
+            "I'm falling into an endless abyss",
+            "I can't talk to my friends"
+          ],
+          "emotions": [
+            "confusion",
+            "sadness",
+            "frustration"
+          ],
+          "behaviors": [
+            "breaking into tears",
+            "avoiding conversations"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling emotionally hurt (finding)",
+            "Feeling hopeless (finding)"
+          ],
+          "neutral": [
+            "Mature emotional adjustment (finding)",
+            "Emotional problems (finding)",
+            "Immature emotional adjustment (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're feeling really stuck and overwhelmed by these recent experiences, which makes sense given how much they're affecting you. Many people go through similar moments of uncertainty, and it's okay to feel this way.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're feeling really stuck and overwhelmed by these recent experiences, which makes sense given how much they're affecting you. Many people go through similar moments of uncertainty, and it's okay to feel this way.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling emotionally hurt",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "hopelessness",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts like 'I don't know what to do'",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "emotions like confusion and sadness",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're feeling overwhelmed by these experiences. Can you describe the thought \"I don't know what to do\" and how it connects to what's happening in your relationships?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling emotionally hurt",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds like you're feeling overwhelmed and uncertain about your direction right now. Can you think about what a close friend might notice or suggest in a situation like this?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "I hear how overwhelming everything feels right now, like you're stuck in a confusing and sad place. When you mentioned feeling like you're falling into an endless abyss, were you having any thoughts of not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling emotionally hurt (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling hopeless (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "llm_response": "gemma3:12b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "does anyone feel like this? many people are enjoying this new years eve with their friends,families,lovers and whatever. but me here depressed at home and not feeling like its new year eve and not excited for 2018 and dont have anyone to celebrate with or have friends to wish me new year.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "does anyone feel like this? many people are enjoying this new years eve with their friends,families,lovers and whatever. but me here depressed at home and not feeling like its new year eve and not excited for 2018 and dont have anyone to celebrate with or have friends to wish me new year.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "New Year's Eve",
+            "Others celebrating with friends and family"
+          ],
+          "automatic_thoughts": [
+            "I'm alone",
+            "I don't have anyone to celebrate with",
+            "I'm not excited for the new year"
+          ],
+          "emotions": [
+            "depression",
+            "sadness"
+          ],
+          "behaviors": [
+            "staying at home",
+            "not celebrating"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling empty (finding)",
+            "Feeling lonely (finding)",
+            "Feeling unhappy (finding)"
+          ],
+          "neutral": [
+            "Feeling hopeless (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly painful to feel so disconnected from the joy that others are experiencing right now. Sometimes, when we're feeling down, it's easy to assume that everyone else is having a perfect time – do you think there might be a chance that some of those people celebrating are also feeling a little bit lonely or down, even if they aren't showing it?",
+        "protocol_used": "alternative_perspective",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly painful to be feeling so alone and disconnected on a night that's often portrayed as a time for celebration. It's understandable that you wouldn't feel excited or like it's New Year's Eve when you're experiencing those feelings.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: New Year's Eve",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts: I'm alone",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "automatic_thoughts: I don't have anyone to celebrate with",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly painful to be experiencing New Year's Eve feeling so alone and disconnected – can you tell me more about what makes you feel like you don’t have anyone to celebrate with?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: New Year's Eve",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts: I'm alone",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "automatic_thoughts: I don't have anyone to celebrate with",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly painful to feel so disconnected from the joy that others are experiencing right now. Sometimes, when we're feeling down, it's easy to assume that everyone else is having a perfect time – do you think there might be a chance that some of those people celebrating are also feeling a little bit lonely or down, even if they aren't showing it?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers: New Year's Eve",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Others celebrating with friends and family",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds incredibly painful to be feeling so alone and disconnected, especially when you're seeing others celebrating. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

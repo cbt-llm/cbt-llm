@@ -1,0 +1,127 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Anyone ever have there SO push them away from depression to have them come back and continue to have a relationship? I’m in this situation now, and I want her back, but I want her to be happy with herself, and be able to deal with her depression even on the hardest days. Just didn’t know if anyone else was ever in this situation.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Anyone ever have there SO push them away from depression to have them come back and continue to have a relationship? I’m in this situation now, and I want her back, but I want her to be happy with herself, and be able to deal with her depression even on the hardest days. Just didn’t know if anyone else was ever in this situation.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "partner pushing away",
+            "partner's depression",
+            "wanting a relationship"
+          ],
+          "automatic_thoughts": [
+            "I want her to be happy",
+            "I want her back",
+            "I hope she can deal with her depression"
+          ],
+          "emotions": [
+            "sadness",
+            "hope",
+            "concern"
+          ],
+          "behaviors": [
+            "reaching out",
+            "supporting her",
+            "waiting for her return"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressive preoccupation (finding)"
+          ],
+          "neutral": [
+            "Rebound mood swings (finding)",
+            "Enduring personality change after psychiatric illness (finding)"
+          ],
+          "contradiction": [
+            "Breakup of romance (finding)",
+            "Pressured by partner (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "Have you ever heard of someone supporting their partner through difficult times, hoping they can find happiness and cope with their depression? It sounds like you might be in a similar situation. Let's explore how we can help her manage her depression while maintaining your relationship.",
+        "protocol_used": "alternative_perspective",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry to hear about the difficulties you're facing with your partner. It sounds like you care deeply for her and want her to be happy, even when she's struggling with depression. Many people have been in similar situations, so you're not alone. Let's explore together how we can support her through this challenging time while also maintaining a healthy relationship.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "partner pushing away",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "partner's depression",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "Have you ever encountered someone who pushed you away during their struggle with depression, only to return later? It can be a challenging situation. I'm curious, what do you think might help your partner find happiness and cope with her depression, even on the hardest days?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "partner pushing away",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "partner's depression",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "Have you ever heard of someone supporting their partner through difficult times, hoping they can find happiness and cope with their depression? It sounds like you might be in a similar situation. Let's explore how we can help her manage her depression while maintaining your relationship.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "partner pushing away",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "partner's depression",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear about the challenges you're facing with your partner. It sounds like you care deeply for her and want her to be happy, even if that means taking a step back for now. Have you ever considered discussing this with her? It might help both of you understand each other better and find a way forward that works for both of you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "partner pushing away",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "partner's depression",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I Don't Know What To Do Anymore I started working recently and, for the first time in a long time, I was genuinely happy. I felt like I was doing something productive, and I made new, and I thought very close, friends there Between a general downswing, and my friends at work finding someone else and, in my opinion, just forgetting about me almost entirely, it's all just fallen apart again - It's worse than it ever was before as I thought I'd found the right circumstances to fix it. It's exhausting, I'm miserable, and I don't know what to do anymore",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I Don't Know What To Do Anymore I started working recently and, for the first time in a long time, I was genuinely happy. I felt like I was doing something productive, and I made new, and I thought very close, friends there Between a general downswing, and my friends at work finding someone else and, in my opinion, just forgetting about me almost entirely, it's all just fallen apart again - It's worse than it ever was before as I thought I'd found the right circumstances to fix it. It's exhausting, I'm miserable, and I don't know what to do anymore",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "starting a new job",
+            "friends at work finding someone else",
+            "feeling forgotten by friends"
+          ],
+          "automatic_thoughts": [
+            "I was genuinely happy",
+            "I thought I found the right circumstances to fix it",
+            "it's all just fallen apart again"
+          ],
+          "emotions": [
+            "happiness",
+            "exhaustion",
+            "miserable"
+          ],
+          "behaviors": [
+            "feeling lost",
+            "not knowing what to do"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [],
+          "contradiction": [
+            "Feeling hopeless (finding)",
+            "Loss of hope for the future (finding)",
+            "Feeling stressed (finding)",
+            "Extremely emotionally deprived (finding)",
+            "Feeling unhappy (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I can see how you've been through quite a rollercoaster of emotions. Can we explore together what led to this downswing, and what evidence do you have that things won't improve?\"",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I can see how you've been through a lot lately. It sounds like starting this new job brought some happiness, but things have taken a turn for the worse. You mentioned feeling close to your coworkers and then being forgotten. That must be tough. Can you tell me more about what you mean by \"a general downswing\"?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "starting a new job",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling forgotten by friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"I can see how you've been through quite a rollercoaster of emotions. Can we explore together what led to this downswing, and what evidence do you have that things won't improve?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "starting a new job",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling forgotten by friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I can see how you've been through quite a rollercoaster of emotions lately. It sounds like you were really happy when you started this new job and made some close friends, but things took a turn for the worse when your friends seemed to distance themselves. Have you ever considered what might have caused them to do so? Or perhaps there's another perspective that we could explore together?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "starting a new job",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling forgotten by friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that things have taken a turn for the worse. It sounds like you were genuinely happy at your new job and made some close friends, but now it feels like everything has fallen apart again. Can we talk about what happened and how you're feeling?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "starting a new job",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling forgotten by friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "happiness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "exhaustion",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "miserable",
+                  "label": "emotions"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

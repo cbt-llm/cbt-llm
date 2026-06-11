@@ -1,0 +1,162 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "does anyone feel like this? many people are enjoying this new years eve with their friends,families,lovers and whatever. but me here depressed at home and not feeling like its new year eve and not excited for 2018 and dont have anyone to celebrate with or have friends to wish me new year.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "does anyone feel like this? many people are enjoying this new years eve with their friends,families,lovers and whatever. but me here depressed at home and not feeling like its new year eve and not excited for 2018 and dont have anyone to celebrate with or have friends to wish me new year.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "New Year's Eve",
+            "Seeing others celebrate"
+          ],
+          "automatic_thoughts": [
+            "I'm alone",
+            "No one cares about me",
+            "I should be happy like others",
+            "This year will be the same as the last"
+          ],
+          "emotions": [
+            "depression",
+            "sadness",
+            "loneliness"
+          ],
+          "behaviors": [
+            "staying at home",
+            "not celebrating",
+            "avoiding social interactions"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling isolated (finding)",
+            "Feeling empty (finding)",
+            "Feeling lonely (finding)",
+            "Feeling unhappy (finding)"
+          ],
+          "neutral": [
+            "Feeling hopeless (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like New Year's Eve is bringing up a lot of sadness for you, especially with everyone else celebrating. Can you tell me more about what it feels like to be here alone tonight?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like New Year's Eve is bringing up a lot of sadness for you, especially with everyone else celebrating. Can you tell me more about what it feels like to be here alone tonight?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're feeling really lonely right now, especially seeing others celebrating. Can you tell me more about how you feel when you see people enjoying New Year's Eve?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "depression",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "sadness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loneliness",
+                  "label": "emotions"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're feeling really alone right now, surrounded by others having a good time. Have you ever thought about what a close friend might say if they saw you feeling this way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling isolated",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling empty",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling lonely",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling unhappy",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "New Year's Eve",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Seeing others celebrate",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like you're feeling really alone right now, surrounded by others celebrating. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "depression",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "sadness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loneliness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "isolation",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "My company has a holiday party and I just can't... go... I don't want to socialize and parties annoy me to no end. All the small talk, all the people... I don't want to go. At times I feel like I'm allergic to people.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "My company has a holiday party and I just can't... go... I don't want to socialize and parties annoy me to no end. All the small talk, all the people... I don't want to go. At times I feel like I'm allergic to people.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "holiday party",
+            "socializing",
+            "small talk",
+            "crowded places"
+          ],
+          "automatic_thoughts": [
+            "I can't go",
+            "parties annoy me",
+            "I don't want to socialize",
+            "I'm allergic to people"
+          ],
+          "emotions": [
+            "frustration",
+            "anxiety"
+          ],
+          "behaviors": [
+            "avoid going to the party"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Fear of social gatherings (finding)",
+            "Fear of social group activities (finding)",
+            "Fear of being in a small group (finding)",
+            "Anxiety about vomiting in public (finding)",
+            "Social isolation (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand that the thought of going to the holiday party is causing you some distress, and it's not uncommon for people to feel uncomfortable in social situations. Let's explore together why this particular event might be challenging for you.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that the thought of going to the holiday party is causing you some distress, and it's not uncommon for people to feel uncomfortable in social situations. Let's explore together why this particular event might be challenging for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "socializing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "small talk",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "crowded places",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you have some reservations about the holiday party. Can you tell me more about what specifically makes you feel this way? Let's explore together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "socializing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "small talk",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "crowded places",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like parties can be overwhelming for you, with all the socializing and small talk. Have you ever considered what a friend or someone who enjoys parties might say about it? It could help us explore other perspectives.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "socializing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "small talk",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "crowded places",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I understand that the thought of going to the holiday party is causing you some distress. Let's explore together why this might be and see if we can find a way for you to feel more comfortable.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "socializing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "small talk",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "crowded places",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

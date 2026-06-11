@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "What are your experiences with antidepressants? I'm planning to see a therapist soon if I qualify for financial aid, and I'm fairly sure I'll be prescribed some kind of antidepressant (or some anti-anxiety medication, seeing as how depression and anxiety are both taking turns curb stomping me). I've heard some pretty bad things about anti-depressants (worsened depression, a LOT of bad physical side effects, etc) and I'm pretty concerned. What are your experiences? What do you take and how has it affected you?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "What are your experiences with antidepressants? I'm planning to see a therapist soon if I qualify for financial aid, and I'm fairly sure I'll be prescribed some kind of antidepressant (or some anti-anxiety medication, seeing as how depression and anxiety are both taking turns curb stomping me). I've heard some pretty bad things about anti-depressants (worsened depression, a LOT of bad physical side effects, etc) and I'm pretty concerned. What are your experiences? What do you take and how has it affected you?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "planning to see a therapist",
+            "concern about antidepressants",
+            "hearing bad things about antidepressants"
+          ],
+          "automatic_thoughts": [
+            "I'll be prescribed antidepressants",
+            "antidepressants might worsen my depression",
+            "antidepressants have bad side effects"
+          ],
+          "emotions": [
+            "concern",
+            "anxiety"
+          ],
+          "behaviors": [
+            "planning to seek financial aid",
+            "considering therapy"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Fear about medication side effects (finding)"
+          ],
+          "neutral": [
+            "Anticipatory anxiety, severe (finding)",
+            "Anxiety about treatment (finding)",
+            "Anticipatory anxiety, moderate (finding)",
+            "Depression worse in morning (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I understand you're feeling quite anxious about starting medication, and it's completely understandable to have concerns about potential side effects. Can you tell me more about what specifically worries you the most?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand you're feeling quite anxious about starting medication, and it's completely understandable to have concerns about potential side effects. Can you tell me more about what specifically worries you the most?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Fear about medication side effects (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Anticipatory anxiety, severe (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anticipatory anxiety, moderate (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anxiety about treatment (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That's understandable to be concerned about potential side effects. Can you tell me more about which specific side effects worry you the most?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "user schema",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\n<therapist message>\nIt makes sense that you're concerned about potential side effects. Have you thought about what a trusted friend or family member might say if they were in your situation?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "I understand you're feeling concerned about starting medication, and it's completely understandable to have worries about potential side effects. Can you tell me more about what specifically worries you the most?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

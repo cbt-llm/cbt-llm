@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I am awake I'm wide awake. I'm lying in bed but I'm wide awake. I could get out of bed because I'm wide awake. But why would I do that to myself?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I am awake I'm wide awake. I'm lying in bed but I'm wide awake. I could get out of bed because I'm wide awake. But why would I do that to myself?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "lying in bed"
+          ],
+          "automatic_thoughts": [
+            "I'm wide awake",
+            "why would I do that to myself?"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "could get out of bed"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Awake (finding)",
+            "Wakefulness (observable entity)"
+          ],
+          "neutral": [
+            "Wakefulness finding (finding)",
+            "Drowsy (finding)"
+          ],
+          "contradiction": [
+            "Asleep (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"It sounds like you're finding it hard to understand why you're awake when you'd rather be asleep. Can you help me explore what thoughts or feelings might be keeping you awake?\"",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I can see you're awake and struggling with being in bed. It's understandable to feel that way sometimes. Let's talk about what might be making it difficult for you to get out of bed today.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Wakefulness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Awake",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're finding it hard to understand why you're awake when you'd rather be asleep. Can you help me explore what thoughts or feelings might be keeping you awake?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Wakefulness",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Awake",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're struggling with being awake while lying in bed. Have you ever considered what a friend or loved one might say about this situation? It could help us explore alternative perspectives together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "lying in bed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I'm wide awake",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're struggling with being awake and lying in bed. Can I ask, have you been having any thoughts of hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "lying in bed",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I'm wide awake",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

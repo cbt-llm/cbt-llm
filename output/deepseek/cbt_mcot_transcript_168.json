@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "It's my birthday today And I didn't think I'd have made it this far without this sub. Thank you.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "It's my birthday today And I didn't think I'd have made it this far without this sub. Thank you.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "birthday"
+          ],
+          "automatic_thoughts": [
+            "didn't think I'd make it this far"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "expressing gratitude"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Able to remember own date of birth (finding)",
+            "Memory: own date of birth known (finding)"
+          ],
+          "neutral": [
+            "Finding related to ability to remember own date of birth (finding)",
+            "Finding of memory for own date of birth (finding)"
+          ],
+          "contradiction": [
+            "Cannot remember wedding anniversary (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It's great to hear that you're celebrating your birthday and feeling grateful for the support here. That sounds like a meaningful moment for you.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It's great to hear that you're celebrating your birthday and feeling grateful for the support here. That sounds like a meaningful moment for you.",
+            "reasoning": null
+          },
+          "socratic_questioning": {
+            "response": "That sounds like a really positive reflection on your journey. Can you tell me more about what makes you feel that way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "birthday",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "didn't think I'd make it this far",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "That sounds like a really meaningful milestone for you. What does this birthday mean to you, in terms of your journey?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "birthday",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "didn't think I'd make it this far",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It's great to hear that your birthday is coming up and you're feeling grateful. How do you think this community has helped you along the way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "birthday",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "didn't think I'd make it this far without this sub",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "expressing gratitude",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Girlfriend left me last night over text Was with some friends, feeling really really depressed as usual at this point, and I left as soon as the ball drops. Get home and tell her im scared of another year with depression. She told me that I put too much pressure on her. She then says she doesn't want to be in a relationship right now. I like her so much. I tried to overdose on my zoloft but my mom stopped me. She won't take me to the hospital. I just turned 17 and this is the third year I've been dealing with depression. I want to hug somebody I'm so sad",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Girlfriend left me last night over text Was with some friends, feeling really really depressed as usual at this point, and I left as soon as the ball drops. Get home and tell her im scared of another year with depression. She told me that I put too much pressure on her. She then says she doesn't want to be in a relationship right now. I like her so much. I tried to overdose on my zoloft but my mom stopped me. She won't take me to the hospital. I just turned 17 and this is the third year I've been dealing with depression. I want to hug somebody I'm so sad",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "Girlfriend left me over text",
+            "Being with friends",
+            "New year approaching"
+          ],
+          "automatic_thoughts": [
+            "I'm scared of another year with depression",
+            "I put too much pressure on her",
+            "She doesn't want to be in a relationship",
+            "I like her so much",
+            "I want to hug somebody"
+          ],
+          "emotions": [
+            "depressed",
+            "scared",
+            "sad"
+          ],
+          "behaviors": [
+            "left as soon as the ball drops",
+            "tried to overdose on zoloft",
+            "asked mom to take me to the hospital"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Girlfriend relationship problem (finding)",
+            "Feeling suicidal (finding)",
+            "Extremely emotionally deprived (finding)",
+            "Feeling emotionally hurt (finding)",
+            "Breakup of romance (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I'm really sorry to hear that you're feeling this way. Can we take a moment to talk about whether you've had any thoughts of hurting yourself or not wanting to be here?",
+        "protocol_used": "safety_check",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like the new year has been particularly tough for you, and I can understand why you might be scared of another year with depression. It's important to remember that it's okay to feel sad and overwhelmed sometimes, but trying to harm yourself is never the solution. Let's work together to find healthier ways to cope with your feelings.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Girlfriend left me",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Being with friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "New year approaching",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "depressed",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "scared",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "tried to overdose on zoloft",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"I'm really sorry to hear that you're feeling this way. Can you tell me more about what makes you feel like another year with depression is scary? And how do you think your friends might react if they knew you were feeling so sad?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Feeling suicidal (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Breakup of romance (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Extremely emotionally deprived (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're feeling quite overwhelmed right now. Let's explore what might happen if things were to go differently this year, or what a friend might say about your situation. Would that be okay with you?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Girlfriend left me",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "Being with friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "New year approaching",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "I'm scared of another year with depression",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "She doesn't want to be in a relationship",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I like her so much",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I tried to overdose on zoloft",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. Can we take a moment to talk about whether you've had any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "suicidal ideation",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "depression",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "breakup",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

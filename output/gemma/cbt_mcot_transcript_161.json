@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "llm_response": "gemma3:12b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Feeling nothing is awful too I haven't taken anxiety meds in 8 months and now I remember why I hated them. Sure, they help stop constant panic attacks over stupid things, but I really end up feeling like some kind of emotionless robot. It's just nothingness constantly and I don't even know which path of suffering to take anymore.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Feeling nothing is awful too I haven't taken anxiety meds in 8 months and now I remember why I hated them. Sure, they help stop constant panic attacks over stupid things, but I really end up feeling like some kind of emotionless robot. It's just nothingness constantly and I don't even know which path of suffering to take anymore.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "Feeling nothing is awful",
+            "I remember why I hated anxiety meds",
+            "They help stop panic attacks over stupid things",
+            "I feel like an emotionless robot",
+            "It's just nothingness constantly",
+            "I don't know which path of suffering to take anymore"
+          ],
+          "emotions": [
+            "awfulness",
+            "nothingness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anticipatory anxiety, severe (finding)",
+            "Anxiety about treatment (finding)",
+            "Anticipatory anxiety (finding)"
+          ],
+          "contradiction": [
+            "Recurrent anxiety (finding)",
+            "Chronic anxiety (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly distressing to feel like you're caught between panic and emotional numbness – that’s a tough spot to be in. Can you imagine what a friend might say about you feeling this way, given everything you're going through?",
+        "protocol_used": "alternative_perspective",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly difficult to be experiencing this sense of nothingness, especially after stopping your anxiety medication and remembering how it affected you. It seems like you're caught between feeling awful and feeling numb, and that's a really tough place to be.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "awfulness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "nothingness",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Anxiety about treatment",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anticipatory anxiety",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly distressing to feel like you're caught between panic and emotional numbness – what do you think contributes to that feeling of being an \"emotionless robot\" when you're on the medication?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly distressing to feel like you're caught between panic and emotional numbness – that’s a tough spot to be in. Can you imagine what a friend might say about you feeling this way, given everything you're going through?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "alternative_perspective",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly difficult, and it makes sense you'd feel overwhelmed. When you say \"feeling nothing is awful,\" were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "awfulness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "nothingness",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "Anxiety about treatment (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Anticipatory anxiety (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

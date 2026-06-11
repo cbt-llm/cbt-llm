@@ -1,0 +1,137 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Wtf do non-depressed people do all day? A lot of the trouble I have is I've been down so bad for so long I don't even know what to do with myself and I start ruminating and feeling shitty. I can't keep myself frantically busy all day obviously, but the moment I stop my brain takes off into bad territory and digs up bad stuff. Help?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Wtf do non-depressed people do all day? A lot of the trouble I have is I've been down so bad for so long I don't even know what to do with myself and I start ruminating and feeling shitty. I can't keep myself frantically busy all day obviously, but the moment I stop my brain takes off into bad territory and digs up bad stuff. Help?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "stopping activities",
+            "feeling down",
+            "ruminating"
+          ],
+          "automatic_thoughts": [
+            "I don't know what to do with myself",
+            "my brain takes off into bad territory",
+            "I dig up bad stuff"
+          ],
+          "emotions": [
+            "shame",
+            "anxiety",
+            "frustration"
+          ],
+          "behaviors": [
+            "ruminate",
+            "feel shitty"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressive preoccupation (finding)",
+            "Depressed mood (finding)",
+            "Repressing thoughts (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
+          "neutral": [
+            "Depression worse later in day (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"It sounds like you're struggling to find ways to occupy your thoughts when you slow down. Have you ever considered trying a new hobby or activity that might help distract your mind from ruminating? It could be something as simple as reading a book, going for a walk, or even learning a new skill.\"",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been struggling for a while now, and it can be overwhelming when your mind starts ruminating on negative thoughts. Let's work together to find ways to manage these feelings and help you feel more at peace. Can we start by exploring what activities you used to enjoy before things got so tough?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Repressing thoughts (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're struggling to find ways to occupy your thoughts when you slow down. Have you ever considered trying a new hobby or activity that might help distract your mind from ruminating? It could be something as simple as reading a book, going for a walk, or even learning a new skill.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling shitty",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I can understand how you might feel lost when you've been struggling for a while. It's important to remember that everyone has different ways of coping, even when they aren't dealing with difficult emotions. Have you ever considered what a trusted friend or family member might do to help manage their thoughts and feelings? Sometimes it can be helpful to learn from others.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "repressing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "complaining of feeling depressed",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're struggling to find ways to occupy your time without letting your thoughts spiral. Let's explore some strategies together that might help you manage these moments better.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "stopping activities",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling down",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

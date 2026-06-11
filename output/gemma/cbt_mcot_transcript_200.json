@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "llm_response": "gemma3:12b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "(insert attractive post title that will encourage people to comment on my post) i want to kms, I could do it too. imagine if i just hang myself that would be rad. i have nothing to live for anyway. No relationship, no friends. is it normal to post this stuff more than once a week? idk... I need to die.",
+    "core_issue": "Safety: Suicidal thoughts",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "(insert attractive post title that will encourage people to comment on my post) i want to kms, I could do it too. imagine if i just hang myself that would be rad. i have nothing to live for anyway. No relationship, no friends. is it normal to post this stuff more than once a week? idk... I need to die.",
+        "core_issue": "Safety: Suicidal thoughts",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I want to kms",
+            "I could hang myself",
+            "I have nothing to live for",
+            "Is it normal to post this stuff more than once a week?",
+            "I need to die"
+          ],
+          "emotions": [
+            "despair",
+            "hopelessness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Wanting to die (finding)"
+          ],
+          "neutral": [
+            "Feeling suicidal (finding)",
+            "Planning suicide (finding)",
+            "Suicidal (finding)",
+            "Self-control behavior: suicide (observable entity)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "That sounds incredibly painful, and I'm so sorry you're going through this. When you said you \"need to die,\" were you having any thoughts of hurting yourself or not wanting to be here?",
+        "protocol_used": "safety_check",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're in a lot of pain right now, and feeling overwhelmed by these intense thoughts and feelings. When you said you \"need to die,\" were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Wanting to die (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling suicidal (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Planning suicide (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're in a lot of pain right now, and expressing thoughts about ending your life. Can you tell me a little more about what's making you feel this way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Wanting to die (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling suicidal (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Planning suicide (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're in a lot of pain right now, and feeling overwhelmed by these thoughts. When you say you \"could\" do it, are you having thoughts of hurting yourself?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Wanting to die (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling suicidal (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Planning suicide (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly painful, and I'm so sorry you're going through this. When you said you \"need to die,\" were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Wanting to die (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feeling suicidal (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Planning suicide (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Suicidal (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Self-control behavior: suicide (observable entity)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

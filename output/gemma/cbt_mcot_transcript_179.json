@@ -1,0 +1,173 @@
+{
+  "metadata": {
+    "llm_response": "gemma3:12b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Wtf do non-depressed people do all day? A lot of the trouble I have is I've been down so bad for so long I don't even know what to do with myself and I start ruminating and feeling shitty. I can't keep myself frantically busy all day obviously, but the moment I stop my brain takes off into bad territory and digs up bad stuff. Help?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Wtf do non-depressed people do all day? A lot of the trouble I have is I've been down so bad for so long I don't even know what to do with myself and I start ruminating and feeling shitty. I can't keep myself frantically busy all day obviously, but the moment I stop my brain takes off into bad territory and digs up bad stuff. Help?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "stopping activities",
+            "feeling down",
+            "ruminating"
+          ],
+          "automatic_thoughts": [
+            "I don't know what to do with myself",
+            "my brain takes off into bad territory",
+            "I dig up bad stuff"
+          ],
+          "emotions": [
+            "shame",
+            "anxiety",
+            "frustration"
+          ],
+          "behaviors": [
+            "ruminate",
+            "feel shitty"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressive preoccupation (finding)",
+            "Depressed mood (finding)",
+            "Repressing thoughts (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
+          "neutral": [
+            "Depression worse later in day (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds incredibly frustrating to feel like you're caught in a cycle where even taking a break leads to distressing thoughts. It takes a lot of energy to manage that, and it's understandable that you're feeling overwhelmed.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds incredibly frustrating to feel like you're caught in a cycle where even taking a break leads to distressing thoughts. It takes a lot of energy to manage that, and it's understandable that you're feeling overwhelmed.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressed preoccupation (finding)",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Repressing thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling shitty",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds incredibly frustrating to feel like your brain automatically pulls you into those negative thoughts when you try to relax. What kinds of activities do you notice tend to trigger that \"bad territory\" in your mind?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed preoccupation",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Repressing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feel shitty",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds incredibly frustrating to feel like you're caught in a cycle where even taking a break leads to distressing thoughts – it's understandable why you're asking what others do. What do you imagine someone who isn't feeling down might be doing, and is it possible there's a small part of you that's doing something similar, even if it feels difficult right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed preoccupation",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "Depressed mood",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Repressing thoughts",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feel shitty",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds incredibly frustrating to feel like you're caught in a cycle where even taking a break leads to distressing thoughts. When you say you've been down for so long, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Depressive preoccupation (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Repressing thoughts (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "ruminating",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling shitty",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

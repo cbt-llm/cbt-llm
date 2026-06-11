@@ -1,0 +1,113 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I just don’t know what to do Why does everything have to be so difficult",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I just don’t know what to do Why does everything have to be so difficult",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "everything being difficult"
+          ],
+          "automatic_thoughts": [
+            "I just don’t know what to do"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about not coping with parenthood (finding)",
+            "Worried about not coping with baby (finding)",
+            "Difficulty coping with grief responses (finding)",
+            "Immature emotional adjustment (finding)",
+            "Fear of losing emotional control (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"I can see that things are tough right now. It's understandable to feel overwhelmed when you're dealing with so many changes. Let's work together to find ways to manage these feelings and make things a bit easier for you.\"",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I can see that things are tough right now. It's understandable to feel overwhelmed when you're dealing with so many changes. Let's work together to find ways to manage these feelings and make things a bit easier for you.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety about not coping with parenthood",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "difficulty coping with grief responses",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you're feeling overwhelmed right now. Can you tell me more about what makes everything seem so difficult for you?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Worried about not coping with baby",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Difficulty coping with grief responses",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I understand that things feel overwhelming right now. Let's explore what a trusted friend or family member might suggest you could do to make things a bit easier.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about not coping with parenthood (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Difficulty coping with grief responses (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It sounds like you're feeling overwhelmed right now. Let's take it one step at a time, shall we?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "difficulty coping",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

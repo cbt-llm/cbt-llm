@@ -1,0 +1,148 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Zoloft I started on Zoloft about 2 months ago. First 100mg, and after about 4 weeks I increased to 200mg (per doctor instructions). A little while after I started taking it, and still now, alcohol is gross. I’m not a huge drinker, but I do love wine and beer. I’ve been on SSRIs for years. I just switched to zoloft as my depression got pretty bad. I can’t even fathom beer anymore, and wine, I can have MAYBE one glass and then I feel sick. Anyone else have this problem? Or with any similar meds? I’ve been on Paxil, pristiq, Effexor... never had this issue.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Zoloft I started on Zoloft about 2 months ago. First 100mg, and after about 4 weeks I increased to 200mg (per doctor instructions). A little while after I started taking it, and still now, alcohol is gross. I’m not a huge drinker, but I do love wine and beer. I’ve been on SSRIs for years. I just switched to zoloft as my depression got pretty bad. I can’t even fathom beer anymore, and wine, I can have MAYBE one glass and then I feel sick. Anyone else have this problem? Or with any similar meds? I’ve been on Paxil, pristiq, Effexor... never had this issue.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "starting Zoloft",
+            "increasing dosage",
+            "thinking about alcohol"
+          ],
+          "automatic_thoughts": [
+            "alcohol is gross",
+            "I can't enjoy wine",
+            "I feel sick after one glass"
+          ],
+          "emotions": [
+            "disgust",
+            "frustration"
+          ],
+          "behaviors": [
+            "avoiding alcohol",
+            "limiting wine consumption"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Perceptual disturbance due to alcohol withdrawal (finding)",
+            "Fear about medication side effects (finding)"
+          ],
+          "contradiction": [
+            "Alcohol induced hallucinations (finding)",
+            "Husband alcoholic (finding)",
+            "Feeling intoxicated (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like starting Zoloft has brought up some new challenges for you, especially with alcohol, which I can tell is frustrating. Can you tell me more about how that feels for you?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like starting Zoloft has brought up some new challenges for you, especially with alcohol, which I can tell is frustrating. Can you tell me more about how that feels for you?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That's an interesting shift, especially since you've been on other medications without this reaction. Can you tell me more about how you think this specific change relates to starting Zoloft?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Zoloft",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "alcohol is gross",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It's understandable that you're wondering if this reaction is related to Zoloft specifically. Have you considered asking others who've taken Zoloft if they experienced similar changes in how alcohol affects them?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Perceptual disturbance due to alcohol withdrawal",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear about medication side effects",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "It sounds like the Zoloft has really changed your relationship with alcohol, and that must be frustrating. Have you considered how the medication might be influencing that reaction?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "starting Zoloft",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "perceptual disturbance due to alcohol withdrawal (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Fear about medication side effects (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I got my IQ tested and I feel bad about myself I took the wechsler IQ test my mom even paid 300 dollars nearly and now I found out my IQ is 99 psychiatrist said 100 is the top 50percent and i'm not even average i'm below average I cried after I went home after finding out do I even have a chance at life with this low iq? can I even finish college? I am still young but I already think I cant make it here in this lifetime I don't want to compare but my brother well he got 145 that's top 0.2 percent I think it seems so unfair",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I got my IQ tested and I feel bad about myself I took the wechsler IQ test my mom even paid 300 dollars nearly and now I found out my IQ is 99 psychiatrist said 100 is the top 50percent and i'm not even average i'm below average I cried after I went home after finding out do I even have a chance at life with this low iq? can I even finish college? I am still young but I already think I cant make it here in this lifetime I don't want to compare but my brother well he got 145 that's top 0.2 percent I think it seems so unfair",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "getting IQ tested",
+            "finding out IQ is 99",
+            "comparing with brother's IQ"
+          ],
+          "automatic_thoughts": [
+            "I'm below average",
+            "I can't make it in life",
+            "I won't finish college",
+            "It's unfair"
+          ],
+          "emotions": [
+            "bad",
+            "sad",
+            "anxiety"
+          ],
+          "behaviors": [
+            "cried after going home"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Impairment of psychological status (finding)"
+          ],
+          "neutral": [
+            "Low ego strength (finding)",
+            "Mental health impairment (finding)",
+            "Emotional immaturity (finding)"
+          ],
+          "contradiction": [
+            "On examination - senility - no psychosis (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been struggling with some difficult thoughts about your IQ test results and how they might impact your future. Let's take a closer look at those thoughts together, and see if we can find any evidence that challenges them. For example, what are some things you've accomplished so far in life that make you feel capable? Or, what strengths do you have that could help you succeed in college or other areas of your life?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been having some difficult thoughts about your IQ test results and how they might impact your future. Let's take a moment to explore those feelings together, and see if we can find a more balanced perspective on the situation.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been struggling with some difficult thoughts about your IQ test results and how they might impact your future. Let's take a closer look at those thoughts together, and see if we can find any evidence that challenges them. For example, what are some things you've accomplished so far in life that make you feel capable? Or, what strengths do you have that could help you succeed in college or other areas of your life?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you've been struggling with feelings of inadequacy since learning your IQ score. Let's take a closer look at those thoughts and see if we can find some other perspectives. For example, what might a trusted friend or family member say about your intelligence? And have there been any instances where you've succeeded despite these feelings of low self-worth?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry to hear that you're feeling this way. It sounds like finding out your IQ score has been quite a blow for you. Let's talk about how you're feeling and see if we can find some ways to help you feel more hopeful.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "IQ testing",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "finding out IQ is below average",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

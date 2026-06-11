@@ -1,0 +1,139 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Do you ever just write a lengthy text about something that happened to you just to delete it at the end because nobody cares? Deep down I knew it would happen but I tried being positive for once and got my hopes up, never again. I thought it would really hurt, but I feel nothing, just numbness.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Do you ever just write a lengthy text about something that happened to you just to delete it at the end because nobody cares? Deep down I knew it would happen but I tried being positive for once and got my hopes up, never again. I thought it would really hurt, but I feel nothing, just numbness.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "writing a lengthy text",
+            "deleting the text",
+            "getting hopes up"
+          ],
+          "automatic_thoughts": [
+            "nobody cares",
+            "it would really hurt"
+          ],
+          "emotions": [
+            "numbness"
+          ],
+          "behaviors": [
+            "deleted the text",
+            "tried being positive"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling of loss of feeling (finding)"
+          ],
+          "neutral": [
+            "Thoughts about dying (finding)",
+            "Normal grief reaction to life event (finding)",
+            "Feeling a failure (finding)"
+          ],
+          "contradiction": [
+            "Feeling emotionally hurt (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I'm sorry to hear that you felt like no one would care about what you wrote. It can be difficult when our expectations aren't met, but it's important to remember that everyone has their own struggles and may not always be able to respond as we'd like. Have you ever considered why you might feel this way? Let's explore that together.",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry to hear that you felt like no one would care about what you wrote. It can be difficult when our expectations aren't met, but it's important to remember that everyone has their own struggles and may not always be able to respond as we'd like. I'm here for you, and I want to understand more about how you're feeling right now. Can you tell me a bit more about what happened when you got your hopes up?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "writing a lengthy text",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "deleting the text",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "getting hopes up",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "I'm sorry to hear that you felt like no one would care about what you wrote. It can be difficult when our expectations aren't met, but it's important to remember that everyone has their own struggles and may not always be able to respond as we'd like. Have you ever considered why you might feel this way? Let's explore that together.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "writing a lengthy text",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "deleting the text",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "getting hopes up",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "I'm sorry to hear that you felt like no one would care about your thoughts. It can be difficult when our expectations aren't met, but it's important to remember that everyone has their own struggles and may not always be able to respond as we'd like. What might a trusted friend or family member say if they knew how you were feeling?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "writing a lengthy text",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "deleting the text",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "getting hopes up",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you feel this way. When you said that, were you having any thoughts of hurting yourself or not wanting to be here? It's important for me to understand how you're feeling right now.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "writing a lengthy text",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "deleting the text",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "getting hopes up",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

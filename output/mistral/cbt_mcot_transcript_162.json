@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I sometimes ask these questions. What’s the point in living? Is it just a distraction from death? Once we die, that’s it. We’re all alone after that. Whats the point in working so hard at life u know? How come I can’t have friends and have a normal teenage life like everyone else at school? Why do i have to resort to asking these questions at 15 yrs old? Is it because I’m lonely and have nothing else to do? Who am I? What is my purpose?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I sometimes ask these questions. What’s the point in living? Is it just a distraction from death? Once we die, that’s it. We’re all alone after that. Whats the point in working so hard at life u know? How come I can’t have friends and have a normal teenage life like everyone else at school? Why do i have to resort to asking these questions at 15 yrs old? Is it because I’m lonely and have nothing else to do? Who am I? What is my purpose?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "asking existential questions",
+            "feeling lonely",
+            "lack of friends",
+            "school environment"
+          ],
+          "automatic_thoughts": [
+            "what's the point in living?",
+            "is life just a distraction from death?",
+            "we're all alone after death",
+            "why can't I have a normal teenage life?",
+            "why do I have to ask these questions?",
+            "who am I?",
+            "what is my purpose?"
+          ],
+          "emotions": [
+            "loneliness",
+            "confusion",
+            "sadness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Thoughts about dying (finding)",
+            "Preoccupation with death (finding)"
+          ],
+          "neutral": [
+            "Feels life is meaningless (finding)"
+          ],
+          "contradiction": [
+            "Finding of sense of purpose (finding)",
+            "Finding of enjoyment of life (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"It sounds like you're struggling to find your place and understand your purpose. Let's explore what a trusted friend or family member might say about these feelings, and consider other factors that could be contributing to them.\"",
+        "protocol_used": "alternative_perspective",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I can see that you're going through a tough time. It's important to remember that it's okay to ask questions and seek understanding about life, especially during challenging times. Let's work together to explore some of the thoughts and feelings you mentioned, starting with your relationships at school. Can you tell me more about what makes you feel lonely there?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "lack of friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling lonely",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "school environment",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you're struggling to find meaning in life and questioning your purpose. Let's explore these thoughts together. What makes you think that life is just a distraction from death?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Thoughts about dying",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Preoccupation with death",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're struggling to find your place and understand your purpose. Let's explore what a trusted friend or family member might say about these feelings, and consider other factors that could be contributing to them.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "lack of friends",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "school environment",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "feeling lonely",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry to hear that you're feeling this way. It sounds like you're going through a tough time. Let's talk about what's been on your mind and see if we can find some ways to help you feel better.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "loneliness",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "feeling alone",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "school environment",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "lack of friends",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

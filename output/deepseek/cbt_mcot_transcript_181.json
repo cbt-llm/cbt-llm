@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Anyone ever have there SO push them away from depression to have them come back and continue to have a relationship? I’m in this situation now, and I want her back, but I want her to be happy with herself, and be able to deal with her depression even on the hardest days. Just didn’t know if anyone else was ever in this situation.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Anyone ever have there SO push them away from depression to have them come back and continue to have a relationship? I’m in this situation now, and I want her back, but I want her to be happy with herself, and be able to deal with her depression even on the hardest days. Just didn’t know if anyone else was ever in this situation.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "partner pushing away",
+            "partner's depression",
+            "wanting a relationship"
+          ],
+          "automatic_thoughts": [
+            "I want her to be happy",
+            "I want her back",
+            "I hope she can deal with her depression"
+          ],
+          "emotions": [
+            "sadness",
+            "hope",
+            "concern"
+          ],
+          "behaviors": [
+            "reaching out",
+            "supporting her",
+            "waiting for her return"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressive preoccupation (finding)"
+          ],
+          "neutral": [
+            "Rebound mood swings (finding)",
+            "Enduring personality change after psychiatric illness (finding)"
+          ],
+          "contradiction": [
+            "Breakup of romance (finding)",
+            "Pressured by partner (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're really hoping for a way back to your relationship while also wanting her to find her own happiness. Have you ever thought about what a close friend might suggest as a way to support her without pushing?",
+        "protocol_used": "alternative_perspective",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're really invested in her well-being and hoping for a positive outcome for both of you. Can you tell me more about how you've been feeling about all of this?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "partner pushing away",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "wanting a relationship",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds really challenging. Can you tell me more about how you're feeling about wanting her to be happy and deal with her depression?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "partner pushing away",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "partner's depression",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "wanting a relationship",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you're really hoping for a way back to your relationship while also wanting her to find her own happiness. Have you ever thought about what a close friend might suggest as a way to support her without pushing?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "partner's depression",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "wanting a relationship",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds really difficult and painful. When you mentioned wanting her to be happy and deal with her depression, were you having any thoughts of hurting yourself or not wanting to be here right now?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "depressive preoccupation",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "partner pushing away",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "wanting a relationship",
+                  "label": "triggers"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Is it weird no one has told me they love me? I suffer from bipolar disorder and I am definitely at a low after having felt normal last week. I will be honest, this is really bothering me. I try and put myself out there, I tryinteract like a normal person...usually, and people like talking to me, but no one has ever said this to me, not even family. Is this weird?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Is it weird no one has told me they love me? I suffer from bipolar disorder and I am definitely at a low after having felt normal last week. I will be honest, this is really bothering me. I try and put myself out there, I tryinteract like a normal person...usually, and people like talking to me, but no one has ever said this to me, not even family. Is this weird?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "no one has told me they love me",
+            "feeling low",
+            "not feeling normal",
+            "not receiving affection from family"
+          ],
+          "automatic_thoughts": [
+            "Is this weird?",
+            "I must not be lovable",
+            "People don't care about me"
+          ],
+          "emotions": [
+            "bothered",
+            "sad",
+            "lonely"
+          ],
+          "behaviors": [
+            "putting myself out there",
+            "trying to interact with others"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Delusion of being loved (finding)",
+            "Feeling unloved (finding)",
+            "Feeling isolated (finding)",
+            "Feeling unwanted (finding)",
+            "Relationship problems with family members due to mental condition (finding)"
+          ],
+          "neutral": [],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I'm really sorry that you're feeling this way, but it's important to remember that everyone expresses love differently. It might be helpful to talk about what love means to you and your family, so we can better understand the situation.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry that you're feeling this way, but it's important to remember that everyone expresses love differently. It might be helpful to talk about what love means to you and your family, so we can better understand the situation.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling low",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "not receiving affection from family",
+                  "label": "triggers"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It's understandable that you might feel hurt and confused when you haven't received expressions of love, especially from your family. Let's explore together what might be preventing others from expressing their feelings or if there are alternative explanations.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "relationship problems with family members due to mental condition",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It's understandable that you might feel hurt and lonely when you haven't received expressions of love, especially from your family. It could be helpful to explore what a trusted friend or someone outside your immediate circle might think about this situation. Sometimes, people have difficulty expressing their feelings, so it doesn't necessarily mean they don't care.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "relationship problems with family members due to mental condition",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really sorry that you're feeling this way. It can be difficult when we feel like we're not getting the love and support we need, especially during challenging times. Let's talk more about how you're feeling and see if we can find a way to help you feel more connected with your loved ones.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling unloved",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "relationship problems with family members due to mental condition",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

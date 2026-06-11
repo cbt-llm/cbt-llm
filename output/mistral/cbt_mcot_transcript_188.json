@@ -1,0 +1,123 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I've got about a week left im gonna preface this by saying km happy with my life, however i've decided to end it soon. I'm just tired of living if that makes any sense, and don't really have anyone to live for.",
+    "core_issue": "Safety: Suicidal thoughts",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I've got about a week left im gonna preface this by saying km happy with my life, however i've decided to end it soon. I'm just tired of living if that makes any sense, and don't really have anyone to live for.",
+        "core_issue": "Safety: Suicidal thoughts",
+        "schema": {
+          "triggers": [
+            "about a week left",
+            "tired of living",
+            "no one to live for"
+          ],
+          "automatic_thoughts": [
+            "decided to end it soon",
+            "happy with my life"
+          ],
+          "emotions": [
+            "sadness",
+            "hopelessness"
+          ],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Planning suicide (finding)",
+            "Thoughts about dying (finding)",
+            "Feeling suicidal (finding)",
+            "Wanting to die (finding)",
+            "Coming to terms with dying (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I'm really sorry that you're feeling this way, and I want to make sure I understand. You mentioned that you have about a week left and you've decided to end your life because you're tired of living and don't feel like you have anyone to live for. Can you tell me more about what's been going on?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really sorry that you're feeling this way, and I want to make sure I understand. You mentioned that you have about a week left and you've decided to end your life because you're tired of living and don't feel like you have anyone to live for. Can you tell me more about what's been going on?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "triggers",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"I can see that you're feeling quite sad and hopeless, but it seems there might be more to this decision than just those feelings. Can you help me understand what led you to feel this way? What has changed in your life recently?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I'm sorry to hear that you're feeling this way, but I'm glad to know you've mentioned being happy with your life. It seems like there might be a conflict between those feelings and the decision to end it soon. Can we explore what might be causing this tension?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm so sorry that you're feeling this way, but I'm really glad you reached out. It sounds like you've been struggling with thoughts about ending your life. Can we talk more about what's been going on for you lately?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "passive ideation",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "wish to be dead or not alive",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

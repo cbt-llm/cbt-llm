@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "experience/help from therapy? thinking about making an appointment. my depression is consuming me and i figure its a last shot. just wondering if anyone has found actual help from this",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "experience/help from therapy? thinking about making an appointment. my depression is consuming me and i figure its a last shot. just wondering if anyone has found actual help from this",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "thinking about making an appointment"
+          ],
+          "automatic_thoughts": [
+            "my depression is consuming me",
+            "it's a last shot"
+          ],
+          "emotions": [
+            "anxiety"
+          ],
+          "behaviors": [
+            "considering therapy"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about treatment (finding)",
+            "Depressive hypochondriacal delusion (finding)",
+            "Psychalgia (finding)"
+          ],
+          "contradiction": [
+            "Chronic anxiety (finding)",
+            "Ready for enhanced spiritual well-being (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It's understandable that you're feeling overwhelmed by your depression and hesitant to make an appointment. Many people find therapy helpful, and I'm here to support you through that process.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It's understandable that you're feeling overwhelmed by your depression and hesitant to make an appointment. Many people find therapy helpful, and I'm here to support you through that process.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Anxiety about treatment (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "Depressive hypochondriacal delusion (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "my depression is consuming me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "thinking about making an appointment",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "it's a last shot",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like making an appointment feels overwhelming right now, but I'm curious—what comes to mind when you think about your previous experiences with therapy or support?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like making that appointment feels overwhelming right now. Can you tell me what evidence you have that this is truly a last shot?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really glad you're thinking about therapy, and I hear how overwhelming this feels right now. Can you tell me more about what makes you think it's a last shot?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

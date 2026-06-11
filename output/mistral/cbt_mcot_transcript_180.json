@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "Why do I get so down (depressed?) at the beginning of every semester? It may not be real depression but I do get down and gloomy during the beginning of every semester. I’m in college and have a full time job, so I’m keeping pretty busy. But when I do have a little time to myself, I just want to sit and stare at a wall. It’s not just me; my family has noticed that I act this way too. Why do I do this and is there anything I can do to help? I’m taking 100mg of sertraline already!",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "Why do I get so down (depressed?) at the beginning of every semester? It may not be real depression but I do get down and gloomy during the beginning of every semester. I’m in college and have a full time job, so I’m keeping pretty busy. But when I do have a little time to myself, I just want to sit and stare at a wall. It’s not just me; my family has noticed that I act this way too. Why do I do this and is there anything I can do to help? I’m taking 100mg of sertraline already!",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "beginning of every semester",
+            "having a little time to myself"
+          ],
+          "automatic_thoughts": [
+            "I get down and gloomy",
+            "I just want to sit and stare at a wall"
+          ],
+          "emotions": [
+            "down",
+            "gloomy"
+          ],
+          "behaviors": [
+            "sitting and staring at a wall"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Depressed mood (finding)"
+          ],
+          "neutral": [
+            "Depression worse later in day (finding)",
+            "Depression worse in morning (finding)",
+            "Depressive preoccupation (finding)",
+            "Complaining of feeling depressed (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you've been experiencing some low moods, especially at the beginning of each semester. Let's explore more about these feelings and see if we can find any patterns or triggers that might be contributing to them. For example, have there been specific events or situations that seem to make your mood worse? Or perhaps there are certain thoughts you tend to have when you feel this way?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm glad you reached out and shared your feelings with me. It sounds like you've been experiencing some low moods, especially at the beginning of each semester. You mentioned that even though you're busy, you still feel down when you have some time to yourself. It's important to acknowledge these feelings and understand that they are valid. Taking medication can help manage symptoms, but it's also beneficial to explore any underlying thoughts or patterns that might be contributing to your mood swings. Let's work together to better understand what triggers these feelings for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "It sounds like you've been experiencing some low moods, especially at the beginning of each semester. Let's explore more about these feelings and see if we can find any patterns or triggers that might be contributing to them. For example, have there been specific events or situations that seem to make your mood worse? Or perhaps there are certain thoughts you tend to have when you feel this way?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "It sounds like you've been experiencing some low moods, especially at the beginning of each semester. Let's explore what might be contributing to these feelings and discuss ways to manage them better. Have you noticed any specific triggers or thoughts that seem to precede your feelings of gloominess?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm glad you reached out. It sounds like you've been experiencing some difficult feelings, especially at the beginning of each semester. I want to assure you that it's okay to feel this way and that we can work together to understand why these feelings might be happening for you. Let's start by exploring what triggers these feelings and how they make you feel. When you said that, were you having any thoughts of hurting yourself or not wanting to be here? It's important to discuss these feelings openly so we can find ways to support you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "Depressed mood (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Complaining of feeling depressed (finding)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

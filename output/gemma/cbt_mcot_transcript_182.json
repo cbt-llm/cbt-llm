@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "llm_response": "gemma3:12b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I'm gonna just kill myself now Life is similar to a card game, I've been dealt a shitty hand and lost the game. I've lost. :(",
+    "core_issue": "Safety: Suicidal thoughts",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I'm gonna just kill myself now Life is similar to a card game, I've been dealt a shitty hand and lost the game. I've lost. :(",
+        "core_issue": "Safety: Suicidal thoughts",
+        "schema": {
+          "triggers": [
+            "feeling of losing",
+            "comparison to a card game"
+          ],
+          "automatic_thoughts": [
+            "I've been dealt a shitty hand",
+            "I've lost the game"
+          ],
+          "emotions": [
+            "despair"
+          ],
+          "behaviors": [
+            "considering self-harm"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Feeling suicidal (finding)",
+            "Coming to terms with dying (finding)",
+            "Feels life is meaningless (finding)",
+            "Feeling despair (finding)",
+            "Suicidal (finding)"
+          ],
+          "neutral": [],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "That sounds incredibly painful, and I hear how hopeless you're feeling right now. When you said you were going to kill yourself, were you having any thoughts of hurting yourself or not wanting to be here?",
+        "protocol_used": "safety_check",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "That sounds incredibly painful, and it takes a lot of courage to share that with me. When you say you're going to kill yourself now, are you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling of losing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "comparison to a card game",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "despair",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Suicidal (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "That sounds incredibly painful, and I hear you're feeling overwhelmed right now. Can you tell me more about what makes you feel like you've \"lost the game\"?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling of losing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "comparison to a card game",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "despair",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Suicidal (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "That sounds incredibly painful, and it takes courage to share that with me. Sometimes when we're feeling overwhelmed, it can be helpful to consider if there might be other ways to look at the situation – what’s one thing, even small, that might suggest things aren't entirely lost?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling of losing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "comparison to a card game",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "despair",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Suicidal (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "That sounds incredibly painful, and I hear how hopeless you're feeling right now. When you said you were going to kill yourself, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "feeling of losing",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "comparison to a card game",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "despair",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Suicidal (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Coming to terms with dying (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "Feels life is meaningless (finding)",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

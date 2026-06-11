@@ -1,0 +1,127 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "i keep depriving myself of sleep and procrastinating even though i know it just makes everything worse why do i do this to myself?",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "i keep depriving myself of sleep and procrastinating even though i know it just makes everything worse why do i do this to myself?",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "deprivation of sleep",
+            "procrastination"
+          ],
+          "automatic_thoughts": [
+            "it makes everything worse",
+            "why do I do this to myself?"
+          ],
+          "emotions": [],
+          "behaviors": [
+            "depriving myself of sleep",
+            "procrastinating"
+          ]
+        },
+        "retrieval": {
+          "entailment": [
+            "Thoughts of self harm (finding)"
+          ],
+          "neutral": [
+            "Obsessional thoughts of causing harm to self (finding)",
+            "Depression worse later in day (finding)",
+            "Inability to resist compulsive behaviors (finding)",
+            "Depression worse in morning (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "Why do you think you keep depriving yourself of sleep and procrastinating, even though it makes things worse? Can we explore together what might be driving these behaviors?",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I understand that you're struggling with depriving yourself of sleep and procrastinating, even though it makes things worse. It's important to acknowledge these feelings without judgment. Let's explore together why this might be happening and how we can work on finding a healthier approach.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "deprivation of sleep",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "procrastination",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "emotions",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "Why do you think you keep depriving yourself of sleep and procrastinating, even though it makes things worse? Can we explore together what might be driving these behaviors?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic_thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you're struggling with some self-defeating behaviors, such as depriving yourself of sleep and procrastinating. Have you ever considered what might be driving these actions? Perhaps we could explore alternative perspectives on why you're doing this to yourself.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "behaviors",
+                  "label": "neutral"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"I'm really sorry that you're feeling this way. It sounds like you've been struggling with depriving yourself of sleep and procrastinating, even though you know it makes things worse. Have you ever had any thoughts about hurting yourself or not wanting to be here?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "deprivation of sleep",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "procrastination",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "thoughts of self harm",
+                  "label": "entailment"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

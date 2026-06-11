@@ -1,0 +1,108 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "(insert attractive post title that will encourage people to comment on my post) i want to kms, I could do it too. imagine if i just hang myself that would be rad. i have nothing to live for anyway. No relationship, no friends. is it normal to post this stuff more than once a week? idk... I need to die.",
+    "core_issue": "Safety: Suicidal thoughts",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "(insert attractive post title that will encourage people to comment on my post) i want to kms, I could do it too. imagine if i just hang myself that would be rad. i have nothing to live for anyway. No relationship, no friends. is it normal to post this stuff more than once a week? idk... I need to die.",
+        "core_issue": "Safety: Suicidal thoughts",
+        "schema": {
+          "triggers": [],
+          "automatic_thoughts": [
+            "I want to kms",
+            "I could do it too",
+            "Imagine if I just hang myself",
+            "I have nothing to live for",
+            "No relationship, no friends",
+            "Is it normal to post this stuff more than once a week?",
+            "I need to die"
+          ],
+          "emotions": [],
+          "behaviors": []
+        },
+        "retrieval": {
+          "entailment": [
+            "Wanting to die (finding)"
+          ],
+          "neutral": [
+            "Feeling suicidal (finding)",
+            "Planning suicide (finding)",
+            "Suicidal (finding)",
+            "Self-control behavior: suicide (observable entity)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+        "protocol_used": "safety_check",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I hear how overwhelming and painful this all feels right now. When you say things like that, I want to understand if you're having thoughts of hurting yourself.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "wanting to die (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "suicidal ideation (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "automatic thoughts",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "entailment",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "**FINAL RESPONSE:**  \nI hear how overwhelming it feels to be alone and without hope, and it sounds like you're carrying a lot of pain right now. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "**FINAL RESPONSE:**  \nI hear how overwhelming and hopeless things feel right now, and it's completely understandable that you're feeling this way. When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "When you said that, were you having any thoughts of hurting yourself or not wanting to be here?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "wanting to die (finding)",
+                  "label": "entailment"
+                },
+                {
+                  "concept": "suicidal ideation (finding)",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "self-control behavior: suicide (observable entity)",
+                  "label": "neutral"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

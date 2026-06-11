@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "experience/help from therapy? thinking about making an appointment. my depression is consuming me and i figure its a last shot. just wondering if anyone has found actual help from this",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "experience/help from therapy? thinking about making an appointment. my depression is consuming me and i figure its a last shot. just wondering if anyone has found actual help from this",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "thinking about making an appointment"
+          ],
+          "automatic_thoughts": [
+            "my depression is consuming me",
+            "it's a last shot"
+          ],
+          "emotions": [
+            "anxiety",
+            "despair"
+          ],
+          "behaviors": [
+            "considering therapy",
+            "seeking help"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Anxiety about treatment (finding)",
+            "Depressive hypochondriacal delusion (finding)",
+            "Psychalgia (finding)"
+          ],
+          "contradiction": [
+            "Chronic anxiety (finding)",
+            "Ready for enhanced spiritual well-being (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "I'm really glad you reached out and are considering therapy. It sounds like you're feeling overwhelmed by your depression, and it's understandable to seek help as a last resort. Many people have found therapy helpful in managing their feelings and improving their quality of life. Let's explore together what might work best for you.",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "I'm really glad you reached out and are considering therapy. It sounds like you're feeling overwhelmed by your depression, and it's understandable to seek help as a last resort. Many people have found therapy helpful in managing their feelings and improving their quality of life. Let's explore together what might work best for you.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "depression",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"I'm glad you reached out and considered therapy as a last shot. It's common to feel anxious about seeking help, but it's also a courageous step towards managing your depression. Can you tell me more about what you mean by 'my depression is consuming me'? Let's explore that together.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "depression",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"I'm glad you're reaching out for help. Many people have found therapy to be a valuable resource in managing depression. What might you hope to gain from therapy?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "depression",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "seeking help",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "I'm really glad you reached out and considered seeking help. It sounds like you're going through a tough time with your depression consuming you. I want to assure you that it takes courage to ask for help, and I'm here to support you on this journey. Let's start by discussing what brought you here today.",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "anxiety",
+                  "label": "neutral"
+                },
+                {
+                  "concept": "despair",
+                  "label": "emotions"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

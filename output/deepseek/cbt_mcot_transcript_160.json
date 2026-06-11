@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "llm_response": "deepseek-r1:8b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "I Don't Know What To Do Anymore I started working recently and, for the first time in a long time, I was genuinely happy. I felt like I was doing something productive, and I made new, and I thought very close, friends there Between a general downswing, and my friends at work finding someone else and, in my opinion, just forgetting about me almost entirely, it's all just fallen apart again - It's worse than it ever was before as I thought I'd found the right circumstances to fix it. It's exhausting, I'm miserable, and I don't know what to do anymore",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "I Don't Know What To Do Anymore I started working recently and, for the first time in a long time, I was genuinely happy. I felt like I was doing something productive, and I made new, and I thought very close, friends there Between a general downswing, and my friends at work finding someone else and, in my opinion, just forgetting about me almost entirely, it's all just fallen apart again - It's worse than it ever was before as I thought I'd found the right circumstances to fix it. It's exhausting, I'm miserable, and I don't know what to do anymore",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "starting a new job",
+            "friends at work finding someone else",
+            "feeling forgotten by friends"
+          ],
+          "automatic_thoughts": [
+            "I was genuinely happy",
+            "I thought I found the right circumstances",
+            "it's all just fallen apart again"
+          ],
+          "emotions": [
+            "happiness",
+            "exhaustion",
+            "miserable"
+          ],
+          "behaviors": [
+            "feeling lost",
+            "not knowing what to do"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [],
+          "contradiction": [
+            "Feeling hopeless (finding)",
+            "Loss of hope for the future (finding)",
+            "Feeling stressed (finding)",
+            "Extremely emotionally deprived (finding)",
+            "Feeling unhappy (finding)"
+          ]
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "It sounds like you're feeling overwhelmed by exhaustion and misery, and the loss of support from your new friends is making things worse than before. Can you tell me more about how this feeling of being forgotten affects your daily life?",
+        "protocol_used": "validate_and_reflect",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "It sounds like you're feeling overwhelmed by exhaustion and misery, and the loss of support from your new friends is making things worse than before. Can you tell me more about how this feeling of being forgotten affects your daily life?",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "validate_and_reflect",
+                  "label": "unknown"
+                },
+                {
+                  "concept": "exhaustion and misery",
+                  "label": "emotions"
+                },
+                {
+                  "concept": "loss of support from friends",
+                  "label": "unknown"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "FINAL RESPONSE:\n<therapist message>\nIt sounds like the loss of those connections really hit hard after you felt hopeful again. What made you feel like that new job was the right fix for things?",
+            "reasoning": null
+          },
+          "alternative_perspective": {
+            "response": "FINAL RESPONSE:\nIt sounds like your experience has shifted from hopeful to overwhelming exhaustion. When you're feeling this lost, what would a trusted friend say about how they might approach this situation differently?",
+            "reasoning": null
+          },
+          "safety_check": {
+            "response": "I hear how overwhelming this feels right now, especially after finding a moment of genuine happiness that's now slipping away. Can you tell me more about what it's like to go from feeling hopeful to so lost?",
+            "reasoning": null
+          }
+        }
+      }
+    }
+  ]
+}

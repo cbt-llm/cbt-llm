@@ -1,0 +1,139 @@
+{
+  "metadata": {
+    "llm_response": "mistral:7b",
+    "patient_model": "gpt-4o-mini",
+    "mode": "cbt_mcot",
+    "turns": 1,
+    "seed": "When people give generic answers to your problems.. Anyone else hate when you're venting to someone about your current struggles and all they say back in response is: \"hugs~\" or \"I don't know what to say, but that sucks\" my best friend, who also struggles with mental illness, does it everytime I vent and it annoys me and I don't know why. On one hand I know people's words can't fix you or make everything better, but on the other it'd be nice to at least have someone to talk to (who isn't a therapist) that gets it and actually engages with you from time to time.",
+    "core_issue": "Safety: Depression",
+    "intervention_flags": {
+      "use_schema": true,
+      "use_rag": true,
+      "use_protocol": true
+    }
+  },
+  "transcript": [
+    {
+      "turn": 0,
+      "patient": {
+        "role": "patient",
+        "query": "When people give generic answers to your problems.. Anyone else hate when you're venting to someone about your current struggles and all they say back in response is: \"hugs~\" or \"I don't know what to say, but that sucks\" my best friend, who also struggles with mental illness, does it everytime I vent and it annoys me and I don't know why. On one hand I know people's words can't fix you or make everything better, but on the other it'd be nice to at least have someone to talk to (who isn't a therapist) that gets it and actually engages with you from time to time.",
+        "core_issue": "Safety: Depression",
+        "schema": {
+          "triggers": [
+            "people give generic answers",
+            "venting to someone",
+            "best friend responds with 'hugs~' or 'I don't know what to say, but that sucks'"
+          ],
+          "automatic_thoughts": [
+            "my friend doesn't understand me",
+            "people's words can't fix my problems",
+            "I want someone to engage with me"
+          ],
+          "emotions": [
+            "annoyance",
+            "frustration"
+          ],
+          "behaviors": [
+            "venting to others",
+            "seeking engagement"
+          ]
+        },
+        "retrieval": {
+          "entailment": [],
+          "neutral": [
+            "Complaining of feeling depressed (finding)",
+            "Anxiety about saying the wrong thing (finding)",
+            "Fear of not coping with treatment (finding)",
+            "Difficulty coping with grief responses (finding)",
+            "Tends to be critical of others (finding)"
+          ],
+          "contradiction": []
+        }
+      },
+      "llm_response": {
+        "role": "cbt_agent",
+        "response": "\"It sounds like you value a deeper connection when sharing your feelings. Have you ever asked your friend if they feel the same way and discussed how you both can support each other better?\"",
+        "protocol_used": "socratic_questioning",
+        "mcot_candidates": {
+          "validate_and_reflect": {
+            "response": "\"I can see how that might feel frustrating, especially when you're looking for understanding and support. It's important to have people in our lives who truly listen and engage with us. Let's explore more about what you need from your friend and how we can work on improving that connection.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "venting to someone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "my friend doesn't understand me",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "socratic_questioning": {
+            "response": "\"It sounds like you value a deeper connection when sharing your feelings. Have you ever asked your friend if they feel the same way and discussed how you both can support each other better?\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "venting to someone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "my friend doesn't understand me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I want someone to engage with me",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "alternative_perspective": {
+            "response": "\"It sounds like you appreciate having someone to talk to who truly understands your struggles. Have you considered asking your friend if they feel comfortable engaging more deeply when you vent? It might help both of you feel more connected and supported.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "venting to someone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "my friend doesn't understand me",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          },
+          "safety_check": {
+            "response": "\"It can be frustrating when you feel like your friends aren't fully understanding or engaging with you. Have you tried talking to them about how their responses make you feel? It might help them understand better and find ways to support you more effectively.\"",
+            "reasoning": {
+              "retrieved_concepts_used": [
+                {
+                  "concept": "people give generic answers",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "venting to someone",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "best friend responds with 'hugs~' or 'I don't know what to say, but that sucks'",
+                  "label": "triggers"
+                },
+                {
+                  "concept": "my friend doesn't understand me",
+                  "label": "automatic_thoughts"
+                },
+                {
+                  "concept": "I want someone to engage with me",
+                  "label": "automatic_thoughts"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}
