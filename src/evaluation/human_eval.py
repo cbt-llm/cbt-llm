@@ -52,7 +52,7 @@ likert_ratings = []      # for Krippendorff alpha (ordinal)
 protocol_matrix = []     # for Krippendorff alpha (nominal)
 
 for file, (model, mode) in FILES.items():
-    df = pd.read_csv(f"human_eval/{file}")
+    df = pd.read_csv(f"human_eval_study_1/{file}")
     
     protocol_cols = [c for c in df.columns if c.endswith("a")]
     score_cols = [c for c in df.columns if "b_1" in c]
