@@ -155,7 +155,7 @@ def run(model, max_turns):
     plot_single(per_turn, "VADER Compound Sentiment",
                 f"{name} \u2014 Turn-by-Turn User Sentiment",
                 out / f"{model}_per_turn.png")
-    plot_single(cumulative, "Running Average Sentiment",
+    plot_single(cumulative, "VADER Compound Sentiment",
                 f"{name} \u2014 Cumulative User Sentiment",
                 out / f"{model}_cumulative.png")
     print(f"{model}: {n} shared cases")
@@ -180,7 +180,7 @@ def main():
                 print(f"{m}: {n} shared cases")
         plot_grid(summaries, 0, "VADER Compound Sentiment",
                   SAVE_ROOT / "grid_per_turn.png")
-        plot_grid(summaries, 1, "Running Average Sentiment",
+        plot_grid(summaries, 1, "VADER Compound Sentiment",
                   SAVE_ROOT / "grid_cumulative.png")
         print(f"grid saved to {SAVE_ROOT/'grid_per_turn.png'}, {SAVE_ROOT/'grid_cumulative.png'}")
         return
