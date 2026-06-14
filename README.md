@@ -472,8 +472,9 @@ Run Human Evaluation Aggregation: `python src/evaluation/human_eval.py`
 
 ### 3. User Affect Evaluation
  
-We model client emotion using the **valence-arousal (VA) model of emotion** ([Russell, 1980](https://doi.org/10.1037/h0077714)), replacing polarity-based sentiment 
-methods (e.g., VADER) with a multidimensional representation of affect.
+We model user sentiments using a polarity-based sentiment method, VADER. Each user utterance (generated via GPT-4o-mini) is scored per turn.
+
+We also model client emotion using the **valence-arousal (VA) model of emotion** ([Russell, 1980](https://doi.org/10.1037/h0077714)) with a multidimensional representation of affect.
 
 User utterances are scored with the NRC VAD Lexicon v2.1 (55k+ English words with valence + arousal scores) instead of [v1](https://aclanthology.org/P18-1017/) (22k+ English words). Scores are averaged per turn, then aggregated as a running mean across sessions.
 
@@ -482,8 +483,17 @@ User utterances are scored with the NRC VAD Lexicon v2.1 (55k+ English words wit
 Download NRC VAD Lexicon v2.1 at ([NRC-VAD](https://saifmohammad.com/WebPages/nrc-vad.html)), unzip and place under `external_libs/`.
  
 ### A. Synthetic Transcripts
+
+
+1. Compare VADER plots across Baseline, CBT-CoT and CBT-MCoT:
+
+```sh
+python src/evaluation/user_sentiment_cumulative.py --model grid
+```
+
+Outputs saved to `evaluation/vader_sentiment_plots/`
  
-Compare valence and arousal across Baseline and CBT-MCoT:
+2. Compare valence and arousal across Baseline and CBT-MCoT:
 
 ```sh
 python src/evaluation/overlay_user_sentiment.py --model <model>
@@ -503,7 +513,14 @@ Outputs saved to `evaluation/realcbt_sentiment_plots/`
 
 #### Interpreting Results
 
-Scores are on a **−1 to +1 scale** for Valence and Arousal.
+1. Scores are on a **−1 to +1 scale** for VADER compound sentiment.
+
+- The y-axis is VADER compound sentiment; 
+  - closer to -1 = more negatively-worded text, closer to +1 = more positively-worded text.
+- The x-axis is user turn (1–10).
+- All modes (baseline, cot and mcot) share the same turn-1 seed, so curves start together and then diverge as the conversation progresses with the therapist LLM under each mode.
+
+2. Scores are on a **−1 to +1 scale** for Valence and Arousal.
 
 - **Valence** measures how positive/negative client language is; **arousal** measures activation level.
 - **Trajectory shape** in the VA circumplex shows the emotional arc across turns. Rightward drift = improving valence; squiggles reflect the non-linear nature of therapeutic dialogue. RealCBT trajectories serve as a human reference for comparison.

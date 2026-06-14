@@ -1,498 +1,194 @@
 from pathlib import Path
 import argparse
 import json
-import math
 import re
 
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-
-# =========================
-# CONFIG
-# =========================
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_ROOT = PROJECT_ROOT / "output"
-SAVE_ROOT = PROJECT_ROOT / "evaluation" / "user_sentiment_plots"
-SAVE_ROOT.mkdir(parents=True, exist_ok=True)
+SAVE_ROOT = PROJECT_ROOT / "evaluation" / "vader_sentiment_plots"
 
 MODEL_DISPLAY = {
-    "gpt": "GPT-4o-mini",
-    "gemma": "Gemma-2-9B",
+    "gpt": "GPT-OSS-20B",
+    "gemma": "Gemma3-12B",
     "mistral": "Mistral-7B-Instruct",
-    "qwen": "Qwen-3-4B",
     "deepseek": "DeepSeek-R1-8B",
 }
+GRID_ORDER = ["mistral", "deepseek", "gemma", "gpt"]  # panel layout for the 2x2
 
-MODE_LABELS = {
-    "baseline": "Baseline",
-    "cot": "CoT",
-    "mcot": "MCoT",
+# therapist reasoning mode -> (label, color)
+MODES = {
+    "baseline": ("Baseline", "#4C72B0"),
+    "cot": ("CBT-CoT", "#55A868"),
+    "mcot": ("CBT-MCoT", "#C44E52"),
 }
 
-
-# =========================
-# HELPERS
-# =========================
-
-def model_title(model: str) -> str:
-    return MODEL_DISPLAY.get(model, model.upper())
+# swap this single function to change the sentiment scorer later
+_AZ = SentimentIntensityAnalyzer()
+def score_text(text: str) -> float:
+    return _AZ.polarity_scores(text)["compound"]
 
 
-def classify_mode_from_filename(filename: str) -> str | None:
-    name = filename.lower()
-
-    if name.startswith("baseline_"):
+def mode_of(name):
+    n = name.lower()
+    if n.startswith("baseline_"):
         return "baseline"
-    if name.startswith("cbt_mcot_"):
+    if n.startswith("cbt_mcot_") or n.startswith("mcot_"):
         return "mcot"
-    if name.startswith("cbt_"):
+    if n.startswith("cbt_") or n.startswith("cot_"):
         return "cot"
     return None
 
-def transcript_sort_key(fp: Path):
-    """
-    Sort by trailing integer if present.
-    """
-    m = re.search(r"(\d+)(?=\.json$)", fp.name)
-    if m:
-        return (fp.stem, int(m.group(1)))
-    return (fp.stem, 10**9)
+
+def case_id(name):
+    m = re.search(r"(\d+)(?=\.json$)", name)
+    return int(m.group(1)) if m else None
 
 
-def load_transcript_files(model: str):
-    model_dir = OUTPUT_ROOT / model
-    if not model_dir.exists():
-        raise FileNotFoundError(f"Missing output directory: {model_dir}")
-
-    grouped = {
-        "baseline": [],
-        "cot": [],
-        "mcot": [],
-    }
-
-    for fp in sorted(model_dir.glob("*.json"), key=transcript_sort_key):
-        mode = classify_mode_from_filename(fp.name)
-        if mode is not None:
-            grouped[mode].append(fp)
-
-    return grouped
+def patient_rows(fp):
+    """(turn, query) per patient utterance. turn = file's own field (0-indexed)."""
+    obj = json.loads(fp.read_text(encoding="utf-8"))
+    out = []
+    for it in obj.get("transcript", []):
+        if not isinstance(it, dict):
+            continue
+        q = str((it.get("patient") or {}).get("query", "")).strip()
+        if q and it.get("turn") is not None:
+            out.append((int(it["turn"]), q))
+    return out
 
 
-def extract_messages(fp: Path):
-    with fp.open("r", encoding="utf-8") as f:
-        obj = json.load(f)
-
-    if isinstance(obj, dict) and "transcript" in obj and isinstance(obj["transcript"], list):
-        return obj["transcript"]
-
-    print(f"[WARN] Unexpected format in {fp.name}")
-    if isinstance(obj, dict):
-        print("Top-level keys:", list(obj.keys()))
-    return []
-
-def extract_patient_turn_sentiments(messages, analyzer, fp_name=None):
-    """
-    Extract patient/user sentiment from nested transcript format.
-
-    Expected turn structure:
-    {
-        "turn": 0,
-        "patient": {
-            "role": "patient",
-            "query": "..."
-        },
-        "llm_response": {
-            "role": "agent" or "cbt_agent",
-            "response": "..."
-        }
-    }
-    """
+def build(model, max_turns):
     rows = []
-
-    if not isinstance(messages, list):
-        print(f"[WARN] messages is not a list for {fp_name}")
-        return rows
-
-    for item in messages:
-        if not isinstance(item, dict):
+    for fp in (OUTPUT_ROOT / model).glob("*.json"):
+        mode, cid = mode_of(fp.name), case_id(fp.name)
+        if mode is None or cid is None:
             continue
+        for turn, q in patient_rows(fp):
+            disp = turn + 1               # transcript 0-9 -> User Turn 1-10
+            if max_turns and disp > max_turns:
+                continue
+            rows.append((mode, cid, disp, score_text(q)))
+    df = pd.DataFrame(rows, columns=["mode", "case", "turn", "sent"])
+    if df.empty:
+        raise ValueError(f"No patient turns for '{model}'")
 
-        patient_block = item.get("patient", {})
-        if not isinstance(patient_block, dict):
+    shared = set.intersection(*(set(g["case"]) for _, g in df.groupby("mode")))
+    df = df[df["case"].isin(shared)].sort_values(["mode", "case", "turn"])
+
+    df["cum"] = (df.groupby(["mode", "case"])["sent"]
+                 .expanding().mean().reset_index(level=[0, 1], drop=True))
+
+    per_turn = (df.groupby(["mode", "turn"], as_index=False)
+                .agg(mean=("sent", "mean"), sem=("sent", "sem"), n=("sent", "count")))
+    cumulative = (df.groupby(["mode", "turn"], as_index=False)
+                  .agg(mean=("cum", "mean"), sem=("cum", "sem"), n=("cum", "count")))
+    per_turn["sem"] = per_turn["sem"].fillna(0.0)
+    cumulative["sem"] = cumulative["sem"].fillna(0.0)
+    return per_turn, cumulative, len(shared)
+
+
+def _draw(ax, summary, show_legend):
+    for mode, (label, color) in MODES.items():
+        d = summary[summary["mode"] == mode]
+        if d.empty:
             continue
+        ax.plot(d["turn"], d["mean"], marker="o", ms=4, color=color, label=label)
+        ax.fill_between(d["turn"], d["mean"] - d["sem"], d["mean"] + d["sem"],
+                        color=color, alpha=0.15)
+    ax.axhline(0, ls="--", alpha=0.4, lw=0.8)
+    if show_legend:
+        ax.legend(fontsize=8, loc="lower right")
+
+
+def _ylim(summaries):
+    """Shared y-range across panels, padded, so heights are comparable."""
+    lo = min((s["mean"] - s["sem"]).min() for s in summaries)
+    hi = max((s["mean"] + s["sem"]).max() for s in summaries)
+    pad = 0.05 * (hi - lo)
+    return lo - pad, hi + pad
+
+
+def plot_single(summary, ylabel, title, fp):
+    fig, ax = plt.subplots(figsize=(7.5, 5))
+    _draw(ax, summary, show_legend=True)
+    ax.set_xlabel("User Turn")
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    fig.tight_layout()
+    fig.savefig(fp, dpi=200)
+    plt.close(fig)
+
+
+def plot_grid(model_summaries, key, ylabel, fp):
+    """model_summaries: {model: (per_turn_df, cumulative_df)}; key=0 per-turn, 1 cumulative."""
+    models = [m for m in GRID_ORDER if m in model_summaries]
+    panels = [model_summaries[m][key] for m in models]
+    ylo, yhi = _ylim(panels)
+
+    fig, axes = plt.subplots(2, 2, figsize=(11, 8), sharex=True, sharey=True)
+    for ax, m in zip(axes.flat, models):
+        _draw(ax, model_summaries[m][key], show_legend=(ax is axes.flat[0]))
+        ax.set_title(MODEL_DISPLAY.get(m, m), fontsize=11)
+        ax.set_ylim(ylo, yhi)
+    for ax in axes.flat[len(models):]:
+        ax.axis("off")
+    for ax in axes[-1, :]:
+        ax.set_xlabel("User Turn")
+    for ax in axes[:, 0]:
+        ax.set_ylabel(ylabel)
+    fig.tight_layout()
+    fig.savefig(fp, dpi=200)
+    plt.close(fig)
+
+
+def run(model, max_turns):
+    out = SAVE_ROOT / model
+    out.mkdir(parents=True, exist_ok=True)
+    per_turn, cumulative, n = build(model, max_turns)
+    name = MODEL_DISPLAY.get(model, model)
+    per_turn.to_csv(out / f"{model}_per_turn.csv", index=False)
+    cumulative.to_csv(out / f"{model}_cumulative.csv", index=False)
+    plot_single(per_turn, "VADER Compound Sentiment",
+                f"{name} \u2014 Turn-by-Turn User Sentiment",
+                out / f"{model}_per_turn.png")
+    plot_single(cumulative, "Running Average Sentiment",
+                f"{name} \u2014 Cumulative User Sentiment",
+                out / f"{model}_cumulative.png")
+    print(f"{model}: {n} shared cases")
+    return per_turn, cumulative
 
-        role = str(patient_block.get("role", "")).strip().lower()
-        if role not in {"patient", "user"}:
-            continue
 
-        text = str(patient_block.get("query", "")).strip()
-        if not text:
-            continue
-
-        turn_idx = item.get("turn", None)
-        if turn_idx is None:
-            turn_idx = len(rows)
-
-        score = analyzer.polarity_scores(text)["compound"]
-
-        rows.append({
-            "turn": int(turn_idx) + 1,   # makes plotting start at 1 instead of 0
-            "text": text,
-            "sentiment": float(score),
-        })
-
-    if fp_name is not None:
-        print(f"{fp_name}: extracted {len(rows)} patient turns")
-
-    return rows
-
-
-def build_raw_df(files, analyzer, mode: str):
-    all_rows = []
-
-    for fp in files:
-        messages = extract_messages(fp)
-        turn_rows = extract_patient_turn_sentiments(messages, analyzer, fp.name)
-
-        for row in turn_rows:
-            all_rows.append({
-                "mode": mode,
-                "transcript": fp.stem,
-                "turn": row["turn"],
-                "sentiment": row["sentiment"],
-            })
-
-    if not all_rows:
-        print(f"[WARN] No patient turns extracted for mode={mode}")
-        return pd.DataFrame(columns=["mode", "transcript", "turn", "sentiment"])
-
-    df = pd.DataFrame(all_rows)
-    print(f"Mode={mode}: extracted {len(df)} total patient-turn rows")
-    return df
-
-
-def add_cumulative_sentiment(raw_df: pd.DataFrame):
-    """
-    Adds cumulative average sentiment within each transcript:
-      cumulative_sentiment at turn t = mean(sentiment of turns 1..t)
-    """
-    if raw_df.empty:
-        out = raw_df.copy()
-        out["cumulative_sentiment"] = pd.Series(dtype=float)
-        return out
-
-    raw_df = raw_df.sort_values(["transcript", "turn"]).copy()
-
-    raw_df["cumulative_sentiment"] = (
-        raw_df.groupby("transcript")["sentiment"]
-        .expanding()
-        .mean()
-        .reset_index(level=0, drop=True)
-    )
-
-    return raw_df
-
-
-def summarize_turn_by_turn(df_with_cum: pd.DataFrame):
-    """
-    Mean of exact turn t across transcripts.
-    """
-    if df_with_cum.empty:
-        return pd.DataFrame(columns=["turn", "mean_sentiment", "sem", "n"])
-
-    out = (
-        df_with_cum.groupby("turn", as_index=False)
-        .agg(
-            mean_sentiment=("sentiment", "mean"),
-            sem=("sentiment", "sem"),
-            n=("sentiment", "count"),
-        )
-        .sort_values("turn")
-    )
-
-    out["sem"] = out["sem"].fillna(0.0)
-    return out
-
-
-def summarize_cumulative(df_with_cum: pd.DataFrame):
-    """
-    Mean of cumulative sentiment at turn t across transcripts.
-    This is the running trend you want.
-    """
-    if df_with_cum.empty:
-        return pd.DataFrame(columns=["turn", "mean_cumulative_sentiment", "sem", "n"])
-
-    out = (
-        df_with_cum.groupby("turn", as_index=False)
-        .agg(
-            mean_cumulative_sentiment=("cumulative_sentiment", "mean"),
-            sem=("cumulative_sentiment", "sem"),
-            n=("cumulative_sentiment", "count"),
-        )
-        .sort_values("turn")
-    )
-
-    out["sem"] = out["sem"].fillna(0.0)
-    return out
-
-
-def summarize_by_transcript(df_with_cum: pd.DataFrame):
-    """
-    One row per transcript:
-      - average exact sentiment across all turns
-      - final cumulative value (same as average across all turns)
-      - num turns
-    """
-    if df_with_cum.empty:
-        return pd.DataFrame(columns=[
-            "transcript",
-            "avg_sentiment",
-            "final_cumulative_sentiment",
-            "num_turns",
-        ])
-
-    grouped = df_with_cum.groupby("transcript", as_index=False)
-
-    avg_df = grouped.agg(
-        avg_sentiment=("sentiment", "mean"),
-        num_turns=("turn", "max"),
-    )
-
-    final_cum = (
-        df_with_cum.sort_values(["transcript", "turn"])
-        .groupby("transcript", as_index=False)
-        .tail(1)[["transcript", "cumulative_sentiment"]]
-        .rename(columns={"cumulative_sentiment": "final_cumulative_sentiment"})
-    )
-
-    out = avg_df.merge(final_cum, on="transcript", how="left")
-    return out.sort_values("transcript")
-
-
-def build_overall_summary(model: str, mode: str, transcript_summary: pd.DataFrame, raw_df: pd.DataFrame):
-    if transcript_summary.empty or raw_df.empty:
-        return {
-            "model": model,
-            "mode": mode,
-            "num_transcripts": 0,
-            "avg_sentiment_across_transcripts": np.nan,
-            "std_sentiment_across_transcripts": np.nan,
-            "avg_sentiment_across_all_turns": np.nan,
-            "num_patient_turns": 0,
-        }
-
-    return {
-        "model": model,
-        "mode": mode,
-        "num_transcripts": int(len(transcript_summary)),
-        "avg_sentiment_across_transcripts": float(transcript_summary["avg_sentiment"].mean()),
-        "std_sentiment_across_transcripts": float(
-            transcript_summary["avg_sentiment"].std(ddof=1)
-        ) if len(transcript_summary) > 1 else 0.0,
-        "avg_sentiment_across_all_turns": float(raw_df["sentiment"].mean()),
-        "num_patient_turns": int(len(raw_df)),
-    }
-
-
-# =========================
-# PLOTTING
-# =========================
-
-def plot_turn_by_turn(mode: str, summary_df: pd.DataFrame, out_dir: Path, model: str):
-    plt.figure(figsize=(7, 4.5))
-
-    if summary_df.empty:
-        plt.text(0.5, 0.5, f"No data for {MODE_LABELS[mode]}", ha="center", va="center")
-        plt.title(f"{model_title(model)} — {MODE_LABELS[mode]} User Sentiment by Turn")
-        plt.tight_layout()
-        plt.savefig(out_dir / f"{mode}_turn_by_turn_sentiment.png", dpi=200)
-        plt.close()
-        return
-
-    x = summary_df["turn"].to_numpy()
-    y = summary_df["mean_sentiment"].to_numpy()
-    sem = summary_df["sem"].to_numpy()
-
-    plt.plot(x, y, marker="o", label=MODE_LABELS[mode])
-    plt.fill_between(x, y - sem, y + sem, alpha=0.2)
-
-    plt.axhline(0, linestyle="--", alpha=0.4)
-    plt.xlabel("Patient Turn")
-    plt.ylabel("VADER Compound Sentiment")
-    plt.title(f"{model_title(model)} — {MODE_LABELS[mode]} User Sentiment by Turn")
-    plt.tight_layout()
-    plt.savefig(out_dir / f"{mode}_turn_by_turn_sentiment.png", dpi=200)
-    plt.close()
-
-
-def plot_cumulative(mode: str, summary_df: pd.DataFrame, out_dir: Path, model: str):
-    plt.figure(figsize=(7, 4.5))
-
-    if summary_df.empty:
-        plt.text(0.5, 0.5, f"No data for {MODE_LABELS[mode]}", ha="center", va="center")
-        plt.title(f"{model_title(model)} — {MODE_LABELS[mode]} Cumulative User Sentiment")
-        plt.tight_layout()
-        plt.savefig(out_dir / f"{mode}_cumulative_sentiment.png", dpi=200)
-        plt.close()
-        return
-
-    x = summary_df["turn"].to_numpy()
-    y = summary_df["mean_cumulative_sentiment"].to_numpy()
-    sem = summary_df["sem"].to_numpy()
-
-    plt.plot(x, y, marker="o", label=MODE_LABELS[mode])
-    plt.fill_between(x, y - sem, y + sem, alpha=0.2)
-
-    plt.axhline(0, linestyle="--", alpha=0.4)
-    plt.xlabel("Patient Turn")
-    plt.ylabel("Running Average VADER Sentiment")
-    plt.title(f"{model_title(model)} — {MODE_LABELS[mode]} Cumulative User Sentiment")
-    plt.tight_layout()
-    plt.savefig(out_dir / f"{mode}_cumulative_sentiment.png", dpi=200)
-    plt.close()
-
-
-def plot_combined_cumulative(all_mode_summaries: dict, out_dir: Path, model: str):
-    plt.figure(figsize=(7.5, 5))
-
-    has_any = False
-    for mode in ["baseline", "cot", "mcot"]:
-        df = all_mode_summaries.get(mode)
-        if df is None or df.empty:
-            continue
-
-        has_any = True
-        x = df["turn"].to_numpy()
-        y = df["mean_cumulative_sentiment"].to_numpy()
-        sem = df["sem"].to_numpy()
-
-        plt.plot(x, y, marker="o", label=MODE_LABELS[mode])
-        plt.fill_between(x, y - sem, y + sem, alpha=0.15)
-
-    if not has_any:
-        plt.text(0.5, 0.5, "No data found", ha="center", va="center")
-
-    plt.axhline(0, linestyle="--", alpha=0.4)
-    plt.xlabel("Patient Turn")
-    plt.ylabel("Running Average VADER Sentiment")
-    plt.title(f"{model_title(model)} — Cumulative User Sentiment Comparison")
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(out_dir / "combined_cumulative_sentiment.png", dpi=200)
-    plt.close()
-
-
-def plot_combined_turn_by_turn(all_mode_summaries: dict, out_dir: Path, model: str):
-    plt.figure(figsize=(7.5, 5))
-
-    has_any = False
-    for mode in ["baseline", "cot", "mcot"]:
-        df = all_mode_summaries.get(mode)
-        if df is None or df.empty:
-            continue
-
-        has_any = True
-        x = df["turn"].to_numpy()
-        y = df["mean_sentiment"].to_numpy()
-        sem = df["sem"].to_numpy()
-
-        plt.plot(x, y, marker="o", label=MODE_LABELS[mode])
-        plt.fill_between(x, y - sem, y + sem, alpha=0.15)
-
-    if not has_any:
-        plt.text(0.5, 0.5, "No data found", ha="center", va="center")
-
-    plt.axhline(0, linestyle="--", alpha=0.4)
-    plt.xlabel("Patient Turn")
-    plt.ylabel("VADER Compound Sentiment")
-    plt.title(f"{model_title(model)} — Turn-by-Turn User Sentiment Comparison")
-    plt.legend()
-    plt.tight_layout()
-    plt.savefig(out_dir / "combined_turn_by_turn_sentiment.png", dpi=200)
-    plt.close()
-
-
-# =========================
-# MAIN
-# =========================
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--model",
-        required=True,
-        help="Model folder inside output/, e.g. deepseek, gpt, gemma, mistral"
-    )
-    args = parser.parse_args()
+    p = argparse.ArgumentParser()
+    p.add_argument("--model", required=True,
+                   help="one model, 'all' (per-model files), or 'grid' (2x2 shared-axis figure)")
+    p.add_argument("--max-turns", type=int, default=10, help="0 = no cap")
+    args = p.parse_args()
+    max_turns = args.max_turns or None
 
-    model = args.model
-    out_dir = SAVE_ROOT / model
-    out_dir.mkdir(parents=True, exist_ok=True)
+    if args.model == "grid":
+        SAVE_ROOT.mkdir(parents=True, exist_ok=True)
+        summaries = {}
+        for m in GRID_ORDER:
+            if (OUTPUT_ROOT / m).is_dir():
+                pt, cum, n = build(m, max_turns)
+                summaries[m] = (pt, cum)
+                print(f"{m}: {n} shared cases")
+        plot_grid(summaries, 0, "VADER Compound Sentiment",
+                  SAVE_ROOT / "grid_per_turn.png")
+        plot_grid(summaries, 1, "Running Average Sentiment",
+                  SAVE_ROOT / "grid_cumulative.png")
+        print(f"grid saved to {SAVE_ROOT/'grid_per_turn.png'}, {SAVE_ROOT/'grid_cumulative.png'}")
+        return
 
-    print("PROJECT_ROOT =", PROJECT_ROOT)
-    print("OUTPUT_ROOT  =", OUTPUT_ROOT)
-    print("MODEL DIR    =", OUTPUT_ROOT / model)
-
-    analyzer = SentimentIntensityAnalyzer()
-    grouped_files = load_transcript_files(model)
-
-    overall_rows = []
-    cumulative_summaries = {}
-    turn_summaries = {}
-
-    for mode in ["baseline", "cot", "mcot"]:
-        files = grouped_files[mode]
-
-        raw_df = build_raw_df(files, analyzer, mode)
-        raw_with_cum_df = add_cumulative_sentiment(raw_df)
-
-        turn_summary = summarize_turn_by_turn(raw_with_cum_df)
-        cumulative_summary = summarize_cumulative(raw_with_cum_df)
-        transcript_summary = summarize_by_transcript(raw_with_cum_df)
-
-        raw_df.to_csv(out_dir / f"{mode}_raw_turn_sentiment.csv", index=False)
-        raw_with_cum_df.to_csv(out_dir / f"{mode}_raw_turn_sentiment_with_cumulative.csv", index=False)
-        turn_summary.to_csv(out_dir / f"{mode}_turn_by_turn_summary.csv", index=False)
-        cumulative_summary.to_csv(out_dir / f"{mode}_cumulative_summary.csv", index=False)
-        transcript_summary.to_csv(out_dir / f"{mode}_transcript_summary.csv", index=False)
-
-        plot_turn_by_turn(mode, turn_summary, out_dir, model)
-        plot_cumulative(mode, cumulative_summary, out_dir, model)
-
-        turn_summaries[mode] = turn_summary
-        cumulative_summaries[mode] = cumulative_summary
-
-        overall_rows.append(
-            build_overall_summary(
-                model=model,
-                mode=mode,
-                transcript_summary=transcript_summary,
-                raw_df=raw_df,
-            )
-        )
-
-    plot_combined_cumulative(cumulative_summaries, out_dir, model)
-    plot_combined_turn_by_turn(turn_summaries, out_dir, model)
-
-    overall_df = pd.DataFrame(overall_rows)
-    overall_df.to_csv(out_dir / "overall_summary_by_mode.csv", index=False)
-
-    print(f"\nSaved outputs to: {out_dir}")
-
-    print("Generated per mode:")
-    print("  - *_raw_turn_sentiment.csv")
-    print("  - *_raw_turn_sentiment_with_cumulative.csv")
-    print("  - *_turn_by_turn_summary.csv")
-    print("  - *_cumulative_summary.csv")
-    print("  - *_transcript_summary.csv")
-    print("  - *_turn_by_turn_sentiment.png")
-    print("  - *_cumulative_sentiment.png")
-    print("Generated combined:")
-    print("  - combined_turn_by_turn_sentiment.png")
-    print("  - combined_cumulative_sentiment.png")
-    print("  - overall_summary_by_mode.csv")
+    models = (sorted(d.name for d in OUTPUT_ROOT.iterdir() if d.is_dir())
+              if args.model == "all" else [args.model])
+    for m in models:
+        run(m, max_turns)
 
 
 if __name__ == "__main__":
