@@ -8,6 +8,7 @@ streamlit run cbt-llm/app.py
 import os
 import json
 import re
+import html as html_lib
 from typing import Any, Dict, List, Optional
 
 import streamlit as st
@@ -246,27 +247,221 @@ def audit_grounding(
 
     return {"schema_used": schema_hit, "rag_used": rag_hit}
 
-st.set_page_config(page_title="CBT LLM", layout="wide")
-st.title("CBT LLM")
+st.set_page_config(page_title="CBT LLM", page_icon="🪷", layout="wide")
 
-with st.sidebar:
-    st.header("Controls")
+CUSTOM_CSS = """
+<style>
+:root {
+  --cbt-card: #FFFFFF;
+  --cbt-border: #E5DFF2;
+  --cbt-text: #241F33;
+  --cbt-text-soft: #6B6480;
+  --cbt-primary: #6C4EB6;
+  --cbt-primary-light: #EFE7FB;
+  --cbt-accent: #9B7FD4;
+  --cbt-user-bg: rgba(155, 127, 212, 0.16);
+  --cbt-assistant-bg: rgba(255, 255, 255, 0.66);
+  --cbt-success: #2F855A;
+}
 
-    therapist_model = st.text_input("Therapist model (Ollama)", value="gemma2:9b")
-    use_schema = st.checkbox("User schema", value=True)
-    use_rag = st.checkbox("Use SNOMED retrieval", value=True)
-    use_protocol = st.checkbox("Use CBT Strategy", value=True)
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
 
-    k = st.slider("Top-k concepts", min_value=1, max_value=15, value=5, step=1)
+.block-container { padding-top: 1.4rem; max-width: 920px; }
 
-    st.divider()
-    st.subheader("Latest debug")
-    debug_slot = st.empty()
+[data-testid="stApp"] {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(199, 174, 240, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 88% 92%, rgba(163, 196, 243, 0.30) 0%, transparent 45%),
+    #F7F5FC;
+}
 
-    st.divider()
-    if st.button("Reset chat"):
-        st.session_state.clear()
-        st.rerun()
+[data-testid="stMain"] {
+  background: rgba(255, 255, 255, 0.60);
+}
+
+section[data-testid="stSidebar"] {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-right: 1px solid rgba(108,78,182,0.28);
+  box-shadow: 6px 0 28px rgba(108,78,182,0.10);
+}
+section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+  padding-top: 0.75rem;
+}
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] {
+  border-color: rgba(108,78,182,0.35) !important;
+}
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlockBorderWrapper"] > div {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(108,78,182,0.08);
+}
+
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+section[data-testid="stSidebar"]::-webkit-scrollbar,
+section[data-testid="stSidebar"] *::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+[data-testid="stChatInput"] {
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(108,78,182,0.22) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 4px 16px rgba(108,78,182,0.08);
+}
+
+div[data-testid="stButton"] button,
+div[data-testid="stDownloadButton"] button {
+  border-radius: 10px !important;
+  border: 1px solid var(--cbt-primary) !important;
+  background: var(--cbt-primary) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  transition: all 0.18s ease !important;
+  box-shadow: 0 2px 10px rgba(108,78,182,0.20);
+}
+div[data-testid="stButton"] button:hover,
+div[data-testid="stDownloadButton"] button:hover {
+  background: rgba(108,78,182,0.82) !important;
+  border-color: rgba(108,78,182,0.9) !important;
+  box-shadow: 0 6px 18px rgba(108,78,182,0.28) !important;
+  transform: translateY(-1px);
+}
+div[data-testid="stButton"] button:active,
+div[data-testid="stDownloadButton"] button:active {
+  transform: translateY(0);
+  background: #5A3D9E !important;
+  box-shadow: 0 2px 6px rgba(108,78,182,0.22) !important;
+}
+div[data-testid="stButton"] button:focus:not(:active),
+div[data-testid="stDownloadButton"] button:focus:not(:active) {
+  border-color: rgba(108,78,182,0.9) !important;
+  box-shadow: 0 0 0 3px rgba(108,78,182,0.20) !important;
+}
+
+.cbt-welcome {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(108,78,182,0.18);
+  border-radius: 18px;
+  padding: 20px 28px;
+  text-align: center;
+  margin-bottom: 10px;
+  box-shadow: 0 6px 20px rgba(108,78,182,0.08);
+}
+.cbt-welcome-icon {
+  width: 38px; height: 38px; border-radius: 50%;
+  margin: 0 auto 10px auto;
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  background: linear-gradient(135deg, rgba(108,78,182,0.16), rgba(155,127,212,0.08));
+  border: 1px solid rgba(108,78,182,0.20);
+  box-shadow: 0 4px 12px rgba(108,78,182,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+}
+.cbt-welcome-icon span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cbt-primary); opacity: 0.7;
+}
+.cbt-welcome-icon span:nth-child(2) { opacity: 1; transform: scale(1.2); }
+.cbt-welcome h3 { margin: 2px 0 4px 0; color: var(--cbt-text); font-weight: 650; font-size: 1.05rem; letter-spacing: -0.01em; }
+.cbt-welcome p { color: var(--cbt-text-soft); max-width: 460px; margin: 0 auto; font-size: 0.85rem; line-height: 1.45; }
+
+.cbt-row { display: flex; margin: 10px 0; align-items: flex-end; gap: 8px; }
+.cbt-row.user { justify-content: flex-end; }
+.cbt-row.assistant { justify-content: flex-start; }
+.cbt-user-avatar {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cbt-primary);
+  box-shadow: 0 2px 8px rgba(108,78,182,0.25);
+}
+.cbt-bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  backdrop-filter: blur(10px);
+}
+.cbt-bubble.user {
+  background: var(--cbt-user-bg);
+  color: var(--cbt-text);
+  border: 1px solid rgba(108,78,182,0.16);
+  border-bottom-right-radius: 4px;
+}
+.cbt-bubble.assistant {
+  background: var(--cbt-assistant-bg);
+  color: var(--cbt-text);
+  border: 1px solid var(--cbt-border);
+  border-left: 3px solid var(--cbt-primary);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 10px rgba(108,78,182,0.06);
+}
+
+.cbt-typing { display: inline-flex; gap: 4px; padding: 4px 2px; }
+.cbt-typing span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cbt-primary); opacity: 0.5;
+  animation: cbt-bounce 1.1s infinite ease-in-out;
+}
+.cbt-typing span:nth-child(2) { animation-delay: 0.15s; }
+.cbt-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes cbt-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+  40% { transform: translateY(-4px); opacity: 1; }
+}
+
+.cbt-chip {
+  display: inline-block; background: var(--cbt-primary-light); color: var(--cbt-primary);
+  border-radius: 999px; padding: 3px 10px; font-size: 0.78rem; margin: 2px 4px 2px 0;
+  border: 1px solid rgba(108,78,182,0.15);
+}
+.cbt-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; margin-right: 8px; }
+.cbt-badge.on { background: #E6F6EC; color: var(--cbt-success); }
+.cbt-badge.off { background: #F1F3F5; color: #8A97A3; }
+
+.cbt-footer-note { text-align: center; color: var(--cbt-text-soft); font-size: 0.78rem; margin-top: 18px; padding-bottom: 8px; }
+</style>
+"""
+st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
+
+
+def escape(text: str) -> str:
+    return html_lib.escape(text).replace("\n", "<br>")
+
+
+USER_AVATAR_SVG = (
+    '<div class="cbt-user-avatar">'
+    '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" '
+    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+    '<circle cx="12" cy="8" r="4"></circle>'
+    '<path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>'
+    '</svg></div>'
+)
+
+
+def render_bubble(role: str, content: str) -> str:
+    if role == "user":
+        bubble = f'<div class="cbt-bubble user">{escape(content)}</div>'
+        return f'<div class="cbt-row user">{bubble}{USER_AVATAR_SVG}</div>'
+    bubble = f'<div class="cbt-bubble assistant">{escape(content)}</div>'
+    return f'<div class="cbt-row assistant">{bubble}</div>'
+
+
+TYPING_HTML = """
+<div class="cbt-row assistant">
+  <div class="cbt-bubble assistant">
+    <div class="cbt-typing"><span></span><span></span><span></span></div>
+  </div>
+</div>
+"""
 
 if "messages" not in st.session_state:
     st.session_state.messages: List[Dict[str, str]] = []
@@ -277,15 +472,74 @@ if "therapist_chat" not in st.session_state:
 if "cbt_context" not in st.session_state:
     st.session_state.cbt_context: List[Dict[str, Any]] = []
 
-for msg in st.session_state.messages:
-    with st.chat_message(msg["role"]):
-        st.markdown(msg["content"])
+with st.sidebar:
+    st.markdown("### CBT LLM")
+    st.caption("Presenter controls")
 
-user_input = st.chat_input("How are you feeling today?")
+    MODEL_OPTIONS = ["gemma2:9b", "gemma3:12b", "mistral:7b", "deepseek-r1:8b", "gpt-oss:20b"]
+
+    with st.container(border=True):
+        st.markdown("**Session**")
+        therapist_model = st.selectbox("AI model (Ollama)", options=MODEL_OPTIONS, index=0)
+        if st.button("Reset conversation", use_container_width=True):
+            st.session_state.clear()
+            st.rerun()
+
+        st.divider()
+
+        st.markdown("**Clinical intelligence**")
+        use_schema = st.toggle("User schema modeling", value=True)
+        use_rag = st.toggle("SNOMED concept retrieval", value=True)
+        use_protocol = st.toggle("CBT protocol grounding", value=True)
+        k = st.slider(
+            "Top-k concepts", min_value=1, max_value=15, value=5, step=1, disabled=not use_rag
+        )
+
+        st.divider()
+
+        st.markdown("**📤 Export**")
+        st.caption(
+            f"{len([m for m in st.session_state.messages if m['role'] == 'assistant'])} exchange(s) recorded"
+        )
+        export = {
+            "therapist_model": therapist_model,
+            "therapist_mode": "cbt",
+            "turns_so_far": len([m for m in st.session_state.messages if m["role"] == "assistant"]),
+            "transcript": st.session_state.messages,
+            "cbt_context": st.session_state.cbt_context,
+        }
+        st.download_button(
+            "Download transcript (JSON)",
+            data=json.dumps(export, ensure_ascii=False, indent=2),
+            file_name="cbt_chat_export.json",
+            mime="application/json",
+            use_container_width=True,
+        )
+
+user_input = st.chat_input("Share what's on your mind…")
+
+if not st.session_state.messages and not user_input:
+    st.markdown(
+        """
+    <div class="cbt-welcome">
+      <div class="cbt-welcome-icon"><span></span><span></span><span></span></div>
+      <h3>Start a conversation</h3>
+      <p>Share what's on your mind — I'll listen, reflect, and gently explore the
+      thoughts and feelings behind it.</p>
+    </div>
+    """,
+        unsafe_allow_html=True,
+    )
+else:
+    for msg in st.session_state.messages:
+        st.markdown(render_bubble(msg["role"], msg["content"]), unsafe_allow_html=True)
+
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user"):
-        st.markdown(user_input)
+    st.markdown(render_bubble("user", user_input), unsafe_allow_html=True)
+
+    typing_slot = st.empty()
+    typing_slot.markdown(TYPING_HTML, unsafe_allow_html=True)
 
     schema = safe_extract_schema(user_input) if use_schema else None
 
@@ -306,13 +560,6 @@ if user_input:
     print("[SCHEMA]", json.dumps(schema, ensure_ascii=False, indent=2) if schema else None)
     print("[RAG]", json.dumps(rag_safe, ensure_ascii=False, indent=2) if rag_safe else None)
     print("=" * 90 + "\n")
-
-    debug_payload = {
-        "schema": schema,
-        "retrieved_terms": [c["term"] for c in (rag_safe or {}).get("concepts", [])]
-    }
-    debug_slot.json(debug_payload)
-
 
     llm = OllamaChat(therapist_model)
 
@@ -343,9 +590,9 @@ if user_input:
             top_p=0.7,
         )
 
+    typing_slot.markdown(render_bubble("assistant", therapist_reply), unsafe_allow_html=True)
+
     st.session_state.messages.append({"role": "assistant", "content": therapist_reply})
-    with st.chat_message("assistant"):
-        st.markdown(therapist_reply)
 
     st.session_state.therapist_chat.append({"role": "user", "content": user_input})
     st.session_state.therapist_chat.append({"role": "assistant", "content": therapist_reply})
@@ -359,22 +606,48 @@ if user_input:
         "grounding_audit": audit,
     })
 
-    with st.sidebar:
-        st.caption(f"Grounding audit: schema_used={audit['schema_used']} | rag_used={audit['rag_used']}")
+if st.session_state.cbt_context:
+    latest = st.session_state.cbt_context[-1]
+    schema = latest.get("schema")
+    rag = latest.get("rag")
+    audit = latest.get("grounding_audit") or {}
 
-with st.sidebar:
-    st.divider()
-    st.subheader("Export")
-    export = {
-        "therapist_model": therapist_model,
-        "therapist_mode": "cbt",
-        "turns_so_far": len([m for m in st.session_state.messages if m["role"] == "assistant"]),
-        "transcript": st.session_state.messages,
-        "cbt_context": st.session_state.cbt_context,
-    }
-    st.download_button(
-        "Download JSON",
-        data=json.dumps(export, ensure_ascii=False, indent=2),
-        file_name="cbt_chat_export.json",
-        mime="application/json",
-    )
+    with st.expander("🔬 Behind the scenes — latest turn (presenter view)", expanded=False):
+        icon_schema = "✓" if audit.get("schema_used") else "–"
+        icon_rag = "✓" if audit.get("rag_used") else "–"
+        cls_schema = "on" if audit.get("schema_used") else "off"
+        cls_rag = "on" if audit.get("rag_used") else "off"
+        st.markdown(
+            f'<span class="cbt-badge {cls_schema}">{icon_schema} Schema grounded</span>'
+            f'<span class="cbt-badge {cls_rag}">{icon_rag} SNOMED grounded</span>',
+            unsafe_allow_html=True,
+        )
+
+        if schema:
+            st.markdown("**Client schema extracted**")
+            for bucket, label in [
+                ("triggers", "Triggers"),
+                ("automatic_thoughts", "Automatic thoughts"),
+                ("emotions", "Emotions"),
+                ("behaviors", "Behaviors"),
+            ]:
+                items = [i for i in (schema.get(bucket) or []) if isinstance(i, str) and i.strip()]
+                if items:
+                    st.markdown(f"- **{label}:** " + ", ".join(items))
+        else:
+            st.caption("No structured schema extracted for this turn.")
+
+        if rag and rag.get("concepts"):
+            st.markdown("**Retrieved clinical concepts**")
+            chips = "".join(
+                f'<span class="cbt-chip">{html_lib.escape(c["term"])}</span>'
+                for c in rag["concepts"]
+            )
+            st.markdown(chips, unsafe_allow_html=True)
+        else:
+            st.caption("No SNOMED concepts retrieved for this turn.")
+
+st.markdown(
+    '<div class="cbt-footer-note">Research prototype — not a substitute for professional mental health care.</div>',
+    unsafe_allow_html=True,
+)
