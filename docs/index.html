@@ -1,0 +1,1676 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#faf8ff">
+    <meta name="description"
+        content="CBT Lens explores where language models fall short in CBT-guided affective reasoning.">
+    <title>CBT Lens · CBT-guided affective reasoning</title>
+    <style>
+        :root {
+            --bg: #faf8ff;
+            --ink: #302e35;
+            --muted: #6b6870;
+            --purple: #3d3942;
+            --deep: #29262e;
+            --pale: #f3f3f3;
+            --line: #dedede;
+            --card: #fff;
+            --lavender: #ccc;
+            --logo-purple: #6e46bb
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 16px/1.65 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif
+        }
+
+        a {
+            color: inherit
+        }
+
+        button {
+            font: inherit
+        }
+
+        .wrap {
+            width: min(100% - 44px, 1080px);
+            margin: auto
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--line);
+            background: rgba(250, 248, 255, .94);
+            backdrop-filter: blur(16px)
+        }
+
+        .bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 72px;
+            gap: 20px
+        }
+
+        .logo {
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: -.05em;
+            font-size: 1.15rem
+        }
+
+        .logo b {
+            display: inline-grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            margin-right: 7px;
+            border-radius: 10px;
+            background: var(--logo-purple);
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 650;
+            font-size: .87rem;
+            padding: 8px 12px;
+            border-radius: 8px
+        }
+
+        nav a:hover {
+            background: var(--pale);
+            color: var(--deep)
+        }
+
+        nav a.demo {
+            color: var(--deep);
+            border: 1px solid #bdbdbd;
+            background: #fff
+        }
+
+        nav a.demo:hover {
+            background: #f3f3f3
+        }
+
+        main {
+            overflow: hidden
+        }
+
+        .hero {
+            padding: 80px 0 70px;
+            text-align: center
+        }
+
+        .kicker {
+            font-size: .74rem;
+            letter-spacing: .17em;
+            text-transform: uppercase;
+            color: var(--purple);
+            font-weight: 800
+        }
+
+        .hero h1,
+        h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            letter-spacing: -.042em
+        }
+
+        .hero h1 {
+            font-size: clamp(2.15rem, 4.7vw, 3.65rem);
+            line-height: 1.12;
+            max-width: 790px;
+            margin: 16px auto 20px;
+            font-weight: 600
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--purple)
+        }
+
+        .hero .sub {
+            max-width: 680px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 1.12rem
+        }
+
+        .hero-actions,
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 28px 0 0
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 45px;
+            border-radius: 9px;
+            padding: 10px 18px;
+            background: var(--purple);
+            border: 1px solid var(--purple);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .9rem;
+            transition: transform .15s, background .15s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: var(--deep)
+        }
+
+        .btn.alt {
+            background: white;
+            color: var(--deep);
+            border-color: #aaa
+        }
+
+        .btn.alt:hover {
+            background: var(--pale)
+        }
+
+        .story {
+            padding: 28px 0 98px
+        }
+
+        .section-top {
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            gap: 26px;
+            align-items: start;
+            margin-bottom: 28px
+        }
+
+        .section-num {
+            color: var(--purple);
+            font-size: .74rem;
+            letter-spacing: .16em;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding-top: 13px
+        }
+
+        .section-top h2 {
+            font-size: clamp(2rem, 4vw, 3.15rem);
+            line-height: 1.18;
+            margin: 0 0 12px;
+            font-weight: 600
+        }
+
+        .section-top p {
+            max-width: 700px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.02rem
+        }
+
+        .figure {
+            margin: 0;
+            border: 0;
+            background: transparent;
+            border-radius: 0;
+            padding: clamp(6px, 2vw, 22px) 0;
+            box-shadow: none
+        }
+
+        .figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            mix-blend-mode: multiply
+        }
+
+        .figure figcaption {
+            margin-top: 17px;
+            padding-top: 15px;
+            border-top: 0;
+            font-size: .86rem;
+            color: var(--muted)
+        }
+
+        .cognitive {
+            max-width: 905px;
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .cognitive img {
+            width: min(100%, 800px);
+            margin: auto
+        }
+
+        .compare img {
+            width: min(100%, 940px);
+            margin: auto
+        }
+
+        .insight {
+            margin: 20px 0 0;
+            border-left: 3px solid var(--purple);
+            padding: 3px 0 3px 19px;
+            color: #333;
+            font-size: 1.02rem
+        }
+
+        .highlight {
+            color: var(--deep);
+            font-weight: 720
+        }
+
+        .tint {
+            background: linear-gradient(135deg, #f3eefa 0%, #fbf9ff 58%, #f1ebfa 100%);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .tint .wrap {
+            padding-top: 88px;
+            padding-bottom: 88px
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 34px
+        }
+
+        .step {
+            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, .81);
+            padding: 25px;
+            border-radius: 14px
+        }
+
+        .step .index {
+            font-size: .79rem;
+            font-weight: 800;
+            color: var(--purple);
+            margin-bottom: 24px
+        }
+
+        .step h3 {
+            margin: 0 0 8px;
+            font-size: 1.07rem;
+            letter-spacing: -.025em
+        }
+
+        .step p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .93rem
+        }
+
+        .finding {
+            padding: 84px 0
+        }
+
+        .finding-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: start
+        }
+
+        .finding p {
+            color: var(--muted)
+        }
+
+        .stat {
+            border: 1px solid var(--line);
+            border-radius: 17px;
+            background: #fff;
+            padding: 28px
+        }
+
+        .stat strong {
+            font-family: Georgia, serif;
+            color: var(--purple);
+            font-size: 3.3rem;
+            font-weight: 500;
+            line-height: 1
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: .91rem
+        }
+
+        .stat+.stat {
+            margin-top: 12px
+        }
+
+        .force-panel {
+            margin-top: 28px;
+            border: 1px solid #dcd1e9;
+            border-radius: 20px;
+            background: #faf8ff;
+            overflow: hidden
+        }
+
+        .force-art {
+            display: block;
+            width: 100%;
+            max-height: 310px;
+            padding: 18px 20px 0
+        }
+
+        .force-panel figcaption {
+            padding: 0 28px 21px;
+            color: var(--muted);
+            font-size: .86rem
+        }
+
+        .force-equation {
+            overflow-x: auto;
+            padding: 21px 25px;
+            border-top: 1px solid #ded4eb;
+            text-align: center;
+            white-space: nowrap;
+            font: 1.2rem Georgia, serif;
+            color: #38343e
+        }
+
+        .force-equation .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 4px
+        }
+
+        .force-equation .fraction span:first-child {
+            border-bottom: 1px solid currentColor;
+            padding: 0 9px 5px
+        }
+
+        .force-equation .fraction span:last-child {
+            padding: 5px 9px 0
+        }
+
+        .force-delta {
+            margin: 0;
+            padding: 0 24px 20px;
+            text-align: center;
+            color: #625c68;
+            font-size: .84rem
+        }
+
+        .force-terms {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 18px 0 24px
+        }
+
+        .force-terms div {
+            border: 1px solid #ded4eb;
+            border-radius: 14px;
+            padding: 18px;
+            background: rgba(255, 255, 255, .55)
+        }
+
+        .force-terms strong {
+            display: block;
+            font: 1.14rem Georgia, serif;
+            color: var(--ink);
+            margin-bottom: 5px
+        }
+
+        .force-terms p {
+            margin: 0;
+            font-size: .87rem;
+            line-height: 1.5
+        }
+
+        .finding-foot {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap
+        }
+
+        .finding-foot p {
+            flex: 1 1 460px;
+            margin: 0
+        }
+
+        .trajectory {
+            border-top: 1px solid var(--line);
+            padding: 84px 0
+        }
+
+        .trajectory-plot {
+            margin: 30px 0 0;
+            padding: clamp(17px, 3vw, 32px);
+            border: 1px solid #dcd1e9;
+            border-radius: 20px;
+            background: #faf8ff
+        }
+
+        .trajectory-legend {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 24px;
+            color: #4f4b55;
+            font-size: .87rem
+        }
+
+        .trajectory-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .trajectory-legend i {
+            width: 23px;
+            height: 3px;
+            border-radius: 3px;
+            background: #3b3741
+        }
+
+        .trajectory-legend .synthetic {
+            background: #a69ab5
+        }
+
+        .trajectory-svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin-top: 10px
+        }
+
+        .trajectory-plot figcaption {
+            font-size: .81rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin-top: 8px
+        }
+
+        .trajectory-takeaways {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 22px
+        }
+
+        .trajectory-takeaways p {
+            margin: 0;
+            border-left: 2px solid #c9bbd7;
+            padding-left: 15px;
+            color: var(--muted);
+            font-size: .9rem
+        }
+
+        .trajectory-takeaways strong {
+            display: block;
+            color: var(--ink);
+            margin-bottom: 3px
+        }
+
+        @media(max-width:720px) {
+
+            .force-terms,
+            .trajectory-takeaways {
+                grid-template-columns: 1fr
+            }
+
+            .force-panel {
+                overflow-x: auto
+            }
+
+            .force-art {
+                min-width: 560px;
+                padding: 12px 6px 0
+            }
+
+            .force-equation {
+                font-size: 1rem;
+                text-align: left
+            }
+
+            .trajectory-svg {
+                min-width: 550px
+            }
+
+            .trajectory-plot {
+                overflow-x: auto
+            }
+        }
+
+        .team {
+            border-top: 1px solid var(--line);
+            padding: 85px 0 105px
+        }
+
+        .team h2 {
+            font-size: clamp(2rem, 4vw, 3.15rem);
+            font-weight: 600;
+            margin: 8px 0 13px
+        }
+
+        .team p {
+            color: var(--muted);
+            max-width: 680px
+        }
+
+        .people {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 28px
+        }
+
+        .person {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 19px;
+            font-weight: 660;
+            line-height: 1.4;
+            min-height: 83px
+        }
+
+        .contact {
+            margin-top: 26px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+            font-size: .94rem
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 25px 0;
+            color: var(--muted);
+            font-size: .83rem
+        }
+
+        .foot {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap
+        }
+
+        footer a {
+            color: var(--deep);
+            text-decoration: none
+        }
+
+        :focus-visible {
+            outline: 3px solid #555;
+            outline-offset: 3px
+        }
+
+        section {
+            scroll-margin-top: 95px
+        }
+
+        @media(max-width:720px) {
+            .wrap {
+                width: min(100% - 34px, 1080px)
+            }
+
+            .bar {
+                min-height: 66px;
+                flex-wrap: wrap;
+                padding: 12px 0;
+                gap: 6px
+            }
+
+            nav {
+                gap: 0
+            }
+
+            nav a {
+                padding: 6px 8px;
+                font-size: .8rem
+            }
+
+            .hero {
+                padding: 59px 0 48px
+            }
+
+            .section-top {
+                grid-template-columns: 1fr;
+                gap: 4px
+            }
+
+            .section-top h2 {
+                margin-top: 0
+            }
+
+            .story {
+                padding-bottom: 68px
+            }
+
+            .steps,
+            .finding-grid {
+                grid-template-columns: 1fr
+            }
+
+            .people {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .tint .wrap,
+            .finding,
+            .team {
+                padding-top: 65px;
+                padding-bottom: 65px
+            }
+        }
+
+        @media(max-width:380px) {
+            .people {
+                grid-template-columns: 1fr
+            }
+
+            nav a {
+                font-size: .75rem;
+                padding: 5px
+            }
+        }
+
+        .citation {
+            border-top: 1px solid var(--line);
+            padding: 80px 0
+        }
+
+        .citation h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin: 7px 0 12px;
+            font-weight: 600
+        }
+
+        .citation p {
+            color: var(--muted);
+            max-width: 680px
+        }
+
+        .cite-box {
+            position: relative;
+            margin-top: 26px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #f7f7f7;
+            padding: 23px
+        }
+
+        .cite-box pre {
+            margin: 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            color: #262626;
+            font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
+        }
+
+        .copy {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border: 1px solid #c8c8c8;
+            border-radius: 7px;
+            background: #fff;
+            color: #171717;
+            cursor: pointer
+        }
+
+        .copy:hover {
+            background: #eaeaea
+        }
+
+        .cite-box pre {
+            padding-right: 44px
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0
+        }
+
+        .team {
+            border-top: 1px solid var(--line)
+        }
+
+        .people {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 30px 18px;
+            margin-top: 34px
+        }
+
+        .person {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 0;
+            padding: 0 8px;
+            border: 0;
+            background: transparent;
+            text-align: center;
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 400
+        }
+
+        .person:hover .avatar,
+        .person:focus-visible .avatar {
+            transform: translateY(-3px);
+            border-color: #a18cbf;
+            background: #eee5f8
+        }
+
+        .avatar {
+            display: grid;
+            place-items: center;
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            border: 1px solid #d8cde9;
+            background: #f0e9fa;
+            color: #554a63;
+            font: 600 1.35rem Georgia, serif;
+            transition: transform .15s, background .15s, border-color .15s
+        }
+
+        .person-name {
+            margin-top: 13px;
+            font-weight: 700;
+            line-height: 1.35
+        }
+
+        .university {
+            margin-top: 5px;
+            font-size: .88rem;
+            color: #55515a
+        }
+
+        .department {
+            max-width: 190px;
+            font-size: .76rem;
+            line-height: 1.35;
+            color: var(--muted)
+        }
+
+        .foot {
+            align-items: center
+        }
+
+        .socials {
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        .socials a {
+            display: inline-flex;
+            align-items: center;
+            color: #625e69;
+            text-decoration: none
+        }
+
+        .socials a:hover {
+            color: var(--ink)
+        }
+
+        @media(max-width:720px) {
+            .people {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+        }
+
+        @media(max-width:380px) {
+            .people {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 26px 8px
+            }
+
+            .avatar {
+                width: 76px;
+                height: 76px
+            }
+        }
+
+        /* Page-native demonstrations: no screenshot assets or white image backgrounds. */
+        .response-demo {
+            border: 1px solid #ded4eb;
+            border-radius: 20px;
+            padding: clamp(21px, 4vw, 42px);
+            background: linear-gradient(145deg, rgba(255, 255, 255, .57), rgba(244, 238, 252, .65))
+        }
+
+        .demo-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .demo-overline {
+            font-size: .73rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+            text-transform: uppercase;
+            color: #605370
+        }
+
+        .demo-hint {
+            font-size: .83rem;
+            color: var(--muted)
+        }
+
+        .response-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 25px
+        }
+
+        .response-example {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ded6e6;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .66);
+            padding: 24px
+        }
+
+        .response-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e4dce9;
+            padding-bottom: 18px;
+            margin-bottom: 18px
+        }
+
+        .response-initial {
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            border-radius: 11px;
+            color: #41364d;
+            background: #e6dff0;
+            font: 700 1.05rem Georgia, serif
+        }
+
+        .response-initial.ash {
+            background: #e9e2ef
+        }
+
+        .response-header h3 {
+            margin: 0;
+            font-size: .96rem;
+            line-height: 1.2
+        }
+
+        .response-header span:last-child {
+            color: var(--muted);
+            font-size: .8rem
+        }
+
+        .response-text {
+            margin: 0 0 13px;
+            color: #38333e;
+            line-height: 1.68;
+            font-size: 1rem
+        }
+
+        .response-text.small {
+            color: #68616d;
+            font-size: .92rem
+        }
+
+        .response-text mark {
+            background: #eee3f8;
+            color: inherit;
+            border-radius: 3px;
+            padding: 2px 3px
+        }
+
+        .response-text mark.assumption {
+            background: #f9dfdf
+        }
+
+        .response-text mark.question {
+            background: #e2f4e0
+        }
+
+        .response-list {
+            margin: -5px 0 14px;
+            padding-left: 25px;
+            color: #38333e;
+            line-height: 1.68
+        }
+
+        .response-list li {
+            padding-left: 3px
+        }
+
+        .response-list mark {
+            color: inherit;
+            background: #e2f4e0;
+            border-radius: 3px;
+            padding: 2px 3px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone
+        }
+
+        .response-note {
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid #e6deec;
+            font-size: .86rem;
+            color: #61566a;
+            line-height: 1.45
+        }
+
+        .response-note span {
+            font-size: 1.2rem;
+            margin-right: 4px
+        }
+
+        .comparison-takeaway {
+            margin-top: 21px;
+            color: #534d59;
+            font-size: .93rem;
+            line-height: 1.55
+        }
+
+        .comparison-takeaway strong {
+            color: var(--ink)
+        }
+
+        @media(max-width:720px) {
+            .response-example {
+                padding: 19px
+            }
+        }
+
+        /* An annotated sentence, drawn directly in the page. */
+        .cognitive-figure {
+            margin: 0;
+            border: 1px solid #ded4eb;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #faf8ff
+        }
+
+        .ccd-diagram {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 430;
+            min-height: 290px;
+            color: #38343e
+        }
+
+        .ccd-arrows {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none
+        }
+
+        .ccd-arrows path {
+            fill: none;
+            stroke: #514b58;
+            stroke-width: 1.15;
+            stroke-linecap: round;
+            stroke-linejoin: round
+        }
+
+        .ccd-quote {
+            position: absolute;
+            top: 29%;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            text-align: center;
+            font: 500 clamp(.85rem, 3.2vw, 2.1rem)/1.42 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            letter-spacing: .055em
+        }
+
+        .ccd-quote .ccd-line {
+            display: block;
+            white-space: nowrap
+        }
+
+        .ccd-quote mark {
+            color: inherit;
+            background: #e9ddfa;
+            border-radius: .32em;
+            padding: .04em .18em;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            font-weight: 650
+        }
+
+        .ccd-label {
+            position: absolute;
+            font-size: clamp(.7rem, 1.5vw, 1rem);
+            font-weight: 700;
+            line-height: 1.22;
+            color: #554b61
+        }
+
+        .ccd-label small {
+            font-size: .9em;
+            font-weight: 500
+        }
+
+        .ccd-thought {
+            top: 4%;
+            left: 31%
+        }
+
+        .ccd-shame {
+            top: 4%;
+            left: 71%
+        }
+
+        .ccd-quiet {
+            top: 77%;
+            left: 4%
+        }
+
+        .ccd-sadness {
+            top: 83%;
+            left: 49%
+        }
+
+        .ccd-smile {
+            top: 77%;
+            right: 4%
+        }
+
+        .cognitive-figure figcaption {
+            display: flex;
+            gap: 16px;
+            padding: 16px clamp(25px, 4vw, 45px) 20px;
+            border-top: 1px solid #dbcfeb;
+            color: #69616e;
+            font-size: .84rem;
+            line-height: 1.5
+        }
+
+        .cognitive-figure figcaption span {
+            flex: 0 0 auto;
+            font-weight: 800;
+            color: #53435f
+        }
+
+        .ccd-mobile {
+            display: none
+        }
+
+        @media(max-width:600px) {
+            .ccd-diagram {
+                display: none
+            }
+
+            .ccd-mobile {
+                display: block;
+                position: relative;
+                height: 440px;
+                color: #38343e
+            }
+
+            .ccd-mobile .ccd-arrows {
+                z-index: 0
+            }
+
+            .ccd-mobile blockquote {
+                position: absolute;
+                top: 27%;
+                left: 0;
+                width: 100%;
+                margin: 0;
+                text-align: center;
+                font: 500 clamp(.76rem, 3.6vw, .98rem)/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                letter-spacing: 0
+            }
+
+            .ccd-mobile .ccd-line {
+                display: block;
+                white-space: nowrap
+            }
+
+            .ccd-mobile mark {
+                color: inherit;
+                background: #e9ddfa;
+                border-radius: .25em;
+                padding: .06em .14em;
+                box-decoration-break: clone;
+                -webkit-box-decoration-break: clone;
+                font-weight: 650
+            }
+
+            .ccd-mobile .ccd-label {
+                font-size: .72rem
+            }
+
+            .ccd-mobile .ccd-thought {
+                top: 3%;
+                left: 31%
+            }
+
+            .ccd-mobile .ccd-shame {
+                top: 3%;
+                left: 74%
+            }
+
+            .ccd-mobile .ccd-quiet {
+                top: 74%;
+                left: 4%
+            }
+
+            .ccd-mobile .ccd-smile {
+                top: 74%;
+                right: 4%
+            }
+
+            .ccd-mobile .ccd-sadness {
+                top: 85%;
+                left: 44%
+            }
+
+            .cognitive-figure figcaption {
+                display: block
+            }
+
+            .cognitive-figure figcaption span {
+                display: block;
+                margin-bottom: 4px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap bar"><a class="logo" href="#top"><b aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path
+                            d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" />
+                        <path d="M9 13a4.5 4.5 0 0 0 3-4" />
+                        <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" />
+                        <path d="M3.477 10.896a4 4 0 0 1 .585-.396" />
+                        <path d="M6 18a4 4 0 0 1-1.967-.516" />
+                        <path d="M12 13h4" />
+                        <path d="M12 18h6a2 2 0 0 1 2 2v1" />
+                        <path d="M12 8h8" />
+                        <path d="M16 8V5a2 2 0 0 1 2-2" />
+                        <circle cx="16" cy="13" r=".5" />
+                        <circle cx="18" cy="3" r=".5" />
+                        <circle cx="20" cy="21" r=".5" />
+                        <circle cx="20" cy="8" r=".5" />
+                    </svg></b> CBT Lens</a>
+            <nav aria-label="Main navigation"><a href="#project">Project</a><a href="#team">Team</a><a
+                    href="#cite">Cite</a><a href="https://arxiv.org/abs/2607.02885" target="_blank"
+                    rel="noopener noreferrer">Paper ↗</a><a class="demo"
+                    href="https://huggingface.co/spaces/vaishnavisinha/cbt-lens" target="_blank"
+                    rel="noopener noreferrer">Demo ↗</a></nav>
+        </div>
+    </header>
+    <main id="top">
+        <section class="hero wrap">
+            <h1>Where do LLMs fall short in <em>CBT-guided reasoning?</em></h1>
+            <p class="sub">A fluent, compassionate answer can still miss the thinking behind a person’s distress. CBT
+                Lens explores how models understand that thinking, choose a strategy, and respond.</p>
+            <div class="hero-actions"><a class="btn" href="https://arxiv.org/abs/2607.02885" target="_blank"
+                    rel="noopener noreferrer">Read the paper ↗</a><a class="btn alt"
+                    href="https://huggingface.co/spaces/vaishnavisinha/cbt-lens" target="_blank"
+                    rel="noopener noreferrer">Try CBT Lens ↗</a></div>
+        </section>
+        <section class="story wrap" id="project">
+            <div class="section-top">
+                <div class="section-num">01 / The cognitive model</div>
+                <div>
+                    <h2>Start with the thought beneath the words.</h2>
+                    <p>One sentence can reveal a belief, an emotion, and a behavior. These connections matter when
+                        deciding which kind of question or reflection might help.</p>
+                </div>
+            </div>
+            <figure class="cognitive-figure" aria-labelledby="cognitive-fig-caption">
+                <div class="ccd-diagram" role="img"
+                    aria-label="I’m a burden on other people: automatic thought. Shame and sadness: emotions. Keeping things to myself and putting on a smile: behaviors.">
+                    <svg class="ccd-arrows" viewBox="0 0 1000 430" preserveAspectRatio="none" aria-hidden="true">
+                        <defs>
+                            <marker id="ccd-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+                                <path d="M1 1 L7 4 L1 7" fill="none" stroke="#514b58" stroke-width="1" />
+                            </marker>
+                        </defs>
+                        <path d="M270 126 C280 86 318 55 358 48" marker-end="url(#ccd-arrow)" />
+                        <path d="M627 126 C640 86 673 58 708 47" marker-end="url(#ccd-arrow)" />
+                        <path d="M144 223 C97 249 89 292 82 321" marker-end="url(#ccd-arrow)" />
+                        <path d="M567 284 C544 306 530 332 525 350" marker-end="url(#ccd-arrow)" />
+                        <path d="M866 223 C911 251 916 292 921 320" marker-end="url(#ccd-arrow)" />
+                    </svg>
+                    <span class="ccd-label ccd-thought">Automatic<br>thought</span>
+                    <span class="ccd-label ccd-shame">Emotion<br><small>(shame)</small></span>
+                    <span class="ccd-label ccd-quiet">Behavior</span>
+                    <span class="ccd-label ccd-sadness">Emotion<br><small>(sadness)</small></span>
+                    <span class="ccd-label ccd-smile">Behavior</span>
+                    <blockquote class="ccd-quote"><span class="ccd-line">“I know <mark>I’m a burden on other
+                                people</mark> so I</span><span class="ccd-line"><mark>keep things to myself</mark> and
+                            <mark>put on a smile</mark>,</span><span class="ccd-line">even when <mark>I’m not
+                                okay.</mark>”</span></blockquote>
+                </div>
+                <div class="ccd-mobile">
+                    <svg class="ccd-arrows" viewBox="0 0 360 440" preserveAspectRatio="none" aria-hidden="true">
+                        <defs>
+                            <marker id="ccd-mobile-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4"
+                                orient="auto">
+                                <path d="M1 1 L7 4 L1 7" fill="none" stroke="#514b58" stroke-width="1" />
+                            </marker>
+                        </defs>
+                        <path d="M128 141 C112 100 125 66 150 52" marker-end="url(#ccd-mobile-arrow)" />
+                        <path d="M237 141 C267 108 278 78 285 53" marker-end="url(#ccd-mobile-arrow)" />
+                        <path d="M84 190 C46 230 43 278 42 318" marker-end="url(#ccd-mobile-arrow)" />
+                        <path d="M272 214 C322 245 325 280 326 318" marker-end="url(#ccd-mobile-arrow)" />
+                        <path d="M207 249 C190 288 178 324 178 365" marker-end="url(#ccd-mobile-arrow)" />
+                    </svg>
+                    <span class="ccd-label ccd-thought">Automatic<br>thought</span>
+                    <span class="ccd-label ccd-shame">Emotion<br><small>(shame)</small></span>
+                    <span class="ccd-label ccd-quiet">Behavior</span>
+                    <span class="ccd-label ccd-smile">Behavior</span>
+                    <span class="ccd-label ccd-sadness">Emotion<br><small>(sadness)</small></span>
+                    <blockquote><span class="ccd-line">“I know</span><span class="ccd-line"><mark>I’m a burden on other
+                                people</mark></span><span class="ccd-line">so I <mark>keep things to
+                                myself</mark></span><span class="ccd-line">and <mark>put on a smile</mark>,</span><span
+                            class="ccd-line">even when <mark>I’m not okay.</mark>”</span></blockquote>
+                </div>
+                <figcaption id="cognitive-fig-caption"><span>Beck’s cognitive model</span> The belief connects what the
+                    person feels with what they do. That structure gives a model more to work with than the surface
+                    wording alone.</figcaption>
+            </figure>
+        </section>
+        <section class="story wrap">
+            <div class="section-top">
+                <div class="section-num">02 / The gap</div>
+                <div>
+                    <h2>A thoughtful-sounding reply is only a start.</h2>
+                    <p>Current models often validate and reflect, even when guided discovery or another CBT strategy may
+                        be more appropriate. The responses below show how different that choice can look.</p>
+                </div>
+            </div>
+            <div class="response-demo">
+                <div class="demo-heading"><span class="demo-overline">Same opening message · two possible first
+                        moves</span><span class="demo-hint">No prior conversation</span></div>
+                <div class="response-grid">
+                    <article class="response-example">
+                        <div class="response-header"><span class="response-initial" aria-hidden="true">G</span>
+                            <div>
+                                <h3>GPT-5.3</h3><span>Explains and suggests</span>
+                            </div>
+                        </div>
+                        <p class="response-text">That sounds really heavy to carry—feeling like you have to hide what
+                            you’re going through just to avoid being a burden. When someone cares about others, they
+                            often start minimizing their own needs. That doesn’t make your feelings less valid—<mark
+                                class="assumption">it means you’ve learned to protect others at your own expense.</mark>
+                        </p>
+                        <p class="response-text">A few things worth gently questioning:</p>
+                        <ul class="response-list">
+                            <li><mark>“I’m a burden” → is that a fact, or a fear?</mark></li>
+                            <li><mark>If someone you cared about felt this way, would you see them as a burden?</mark>
+                            </li>
+                            <li><mark>Are you giving others the chance to choose?</mark></li>
+                        </ul>
+                        <p class="response-text"><mark class="assumption">You don’t have to suddenly open up to
+                                everyone. Maybe there’s a small step that feels safe:</mark></p>
+                        <ul class="response-list">
+                            <li>sharing one honest sentence with someone you trust</li>
+                            <li>or even just saying “I’ve been a bit off lately”</li>
+                        </ul>
+                        <p class="response-text">You deserve space too—not just to function, but to be real. <mark
+                                class="assumption">If you want, we can break this down together:</mark></p>
+                        <ul class="response-list">
+                            <li>where that “burden” belief started</li>
+                            <li>or how to test it in a low-risk way without feeling exposed</li>
+                        </ul>
+                        <div class="response-note"><span aria-hidden="true">↳</span> Assumes why the person feels this
+                            way, then moves toward action.</div>
+                    </article>
+                    <article class="response-example">
+                        <div class="response-header"><span class="response-initial ash" aria-hidden="true">A</span>
+                            <div>
+                                <h3>Ash — AI for Mental Health</h3><span>Asks before interpreting</span>
+                            </div>
+                        </div>
+                        <p class="response-text">That sounds really heavy – not just <mark class="assumption">worrying
+                                you might be a burden</mark>, but feeling sure that you are. I’m not going to argue with
+                            you or try to talk you out of it. I just want to understand. <mark class="question">What
+                                makes you feel certain you’re a burden to other people?</mark></p>
+                        <div class="response-note"><span aria-hidden="true">↳</span> Invites the person to explain the
+                            belief before suggesting what to do.</div>
+                    </article>
+                </div>
+                <div class="comparison-takeaway"><strong>The difference is the next move.</strong> One response starts
+                    to explain and plan; the other gathers cognitive context. The example illustrates strategy choice,
+                    not clinical effectiveness.</div>
+            </div>
+            <p class="insight"><span class="highlight">The research question:</span> Can a model identify the user’s
+                cognitive context and choose an appropriate CBT strategy, rather than defaulting to the same reassuring
+                pattern?</p>
+        </section>
+        <section class="tint">
+            <div class="wrap">
+                <div class="section-top">
+                    <div class="section-num">03 / The approach</div>
+                    <div>
+                        <h2>From narrative to grounded strategy.</h2>
+                        <p>The paper links cognitive conceptualization, clinical concepts, and multiple reasoning paths
+                            before a response strategy is selected.</p>
+                    </div>
+                </div>
+                <div class="steps">
+                    <article class="step">
+                        <div class="index">01 — CONCEPTUALIZE</div>
+                        <h3>Read the cognitive context</h3>
+                        <p>Break a user narrative into elements of Beck’s cognitive conceptualization framework.</p>
+                    </article>
+                    <article class="step">
+                        <div class="index">02 — GROUND</div>
+                        <h3>Check relevant concepts</h3>
+                        <p>Connect the context to SNOMED CT concepts and validate their relevance with natural language
+                            inference.</p>
+                    </article>
+                    <article class="step">
+                        <div class="index">03 — SELECT</div>
+                        <h3>Choose a CBT strategy</h3>
+                        <p>Use multiple chains of thought to select validation and reflection, Socratic questioning, or
+                            an alternative perspective.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="finding wrap">
+            <div class="section-top">
+                <div class="section-num">04 / Protocol Leverage Force</div>
+                <div>
+                    <h2>How much leverage did the CBT protocol have?</h2>
+                    <p>Protocol Leverage Force (F) measures how strongly CBT guidance reorients a response away from
+                        the model’s baseline and toward the user’s utterance. It is a behavioral measure, not a score
+                        of therapeutic quality.</p>
+                </div>
+            </div>
+            <figure class="force-panel">
+                <svg class="force-art" viewBox="0 0 760 300" role="img"
+                    aria-label="A dashed circle surrounds the baseline response centroid. The selected CBT protocol sits on the circle at distance r. From that point, one arrow shows the shift toward the user's utterance and a second outward arrow shows Protocol Leverage Force F.">
+                    <defs>
+                        <marker id="force-tip" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
+                            <path d="M1 1L7 4L1 7" fill="none" stroke="#514b58" stroke-width="1.1" />
+                        </marker>
+                    </defs>
+                    <circle cx="270" cy="182" r="99" fill="none" stroke="#a8a1ad" stroke-width="1.2"
+                        stroke-dasharray="5 6" />
+                    <path d="M270 182L355 132" fill="none" stroke="#99919f" stroke-width="1.2" />
+                    <path d="M355 131L282 32" fill="none" stroke="#666070" stroke-width="1.7"
+                        marker-end="url(#force-tip)" />
+                    <path d="M360 128L505 64" fill="none" stroke="#46414c" stroke-width="1.7"
+                        marker-end="url(#force-tip)" />
+                    <circle cx="270" cy="182" r="7" fill="#423e48" />
+                    <circle cx="355" cy="132" r="10" fill="#faf8ff" stroke="#58505e" stroke-width="1.7" />
+                    <text x="233" y="208" fill="#4d4754" font-size="14">baseline</text><text x="233" y="226"
+                        fill="#4d4754" font-size="14">centroid</text>
+                    <text x="294" y="149" fill="#625966" font-size="18" font-style="italic">r</text>
+                    <text x="347" y="138" text-anchor="middle" fill="#3f3945" font-size="14" font-weight="700">m</text>
+                    <text x="255" y="27" fill="#534d58" font-size="19" font-style="italic">v</text>
+                    <text x="514" y="69" fill="#3f3945" font-size="20" font-style="italic">F</text>
+                    <text x="386" y="156" fill="#534d58" font-size="14">selected protocol</text>
+                    <text x="112" y="73" fill="#534d58" font-size="14">Baseline response</text>
+                    <text x="109" y="91" fill="#77717b" font-size="12">the model’s usual answer</text>
+                    <text x="301" y="45" fill="#534d58" font-size="14">shift toward the user’s utterance</text>
+                    <text x="535" y="58" fill="#534d58" font-size="14">resulting leverage</text>
+                    <text x="535" y="76" fill="#534d58" font-size="14">of CBT guidance</text>
+                    <text x="602" y="259" fill="#77717b" font-size="12" font-style="italic">Not to scale</text>
+                </svg>
+                <figcaption>Adapted from the paper’s centrifugal-force analogy: the baseline is the center, the selected
+                    protocol is a point mass <em>m</em>, the distance from baseline is <em>r</em>, the shift toward the
+                    user is <em>v</em>, and the outward arrow represents <em>F</em>.</figcaption>
+                <div class="force-equation"
+                    aria-label="F equals protocol weight times delta squared divided by cosine distance between the guided response and baseline response centroid, plus epsilon">
+                    F = <span class="fraction"><span>w<sub>protocol</sub> ·
+                            Δ<sup>2</sup></span><span>d<sub>cos</sub>(e<sub>MCoT</sub>, μ<sub>base</sub>) +
+                            ε</span></span>
+                </div>
+                <p class="force-delta">Δ = d<sub>cos</sub>(baseline, user utterance) − d<sub>cos</sub>(guided response,
+                    user utterance)</p>
+            </figure>
+            <div class="force-terms">
+                <div><strong>w<sub>protocol</sub></strong>
+                    <p>How confidently the framework selected a CBT protocol for this turn.</p>
+                </div>
+                <div><strong>Δ · shift toward the user</strong>
+                    <p>Positive Δ means the guided response moved closer to the user’s utterance than the baseline did.
+                        The formula squares its magnitude, so the sign must be read separately.</p>
+                </div>
+                <div><strong>Distance from baseline</strong>
+                    <p>Compares the guided response with the baseline response centroid. ε reflects how much the
+                        baseline itself changes across prompt paraphrases.</p>
+                </div>
+            </div>
+            <div class="finding-foot">
+                <p>Across three open-weight models and 14 RealCBT-derived case studies, models often favored validation
+                    and reflection. The metric helps identify <em>how</em> guidance changed an answer; expert review is
+                    still needed to assess the answer itself.</p>
+                <a class="btn alt" href="https://arxiv.org/abs/2607.02885" target="_blank"
+                    rel="noopener noreferrer">Read the methods ↗</a>
+            </div>
+        </section>
+        <section class="trajectory" id="affect">
+            <div class="wrap">
+                <div class="section-top">
+                    <div class="section-num">05 / The affective story</div>
+                    <div>
+                        <h2>What happens to emotion across a conversation?</h2>
+                        <p>The paper compares valence (the tone of user language) and arousal (its intensity) across
+                            CBT-MCoT synthetic sessions and RealCBT human transcripts. Each turn updates a cumulative
+                            mean scored with the NRC VAD Lexicon; the plotted paths summarize 14 transcripts per model.
+                        </p>
+                    </div>
+                </div>
+                <figure class="trajectory-plot">
+                    <div class="trajectory-legend"><span><i aria-hidden="true"></i> RealCBT human
+                            transcript</span><span><i class="synthetic" aria-hidden="true"></i> CBT-MCoT synthetic
+                            session</span></div>
+                    <svg class="trajectory-svg" viewBox="0 0 720 320" role="img"
+                        aria-label="Schematic valence and arousal trajectories. The human transcript takes a longer path with more turns and changes of direction, while the synthetic session follows a shorter, smoother path.">
+                        <path d="M79 38V269H663" fill="none" stroke="#aaa4af" stroke-width="1.3" />
+                        <path d="M80 93H660M80 155H660M80 217H660" fill="none" stroke="#e7e1eb" stroke-width="1"
+                            stroke-dasharray="4 6" />
+                        <text x="650" y="298" fill="#68626d" font-size="14">Valence →</text><text x="18" y="32"
+                            fill="#68626d" font-size="14">Arousal ↑</text>
+                        <path d="M175 202L182 188L188 170L184 152L195 137L194 117L207 105L212 88L209 70" fill="none"
+                            stroke="#a69ab5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="175" cy="202" r="5" fill="#faf8ff" stroke="#a69ab5" stroke-width="2" />
+                        <path d="M209 63L211 69L218 70L213 75L214 82L209 78L203 82L204 75L199 70L206 69Z" fill="#faf8ff"
+                            stroke="#a69ab5" stroke-width="1.5" />
+                        <path
+                            d="M393 182L402 191L411 186L421 201L432 199L439 212L448 208L457 221L466 214L473 230L480 220L488 234L496 226L506 242L516 233L525 246L535 238L543 252L554 244"
+                            fill="none" stroke="#3b3741" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <circle cx="393" cy="182" r="5" fill="#faf8ff" stroke="#3b3741" stroke-width="2" />
+                        <path d="M554 237L556 243L563 244L558 249L559 256L554 252L548 256L549 249L544 244L551 243Z"
+                            fill="#faf8ff" stroke="#3b3741" stroke-width="1.5" />
+                        <text x="136" y="232" fill="#68626d" font-size="13">start</text><text x="551" y="280"
+                            fill="#68626d" font-size="13">end</text>
+                    </svg>
+                    <figcaption>Illustrative paths based on the paper’s reported pattern; positions and turns here are
+                        schematic, not the measured data.</figcaption>
+                </figure>
+                <div class="trajectory-takeaways">
+                    <p><strong>Human conversations move more.</strong> The longer RealCBT transcripts show more turns
+                        and more oscillation in affective language.</p>
+                    <p><strong>Synthetic paths look smoother.</strong> The CBT-MCoT sessions trace shorter, less varied
+                        trajectories in the paper’s plots.</p>
+                    <p><strong>A trace is context, not an outcome.</strong> Valence and arousal describe language over
+                        time; neither shows whether a person improved clinically.</p>
+                </div>
+            </div>
+        </section>
+        <section class="team" id="team">
+            <div class="wrap">
+                <div class="kicker">The team</div>
+                <h2>People behind the paper.</h2>
+                <p>Authors and affiliations as listed in the paper. Select a profile to search LinkedIn; individual
+                    profile links can be added later.</p>
+                <div class="people"><a class="person"
+                        href="https://www.linkedin.com/search/results/people/?keywords=Vaishnavi%20Sinha%20UMBC"
+                        target="_blank" rel="noopener noreferrer" aria-label="Find Vaishnavi Sinha on LinkedIn"
+                        title="LinkedIn profile link to be added"><span class="avatar" aria-hidden="true">VS</span><span
+                            class="person-name">Vaishnavi Sinha</span><span class="university">UMBC</span><span
+                            class="department">Computer Science & Electrical Engineering</span></a><a class="person"
+                        href="https://www.linkedin.com/search/results/people/?keywords=Pooja%20Guttal%20UMBC"
+                        target="_blank" rel="noopener noreferrer" aria-label="Find Pooja Guttal on LinkedIn"
+                        title="LinkedIn profile link to be added"><span class="avatar" aria-hidden="true">PG</span><span
+                            class="person-name">Pooja Guttal</span><span class="university">UMBC</span><span
+                            class="department">Computer Science & Electrical Engineering</span></a><a class="person"
+                        href="https://www.linkedin.com/search/results/people/?keywords=Pranay%20Deep%20Reddy%20Katike%20UMBC"
+                        target="_blank" rel="noopener noreferrer" aria-label="Find Pranay Deep Reddy Katike on LinkedIn"
+                        title="LinkedIn profile link to be added"><span class="avatar" aria-hidden="true">PK</span><span
+                            class="person-name">Pranay Deep Reddy Katike</span><span class="university">UMBC</span><span
+                            class="department">Computer Science & Electrical Engineering</span></a><a class="person"
+                        href="https://www.linkedin.com/search/results/people/?keywords=Vishal%20Sinha%20UC%20Irvine"
+                        target="_blank" rel="noopener noreferrer" aria-label="Find Vishal Sinha on LinkedIn"
+                        title="LinkedIn profile link to be added"><span class="avatar" aria-hidden="true">VS</span><span
+                            class="person-name">Vishal Sinha</span><span class="university">UC Irvine</span><span
+                            class="department">Electrical Engineering & Computer Science</span></a><a class="person"
+                        href="https://www.linkedin.com/search/results/people/?keywords=Gerald%20Ndawula%20UMBC"
+                        target="_blank" rel="noopener noreferrer" aria-label="Find Gerald Ndawula on LinkedIn"
+                        title="LinkedIn profile link to be added"><span class="avatar" aria-hidden="true">GN</span><span
+                            class="person-name">Gerald Ndawula</span><span class="university">UMBC</span><span
+                            class="department">Computer Science & Electrical Engineering</span></a><a class="person"
+                        href="https://www.linkedin.com/search/results/people/?keywords=Lira%20Yoon%20UMBC"
+                        target="_blank" rel="noopener noreferrer" aria-label="Find Lira Yoon on LinkedIn"
+                        title="LinkedIn profile link to be added"><span class="avatar" aria-hidden="true">LY</span><span
+                            class="person-name">Lira Yoon</span><span class="university">UMBC</span><span
+                            class="department">Psychology</span></a><a class="person"
+                        href="https://www.linkedin.com/search/results/people/?keywords=Andrea%20Kleinsmith%20UMBC"
+                        target="_blank" rel="noopener noreferrer" aria-label="Find Andrea Kleinsmith on LinkedIn"
+                        title="LinkedIn profile link to be added"><span class="avatar" aria-hidden="true">AK</span><span
+                            class="person-name">Andrea Kleinsmith</span><span class="university">UMBC</span><span
+                            class="department">Information Systems</span></a><a class="person"
+                        href="https://www.linkedin.com/search/results/people/?keywords=Manas%20Gaur%20UMBC"
+                        target="_blank" rel="noopener noreferrer" aria-label="Find Manas Gaur on LinkedIn"
+                        title="LinkedIn profile link to be added"><span class="avatar" aria-hidden="true">MG</span><span
+                            class="person-name">Manas Gaur</span><span class="university">UMBC</span><span
+                            class="department">Computer Science & Electrical Engineering</span></a></div>
+                <div class="contact"><strong>Contact</strong>
+                    <p>For research inquiries and future collaborations, contact details will be added here.</p>
+                </div>
+            </div>
+        </section>
+        <section class="citation" id="cite">
+            <div class="wrap">
+                <div class="kicker">Reference</div>
+                <div class="cite-box">
+                    <pre id="bibtex">@article{sinha2026llms,
+  title={Where do LLMs Fall Short in CBT-Guided Affective Reasoning?},
+  author={Sinha, Vaishnavi and Guttal, Pooja and Katike, Pranay Deep Reddy and Sinha, Vishal and Ndawula, Gerald and Yoon, Lira and Kleinsmith, Andrea and Gaur, Manas},
+  journal={arXiv preprint arXiv:2607.02885},
+  year={2026}
+}</pre><button class="copy" id="copy-citation" type="button" aria-label="Copy BibTeX citation"
+                        title="Copy BibTeX citation"><svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <rect x="8" y="8" width="12" height="12" rx="2" />
+                            <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+                        </svg></button><span id="copy-status" class="sr-only" role="status" aria-live="polite"></span>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="wrap foot"><strong>CBT Lens</strong>
+            <div class="socials"><a href="https://github.com/cbt-llm/cbt-llm" target="_blank" rel="noopener noreferrer"
+                    aria-label="CBT Lens on GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                        height="20" fill="currentColor" role="img" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg></a><a href="https://www.linkedin.com/search/results/people/?keywords=CBT%20Lens"
+                    target="_blank" rel="noopener noreferrer" aria-label="Find CBT Lens on LinkedIn"
+                    title="LinkedIn search; team link to be added"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                        height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                        <rect width="4" height="12" x="2" y="9" />
+                        <circle cx="4" cy="4" r="2" />
+                    </svg></a></div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('copy-citation').addEventListener('click', async () => {
+            const citation = document.getElementById('bibtex').textContent;
+            const status = document.getElementById('copy-status');
+            try {
+                await navigator.clipboard.writeText(citation);
+                status.textContent = 'Citation copied to clipboard';
+            } catch {
+                const range = document.createRange();
+                range.selectNodeContents(document.getElementById('bibtex'));
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+                status.textContent = 'Citation selected. Press Command+C or Control+C to copy.';
+            }
+        });
+    </script>
+</body>
+
+</html>
