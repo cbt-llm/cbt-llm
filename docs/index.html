@@ -7,7 +7,13 @@
     <meta name="theme-color" content="#faf8ff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#0f0d16" media="(prefers-color-scheme: dark)">
     <script>
-        try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch { }
+        // Saved choice wins; otherwise follow the OS. Dark styles key off data-theme only.
+        (() => {
+            let t = null;
+            try { t = localStorage.getItem('theme'); } catch { }
+            document.documentElement.dataset.theme = t === 'light' || t === 'dark' ? t
+                : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +23,7 @@
     <meta name="description"
         content="CBT Lens explores where language models fall short in CBT-guided affective reasoning.">
     <title>CBT Lens · CBT-guided affective reasoning</title>
-    <link rel="stylesheet" href="assets/css/site.css">
+    <link rel="stylesheet" href="assets/css/site.css?v=5">
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
 </head>
 
@@ -518,7 +524,8 @@
         (() => {
             const root = document.documentElement;
             const media = window.matchMedia('(prefers-color-scheme: dark)');
-            const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : media.matches;
+            const isDark = () => root.dataset.theme === 'dark';
+            const saved = () => { try { return localStorage.getItem('theme'); } catch { return null; } };
             const btn = document.querySelector('.theme-toggle');
             const sync = () => btn.setAttribute('aria-pressed', isDark());
             btn.addEventListener('click', () => {
@@ -526,7 +533,11 @@
                 try { localStorage.setItem('theme', root.dataset.theme); } catch { }
                 sync();
             });
-            media.addEventListener('change', sync);
+            // Follow OS changes until the visitor picks a theme themselves.
+            media.addEventListener('change', () => {
+                if (!saved()) root.dataset.theme = media.matches ? 'dark' : 'light';
+                sync();
+            });
             sync();
         })();
         (() => {
