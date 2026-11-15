@@ -4,1258 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#faf8ff">
+    <meta name="theme-color" content="#faf8ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f0d16" media="(prefers-color-scheme: dark)">
+    <script>
+        try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch { }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <meta name="description"
         content="CBT Lens explores where language models fall short in CBT-guided affective reasoning.">
     <title>CBT Lens · CBT-guided affective reasoning</title>
-    <style>
-        :root {
-            --bg: #faf8ff;
-            --ink: #302e35;
-            --muted: #6b6870;
-            --purple: #3d3942;
-            --deep: #29262e;
-            --pale: #f3f3f3;
-            --line: #dedede;
-            --card: #fff;
-            --lavender: #ccc;
-            --logo-purple: #6e46bb
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-        html {
-            scroll-behavior: smooth
-        }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--ink);
-            font: 16px/1.65 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif
-        }
-
-        a {
-            color: inherit
-        }
-
-        button {
-            font: inherit
-        }
-
-        .wrap {
-            width: min(100% - 44px, 1080px);
-            margin: auto
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            border-bottom: 1px solid var(--line);
-            background: rgba(250, 248, 255, .94);
-            backdrop-filter: blur(16px)
-        }
-
-        .bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 72px;
-            gap: 20px
-        }
-
-        .logo {
-            text-decoration: none;
-            font-weight: 800;
-            letter-spacing: -.05em;
-            font-size: 1.15rem
-        }
-
-        .logo b {
-            display: inline-grid;
-            place-items: center;
-            width: 38px;
-            height: 38px;
-            margin-right: 7px;
-            border-radius: 10px;
-            background: var(--logo-purple);
-            color: #fff;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 0
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 6px
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #444;
-            font-weight: 650;
-            font-size: .87rem;
-            padding: 8px 12px;
-            border-radius: 8px
-        }
-
-        nav a:hover {
-            background: var(--pale);
-            color: var(--deep)
-        }
-
-        nav a.demo {
-            color: var(--deep);
-            border: 1px solid #bdbdbd;
-            background: #fff
-        }
-
-        nav a.demo:hover {
-            background: #f3f3f3
-        }
-
-        main {
-            overflow: hidden
-        }
-
-        .hero {
-            padding: 80px 0 70px;
-            text-align: center
-        }
-
-        .kicker {
-            font-size: .74rem;
-            letter-spacing: .17em;
-            text-transform: uppercase;
-            color: var(--purple);
-            font-weight: 800
-        }
-
-        .hero h1,
-        h2 {
-            font-family: Georgia, "Times New Roman", serif;
-            letter-spacing: -.042em
-        }
-
-        .hero h1 {
-            font-size: clamp(2.15rem, 4.7vw, 3.65rem);
-            line-height: 1.12;
-            max-width: 790px;
-            margin: 16px auto 20px;
-            font-weight: 600
-        }
-
-        .hero h1 em {
-            font-style: normal;
-            color: var(--purple)
-        }
-
-        .hero .sub {
-            max-width: 680px;
-            margin: 0 auto;
-            color: var(--muted);
-            font-size: 1.12rem
-        }
-
-        .hero .publication {
-            margin: 17px auto 0;
-            max-width: 740px;
-            color: #55505d;
-            font-size: .88rem;
-            line-height: 1.5
-        }
-
-        .hero .publication a {
-            text-underline-offset: 3px
-        }
-
-        .hero-actions,
-        .actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 28px 0 0
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 45px;
-            border-radius: 9px;
-            padding: 10px 18px;
-            background: var(--purple);
-            border: 1px solid var(--purple);
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: .9rem;
-            transition: transform .15s, background .15s
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            background: var(--deep)
-        }
-
-        .btn.alt {
-            background: white;
-            color: var(--deep);
-            border-color: #aaa
-        }
-
-        .btn.alt:hover {
-            background: var(--pale)
-        }
-
-        .story {
-            padding: 28px 0 98px
-        }
-
-        .section-top {
-            display: grid;
-            grid-template-columns: 190px 1fr;
-            gap: 26px;
-            align-items: start;
-            margin-bottom: 28px
-        }
-
-        .section-num {
-            color: var(--purple);
-            font-size: .74rem;
-            letter-spacing: .16em;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding-top: 13px
-        }
-
-        .section-top h2 {
-            font-size: clamp(2rem, 4vw, 3.15rem);
-            line-height: 1.18;
-            margin: 0 0 12px;
-            font-weight: 600
-        }
-
-        .section-top p {
-            max-width: 700px;
-            margin: 0;
-            color: var(--muted);
-            font-size: 1.02rem
-        }
-
-        .figure {
-            margin: 0;
-            border: 0;
-            background: transparent;
-            border-radius: 0;
-            padding: clamp(6px, 2vw, 22px) 0;
-            box-shadow: none
-        }
-
-        .figure img {
-            display: block;
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            mix-blend-mode: multiply
-        }
-
-        .figure figcaption {
-            margin-top: 17px;
-            padding-top: 15px;
-            border-top: 0;
-            font-size: .86rem;
-            color: var(--muted)
-        }
-
-        .cognitive {
-            max-width: 905px;
-            margin-left: auto;
-            margin-right: auto
-        }
-
-        .cognitive img {
-            width: min(100%, 800px);
-            margin: auto
-        }
-
-        .compare img {
-            width: min(100%, 940px);
-            margin: auto
-        }
-
-        .insight {
-            margin: 20px 0 0;
-            border-left: 3px solid var(--purple);
-            padding: 3px 0 3px 19px;
-            color: #333;
-            font-size: 1.02rem
-        }
-
-        .highlight {
-            color: var(--deep);
-            font-weight: 720
-        }
-
-        .tint {
-            background: linear-gradient(135deg, #f3eefa 0%, #fbf9ff 58%, #f1ebfa 100%);
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line)
-        }
-
-        .tint .wrap {
-            padding-top: 88px;
-            padding-bottom: 88px
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 14px;
-            margin-top: 34px
-        }
-
-        .step {
-            border: 1px solid #ddd;
-            background: rgba(255, 255, 255, .81);
-            padding: 25px;
-            border-radius: 14px
-        }
-
-        .step .index {
-            font-size: .79rem;
-            font-weight: 800;
-            color: var(--purple);
-            margin-bottom: 24px
-        }
-
-        .step h3 {
-            margin: 0 0 8px;
-            font-size: 1.07rem;
-            letter-spacing: -.025em
-        }
-
-        .step p {
-            margin: 0;
-            color: var(--muted);
-            font-size: .93rem
-        }
-
-        .finding {
-            padding: 84px 0
-        }
-
-        .finding-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            align-items: start
-        }
-
-        .finding p {
-            color: var(--muted)
-        }
-
-        .stat {
-            border: 1px solid var(--line);
-            border-radius: 17px;
-            background: #fff;
-            padding: 28px
-        }
-
-        .stat strong {
-            font-family: Georgia, serif;
-            color: var(--purple);
-            font-size: 3.3rem;
-            font-weight: 500;
-            line-height: 1
-        }
-
-        .stat span {
-            display: block;
-            margin-top: 12px;
-            color: var(--muted);
-            font-size: .91rem
-        }
-
-        .stat+.stat {
-            margin-top: 12px
-        }
-
-        .force-panel {
-            margin-top: 28px;
-            border: 1px solid #dcd1e9;
-            border-radius: 20px;
-            background: #faf8ff;
-            overflow: hidden
-        }
-
-        .force-art {
-            display: block;
-            width: 100%;
-            max-height: 310px;
-            padding: 18px 20px 0
-        }
-
-        .force-panel figcaption {
-            padding: 0 28px 21px;
-            color: var(--muted);
-            font-size: .86rem
-        }
-
-        .finding-foot {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-top: 24px
-        }
-
-        .finding-foot p {
-            flex: 1 1 460px;
-            margin: 0
-        }
-
-        .trajectory {
-            border-top: 1px solid var(--line);
-            padding: 84px 0
-        }
-
-        .trajectory-plot {
-            margin: 30px 0 0;
-            padding: clamp(17px, 3vw, 32px);
-            border: 1px solid #dcd1e9;
-            border-radius: 20px;
-            background: #faf8ff
-        }
-
-        .trajectory-legend {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 9px 22px;
-            color: #4f4b55;
-            font-size: .85rem
-        }
-
-        .trajectory-legend span {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px
-        }
-
-        .trajectory-legend i {
-            width: 23px;
-            height: 3px;
-            border-radius: 3px;
-            background: #254977
-        }
-
-        .trajectory-legend .synthetic {
-            background: #674d91
-        }
-
-        .trajectory-marker {
-            width: 15px;
-            height: 15px;
-            color: #4f4b55;
-            flex: 0 0 auto
-        }
-
-        .trajectory-turns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px 25px;
-            margin: 17px 0 3px;
-            color: #514b58;
-            font-size: .82rem
-        }
-
-        .trajectory-turns span {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px
-        }
-
-        .turn-gradient {
-            display: inline-block;
-            width: 92px;
-            height: 8px;
-            border-radius: 20px;
-            background: linear-gradient(90deg, #d5c9e7, #594279)
-        }
-
-        .turn-gradient.real {
-            background: linear-gradient(90deg, #cae6f5, #234b7d)
-        }
-
-        .trajectory-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: 10px
-        }
-
-        .trajectory-model {
-            min-width: 0;
-            margin: 0;
-            padding: 12px 8px 8px;
-            border: 1px solid #e5ddeb;
-            border-radius: 13px;
-            background: rgba(255, 255, 255, .65)
-        }
-
-        .trajectory-model h3 {
-            margin: 0 0 1px;
-            text-align: center;
-            font-size: .92rem;
-            font-weight: 660
-        }
-
-        .trajectory-model svg {
-            display: block;
-            width: 100%;
-            height: auto
-        }
-
-        .trajectory-plot>figcaption {
-            font-size: .81rem;
-            color: var(--muted);
-            line-height: 1.5;
-            margin-top: 15px
-        }
-
-        @media(max-width:900px) {
-            .trajectory-grid {
-                min-width: 900px
-            }
-
-            .trajectory-plot {
-                overflow-x: auto
-            }
-        }
-
-        @media(max-width:720px) {
-            .force-panel {
-                overflow-x: auto
-            }
-
-            .force-art {
-                min-width: 560px;
-                padding: 12px 6px 0
-            }
-        }
-
-        .team {
-            border-top: 1px solid var(--line);
-            padding: 85px 0 105px
-        }
-
-        .team h2 {
-            font-size: clamp(2rem, 4vw, 3.15rem);
-            font-weight: 600;
-            margin: 8px 0 13px
-        }
-
-        .team p {
-            color: var(--muted);
-            max-width: 680px
-        }
-
-        .people {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: 28px
-        }
-
-        .person {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            padding: 19px;
-            font-weight: 660;
-            line-height: 1.4;
-            min-height: 83px
-        }
-
-        footer {
-            border-top: 1px solid var(--line);
-            padding: 25px 0;
-            color: var(--muted);
-            font-size: .83rem
-        }
-
-        .foot {
-            display: flex;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap
-        }
-
-        footer a {
-            color: var(--deep);
-            text-decoration: none
-        }
-
-        :focus-visible {
-            outline: 3px solid #555;
-            outline-offset: 3px
-        }
-
-        section {
-            scroll-margin-top: 95px
-        }
-
-        @media(max-width:720px) {
-            .wrap {
-                width: min(100% - 34px, 1080px)
-            }
-
-            .bar {
-                min-height: 66px;
-                flex-wrap: wrap;
-                padding: 12px 0;
-                gap: 6px
-            }
-
-            nav {
-                gap: 0
-            }
-
-            nav a {
-                padding: 6px 8px;
-                font-size: .8rem
-            }
-
-            .hero {
-                padding: 59px 0 48px
-            }
-
-            .section-top {
-                grid-template-columns: 1fr;
-                gap: 4px
-            }
-
-            .section-top h2 {
-                margin-top: 0
-            }
-
-            .story {
-                padding-bottom: 68px
-            }
-
-            .steps,
-            .finding-grid {
-                grid-template-columns: 1fr
-            }
-
-            .people {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
-
-            .tint .wrap,
-            .finding,
-            .team {
-                padding-top: 65px;
-                padding-bottom: 65px
-            }
-        }
-
-        @media(max-width:380px) {
-            .people {
-                grid-template-columns: 1fr
-            }
-
-            nav a {
-                font-size: .75rem;
-                padding: 5px
-            }
-        }
-
-        .citation {
-            border-top: 1px solid var(--line);
-            padding: 80px 0
-        }
-
-        .citation h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin: 7px 0 12px;
-            font-weight: 600
-        }
-
-        .citation p {
-            color: var(--muted);
-            max-width: 680px
-        }
-
-        .cite-box {
-            position: relative;
-            margin-top: 26px;
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            background: #f7f7f7;
-            padding: 23px
-        }
-
-        .cite-box pre {
-            margin: 0;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            overflow-wrap: anywhere;
-            color: #262626;
-            font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
-        }
-
-        .copy {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: grid;
-            place-items: center;
-            width: 34px;
-            height: 34px;
-            border: 1px solid #c8c8c8;
-            border-radius: 7px;
-            background: #fff;
-            color: #171717;
-            cursor: pointer
-        }
-
-        .copy:hover {
-            background: #eaeaea
-        }
-
-        .cite-box pre {
-            padding-right: 44px
-        }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0
-        }
-
-        .team {
-            border-top: 1px solid var(--line)
-        }
-
-        .people {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            column-gap: 20px;
-            row-gap: 16px;
-            margin-top: 34px
-        }
-
-        .person {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 0;
-            padding: 5px 10px 6px;
-            border: 0;
-            background: transparent;
-            text-align: center;
-            text-decoration: none;
-            color: var(--ink);
-            font-weight: 400
-        }
-
-        .person:hover .avatar,
-        .person:focus-visible .avatar {
-            transform: translateY(-3px);
-            border-color: #a18cbf;
-            background: #eee5f8
-        }
-
-        .avatar {
-            position: relative;
-            display: grid;
-            place-items: center;
-            width: 92px;
-            height: 92px;
-            overflow: hidden;
-            border-radius: 50%;
-            border: 1px solid #d8cde9;
-            background: #f0e9fa;
-            color: #554a63;
-            font: 600 1.35rem Georgia, serif;
-            transition: transform .15s, background .15s, border-color .15s
-        }
-
-        .avatar img,
-        .response-initial img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0
-        }
-
-        .avatar img {
-            object-position: center 25%
-        }
-
-        .avatar img.loaded,
-        .response-initial img.loaded {
-            opacity: 1
-        }
-
-        .person--pranay .avatar img.loaded {
-            transform: scale(1.16)
-        }
-
-        .person--andrea .avatar img {
-            object-position: center 8%
-        }
-
-        .person-name {
-            margin-top: 12px;
-            font-weight: 700;
-            line-height: 1.35
-        }
-
-        .university {
-            margin-top: 5px;
-            font-size: .88rem;
-            color: #55515a
-        }
-
-        .department {
-            max-width: 190px;
-            font-size: .76rem;
-            line-height: 1.35;
-            color: var(--muted)
-        }
-
-        .current-affiliation {
-            max-width: 190px;
-            margin-top: 7px;
-            font-size: .76rem;
-            line-height: 1.35;
-            color: var(--muted)
-        }
-
-        .foot {
-            align-items: center
-        }
-
-        .socials {
-            display: flex;
-            align-items: center;
-            gap: 16px
-        }
-
-        .socials a {
-            display: inline-flex;
-            align-items: center;
-            color: #625e69;
-            text-decoration: none
-        }
-
-        .socials a:hover {
-            color: var(--ink)
-        }
-
-        @media(max-width:720px) {
-            .people {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
-        }
-
-        @media(max-width:380px) {
-            .people {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                column-gap: 8px;
-                row-gap: 14px
-            }
-
-            .person {
-                padding: 5px 4px 6px
-            }
-
-            .avatar {
-                width: 76px;
-                height: 76px
-            }
-        }
-
-        /* Page-native demonstrations: no screenshot assets or white image backgrounds. */
-        .response-demo {
-            border: 1px solid #ded4eb;
-            border-radius: 20px;
-            padding: clamp(21px, 4vw, 42px);
-            background: linear-gradient(145deg, rgba(255, 255, 255, .57), rgba(244, 238, 252, .65))
-        }
-
-        .demo-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 12px;
-            flex-wrap: wrap
-        }
-
-        .demo-overline {
-            font-size: .73rem;
-            font-weight: 800;
-            letter-spacing: .13em;
-            text-transform: uppercase;
-            color: #605370
-        }
-
-        .demo-hint {
-            font-size: .83rem;
-            color: var(--muted)
-        }
-
-        .response-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 14px;
-            margin-top: 25px
-        }
-
-        .response-example {
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #ded6e6;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, .66);
-            padding: 24px
-        }
-
-        .response-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid #e4dce9;
-            padding-bottom: 18px;
-            margin-bottom: 18px
-        }
-
-        .response-initial {
-            position: relative;
-            display: grid;
-            place-items: center;
-            width: 38px;
-            height: 38px;
-            flex: 0 0 38px;
-            overflow: hidden;
-            border-radius: 11px;
-            color: #41364d;
-            background: #e6dff0;
-            font: 700 1.05rem Georgia, serif
-        }
-
-        .response-initial.ash {
-            background: #e9e2ef
-        }
-
-        .response-header h3 {
-            margin: 0;
-            font-size: .96rem;
-            line-height: 1.2
-        }
-
-        .response-header span:last-child {
-            color: var(--muted);
-            font-size: .8rem
-        }
-
-        .response-text {
-            margin: 0 0 13px;
-            color: #38333e;
-            line-height: 1.68;
-            font-size: 1rem
-        }
-
-        .response-text.small {
-            color: #68616d;
-            font-size: .92rem
-        }
-
-        .response-text mark {
-            background: #eee3f8;
-            color: inherit;
-            border-radius: 3px;
-            padding: 2px 3px
-        }
-
-        .response-text mark.assumption {
-            background: #f9dfdf
-        }
-
-        .response-text mark.question {
-            background: #e2f4e0
-        }
-
-        .response-list {
-            margin: -5px 0 14px;
-            padding-left: 25px;
-            color: #38333e;
-            line-height: 1.68
-        }
-
-        .response-list li {
-            padding-left: 3px
-        }
-
-        .response-list mark {
-            color: inherit;
-            background: #e2f4e0;
-            border-radius: 3px;
-            padding: 2px 3px;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone
-        }
-
-        .response-note {
-            margin-top: auto;
-            padding-top: 14px;
-            border-top: 1px solid #e6deec;
-            font-size: .86rem;
-            color: #61566a;
-            line-height: 1.45
-        }
-
-        .response-note span {
-            font-size: 1.2rem;
-            margin-right: 4px
-        }
-
-        .comparison-takeaway {
-            margin-top: 21px;
-            color: #534d59;
-            font-size: .93rem;
-            line-height: 1.55
-        }
-
-        .comparison-takeaway strong {
-            color: var(--ink)
-        }
-
-        @media(max-width:720px) {
-            .response-example {
-                padding: 19px
-            }
-        }
-
-        /* An annotated sentence, drawn directly in the page. */
-        .cognitive-figure {
-            margin: 0;
-            border: 1px solid #ded4eb;
-            border-radius: 20px;
-            overflow: hidden;
-            background: #faf8ff
-        }
-
-        .ccd-diagram {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1000 / 430;
-            min-height: 290px;
-            color: #38343e
-        }
-
-        .ccd-arrows {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none
-        }
-
-        .ccd-arrows path {
-            fill: none;
-            stroke: #514b58;
-            stroke-width: 1.15;
-            stroke-linecap: round;
-            stroke-linejoin: round
-        }
-
-        .ccd-quote {
-            position: absolute;
-            top: 29%;
-            left: 0;
-            width: 100%;
-            margin: 0;
-            text-align: center;
-            font: 500 clamp(.85rem, 3.2vw, 2.1rem)/1.42 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            letter-spacing: .055em
-        }
-
-        .ccd-quote .ccd-line {
-            display: block;
-            white-space: nowrap
-        }
-
-        .ccd-quote mark {
-            color: inherit;
-            background: #e9ddfa;
-            border-radius: .32em;
-            padding: .04em .18em;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-            font-weight: 650
-        }
-
-        .ccd-label {
-            position: absolute;
-            z-index: 1;
-            padding: 0 .25em;
-            background: #faf8ff;
-            font-size: clamp(.7rem, 1.5vw, 1rem);
-            font-weight: 700;
-            line-height: 1.22;
-            color: #554b61
-        }
-
-        .ccd-label small {
-            font-size: .9em;
-            font-weight: 500
-        }
-
-        .ccd-thought {
-            top: 4%;
-            left: 31%
-        }
-
-        .ccd-shame {
-            top: 4%;
-            left: 71%
-        }
-
-        .ccd-quiet {
-            top: 77%;
-            left: 4%
-        }
-
-        .ccd-sadness {
-            top: 83%;
-            left: 49%
-        }
-
-        .ccd-smile {
-            top: 77%;
-            right: 4%
-        }
-
-        .cognitive-figure figcaption {
-            display: flex;
-            gap: 16px;
-            padding: 16px clamp(25px, 4vw, 45px) 20px;
-            border-top: 1px solid #dbcfeb;
-            color: #69616e;
-            font-size: .84rem;
-            line-height: 1.5
-        }
-
-        .cognitive-figure figcaption span {
-            flex: 0 0 auto;
-            font-weight: 800;
-            color: #53435f
-        }
-
-        .ccd-mobile {
-            display: none
-        }
-
-        @media(max-width:600px) {
-            .ccd-diagram {
-                display: none
-            }
-
-            .ccd-mobile {
-                display: block;
-                position: relative;
-                height: 440px;
-                color: #38343e
-            }
-
-            .ccd-mobile .ccd-arrows {
-                z-index: 0
-            }
-
-            .ccd-mobile blockquote {
-                position: absolute;
-                top: 27%;
-                left: 0;
-                width: 100%;
-                margin: 0;
-                text-align: center;
-                font: 500 clamp(.76rem, 3.6vw, .98rem)/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-                letter-spacing: 0
-            }
-
-            .ccd-mobile .ccd-line {
-                display: block;
-                white-space: nowrap
-            }
-
-            .ccd-mobile mark {
-                color: inherit;
-                background: #e9ddfa;
-                border-radius: .25em;
-                padding: .06em .14em;
-                box-decoration-break: clone;
-                -webkit-box-decoration-break: clone;
-                font-weight: 650
-            }
-
-            .ccd-mobile .ccd-label {
-                font-size: .72rem
-            }
-
-            .ccd-mobile .ccd-thought {
-                top: 3%;
-                left: 31%
-            }
-
-            .ccd-mobile .ccd-shame {
-                top: 3%;
-                left: 74%
-            }
-
-            .ccd-mobile .ccd-quiet {
-                top: 74%;
-                left: 4%
-            }
-
-            .ccd-mobile .ccd-smile {
-                top: 74%;
-                right: 4%
-            }
-
-            .ccd-mobile .ccd-sadness {
-                top: 85%;
-                left: 44%
-            }
-
-            .cognitive-figure figcaption {
-                display: block
-            }
-
-            .cognitive-figure figcaption span {
-                display: block;
-                margin-bottom: 4px
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/site.css">
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
 </head>
 
 <body>
@@ -1278,30 +41,130 @@
                         <circle cx="20" cy="21" r=".5" />
                         <circle cx="20" cy="8" r=".5" />
                     </svg></b> CBT Lens</a>
-            <nav aria-label="Main navigation"><a href="#project">Project</a><a href="#team">Team</a><a
-                    href="#cite">Cite</a><a href="https://arxiv.org/abs/2607.02885" target="_blank"
-                    rel="noopener noreferrer">Paper ↗</a><a class="demo"
-                    href="https://huggingface.co/spaces/vaishnavisinha/cbt-lens" target="_blank"
-                    rel="noopener noreferrer">Demo ↗</a></nav>
+            <nav id="site-menu" aria-label="Main navigation"><a href="#why">Project</a><a href="#team">Team</a><a href="#cite">Cite</a><a href="https://arxiv.org/abs/2607.02885" target="_blank" rel="noopener noreferrer">Paper ↗</a></nav>
+            <div class="nav-actions"><button class="nav-icon theme-toggle" type="button" aria-label="Toggle dark mode"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg></button><a class="nav-demo" href="https://huggingface.co/spaces/vaishnavisinha/cbt-lens" target="_blank" rel="noopener noreferrer">Demo ↗</a><button class="nav-icon nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /></svg></button></div>
         </div>
     </header>
     <main id="top">
         <section class="hero wrap">
-            <h1>Where do LLMs fall short in <em>CBT-guided reasoning?</em></h1>
-            <p class="sub">LLMs can know CBT theory yet still default to Validation &amp; Reflection when a conversation
-                calls for a different strategy. CBT Lens combines clinical grounding with multiple reasoning paths to
-                choose a response, then measures whether that guidance changes the model’s usual behavior.</p>
-            <p class="publication">To be published in the proceedings of the <a href="https://acii-conf.net/2026/"
-                    target="_blank" rel="noopener noreferrer">14th International Conference on Affective Computing and
-                    Intelligent Interaction (ACII 2026) ↗</a></p>
+            <div class="galaxy" aria-hidden="true">
+                <div class="galaxy-swirl">
+                    <span class="nebula n1"></span>
+                    <span class="nebula n2"></span>
+                    <span class="nebula n3"></span>
+                    <span class="nebula n4"></span>
+                    <span class="nebula n5"></span>
+                </div>
+                <div class="stars"></div>
+                <div class="stars stars-2"></div>
+            </div>
+            <h1>Where do LLMs fall short in <em>CBT‑guided reasoning?</em></h1>
+            <p class="sub">LLMs know Cognitive Behavioral Therapy (CBT), but lack the structured reasoning to handle
+                mental health–related queries. We introduce CBT Lens, a clinically grounded reasoning framework, and a
+                novel metric to evaluate whether it changes a model’s baseline behavior.</p>
+            <p class="pub-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="8" r="6" />
+                    <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                </svg><span>
+                    To appear at the
+                    <a href="https://acii-conf.net/2026/" target="_blank" rel="noopener noreferrer">
+                        14th International Conference on Affective Computing and Intelligent Interaction (ACII)
+                    </a>
+                    · Best Demo Award 2026
+                </span></p>
             <div class="hero-actions"><a class="btn" href="https://arxiv.org/abs/2607.02885" target="_blank"
                     rel="noopener noreferrer">Read the paper ↗</a><a class="btn alt"
                     href="https://huggingface.co/spaces/vaishnavisinha/cbt-lens" target="_blank"
-                    rel="noopener noreferrer">Try CBT Lens ↗</a></div>
+                    rel="noopener noreferrer">Try CBT
+                    Lens ↗</a></div>
+        </section>
+        <section class="story wrap" id="why">
+            <div class="section-top">
+                <div class="section-num">01 / The gap</div>
+                <div>
+                    <h2>An empathetic reply doesn't reflect clinical structure.</h2>
+                    <p>Are LLMs ready to handle mental health? Not even close. They validate by default and rush to
+                        solutions. Agreeing with users all the time creates an echo chamber. It is not the
+                        same as providing clinically grounded care, and this gap remains a challenge.</p>
+                </div>
+            </div>
+            <div class="phones">
+                <figure class="phone-col">
+                    <div class="phone">
+                        <div class="phone-screen">
+                            <div class="phone-app">
+                                <span class="response-initial" aria-hidden="true">G<img src="assets/icons/gpt-icon.png"
+                                        alt=""></span>
+                                <div>
+                                    <h3>GPT-5.3</h3><span>TMI and premature problem solving</span>
+                                </div>
+                            </div>
+                            <div class="chat">
+                                <div class="bubble user">“I know I’m a burden on other people so I keep things to
+                                    myself and put on a smile, even when I’m not okay.”</div>
+                                <div class="bubble bot">
+                                    <p class="response-text">That sounds really heavy to carry—feeling like you have to
+                                        hide what you’re going through just to avoid being a burden. When someone cares
+                                        about others, they often start minimizing their own needs. That doesn’t make
+                                        your feelings less valid—<mark class="assumption">it means you’ve learned to
+                                            protect others at your own expense.</mark></p>
+                                    <p class="response-text">A few things worth gently questioning:</p>
+                                    <ul class="response-list">
+                                        <li><mark>“I’m a burden” → is that a fact, or a fear?</mark></li>
+                                        <li><mark>If someone you cared about felt this way, would you see them as a
+                                                burden?</mark></li>
+                                        <li><mark>Are you giving others the chance to choose?</mark></li>
+                                    </ul>
+                                    <p class="response-text"><mark class="assumption">You don’t have to suddenly open up
+                                            to everyone. Maybe there’s a small step that feels safe:</mark></p>
+                                    <ul class="response-list">
+                                        <li>sharing one honest sentence with someone you trust</li>
+                                        <li>or even just saying “I’ve been a bit off lately”</li>
+                                    </ul>
+                                    <p class="response-text">You deserve space too—not just to function, but to be
+                                        real. <mark class="assumption">If you want, we can break this down
+                                            together:</mark></p>
+                                    <ul class="response-list">
+                                        <li>where that “burden” belief started</li>
+                                        <li>or how to test it in a low-risk way without feeling exposed</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="phone-col">
+                    <div class="phone">
+                        <div class="phone-screen">
+                            <div class="phone-app">
+                                <span class="response-initial ash" aria-hidden="true">A<img
+                                        src="assets/icons/talk-to-ash.png" alt=""></span>
+                                <div>
+                                    <h3>Ash — AI for Mental Health</h3><span>Asks before interpreting</span>
+                                </div>
+                            </div>
+                            <div class="chat">
+                                <div class="bubble user">“I know I’m a burden on other people so I keep things to
+                                    myself and put on a smile, even when I’m not okay.”</div>
+                                <div class="bubble bot">
+                                    <p class="response-text">That sounds really heavy – not just <mark
+                                            class="assumption">worrying you might be a burden</mark>, but feeling sure
+                                        that you are. I’m not going to argue with you or try to talk you out of it. I
+                                        just want to understand. <mark class="question">What makes you feel certain
+                                            you’re a burden to other people?</mark></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+            </div>
+            <!-- <p class="insight"><span class="highlight">The research question:</span> Why do LLMs that know CBT still
+                default to Validation &amp; Reflection, and can clinical grounding change that behavior?</p> -->
         </section>
         <section class="story wrap" id="project">
             <div class="section-top">
-                <div class="section-num">01 / The cognitive model</div>
+                <div class="section-num">02 / The cognitive model</div>
                 <div>
                     <h2>Start by breaking down the user’s query.</h2>
                 </div>
@@ -1362,74 +225,6 @@
                     sadness); behaviors are what they do (stay quiet and put on a smile).</figcaption>
             </figure>
         </section>
-        <section class="story wrap">
-            <div class="section-top">
-                <div class="section-num">02 / The gap</div>
-                <div>
-                    <h2>An empathetic reply doesn't necessarily reflect clinical structure.</h2>
-                    <p>Current models often validate and reflect, even when guided discovery or another CBT strategy may
-                        be more appropriate. The responses below show the current state of GPT-5.3 and a mental
-                        health application.</p>
-                </div>
-            </div>
-            <div class="response-demo">
-                <div class="demo-heading"><span class="demo-overline">Same opening query · LLM vs. mental health
-                        app</span><span class="demo-hint">No prior user history</span></div>
-                <div class="response-grid">
-                    <article class="response-example">
-                        <div class="response-header"><span class="response-initial" aria-hidden="true">G<img
-                                    src="assets/icons/gpt-icon.png" alt=""></span>
-                            <div>
-                                <h3>GPT-5.3</h3><span>Explains and suggests</span>
-                            </div>
-                        </div>
-                        <p class="response-text">That sounds really heavy to carry—feeling like you have to hide what
-                            you’re going through just to avoid being a burden. When someone cares about others, they
-                            often start minimizing their own needs. That doesn’t make your feelings less valid—<mark
-                                class="assumption">it means you’ve learned to protect others at your own expense.</mark>
-                        </p>
-                        <p class="response-text">A few things worth gently questioning:</p>
-                        <ul class="response-list">
-                            <li><mark>“I’m a burden” → is that a fact, or a fear?</mark></li>
-                            <li><mark>If someone you cared about felt this way, would you see them as a burden?</mark>
-                            </li>
-                            <li><mark>Are you giving others the chance to choose?</mark></li>
-                        </ul>
-                        <p class="response-text"><mark class="assumption">You don’t have to suddenly open up to
-                                everyone. Maybe there’s a small step that feels safe:</mark></p>
-                        <ul class="response-list">
-                            <li>sharing one honest sentence with someone you trust</li>
-                            <li>or even just saying “I’ve been a bit off lately”</li>
-                        </ul>
-                        <p class="response-text">You deserve space too—not just to function, but to be real. <mark
-                                class="assumption">If you want, we can break this down together:</mark></p>
-                        <ul class="response-list">
-                            <li>where that “burden” belief started</li>
-                            <li>or how to test it in a low-risk way without feeling exposed</li>
-                        </ul>
-                        <div class="response-note"><span aria-hidden="true">↳</span> Assumes why the person feels this
-                            way, overwhelms them with too much information, then immediately guides them toward action.
-                        </div>
-                    </article>
-                    <article class="response-example">
-                        <div class="response-header"><span class="response-initial ash" aria-hidden="true">A<img
-                                    src="assets/icons/talk-to-ash.png" alt=""></span>
-                            <div>
-                                <h3>Ash — AI for Mental Health</h3><span>Asks before interpreting</span>
-                            </div>
-                        </div>
-                        <p class="response-text">That sounds really heavy – not just <mark class="assumption">worrying
-                                you might be a burden</mark>, but feeling sure that you are. I’m not going to argue with
-                            you or try to talk you out of it. I just want to understand. <mark class="question">What
-                                makes you feel certain you’re a burden to other people?</mark></p>
-                        <div class="response-note"><span aria-hidden="true">↳</span> Invites the person to explain the
-                            belief before suggesting what to do.</div>
-                    </article>
-                </div>
-            </div>
-            <!-- <p class="insight"><span class="highlight">The research question:</span> Why do LLMs that know CBT still
-                default to Validation &amp; Reflection, and can clinical grounding change that behavior?</p> -->
-        </section>
         <section class="tint">
             <div class="wrap">
                 <div class="section-top">
@@ -1442,20 +237,23 @@
                     <article class="step">
                         <div class="index">01 — CONCEPTUALIZE</div>
                         <h3>Read the cognitive context</h3>
-                        <p>Break a user narrative into elements of Beck’s cognitive conceptualization framework.</p>
+                        <p>Interpret user query with Beck’s cognitive model.</p>
                     </article>
                     <article class="step">
                         <div class="index">02 — GROUND</div>
-                        <h3>Retrieve relevant concepts</h3>
-                        <p>Connect the user’s context to a SNOMED CT knowledge graph and validate the concepts’
-                            relevance with natural language
+                        <h3>Retrieve mental health concepts</h3>
+                        <p>Connect the user’s context to an expert validated knowledge graph filtered via natural language
                             inference.</p>
                     </article>
                     <article class="step">
                         <div class="index">03 — SELECT</div>
                         <h3>Choose a CBT strategy</h3>
-                        <p>Use multiple chains of thought to select from Validation &amp; Reflection, Socratic
-                            Questioning, or an Alternative Perspective.</p>
+                        <p>Select from Validation &amp; Reflection, Socratic Questioning, or an Alternative Perspective.</p>
+                    </article>
+                    <article class="step">
+                        <div class="index">04 — EVALUATE</div>
+                        <h3>Evaluation</h3>
+                        <p>LLM-as-a-Judge and a cross-disciplinary human expert panel.</p>
                     </article>
                 </div>
             </div>
@@ -1465,54 +263,116 @@
                 <div class="section-num">04 / Protocol Leverage Force</div>
                 <div>
                     <h2>Did our framework change the model’s baseline behavior?</h2>
-                    <p>Protocol Leverage Force (F) measures how strongly CBT guidance reorients a response away from
-                        the model’s baseline and toward the user’s utterance.</p>
+                    <p>Protocol Leverage Force (<em>F</em>) measures how strongly our framework reorients a response away
+                        from the model’s baseline behavior and toward the user’s utterance. Models often favored
+                        Validation &amp; Reflection, resulting in <b><em>F</em> = 1.18%–1.34%</b> across three
+                        open-weight models. A low <em>F</em> means
+                        guidance barely moves the model off its default reply, so responses stay lexically close to the
+                        baseline.</p>
                 </div>
             </div>
-            <figure class="force-panel">
-                <svg class="force-art" viewBox="0 0 760 300" role="img"
-                    aria-label="A dashed circle surrounds the baseline response centroid. The selected CBT protocol sits on the circle at distance r. From that point, one arrow shows the shift toward the user's utterance and a second outward arrow shows Protocol Leverage Force F.">
-                    <defs>
-                        <marker id="force-tip" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto">
-                            <path d="M1 1L7 4L1 7" fill="none" stroke="#514b58" stroke-width="1.1" />
-                        </marker>
-                    </defs>
-                    <circle cx="270" cy="182" r="99" fill="none" stroke="#a8a1ad" stroke-width="1.2"
-                        stroke-dasharray="5 6" />
-                    <path d="M270 182L355 132" fill="none" stroke="#99919f" stroke-width="1.2" />
-                    <path d="M355 131L282 32" fill="none" stroke="#666070" stroke-width="1.7"
-                        marker-end="url(#force-tip)" />
-                    <path d="M360 128L505 64" fill="none" stroke="#46414c" stroke-width="1.7"
-                        marker-end="url(#force-tip)" />
-                    <circle cx="270" cy="182" r="7" fill="#423e48" />
-                    <circle cx="355" cy="132" r="10" fill="#faf8ff" stroke="#58505e" stroke-width="1.7" />
-                    <text x="233" y="208" fill="#4d4754" font-size="14">baseline</text><text x="233" y="226"
-                        fill="#4d4754" font-size="14">centroid</text>
-                    <text x="294" y="149" fill="#625966" font-size="18" font-style="italic">r</text>
-                    <text x="355" y="132" text-anchor="middle" dominant-baseline="central" fill="#3f3945" font-size="14"
-                        font-weight="700">m</text>
-                    <text x="255" y="27" fill="#534d58" font-size="19" font-style="italic">v</text>
-                    <text x="514" y="69" fill="#3f3945" font-size="20" font-style="italic">F</text>
-                    <text x="386" y="156" fill="#534d58" font-size="14">selected protocol</text>
-                    <text x="112" y="73" fill="#534d58" font-size="14">Baseline response</text>
-                    <text x="109" y="91" fill="#77717b" font-size="12">the model’s usual answer</text>
-                    <text x="301" y="45" fill="#534d58" font-size="14">shift toward the user’s utterance</text>
-                    <text x="535" y="58" fill="#534d58" font-size="14">resulting leverage</text>
-                    <text x="535" y="76" fill="#534d58" font-size="14">of CBT guidance</text>
-                    <text x="602" y="259" fill="#77717b" font-size="12" font-style="italic">Not to scale</text>
-                </svg>
-                <figcaption>Adapted from Huygens’ centrifugal-force analogy. The center is the model’s baseline
-                    response; the circle shows its distance to the CBT-guided response. From the selected protocol
-                    (<em>m</em>), one arrow points toward the user’s words, while the outward arrow represents the
-                    framework’s leverage (<em>F</em>).</figcaption>
-            </figure>
-            <div class="finding-foot">
-                <p>Across three open-weight models and RealCBT-derived user case studies, models often favored
-                    Validation &amp; Reflection. F helps quantify how much CBT guidance changed a model’s baseline
-                    response. Human reviewers brought expertise in clinical psychology, psychology research, mental
-                    health AI, and industry practice.</p>
-                <a class="btn alt" href="https://arxiv.org/abs/2607.02885" target="_blank"
-                    rel="noopener noreferrer">Read the methods ↗</a>
+            <div class="force-grid">
+                <figure class="force-panel">
+                    <svg class="force-art" viewBox="96 10 572 272" role="img"
+                        aria-label="A dashed circle surrounds the centroid of the model’s current baseline language. The selected CBT strategy sits on the circle at distance r. From that point, one arrow shows the shift toward the user’s language and a second outward arrow shows the resulting force of CBT Lens, F.">
+                        <defs>
+                            <marker id="force-tip-v" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"
+                                markerUnits="userSpaceOnUse">
+                                <path d="M1 1L8 4.5L1 8Z" fill="#3d9ae8" />
+                            </marker>
+                            <marker id="force-tip-f" markerWidth="11" markerHeight="11" refX="8.5" refY="5.5"
+                                orient="auto" markerUnits="userSpaceOnUse">
+                                <path d="M1 1L10 5.5L1 10Z" fill="#6e46bb" />
+                            </marker>
+                            <radialGradient id="force-halo" cx="50%" cy="50%" r="50%">
+                                <stop offset="0" stop-color="#e6dbfa" />
+                                <stop offset="1" stop-color="#f6f2fe" />
+                            </radialGradient>
+                        </defs>
+                        <circle cx="270" cy="182" r="99" fill="url(#force-halo)" stroke="#b9a2e6" stroke-width="1.4"
+                            stroke-dasharray="5 6" />
+                        <path d="M270 182L355 132" fill="none" stroke="#9c8cb8" stroke-width="1.3" />
+                        <path d="M355 131L284 35" fill="none" stroke="#3d9ae8" stroke-width="2"
+                            marker-end="url(#force-tip-v)" />
+                        <path d="M362 128L503 65" fill="none" stroke="#6e46bb" stroke-width="2.6"
+                            marker-end="url(#force-tip-f)" />
+                        <circle cx="270" cy="182" r="7" fill="#3b2a5c" />
+                        <circle cx="355" cy="132" r="11" fill="#fcee4f" stroke="#3b2a5c" stroke-width="1.6" />
+                        <text x="233" y="208" fill="#3b2a5c" font-size="14">baseline</text><text x="233" y="226"
+                            fill="#3b2a5c" font-size="14">centroid</text>
+                        <text x="294" y="149" fill="#7b6a98" font-size="18" font-style="italic">r</text>
+                        <text x="355" y="132" text-anchor="middle" dominant-baseline="central" fill="#2f2b1a"
+                            font-size="14" font-weight="700">m</text>
+                        <text x="255" y="27" fill="#1f6fbf" font-size="19" font-style="italic"
+                            font-weight="600">v</text>
+                        <text x="514" y="69" fill="#6e46bb" font-size="21" font-style="italic"
+                            font-weight="700">F</text>
+                        <text x="386" y="156" fill="#534d58" font-size="14">selected strategy</text>
+                        <text x="100" y="66" fill="#3b2a5c" font-size="14">Model’s current</text>
+                        <text x="100" y="84" fill="#3b2a5c" font-size="14">baseline language</text>
+                        <text x="301" y="45" fill="#1f6fbf" font-size="14">shift toward the user’s language</text>
+                        <text x="535" y="58" fill="#6e46bb" font-size="14" font-weight="600">resulting force</text>
+                        <text x="535" y="76" fill="#6e46bb" font-size="14" font-weight="600">of CBT Lens</text>
+                        <text x="590" y="272" fill="#67616c" font-size="12" font-style="italic">Not to scale</text>
+                    </svg>
+                    <figcaption>Adapted from Huygens’ centrifugal-force analogy.</figcaption>
+                </figure>
+            </div>
+            <div class="ba">
+                <div class="ba-head">
+                    <span class="f-label">Before &amp; after</span>
+                </div>
+                <div class="ba-query">
+                    <span class="ba-user" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="8.5" r="4" />
+                            <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z" />
+                        </svg></span>
+                    <div class="ba-msg">
+                        <div class="ba-meta"><b>User</b></div>
+                        <p>“I’m extremely good at my job. I mean, I’m the best employee that they have ever
+                            had… I make no errors. So how can I be wrong when it comes to these
+                            circumstances with my coworkers?”</p>
+                    </div>
+                </div>
+                <div class="ba-panel" id="ba-gemma">
+                    <div class="phone ba-phone">
+                        <div class="phone-screen">
+                            <div class="phone-app">
+                                <span class="response-initial guided" aria-hidden="true">G</span>
+                                <div>
+                                    <h3>Gemma3</h3>
+                                </div>
+                                <div class="ba-tabs" role="tablist" aria-label="Choose a response">
+                                    <button type="button" role="tab" id="ba-tab-base" aria-controls="ba-base"
+                                        aria-selected="true">Baseline</button>
+                                    <button type="button" role="tab" id="ba-tab-lens" aria-controls="ba-lens"
+                                        aria-selected="false" tabindex="-1">With CBT Lens</button>
+                                </div>
+                            </div>
+                            <div class="chat" id="ba-base" role="tabpanel" aria-labelledby="ba-tab-base">
+                                <div class="bubble bot">
+                                            <p class="response-text">It’s fantastic you’re so confident and skilled in
+                                                your role, that’s a wonderful asset! However, even the most talented
+                                                individuals can have blind spots when it comes to interpersonal
+                                                relationships. <mark class="assumption">It’s possible your perception of
+                                                    the situation with your coworkers is influenced by your own
+                                                    perspective and values</mark>, and exploring that might reveal areas
+                                                for understanding or adjustment.</p>
+                                        </div>
+                            </div>
+                            <div class="chat" id="ba-lens" role="tabpanel" aria-labelledby="ba-tab-lens" hidden>
+                                <div class="ba-lens-meta"><span class="strategy">Strategy: Socratic Questioning</span><b
+                                        class="f-score"><em>F</em> = 1.647%</b></div>
+                                <div class="bubble bot">
+                                            <p class="response-text">It sounds like you have a very strong sense of your
+                                                abilities and contributions at work. <mark class="question">Can you
+                                                    think of a time when you’ve received feedback that suggested there
+                                                    might be room for improvement, even if it was minor?</mark></p>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <section class="trajectory" id="affect">
@@ -1524,9 +384,8 @@
                         <p><strong>Valence</strong> describes how positive or negative an emotion feels.
                             <strong>Arousal</strong> describes its level of physiological activation or energy. These
                             are the two dimensions of <a href="https://doi.org/10.1037/h0077714" target="_blank"
-                                rel="noopener noreferrer">Russell’s Circumplex Model of Affect ↗</a>. The paper compares
-                            estimates from user language in CBT-MCoT synthetic sessions with RealCBT human transcripts,
-                            scoring each turn with the NRC VAD Lexicon.
+                                rel="noopener noreferrer">Russell’s Circumplex Model of Affect ↗</a>. We compare user language in
+                            our synthetic sessions with RealCBT human transcripts to trace how emotion shifts over the course of a conversation.
                         </p>
                     </div>
                 </div>
@@ -1559,9 +418,8 @@
                                 aria-label="GPT-OSS synthetic trajectory and RealCBT human trajectory on matching valence and arousal axes"></svg>
                         </div>
                     </div>
-                    <figcaption>Recreated in code from the paper’s Figure 6. The axes and turn ranges follow the figure;
-                        individual coordinates are visually approximated from it. Each path represents a cumulative mean
-                        over turns, averaged across 14 transcripts.</figcaption>
+                    <figcaption>Valence rises in both real and synthetic sessions, but RealCBT shows sustained arousal
+                        de-escalation and a more nuanced emotional trajectory.</figcaption>
                 </figure>
             </div>
         </section>
@@ -1657,6 +515,29 @@
         </div>
     </footer>
     <script>
+        (() => {
+            const root = document.documentElement;
+            const media = window.matchMedia('(prefers-color-scheme: dark)');
+            const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : media.matches;
+            const btn = document.querySelector('.theme-toggle');
+            const sync = () => btn.setAttribute('aria-pressed', isDark());
+            btn.addEventListener('click', () => {
+                root.dataset.theme = isDark() ? 'light' : 'dark';
+                try { localStorage.setItem('theme', root.dataset.theme); } catch { }
+                sync();
+            });
+            media.addEventListener('change', sync);
+            sync();
+        })();
+        (() => {
+            const header = document.querySelector('header');
+            const toggle = header.querySelector('.nav-toggle');
+            const setOpen = open => { header.classList.toggle('open', open); toggle.setAttribute('aria-expanded', open); };
+            toggle.addEventListener('click', () => setOpen(!header.classList.contains('open')));
+            header.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+            document.addEventListener('click', e => { if (!header.contains(e.target)) setOpen(false); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+        })();
         document.querySelectorAll('.avatar img, .response-initial img').forEach(img => {
             const showWhenReady = () => { if (img.naturalWidth) img.classList.add('loaded'); };
             img.addEventListener('load', showWhenReady);
@@ -1707,11 +588,14 @@
                 const angle = -Math.PI / 2 + i * Math.PI / 5, radius = i % 2 ? 3 : 7;
                 return `${i ? 'L' : 'M'}${(x + Math.cos(angle) * radius).toFixed(1)} ${(y + Math.sin(angle) * radius).toFixed(1)}`;
             }).join('') + 'Z';
+            const DRAW_SECONDS = 3.2;
             const draw = (svg, series, light, dark) => {
-                for (let i = 1; i < series.length; i++) node('line', { x1: sx(series[i - 1][0]), y1: sy(series[i - 1][1]), x2: sx(series[i][0]), y2: sy(series[i][1]), stroke: blend(light, dark, i / (series.length - 1)), 'stroke-width': 2.3, 'stroke-linecap': 'round' }, svg);
-                node('circle', { cx: sx(series[0][0]), cy: sy(series[0][1]), r: 5, fill: '#faf8ff', stroke: '#3e3945', 'stroke-width': 1.4 }, svg);
+                // Each segment is timed so both paths finish together when the plot plays.
+                const step = DRAW_SECONDS / (series.length - 1);
+                for (let i = 1; i < series.length; i++) node('path', { class: 'tseg', pathLength: 1, style: `--d:${((i - 1) * step).toFixed(3)}s;--dur:${step.toFixed(3)}s`, d: `M${sx(series[i - 1][0])} ${sy(series[i - 1][1])}L${sx(series[i][0])} ${sy(series[i][1])}`, stroke: blend(light, dark, i / (series.length - 1)), 'stroke-width': 2.3, 'stroke-linecap': 'round', fill: 'none' }, svg);
+                node('circle', { cx: sx(series[0][0]), cy: sy(series[0][1]), r: 5, fill: '#fdfcff', stroke: '#3e3945', 'stroke-width': 1.4 }, svg);
                 const end = series[series.length - 1];
-                node('path', { d: star(sx(end[0]), sy(end[1])), fill: '#faf8ff', stroke: '#3e3945', 'stroke-width': 1.3 }, svg);
+                node('path', { class: 'tend', style: `--d:${DRAW_SECONDS}s`, d: star(sx(end[0]), sy(end[1])), fill: '#fdfcff', stroke: '#3e3945', 'stroke-width': 1.3 }, svg);
             };
             document.querySelectorAll('[data-trajectory]').forEach(svg => {
                 [-.05, -.07, -.09, -.11, -.13, -.15].forEach(v => {
@@ -1729,6 +613,47 @@
                 node('text', { x: 12, y: 144, transform: 'rotate(-90 12 144)', 'text-anchor': 'middle', fill: '#4f4a55', 'font-size': 13 }, svg, 'Arousal');
                 draw(svg, real, '#cae6f5', '#234b7d');
                 draw(svg, synthetic[svg.dataset.trajectory], '#d5c9e7', '#594279');
+            });
+            // Draw the paths, hold the finished plot for a few seconds, then replay.
+            // Loops only while the plot is on screen.
+            const PAUSE_SECONDS = 3;
+            const plot = document.querySelector('.trajectory-plot');
+            if (plot && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                plot.classList.add('animate');
+                let timer = null;
+                const play = () => {
+                    plot.classList.remove('play');
+                    void plot.offsetWidth; // restart the CSS animations
+                    plot.classList.add('play');
+                    timer = setTimeout(play, (DRAW_SECONDS + .4 + PAUSE_SECONDS) * 1000);
+                };
+                new IntersectionObserver(entries => {
+                    const visible = entries.some(e => e.isIntersecting);
+                    if (visible && !timer) play();
+                    if (!visible && timer) {
+                        clearTimeout(timer);
+                        timer = null;
+                    }
+                }, { threshold: .35 }).observe(plot);
+            }
+        })();
+        // Before & after: toggle between the baseline and CBT Lens responses.
+        (() => {
+            const tabs = [...document.querySelectorAll('.ba-tabs [role="tab"]')];
+            const select = tab => tabs.forEach(t => {
+                const on = t === tab;
+                t.setAttribute('aria-selected', on);
+                t.tabIndex = on ? 0 : -1;
+                document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+            });
+            tabs.forEach((tab, i) => {
+                tab.addEventListener('click', () => select(tab));
+                tab.addEventListener('keydown', e => {
+                    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+                    const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+                    select(next);
+                    next.focus();
+                });
             });
         })();
     </script>
