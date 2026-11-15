@@ -839,22 +839,19 @@ h2 {
 }
 
 @media(max-width:900px) {
-    .trajectory-grid {
-        min-width: 900px
-    }
 
-    .trajectory-plot {
-        overflow-x: auto
+    /* Stack the three trajectory charts instead of scrolling sideways */
+    .trajectory-grid {
+        grid-template-columns: minmax(0, 440px);
+        justify-content: center;
+        gap: 14px
     }
 }
 
 @media(max-width:720px) {
-    .force-panel {
-        overflow-x: auto
-    }
 
+    /* Scale the F diagram to the screen instead of scrolling sideways */
     .force-art {
-        min-width: 560px;
         padding: 12px 6px 0
     }
 }
@@ -3042,4 +3039,19 @@ header .bar {
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) .ba-tabs button { color: #c4bacf }
     :root:not([data-theme="light"]) .ba-tabs button[aria-selected="true"] { background: #7c55cc; color: #fff }
+}
+
+@media (max-width: 720px) {
+    .force-art {
+        padding: 12px 4px 0
+    }
+
+    /* Larger diagram labels once the SVG is scaled down on phones */
+    .force-art text[font-size="14"] {
+        font-size: 15.5px
+    }
+
+    .force-art text[font-size="12"] {
+        font-size: 13px
+    }
 }
