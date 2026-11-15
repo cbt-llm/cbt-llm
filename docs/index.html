@@ -4,14 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f2effe">
+    <meta name="theme-color" content="#faf8ff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f0d16" media="(prefers-color-scheme: dark)">
+    <script>
+        try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch { }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <meta name="description"
         content="CBT Lens explores where language models fall short in CBT-guided affective reasoning.">
     <title>CBT Lens · CBT-guided affective reasoning</title>
     <link rel="stylesheet" href="assets/css/site.css">
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
 </head>
 
 <body>
@@ -34,50 +41,126 @@
                         <circle cx="20" cy="21" r=".5" />
                         <circle cx="20" cy="8" r=".5" />
                     </svg></b> CBT Lens</a>
-            <nav aria-label="Main navigation"><a href="#project">Project</a><a href="team.html">Team</a><a
-                    href="#cite">Cite</a><a href="https://arxiv.org/abs/2607.02885" target="_blank"
-                    rel="noopener noreferrer">Paper ↗</a><a class="demo"
-                    href="https://huggingface.co/spaces/vaishnavisinha/cbt-lens" target="_blank"
-                    rel="noopener noreferrer">Demo ↗</a></nav>
+            <nav id="site-menu" aria-label="Main navigation"><a href="#why">Project</a><a href="#team">Team</a><a href="#cite">Cite</a><a href="https://arxiv.org/abs/2607.02885" target="_blank" rel="noopener noreferrer">Paper ↗</a></nav>
+            <div class="nav-actions"><button class="nav-icon theme-toggle" type="button" aria-label="Toggle dark mode"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg></button><a class="nav-demo" href="https://huggingface.co/spaces/vaishnavisinha/cbt-lens" target="_blank" rel="noopener noreferrer">Demo ↗</a><button class="nav-icon nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /></svg></button></div>
         </div>
     </header>
     <main id="top">
         <section class="hero wrap">
+            <div class="galaxy" aria-hidden="true">
+                <div class="galaxy-swirl">
+                    <span class="nebula n1"></span>
+                    <span class="nebula n2"></span>
+                    <span class="nebula n3"></span>
+                    <span class="nebula n4"></span>
+                    <span class="nebula n5"></span>
+                </div>
+                <div class="stars"></div>
+                <div class="stars stars-2"></div>
+            </div>
             <h1>Where do LLMs fall short in <em>CBT‑guided reasoning?</em></h1>
-            <p class="sub">Despite broad CBT knowledge, LLMs lack the structured reasoning therapy requires. We
-                introduce a clinically grounded reasoning framework and a metric to measure whether that guidance
-                actually changes model behavior.</p>
+            <p class="sub">LLMs know Cognitive Behavioral Therapy (CBT), but lack the structured reasoning to handle
+                mental health–related queries. We introduce CBT Lens, a clinically grounded reasoning framework, and a
+                novel metric to evaluate whether it changes a model’s baseline behavior.</p>
             <p class="pub-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="12" cy="8" r="6" />
                     <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
-                </svg><span>To appear at ACII 2026 · <a href="https://acii-conf.net/2026/" target="_blank"
-                        rel="noopener noreferrer">14th International Conference on Affective Computing and Intelligent
-                        Interaction ↗</a></span></p>
+                </svg><span>
+                    To appear at the
+                    <a href="https://acii-conf.net/2026/" target="_blank" rel="noopener noreferrer">
+                        14th International Conference on Affective Computing and Intelligent Interaction (ACII)
+                    </a>
+                    · Best Demo Award 2026
+                </span></p>
+            <div class="hero-actions"><a class="btn" href="https://arxiv.org/abs/2607.02885" target="_blank"
+                    rel="noopener noreferrer">Read the paper ↗</a><a class="btn alt"
+                    href="https://huggingface.co/spaces/vaishnavisinha/cbt-lens" target="_blank"
+                    rel="noopener noreferrer">Try CBT
+                    Lens ↗</a></div>
         </section>
-        <section class="why wrap" id="why">
+        <section class="story wrap" id="why">
             <div class="section-top">
                 <div class="section-num">01 / The gap</div>
                 <div>
-                    <h2>Emotional awareness <span class="neq">≠</span> clinical structure.</h2>
+                    <h2>An empathetic reply doesn't reflect clinical structure.</h2>
+                    <p>Are LLMs ready to handle mental health? Not even close. They validate by default and rush to
+                        solutions. Agreeing with users all the time creates an echo chamber. It is not the
+                        same as providing clinically grounded care, and this gap remains a challenge.</p>
                 </div>
             </div>
-            <div class="why-grid">
-                <div class="why-card">
-                    <p>In 2025, therapy and companionship became the leading use of generative AI,
-                        with LLMs increasingly powering mental health applications.</p>
-                    <p>These models can sound empathetic, but without clinical structure, they lack the reasoning to
-                        determine the right therapeutic intervention and when to use it.</p>
-                    <div class="why-source">Source: <a
-                            href="https://hbr.org/2025/04/how-people-are-really-using-gen-ai-in-2025" target="_blank"
-                            rel="noopener noreferrer">Zao-Sanders, “How People Are Really Using Gen AI in 2025,”
-                            Harvard Business Review ↗</a></div>
-                </div>
-                <figure>
-                    <img src="assets/figures/genai-use-cases-2025.png" width="831" height="1360" loading="lazy"
-                        alt="Top 10 gen AI use cases: therapy/companionship moved from #2 in 2024 to #1 in 2025.">
+            <div class="phones">
+                <figure class="phone-col">
+                    <div class="phone">
+                        <div class="phone-screen">
+                            <div class="phone-app">
+                                <span class="response-initial" aria-hidden="true">G<img src="assets/icons/gpt-icon.png"
+                                        alt=""></span>
+                                <div>
+                                    <h3>GPT-5.3</h3><span>TMI and premature problem solving</span>
+                                </div>
+                            </div>
+                            <div class="chat">
+                                <div class="bubble user">“I know I’m a burden on other people so I keep things to
+                                    myself and put on a smile, even when I’m not okay.”</div>
+                                <div class="bubble bot">
+                                    <p class="response-text">That sounds really heavy to carry—feeling like you have to
+                                        hide what you’re going through just to avoid being a burden. When someone cares
+                                        about others, they often start minimizing their own needs. That doesn’t make
+                                        your feelings less valid—<mark class="assumption">it means you’ve learned to
+                                            protect others at your own expense.</mark></p>
+                                    <p class="response-text">A few things worth gently questioning:</p>
+                                    <ul class="response-list">
+                                        <li><mark>“I’m a burden” → is that a fact, or a fear?</mark></li>
+                                        <li><mark>If someone you cared about felt this way, would you see them as a
+                                                burden?</mark></li>
+                                        <li><mark>Are you giving others the chance to choose?</mark></li>
+                                    </ul>
+                                    <p class="response-text"><mark class="assumption">You don’t have to suddenly open up
+                                            to everyone. Maybe there’s a small step that feels safe:</mark></p>
+                                    <ul class="response-list">
+                                        <li>sharing one honest sentence with someone you trust</li>
+                                        <li>or even just saying “I’ve been a bit off lately”</li>
+                                    </ul>
+                                    <p class="response-text">You deserve space too—not just to function, but to be
+                                        real. <mark class="assumption">If you want, we can break this down
+                                            together:</mark></p>
+                                    <ul class="response-list">
+                                        <li>where that “burden” belief started</li>
+                                        <li>or how to test it in a low-risk way without feeling exposed</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+                <figure class="phone-col">
+                    <div class="phone">
+                        <div class="phone-screen">
+                            <div class="phone-app">
+                                <span class="response-initial ash" aria-hidden="true">A<img
+                                        src="assets/icons/talk-to-ash.png" alt=""></span>
+                                <div>
+                                    <h3>Ash — AI for Mental Health</h3><span>Asks before interpreting</span>
+                                </div>
+                            </div>
+                            <div class="chat">
+                                <div class="bubble user">“I know I’m a burden on other people so I keep things to
+                                    myself and put on a smile, even when I’m not okay.”</div>
+                                <div class="bubble bot">
+                                    <p class="response-text">That sounds really heavy – not just <mark
+                                            class="assumption">worrying you might be a burden</mark>, but feeling sure
+                                        that you are. I’m not going to argue with you or try to talk you out of it. I
+                                        just want to understand. <mark class="question">What makes you feel certain
+                                            you’re a burden to other people?</mark></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </figure>
             </div>
+            <!-- <p class="insight"><span class="highlight">The research question:</span> Why do LLMs that know CBT still
+                default to Validation &amp; Reflection, and can clinical grounding change that behavior?</p> -->
         </section>
         <section class="story wrap" id="project">
             <div class="section-top">
@@ -142,356 +225,102 @@
                     sadness); behaviors are what they do (stay quiet and put on a smile).</figcaption>
             </figure>
         </section>
-        <section class="story wrap">
-            <div class="section-top">
-                <div class="section-num">03 / Current models</div>
-                <div>
-                    <h2>An empathetic reply doesn't necessarily reflect clinical structure.</h2>
-                    <p>Current models often validate and reflect, even when guided discovery or another CBT strategy may
-                        be more appropriate. The responses below show the current state of GPT-5.3 and a mental
-                        health application.</p>
-                </div>
-            </div>
-            <div class="phones-head"><span class="demo-overline">Same opening query · LLM vs. mental health
-                    app</span><span class="demo-hint">No prior user history</span></div>
-            <div class="phones">
-                <figure class="phone-col">
-                    <div class="phone">
-                        <div class="phone-screen">
-                            <div class="phone-app">
-                                <span class="response-initial" aria-hidden="true">G<img src="assets/icons/gpt-icon.png"
-                                        alt=""></span>
-                                <div>
-                                    <h3>GPT-5.3</h3><span>Explains and suggests</span>
-                                </div>
-                            </div>
-                            <div class="chat">
-                                <div class="bubble bot">
-                                    <p class="response-text">That sounds really heavy to carry—feeling like you have to
-                                        hide what you’re going through just to avoid being a burden. When someone cares
-                                        about others, they often start minimizing their own needs. That doesn’t make
-                                        your feelings less valid—<mark class="assumption">it means you’ve learned to
-                                            protect others at your own expense.</mark></p>
-                                    <p class="response-text">A few things worth gently questioning:</p>
-                                    <ul class="response-list">
-                                        <li><mark>“I’m a burden” → is that a fact, or a fear?</mark></li>
-                                        <li><mark>If someone you cared about felt this way, would you see them as a
-                                                burden?</mark></li>
-                                        <li><mark>Are you giving others the chance to choose?</mark></li>
-                                    </ul>
-                                    <p class="response-text"><mark class="assumption">You don’t have to suddenly open up
-                                            to everyone. Maybe there’s a small step that feels safe:</mark></p>
-                                    <ul class="response-list">
-                                        <li>sharing one honest sentence with someone you trust</li>
-                                        <li>or even just saying “I’ve been a bit off lately”</li>
-                                    </ul>
-                                    <p class="response-text">You deserve space too—not just to function, but to be
-                                        real. <mark class="assumption">If you want, we can break this down
-                                            together:</mark></p>
-                                    <ul class="response-list">
-                                        <li>where that “burden” belief started</li>
-                                        <li>or how to test it in a low-risk way without feeling exposed</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <figcaption class="response-note">Assumes why the person feels
-                        this way, overwhelms them with too much information, then immediately guides them toward
-                        action.</figcaption>
-                </figure>
-                <figure class="phone-col">
-                    <div class="phone">
-                        <div class="phone-screen">
-                            <div class="phone-app">
-                                <span class="response-initial ash" aria-hidden="true">A<img
-                                        src="assets/icons/talk-to-ash.png" alt=""></span>
-                                <div>
-                                    <h3>Ash — AI for Mental Health</h3><span>Asks before interpreting</span>
-                                </div>
-                            </div>
-                            <div class="chat">
-                                <div class="bubble bot">
-                                    <p class="response-text">That sounds really heavy – not just <mark
-                                            class="assumption">worrying you might be a burden</mark>, but feeling sure
-                                        that you are. I’m not going to argue with you or try to talk you out of it. I
-                                        just want to understand. <mark class="question">What makes you feel certain
-                                            you’re a burden to other people?</mark></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <figcaption class="response-note">Invites the person to explain
-                        the belief before suggesting what to do.</figcaption>
-                </figure>
-            </div>
-            <!-- <p class="insight"><span class="highlight">The research question:</span> Why do LLMs that know CBT still
-                default to Validation &amp; Reflection, and can clinical grounding change that behavior?</p> -->
-        </section>
         <section class="tint">
             <div class="wrap">
                 <div class="section-top">
-                    <div class="section-num">04 / The approach</div>
+                    <div class="section-num">03 / The approach</div>
                     <div>
-                        <h2>Our framework.</h2>
+                        <h2>Clinical grounding.</h2>
                     </div>
                 </div>
-                <figure class="fwd">
-                    <div class="fwd-scroll">
-                        <svg viewBox="0 0 1364 444" role="img"
-                            aria-label="CBT Lens framework. A synthetic user query is decomposed by GPT-4o-mini into a user cognitive model, and matched against a SNOMED CT knowledge graph in Neo4j; the top 5 retrieved concepts are classified by an NLI model as entailment, neutral or contradiction. Both feed a CBT-guided prompt together with the CBT principles V, SQ and AP. An open-weight LLM on Ollama answers using chain-of-thought or multiple chains-of-thought, producing a CBT-guided response using Socratic Questioning.">
-                            <defs>
-                                <marker id="fwd-tip" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5"
-                                    orient="auto" markerUnits="userSpaceOnUse">
-                                    <path d="M1 1L8 4.5L1 8Z" fill="#2f2b35" />
-                                </marker>
-                                <linearGradient id="fwd-person" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0" stop-color="#c7aef0" />
-                                    <stop offset="1" stop-color="#7a4fc4" />
-                                </linearGradient>
-                                <clipPath id="fwd-avatar-clip">
-                                    <circle cx="62" cy="50" r="25" />
-                                </clipPath>
-                            </defs>
-
-                            <g class="fwd-line">
-                                <!-- trunk: user query to both branches and into NLI -->
-                                <path d="M36 50H10V438H440V424" marker-end="url(#fwd-tip)" />
-                                <path d="M10 196H194" marker-end="url(#fwd-tip)" />
-                                <path d="M10 330H194" marker-end="url(#fwd-tip)" />
-                                <path d="M356 196H384" marker-end="url(#fwd-tip)" />
-                                <path d="M356 330H406" marker-end="url(#fwd-tip)" />
-                                <path d="M648 204C656 216 660 228 664 238" marker-end="url(#fwd-tip)" />
-                                <path d="M652 290H660V420H652" />
-                                <path d="M660 356H740V294" marker-end="url(#fwd-tip)" />
-                                <path d="M740 116V232" marker-end="url(#fwd-tip)" />
-                                <path d="M814 263H832V190H850" marker-end="url(#fwd-tip)" />
-                                <path d="M832 263V338H850" marker-end="url(#fwd-tip)" />
-                                <path d="M986 192L1014 246" marker-end="url(#fwd-tip)" />
-                                <path d="M986 336L1014 282" marker-end="url(#fwd-tip)" />
-                                <path d="M1124 263H1146" marker-end="url(#fwd-tip)" />
-                            </g>
-
-                            <!-- user query -->
-                            <circle cx="62" cy="50" r="26" fill="#f1eafc" stroke="#2f2b35" stroke-width="1.4" />
-                            <g clip-path="url(#fwd-avatar-clip)" fill="url(#fwd-person)">
-                                <circle cx="62" cy="44" r="10" />
-                                <ellipse cx="62" cy="74" rx="19" ry="15" />
-                            </g>
-                            <text class="fwd-t b" x="62" y="94" text-anchor="middle">Synthetic</text>
-                            <text class="fwd-t b" x="62" y="110" text-anchor="middle">User Query</text>
-                            <rect x="104" y="12" width="420" height="76" rx="16" fill="#eef6ff" stroke="#3a86dd"
-                                stroke-width="1.6" />
-                            <foreignObject x="104" y="12" width="420" height="76">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="fwd-query">“I know I’m a burden on
-                                    other people, so I keep things to myself and put on a smile, even when I’m not
-                                    okay.”</div>
-                            </foreignObject>
-
-                            <!-- branch 1: cognitive model -->
-                            <foreignObject x="34" y="182" width="150" height="28">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="fwd-tool"><img
-                                        src="assets/icons/gpt-icon.png" alt="" />GPT-4o-mini</div>
-                            </foreignObject>
-                            <rect x="196" y="166" width="160" height="60" rx="13" fill="#fff" stroke="#2f2b35"
-                                stroke-width="1.6" />
-                            <text class="fwd-t b" x="276" y="201" text-anchor="middle">User Cognitive Model</text>
-                            <foreignObject x="388" y="150" width="260" height="92">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="fwd-ccd"><p>“I know <mark>I’m a burden on
-                                        other people</mark> so I <mark>keep things to myself</mark> and <mark>put on a
-                                        smile</mark>, even when <mark>I’m not okay.</mark>”</p></div>
-                            </foreignObject>
-
-                            <!-- branch 2: SNOMED CT + NLI -->
-                            <foreignObject x="34" y="314" width="150" height="32">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="fwd-tool fwd-neo"><img
-                                        src="assets/icons/neo4j.svg" alt="" />neo4j</div>
-                            </foreignObject>
-                            <rect x="196" y="298" width="160" height="64" rx="13" fill="#fff" stroke="#2e8b57"
-                                stroke-width="1.6" />
-                            <text class="fwd-t b" x="276" y="326" text-anchor="middle">SNOMED CT</text>
-                            <text class="fwd-t b" x="276" y="344" text-anchor="middle">Knowledge Graph</text>
-                            <text class="fwd-s" x="360" y="321">Top 5</text>
-                            <text class="fwd-s" x="360" y="346">retrievals</text>
-                            <text class="fwd-t" x="530" y="262" text-anchor="middle">Natural Language Inference</text>
-                            <text class="fwd-s" x="530" y="278" text-anchor="middle">Classification (nli-deberta-v3-small)</text>
-                            <foreignObject x="410" y="288" width="240" height="132">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="fwd-nli">
-                                    <div class="e"><b>Entailment</b><span>✓ Recognizes emotional pain</span><span>✓ Attitude
-                                            towards care</span></div>
-                                    <div class="n"><b>Neutral</b><span>• Fear of being a burden</span>
-                                    </div>
-                                    <div class="c"><b>Contradiction</b><span>• Caring towards others</span></div>
-                                </div>
-                            </foreignObject>
-
-                            <!-- CBT principles + prompt -->
-                            <rect x="636" y="12" width="208" height="104" rx="14" fill="#f5f0fd" stroke="#b9a2e6"
-                                stroke-width="1.4" />
-                            <foreignObject x="636" y="12" width="208" height="104">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="fwd-principles">
-                                    <div class="fwd-ptitle">CBT principles</div>
-                                    <div><i>V</i>Validation &amp; Reflection</div>
-                                    <div><i>SQ</i>Socratic Questioning</div>
-                                    <div><i>AP</i>Alternative Perspective</div>
-                                </div>
-                            </foreignObject>
-                            <rect x="666" y="236" width="148" height="54" rx="13" fill="#e8f2ff" stroke="#2f6fd0"
-                                stroke-width="1.6" />
-                            <text class="fwd-t b" x="740" y="268" text-anchor="middle">CBT-guided Prompt</text>
-
-                            <!-- reasoning -->
-                            <rect x="852" y="166" width="134" height="48" rx="12" fill="#fff" stroke="#b9a2e6"
-                                stroke-width="1.4" />
-                            <text class="fwd-m" x="919" y="195" text-anchor="middle">Chain-of-Thought</text>
-                            <text class="fwd-or" x="919" y="268" text-anchor="middle">or</text>
-                            <rect x="852" y="310" width="134" height="56" rx="12" fill="#fff" stroke="#b9a2e6"
-                                stroke-width="1.4" />
-                            <text class="fwd-m" x="919" y="334" text-anchor="middle">Multiple</text>
-                            <text class="fwd-m" x="919" y="352" text-anchor="middle">Chains-of-Thought</text>
-
-                            <text class="fwd-t b" x="1070" y="222" text-anchor="middle">Ollama</text>
-                            <rect x="1016" y="236" width="108" height="54" rx="13" fill="#e8f2ff" stroke="#2f6fd0"
-                                stroke-width="1.6" />
-                            <text class="fwd-t" x="1070" y="259" text-anchor="middle">Open-weight</text>
-                            <text class="fwd-t" x="1070" y="277" text-anchor="middle">LLM</text>
-
-                            <!-- response -->
-                            <rect x="1152" y="148" width="28" height="28" rx="8" fill="#f7b538" />
-                            <rect x="1158" y="156" width="16" height="12" rx="3" fill="none" stroke="#fff"
-                                stroke-width="1.8" />
-                            <circle cx="1163" cy="162" r="1.6" fill="#fff" />
-                            <circle cx="1169" cy="162" r="1.6" fill="#fff" />
-                            <text class="fwd-t b fwd-rh" x="1186" y="167">CBT-guided Response (SQ)</text>
-                            <rect x="1152" y="186" width="178" height="150" rx="16" fill="#fffbe6" stroke="#e2c44a"
-                                stroke-width="1.6" />
-                            <foreignObject x="1164" y="196" width="156" height="132">
-                                <div xmlns="http://www.w3.org/1999/xhtml" class="fwd-resp">“It sounds like the belief
-                                    that you’re a burden really impacts how you interact with others. Can you tell me
-                                    more about what makes you feel like a burden?”</div>
-                            </foreignObject>
-                        </svg>
-                    </div>
-                </figure>
+                <div class="steps">
+                    <article class="step">
+                        <div class="index">01 — CONCEPTUALIZE</div>
+                        <h3>Read the cognitive context</h3>
+                        <p>Interpret user query with Beck’s cognitive model.</p>
+                    </article>
+                    <article class="step">
+                        <div class="index">02 — GROUND</div>
+                        <h3>Retrieve mental health concepts</h3>
+                        <p>Connect the user’s context to an expert validated knowledge graph filtered via natural language
+                            inference.</p>
+                    </article>
+                    <article class="step">
+                        <div class="index">03 — SELECT</div>
+                        <h3>Choose a CBT strategy</h3>
+                        <p>Select from Validation &amp; Reflection, Socratic Questioning, or an Alternative Perspective.</p>
+                    </article>
+                    <article class="step">
+                        <div class="index">04 — EVALUATE</div>
+                        <h3>Evaluation</h3>
+                        <p>LLM-as-a-Judge and a cross-disciplinary human expert panel.</p>
+                    </article>
+                </div>
             </div>
         </section>
         <section class="finding wrap">
             <div class="section-top">
-                <div class="section-num">05 / Protocol Leverage Force</div>
+                <div class="section-num">04 / Protocol Leverage Force</div>
                 <div>
                     <h2>Did our framework change the model’s baseline behavior?</h2>
-                    <p>Protocol Leverage Force (F) measures how strongly CBT guidance reorients a response away from
-                        the model’s baseline and toward the user’s utterance.</p>
+                    <p>Protocol Leverage Force (<em>F</em>) measures how strongly our framework reorients a response away
+                        from the model’s baseline behavior and toward the user’s utterance. Models often favored
+                        Validation &amp; Reflection, resulting in <b><em>F</em> = 1.18%–1.34%</b> across three
+                        open-weight models. A low <em>F</em> means
+                        guidance barely moves the model off its default reply, so responses stay lexically close to the
+                        baseline.</p>
                 </div>
             </div>
             <div class="force-grid">
-            <figure class="force-panel">
-                <svg class="force-art" viewBox="96 10 572 272" role="img"
-                    aria-label="A dashed circle surrounds the baseline response centroid. The selected CBT protocol sits on the circle at distance r. From that point, one arrow shows the shift toward the user's utterance and a second outward arrow shows Protocol Leverage Force F.">
-                    <defs>
-                        <marker id="force-tip-v" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"
-                            markerUnits="userSpaceOnUse">
-                            <path d="M1 1L8 4.5L1 8Z" fill="#3d9ae8" />
-                        </marker>
-                        <marker id="force-tip-f" markerWidth="11" markerHeight="11" refX="8.5" refY="5.5" orient="auto"
-                            markerUnits="userSpaceOnUse">
-                            <path d="M1 1L10 5.5L1 10Z" fill="#6e46bb" />
-                        </marker>
-                        <radialGradient id="force-halo" cx="50%" cy="50%" r="50%">
-                            <stop offset="0" stop-color="#e6dbfa" />
-                            <stop offset="1" stop-color="#f6f2fe" />
-                        </radialGradient>
-                    </defs>
-                    <circle cx="270" cy="182" r="99" fill="url(#force-halo)" stroke="#b9a2e6" stroke-width="1.4"
-                        stroke-dasharray="5 6" />
-                    <path d="M270 182L355 132" fill="none" stroke="#9c8cb8" stroke-width="1.3" />
-                    <path d="M355 131L284 35" fill="none" stroke="#3d9ae8" stroke-width="2"
-                        marker-end="url(#force-tip-v)" />
-                    <path d="M362 128L503 65" fill="none" stroke="#6e46bb" stroke-width="2.6"
-                        marker-end="url(#force-tip-f)" />
-                    <circle cx="270" cy="182" r="7" fill="#3b2a5c" />
-                    <circle cx="355" cy="132" r="11" fill="#fcee4f" stroke="#3b2a5c" stroke-width="1.6" />
-                    <text x="233" y="208" fill="#3b2a5c" font-size="14">baseline</text><text x="233" y="226"
-                        fill="#3b2a5c" font-size="14">centroid</text>
-                    <text x="294" y="149" fill="#7b6a98" font-size="18" font-style="italic">r</text>
-                    <text x="355" y="132" text-anchor="middle" dominant-baseline="central" fill="#2f2b1a" font-size="14"
-                        font-weight="700">m</text>
-                    <text x="255" y="27" fill="#3d9ae8" font-size="19" font-style="italic" font-weight="600">v</text>
-                    <text x="514" y="69" fill="#6e46bb" font-size="21" font-style="italic" font-weight="700">F</text>
-                    <text x="386" y="156" fill="#534d58" font-size="14">selected protocol</text>
-                    <text x="112" y="73" fill="#3b2a5c" font-size="14">Baseline response</text>
-                    <text x="109" y="91" fill="#77717b" font-size="12">the model’s usual answer</text>
-                    <text x="301" y="45" fill="#2f7fcf" font-size="14">shift toward the user’s utterance</text>
-                    <text x="535" y="58" fill="#6e46bb" font-size="14" font-weight="600">resulting leverage</text>
-                    <text x="535" y="76" fill="#6e46bb" font-size="14" font-weight="600">of CBT guidance</text>
-                    <text x="590" y="272" fill="#77717b" font-size="12" font-style="italic">Not to scale</text>
-                </svg>
-                <figcaption>Adapted from Huygens’ centrifugal-force analogy. The center is the model’s baseline
-                    response; the circle shows its distance to the CBT-guided response. From the selected protocol
-                    (<em>m</em>), one arrow points toward the user’s words, while the outward arrow represents the
-                    framework’s leverage (<em>F</em>).</figcaption>
-            </figure>
-                <div class="f-table">
-                    <div class="f-table-head">
-                        <span class="f-label">Results</span>
-                        <h3>Transcript-level impact of MCoT via <em>F</em></h3>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Model</th>
-                                <th scope="col">Mean <em>F</em></th>
-                                <th scope="col">Std. dev.</th>
-                                <th scope="col" class="eps">ε</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Mistral</th>
-                                <td>
-                                    <div class="f-bar"><i style="width:66px"></i><span>1.256%</span></div>
-                                </td>
-                                <td>0.442%</td>
-                                <td>0.040</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Gemma3</th>
-                                <td>
-                                    <div class="f-bar"><i style="width:62px"></i><span>1.179%</span></div>
-                                </td>
-                                <td>0.690%</td>
-                                <td>0.061</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">GPT-OSS</th>
-                                <td>
-                                    <div class="f-bar"><i style="width:70px"></i><span>1.341%</span></div>
-                                </td>
-                                <td>0.500%</td>
-                                <td>0.053</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="f-takeaway">Each model’s average <em>F</em> stays within a narrow
-                        <b>1.18%–1.34%</b> band: knowledge-guided prompting shifts responses, but not enough to
-                        overcome the bias toward Validation &amp; Reflection. Gemma3 varies most across dialogues;
-                        Mistral the least.</p>
-                    <p class="f-note"><b>ε</b>: mean baseline perturbation across three prompt paraphrases. Small
-                        values mean responses are not sensitive to paraphrasing.</p>
-                </div>
+                <figure class="force-panel">
+                    <svg class="force-art" viewBox="96 10 572 272" role="img"
+                        aria-label="A dashed circle surrounds the centroid of the model’s current baseline language. The selected CBT strategy sits on the circle at distance r. From that point, one arrow shows the shift toward the user’s language and a second outward arrow shows the resulting force of CBT Lens, F.">
+                        <defs>
+                            <marker id="force-tip-v" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"
+                                markerUnits="userSpaceOnUse">
+                                <path d="M1 1L8 4.5L1 8Z" fill="#3d9ae8" />
+                            </marker>
+                            <marker id="force-tip-f" markerWidth="11" markerHeight="11" refX="8.5" refY="5.5"
+                                orient="auto" markerUnits="userSpaceOnUse">
+                                <path d="M1 1L10 5.5L1 10Z" fill="#6e46bb" />
+                            </marker>
+                            <radialGradient id="force-halo" cx="50%" cy="50%" r="50%">
+                                <stop offset="0" stop-color="#e6dbfa" />
+                                <stop offset="1" stop-color="#f6f2fe" />
+                            </radialGradient>
+                        </defs>
+                        <circle cx="270" cy="182" r="99" fill="url(#force-halo)" stroke="#b9a2e6" stroke-width="1.4"
+                            stroke-dasharray="5 6" />
+                        <path d="M270 182L355 132" fill="none" stroke="#9c8cb8" stroke-width="1.3" />
+                        <path d="M355 131L284 35" fill="none" stroke="#3d9ae8" stroke-width="2"
+                            marker-end="url(#force-tip-v)" />
+                        <path d="M362 128L503 65" fill="none" stroke="#6e46bb" stroke-width="2.6"
+                            marker-end="url(#force-tip-f)" />
+                        <circle cx="270" cy="182" r="7" fill="#3b2a5c" />
+                        <circle cx="355" cy="132" r="11" fill="#fcee4f" stroke="#3b2a5c" stroke-width="1.6" />
+                        <text x="233" y="208" fill="#3b2a5c" font-size="14">baseline</text><text x="233" y="226"
+                            fill="#3b2a5c" font-size="14">centroid</text>
+                        <text x="294" y="149" fill="#7b6a98" font-size="18" font-style="italic">r</text>
+                        <text x="355" y="132" text-anchor="middle" dominant-baseline="central" fill="#2f2b1a"
+                            font-size="14" font-weight="700">m</text>
+                        <text x="255" y="27" fill="#1f6fbf" font-size="19" font-style="italic"
+                            font-weight="600">v</text>
+                        <text x="514" y="69" fill="#6e46bb" font-size="21" font-style="italic"
+                            font-weight="700">F</text>
+                        <text x="386" y="156" fill="#534d58" font-size="14">selected strategy</text>
+                        <text x="100" y="66" fill="#3b2a5c" font-size="14">Model’s current</text>
+                        <text x="100" y="84" fill="#3b2a5c" font-size="14">baseline language</text>
+                        <text x="301" y="45" fill="#1f6fbf" font-size="14">shift toward the user’s language</text>
+                        <text x="535" y="58" fill="#6e46bb" font-size="14" font-weight="600">resulting force</text>
+                        <text x="535" y="76" fill="#6e46bb" font-size="14" font-weight="600">of CBT Lens</text>
+                        <text x="590" y="272" fill="#67616c" font-size="12" font-style="italic">Not to scale</text>
+                    </svg>
+                    <figcaption>Adapted from Huygens’ centrifugal-force analogy.</figcaption>
+                </figure>
             </div>
             <div class="ba">
                 <div class="ba-head">
-                    <div>
-                        <span class="f-label">Before &amp; after</span>
-                        <h3>What changes when CBT Lens guides the model</h3>
-                    </div>
-                    <div class="ba-tabs" role="tablist" aria-label="Choose a model">
-                        <button type="button" role="tab" id="ba-tab-gemma" aria-controls="ba-gemma"
-                            aria-selected="true">Gemma3</button>
-                        <button type="button" role="tab" id="ba-tab-mistral" aria-controls="ba-mistral"
-                            aria-selected="false" tabindex="-1">Mistral</button>
-                    </div>
+                    <span class="f-label">Before &amp; after</span>
                 </div>
                 <div class="ba-query">
                     <span class="ba-user" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor">
@@ -499,90 +328,49 @@
                             <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z" />
                         </svg></span>
                     <div class="ba-msg">
-                        <div class="ba-meta"><b>User</b> · same message sent to both models</div>
+                        <div class="ba-meta"><b>User</b></div>
                         <p>“I’m extremely good at my job. I mean, I’m the best employee that they have ever
                             had… I make no errors. So how can I be wrong when it comes to these
                             circumstances with my coworkers?”</p>
                     </div>
                 </div>
-                <div class="ba-panel" id="ba-gemma" role="tabpanel" aria-labelledby="ba-tab-gemma">
-                    <div class="phones">
-                        <figure class="phone-col">
-                            <div class="phone">
-                                <div class="phone-screen">
-                                    <div class="phone-app">
-                                        <span class="response-initial" aria-hidden="true">G</span>
-                                        <div>
-                                            <h3>Gemma3</h3><span>Without CBT Lens · baseline</span>
-                                        </div>
-                                    </div>
-                                    <div class="chat">
-                                        <div class="bubble bot">
-                                            <p class="response-text">It’s fantastic you’re so confident and skilled in your role, that’s a wonderful asset! However, even the most talented individuals can have blind spots when it comes to interpersonal relationships. <mark class="assumption">It’s possible your perception of the situation with your coworkers is influenced by your own perspective and values</mark>, and exploring that might reveal areas for understanding or adjustment.</p>
-                                        </div>
-                                    </div>
+                <div class="ba-panel" id="ba-gemma">
+                    <div class="phone ba-phone">
+                        <div class="phone-screen">
+                            <div class="phone-app">
+                                <span class="response-initial guided" aria-hidden="true">G</span>
+                                <div>
+                                    <h3>Gemma3</h3>
+                                </div>
+                                <div class="ba-tabs" role="tablist" aria-label="Choose a response">
+                                    <button type="button" role="tab" id="ba-tab-base" aria-controls="ba-base"
+                                        aria-selected="true">Baseline</button>
+                                    <button type="button" role="tab" id="ba-tab-lens" aria-controls="ba-lens"
+                                        aria-selected="false" tabindex="-1">With CBT Lens</button>
                                 </div>
                             </div>
-                            <figcaption class="response-note">Assumes the user’s view is biased before understanding it.</figcaption>
-                        </figure>
-                        <figure class="phone-col">
-                            <div class="phone">
-                                <div class="phone-screen">
-                                    <div class="phone-app">
-                                        <span class="response-initial guided" aria-hidden="true">G</span>
-                                        <div>
-                                            <h3>Gemma3 <span class="strategy"><i>Strategy selection</i>Socratic Questioning</span></h3><span>With CBT Lens</span>
+                            <div class="chat" id="ba-base" role="tabpanel" aria-labelledby="ba-tab-base">
+                                <div class="bubble bot">
+                                            <p class="response-text">It’s fantastic you’re so confident and skilled in
+                                                your role, that’s a wonderful asset! However, even the most talented
+                                                individuals can have blind spots when it comes to interpersonal
+                                                relationships. <mark class="assumption">It’s possible your perception of
+                                                    the situation with your coworkers is influenced by your own
+                                                    perspective and values</mark>, and exploring that might reveal areas
+                                                for understanding or adjustment.</p>
                                         </div>
-                                    </div>
-                                    <div class="chat">
-                                        <div class="bubble bot">
-                                            <p class="response-text">It sounds like you have a very strong sense of your abilities and contributions at work. <mark class="question">Can you think of a time when you’ve received feedback that suggested there might be room for improvement, even if it was minor?</mark></p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <figcaption class="response-note"><b>F = 1.647%</b> · Drops the assumption and asks the user to examine the belief.</figcaption>
-                        </figure>
-                    </div>
-                </div>
-                <div class="ba-panel" id="ba-mistral" role="tabpanel" aria-labelledby="ba-tab-mistral" hidden>
-                    <div class="phones">
-                        <figure class="phone-col">
-                            <div class="phone">
-                                <div class="phone-screen">
-                                    <div class="phone-app">
-                                        <span class="response-initial" aria-hidden="true">M</span>
-                                        <div>
-                                            <h3>Mistral</h3><span>Without CBT Lens · baseline</span>
+                            <div class="chat" id="ba-lens" role="tabpanel" aria-labelledby="ba-tab-lens" hidden>
+                                <div class="ba-lens-meta"><span class="strategy">Strategy: Socratic Questioning</span><b
+                                        class="f-score"><em>F</em> = 1.647%</b></div>
+                                <div class="bubble bot">
+                                            <p class="response-text">It sounds like you have a very strong sense of your
+                                                abilities and contributions at work. <mark class="question">Can you
+                                                    think of a time when you’ve received feedback that suggested there
+                                                    might be room for improvement, even if it was minor?</mark></p>
                                         </div>
-                                    </div>
-                                    <div class="chat">
-                                        <div class="bubble bot">
-                                            <p class="response-text">While it’s great to hear about your dedication and high performance, it’s important to remember that everyone makes mistakes sometimes, and it’s a part of the learning process. <mark class="same">Regarding your co-workers, maintaining positive relationships is crucial for a harmonious work environment. Let’s discuss potential strategies for handling challenging situations with them.</mark></p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <figcaption class="response-note">Moves straight to advice about coworkers.</figcaption>
-                        </figure>
-                        <figure class="phone-col">
-                            <div class="phone">
-                                <div class="phone-screen">
-                                    <div class="phone-app">
-                                        <span class="response-initial guided" aria-hidden="true">M</span>
-                                        <div>
-                                            <h3>Mistral <span class="strategy"><i>Strategy selection</i>Alternative Perspective</span></h3><span>With CBT Lens</span>
-                                        </div>
-                                    </div>
-                                    <div class="chat">
-                                        <div class="bubble bot">
-                                            <p class="response-text">I understand that you feel very confident in your abilities and believe that you’re the best employee. <mark class="same">However, it’s important to consider other perspectives as well. Let’s explore how a trusted friend or colleague might view this situation.</mark></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <figcaption class="response-note"><b>F = 0.002%</b> · Keeps the same framing and advice, reworded.</figcaption>
-                        </figure>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -590,13 +378,15 @@
         <section class="trajectory" id="affect">
             <div class="wrap">
                 <div class="section-top">
-                    <div class="section-num">06 / The affective story</div>
+                    <div class="section-num">05 / The affective story</div>
                     <div>
                         <h2>What do valence and arousal show us?</h2>
-                        <p><strong>Valence</strong> is how positive an emotion feels; <strong>arousal</strong> is how
-                            energized it is (<a href="https://doi.org/10.1037/h0077714" target="_blank"
-                                rel="noopener noreferrer">Russell’s Circumplex Model ↗</a>). We score each user turn
-                            with the NRC VAD Lexicon and compare our synthetic sessions with real CBT transcripts.</p>
+                        <p><strong>Valence</strong> describes how positive or negative an emotion feels.
+                            <strong>Arousal</strong> describes its level of physiological activation or energy. These
+                            are the two dimensions of <a href="https://doi.org/10.1037/h0077714" target="_blank"
+                                rel="noopener noreferrer">Russell’s Circumplex Model of Affect ↗</a>. We compare user language in
+                            our synthetic sessions with RealCBT human transcripts to trace how emotion shifts over the course of a conversation.
+                        </p>
                     </div>
                 </div>
                 <figure class="trajectory-plot">
@@ -628,21 +418,62 @@
                                 aria-label="GPT-OSS synthetic trajectory and RealCBT human trajectory on matching valence and arousal axes"></svg>
                         </div>
                     </div>
-                    <figcaption>Recreated in code from the paper’s Figure 6. The axes and turn ranges follow the figure;
-                        individual coordinates are visually approximated from it. Each path represents a cumulative mean
-                        over turns, averaged across 14 transcripts.</figcaption>
+                    <figcaption>Valence rises in both real and synthetic sessions, but RealCBT shows sustained arousal
+                        de-escalation and a more nuanced emotional trajectory.</figcaption>
                 </figure>
-                <div class="va-results">
-                    <div class="va-card"><span class="va-tag">Valence ↑</span>
-                        <p>Rises in both synthetic and real sessions, a shift toward positive affect.</p>
-                    </div>
-                    <div class="va-card"><span class="va-tag">Arousal ↕</span>
-                        <p>Diverges. Real 60-turn sessions de-escalate steadily and oscillate more; our 10-turn
-                            synthetic sessions drift upward rather than settling.</p>
-                    </div>
-                </div>
-                <p class="va-takeaway">Synthetic sessions capture the <b>direction</b> of emotional change, but not the
-                    sustained de-escalation and depth of real therapy.</p>
+            </div>
+        </section>
+        <section class="team" id="team">
+            <div class="wrap">
+                <div class="kicker">The team</div>
+                <div class="people"><a class="person" href="https://www.linkedin.com/in/vaishnavi-sinha" target="_blank"
+                        rel="noopener noreferrer" aria-label="Visit Vaishnavi Sinha’s LinkedIn profile"><span
+                            class="avatar" aria-hidden="true">VS<img src="assets/team/vaishnavi-sinha.jpg" alt=""
+                                loading="lazy"></span><span class="person-name">Vaishnavi Sinha</span><span
+                            class="university">University of Southern California</span><span class="department">Computer
+                            Science</span></a><a class="person" href="https://www.linkedin.com/in/poojaguttal/"
+                        target="_blank" rel="noopener noreferrer"
+                        aria-label="Visit Pooja Guttal’s LinkedIn profile"><span class="avatar"
+                            aria-hidden="true">PG<img src="assets/team/pooja-guttal.jpeg" alt=""
+                                loading="lazy"></span><span class="person-name">Pooja Guttal</span><span
+                            class="university">University of Maryland, Baltimore County</span><span
+                            class="department">Computer Science & Electrical Engineering</span></a><a
+                        class="person person--pranay" href="https://www.linkedin.com/in/pranay255949/" target="_blank"
+                        rel="noopener noreferrer" aria-label="Visit Pranay Deep Reddy Katike’s LinkedIn profile"><span
+                            class="avatar" aria-hidden="true">PK<img src="assets/team/pranay-deep-reddy-katike.jpg"
+                                alt="" loading="lazy"></span><span class="person-name">Pranay Deep Reddy
+                            Katike</span><span class="university">University of Maryland, Baltimore County</span><span
+                            class="department">Computer Science & Electrical Engineering</span></a><a class="person"
+                        href="https://www.linkedin.com/in/vsinha10/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Visit Vishal Sinha’s LinkedIn profile"><span class="avatar"
+                            aria-hidden="true">VS<img src="assets/team/vishal-sinha.jpg" alt=""
+                                loading="lazy"></span><span class="person-name">Vishal Sinha</span><span
+                            class="university">University of California, Irvine</span><span
+                            class="department">Electrical Engineering & Computer Science</span></a><a class="person"
+                        href="https://www.linkedin.com/in/gerald-ndawula/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Visit Gerald Ndawula’s LinkedIn profile"><span class="avatar"
+                            aria-hidden="true">GN<img src="assets/team/gerald-ndawula.jpg" alt=""
+                                loading="lazy"></span><span class="person-name">Gerald Ndawula</span><span
+                            class="university">University of Maryland, Baltimore County</span><span
+                            class="department">Computer Science & Electrical Engineering</span></a><a class="person"
+                        href="https://psychology.umbc.edu/corefaculty/lira-yoon/" target="_blank"
+                        rel="noopener noreferrer" aria-label="Visit Lira Yoon’s faculty page"><span class="avatar"
+                            aria-hidden="true">LY<img src="assets/team/lira-yoon.jpg" alt="" loading="lazy"></span><span
+                            class="person-name">Lira Yoon</span><span class="university">University of Maryland,
+                            Baltimore County</span><span class="department">Psychology</span></a><a
+                        class="person person--andrea" href="https://www.linkedin.com/in/andrea-kleinsmith-815a084a/"
+                        target="_blank" rel="noopener noreferrer"
+                        aria-label="Visit Andrea Kleinsmith’s LinkedIn profile"><span class="avatar"
+                            aria-hidden="true">AK<img src="assets/team/andrea-kleinsmith.jpg" alt=""
+                                loading="lazy"></span><span class="person-name">Andrea Kleinsmith</span><span
+                            class="university">University of Maryland, Baltimore County</span><span
+                            class="department">Information Systems</span></a><a class="person"
+                        href="https://www.linkedin.com/in/manasgaur/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Visit Manas Gaur’s LinkedIn profile"><span class="avatar" aria-hidden="true">MG<img
+                                src="assets/team/manas-gaur.jpg" alt="" loading="lazy"></span><span
+                            class="person-name">Manas Gaur</span><span class="university">University of Maryland,
+                            Baltimore County</span><span class="department">Computer Science & Electrical
+                            Engineering</span></a></div>
             </div>
         </section>
         <section class="citation" id="cite">
@@ -684,6 +515,29 @@
         </div>
     </footer>
     <script>
+        (() => {
+            const root = document.documentElement;
+            const media = window.matchMedia('(prefers-color-scheme: dark)');
+            const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : media.matches;
+            const btn = document.querySelector('.theme-toggle');
+            const sync = () => btn.setAttribute('aria-pressed', isDark());
+            btn.addEventListener('click', () => {
+                root.dataset.theme = isDark() ? 'light' : 'dark';
+                try { localStorage.setItem('theme', root.dataset.theme); } catch { }
+                sync();
+            });
+            media.addEventListener('change', sync);
+            sync();
+        })();
+        (() => {
+            const header = document.querySelector('header');
+            const toggle = header.querySelector('.nav-toggle');
+            const setOpen = open => { header.classList.toggle('open', open); toggle.setAttribute('aria-expanded', open); };
+            toggle.addEventListener('click', () => setOpen(!header.classList.contains('open')));
+            header.querySelectorAll('nav a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+            document.addEventListener('click', e => { if (!header.contains(e.target)) setOpen(false); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+        })();
         document.querySelectorAll('.avatar img, .response-initial img').forEach(img => {
             const showWhenReady = () => { if (img.naturalWidth) img.classList.add('loaded'); };
             img.addEventListener('load', showWhenReady);
@@ -783,17 +637,15 @@
                 }, { threshold: .35 }).observe(plot);
             }
         })();
-        // Before & after: switch between model examples.
+        // Before & after: toggle between the baseline and CBT Lens responses.
         (() => {
             const tabs = [...document.querySelectorAll('.ba-tabs [role="tab"]')];
-            const select = tab => {
-                tabs.forEach(t => {
-                    const on = t === tab;
-                    t.setAttribute('aria-selected', on);
-                    t.tabIndex = on ? 0 : -1;
-                    document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-                });
-            };
+            const select = tab => tabs.forEach(t => {
+                const on = t === tab;
+                t.setAttribute('aria-selected', on);
+                t.tabIndex = on ? 0 : -1;
+                document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+            });
             tabs.forEach((tab, i) => {
                 tab.addEventListener('click', () => select(tab));
                 tab.addEventListener('keydown', e => {
